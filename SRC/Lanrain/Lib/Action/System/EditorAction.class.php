@@ -40,7 +40,7 @@ class EditorAction extends BackAction{
     /**
      * 编辑器图片空间 
      */
-    // public function editer_manager() {
+     public function editer_manager() {
         // $root_path = './data/upload/editer/';
         // $root_url = './data/upload/editer/';
         // $ext_arr = array('gif', 'jpg', 'jpeg', 'png', 'bmp');

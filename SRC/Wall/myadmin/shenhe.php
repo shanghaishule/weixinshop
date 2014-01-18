@@ -112,7 +112,7 @@ die($str);
 //审核处理文件
 include("shenhe.do.all.php");
 ?> 
-			<form method="POST" name="shenhe">
+			<form method="post" name="shenhe">
 			<tr>
 				<th><?=$q[0]?></th>
 				<th><?=$q[5]?></th>
