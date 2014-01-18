@@ -1,0 +1,48 @@
+<include file="Public:head"/>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+<div class="cLineB">
+  <h4>在线订餐配置 </h4><a href="{lanrain::U('Ordering/index',array('token'=>session('token')))}" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+         
+    <div class="msgWrap bgfc">
+	  <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">	 
+		<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tbody>
+				 <tr>
+					<th width="120">关键词：</th>
+					<td><input type="text" name="keyword" value="{lanrain:$ordering.keyword}" class="px" style="width:550px;"><br><span class="red">只能写一个关键词,功能面板必须开启在线订餐</span></td>
+				</tr>
+				<tr>
+					<th width="120">回复标题：</th>
+					<td><input type="text" name="title" value="{lanrain:$ordering.title}" class="px" style="width:550px;"></td>
+				</tr>
+				<tr>
+					<th width="120">内容介绍：</th>
+					<td><textarea style="width:560px;height:75px" name="info" id="info" class="px">{lanrain:$ordering.info}</textarea><br/>最多填写120个字</td>
+				</tr>
+				<tr>
+					<th>回复图片：</th>
+					<td><input type="text" name="picurl" value="{lanrain:$ordering.picurl}" class="px" style="width:550px;"><br/> 填写图片外链地址，大小为720x400</td>
+				</tr>
+				<tr>
+					<th>幻灯片：</th>
+					<td>
+						<textarea style="width:560px;height:75px" name="flash" id="info" class="px">{lanrain:$ordering.flash}</textarea>
+						 <br/>填写图片外链地址,多个请使用豆号（,）隔开,填写图片外链地址，大小为720x400</td>
+				</tr>
+
+				<th>&nbsp;</th>
+					<td>
+						<button type="submit" name="button" class="btnGreen">保存</button>
+						<a href="{lanrain::U('ordering/index',array('token'=>session('token')))}" class="btnGray vm">取消</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+  </div> 
+ 
+  
+        </div>
+<include file="Public:footer"/>

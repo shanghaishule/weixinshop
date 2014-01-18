@@ -1,0 +1,93 @@
+<!--添加栏目-->
+<div class="dialog_content pad_10">
+    <form id="info_form" action="{:U('item_cate/tag_add')}" method="post">
+    <table width="600" cellpadding="2" cellspacing="0" class="table-other">
+        <tr> 
+            <td align="center" width="40%">分类关联标签(<em class="red">双击删除关联标签</em>) </td>
+            <td align="center" width="10%">操作</td>
+            <td align="center" width="40%">添加标签(<em class="red">双击添加到关联标签</em>) </td>
+        </tr>
+        <tr> 
+            <td rowspan="2" valign="top">
+                <ul style="height:210px;width:300px;" class="tag_list cate_tags" id="J_cate_tags"></ul>
+                <p style="line-height:18px; padding:5px 0; clear:both; float:left;">直接添加关联标签，可输入多个标签，以,号分隔</p>
+                <textarea name="custom_tags" style="width:290px; height:60px;"></textarea>
+            </td>
+            <td rowspan="2" align="center">
+                <p><input type="button" value="&lt;&lt;&lt;" id="J_add_all"></p>
+                <br />
+                <p><input type="button" value="&gt;&gt;&gt;" id="J_del_all"></p>
+            </td>
+            <td>
+                <span>搜索标签：</span>
+                <input type="text" id="J_tag_keywords" class="input-text">
+                <input type="button" value="搜索" class="btn" id="J_search_tags">
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <ul style="height:275px;width:300px;" class="tag_list" id="J_items_tags"></ul>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="tag_ids" id="J_tag_ids" value="" />
+    <input type="hidden" name="cate_id" id="J_cate_id" value="{$cate_id}" />
+    </form>
+</div>
+<script>
+$(function($){
+    var search_url = "{:U('item_cate/tag_search')}";
+    $('#J_search_tags').live('click', function(){
+        var keywords = $("#J_tag_keywords").val(),
+            cate_id = $("#J_cate_id").val();
+        $.getJSON(search_url, { cate_id: cate_id, keywords: keywords }, function(result){
+            if (result.status == 1) {
+                var list_html = '';
+                if (result.data) {
+                    for(var i=0; i < result.data.length; i++){
+                        var tag = result.data[i];
+                        list_html += "<li ondblclick=\"move_tag(this);\" rel=\"0\" tagid=\""+tag.id+"\">"+tag.name+"</li>";
+                    }
+                }
+                $("#J_items_tags").html(list_html);
+            }
+        });
+    });
+    
+    $("#J_del_all").click(function(){
+        $("#J_cate_tags li").prependTo($("#J_items_tags")).attr("rel",'0');
+    });
+    $("#J_add_all").click(function(){
+        $("#J_items_tags li").prependTo($("#J_cate_tags")).attr("rel",'1');
+    });
+    $("#info_form").submit(function(){
+        $("#J_tag_ids").val(get_tag_ids());
+    });
+
+    $('#info_form').ajaxForm({success:complate, dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+
+});
+function move_tag(obj){
+    if($(obj).attr('rel') == '0'){
+        $(obj).prependTo($("#J_cate_tags")).attr("rel",'1'); 
+    }else{
+        $(obj).prependTo($("#J_items_tags")).attr("rel",'0'); 
+    }
+}
+function get_tag_ids(){
+    var tag_ids = "";
+    $("#J_cate_tags li").each(function(){
+        tag_ids += '|' + $(this).attr('tagid');
+    });
+    return tag_ids;
+}
+</script>

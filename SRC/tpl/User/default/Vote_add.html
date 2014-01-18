@@ -1,0 +1,150 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/plugins/code/prettify.css" />
+<script src="{lanrain::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script src="{lanrain::RES}/js/date/WdatePicker.js"></script>
+<script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#info', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : false,
+items : [
+'source','undo','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr']
+});
+
+});
+</script>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+<div class="cLineB">
+  <h4>文本投票设置 </h4><a href="{lanrain::U('Vote/index',array('type'=>'text'))}" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+         
+         <div class="msgWrap bgfc">
+  <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">	 
+<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+
+                            <tr>
+<th width="120">关键词：</th>
+<td><input type="text" name="keyword" value="" class="px" style="width:550px;"><br><span class="red">只能写一个关键词,功能面板必须开启投票</span></td>
+</tr>
+                            <tr>
+<th width="120">投票标题：</th>
+<td><input type="text" name="title" value="" class="px" style="width:550px;"></td>
+</tr>
+<tr>
+<th>投票图片：</th>
+<td><input type="text" name="picurl" value="" class="px" style="width:550px;"> 填写图片外链地址，大小为720x400</td>
+</tr>
+                                <tr>
+<th>图片显示：</th>
+<td><label>
+<input type="radio" name="showpic" value="1" checked="checked" id="showpic2">
+显示在投票页面</label>
+    
+    <label>
+<input name="showpic" type="radio" id="showpic1" value="0">
+不显示在投票页面</label>
+                                    
+                                    
+</td>
+</tr>
+<tr>
+<th valign="top">投票说明：</th>
+<td valign="top"><textarea class="px" id="info" name="info" style="width: 560px; height: 120px; display: ;"></textarea></td>
+</tr>
+<tr>
+<th valign="top">投票选项：</th>
+<td valign="top"><div class="bdrcontent">
+<div id="div_ptype">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="70%">
+<tbody>
+<tr>
+	<td width="350">选项标题</td>
+   <td width="50">排序</td>                  
+
+</tr>
+<tr>
+		<td class="norightborder">
+		<tbody>
+			<tr >
+				<td width="350" style="width:350px;"><input type="text" name="titele" value="" class="px" style="width:350px;"></td>
+				<td><input type="text" name="titele" value="1" style="width:35px;" class="px"></td>				
+			</tr>
+			<tr >
+				<td width="350" style="width:350px;"><input type="text" name="titele" value="" class="px" style="width:350px;"></td>
+				<td><input type="text" name="titele" value="2" style="width:35px;" class="px"></td>				
+			</tr>
+			<tr >
+				<td width="350" style="width:350px;"><input type="text" name="titele" value="" class="px" style="width:350px;"></td>
+				<td><input type="text" name="titele" value="3" style="width:35px;" class="px"></td>				
+			</tr>
+			
+		</tbody>
+	</td>
+</tr>
+</tbody>
+</table>
+  
+</div>
+</div>
+
+</td>
+</tr>
+<tr>
+<th>单选/多选：</th>
+<td><p style="width: 120px; float: left; display: block; line-height: 32px; height: 32px;">
+<label>
+<input name="type" type="radio" onclick="document.getElementById('cknums').style.display='none';" id="RadioGroup1_0" value="0" checked="checked">
+单选</label>
+　
+<label>
+<input type="radio" name="type" onclick="document.getElementById('cknums').style.display='block';" value="1" id="RadioGroup1_1">
+多选</label></p>
+<p id="cknums" style="display:none;width:200px; float: left">
+                                    <input name="cknums" class="px" size="4" type="text" value="2">多项最多选多少项
+</p></td>
+</tr>
+                          
+<tr>
+<th>截至时间：</th>
+<td><input type="input" class="px" id="statdate" value="<php>echo date('Y-m-d',time());</php>" onClick="WdatePicker()" name="statdate">
+                           
+  		到
+  		<input type="input" class="px" id="enddate" value="<php>echo date('Y-m-d',time());</php>" name="enddate" onClick="WdatePicker()"></td>
+</tr>
+<tr>
+<th>投票结果：</th>
+<td><label>
+<input type="radio" name="display" value="1" id="RadioGroup2_1">
+投票前可见</label>
+    
+    <label>
+<input name="display" type="radio" id="RadioGroup2_0" value="0">
+投票后可见</label>
+                                    
+                                      <label>
+<input name="display" type="radio" id="RadioGroup2_2" value="2">
+投票结束可见</label></td>
+</tr>
+<tr>
+<th>&nbsp;</th>
+<td><button type="submit" name="button" class="btnGreen">保存</button>
+<a href="{lanrain::U('Vote/index',array('type'=>'text'))}" class="btnGray vm">取消</a></td>
+</tr>
+</tbody>
+</table>
+   
+
+
+</form>
+  </div> 
+ 
+  
+        </div>
+<include file="Public:footer"/>

@@ -1,0 +1,44 @@
+.index{
+
+}
+
+body {
+ background: #8F391D  url(../images/bg.jpg) top center no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font:14px/180% Verdana, Arial, "宋体", sans-serif;
+  
+}
+.tdcode{
+  display:block; bottom:3px; right:3px; position:fixed;
+}
+.start{
+color:red;
+font-size:25px;
+margin-left:21%;
+margin-top:-11%;
+}
+#totalNum{
+position:absolutely;
+    display:block;
+color:white;
+font-size:40px;
+margin-left:50%;
+margin-top:15%;
+}
+#ShowDiv{
+margin-left:55%;
+margin-top:3%;
+color:white;
+font-size:160px;
+
+height:0px;
+width:0px;
+
+-webkit-border-radius:20px;
+    border-radius:230px;
+    background:rgba(0,0,0,0.2);
+	border:1px solid rgba(0,0,0,0.2);
+}

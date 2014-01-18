@@ -1,0 +1,122 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/plugins/code/prettify.css" />
+<script src="{lanrain::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+	KindEditor.ready(function(K){
+		var editor = K.editor({
+			allowFileManager:true
+		});
+		K('#upload').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					fileUrl : K('#pic').val(),
+					clickFn : function(url, title) {
+						if(url.indexOf("http") > -1){
+							K('#pic').val(url);
+						}else{
+							K('#pic').val("{lanrain::C('site_url')}"+url);
+						}
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+  <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" > 
+   <div class="cLineB"> 
+    <h4>商家设置 </h4> 
+    <a href="{lanrain::U('Host/index',array('token'=>$token))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+   </div> 
+   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+    <input type="hidden" name="id" value="{lanrain:$set.id}" /> 
+     
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th width="120"><span class="red">*</span>关键词：</th> 
+        <td><input type="text" name="keyword" value="{lanrain:$set.keyword}" class="px" style="width:400px;" /> <span class="red">只能写一个关键词</span></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>商家名称：</th> 
+        <td><input type="text" name="title" value="{lanrain:$set.title}" class="px" style="width:400px;" /></td> 
+       </tr> 
+       <tr style="display:none"> 
+        <th><span class="red">*</span>商家地址：</th> 
+        <td><input type="text" name="address" value="{lanrain:$set.address}" class="px" style="width:400px;" /></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>商家电话：</th> 
+        <td><input type="text" name="tel" value="{lanrain:$set.tel}" class="px" style="width:400px;" />电话号码</td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>手机号：</th> 
+        <td><input type="text" name="tel2" value="{lanrain:$set.tel2}" class="px" style="width:400px;" />手机号</td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>订单封面图片：</th> 
+        <td><input type="text" name="ppicurl" id="pic" value="{lanrain:$set.ppicurl}" class="px" style="width:400px;" readonly="readonly"/><span class="ke-button-common" id="upload" style="margin-top: 3px;margin-left: 5px;"><input type="button" class="ke-button-common ke-button" value="上传"></span> 填写图片外链地址，推荐大小为720x400</td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>订单页头部图片：</th> 
+        <td><input type="text" name="headpic" value="<if condition="$set.headpic neq false">{lanrain:$set.headpic}<else/>{lanrain::RES}/images/cart_info/online.jpg</if>" class="px" style="width:400px;" /> 不会自定义请留空:填写图片外链地址，推荐大小为720x125，高度可根据自身需求调整。<br />不填默认本图片: <a target="ss" href="{lanrain::C('site_url')}/tpl/User/default/common/images/cart_info/online.jpg">点击查看</a> </td> 
+       </tr> 
+        
+       <tr> 
+        <th valign="top"><span class="red">*</span>商家图片：</th> 
+        <td valign="top">
+         <div class="bdrcontent"> 
+          <div id="div_ptype"> 
+           <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+            <thead> 
+             <tr> 
+              <th width="160">文字描述</th>  
+              <th width="160">图片地址</th> 
+              <th width="160">图片跳转地址以http://开头</th> 
+               
+             </tr> 
+            </thead> 
+            <tbody> 
+             <tr> 
+              <td width="160"><input type="text" name="name" value="{lanrain:$set.name}" class="px" style="width:160px;" /></td>  
+              
+              <td width="200"><input type="text" name="picurl" value="{lanrain:$set.picurl}" class="px" style="width:160px;" /></td> 
+              <td width="200"><input type="text" name="url" value="{lanrain:$set.url}" class="px" style="width:160px;" /></td> 
+               
+             </tr> 
+            </tbody> 
+            
+           </table> 
+          </div> 
+         </div> 
+ 
+</td> 
+       </tr> 
+       <tr> 
+        <th valign="top"><span class="red">*</span>商家介绍：</th> 
+        <td valign="top"><textarea class="px" id="info" name="info" style="width: 410px; height: 180px;">{lanrain:$set.info}</textarea></td> 
+       </tr> 
+       <tr> 
+        <th valign="top"><span class="red">*</span>订单说明：</th> 
+        <td valign="top"><textarea class="px" id="info2" name="info2" style="width: 410px; height: 180px; ">{lanrain:$set.info2}</textarea></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+    </div>
+        <div class="msgWrap"> 
+       <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+       <tbody>
+       <tr>         
+        <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td>  <td><button type="submit" name="button" class="btnGreen">保存</button> | <a href="{lanrain::U('Host/index',array('token'=>$token))}" class="btnGray vm">取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+  </div> 
+  <include file="Public:footer" />

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>权限管理</title>
+<include file="common:public" />
+<div class="cr"></div>
+<form action="{lanrain::U('Group/role_sort')}" method="post">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="alist">
+	<tr>
+		<td width="70">排序权重</td>
+		<td width="70">ID</td>
+		<td width="350">角色名称</td>
+		<td >角色描述</td>
+		<td width="70">状态</td>
+		<td width="200">管理操作</td>
+	</tr>
+	<volist name="list" id="vo">
+		<tr>
+			<td align='center'>
+				<input type='text' value='{lanrain:$vo.sort}' size='3' name='sort[{lanrain:$vo.id}]'></td>
+			<td align='center'>{lanrain:$vo.id}</td>
+			<td >{lanrain:$vo.name}</td>
+			<td >{lanrain:$vo.remark}</td>
+			<td align='center'><eq name="vo.status" value="1"><font color="red">√</font><else/><font color="blue">×</font></eq> 
+			</td>
+			<td align='center'>
+				<a href="javascript:setting_access({lanrain:$vo.id}, '{lanrain:$vo.name}')">权限设置</a>
+				| <a href="{lanrain::U('Group/edit/',array('id'=>$vo['id']))}">修改</a>
+				| <a href="javascript:void(0)" onclick="return confirmurl('{lanrain::U('Group/del/',array('id'=>$vo['id']))}','确定删除该角色吗?')">删除</a>
+			</td>
+		</tr>
+	</volist>
+</table>
+
+<script type="text/javascript">
+//权限设置
+function setting_access(id, name) {
+	window.top.art.dialog.open('{lanrain::U("Group/access")}'+'&roleid='+id,{title: name+'权限设置', width: 600, height: 500});
+}
+</script>
+<div class="bottom">
+<input type="submit" value="排序" class="bginput" />
+</div>
+</form>
+</body>
+</html>

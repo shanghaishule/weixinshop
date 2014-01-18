@@ -1,0 +1,66 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/plugins/code/prettify.css" />
+<script src="{lanrain::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+	KindEditor.ready(function(K){
+		var editor = K.editor({
+			allowFileManager:true
+		});
+		K('#upload').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					fileUrl : K('#pic').val(),
+					clickFn : function(url, title) {
+						if(url.indexOf("http") > -1){
+							K('#pic').val(url);
+						}else{
+							K('#pic').val("{lanrain::C('site_url')}"+url);
+						}
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+  <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" > 
+   <div class="cLineB"> 
+    <h4><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>设置</h4> 
+    <a href="{lanrain::U('Product/cats',array('token'=>$token,'parentid'=>$parentid,'dining'=>$isDining))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+   </div> 
+   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+    <input type="hidden" name="id" value="{lanrain:$set.id}" /> 
+     
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th><span class="red">*</span>名称：</th> 
+        <td><input type="text" name="name" value="{lanrain:$set.name}" class="px" style="width:400px;" /></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>Logo地址：</th> 
+        <td><input type="text" name="logourl" id="pic" value="{lanrain:$set.logourl}" class="px" style="width:400px;" readonly="readonly"/><span class="ke-button-common" id="upload" style="margin-top: 3px;margin-left: 5px;"><input type="button" class="ke-button-common ke-button" value="上传"></span></td> 
+       </tr>
+       
+        <tr> 
+        <th><span class="red">*</span>简介：</th> 
+        <td><textarea name="des" class="px" style="width:400px;height:80px;">{lanrain:$set.des}</textarea></td> 
+       </tr>
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <if condition="$isDining neq 1"><input type="hidden" value="0" name="dining" /><else/><input type="hidden" value="1" name="dining" /></if>
+       <input type="hidden" value="{lanrain::$parentid}" name="parentid" />
+       <button type="submit" name="button" class="btnGreen">保存</button> &nbsp; <a href="{lanrain::U('Product/cats',array('token'=>$token))}" class="btnGray vm">取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+  </div> 
+  <include file="Public:footer" />

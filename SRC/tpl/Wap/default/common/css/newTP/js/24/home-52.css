@@ -1,0 +1,138 @@
+
+.body{
+	max-width:640px;
+	margin:auto;
+	min-height:100%;
+	background-color:#e1e0de;
+	position:relative;
+}
+
+.body{
+	min-height:100%;
+	overflow:hidden;
+	display:block;
+	background:-webkit-gradient(linear, 0 0, 0 100%, from(#416e8b), to(#4f96b1));
+}
+.body2{
+	float: left;
+	min-height:100%;
+	-webkit-transition:-webkit-transform .2s ease-in;
+}
+.body2.on{
+	-webkit-transform:translate3d(-80px, 0, 0);
+}
+
+.header2 img{
+	width:100%;
+	min-height:100px;
+	max-height:320px;
+}
+.header2 a.tel{
+	display:block;
+	width:100%;
+	line-height:35px;
+	color:#fff;
+	background:rgba(0,0,0,0.5);
+	height:35px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	z-index:10;
+	text-align:center;
+}
+.header2 a.tel span{
+	font-size:18px;
+	margin-right:5px;
+	line-height:35px;
+	display:inline-block;
+	position: relative;
+}
+/******************************/
+.list_ul{
+	margin:10px;
+	overflow:hidden;
+}
+/*.list_ul:after{
+	content: "",
+	height:0;
+	display: block;
+	clear: both;
+}*/
+.list_ul li{
+	padding:5px;
+	width:50%;
+	float:left;
+	-webkit-box-sizing:border-box;
+}
+
+.list_ul li a{
+	display:block;
+	height:70px;
+	background:#5491ac;
+	border-radius:3px;
+}
+.list_ul li a.active{
+	background-color:#579bb5;
+}
+/*.list_ul li a>dl{
+	pointer-events:none;
+}*/
+.list_ul li a dd{
+	height:70px;
+	vertical-align: middle;
+}
+
+.list_ul li a dd>*{
+	color:#fff;
+}
+.list_ul li a dd>span{
+	display:block;
+	width:45px;
+	height:45px;
+	border:2px solid #fff;
+	border-radius:60px;
+	margin:auto 10px;
+	line-height:45px;
+	text-align:center;
+	font-size:2em;
+	background:-webkit-gradient(linear, 0 0, 100% 0, from(#49b5de), to(#26a2c1), color-stop(.5, #49b5de), color-stop(.5, #26a3c2));
+}
+
+.list_ul li a.active dd>span{
+	background:-webkit-gradient(linear, 0 0, 100% 0, from(#47a2c3), to(#3997bc), color-stop(.5, #47a2c3), color-stop(.5, #3997bc));
+}
+
+
+.aside_61{
+	z-index:0;
+	width:80px;
+	position:absolute;
+	right:-80px;
+	top:0px;
+	height:100%;
+	background:#fff;
+	z-index:1;
+	background:-webkit-gradient(linear, -20% 0, 20% 0, from(#666), to(#fff));
+}
+.aside_61 ul{
+	-webkit-padding-start: 0px;
+}
+
+.aside_61 span{
+	display:block;
+	line-height:70px;
+	font-size:3em;
+	color:#4480a0;
+	text-align:center;
+}
+
+.aside_61 .a_aside{
+	position:absolute;
+	left:-60px;
+	top:10px;
+	display:block;
+	width:60px;
+	height:50px;
+	background:url(../../img/template/lib/v61_2.png#1) no-repeat 0 0;
+	-webkit-background-size:60px 50px;
+}

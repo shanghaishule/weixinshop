@@ -1,0 +1,180 @@
+@charset "utf-8";
+
+*{ word-wrap:break-word;}
+body{ padding:5px 0; background:#F4F7FD; text-align:center; }
+body, td, input, textarea, select, button{ color:#666; font:12px Verdana, Tahoma, Arial, sans-serif;}
+ul, dl, dd, p, h1, h2, h3, h4, h5, h6, form, fieldset { margin:0; padding:0; }
+h1, h2, h3, h4, h5, h6{ font-size:12px; }
+a{ color:#2366A8; text-decoration:none; }
+	a:hover { text-decoration:underline; }
+	a img{ border:none; }
+em, cite, strong, th{ font-style:normal; font-weight:normal; }
+table{ border-collapse:collapse; }
+
+.container{ overflow:hidden; margin:0 auto; width:700px; height:auto !important;text-align:left; border:1px solid #D5E3EE; }
+.header{ height:90px; background:url(../images/top.png) repeat-x; }
+	.header h1{ text-indent:-9999px; width:350px; height:70px; background:url(../images/setting.png) no-repeat 0px 0px; }
+	.header span { float: left; padding-left: 210px; margin-top:-24px; }
+.main{ padding:20px 20px 0; background:#FFF url(../images/top.png) repeat-x 0 -194px; }
+	.main h3{ margin:10px auto; width:75%; color:#6CA1B4; font-weight:700; }
+.desc{ margin:0 auto; width:537px; line-height:180%; clear:both; }
+	.desc ul{ margin-left:20px; }
+.desc1{ margin:10px 0; width:100%; }
+	.desc1 ul{ margin-left:25px; }
+	.desc1 li{ margin:3px 0; }
+.tb, .tb2{ margin:15px 0 15px 67px; }
+	.tb th{ padding:5px; color:#06C; font-weight:600; }
+	.tb td{ padding:3px 5px; }
+		.tb .w, .tb .nw, .tb .padleft{ padding-left:45px; }
+		.tb .pdleft1{ padding-left:67px; }
+.tb2{}
+	.tb2 th, .tb2 td{ padding:3px 5px; }
+	.tbopt{ width:120px; }
+.btnbox{ text-align:center; }
+	.btnbox input{ margin:0 2px; }
+	.btnbox textarea{ margin-bottom:10px; height:150px; }
+.btn{ margin-top:10px; }
+.footer{
+	text-align:center;
+	font-size:11px;
+	padding-bottom:5px;
+	padding-top:5px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #D5E3EE;
+}
+.footer p{
+	width:100%;
+	text-align:center;
+	display:block;
+	padding-top:10px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:normal;
+
+	}
+.footer p a{
+	color:#ff6600;
+	}
+.footer p a:hover{
+	color:#ff6600;
+	text-decoration:none;
+	}
+
+
+.marginbot{ margin-bottom:20px; }
+.margintop{ margin-top:20px; }
+.red{ color:red; }
+.marginbot p{
+	padding-top:5px;
+	color:#ff0000;
+	
+	}
+.ziti-c{
+	font-weight:bold;
+	}
+.marginbot p.nest{
+line-height:25px;
+
+	}
+.las-1{
+	background:url(../images/install-2.gif) no-repeat;
+	width:170px;
+	height:35px;
+	border:none;
+	
+	}
+.las-2{
+	background:url(../images/install-1.gif) no-repeat;
+	width:170px;
+	height:35px;
+	border:none;
+	cursor:pointer;
+	}
+.marginbot p.nes{
+	text-indent:134px;
+	text-align:left;
+	}
+.shop-tex{
+	width:80%;
+	
+	}
+.txt{
+	width:200px;
+	height:18px;
+	background-color:#fbfdfa;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #BED4F3;
+	border-right-color: #D5E3EE;
+	border-bottom-color: #D5E3EE;
+	border-left-color: #BED4F3;
+	padding-left: 4px;
+	}
+.licenseblock{ margin-bottom:15px; padding:8px; height:280px; border:1px solid #EEE; background:#FFF; overflow:scroll; overflow-x:hidden;
+
+
+ }
+.license{}
+	.license h1{ padding-bottom:10px; font-size:14px; text-align:center; }
+	.license h3{ margin:0; color:#666; }
+	.license p{ line-height:150%; margin:10px 0; text-indent:25px; }
+	.license li{ line-height:150%; margin:5px 0; }
+.title{ margin:5px 0 -15px 60px; }
+.dress{
+	float:right;
+	position:relative;
+	z-index:1000;
+	top:-58px;
+	width:160px;
+	text-align:left;
+	height: 44px;
+	}
+.dress h3{
+	font-size:22px;
+	color:#B3C2D5;
+	float:left;
+	clear:both;
+	margin-top:-3px;
+	*margin-top:0px;
+	line-height: 28px;
+	}
+.dress p{
+	font-size:12px;
+	color:#B3C2D5;
+	padding-top:1px;
+	padding-left:4px;
+	clear:both;
+	line-height: 16px;
+	}
+.dress1{
+	background:url(../images/rep.gif) left 0px no-repeat;
+	padding-left:122px;
+
+	}
+.dress2{
+	background:url(../images/rep.gif) left -65px no-repeat;
+	padding-left:130px;
+	
+	
+	}
+.dress3{
+	background:url(../images/rep.gif) left -130px no-repeat;
+	padding-left:130px;
+
+	}
+.dress4{
+	background:url(../images/rep.gif) left -195px no-repeat;
+	padding-left:130px;
+
+	}
+input[type=checkbox],input[type=radio]{
+	vertical-align:-2px;
+	*vertical-align:-3px;
+	}

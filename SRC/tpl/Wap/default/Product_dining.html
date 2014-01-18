@@ -1,0 +1,14 @@
+<include file="Product:header"/>
+<!--主体-->
+<div class="main">
+	<div class="f_index clearfix">
+		<a class="f_index_button ts1" href="{lanrain::U('Product/cats',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id,'dining'=>1))}">我要点餐</a>
+		<ul class="clearfix">
+			<if condition="$diningConfig.diningyuding eq 1"><li class="fl"><a href="{lanrain::U('Product/orderCart',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id,'cartIsDining'=>1))}" class="c_button_cz" title="预订餐桌">预订餐桌</a></li></if>
+			<if condition="$diningConfig.diningwaimai eq 1"><li class="fr"><a href="{lanrain::U('Product/cats',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id,'dining'=>1))}" class="c_button_wm" title="预订外卖">预订外卖</a></li></if>
+
+		</ul>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<include file="Product:header"/>
+
+<div class="main">
+
+    	<div class="p_mod">
+    		<h2 class="p_mod_title">订单信息</h2>
+            <div class="car">
+                <volist name="products" id="p">
+              <div class="car_list clearfix">
+                <div class="car_content clearfix">
+                  <h3><a href="{lanrain::U('Product/product',array('token'=>$token,'id'=>$p['id'],'wecha_id'=>$_GET['wecha_id']))}">{lanrain:$p.name}</a></h3>
+                     <a href="{lanrain::U('Product/product',array('token'=>$token,'id'=>$p['id'],'wecha_id'=>$_GET['wecha_id']))}">
+                      <img src="{lanrain:$p.logourl}" />
+                     </a>
+                     <div class="car_property">
+                        <span class="price_now">单价：<font>￥{lanrain:$p.price}</font></span>
+                                                <div class="o_num_input clearfix" id="{lanrain:$p.id}">
+                            
+                            数量：{lanrain:$p.count}
+                           
+                        </div>
+                                             
+                     </div>
+                </div>
+              </div>
+                 </volist>
+                            <p><span class="price_now" id="total_fee">总价格：<font>￥{lanrain:$totalFee}</font></span></p>
+            </div>            
+    	</div>
+
+ 
+</div>
+
+
+<!--物流信息-->
+<php>if(!$thisOrder['diningtype']){</php>
+<div class="main" id="wrap">
+    	<div class="p_mod o_address">
+    		<h2 class="p_mod_title">发货信息</h2>
+            <div id="city">
+    		<ul>
+    			<li><strong>发货状态：<php>if($thisOrder['sent']){echo '已发货';}else{echo '未发货';}</php></strong></li>
+				<php>if($thisOrder['sent']){</php>
+    			<li><strong>快递公司：{lanrain:$thisOrder.logistics}</strong></li>
+    			<li><strong>快递单号：{lanrain:$thisOrder.logisticsid}</strong></li>
+				<php>}</php>
+    		</ul>
+            </div>
+			
+			
+    	</div>
+</div>
+<php>}</php>
+<!--物流信息-->
+<style type="text/css">
+.desks{ display: none;}
+</style>
+
+
+
+<style>
+.deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:13px 24px;border:solid #d6d482 1px;background:#f5f4c5;font-size:16px;color:#8f772f;line-height:18px;border-radius:3px;}
+</style>
+<div class="main" id="wrap">
+    <form method="post" action="" onsubmit="return tgSubmit()">
+    	<div class="p_mod o_address">
+    		<h2 class="p_mod_title">接收信息</h2>
+            <div id="city">
+    		<ul>
+    			<li><strong>姓名：</strong><input type="text" placeholder="请输入收货人姓名" id="truename" name="truename" value="{lanrain:$thisOrder.truename}" /></li>
+    			<li><strong>手机：</strong><input type="text" placeholder="请输入联系人手机号" id="tel" name="tel" value="{lanrain:$thisOrder.tel}" /></li>
+    			<li><strong>地址：</strong><input type="text" placeholder="请输入详细地址" id="address" name="address" value="{lanrain:$thisOrder.address}" /></li>
+    		</ul>
+            </div>
+			
+			
+    	</div>
+		<div class="o_btn clearfix">
+			<php>if($alipayConfig['open']&&!$thisOrder['paid']){</php>
+			<input type="button" class="o_btn_back ts1" onclick="history.go(-1);" value="返回" />
+    		<input type="button" class="o_btn_submit ts1" onclick="location.href='/index.php?g=Wap&m=Alipay&a=pay&price={lanrain:$totalFee}&orderName={lanrain:$p.name}&single_orderid={lanrain:$thisOrder.id}&token={lanrain:$token}'" value="点击这里付款" />
+			<php>}</php>
+			</div>
+    </form>
+</div>
+
+				
+
+</body>
+</html>

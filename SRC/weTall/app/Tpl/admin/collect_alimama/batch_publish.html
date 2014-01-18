@@ -1,0 +1,67 @@
+<!--移动栏目-->
+<div class="dialog_content pad_10">
+	<form id="info_form" action="{:U('collect_alimama/batch_publish')}" method="post">
+	<table width="100%" class="table_form">
+		<tr> 
+			<th width="80">{:L('publish_item_cate')} :</th>
+			<td><select class="J_cate_select mr10" data-pid="0" data-uri="{:U('item_cate/ajax_getchilds', array('type'=>0))}"></select></td>
+		</tr>
+		<tr>
+			<th>{:L('auto_user')} :</th>
+			<td>
+				<select name="auid" id="J_auid">
+					<option value="0">--{:L('please_select')}--</option>
+					<volist name="auto_user" id="val">
+					<option value="{$val.id}">{$val.name}</option>
+					</volist>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>{:L('import_page_num')} :</th>
+			<td><input type="text" name="page_num" size="4" class="input-text" value="10" /></td>
+		</tr>
+	</table>
+	<input type="hidden" name="cate_id" id="J_cate_id" value="0" />
+	<input type="hidden" id="J_form_data" name="form_data" value="" />
+	</form>
+</div>
+<script>
+$(function(){
+	var batch_publish_do_url = "{:U('collect_alimama/batch_publish_do')}";
+	$('#J_form_data').val($('#J_alimama_form').serialize());
+	$('#info_form').ajaxForm({beforeSubmit:showloading, success:complate, dataType:'json'});
+	function showloading(){
+		if($('#J_cate_id').val()=='0'){
+			$.pinphp.tip({content:lang.please_select+lang.publish_item_cate, icon:'alert'});
+			return false;
+		}
+		if($('#J_auid').val()=='0'){
+			$.pinphp.tip({content:lang.please_select+lang.auto_user, icon:'alert'});
+			return false;
+		}
+	}
+	function complate(result){
+		if(result.status == 1){
+			//开始采集
+			publish_page();
+		} else {
+			$.pinphp.tip({content:result.msg, icon:'alert'});
+		}
+	}
+	var p = 1;
+	function publish_page(){
+		$('.dialog_content').html('<span class="blue">'+lang.publish_page_left+'<em class="red"> [ '+p+' ] </em>'+lang.publish_page_right+'</span>');
+		$.getJSON(batch_publish_do_url, {p:p}, function(result){
+			if(result.status == 1){
+				p++;
+				publish_page(p);
+			}else{
+				$.dialog.get('batch_publish').close();
+				$.pinphp.tip({content:result.msg});
+			}
+		});
+	}
+	$('.J_cate_select').cate_select({field:'J_cate_id'});
+});
+</script>

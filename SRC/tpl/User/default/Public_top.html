@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>var SITEURL='';</script>
+<title> {lanrain::C('site_title')} {lanrain::C('site_name')}</title>
+<link href="{lanrain::RES}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{lanrain::RES}/css/stylet.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{lanrain::RES}/js/jquery.min.js"></script>
+<script type="text/javascript" src="{lanrain::RES}/js/main.js"></script>
+
+<script type="text/javascript">
+function ying(){
+	 document.getElementById('tiduser').style.display="none";
+	 document.getElementById('quit').style.display="block";
+}
+function xian(){
+	 document.getElementById('tiduser').style.display="block";
+	 document.getElementById('quit').style.display="none";
+}
+setTimeout("xian()",5000);
+</script>
+
+</head>
+
+<body>
+<div id="herder" >
+	<div id="top">
+		<img src="{lanrain::RES}/images/logo.png" />
+		<a href="/" >首页</a>
+		<a href="{lanrain::U('Home/Index/fc')}" >功能介绍</a>
+		<a href="{lanrain::U('Home/Index/about')}" >关于我们</a>
+		<a href="{lanrain::U('Home/Index/price')}" >资费说明</a>
+		<a href="{lanrain::U('Home/Index/common')}" >微信导航</a>
+		<a href="{lanrain::U('User/Index/index')}" >管理中心</a>
+        <a href="{lanrain::U('Home/Index/help')}" >帮助中心</a>
+		<a class="line" ></a>
+        <a href="#" class="a" id="tiduser" onmouseover="ying();" >您好：<span>{lanrain:$Think.session.uname}</span></a>
+		<a href="#" class="a1" id="quit" onclick="Javascript:window.open('{lanrain::U('System/Admin/logout')}')" onLoad=setTimeout("abc.style.display='none'",5000) >安全退出</a>
+	</div>
+</div>
+<div id="Frame" class="shadow">
+	<div id="nav">
+    <?php if(!empty($_GET['id'])){ ?>
+		<img src="{lanrain:$wecha.headerpic}" width="50" height="50" />
+    <?php }else{ ?>
+    	<img src="{lanrain::RES}/images/portrait.jpg" width="50" height="50" />
+    <?php } ?>
+		<ul class="ul">
+        <?php if(!empty($_GET['id'])){ ?>
+			<li><strong>{lanrain:$wecha.wxname}</strong><img src="{lanrain::RES}/images/vip.png" /></li>
+			<li>微信号：{lanrain:$wecha.weixin}</li>
+        <?php }else{ ?>
+        	<li><strong>用户：</strong><strong style="color:#CC3300;" >{lanrain:$Think.session.uname}</strong></li>
+			<li><strong>等级：</strong><strong style="color:#CC3300;" >VIP<php>if($_SESSION['gid']>1){echo $_SESSION['gid']-1;}else{echo 0;}</php></strong></li>
+        <?php } ?>
+		</ul>
+		<ul >
+			<li>VIP有效时间：<if condition="$_SESSION['viptime'] neq 0">{lanrain:$thisUser.viptime|date="Y-m-d",###}<else/>vip0不限时间</if></li>
+			<li>图文自定义：{lanrain:$thisUser.diynum}/{lanrain:$userinfo.diynum}</li>
+		</ul>
+		<ul>
+			<li>活动创建数：{lanrain:$thisUser.activitynum}/{lanrain:$userinfo.activitynum}</li>
+			<li>请求数：{lanrain:$thisUser.connectnum}/{lanrain:$userinfo.connectnum}</li>
+		</ul>
+		<ul>
+			<li>请求数剩余：<php>echo ($userinfo['connectnum']-$_SESSION['connectnum']);</php></li>
+			<li>已使用：<php>echo $_SESSION['diynum'];</php></li>
+		</ul>
+		<ul>
+			<li>当月赠送请求数：{lanrain:$userinfo.connectnum}</li>
+			<li>当月剩余请求数：<php>echo $userinfo['connectnum']-$_SESSION['connectnum'];</php></li>
+		</ul>
+	</div>
+    <div id="floatline"></div>
+	<div id="Menu">
+		<div class="top">
+             <img src="{lanrain::RES}/images/TwoMenu-ico-006.png" />
+            <a>管理平台</a>
+            <span>- 会员充值</span>
+		</div>
+		<div class="TwoMenu">
+			<a href="{lanrain::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}" >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-06.png" />
+            	<span>管理</span>
+            </a>
+			<div id="TwoMenu-01" style="display:block;" >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-006.png" /><a class="a">管理</a>
+            </div>
+			<?php for($i=1;$i<6;$i++){?>
+            	<a ></a>
+            <?php } ?>
+		</div>
+		<div class="ThreeMenu">
+        	<div class="contab" style="display:block;" >
+                <a href="{lanrain::U('Index/useredit')}" class="Red" >
+                	<img src="{lanrain::RES}/images/1-0.png" /><span>修改密码</span>
+                </a>
+                <a href="{lanrain::U('Index/index')}" class="Highland" >
+                    <img src="{lanrain::RES}/images/1-1.png" /><span>我的公号</span>
+                </a>
+                <a href="{lanrain::U('Index/add')}" class="Navy" >
+                    <img src="{lanrain::RES}/images/1-2.png" /><span>添加公号</span>
+                </a>
+                <a href="{lanrain::U('Alipay/index')}" class="DarkGreen" >
+                    <img src="{lanrain::RES}/images/1-3.png" /><span>会员充值</span>
+                </a>
+            </div>
+		</div>
+	</div>
+	<div id="Content" >
+	</div>

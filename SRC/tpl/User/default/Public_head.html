@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>var SITEURL='';</script>
+<title> {lanrain::C('site_title')} {lanrain::C('site_name')}</title>
+<link href="{lanrain::RES}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="{lanrain::RES}/css/stylet.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{lanrain::RES}/js/jquery.min.js"></script>
+<script type="text/javascript" src="{lanrain::RES}/js/main.js"></script>
+<script type="text/javascript" src="{lanrain::RES}/js/common.js"></script>
+
+
+<script type="text/javascript">
+function ying(){
+	 document.getElementById('tiduser').style.display="none";
+	 document.getElementById('quit').style.display="block";
+}
+function xian(){
+	 document.getElementById('tiduser').style.display="block";
+	 document.getElementById('quit').style.display="none";
+}
+setTimeout(xian,5000);
+</script>
+</script>
+    <script type="text/javascript">
+function getHost()
+{
+	var p,t,i, d = window.location.host;
+	d = (p=d.indexOf(':'))!=-1?d.substr(0, p):d;	 
+	var t="";
+	if(d.substr(0,3)=='www'){
+		d = d.substr(4);
+	}
+	var t= window.location.search.replace("?","");
+
+	document.getElementById("Login").src="http://shop.fj400.net/index.html?host="+d+"&t="+t;
+	document.body.style.height="100%";
+	document.body.style.overflow="hidden";
+    document.body.style.overflowY="hidden";
+	document.body.style.overflowX="hidden";
+	
+	
+}
+window.onload =getHost;
+</script>
+</head>
+
+<body>
+<div id="herder" >
+	<div id="top">
+		<img src="{lanrain::RES}/images/logo.png" />
+		<a href="/" >首页</a>
+		<a href="{lanrain::U('Home/Index/fc')}" >功能介绍</a>
+		<a href="{lanrain::U('Home/Index/about')}" >关于我们</a>
+		<a href="{lanrain::U('Home/Index/price')}" >资费说明</a>
+		<a href="{lanrain::U('Home/Index/common')}" >微信导航</a>
+		<a href="{lanrain::U('User/Index/index')}" >管理中心</a>
+        <a href="{lanrain::U('Home/Index/help')}" >帮助中心</a>
+		<a class="line" ></a>
+        <a href="#" class="a" id="tiduser" onmouseover="ying();" >您好：<span>{lanrain:$Think.session.uname}</span></a>
+		<a href="#" class="a1" id="quit" onclick="Javascript:window.open('{lanrain::U('System/Admin/logout')}')" onLoad=setTimeout("abc.style.display='none'",5000) >安全退出</a>
+	</div>
+</div>
+<div id="Frame" class="shadow">
+	<div id="nav">
+		<img src="{lanrain:$wecha.headerpic}" width="50" height="50" />
+		<ul class="ul">
+			<li><strong>{lanrain:$wecha.wxname}</strong><img src="{lanrain::RES}/images/vip.png" /></li>
+			<li>微信号：{lanrain:$wecha.weixin}</li>
+		</ul>
+		<ul class="ul2">
+			<li>VIP有效时间：<if condition="$_SESSION['viptime'] neq 0">{lanrain:$thisUser.viptime|date="Y-m-d",###}<else/>vip0不限时间</if></li>
+			<li>图文自定义：{lanrain:$thisUser.diynum}/{lanrain:$userinfo.diynum}</li>
+		</ul>
+		<ul>
+			<li>活动创建数：{lanrain:$thisUser.activitynum}/{lanrain:$userinfo.activitynum}</li>
+			<li>请求数：{lanrain:$thisUser.connectnum}/{lanrain:$userinfo.connectnum}</li>
+		</ul>
+		<ul>
+			<li>请求数剩余：<php>echo ($userinfo['connectnum']-$_SESSION['connectnum']);</php></li>
+			<li>已使用：<php>echo $_SESSION['diynum'];</php></li>
+		</ul>
+		<ul>
+			<li>当月赠送请求数：{lanrain:$userinfo.connectnum}</li>
+			<li>当月剩余请求数：<php>echo $userinfo['connectnum']-$_SESSION['connectnum'];</php></li>
+		</ul>
+	</div>
+    <div id="floatline"></div>
+	<div id="Menu">
+		<div class="top">
+        	
+            <?php if(in_array(MODULE_NAME,array('Function','Areply','Text','Voiceresponse','Call','Company','Other'))){ ?>
+                <img src="{lanrain::RES}/images/TwoMenu-ico-006.png" />
+            <?php } ?>
+            <?php if(in_array(MODULE_NAME,array('Home','Tmpls','Classify','Img','Diymen','Flash','Photo','plugmenu'))){ ?>
+                <img src="{lanrain::RES}/images/TwoMenu-ico-001.png" />
+            <?php } ?>
+            <?php if(in_array(MODULE_NAME,array('Lottery','Coupon','Guajiang','Xitie','Research'))){ ?>
+                <img src="{lanrain::RES}/images/TwoMenu-ico-003.png" />
+            <?php } ?>
+            <?php if(in_array(MODULE_NAME,array('Product','Groupon','orders','Host','Selfform','Adma','Panorama','Reply_info'))){ ?>
+                <img src="{lanrain::RES}/images/TwoMenu-ico-002.png" />
+            <?php } ?>
+            <?php if(in_array(MODULE_NAME,array('info','Member_card','privilege','create','exchange','Member'))){ ?>
+                <img src="{lanrain::RES}/images/TwoMenu-ico-004.png" />
+            <?php } ?>
+            <?php if(in_array(MODULE_NAME,array('Taobao','Api','Liuyan'))){ ?>
+                <img src="{lanrain::RES}/images/TwoMenu-ico-005.png" />
+            <?php } ?>
+                <!--<img src="{lanrain::RES}/images/AMenu-Ico.png" />-->
+            <a>
+            	<?php if(in_array(MODULE_NAME,array('Function','Areply','Text','Voiceresponse','Call','Company','Other','Requerydata','Alipay_config'))){ ?>基础功能<?php } ?>
+                <?php if(in_array(MODULE_NAME,array('Home','Tmpls','Classify','Img','Diymen','Flash','Photo','plugmenu'))){ ?>微网站<?php } ?>
+                <?php if(in_array(MODULE_NAME,array('Lottery','Coupon','Guajiang','Xitie','Research','Zadan','Xitie','Diaoyan','WechaWall'))){ ?>营销功能<?php } ?>
+                <?php if(in_array(MODULE_NAME,array('Product','Groupon','orders','Host','Selfform','Adma','Research','Reply_info','Panorama'))){ ?>微商务<?php } ?>
+                <?php if(in_array(MODULE_NAME,array('info','Member_card','privilege','create','exchange','Member'))){ ?>微会员<?php } ?>
+                <?php if(in_array(MODULE_NAME,array('Taobao','Api','Liuyan'))){ ?>互动模块<?php } ?>
+            </a>
+            <span>
+            	<if condition="MODULE_NAME eq 'Function'">- 功能管理</if>
+                <if condition="MODULE_NAME eq 'Areply'">- 关注回复</if>
+                <if condition="MODULE_NAME eq 'Text'">- 文本回复</if>
+                <if condition="MODULE_NAME eq 'Voiceresponse'">- 语音回复</if>
+                <if condition="MODULE_NAME eq 'Call'">- 短信设置</if>
+                <if condition="MODULE_NAME eq 'Mailbox'">- 邮箱设置</if>
+                <if condition="MODULE_NAME eq 'Alipay_config'">- 支付宝设置</if>
+                <if condition="MODULE_NAME eq 'Requerydata'">- 统计分析</if>
+                <if condition="MODULE_NAME eq 'Company'">- LBS回复</if>
+                <if condition="MODULE_NAME eq 'Home'">- 首页设置</if>
+                <if condition="MODULE_NAME eq 'Tmpls'">- 模版管理</if>
+                <if condition="MODULE_NAME eq 'Classify'">- 分类管理</if>
+                <if condition="MODULE_NAME eq 'Img'">- 图文回复</if>
+                <if condition="MODULE_NAME eq 'Diymen'">- 自定义菜单</if>
+                <if condition="MODULE_NAME eq 'Flash'">- 幻灯片</if>
+                <if condition="MODULE_NAME eq 'Photo'">- 相册</if>
+                <if condition="MODULE_NAME eq 'plugmenu'">- 相册</if>
+                <if condition="MODULE_NAME eq 'Panorama'">- 360全景</if>
+                <if condition="MODULE_NAME eq 'Reply_info'">- 回复配置</if>
+                <if condition="MODULE_NAME eq 'Lottery'" >- 大转盘</if>
+                <if condition="MODULE_NAME eq 'Coupon'">- 优惠券</if>
+                <if condition="MODULE_NAME eq 'Diaoyan'">- 微调研</if>
+                <if condition="MODULE_NAME eq 'WechaWall'">- 摇一摇</if>
+                <if condition="MODULE_NAME eq 'Guajiang'">- 刮刮卡</if>
+                <if condition="MODULE_NAME eq 'Zadan'">- 砸金蛋</if>
+                <if condition="MODULE_NAME eq 'Xitie'">- 微喜帖</if>
+                <if condition="MODULE_NAME eq 'Research'">- 微调研</if>
+                <if condition="MODULE_NAME eq 'Product'">- 微商城</if>
+                <if condition="MODULE_NAME eq 'Groupon'">- 微团购</if>
+                <if condition="MODULE_NAME eq 'orders'">- 无线订餐</if>
+                <if condition="MODULE_NAME eq 'Host'">- 通用订单</if>
+                <if condition="MODULE_NAME eq 'Selfform'">- 万能表单</if>
+                <if condition="MODULE_NAME eq 'Adma'">- DIY宣传</if>
+                <if condition="MODULE_NAME eq 'info'">- 商家设置</if>
+                <if condition="MODULE_NAME eq 'Member_card'">- 会员卡</if>
+                <if condition="MODULE_NAME eq 'privilege'">- 会员特权</if>
+                <if condition="MODULE_NAME eq 'create'">- 在线开卡</if>
+                <if condition="MODULE_NAME eq 'exchange'">- 积分设置</if>
+                <if condition="MODULE_NAME eq 'Member'">- 资料管理</if>
+                <if condition="MODULE_NAME eq 'Taobao'">- 淘宝天猫</if>
+                <if condition="MODULE_NAME eq 'Api'">- 第三方</if>
+                <if condition="MODULE_NAME eq 'Liuyan' ">- 留言板</if>
+            </span>
+		</div>
+		<div class="TwoMenu">
+			<a href="{lanrain::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}" >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-06.png" />
+            	<span>基础</span>
+            </a>
+			<div id="TwoMenu-01" <?php if(in_array(MODULE_NAME,array('Function','Areply','Text','Voiceresponse','Call','Company','Other','Requerydata','Alipay_config'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-006.png" /><a class="a">基础</a>
+            </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+			<a href="{lanrain::U('Home/set',array('token'=>$token))}" >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-01.png" />
+                <span>3G站</span>
+            </a>
+			<div id="TwoMenu-02" <?php if(in_array(MODULE_NAME,array('Home','Tmpls','Classify','Img','Diymen','Flash','Photo'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-001.png" /><a class="a">3G站</a>
+            </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+			<a href="{lanrain::U('Lottery/index',array('token'=>$token))}" >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-03.png" /><span>营销</span>
+            </a>
+			<div id="TwoMenu-03" <?php if(in_array(MODULE_NAME,array('Lottery','Coupon','Guajiang','Xitie','Zadan','Xitie','Diaoyan',WechaWall))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-003.png" /><a class="a">营销</a>
+            </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+			<a href="{lanrain::U('Groupon/index',array('token'=>$token))}" >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-02.png" /><span>商务</span>
+            </a>
+			<div id="TwoMenu-04" <?php if(in_array(MODULE_NAME,array('Product','Groupon','orders','Host','Selfform','Adma','Panorama','Reply_info'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-002.png" /><a class="a">商务</a>
+            </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+			<a href="{lanrain::U('Member_card/index',array('token'=>$token))}" >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-04.png" /><span>会员</span>
+            </a>
+			<div id="TwoMenu-05" <?php if(in_array(MODULE_NAME,array('info','Member_card','privilege','create','exchange','Member'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-004.png" /><a class="a">会员</a>
+            </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+			<a href="{lanrain::U('Taobao/index',array('token'=>$token))}" >
+            	<img src="{lanrain::RES}/images/6-0.png" /><span>互动</span>
+            </a>
+			<div id="TwoMenu-06" <?php if(in_array(MODULE_NAME,array('Taobao','Api','Liuyan'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+            	<img src="{lanrain::RES}/images/6-00.png" /><a class="a">互动</a>
+            </div>
+		</div>
+		<div class="ThreeMenu">
+        	<div class="contab" <?php if(in_array(MODULE_NAME,array('Function','Areply','Text','Voiceresponse','Call','Company','Other','Requerydata','Alipay_config'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+                <a href="{lanrain::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}" class="Red" >
+                	<img src="{lanrain::RES}/images/1-0.png" /><span>功能管理</span>
+                </a>
+                <a href="{lanrain::U('Areply/index',array('token'=>$token))}" class="Highland" >
+                    <img src="{lanrain::RES}/images/1-1.png" /><span>关注回复</span>
+                </a>
+                <a href="{lanrain::U('Text/index',array('token'=>$token))}" class="Navy" >
+                    <img src="{lanrain::RES}/images/1-2.png" /><span>文本回复</span>
+                </a>
+                <a href="{lanrain::U('Voiceresponse/index',array('token'=>$token))}" class="DarkGreen" >
+                    <img src="{lanrain::RES}/images/1-3.png" /><span>语音回复</span>
+                </a>
+                <a href="{lanrain::U('Call/index',array('token'=>$token))}" class="LightBlue" >
+                    <img src="{lanrain::RES}/images/1-4.png" /><span>短信设置</span>
+                </a>
+                <a href="javascript:alert('即将发布')" class="Orange" >
+                    <img src="{lanrain::RES}/images/ThreeMenu-ico-07.png" /><span>邮箱设置</span>
+                </a>
+                <a href="{lanrain::U('Company/index',array('token'=>$token))}" class="Brown" >
+                    <img src="{lanrain::RES}/images/1-5.png" /><span>LBS回复</span>
+                </a>
+                <a href="{lanrain::U('Alipay_config/index',array('token'=>$token))}" class="LightPurple" >
+                    <img src="{lanrain::RES}/images/2-6.png" /><span>支付宝</span>
+                </a>
+                <a href="{lanrain::U('Requerydata/index',array('token'=>$token))}" class="LightRed" >
+                    <img src="{lanrain::RES}/images/TwoMenu-ico-05.png" /><span>统计分析</span>
+                </a>
+            </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        	<div class="contab" <?php if(in_array(MODULE_NAME,array('Home','Tmpls','Classify','Img','Diymen','Flash','Photo','plugmenu'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+                 <a href="{lanrain::U('Home/set',array('token'=>$token))}" class="Red" >
+                     <img src="{lanrain::RES}/images/2-0.png" /><span>首页设置</span>
+                 </a>
+                <a href="{lanrain::U('Tmpls/index',array('token'=>$token))}" class="Highland" >
+                    <img src="{lanrain::RES}/images/2-1.png" /><span>模版管理</span>
+                </a>
+                <a href="{lanrain::U('Classify/index',array('token'=>$token))}" class="Navy" >
+                    <img src="{lanrain::RES}/images/2-2.png" /><span>分类管理</span>
+                </a>
+                <a href="{lanrain::U('Img/index',array('token'=>$token))}" class="DarkGreen" >
+                    <img src="{lanrain::RES}/images/2-3.png" /><span>图文回复</span>
+                </a>
+                <a href="{lanrain::U('Diymen/index',array('token'=>$token))}" class="LightBlue" >
+                    <img src="{lanrain::RES}/images/2-4.png" /><span>DIY菜单</span>
+                </a>
+                <a href="{lanrain::U('Flash/index',array('token'=>$token))}" class="Orange" >
+                    <img src="{lanrain::RES}/images/2-5.png" /><span>幻灯片</span>
+                </a>
+                <a href="{lanrain::U('Photo/index',array('token'=>$token))}" class="Brown" >
+                    <img src="{lanrain::RES}/images/2-6.png" /><span>相册</span>
+                </a>
+                <a href="{lanrain::U('Home/plugmenu',array('token'=>$token))}" class="LightPurple" >
+                    <img src="{lanrain::RES}/images/2-6.png" /><span>拨号版权</span>
+                </a>
+            </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <div class="contab" <?php if(in_array(MODULE_NAME,array('Lottery','Coupon','Guajiang','Xitie','Research','Zadan','Xitie','Diaoyan',WechaWall))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+                <a href="{lanrain::U('Lottery/index',array('token'=>$token))}" class="Red"  >
+                    <img src="{lanrain::RES}/images/3-0.png" /><span>大转盘</span>
+                </a>
+                <a href="{lanrain::U('Coupon/index',array('token'=>$token))}" class="Highland" >
+                    <img src="{lanrain::RES}/images/3-1.png" /><span>优惠券</span>
+                </a>
+                <a href="{lanrain::U('Guajiang/index',array('token'=>$token))}" class="Navy" >
+                    <img src="{lanrain::RES}/images/3-2.png" /><span>刮刮卡</span>
+                </a>
+                 <a href="{lanrain::U('Zadan/index',array('token'=>$token))}" class="DarkGreen">
+                    <img src="{lanrain::RES}/images/3-3.png" /><span>砸金蛋</span>
+                </a>
+                <a href="{lanrain::U('Xitie/index',array('token'=>$token))}" class="LightBlue">
+                    <img src="{lanrain::RES}/images/3-3.png" /><span>微喜帖</span>
+                </a>
+                <a href="{lanrain::U('Diaoyan/index',array('token'=>$token))}" class="Orange" >
+                    <img src="{lanrain::RES}/images/3-4.png" /><span>微调研</span>
+                </a>
+                <a href="{lanrain::U('WechaWall/index',array('token'=>$token))}" class="Brown" >
+                    <img src="{lanrain::RES}/images/3-6.png" /><span>摇一摇</span>
+                </a>
+            </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <div class="contab" <?php if(in_array(MODULE_NAME,array('Product','Groupon','orders','Host','Selfform','Adma','Panorama','Reply_info'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+                <a href="{lanrain::U('Groupon/index',array('token'=>$token))}" class="Highland" >
+                    <img src="{lanrain::RES}/images/5-1.png" /><span>微团购</span>
+                </a>
+                <a href="http://bestchoice88.com/weTall/index.php?g=admin&m=index&a=index" class="Red"  > <!-- {lanrain::U('Product/index',array('token'=>$token))}-->
+                    <img src="{lanrain::RES}/images/5-0.png" /><span>微商城</span>
+                </a>
+                
+                <a href="{lanrain::U('Product/orders',array('token'=>$token,'dining'=>1))}" class="Navy" >
+                    <img src="{lanrain::RES}/images/5-2.png" /><span>无线订餐</span>
+                </a>
+                <a href="{lanrain::U('Host/index',array('token'=>$token))}"  class="DarkGreen" >
+                    <img src="{lanrain::RES}/images/ThreeMenu-ico-09.png" /><span>通用订单</span>
+                </a>
+                <a href="{lanrain::U('Selfform/index',array('token'=>$token))}" class="LightBlue" >
+                    <img src="{lanrain::RES}/images/ThreeMenu-ico-09.png" /><span>万能表单</span>
+                </a>
+                <a href="{lanrain::U('Adma/index',array('token'=>$token))}"  class="Orange" >
+                    <img src="{lanrain::RES}/images/ThreeMenu-ico-09.png" /><span>DIY宣传</span>
+                </a>
+                <a href="{lanrain::U('Panorama/index',array('token'=>$token))}" class="LightPurple" >
+                    <img src="{lanrain::RES}/images/2-6.png" /><span>360全景</span>
+                </a>
+            </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <div class="contab" <?php if(in_array(MODULE_NAME,array('info','Member_card','privilege','create','exchange','Member'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+                <a href="{lanrain::U('Member_card/info',array('token'=>$token))}"  class="Red"  >
+                    <img src="{lanrain::RES}/images/4-1.png" /><span>商家设置</span>
+                </a>
+                <a href="{lanrain::U('Member_card/index',array('token'=>$token))}" class="Highland" >
+                    <img src="{lanrain::RES}/images/4-1.png" /><span>会员卡</span>
+                </a>
+                <a href="{lanrain::U('Member_card/privilege',array('token'=>$token))}" class="Navy" >
+                    <img src="{lanrain::RES}/images/4-1.png" /><span>会员特权</span>
+                </a>
+                <a href="{lanrain::U('Member_card/create',array('token'=>$token))}" class="DarkGreen" >
+                    <img src="{lanrain::RES}/images/4-1.png" /><span>在线开卡</span>
+                </a>
+                <a href="{lanrain::U('Member_card/exchange',array('token'=>$token))}" class="LightBlue" >
+                    <img src="{lanrain::RES}/images/4-1.png" /><span>积分设置</span>
+                </a>
+                <a href="{lanrain::U('Member/index',array('token'=>$token))}" class="Orange" >
+                    <img src="{lanrain::RES}/images/4-1.png" /><span>资料管理</span>
+                </a>
+            </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <div class="contab" <?php if(in_array(MODULE_NAME,array('Taobao','Api','Liuyan'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
+                <a href="{lanrain::U('Taobao/index',array('token'=>$token))}"  class="Red"  >
+                    <img src="{lanrain::RES}/images/ThreeMenu-ico-04.png" /><span>淘宝天猫</span>
+                </a>
+                <a href="{lanrain::U('Api/index',array('token'=>$token))}" class="Highland" >
+                    <img src="{lanrain::RES}/images/ThreeMenu-ico-04.png" /><span>第三方</span>
+                </a>
+                <a href="{lanrain::U('Liuyan/index',array('token'=>$token))}" class="Navy" >
+                    <img src="{lanrain::RES}/images/ThreeMenu-ico-04.png" /><span>留言板</span>
+                </a>
+            </div>
+		</div>
+	</div>
+	<div id="Content" >
+	</div>

@@ -1,0 +1,81 @@
+@charset "utf-8";
+/* CSS Document */
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,lengend,button,input,textarea,th,td,table{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}
+body,button,input,select,textarea,li,p,span{font:12px/1 Tahoma,Helvetica,Arial,"\5b8b\4f53",sans-serif;}
+h1{font-size:18px;}
+h2{font-size:16px;}
+h3{font-size:14px;}
+h4,h5,h6{font-size:100%;}
+ul,ol{list-style:none;}
+a{text-decoration:none;cursor:pointer;}
+a:hover{text-decoration:none;}
+.exp{ display:none;}
+fieldset,img{border:none;}
+button,input,select,textarea{font-size:100%;}
+table{border-collapse:collapse;border-spacing:0;}
+hr{border:none;height:1px;}
+.fl{float:left;}
+.fr{float:right;}
+.tc{text-align:center;}
+.tl{text-align:left;}
+.tr{text-align:right;}
+.clearfix:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{clear:both;zoom:1;}
+
+body{ background:url(../images/install_bg.gif) repeat-x #FFF;}
+.header,.content{ width:900px; margin:0 auto;}
+
+.header{height:80px;}
+.header .logo{ width:193px; height:54px; background:url(../images/logo.gif) no-repeat; margin:10px 0 0 10px;}
+.header .top_nav{margin-top:10px;}
+.header .top_nav li{ float:left;}
+.header .top_nav li a{ color:#FFF; margin-left:10px;}
+.header .top_nav li a:hover{text-decoration:underline;}
+.header h2{ clear:both; font-size: 16px;font-family:"微软雅黑"; height:23px;margin-top:35px; color: #FFFFFF;}
+
+.step{width:185px; background:url(../images/install_menu_bg.gif) repeat-x #FFF;}
+.step h3{ height:35px; background:url(../images/install_menu_title.gif) no-repeat 8px 14px;}
+.step ul{ margin:10px 0 20px 25px;}
+.step ul li { clear:both; height:30px; line-height:30px;}
+.step ul li span{ width:17px; height:18px; line-height:18px; background:#858585; display:inline-block; text-align:center; vertical-align:middle; float:left; color:#FFF; font-weight:bold; margin:6px 8px 0 0;}
+.step ul li h4{ font-weight:normal; font-size:14px; color:#474747;}
+.step ul li.curr span{ background:#ffae00; color:#000;}
+.step ul li.curr h4{ color:#146928; font-weight:bold;}
+
+.c_main{ width:700px; background:#FFF;}
+.c_main_title{ border:1px #e8e9e9 solid; color:#fb6e1a; height:30px; line-height:30px; padding-left:10px; font-weight:bold;}
+.c_main_body{height:400px; overflow:hidden;border:1px #e8e9e9 solid; border-top:none; padding:10px; overflow-y:auto;}
+.act { margin-top:10px;}
+.act .btn{ text-align:center; clear:both; margin-top:10px;}
+.btn_next{ height:25px; line-height:25px; background:#2fbb07; padding:0 10px; color:#FFF; font-weight:700; border:1px #CCC solid; border-right:1px #000 solid; border-bottom:1px #000 solid; cursor:pointer;}
+.text_input{ border:1px #678bb6 solid; height:22px; line-height:22px; padding:0 4px; color:#03F;}
+.error_msg{ border:1px #fb6e1a solid; height:30px; line-height:30px; background:url(../images/error_icon.gif) no-repeat 10px 5px #f9ede1; padding-left:40px; color:#ff0003; font-weight:bold; margin-bottom:5px;}
+.input_checkbox{ width:14px; height:14px;}
+
+.eula{ color:#777777;}
+.eula h3{ text-align:center; height:30px; line-height:30px;}
+.eula h4{ height:30px; line-height:40px;}
+.eula p{ line-height:20px;}
+.act .accept input { float:left; margin-left:2px;}
+.act .accept label{ color:#146928;}
+
+.setconf fieldset{ border:1px #cccccc solid;}
+.setconf fieldset legend{ border:1px #cccccc solid; background:#ffe1a0; padding:5px; color:#3d70a6; margin:0 0 0 10px;}
+.setconf fieldset ul{ margin:10px 10px 0 10px;}
+.setconf fieldset li{ height:32px;}
+.setconf fieldset .field{ float:left;width:100px; padding-left:10px; height:20px; line-height:20px; color:#454545;}
+.setconf fieldset .field_tip{ color:#92a4b9;height:20px; line-height:20px; margin-left:10px;}
+.setconf fieldset .field_tip input{ margin-top:4px; float:left; margin-left:10px}
+.setconf fieldset .port{width:40px;}
+.setconf fieldset .text_input{float:left;}
+.setconf fieldset.admin_info{ margin-top:10px;}
+
+.process {overflow-y: scroll; padding: 10px; color: #234f8d;}
+.process span{line-height: 20px;}
+
+.finish{ padding:30px 0 0 100px;}
+.finish .succ{ height:46px; line-height:50px; background:url(../images/succ_icon.gif) no-repeat; padding-left:75px; font-size:14px; font-weight:700; color:#1b1b1b; margin-bottom:20px;}
+.finish p{ height:22px; margin-left:100px;}
+.finish p span{ float:left;text-align:right; width:160px; color:#4f4e4e;}
+.finish p a{ color:#3c6fa6; float:left; margin-left:10px;}
+.finish p a:hover{ text-decoration:underline;}

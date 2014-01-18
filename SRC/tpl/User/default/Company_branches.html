@@ -1,0 +1,85 @@
+<include file="Public:head"/>  
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB" >
+<h4 class="left">分支机构</h4>
+<div class="searchbar right" >
+<form method="post" action="">
+<script>
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+</script>
+
+</form>
+</div>
+<div class="clr"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul>
+<li class="tabli" id="tab0"><a href="{lanrain::U('Company/index',array('token'=>$token))}">公司信息</a></li>
+<li class="<if condition="$isBranch eq 1">current</if> tabli" id="tab2"><a href="{lanrain::U('Company/branches',array('token'=>$token,'isBranch'=>1))}">分支机构</a></li>
+</ul>
+</div>
+<!--tab end-->
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<div class="cLine">
+<div class="pageNavigator left"> <a href="{lanrain::U('Company/index',array('token'=>$token,'isBranch'=>1))}" title="" class="btnGrayS vm bigbtn"><img src="{lanrain::RES}/images/icons/add.png" class="vm">添加</a></div>
+<div class="clr"></div>
+</div>
+
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th class="select" style="display:none"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+<th width="70">名称</th>
+<th width="80">电话</th>
+<th width="160">地址</th>
+<th width="150" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="branches" id="c"> 
+<tr>
+<td style="display:none"><input type="checkbox" value="{lanrain:$o.id}" class="cbitem" name="id_{lanrain:$i}"></td>
+<td>{lanrain:$c.name}</td>
+<td>{lanrain:$c.tel}</td>
+<td>{lanrain:$c.address}</td>
+<td class="norightborder"><a href="{lanrain::U('Company/index',array('token'=>$token,'id'=>$c['id'],'isBranch'=>1))}">修改</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::U('Company/delete',array('token'=>$token,'id'=>$c['id'],'isBranch'=>1))}');">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+<input type="hidden" name="token" value="{lanrain:$_GET['token']}" />
+</form>
+
+   <script>
+function showIntroDetail(id){
+	art.dialog.open('{lanrain::U('Product/orderInfo',array('token'=>$token,'dining'=>$isDining))}&id='+id,{lock:false,title:'订单详情',width:700,height:420,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+</script>
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lanrain:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

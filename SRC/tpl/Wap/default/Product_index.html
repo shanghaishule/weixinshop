@@ -1,0 +1,11 @@
+<include file="Product:header"/>
+<section class="h_list clearfix">
+	<ul>
+	  <if condition="$shopOpen eq 1"><li><a class="icon_1" href="{lanrain::U('Product/cats',array('token'=>$token,'wecha_id'=>$wecha_id))}">购物</a></li></if>
+		<if condition="$diningOpen eq 1"><li><a class="icon_2" href="{lanrain::U('Product/dining',array('token'=>$token,'wecha_id'=>$wecha_id,'dining'=>1))}">订餐</a></li></if>
+		<if condition="$grouponOpen eq 1"><li><a class="icon_3" href="{lanrain::U('Groupon/grouponIndex',array('token'=>$token,'wecha_id'=>$wecha_id))}">团购</a></li></if>
+		<li><a class="icon_6" href="{lanrain::U('Product/my',array('token'=>$token,'wecha_id'=>$wecha_id))}">我的</a></li>
+	</ul>
+</section>
+</body>
+</html>

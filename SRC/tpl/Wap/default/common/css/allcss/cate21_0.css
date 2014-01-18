@@ -1,0 +1,79 @@
+html, body {
+	color:#222;
+	font-family:Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+	margin:0;
+	padding: 0;
+	text-decoration: none;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+	margin:0;
+	padding:0;
+}
+img {
+	border:0;
+}
+ol, ul {
+	list-style: none outside none;
+	margin:0;
+	padding: 0;
+}
+a {
+	color:#000000;
+	text-decoration: none;
+}
+.clr {
+	display:block;
+	clear:both;
+	height:0;
+	overflow:hidden;
+}
+.copyright{padding:8px 0;text-align:center;font-size:14px;color:#666; position:fixed; bottom:0; width:100%; z-index:3}
+.copyright a{color:#666;}
+/*cate16*/
+#cate16{background-color: #000000;overflow-x: hidden;}
+#cate16 .mainbg{ 
+	width:100%;
+	position:fixed;
+	z-index:1
+}
+#cate16 .mainbg img{
+	width:100%;
+}
+#cate16 .mainmenu {
+  z-index: 2;
+	color: #FFF;
+	position: fixed;
+	margin: 0px auto;
+	bottom: 0;
+	width: 100%;
+}
+#cate16 .mainmenu ul {
+	display: block;
+}
+#cate16 .mainmenu li {
+float: left;
+text-align: center;
+display: block;
+}
+#cate16 .mainmenu li .menubtn{
+width: 72px;
+height: 87px;
+margin-left: 5px;
+margin-bottom: 8px;
+position: relative;
+/*background-color:rgba(255, 255, 255, 0.2);*/
+border-radius: 5px;
+}
+#cate16 .mainmenu li img {
+width: 55px;
+height: 55px;
+margin-top: 15px;
+margin-bottom:5px;
+border-radius: 5px;
+}
+#cate16 .menutitle {
+color: #fff;
+font-size: 14px;
+display: block;
+text-align:center;
+}

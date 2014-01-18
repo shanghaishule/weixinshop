@@ -1,0 +1,77 @@
+<include file="Public:head"/>  
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+<h4 class="left">360°全景</h4>
+<div class="searchbar right">
+<form method="post" action="">
+
+<script>
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+</script>
+</form>
+</div>
+<div class="clr"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul>
+<li class="tabli current" id="tab0"><a href="{lanrain::U('Panorama/index',array('token'=>$token))}">全景管理</a></li>
+<li class="tabli" id="tab2"><a href="{lanrain::U('Reply_info/set',array('token'=>$token,'infotype'=>'panorama'))}">回复配置</a></li>
+</ul>
+</div>
+<!--tab end-->
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<div class="cLine">
+<div class="pageNavigator left"> <a href="{lanrain::U('Panorama/add',array('token'=>$token))}" title="" class="btnGrayS vm bigbtn"><img src="{lanrain::RES}/images/product/add.png" class="vm">添加360°全景</a></div>
+<div class="clr"></div>
+</div>
+
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th width="270">名称</th>
+<th width="120">关键词</th>
+<th width="120">外链代码</th>
+<th width="150" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="o"> 
+<tr>
+<td>{lanrain:$o.name}</td>
+<td>{lanrain:$o.keyword}</td>
+<td>全景 {lanrain:$o.id}</td>
+<td class="norightborder"><a href="{lanrain::U('Panorama/set',array('token'=>$token,'id'=>$o['id']))}">修改</a> <a href="{lanrain::U('Panorama/delete',array('id'=>$o['id'],'token'=>$token))}">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+<input type="hidden" name="token" value="{lanrain:$_GET['token']}" />
+</form>
+
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lanrain:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

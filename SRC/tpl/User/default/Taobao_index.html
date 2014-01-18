@@ -1,0 +1,75 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/plugins/code/prettify.css" />
+<script src="{lanrain::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+	KindEditor.ready(function(K){
+		var editor = K.editor({
+			allowFileManager:true
+		});
+		K('#upload').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					fileUrl : K('#pic').val(),
+					clickFn : function(url, title) {
+						if(url.indexOf("http") > -1){
+							K('#pic').val(url);
+						}else{
+							K('#pic').val("{lanrain::C('site_url')}"+url);
+						}
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+  <h4>淘宝天猫店铺配置<span class="FAQ">只需要你填写天猫或淘宝店铺的手机站点地址，简单配置关键词，再在功能管理页面开启此功能，就可以直接通过微信检索店铺内的商品。</span></h4>             
+ </div>
+    <div class="msgWrap form"><form method="post"   action="<if condition="$taobao['keyword'] neq ''">index.php?g=User&m=Taobao&a=edit&token={lanrain:$Think.get.token}</if>"  enctype="multipart/form-data" >  
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="userinfoArea">
+              <tbody>
+               <tr>
+                  <th valign="top"><span class="red">*</span><label for="title">店内常用关键词:</label></th>
+                  <td><input type="text"  name="keyword"  id="title" value="{lanrain:$taobao.keyword}"   class="px" tabindex="1" size="80"><br />例如：衣服|靴子|袜子|内衣 <span class="red">（触发类型为包含匹配）</span></td>
+                </tr>
+                <tr>
+                  <th><span class="red">*</span><label for="tag">店铺名称:</label></th>
+                  <td><input type="text"  name="title"  id="title" value="{lanrain:$taobao.title}"   class="px" tabindex="1" size="80"> </td>
+                </tr>
+                 <tr>
+                  <th><span class="red">*</span><label for="pic">店铺封面图片：</label></th>
+                  <td><input type="text"  name="picurl"  id="pic" value="{lanrain:$taobao.picurl}"   class="px" tabindex="1" size="80" readonly="readonly"><span class="ke-button-common" id="upload" style="margin-top: 3px;margin-left: 5px;"><input type="button" class="ke-button-common ke-button" value="上传"></span></td>
+                </tr>
+                <tr>
+                  <th><span class="red">*</span><label for="tel">店铺地址：</label></th>
+                  <td><input type="text"  name="homeurl"  id="homeurl" value="{lanrain:$taobao.homeurl}"   class="px" tabindex="1" size="80"> 请填写天猫或淘宝的店铺地址</td>
+                </tr>
+                <tr>
+                  <th valign="top"></th>
+                  <td>例如：天猫3G店铺地址通常为：<a href="http://beilimy.m.tmall.com/" target="_blank">http://beilimy.m.tmall.com/</a>　 淘宝的3G店铺地址为：<a href="http://shop104008058.m.taobao.com/" target="_blank">http://shop104008058.m.taobao.com/</a><br />    
+                  	</td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td><button type="submit" name="appidsubmit" value="true" class="btnGreen vm" ><strong>保存</strong></button></td>
+                </tr>
+              </tbody>
+            </table>
+</form>
+            </div>
+            </div>        <div class="clr"></div>
+      </div>
+    </div>
+ 
+  </div>
+   
+  
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>  
+ 

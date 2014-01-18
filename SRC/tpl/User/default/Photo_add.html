@@ -1,0 +1,230 @@
+<include file="Public:head"/>
+<style type="text/css">
+.userinfoArea th {
+width: 100px;
+}
+.clr{
+clear:both;
+}
+.chatPanel .mediaFullText .mediaContent {
+font-size: 14px;}
+.chatPanel .media {
+border:0px solid #D1D1D1;
+box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-moz-box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-webkit-box-shadow:0 0px 5px 0 rgba(0, 0, 0, 0.25);
+-webkit-border-radius:5px 5px 10px 10px;
+-moz-border-radius:5px 5px 10px 10px;
+border-radius:5px 5px 10px 10px;
+background: url({lanrain::RES}/images/photo/bottom.png) repeat-x scroll left bottom #FFFFFF;
+background-size:2px auto;
+}
+.chatPanel .media .mediaHead .title {
+line-height:1.2em;
+font-size:16px;
+display:block;
+text-align: left;
+margin-top:0;
+padding:0;
+height: auto;
+}
+.chatPanel .media .mediaPanel {
+padding:0px;
+margin:0px;
+}
+.chatPanel .media .mediaHead {
+padding: 10px 10px 8px;
+border-bottom: 0px solid #D3D8DC;
+color: #000000;
+font-size: 20px;
+}
+
+.chatPanel .media .mediaFooter {
+padding: 0 10px;
+}
+.chatPanel .mediaFullText .mediaImg {
+width: 265px;
+margin: 0 10px;}
+.chatPanel .mediaFullText .mediaImg img{
+width: 100%;}
+.chatPanel .mediaFullText .mediaContentP {
+margin: 5px 10px 0px;
+}
+.chatPanel .mediaFullText .mediaContentP p{
+line-height:18px
+}
+.chatPanel .mediaFullText .mediaContent {
+padding: 0 0 5px;
+}
+</style>
+
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB">
+          	<h4>创建相册</h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>
+         
+          <form method="post" action="">
+         <div class="msgWrap bgfc">
+            <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+<tr>
+<th valign="top"><span class="red">*</span>相册名称：</th>
+<td width="430"><input type="text" name="title" value="" class="px" style="width:400px;" id="name" onkeyup="DivFollowingText1()">
+<script type="text/javascript">
+function DivFollowingText1()
+{
+document.getElementById("zname").innerHTML=document.getElementById("name").value;
+document.getElementById("zname2").innerHTML=document.getElementById("name").value;
+}
+</script> 
+<br>
+尽量简单，不要超过<span class="red">20字</span>.</td>
+<td width="430" rowspan="4" valign="top" class="chatPanel" style="padding:0px;">
+
+
+<!--完整显示所有内容的效果-->	
+<div class="chatItem you" id="photo1"> 
+  　<a target="ddd" href="">
+<div class="media mediaFullText">
+
+<div class="mediaPanel">
+<div class="mediaHead"><span class="title" id="zname">相册名称</span>
+</div>
+<div class="mediaImg"><img id="zpic" src="{lanrain::RES}/images/photo/noneimg.jpg"></div>
+<div class="mediaContent mediaContentP">
+<p id="zinfo">相册说明文字，尽量简短，突出重点就好！</p>
+</div>
+<div class="mediaFooter">
+<span class="mesgIcon right"></span><span style="line-height:50px;" class="left">查看全文</span>
+<div class="clr"></div>
+</div>
+</div>
+</div>
+</a>
+</div>
+
+<!--最简单的显示效果-->	
+<div class="chatItem you" id="photo2" style="display:none"> 
+  　<a target="ddd" href="">
+<div class="media mediaFullText">
+
+<div class="mediaPanel">
+<div class="mediaHead" style="padding: 10px 10px 0px;">
+</div>
+<div class="mediaImg"><img id="zpic2" src="{lanrain::RES}/images/photo/noneimg.jpg"/></div>
+<div class="mediaFooter">
+<span class="mesgIcon right"></span>
+<span style="line-height:50px; font-size:16px" id="zname2">相册名称</span>
+<div class="clr"></div>
+</div>
+</div>
+</div>
+</a>
+</div>
+
+
+</td>
+
+</tr>
+<tr>
+<th valign="top"><span class="red">*</span>相册封面图：</th>
+<td width="430"><input type="text" name="picurl" value="" class="px" style="width:400px;" id="pic" onblur="document.getElementById('zpic').src=document.getElementById('pic').value;document.getElementById('zpic2').src=document.getElementById('pic').value;">
+<br>									
+外链图片地址，尺寸720×400.</td>
+</tr>
+<tr>
+   <th valign="top">相册介绍：</th>
+	<td valign="top">
+	<textarea class="px" id="info" name="info" style="width:400px; height:120px" onkeyup="DivFollowingText2()"></textarea><br>
+		<script type="text/javascript">
+		function DivFollowingText2()
+		{
+		document.getElementById("zinfo").innerHTML=document.getElementById("info").value;
+		}
+		</script> 
+										请简单描述相册内容，尽量控制在<span class="red">150文字以内</span>。<br>
+	<label>
+		<input name="isshowinfo" type="radio" id="RadioGroup0_0" value="0" checked="checked" onclick="document.getElementById('photo2').style.display='none';document.getElementById('photo1').style.display='';">
+		显示简介</label>　　
+	<label>
+		<input type="radio" name="isshowinfo" value="1" id="RadioGroup0_1" onclick="document.getElementById('photo1').style.display='none';document.getElementById('photo2').style.display='';">
+		不显示简介
+		</label>	
+	</td>
+</tr>
+<tr>
+<th valign="top">是否显示：</th>
+	<td valign="top">							
+		<label>
+		<input name="status" type="radio" id="RadioGroup1_0" value="1" checked="checked">
+		显示此相册</label>　　<label>
+		<input type="radio" name="status" value="0" id="RadioGroup1_1">
+		不显示此相册</label>                            	
+	</td>
+</tr>
+<tr>
+	<th valign="top">&nbsp;</th>
+	<td>
+		<button type="submit" name="button" class="btnGreen">保存</button>
+		<a href="index.php?ac=photo-list&amp;id=9878" class="btnGray vm">取消</a></td>
+		<td>&nbsp;
+	</td>
+</tr>
+</tbody>
+</table>
+            
+          </div>
+          </form>
+          
+        </div>
+				<script type="text/javascript">
+var selUser = {};
+
+function addvotetouser(obj, type) {
+var liid = 'votetouser_' + type + '_' + obj.value;
+var userObj = $('vote_user_'+type);
+if(obj.checked) {
+if($(liid) == null) {
+var newli = document.createElement("li");
+newli.id = liid;
+
+//创建隐含域
+try {
+var InputNode = document.createElement("<input type=\"hidden\" value=\""+ obj.value +"\" name=\"votetouser["+type+"]["+obj.getAttribute('user')+"]\">");
+} catch(e) {
+var InputNode = document.createElement("input");
+InputNode.setAttribute("name", "votetouser["+type+"][]");
+InputNode.setAttribute("type", "hidden");
+InputNode.setAttribute("value", obj.value);
+}
+newli.appendChild(InputNode);
+var newspan = document.createElement("span");
+newspan.innerHTML ='<p>' + obj.getAttribute('user')+'</p> <a href="javascript:;" onclick="delSelUser(\''+liid+'\', \''+obj.value+'\');" title="删除" class="deltw">删除</a>';
+newli.appendChild(newspan);
+userObj.appendChild(newli);
+selUser[obj.value] = obj.value;
+}
+} else {
+userObj.removeChild($(liid));
+delete selUser[obj.value];
+}
+}
+function delSelUser(lid, uid) {
+delete selUser[uid];
+$(lid).parentNode.removeChild($(lid));
+}
+
+function setFlag(obj, utype) {
+var uids = common = '';
+obj.href = ''+utype;
+for(var key in selUser) {
+if(parseInt(selUser[key])) {
+uids = uids + common + selUser[key];
+common = ',';
+}
+}
+if(uids != '') {
+obj.href += '&uids=' +  uids;
+}
+}
+</script>
+<include file="Public:footer"/>  
+ 

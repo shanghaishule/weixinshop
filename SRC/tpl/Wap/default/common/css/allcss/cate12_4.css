@@ -1,0 +1,72 @@
+html, body {
+	color:#222;
+	font-family:Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+	margin:0;
+	padding: 0;
+	text-decoration: none;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+	margin:0;
+	padding:0;
+}
+img {
+	border:0;
+}
+ol, ul {
+	list-style: none outside none;
+	margin:0;
+	padding: 0;
+}
+a {
+	color:#000000;
+	text-decoration: none;
+}
+.clr {
+	display:block;
+	clear:both;
+	height:0;
+	overflow:hidden;
+}
+.copyright{padding:8px 0;text-align:center;font-size:14px;color:#666}
+.copyright a{color:#666}
+/*cate14*/
+#cate14{background-color: #000000;overflow-x: hidden;}
+#cate14 .mainbg{ 
+	width:100%;
+	position:fixed;
+	z-index:1
+}
+#cate14 .mainbg img{
+	width:100%;
+}
+#cate14 .mainmenu {
+	z-index: 2;
+	color: #FFF;
+	position: fixed;
+	margin: 0px auto;
+	bottom: 0;
+	width: 100%;
+}
+#cate14 .mainmenu ul {
+	display: block;
+	margin: 0px 15%;
+}
+#cate14 .mainmenu li {
+	display: block;
+	width:50%;
+	float:left;
+}
+#cate14 .mainmenu li:last-of-type {
+	margin-bottom:25px;
+}
+#cate14 .mainmenu li a {
+	display:block;
+	background-color:rgba(255, 152, 0, 0.5);
+	padding:8px 10px;
+	margin:0 3px 3px 0;
+	font-size:14px;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	border-radius: 3px;
+}

@@ -1,0 +1,98 @@
+<include file="Public:head"/> 
+<script>
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+</script> 
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+         
+          <div class="cLineB">
+              <h4 class="left">创建会员卡号　<span style="color:red">此会员卡号,会员领取一张，这里将会少一张,当全部被领取完了,请再次开卡</span></h4>
+              <br />
+           
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+			<div class="pageNavigator left">
+			
+				<a href="{lanrain::U('Member_card/create_add',array('token'=>$token))}" title="创建会员卡号" class="add">创建会员卡号
+				</a>&nbsp;&nbsp;<a class="delete" href="###" onclick="if(confirm('确定删除吗')){$('#info').submit()}">删除</a>&nbsp;&nbsp; <strong>已经领取 <span style="color:red">{lanrain:$usecount}</span> 张，剩余<span style="color:red">{lanrain:$ucount}</span>张未领取，一共 <span style="color:red">{lanrain:$count}</span>张</strong>
+			</div>
+			<a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:10px">返回</a>          
+			<div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post" action="" id="info">
+          <input name="delall" type="hidden" value="del">
+           <input name="wxid" type="hidden" value="gh_423dwjkewad">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+					<th class="select"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+					<th class="category">会员卡号</th>					
+					<th class="edit norightborder">状态</th>
+                    <th class="category">会员资料</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="data_vip" id="data_vip">           
+                <tr>
+					  <td><input type="checkbox" value="{lanrain:$data_vip.id}" class="cbitem" name="id_{lanrain:$i}"></td>
+
+					  <td><div class="answer_text">{lanrain:$data_vip.number}</div></td>
+					 
+					  <td class="norightborder">
+						<!--a href="">使用统计</a--> 
+						<if condition="$data_vip['wecha_id'] eq false">空闲卡<else/><strong>使用中</strong></if>
+					  </td>
+                      <td> 
+                      <if condition="$data_vip['wecha_id'] neq false">
+                            
+                    <a href="index.php?g=User&m=Member_card&a=getuserinfo&id={lanrain:$data_vip.wecha_id}">查看详情</a>
+                       
+                      </if>
+                    
+                    </td>
+                </tr>
+				</volist>
+      			
+              </tbody>
+            </table>
+           </form> 
+			<script>
+			   function checkvotethis() {
+					var aa=document.getElementsByName('del_id[]');
+					var mnum = aa.length;
+					j=0;
+					for(i=0;i<mnum;i++){
+					if(aa[i].checked){
+					j++;
+					}
+					}
+					if(j>0) {
+					document.getElementById('info').submit();
+					} else {
+					alert('未选中内容！')
+					}
+				}
+			</script>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages">{lanrain:$page}</div>
+             </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+<include file="Public:footer"/>

@@ -1,0 +1,60 @@
+<include file="Public:head"/> 
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+<h4 class="left">喜帖 ({lanrain:$page} ) </h4>
+<div class="searchbar right">
+<form method="post" action="">
+<input type="text" id="msgSearchInput" class="txt left" placeholder="输入关键词搜索" name="searchkey" value="{lanrain:$key}">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+</form>
+</div>
+<div class="clr"></div>
+</div>
+
+<div class="cLine">
+<div class="pageNavigator left"> <a href="{lanrain::U('Xitie/add',array('token'=>$token))}" title="添加" class="btnGrayS vm bigbtn"><img src="{lanrain::RES}/images/product/add.png" width="16" class="vm">添加</a></div>
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th width="160">标题</th>
+<th width="160">关键词</th>
+<th width="160">男方名</th>
+<th width="160">女方名</th>
+<th width="130">时间</th>
+ 
+<th width="200" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="item"> 
+<tr>
+<td>{lanrain:$item.title}</td>
+<td>{lanrain:$item.keyword}</td>
+<td>{lanrain:$item.man_name}</td>
+<td>{lanrain:$item.girl_name}</td>
+<td>{lanrain:$item.time|date="Y-m-d H:i:s",###}</td> 
+
+<td class="norightborder"><a href="{lanrain::U('Xitie/infos',array('id'=>$item['id'],'token'=>$token))}">留言查看</a>&nbsp;&nbsp;<a href="{lanrain::U('User/Xitie/inputs',array('id'=>$item['id'],'token'=>$token))}">参与查看</a>&nbsp;&nbsp;<a href="{lanrain::U('Xitie/set',array('id'=>$item['id'],'token'=>$token))}">修改</a>&nbsp;&nbsp;<a href="{lanrain::U('Xitie/del',array('id'=>$item['id'],'token'=>$token))}">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lanrain:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

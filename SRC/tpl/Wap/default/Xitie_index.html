@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="" name="Keywords">
+	<meta content="" name="Description">
+    <link rel="stylesheet" type="text/css" href="{lanrain::RES}/weixitie/wedding.css" media="all" />
+<script type="text/javascript" src="{lanrain::RES}/weixitie/jQuery.js"></script>
+<script type="text/javascript" src="{lanrain::RES}/weixitie/wedding.js"></script>
+<script type="text/javascript" src="{lanrain::RES}/weixitie/jquery_easing.js"></script>
+<script type="text/javascript" src="{lanrain::RES}/weixitie/weiba_sys.js"></script>
+<title></title>
+    <!--[if lte IE 9]><script src="http://stc.weimob.com/src/watermark.js"></script><![endif]-->
+	<!--[if IE 7]><link href="http://stc.weimob.com/css/font_awesome_ie7.css" rel="stylesheet" /><![endif]-->
+</head>
+<body>
+	<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta content="" name="description">
+		<meta content="" name="keywords">
+		<meta content="eric.wu" name="author">
+		<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+		<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+		<meta content="no-cache" http-equiv="pragma">
+		<meta content="0" http-equiv="expires">
+		<meta content="phone=no, address=no" name="format-detection">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+		<script>
+	        $().ready(function(){
+	        	playbox.init("playbox");
+
+	        	$("#overlay_ul").bind("click", function(evt){
+	        		if("UL" == evt.target.nodeName){
+	        		this.className = 'overlay_ul';
+	        		$(this).find('li').removeClass('on');
+	        		}
+	        		
+	        	});
+	        });
+
+	        function show(i){
+	        	$("#overlay_ul>li").removeClass("on")[i].className = "on";
+	        	$("#overlay_ul").addClass("on");
+	        }
+
+	        function submit1(){
+	        	var form1 = document.getElementById("form1");
+	        	var Name = form1.Name.value;
+	        	var phone = form1.phone.value;
+	        	var count = form1.count.value;
+				var id = form1.id.value;
+	        	if(Name.length<1){
+	        		alert("请输入姓名！");
+	        		return;
+	        	}
+	        	if(phone.length<6){
+	        		alert("请输入电话号码！");
+	        		return;
+	        	}
+	        	if(count.length<1){
+	        		alert("请输入人数！");
+	        		return;
+	        	}
+	        	var obj = {
+					id:	id,	
+					name: Name,
+					phone: phone,
+					count: count,
+					action 	: "add"
+	        	}
+	        	$.post("index.php?g=Wap&m=Xitie&a=add&token={lanrain:$token}&wecha_id={lanrain:$wecha_id}", obj,function(result){
+				   	alert(result);
+				   	form1.reset();
+					$("#overlay_ul").removeClass("on");
+				});
+				
+	        }
+	        //
+	       function submit2(){
+	        	var form2 = document.getElementById("form2");
+	        	var Name = form2.Name.value;
+	        	var phone = form2.phone.value;
+	        	var content = form2.content.value;
+				var id = form2.id.value;
+	        	if(Name.length<1){
+	        		alert("请输入姓名！");
+	        		return;
+	        	}
+	        	if(phone.length<6){
+	        		alert("请输入电话号码！");
+	        		return;
+	        	}
+	        	if(content.length>50){
+	        		alert("内容不能大于50个字！");
+	        		return;
+	        	}
+	        	if(content.length<1){
+	        		alert("请输入祝福内容！");
+	        		return;
+	        	}
+	        	var obj = {
+	        			id:	id,	
+					name: Name,
+					phone: phone,
+					content: content,
+					action 	: "addtwo"
+	        	}
+	        	$.post("index.php?g=Wap&m=Xitie&a=add&token={lanrain:$token}&wecha_id={lanrain:$wecha_id}", obj,function(result){
+				   	alert(result);
+				   	form2.reset();
+					$("#overlay_ul").removeClass("on");
+				});
+	        }
+		</script>
+		 <style type="text/css">
+
+        .loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    line-height: 100%;
+    border: none;
+    z-index: 9999;
+}
+
+.loading-part {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #FFFFFF;
+    z-index: 1;
+}
+
+.loading-part.top {
+    top: 0;
+}
+
+.loading-part.bottom {
+    bottom: 0;
+}
+
+.loading-panel {
+    position: absolute;
+    width: 200px;
+    height: 82px;
+    top: 50%;
+    left: 50%;
+    margin-top: -41px;
+    margin-left: -100px;
+    z-index: 2;
+}
+
+.loading-icon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: url('{lanrain::RES}/weixitie/love.gif') center center no-repeat;
+    margin: auto;
+}
+
+.loading-text {
+    position: relative;
+    width: 200px;
+    height: 32px;
+    color: #fc8e65;
+    text-align: center;
+    line-height: 32px;
+    margin: auto;
+}.cover {
+    display: none;
+    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #A00908;
+    box-shadow: 5px 5px 5px 10px rgba(0,0,0,.6);
+    z-index: 999;
+}
+
+/*封面模版:t1*/
+.cover.t1 {
+    min-height: 330px;
+    background-color: #A00908;
+}
+
+.cover.t1 .slogan {
+    position: absolute;
+    width: 266px;
+    height: 290px;
+    left: 50%;
+    margin-left: -133px;
+    top: 50%;
+    margin-top: -145px;
+}
+
+.cover.t1 .mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('{lanrain::RES}/weixitie/icons.png') 0 0 no-repeat;
+    top: 0;
+    left: 0; 
+}
+
+.cover.t1 .head {
+    position: absolute;
+    width: 158px;
+    height: 153px;
+    top: 68px;
+    left: 48px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+ 
+    </style>
+    <script type="text/javascript">
+    $(function () {
+             var $loading = $('.loading'),
+                $parts = $('.loading-part', $loading),
+                height = $parts.height();
+            var $loadingpanel = $('.loading-panel', $loading);
+            var $cover = $('.cover'); 
+            function closeLoading(callback) {
+                $loadingpanel.fadeOut(function () {
+                    $loading.remove();
+                });
+                if (typeof callback === 'function') {
+                    callback.call(this);
+                }
+            }
+            function closeCover() { 
+                $cover.animate({
+                    'top': -$cover.height()
+                }, 'linear', function () {
+                    $cover.remove();
+                });
+            }
+            var handler_touch = function (e) {
+                closeCover();
+                e.preventDefault();
+                return false;
+            };
+            //处理封面
+            function initCover() {
+                $cover.one('touchstart MSPointerDown', handler_touch); 
+                if (window.navigator.msPointerEnabled !== undefined) {
+                    window.setTimeout(function () {
+                        closeCover();
+                    }, 2000);
+                }
+            }
+            closeLoading(function () {
+                initCover();
+                $cover.fadeIn(1500, function () {
+                    $cover.animate({
+                        top: '-120px'
+                    }, 'easeOutBack', function () {
+                        $cover.animate({
+                            top: 0
+                        }, 500, 'easeOutElastic', function () { });
+                    });
+                });
+            });
+        });
+    </script>
+	</head>
+	<body onselectstart="return true;" ondragstart="return false;">
+		<div class="loading">
+        <div class="loading-part top"></div>
+        <div class="loading-part bottom"></div>
+        <div class="loading-panel">
+            <div class="loading-icon"></div>
+            <div class="loading-text">幸福加载中...</div>
+        </div>
+    </div>
+    <div class="cover t1">
+    <div class="slogan">
+        <div class="head" style="background-image:url('{lanrain:$Xitie['pic']}')"></div>
+        <div class="mask"></div>
+    </div>
+</div>
+		<div class="container">
+			<header>
+				<div>
+					<ul class="box">
+						<li class="relative"><span class="pic"><img src="{lanrain:$Xitie['small_pic']}" /></span></li>
+						<li>
+							<div class="label">
+								<label>{lanrain:$Xitie['man_name']}</label>
+								<img src="{lanrain::RES}/weixitie/04.png" style="width:30px;" />
+								<label>{lanrain:$Xitie['girl_name']}</label>
+							<div>
+						</li>
+						<li>
+							<span id="playbox" class="btn_music" onClick="playbox.init(this).play();">
+							<audio id="audio" loop src="{lanrain:$Xitie['background_music']}"></audio></span>
+						</li>
+					</ul>
+				</div>
+			</header>
+			<section class="body">
+								<div>
+                                <video id="tenvideo_video_player_0" autobuffer="false" onplay="document.getElementById('audio').pause()" controls="" preload="metadata" autoplay="1" x-webkit-airplay="" style="width: 100%; min-height:200px;">
+						<source src="{lanrain:$Xitie['video']}">示例视频1</source> 
+					</video>
+				</div>
+				<div>
+					<ul>						<li class="pb_10"><img src="{lanrain:$Xitie['pic']}" style="width:100%;" /></li>
+												<li class="pb_10"><img src="{lanrain:$Xitie['pic']}" style="width:100%;" /></li>
+												<li class="pb_10"><img src="{lanrain:$Xitie['pic']}" style="width:100%;" /></li>
+												<li class="pb_10"><img src="{lanrain:$Xitie['pic']}" style="width:100%;" /></li>
+												<li class="pb_10"><img src="{lanrain:$Xitie['pic']}" style="width:100%;" /></li>
+											</ul>
+				</div>
+				<div class="des">
+					<h3  class="align_center">想说的话</h3>
+					<p>{lanrain:$Xitie['message']}</p>
+				</div>
+				<div>
+					<ul class="list_font" >
+						<li >
+							<a href="javascript:;" class="tbox" >
+								<div >{lanrain:$Xitie['time']}</div>
+								<div style="margin-left:10px; margin-right:10px;" >
+									<figure>
+										<p><span><img src="{lanrain::RES}/weixitie/08.png" /></span></p>
+										<figcaption>宴会时间</figcaption>
+									</figure>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="http://map.baidu.com/?latlng={lanrain:$Xitie['longitude']},{lanrain:$Xitie['latitude']}&title={lanrain:$Xitie['address']}&content={lanrain:$Xitie['address']}&autoOpen=true&l=" class="tbox">
+								<div>{lanrain:$Xitie['address']}</div>
+								<div>
+									<figure>
+										<p><span><img src="{lanrain::RES}/weixitie/06.png" /></span></p>
+										<figcaption>点此导航</figcaption>
+									</figure>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="http://site.tg.qq.com/forwardToPhonePage?siteId=1&phone={lanrain:$Xitie['phone']}" class="tbox">
+								<div>{lanrain:$Xitie['phone']}</div>
+								<div>
+									<figure>
+										<p><span><img src="{lanrain::RES}/weixitie/07.png" /></span></p>
+										<figcaption>接待电话</figcaption>
+									</figure>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<ul class="btns_1 box">
+						<li><a href="javascript:show(0);" >我要赴宴</a></li>
+						<li><a href="javascript:show(1);" >送上祝福</a></li>
+						<li><a href="javascript:show(2);window.scrollTo(0, -1);" >分享喜帖</a></li>
+					</ul>
+					<ul id="overlay_ul" class="overlay_ul">
+						<li>
+							<form id="form1" action="javascript:;" method="post">
+								<input type="hidden" name="id" value="{lanrain:$Xitie['id']}" />
+								<table>
+									<tr><td colspan="2"><label>我要赴宴</label></td></tr>
+									<tr><td style="width:45px;">姓名</td><td><input type="text" name="Name" /></td></tr>
+									<tr><td>手机</td><td><input type="tel" name="phone" /></td></tr>
+									<tr><td>人数</td><td><input type="number" name="count" /></td></tr>
+									<tr><td colspan="2" style="text-align:center;" class="btns_1"><a href="javascript:submit1();" >提交</a></td></tr>
+								</table>
+							</form>
+						</li>
+						<li>
+							<form id="form2" action="javascript:;" method="post">
+								<input type="hidden" name="id" value="{lanrain:$Xitie['id']}" />
+								<table>
+									<tr><td colspan="2"><label>送上祝福</label></td></tr>
+									<tr><td style="width:45px;">姓名</td><td><input type="text" name="Name" /></td></tr>
+									<tr><td>手机</td><td><input type="tel" name="phone" /></td></tr>
+									<tr><td colspan="2"><textarea placeholder="这里写一些祝福语给喜帖和喜帖" style="width:100%;height:50px;" maxlength="100" name="content"></textarea></td></tr>
+									<tr><td colspan="2" style="text-align:center;" class="btns_1"><a href="javascript:submit2();" >提交</a></td></tr>
+								</table>
+							</form>
+						</li>
+						<li style="text-align:right;height:100%!important;right:-15px;left:0px;background-color:rgba(62,78,78,0.7) " onClick="$('#overlay_ul').click();event.preventDefault(); return false;">
+							<img src="{lanrain::RES}/weixitie/09.png" style="width:260px;" />
+						</li>
+						<li style="text-align:right;" onClick="$('#overlay_ul').click();event.preventDefault(); return false;">
+							<img src="{lanrain::RES}/weixitie/10.png" style="width:260px;" />
+						</li>
+					</ul>
+				</div>
+			<section>
+						</div>
+				<footer style="text-align:center; font-size:15px; color:red;margin-top:5px;margin-right:20px">@微盟提供</footer>
+		<div style="height:8px;"></div>
+				<script type="text/javascript">
+ 	        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        window.shareData = {  
+            "imgUrl": "{lanrain:$Xitie['pic']}", 
+            "timeLineLink": "#",
+            "sendFriendLink": "#",
+            "weiboLink": "#",
+            "tTitle": "喜帖",
+            "tContent": "喜帖",
+            "fTitle": "喜帖",
+            "fContent": "喜帖",
+            "wContent": "喜帖" 
+        };
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+            WeixinJSBridge.invoke('sendAppMessage', { 
+                "img_url": window.shareData.imgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "link": window.shareData.sendFriendLink,
+                "desc": window.shareData.fContent,
+                "title": window.shareData.fTitle
+            }, function (res) {
+                _report('send_msg', res.err_msg);
+            })
+        });
+
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function (argv) {
+            WeixinJSBridge.invoke('shareTimeline', {
+                "img_url": window.shareData.imgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "link": window.shareData.timeLineLink,
+                "desc": window.shareData.tContent,
+                "title": window.shareData.tTitle
+            }, function (res) {
+                _report('timeline', res.err_msg);
+            });
+        });
+
+        // 分享到微博
+        WeixinJSBridge.on('menu:share:weibo', function (argv) {
+            WeixinJSBridge.invoke('shareWeibo', {
+                "content": window.shareData.wContent,
+                "url": window.shareData.weiboLink,
+            }, function (res) {
+                _report('weibo', res.err_msg);
+            });
+        });
+        }, false)
+    </script>
+	</body>
+</html>
+</body>
+</html>

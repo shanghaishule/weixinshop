@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lanrain:$tpl['wxname']}</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="{lanrain::RES}/css/flash/css/plugmenu.css">
+<style type="text/css">
+@charset "utf-8";
+*{
+	margin:0;
+	padding:0;}
+.wz_wrapper a{
+	display:block;
+	color: #FFF;
+	text-decoration: none;
+	}
+
+.wz_flat_left{
+	float:left;}
+.wz_flat_right{
+	float:right;}
+.clfl{
+	float:none;
+	clear:both;}
+.wz_color_01{
+	background-color:#228981;}
+.wz_color_02{
+	background-color:#8019bf;}
+.wz_color_03{
+	background-color:#22601a;}
+.wz_color_04{
+	background-color:#1f4b89;}
+.wz_color_05{
+	background-color:#af1d42;}
+.wz_color_06{
+	background-color:#ce6619;}
+
+.wz_wrapper {
+	width: 320px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.wz_line{
+	color:#FFF;
+	font-size:16px;
+	font-family:"微软雅黑";
+	background-color:#999;
+	height:103px;
+	width:100%;
+	margin-bottom:10px;}
+.wz_text{
+	overflow:hidden;
+	text-align:center;
+	line-height:103px;
+	width:103px;
+	height:103px;
+	}
+.wz_img{
+	overflow:hidden;
+	height:103px;
+	width:217px;}
+	
+.wz_img img{
+	width:100%;
+	min-height:103px;
+}
+
+</style>
+</head>
+<body>
+<div class="wz_wrapper">
+<php>
+$color=1;
+$f=1;
+</php>
+	<volist name="info" id="vo">
+		<div class="wz_line">
+		<a href="<if condition="$vo['url'] eq ''">{lanrain::U('Wap/Index/lists',array('classid'=>$vo['id'],'token'=>$vo['token']))}<else/>{lanrain:$vo.url}</if>">
+<php>
+		if($f==1){
+		$flat='left';
+		}else{
+        $flat='right';
+		}
+		echo '		<div class="wz_text wz_color_0'.$color.' wz_flat_'.$flat.'">';
+		$color++;
+		$f++;
+		if($color==7){
+		$color=1;
+		}
+		if($f==3){
+		$f=1;
+		}
+</php>
+{lanrain:$vo.name}</div>
+		<div class="wz_img "><img src="{lanrain:$vo.img}"/></div></a>
+		<div class="clfl"></div>
+		</div>
+	</volist>
+</div>
+<if condition="$showPlugMenu">
+			<div class="plug-div">
+				<div class="plug-phone">
+					<div class="plug-menu themeStyle" style="background:{lanrain:$homeInfo.plugmenucolor}">
+						<span class="close">
+						</span>
+					</div>
+					<volist name="plugmenus" id="vo">
+						<div class="themeStyle plug-btn plug-btn{lanrain:$i} close" style="background:{lanrain:$homeInfo.plugmenucolor}">
+							<a href="{lanrain:$vo.url}">
+								<span style="background-image: url({lanrain::RES}/css/flash/images/img/{lanrain:$vo.name}.png);">
+								</span>
+							</a>
+						</div>
+					</volist>
+					<div class="plug-btn plug-btn5 close">
+					</div>
+				</div>
+			</div>
+		</if>
+	<script src="{lanrain::RES}/css/flash/js/zepto.min.js" type="text/javascript"></script>
+	<script src="{lanrain::RES}/css/flash/js/plugmenu.js" type="text/javascript"></script>
+	<div class="copyright">
+		<if condition="$iscopyright eq 1">
+			{lanrain:$homeInfo.copyright}
+		<else/>
+			{lanrain:$siteCopyright}
+		</if>
+	</div>
+</body>
+</html>
+
+

@@ -1,0 +1,53 @@
+<include file="Public:head"/> 
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+<h4 class="left">祝福列表 ({lanrain:$page}) </h4>
+<div class="searchbar right">
+<form method="post" action="">
+<input type="text" id="msgSearchInput" class="txt left" placeholder="输入关键词搜索" name="searchkey" value="{lanrain:$key}">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+</form>
+</div>
+<div class="clr"></div>
+</div>
+
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th width="160">姓名</th>
+<th width="160">电话</th>
+<th width="160">人数</th>
+<th width="130">时间</th>
+<th width="200" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="item"> 
+<tr>
+<td>{lanrain:$item.name}</td>
+<td>{lanrain:$item.phone}</td>
+<td>{lanrain:$item.number}</td>
+<td>{lanrain:$item.time|date="Y-m-d H:i:s",###}</td> 
+
+<td class="norightborder"><a href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::U('Yitie/delinfos',array('id'=>$item['id'],'token'=>$token))}');">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lanrain:$page}&nbsp;总参与人数：{lanrain:$num}人</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

@@ -1,0 +1,38 @@
+<include file="Public:head"/>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+<div class="cLineB">
+  <h4>回答不上来的配置 </h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+         
+    <div class="msgWrap bgfc">
+	  <form class="form" method="post" action="" target="_top" >	 
+		<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tbody>
+				<tr>
+				  <th valign="top"><span class="red">*</span>触发时机：</th>
+				  <td>
+					<span class="red">当小黄鸡聊天系统关闭后，客户回复无回答的时候将会触发此回复。</span></td>
+				</tr>
+				<tr>
+					<th width="120">回复文字内容：</th>
+					<td><textarea style="width:560px;height:75px" name="info" id="info" class="px">{lanrain:$other.info}</textarea><br/>最多填写120个字</td>
+				</tr>
+				<tr>
+					<th>回复图文关键词：</th>
+					<td><input type="text" name="keyword" value="{lanrain:$other.keyword}" class="px" style="width:550px;"><br/> 注：只能填写一个关键词，此项如果填写，文字回复将会失效</td>
+				</tr>
+				<th>&nbsp;</th>
+					<td>
+						<button type="submit" name="button" class="btnGreen">保存</button>
+						<a href="javascript:history.go(-1);" class="btnGray vm">取消</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+  </div> 
+ 
+  
+        </div>
+<include file="Public:footer"/>

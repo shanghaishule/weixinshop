@@ -1,0 +1,37 @@
+<include file="public:header" />
+<!--接口列表-->
+<div class="pad_10">
+    <div class="table_list">
+        <table width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>{:L('integrate_name')}</th>
+                <th>{:L('integrate_desc')}</th>
+                <th>{:L('author')}</th>
+                <th width="100">{:L('operations_manage')}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="val">
+            <tr>
+                <td align="center">{$val.name}</td>
+                <td>{$val.desc}</td>
+                <td align="center">{$val.author}</td>
+                <td align="center">
+                    <if condition="C('pin_integrate_code') eq $val['code']">
+                        <if condition="$val['code'] neq 'default'">
+                        <a href="{:U('integrate/setting', array('code'=>$val['code'], 'menuid'=>$menuid))}">{:L('setting')}</a>
+                        </if>
+                    <else/>
+                        <a href="{:U('integrate/install', array('code'=>$val['code'], 'menuid'=>$menuid))}">{:L('install')}</a>
+                    </if>
+                </td>
+            </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+</div>
+<include file="public:footer" />
+</body>
+</html>

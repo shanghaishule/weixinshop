@@ -1,0 +1,58 @@
+<include file="Index:header"/>
+<div class="content"  style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;"  >
+<div class="usercontent" style="margin-top:20px;">
+<ul>
+<!--<li><a href="" class="gold" title="查看金币历史记录" ><p><strong>账户金币总数：</strong>5</p><p>已消费金币数：0</p></a></li>-->
+<li class="addli"><a class="addwx" title="添加微信公众号" onclick="location.href='{lanrain::U('Index/add')}';">添加微信公众号</a></li>
+<li style="height:47px;line-height:47px;color:red;padding:10px;">请添加公众帐号,进入功能管理,再进行功能测试，</li>
+</ul>
+      </div>
+          <div class="msgWrap" style="float:left;width:100%;">
+            <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <THEAD>
+                <TR>
+                  <TH>公众号名称</TH>
+                  <TH>VIP等级</TH>
+                  <TH>创建时间/到期时间</TH>
+                   <TH>已定义/上限</TH>
+                   <TH>请求数</TH>
+                  <TH>操作</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+                <TR></TR>                
+                 <volist name="info" id="vo"> 
+					<TR>
+					  <TD><p><a href="{lanrain::U('Function/index',array('id'=>$vo['id'],'token'=>$vo['token']))}" title="点击进入功能管理"><img src="{lanrain:$vo.headerpic}" width="40" height="40"></a></p><p>{lanrain:$vo.wxname}</p></TD>
+					  <TD align="center"><php>if($_SESSION['gid']>1){echo $_SESSION['gid']-1;}else{echo 0;}</php></TD>
+					  <TD><p>创建时间:{lanrain:$vo.createtime|date="Y-m-d",###}</p><p>到期时间:{lanrain:$viptime|date="Y-m-d",###}</p><p><a   href="{lanrain::U('Alipay/index')}" id="smemberss" class="green"><em>升降级vip续费</em></a></p></Td>
+					  <TD><p>图文：<php>echo $_SESSION['diynum'].'/'.$group[$_SESSION['gid']]['did'];</php></p></TD>
+					   <TD><p>总请求数:<php>echo $_SESSION['connectnum']</php></p><p> 本月请求数:<php>echo $group[$_SESSION['gid']]['cid'];</php></p></TD>
+					  
+					  <TD class="norightborder">　<a href="{lanrain::U('Index/edit',array('id'=>$vo['id']))}">编辑</a>　<a  href="{lanrain::U('Index/del',array('id'=>$vo['id']))};">删除</a>　
+					  <a href="{lanrain::U('Function/index',array('id'=>$vo['id'],'token'=>$vo['token']))}" class="btnGreens" >功能管理</a>
+					  <a href="{lanrain::U('Home/Index/help',array('id'=>$vo['id'],'token'=>$vo['token']))}" class="btnGreens" >API接口</a>
+					  </TD>
+					</TR>
+                  </volist>
+
+              </TBODY>
+            </TABLE>
+            
+          </div>
+          
+          <div class="cLine">
+            <div class="pageNavigator right">
+              <div class="pages"></div>
+            </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+        
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>	

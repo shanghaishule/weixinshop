@@ -1,0 +1,114 @@
+<include file="Public:head"/>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+  <h4 class="left">已经开发的功能 <span class="FAQ">请勾选你要开启的功能</span></h4>
+ </div>
+<div class="msgWrap">
+ <volist id="fun" name="fun">
+ <fieldset>
+	<legend>
+		<span class="vipimgbig vip-iconbig<php>echo $i-1;</php>"></span> VIP<php>echo $i-1;</php>可以使用的功能
+	</legend>
+	<ul class="changeapp">
+	<volist name="fun" id="list" key="b">
+	  <li>
+		  <label> 
+			<input  type="checkbox" <if condition="in_array($list['funname'],$check)">checked="checked"</if> <if condition="$list['gid'] gt session('gid')"> disabled="disabled" </if> onchange="changeapp(this,'{lanrain:$Think.session.token}','{lanrain:$list.id}')"  value="{lanrain:$list.id}"/> {lanrain:$list.name}
+		  </label>
+		  <div>查询例子:<br> {lanrain:$list.info}</div>
+		</li>
+	</volist>
+	</ul>   
+   </fieldset>
+</volist>
+            
+               </div>
+<div class="cLineB">
+  <h4 class="left">待开发待的功能 <span class="FAQ">正在开发中，敬请期待！</span></h4>
+ </div>
+<div>
+<ul class="changeapp">    
+  <li><label> <input  type="checkbox" disabled="disabled" value="13"> 歌词接龙<a href="#"   class="vipimg vip-icon0" title=""></a></label><div>输入正确的歌词即可</div></li>
+    
+  <li>
+	<label> <input  type="checkbox" disabled="disabled" value="19"> 今日桃花运指数<a href="#" class="vipimg vip-icon0" title=""></a></label>
+	<div>桃花运+姓名例如<br> 杨广桃花运</div>
+  </li>
+    
+  <li>
+	<label> <input  type="checkbox" disabled="disabled"  value="24"> 历史上的今天<a href="#"   class="vipimg vip-icon0" title=""></a></label>
+	<div>输入：today</div>
+  </li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="26"> 爱情语录<a href="#"   class="vipimg vip-icon0" title=""></a></label><div>发一个爱的表情或者 输入一个爱</div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="27"> 人生格言<a href="#"   class="vipimg vip-icon0" title=""></a></label><div>随机看格言 输入格言二字;查询某位名人格言 ： 爱迪生格言</div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="31"> 号码百事通<a href="#"   class="vipimg vip-icon0" title=""></a></label><div>输入公司名称即可 例如：中国人寿电话</div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="34"> 健康食谱<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="35"> 泡妞秘诀<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="36"> 情书生成器<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="39"> 星座运势<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="40"> 安全期计算器<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="41"> 姓名配对<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="48"> 汽车知识库<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="49"> 手机知识库<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="50"> 驾考题库<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="51"> 商铺管理<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+    
+  <li><label> <input  type="checkbox"       disabled="disabled"  value="53"> 活动管理<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+      
+  <li><label> <input  type="checkbox" disabled="disabled"  value="56"> 语音陪聊<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+    
+  <li><label> <input  type="checkbox" disabled="disabled"  value="57"> 违章查询<a href="#"   class="vipimg vip-icon0" title=""></a></label><div>区域定制化模块</div></li>
+    
+  <li><label> <input  type="checkbox"  disabled="disabled"  value="59"> 汇率换算<a href="#"   class="vipimg vip-icon0" title=""></a></label><div></div></li>
+
+      <div class="clr"></div>
+   </ul>
+</div>
+
+              <div class="clr"></div>
+                
+          </div>
+         
+           <script>
+function changeapp(obj,token,id){
+if(obj.checked==true){
+   
+var myurl='index.php?g=User&m=Token_open&a=add&token='+token+'&id='+id+'&r='+Math.random(); 
+$.get(myurl,function(data){
+	 if(data==1){
+		alert('该功能已经成功添加');
+	}
+});
+}else{
+  
+var myurl='index.php?g=User&m=Token_open&a=del&token='+token+'&id='+id+'&r='+Math.random(); 
+$.get(myurl,function(data){
+ if(data==1){
+		alert('已经取消该功能');
+	}
+});
+}
+}
+</script>
+
+
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/> 

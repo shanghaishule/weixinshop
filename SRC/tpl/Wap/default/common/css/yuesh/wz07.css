@@ -1,0 +1,154 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style-type: none;
+}
+
+html,body {
+	background-color: #949494;
+	font-family: Microsoft YaHei, Helvitica, Verdana, Tohoma, Arial,
+		san-serif;
+}
+
+.clr {
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+}
+
+.ul01 {
+	height: 95px;
+	width: 100%;
+	background-image: url(../images/bg_13.png);
+	background-repeat: repeat-x;
+	padding-bottom: 1px;
+}
+
+.ul01_left {
+	float: left;
+	width: 11px;
+	height: 95px;
+}
+
+.ul01_right {
+	float: right;
+	width: 11px;
+	height: 95px;
+}
+
+.ul01_cont {
+	float: left;
+	width: 100%;
+	height: 95px;
+	position: absolute;
+	z-index: 12;
+}
+
+.ul01_cont_nr {
+	float: left;
+	position: absolute;
+	padding-left: 118px;
+	padding-right: 44px;
+	max-width:100%;
+	z-index:32;
+}
+
+.ul01_cont_nr h4 {
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: #000000;
+	/**text-align: center;**/
+	display: block;
+	margin-top: 21px;
+	margin-left: auto;
+	margin-right: auto;
+	height:22px;
+	overflow:hidden;
+}
+
+.ul01_cont p {
+	margin-top: 11px;
+	/**text-align: center;**/
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 12px;
+	font-family: "黑体";
+	color: #a4a4a4;
+	height:30px;
+	overflow:hidden;
+}
+
+.circle { /*圆角*/
+	width: 75px;
+	height: 75px;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	float: left;
+	margin-top: 3px;
+	margin-left: 13px;
+	padding: 6px;
+	background-image: url(../images/wz_smm_15.png);
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+
+.semicircle { /*半透明半圆*/
+	z-index: 999;
+	position: relative;
+	top: -45px;
+	filter: alpha(opacity = 50);
+	opacity: 0.5;
+	width: 75px;
+	height: 75px;
+	background: #ffffff;
+	-moz-border-radius: 100px 100px 100 100;
+	-webkit-border-radius: 100px 100px 100 100;
+	border-radius: 100px 100px 100px 100px;
+}
+
+.imgchange {
+	top: 9px;
+	z-index: 900;
+	position: absolute;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 75px;
+	height: 75px;
+	-moz-border-radius: 100px 100px 100 100;
+	-webkit-border-radius: 100px 100px 100 100;
+	border-radius: 100px 100px 100px 100px;
+}
+
+.arrow_right {
+	float: right;
+	margin-right: 15px;
+	margin-top: 33px;
+}
+
+.ul03{
+	height:95px;
+	width:100%;
+	background-image:url(../images/wz_05_22.png);
+	background-repeat:repeat-x;
+	}
+
+.ul04{
+	height:95px;
+	width:100%;
+	background-image:url(../images/wz_05_26.png);
+	background-repeat:repeat-x;
+	}
+	
+.ul05{
+	height:95px;
+	width:100%;
+	background-image:url(../images/wz_05_30.png);
+	background-repeat:repeat-x;
+	}

@@ -1,0 +1,47 @@
+<include file="Public:head"/>
+<script src="{lanrain::RES}/js/date/WdatePicker.js"></script>
+<form class="form" method="post" action=""  target="_top" enctype="multipart/form-data" >
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<!--活动开始-->
+<div class="cLineB">
+  <h4>编辑微调研问题</h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>  
+<div class="msgWrap bgfc">
+ 
+<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+<tr>
+  <th valign="top"><span class="red">*</span>问题：</th>
+  <td><input type="input" class="px" id="question" name="question" style="width:500px"></td>
+</tr><tr>
+  <th valign="top"><span class="red">*</span>A：</th>
+  <td><input type="input" class="px" id="a" name="questionA" style="width:500px"></td>
+</tr><tr>
+  <th valign="top"><span class="red"></span>B：</th>
+  <td><input type="input" class="px" id="b" name="questionB" style="width:500px"></td>
+</tr><tr>
+  <th valign="top"><span class="red"></span>C：</th>
+  <td><input type="input" class="px" id="c" name="questionC" style="width:500px"></td>
+</tr><tr>
+  <th valign="top"><span class="red"></span>D：</th>
+  <td><input type="input" class="px" id="d" name="questionD" style="width:500px"></td>
+</tr><tr>
+  <th valign="top"><span class="red"></span>E：</th>
+  <td><input type="input" class="px" id="e" name="questionE" style="width:500px"></td>
+</tr><tr>
+  <th valign="top"><span class="red"></span>显示在微网站上：</th>
+  <td><input type="checkbox" class="px"  name="display"></td>
+</tr><tr>
+  <th valign="top"><span class="red"></span>问题类型：</th>
+  <td><input type="radio" class="px" checked value="D"  name="type">   单选</input><input value="S"style="margin-left:42px;" type="radio" class="px"  name="type">   多选</input></td>
+   
+</tr>
+
+<tr>
+<th>&nbsp;</th>
+<td><button type="submit" name="button" class="btnGreen">保存</button>　<a href="index.php?g=User&m=Diaoyan&a=index" class="btnGray vm">取消</a></td>
+                                    </tr>
+</tbody>
+</table>
+</div> 
+</div>
+</form>
+<include file="Public:footer"/> 

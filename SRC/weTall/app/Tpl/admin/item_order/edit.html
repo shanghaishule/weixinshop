@@ -1,0 +1,343 @@
+<include file="public:header" />
+<script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
+<style>
+.tdtitle {font-family: "宋体";
+    height: 32px;
+    line-height: 32px;
+    padding-right: 5px;
+    text-align: right;
+    vertical-align: top;}
+
+.tblist thead tr th, .tblist tbody tr.tblist_th td {
+    background: url("__STATIC__/weixin/images/tblistthbg.gif") repeat-x scroll 0 0 transparent;
+    border-right: 1px solid #DDDDDD;
+    height: 30px;
+    overflow: hidden;
+    padding: 0 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+.tblist tbody tr, .tbmodify .tblist tbody tr {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+.tblist {
+    border-left: 1px solid #DDDDDD;
+    width: 100%;
+}	
+.tblist tbody tr, .tbmodify .tblist tbody tr {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+.tblist tbody tr td, .tbmodify .tblist tbody tr td {
+    border-bottom: 1px solid #DDDDDD;
+    border-left: 0 solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    line-height: 18px;
+    text-align: center;
+}
+.tblist tbody tr td {
+    padding: 2px 4px;
+}
+.tbdetail {
+    width: 100%;
+}
+.tbdetail td {
+    background-color: #FFFFFF;
+    height: 32px;
+    line-height: 33px;
+    padding: 3px 0 3px 5px;
+   <!-- text-align: left;-->
+}
+.tbdetail .ltd {
+    padding-left: 5px;
+  text-align: left;
+}
+.tbdetail .rtd {
+    padding-right: 5px;
+   text-align: right;	
+}
+</style>
+<script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
+<!--编辑商品-->
+<form id="info_form" action="{:u('item_order/edit')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		
+		<div class="J_panes">
+        <div class="content_list pad_10">
+        <div align="center" style="background:none repeat scroll 0 0 #E6F1F6;font-size:14px;font-weight:bold;padding:10px 0;">基本信息</div>
+		
+        
+       
+        
+        
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbdetail">
+                    <tbody>
+                        <tr>
+                            <td width="12%" class="tdtitle" >订单编号：</td>
+                            <td width="22%">{$info.orderId}</td>
+                          
+                            <td width="12%" class="tdtitle">订单状态：</td>
+                            <td width="22%">   
+                         <switch name="info.status" >
+                         <case value="1">待付款</case>
+                         <case value="2">待发货</case>
+                         <case value="3">待收货</case>
+                         <case value="4">完成</case>
+                        <default /><font color="red">关闭</font>
+                          </switch>
+                        </td>
+                         <td width="12%" class="tdtitle"></td>
+                            <td width="22%"></td>
+                        </tr>
+                        <tr>
+                            <td class="tdtitle">下单时间：</td>
+                            <td>{$info.add_time|date='Y/m/d H:i:s',###}</td>
+                            <td class="tdtitle">付款时间：</td>
+                            <td><if condition="$info.support_time eq ''">-<else />{$info.support_time|date='Y/m/d H:i:s',###}</if></td>
+                            <td class="tdtitle">商品总额：</td>
+                            <td class="red"><span id="labProductTotal">¥{$info.goods_sumPrice}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdtitle">订单总额：</td>
+                            <td class="red"><span id="labOrderTotal">¥{$info.order_sumPrice}</span></td>
+                        </tr>
+                       
+                        <tr>
+                            <td class="tdtitle">客户要求：</td>
+                            <td style="padding:5px 0 5px 10px;" colspan="5">{$info.note}</td>
+                        </tr>
+                        <tr>
+                            <td class="tdtitle">客服备注：</td>
+                            <td style="padding:5px 0 5px 10px;" colspan="5">
+                                <span  id="labSellerRemark">{$info.sellerRemark}</span>
+                                 <form method="POST" >
+                                <input type="hidden" name="id" value="{$info.id}" />
+                                    <input type="hidden" name="g" value="admin" />
+                                    <input type="hidden" name="m" value="item_order" />
+                                   <input type="hidden" name="a" value="updateRemark" />
+                                   <span style="display:none;" id="sellerRemark_modify">
+	                                    <textarea style="width:600px;height:45px;margin-bottom:3px;resize: none;"  id="txtSellerRemark" name="txtSellerRemark">{$info.sellerRemark}</textarea>
+                                    <br>
+                                    <input type="submit" class="button" id="btnSellerRemark" value="保存" name="btnSellerRemark">
+                                    <input type="button" value="取消" class="button" onclick="Cancel()">
+                                </span>
+                                <input type="button" value="修改" class="button"  onclick="Modify()" id="btnModifySellerRemark" name="btnModifySellerRemark">
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <script>
+                function Modify()
+                {
+                	$('#labSellerRemark').hide();
+                	$('#btnModifySellerRemark').hide();
+                	$('#sellerRemark_modify').show();
+                }
+                  function Cancel()
+                {
+                	$('#labSellerRemark').show();
+                	$('#btnModifySellerRemark').show();
+                	$('#sellerRemark_modify').hide();
+                }
+              
+                </script>
+                
+            
+                 <div align="center" style="background:none repeat scroll 0 0 #E6F1F6;font-size:14px;font-weight:bold;padding:10px 0;">支付信息</div>    
+               <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbdetail">
+                    <tbody>
+                        <tr>
+                            <td width="12%" class="tdtitle">支付方式：</td>
+                            <td width="22%">
+                             <switch name="info.supportmetho" >
+                         <case value="1">支付宝支付</case>
+                         <case value="2">货到付款</case>
+                        <default />-
+                          </switch>
+                           </td>
+                           <td width="12%" class="tdtitle">是否货到付款:</td>
+                            <td width="22%"> <switch name="info.supportmetho" >
+                         <case value="1">否</case>
+                         <case value="2">是</case>
+                        <default />-
+                          </switch></td>
+                             <td width="12%" class="tdtitle"></td>
+                            <td width="22%" class="red"><span id="labPaymentFee"></span></td> 
+                        </tr>
+                    </tbody>
+                </table>
+                
+                 <div align="center" style="background:none repeat scroll 0 0 #E6F1F6;font-size:14px;font-weight:bold;padding:10px 0;">配送信息</div>    
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbdetail">
+                    <tbody>
+                        <tr>
+                            <td width="12%" class="tdtitle">客户要求：</td>
+                            <td width="22%">  <switch name="info.freetype" >
+                         <case value="1">平邮</case>
+                         <case value="2">快递</case>  
+                         <case value="3">ems</case>  
+                          <case value="0">卖家包邮</case>  
+                           </switch></td>
+                            <td width="12%" class="tdtitle">运送费用：</td>
+                            <td width="22%" class="red"><span id="labDeliveryFee">
+                            <switch name="info.freetype" >
+                          <case value="0">¥0.00</case>  
+                          <default />{$info.freeprice}
+                           </switch></span></td>
+                            <td width="12%" class="tdtitle"></td>
+                            <td width="22%" class="red">
+                          
+                                
+                            </td>
+                        </tr>
+                          <tr>
+                            <td width="12%" class="tdtitle">配送快递：</td>
+                            <td width="22%"> 
+                            <if condition="$info.userfree eq '0'">无需快递<elseif condition="$info.userfree neq '' and $info.userfree neq '0' " />{$info.userfree}<else />-</if>
+                            
+                            </td>
+                            <td width="12%" class="tdtitle">快递单号：</td>
+                            <td width="22%"> <if condition="$info.freecode  eq ''">-<else /> {$info.freecode}</if></td>
+                        </tr>
+                     
+                            
+                          </tr>
+                        <tr id="trDeliverySend">
+	                         <td class="tdtitle">出库时间：</td>
+	                           <td colspan="5">
+                                <span style="display:block;width:180px;float:left;" id="labDeliveryTime"><if condition="$info.fahuo_time  eq ''">-<else /> {$info.fahuo_time|date='Y/m/d H:i:s',###}</if></span>
+                            </td>
+                        </tr>
+                        <tr id="trDeliveryAddress">
+	                       <td class="tdtitle">发货地址：</td>
+	                         <td style="padding:5px 0;" colspan="5">
+	                         <if condition="$info.fahuoaddress eq ''">-<else />
+	                         {$fahuoaddress.contacts}（{$fahuoaddress.mobile}）{$fahuoaddress.Province} {$fahuoaddress.City} {$fahuoaddress.Area} {$fahuoaddress.address}（邮编：<if condition="$fahuoaddress.postcode eq ''">-<else />{$fahuoaddress.postcode}</if>） 
+	                         </if>
+                                
+                           </td>
+                           
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                
+                   <div align="center" style="background:none repeat scroll 0 0 #E6F1F6;font-size:14px;font-weight:bold;padding:10px 0;">收货人信息</div>    
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbdetail">
+                    <tbody>
+                        <tr>
+                            <td class="tdtitle">收货人账号：</td>
+                            <td colspan="5">
+                                {$info.userName}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="12%" class="tdtitle">收 货 人：</td>
+                            <td width="22%">
+                                <span attr="address_display" id="labConsignee">{$info.address_name}</span>
+                                <span style="display:none;" attr="address_modify">
+                                    <input type="text" class="txt150" id="txtConsignee" maxlength="50" value="address_name" name="txtConsignee">
+                                </span>
+                            </td>
+                            <td width="12%" class="tdtitle">联系手机：</td>
+                            <td width="22%">
+                                <span attr="address_display" id="labMobile">{$info.mobile}</span>
+                                <span style="display:none;" attr="address_modify">
+                                    <input type="text" class="txt150" id="txtMobile" maxlength="50" value="{$info.mobile}" name="txtMobile">
+                                </span>
+                            </td>
+                            <td width="12%" class="tdtitle"></td>
+                            <td width="22%">
+                                <span attr="address_display" id="labPhone"></span>
+                                <span style="display:none;" attr="address_modify">
+                                    <input type="text" class="txt150" id="txtPhone" maxlength="50" name="txtPhone">
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tdtitle">收货地址：</td>
+                            <td colspan="5">
+                                <span attr="address_display">
+                                   {$info.address}
+                                </span>
+                               
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                 <div align="center" style="background:none repeat scroll 0 0 #E6F1F6;font-size:14px;font-weight:bold;padding:10px 0;">商品明细</div>    
+                   <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tblist">
+                    <thead>
+                        <tr>
+                            <th width="70">商品图片</th>
+                            <th>商品名称</th>
+                            <th width="60">单价</th>
+                            <th width="60">数量</th>
+                            <th width="60">小计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <volist name='order_detail' id='vo' >
+                        <tr class="">
+                            <td><img width="68" alt="nopic" src="{:attach(get_thumb($vo['img'], '_b'), 'item')}"></td>
+                            <td class="ltd">
+                                {$vo.title}
+                                
+                            </td>
+                            <td class="red rtd">¥{$vo.price}</td>
+                            <td>{$vo.quantity}</td>
+                            <td class="red rtd">¥<?php echo $vo['price']*$vo['quantity']; ?></td>
+                        </tr>
+                     </volist>   
+                    </tbody>
+                </table>      
+                
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbdetail">
+                    <tbody>
+                        <tr>
+                            <td class="rtd">商品总额：<span class="red" id="labProdAllTotal">¥{$info.goods_sumPrice}</span>  </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>          
+		</div>
+      
+		
+        </div>
+      <!--  <a data-height="130" data-width="400" data-id="add" data-title="添加收货地址" data-uri="/index.php?g=admin&amp;m=address&amp;a=add" href="javascript:void(0);" class="add fb J_showdialog"><em>添加收货地址</em></a>-->
+      
+		<div class="mt10" style="text-align:center;">
+		  <switch name="info.status" >
+                <case value="1"><!-- 待付款-->
+                <a href="{:U('item_order/status',array('orderId'=>$info['orderId'],'status'=>2))}">	<input type="button" value="设为已付款" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
+                </case>  
+                <case value="2"><!-- 待发货-->
+                
+               <a data-height="130" data-width="650"
+                 data-id="add" data-title="发货管理" data-uri="/index.php?g=admin&amp;m=item_order&amp;a=fahuo&amp;id={$info.id}" href="javascript:void(0);" class="add fb J_showdialog"> 	<input type="button" value="发货" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
+                </case>  
+                <case value="3"><!-- 待收货 -->
+                  <a href="{:U('item_order/status',array('orderId'=>$info['orderId'],'status'=>4))}"><input type="button" value="设为已收货" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
+                </case>  
+                
+                <default />
+             </switch>
+		
+		
+		<a href="{:U('item_order/index')}">  <input type="button"  value=" 返回列表 " class="btn btn_cannel"></a></div>
+	</div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+<input type="hidden" name="id" value="{$info.id}" />
+</form>
+<include file="public:footer" />
+
+
+</body>
+</html>
+<script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
+<script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
+

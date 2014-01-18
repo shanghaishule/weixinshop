@@ -1,0 +1,80 @@
+<include file="public:header" />
+<!--网站设置-->
+<div class="pad_lr_10">
+	<form id="info_form" action="{:u('setting/edit')}" method="post" enctype="multipart/form-data">
+	<table width="100%" class="table_form">
+        <tr>
+            <th width="150">{:L('site_name')} :</th>
+            <td><input type="text" name="setting[site_name]" class="input-text" size="50" value="{:C('pin_site_name')}"></td>
+        </tr>
+        <tr>
+            <th>{:L('seo_title')} :</th>
+            <td><input type="text" name="setting[site_title]" class="input-text" size="50" value="{:C('pin_site_title')}"></td>
+        </tr>
+        <tr>
+            <th>{:L('seo_keys')} :</th>
+            <td><input type="text" name="setting[site_keyword]" class="input-text" size="50" value="{:C('pin_site_keyword')}"></td>
+        </tr>
+        <tr>
+            <th>{:L('seo_desc')} :</th>
+            <td><textarea rows="3" cols="50" name="setting[site_description]">{:C('pin_site_description')}</textarea></td>
+        </tr>
+         <tr>
+            <th>微信公众号二维码 :</th>
+            <td>
+            <?php if(C('pin_weixin_img')!=''){ ?>
+            <img src="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>" width="100" height="100"/><br />
+            <?php }else{ ?>
+            <?php } ?>
+  	<input type="file" name="weixin_img" /></td>
+        </tr>
+         <tr>
+            <th>微信公商城二维码 :</th>
+            <td>
+            <?php if(C('pin_weixinshop_img')!=''){ ?>
+            <img src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>" width="100" height="100"/><br />
+            <?php }else{ ?>
+            <?php } ?>
+  	<input type="file" name="weixinshop_img" /></td>
+        </tr>
+        	
+       <!-- <tr>
+            <th>{:L('site_icp')} :</th>
+            <td><input type="text" name="setting[site_icp]" class="input-text" size="50" value="{:C('pin_site_icp')}"></td>
+        </tr>
+        <tr>
+            <th>{:L('statistics_code')} :</th>
+            <td><textarea rows="3" cols="50" name="setting[statistics_code]">{:C('pin_statistics_code')}</textarea></td>
+        </tr>-->
+    	<tr>
+        	<th>{:L('site_status')} :</th>
+        	<td>
+            	<label><input type="radio" class="J_change_status" <if condition="C('pin_site_status') eq '1'">checked="checked"</if> value="1" name="setting[site_status]"> {:L('open')}</label> &nbsp;&nbsp;
+                <label><input type="radio" class="J_change_status" <if condition="C('pin_site_status') eq '0'">checked="checked"</if> value="0" name="setting[site_status]"> {:L('close')}</label>
+            </td>
+    	</tr>
+        <tr id="J_closed_reason" <if condition="C('pin_site_status') eq 1">class="hidden"</if>>
+        	<th>{:L('closed_reason')} :</th>
+        	<td><textarea rows="4" cols="50" name="setting[closed_reason]" id="closed_reason">{:C('pin_closed_reason')}</textarea></td>
+    	</tr>
+        <tr>
+        	<th></th>
+        	<td><input type="hidden" name="menuid"  value="{$menuid}"/><input type="submit" class="btn btn_submit" value="{:L('submit')}"/></td>
+    	</tr>
+	</table>
+	</form>
+</div>
+<include file="public:footer" />
+<script>
+$(function(){
+    $('.J_change_status').live('click', function(){
+        if($(this).val() == '0'){
+            $('#J_closed_reason').fadeIn();
+        }else{
+            $('#J_closed_reason').fadeOut();
+        }
+    });
+});
+</script>
+</body>
+</html>

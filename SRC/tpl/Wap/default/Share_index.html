@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-rim-auto-match" content="none"/>
+<title>分享送积分</title>
+<link rel="stylesheet" type="text/css" href="http://imgcache.life.qq.com/www/misc/styles/wei_dialog_v1.2.1.css?v=1.0.1" />
+<link rel="stylesheet" type="text/css" href="http://imgcache.life.qq.com/www/misc/styles/wei_canyin_v1.6.8.css?v=1.0.11" />
+<script src="http://imgcache.life.qq.com/www/misc/scripts/wei_webapp_v2_common_v1.6.4.js?v=1.0.5"></script>
+<script src="http://imgcache.life.qq.com/www/misc/scripts/wei_industry_common_v1.3.0.js?v=1.0.5"></script>
+<link rel="stylesheet" href="http://www.bestchoice88.com/tpl/Wap/default/common/css/content.css" />
+<style>
+
+</style>
+</head>
+<body id="page_order">
+
+    <div class="footFix topSearch" data-indent="140" data-ffix-top="0" id="topSearch">
+        <form method="get" action="/weixin/dish/listShop#wechat_webview_type=1">
+            <div class="box">
+                <p><input type="text" placeholder="搜索店名、地址..." name="keyword" value=""/></p>
+                <span>
+                    <input type="button" value="搜索" onClick="if(_trim(document.getElementsByName('keyword')[0].value)){return this.form.submit();}else{return false}"/>
+                    <input type="reset" value="取消" onClick="document.getElementsByName('keyword')[0].value='';return this.form.submit();"/>
+                    <input type="hidden" name="isSearch" value="1"/>
+                    <input type="hidden" name="qrcode" value="q13841544212332" />
+                    <input type="hidden" name="ticket" value="Ar4d7EIBAADFNaxS" />
+                    <input type="hidden" name="needLocate" value="no" />
+                    <input type="hidden" name="longitude" value="" />
+                    <input type="hidden" name="latitude" value="" />
+                </span>
+            </div>
+        </form>
+    </div>
+            <section>
+        <article>
+            <span><img src="http://www.weixinkf.cn/uploads/file/20131213124705810.jpg" /></span>
+            <h1>扬州大酒店</h1>
+            <p><!--0311-86995856<br/-->扬州市邗江区文昌中路559号（文昌阁西侧100米，文昌中路与大学北路交叉口）</p>
+        </article>
+        <ul>
+            <li><a href="tel:021-58343567" class="order">预订</a></li>
+            <li><a href="http://api.map.baidu.com/marker?location=32.39323479888415,119.42581913624575&title=我的位置&content=扬州大酒店&output=html
+" class="gps">导航</a></li>
+            <li><a href="http://www.weixinkf.cn/uploads/file/20131213124705810.jpg" class="reality">实景</a></li>
+        </ul>
+    </section>
+     
+ <div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+                    <img src="http://www.bestchoice88.com/tpl/Wap/default/common/images/nav.png" />
+                </div>
+    
+   <div class="text" id="content">
+                    <div id="mess_share">
+                        <div id="share_1">
+                            <button class="button2" onclick="document.getElementById('mcover').style.display='block';">
+                                <img src="http://www.bestchoice88.com/tpl/Wap/default/common/images/icon_share.jpg" width="64" height="64" />
+                                 发送给朋友
+                            </button>
+                        </div>
+                        <div id="share_2">
+                            <button class="button2" onclick="document.getElementById('mcover').style.display='block';">
+                                <img src="http://www.bestchoice88.com/tpl/Wap/default/common/images/friend.jpg" width="64" height="64" />
+                                 分享到朋友圈
+                            </button>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                </div>
+      
+    <script>
+    
+    
+    </script>          
+    <script>
+    var curWwwPath = window.document.location.href; 
+    //获取主机地址之后的目录，如： cis/website/meun.htm 
+    var pathName = window.document.location.pathname; 
+    var pos = curWwwPath.indexOf(pathName); //获取主机地址，如： http://localhost:8080 
+    var localhostPaht = curWwwPath.substring(0, pos); //获取带"/"的项目名，如：/cis 
+    var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1); 
+    var rootPath = localhostPaht + projectName; 
+//"http://bestchoice88.com/tpl/Wap/default/share_nav.html"
+window.shareData = {"appid":"wx4654d93678602ecb","imgUrl":"http://www.bestchoice88.com/tpl/Wap/default/common/images/friend.jpg","timeLineLink":"{lanrain:$shareData.url}","tTitle":"{lanrain:$shareData.title}","tContent":"{lanrain:$shareData.content}","wLink":null};
+var ticket = 'Ar4d7EIBAADFNaxS',
+    ticketSource = '',
+    wticket = '0d0cc8020fd02b816f0b08aa2bc46216',
+    qrcode = 'q13841544212332';
+
+    var pageName = pageName ? pageName : '';
+   
+// 分享
+function shareFriend(appid, imgUrl, sendFriendLink, fContent, fTitle) {
+    
+    WeixinJSBridge.invoke('sendAppMessage',{
+                            "appid":appid,
+                            "img_url":imgUrl,
+                            "img_width":"640",
+                            "img_height":"640",
+                            "link":sendFriendLink,
+                            "desc":fContent,
+                            "title":fTitle
+                            }, function(res) {
+//                            _report('send_msg', res.err_msg);
+                             window.location.href="http://bestchoice88.com/index.php?g=Wap&m=Share&a=index&shared=M&shareOp="+res.err_msg;
+                            });
+  
+}
+function shareTimeline(imgUrl, timeLineLink, tContent, tTitle) {
+    WeixinJSBridge.invoke('shareTimeline',{
+                            "img_url":imgUrl,
+                            "img_width":"640",
+                            "img_height":"640",
+                            "link":timeLineLink,
+                            "desc": tContent,
+                            "title": tTitle
+                            }, function(res) {
+//                            _report('timeline', res.err_msg);
+                            window.location.href="http://bestchoice88.com/index.php?g=Wap&m=Share&a=index&shared=Y&shareOp="+res.err_msg;
+                            });
+}
+function shareWeibo(wContent, wLink) {
+    WeixinJSBridge.invoke('shareWeibo',{
+                            "content":wContent,
+                            "url":wLink,
+                            }, function(res) {
+//                            _report('weibo', res.err_msg);
+                            window.location.href="http://bestchoice88.com/index.php?g=Wap&m=Share&a=index&shared=W&shareOp="+res.err_msg;
+                            });
+}
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv){
+            if (pageName == 'menuFilled') {
+
+                var params = {
+                    'qrcode' : qrcode,
+                    'ticket' : ticket,
+                    'ticketSource' : ticketSource
+                };
+
+                MLoading.show('加载中');
+                setTimeout(function(){MLoading.hide();},3000);
+                _doAjax('/weixin/dish/share', 'POST', params, function(ret){
+                    MLoading.hide();
+                    if (ret['code'] != 0) {
+                        alert(ret['message']);
+                        return;
+                    }
+                    var result = ret['result']['data'];
+
+                    shareFriend(result.appid, result.img_url, result.link, result.desc, result.title);
+                });
+
+            } else {
+                shareFriend(window.shareData.appid, window.shareData.imgUrl, window.shareData.sendFriendLink, window.shareData.fContent, window.shareData.fTitle);
+            }
+        });
+
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function(argv){
+            if (pageName == 'menuFilled') {
+
+                var params = {
+                    'qrcode' : qrcode,
+                    'ticket' : ticket,
+                    'ticketSource' : ticketSource
+                };
+
+                MLoading.show('加载中');
+                setTimeout(function(){MLoading.hide();},3000);
+                _doAjax('/weixin/dish/share', 'POST', params, function(ret){
+                    MLoading.hide();
+                    if (ret['code'] != 0) {
+                        alert(ret['message']);
+                        return;
+                    }
+                    var result = ret['result']['data'];
+
+                    shareTimeline(result.img_url, result.link, result.desc, result.title);
+                    
+                });
+                
+            } else {
+
+                shareTimeline(window.shareData.imgUrl, window.shareData.timeLineLink, window.shareData.tContent, window.shareData.tTitle);                
+            }
+        });
+
+        // 分享到微博
+        WeixinJSBridge.on('menu:share:weibo', function(argv){
+            if (pageName == 'menuFilled') {
+
+                var params = {
+                    'qrcode' : qrcode,
+                    'ticket' : ticket,
+                    'ticketSource' : ticketSource
+                };
+
+                MLoading.show('加载中');
+                setTimeout(function(){MLoading.hide();},3000);
+                _doAjax('/weixin/dish/share', 'POST', params, function(ret){
+                    MLoading.hide();
+                    if (ret['code'] != 0) {
+                        alert(ret['message']);
+                        return;
+                    }
+                    var result = ret['result']['data'];
+
+                    shareWeibo(result.title, result.link);
+                });
+
+            } else {
+
+                shareWeibo(window.shareData.wContent, window.shareData.wLink);
+            }
+        });
+     }, false)
+
+</script><script>
+    var needLocate = 'no';
+    needLocate = needLocate != 'no';
+
+
+function locate(){
+    if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(geo_success, geo_error, {timeout:3000});
+    } else {
+        MDialog.notice('定位失败，请检查网络设置', null, 3000);
+    }
+}
+function geo_success(position) {
+    window.location.href="/weixin/dish/listShop?needLocate=no&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude+"&qrcode="+qrcode+"&ticket="+ticket+'#wechat_webview_type=1';
+}
+function geo_error() {
+    // MDialog.notice('定位失败，请检查网络设置', null, 3000);
+
+    if (needLocate) {
+        window.location.href="/weixin/dish/listShop?qrcode="+qrcode+"&ticket="+ticket+"&needLocate=no"+'#wechat_webview_type=1';
+    }
+}
+
+_onPageLoaded(function(){
+
+    if (needLocate) {
+        locate();
+        return;
+    }
+
+    //修复滑动时搜索条(有较多输入内容)闪烁残缺的现象
+    if (_env.ios){
+        var ts = _q('.topSearch');
+        var ts2 = ts.cloneNode();
+        ts2.id = 'fixIOSTopSearch';
+        ts2.style.zIndex = 98;
+        ts2.innerHTML = '';
+        ts.parentNode.appendChild(ts2);
+    }
+
+    (function() {
+
+        // ios下系统默认弹窗
+        if (_isIOS) {
+            return null;
+        }
+
+        var orderBtns = _qAll('.order');
+        
+        for(var i=0;i<orderBtns.length;i++) {
+            orderBtns[i].onclick = function(e) {
+                var self = this;
+                var phone = self.getAttribute('href').match(/\d*-?\d+/);
+                if (!phone[0]) {phone[0]='';}
+                MDialog.confirm(
+                    '', '<span style="text-align:center !important;display:inline-block;width:205px;">是否拨打预订电话<br/>'+phone[0]+'？</span>', null,
+                    '确定', function(){
+                        isCancle = false;
+
+                        location.href = self.getAttribute('href');
+                    }, null,
+                    '取消', null, null,
+                    null, true, true
+                );
+
+                return false;
+            }
+        }
+    })();
+});
+
+
+</script>
+
+</body>
+</html>

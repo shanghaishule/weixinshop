@@ -1,0 +1,34 @@
+<include file="public:header"/>
+<div class="c_main fr">
+<form action="{:U('setconf')}" method="post">
+	<div class="c_main_title">{:L('step_setconf_desc')}</div>
+	<div class="c_main_body setconf">
+    	<present name="error_msg">
+        <div class="error_msg">{$error_msg}</div>
+        </present>
+        <fieldset>
+        	<legend>{:L('setconf_database')}</legend>
+            <ul>
+            	<li><span class="field">{:L('database_host')}：</span><input type="text" name="db_host" class="text_input" size="30" value="{$db_host}" /><span class="field port">{:L('database_port')}：</span><input type="text" name="db_port" class="text_input" size="8" value="{$db_port}" /></li>
+                <li><span class="field">{:L('database_user')}：</span><input type="text" name="db_user" class="text_input" size="30" value="{$db_user}" /><span class="field_tip">{:L('database_user_tip')}</span></li>
+                <li><span class="field">{:L('database_pass')}：</span><input type="password" name="db_pass" id="db_pass" class="text_input" size="30" value="{$db_pass}" /><span class="field_tip">{:L('database_pass_tip')}</span></li>
+                <li><span class="field">{:L('database_name')}：</span><input type="text" name="db_name" class="text_input" size="30" value="{$db_name}" /><span class="field_tip">{$database_name_tip}</span></li>
+                <li><span class="field">{:L('table_prefix')}：</span><input type="text" name="db_prefix" class="text_input" size="30" value="{$db_prefix}" /><span class="field_tip">{:L('table_prefix_tip')}</span></li>
+            </ul>
+        </fieldset>
+        <fieldset class="admin_info">
+        	<legend>{:L('setconf_database')}</legend>
+            <ul>
+                <li><span class="field">{:L('admin_user')}：</span><input type="text" name="admin_user" class="text_input" size="30" value="{$admin_user}" /></li>
+                <li><span class="field">{:L('admin_pass')}：</span><input type="password" name="admin_pass" class="text_input" size="30" value="{$admin_pass}" /></li>
+                <li><span class="field">{:L('admin_pass_confirm')}：</span><input type="password" name="admin_pass_confirm" class="text_input" size="30" value="{$admin_pass_confirm}" /></li>
+                <li><span class="field">{:L('admin_email')}：</span><input type="text" name="admin_email" class="text_input" size="30" value="{$admin_email}" /></li>
+            </ul>
+        </fieldset>
+    </div>
+    <div class="act">
+        <div class="btn"><input type="submit" value="{:L('next')}" class="btn_next" /></div>
+    </div>
+</form>
+</div>
+<include file="public:footer"/>

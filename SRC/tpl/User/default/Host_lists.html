@@ -1,0 +1,77 @@
+<include file="Public:head"/>  
+     <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+<h4 class="left">订单类型信息 ({lanrain:$page}) </h4>
+<div class="searchbar right">
+<a href="{lanrain::U('Host/index',array('token'=>$token))}" class="btnGreen vm">返回</a>
+</div>
+<div class="clr"></div>
+</div>
+<div class="cLine">
+<div class="pageNavigator left"> <a href="{lanrain::U('Host/list_add',array('token'=>$token,'hid'=>$_GET['id']))}" title="新增订单类型" class="btnGrayS vm bigbtn">新增订单类型 </a> </div>
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th class="select">选择</th>
+<th width="160">订单类型</th>
+<th width="70">原价</th>
+<th width="80">优惠价</th>
+<th>简要说明</th>
+ 
+<th width="100" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="li" id="list"> 
+<tr>
+<td><input type="checkbox" name="del_id[]" value="285" class="checkitem"></td>
+<td>{lanrain:$list.type}</td>
+<td>{lanrain:$list.price}</td>
+<td>{lanrain:$list.yhprice}</td>
+<td>{lanrain:$list.info}</td>
+ 
+<td colspan="10" class="norightborder">  <a  href="{lanrain::U('Host/list_edit',array('id'=>$list['id'],'token'=>$token))}">编辑</a> |
+<a href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::U('Host/list_del',array('id'=>$list['id'],'token'=>$token))}');">删除</a>
+
+</td>
+
+</tr>
+</volist>
+
+</tbody>
+</table>
+</form>
+<script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script> 
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lanrain:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

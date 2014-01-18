@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>添加用户级</title>
+	<link href="{lanrain::RES}/images/main.css" type="text/css" rel="stylesheet">
+	<script src="{lanrain::STATICS}/jquery-1.4.2.min.js" type="text/javascript"></script>
+	<meta http-equiv="x-ua-compatible" content="ie=7" />
+</head>
+<body class="warp">
+<div id="artlist" class="addn">
+<gt name="info.id" value="0">
+			<form action="{lanrain::U('User_group/edit')}" method="post" name="form" id="myform">
+			<input type="hidden" name="id" value="{lanrain:$info.id}">
+		<else />
+			<form action="{lanrain::U('User_group/add')}" method="post" name="form" id="myform">
+		</gt>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+				
+				 <tr>
+					<th colspan="4">{lanrain:$title}</th>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>用户状态：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="radio" class="radio" class="ipt" value="1" name="status" id="status1" <if condition="($info.status eq 1) OR ($info['status'] eq '') ">checked=""</if> >
+							启用
+							<input type="radio" class="radio" class="ipt"  value="0" name="status" id="status2" <eq name="info.status" value="0">checked=""</eq> >
+							关闭
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>是否显示版权:</strong></td>
+					<td colspan="3" class="lt">
+						<input type="radio" class="radio" class="ipt" value="1" name="iscopyright" id="status1" <if condition="($info.iscopyright eq 1) OR ($info['iscopyright'] eq '') ">checked=""</if> >
+							启用
+							<input type="radio" class="radio" class="ipt"  value="0" name="iscopyright" id="status2" <eq name="info.iscopyright" value="0">checked=""</eq> >
+							关闭
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>用户组名称：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="text" name="name" class="ipt" size="45" value="{lanrain:$info.name}" <eq name="info.username" value="admin">readonly="readonly"</eq>>
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>公众号数量：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="text" name="wechat_card_num" value="{lanrain:$info.wechat_card_num}" class="ipt" size="45"/>
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>自定义图文条数：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="text" name="diynum" value="{lanrain:$info.diynum}" class="ipt" size="45"/>
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>功能请求次数：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="text" name="connectnum" value="{lanrain:$info.connectnum}" class="ipt" size="45"/>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>活动创建次数：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="text" name="activitynum"  value="{lanrain:$info.activitynum}" class="ipt" size="45"/>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td height="48" align="right"><strong>包月价格：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="text" name="price" class="ipt" size="45" value="{lanrain:$info.price}"/>
+					</td>
+				</tr>
+					<tr>
+					<td height="48" align="right"><strong>创建会员卡数量：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="text" name="create_card_num" class="ipt" size="45" value="{lanrain:$info.create_card_num}"/>
+					</td>
+				</tr>
+	<tr>
+		<td colspan="4" style="padding:10px 0 10px 230px;">
+			<gt name="info.id" value="0">
+				<button class="button" type="submit"  value="" >修 改</button>
+				<else />
+				<button class="button" type="submit" value="">添 加</button></gt>
+			&nbsp;
+			<button class="button" type="button" onclick="javascript:history.back(-1);" value="" >返 回</button></td>
+	</tr>
+</table>
+</form>
+<br />
+<br />
+<br />
+
+</div>
+</body>
+</html>

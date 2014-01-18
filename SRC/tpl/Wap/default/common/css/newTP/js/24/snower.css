@@ -1,0 +1,47 @@
+.snower{
+	position: absolute;
+	z-index:9000;
+	width:100%;
+	max-width:640px;
+	height:100%;
+	top:0;
+	left:0;
+	overflow:hidden;
+	pointer-events:none;
+	-webkit-box-sizing:border-box;
+}
+.snower  > div{
+	position: absolute;
+	max-width: 100px;
+	max-height: 100px;
+	-webkit-animation-iteration-count: infinite!important;
+	-webkit-animation-direction: normal!important;
+	-webkit-animation-timing-function: linear, ease-in!important;
+}
+
+.snower > div > img {
+	/*position: absolute;*/
+	width: 100%;
+	-webkit-animation-iteration-count: infinite!important;
+	-webkit-animation-direction: alternate!important;
+	-webkit-animation-timing-function: ease-in-out!important;
+	-webkit-transform-origin: 50% -100%!important;
+}
+
+@-webkit-keyframes fade{
+	0%   { opacity: 1; }
+	95%  { opacity: 1; }
+	100% { opacity: 0; }
+}
+@-webkit-keyframes drop{
+	0%{ -webkit-transform: translate3d(0px, -50px, 0); }
+	100% { -webkit-transform: translate3d(0px, 500px, 0); }
+}
+@-webkit-keyframes clockwiseSpin{
+	0% { -webkit-transform: rotate(-50deg); }
+	100% { -webkit-transform: rotate(50deg); }
+}
+@-webkit-keyframes counterclockwiseSpinAndFlip{
+	0%{-webkit-transform: scale(-1, 1) rotate(50deg); }
+	100% { -webkit-transform: scale(-1, 1) rotate(-50deg); }
+}

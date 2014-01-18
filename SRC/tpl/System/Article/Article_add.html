@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title>权限管理</title>
+<link href="{phpw:$common_path}/images/main.css" type="text/css" rel="stylesheet">
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<link rel="stylesheet" href="Common/System/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="Common/System/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="Common/System/kindeditor/lang/zh_CN.js"></script>
+<script>
+			
+			KindEditor.ready(function(K) {
+				var colorpicker;
+				K('#colorpicker').bind('click', function(e) {
+					e.stopPropagation();
+					if (colorpicker) {
+						colorpicker.remove();
+						colorpicker = null;
+						return;
+					}
+					var colorpickerPos = K('#colorpicker').pos();
+					colorpicker = K.colorpicker({
+						x : colorpickerPos.x,
+						y : colorpickerPos.y + K('#colorpicker').height(),
+						z : 19811214,
+						selectedColor : 'default',
+						noColor : '无颜色',
+						click : function(color) {
+							K('#colorpicker').val(color);
+							colorpicker.remove();
+							colorpicker = null;
+						}
+					});
+				});
+				K(document).click(function() {
+					if (colorpicker) {
+						colorpicker.remove();
+						colorpicker = null;
+					}
+				});
+			});
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			uploadJson : '/index.php/Admin/Editor/editer_upload',
+			fileManagerJson : '/index.php/Admin/Editor/editer_manager',
+			allowFileManager : true,
+			basePath : '/Public/kindeditor/',
+		});
+		
+		K('#imgs').click(function() {
+			editor.loadPlugin('multiimage', function() {
+				editor.plugin.multiImageDialog({
+					clickFn : function(urlList) {
+						K('#img-hidden').val(urlList);
+						K('#imgs').attr('src',urlList[0]);
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+		
+	});
+$(function() {
+	$('#draw').click(function(){
+		$.post("/index.php/Admin/Public/draw_keys",{content:editor.text()},function(data){
+			data=eval('('+data+')');
+			$("input[name=keysword]").val(data);
+		});
+	})
+});	
+KindEditor.ready(function(K) {
+			var editor = K.editor({
+			uploadJson : './index.php/Admin/Editor/editer_upload',
+			fileManagerJson : './index.php/Admin/Editor/editer_manager',
+			allowFileManager : true,
+			basePath : './Public/kindeditor/',
+				});
+				K('#images-pic').click(function() {
+					editor.loadPlugin('image', function() {
+						editor.plugin.imageDialog({
+							showLocal : false,
+							imageUrl : K('#images-pic').val(),
+							clickFn : function(url, title, width, height, border, align) {
+								K('#img-url').val(url);
+								editor.hideDialog();
+								$('#images-pic').attr('src',$('#img-url').val());
+							}
+							
+						});
+					});
+					
+				});
+				
+			});
+	$(function(){
+	$('#jump').change(function(){
+		 if($("#jump").attr("checked")==true){
+			$('#jumpdis').show();
+		}else{
+			$('#jumpdis').hide();
+		}
+	})
+	
+	});
+		</script>
+
+
+</head>
+<body class="warp">
+<div id="artlist" class="addn">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+  <tr>
+    <th colspan="4">添加文章</th>
+    </tr>
+    <tr> 
+		<td  height="48" align="right">
+			<strong>标题：</strong>
+		</td>
+		<td>
+			<input type="text" name="" value="" class="ipt" size="45" style="width:450px;" />　
+			<button class="button">检查重复</button>
+			<input type="checkbox" name="" value="" />立即发布
+		</td>
+    </tr>
+	<tr> 
+		<td  height="48" align="right">
+			<strong>关键词：</strong>
+		</td>
+		<td>
+			<input type="text" name="" value="" class="ipt" size="45" style="width:450px;" />　
+			<button class="button">提取</button>
+		</td>
+    </tr>
+	<tr> 
+		<td  height="48" align="right">
+			<strong>描述：</strong>
+		</td>
+		<td>
+			 <textarea class="text-input "  name="ipt" style="width:450px;height:30px;border: 1px solid #BFBFBF;border-bottom: 1px solid #E4E4E4;border-right: 1px solid #E4E4E4;background: #E9E9E9;"></textarea>
+		</td>
+    </tr>
+ 
+    <tr> 
+      <td height="48" align="right">
+		<strong>文章作者：</strong>
+	  </td>
+      <td height="48">
+		<input type="text" name="" value="" class="ipt" />　
+		<strong>文章来源：</strong>
+		<input type="text" name="" value="" class="ipt" /> 
+	  </td>
+    
+    </tr>
+	   <tr> 
+      <td height="48" align="right"><strong>归属栏目：</strong></td>
+      <td>
+		<select style="width:136px">
+			<option>栏目名称</option>
+		</select>
+		<strong>文章属性：</strong>
+		<input type="checkbox" name="" value="" />
+		推荐 <input type="checkbox" name="" value="" />
+		幻灯 <input type="checkbox" name="" value="" />
+		自定义属性1 <input type="checkbox" name="" value="" />
+		自定义属性2 <input type="checkbox" name="" value="" />
+		自定义属性3</td>
+    </tr>
+     <tr> 
+      <td width="10%" height="48" align="right"><strong>附件上传：</strong></td>
+      <td width="90%"><img src="{phpw:$common_path}/images/main/picxz.gif" /> <img src="{phpw:$common_path}/images/main/picup.gif" />
+	  </td>
+    </tr>
+      <tr> 
+      <td colspan="2">
+		 <textarea class="text-input "  id="editor_id" name="content" cols="79" rows="15" style="width:100%;height:300px;"></textarea>
+ </td>
+    </tr>
+    <tr> 
+      <td height="48" colspan="2">
+	  <div id="addkey"></div>
+	  <div 	style="">
+		<img src="{phpw:$common_path}/images/main/addwz.gif" />
+		<img src="{phpw:$common_path}/images/main/addqx.gif" />
+	  </div></td>
+    </tr>
+</table><br />
+<br />
+<br />
+
+</div>
+</body>
+</html>

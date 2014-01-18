@@ -1,0 +1,106 @@
+<include file="Public:head"/>  
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+<h4 class="left">订单管理（<a href="{lanrain::U('Product/orders',array('token'=>$token,'handled'=>0))}">未处理订单<span style="color:#f00">{lanrain:$unhandledCount}</span>个</a>） ({lanrain:$page}) </h4>
+<div class="searchbar right">
+<form method="post" action="">
+<input type="text" id="msgSearchInput" class="txt left" placeholder="输入订购人名字搜索" name="searchkey" value="">
+<input type="hidden" name="ac" value="hotels-list">
+<input type="hidden" name="id" value="9878">
+<input type="hidden" name="wxid" value="gh_423dwjkewad">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+<script>
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+</script>
+<if condition="($parentid neq  '0') and ($parentid neq '')"><a href="{lanrain::U('Product/cats',array('token'=>$token,'parentid'=>$parentCat['parentid']))}" class="btnGreen" style="margin-top:-27px">返回上</a></if>
+</form>
+</div>
+<div class="clr"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul>
+<li class="tabli" id="tab0"><a href="{lanrain::U('Product/index',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品<else/>菜品</if>管理</a></li>
+<li class="tabli" id="tab2"><a href="{lanrain::U('Product/cats',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>管理</a></li>
+<li class="current tabli" id="tab2"><a href="{lanrain::U('Product/orders',array('token'=>$token,'dining'=>$isDining))}">订单管理</a></li>
+<if condition="$isDining eq 1"><li class="tabli" id="tab2"><a href="{lanrain::U('Product/tables',array('token'=>$token,'dining'=>1))}">桌台管理</a></li></if>
+<if condition="$isDining neq 1">
+<li class="tabli" id="tab5"><a href="{lanrain::U('Reply_info/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+<else/>
+<li class="tabli" id="tab5"><a href="{lanrain::U('Reply_info/set',array('token'=>$token,'infotype'=>'Dining'))}">订餐回复配置</a></li>
+</if>
+</ul>
+</div>
+<!--tab end-->
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<div class="cLine">
+<div class="pageNavigator left"> <a href="###" onclick="$('#info').submit()" title="" class="btnGrayS vm bigbtn"><img src="{lanrain::RES}/images/product/arrow_switch.png" class="vm">处理订单</a></div>
+<div class="clr"></div>
+</div>
+
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th class="select"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+<th width="70">姓名</th>
+<th width="80">电话</th>
+<th class="60">数量</th>
+<th width="80">总价（元）</th>
+<th class="160">付款状态/发货状态</th>
+<th class="60">状态</th>
+<th width="130">创建时间</th>
+ 
+
+<th width="150" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="orders" id="o"> 
+<tr>
+<td><input type="checkbox" value="{lanrain:$o.id}" class="cbitem" name="id_{lanrain:$i}"></td>
+<td>{lanrain:$o.truename} <if condition="$isDining eq 1"><span style="color:#f60">[<if condition="$o.diningtype eq 1">点餐<elseif condition="$o.diningtype eq 2" />外卖<elseif condition="$o.diningtype eq 3" />预定<else /></if>]</span></if></td>
+<td>{lanrain:$o.tel}</td>
+<td>{lanrain:$o.total}</td>
+<td>{lanrain:$o.price}</td>
+<td><if condition="$o.paid eq 1"><span style="color:green">已付款</span><else/><span style="color:red">未付款</span></if> / <if condition="$o.sent eq 1"><span style="color:green">已发货</span><else/><span style="color:red">未发货</span></if></td>
+<td><if condition="$o.handled eq 1"><span style="color:green">已处理</span><else/><span style="color:red">未处理</span></if></td>
+<td>{lanrain:$o.time|date="Y-m-d H:i:s",###}</td> 
+<td class="norightborder"><a href="###" onclick="showIntroDetail({lanrain:$o.id})">详细</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::U('Product/deleteOrder',array('token'=>$token,'id'=>$o['id'],'dining'=>$isDining))}');">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+<input type="hidden" name="token" value="{lanrain:$_GET['token']}" />
+</form>
+
+   <script>
+function showIntroDetail(id){
+	art.dialog.open('{lanrain::U('Product/orderInfo',array('token'=>$token,'dining'=>$isDining))}&id='+id,{lock:false,title:'订单详情',width:700,height:420,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+</script>
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lanrain:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

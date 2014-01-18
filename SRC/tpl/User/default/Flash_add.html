@@ -1,0 +1,77 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/plugins/code/prettify.css" />
+<script src="{lanrain::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+	KindEditor.ready(function(K){
+		var editor = K.editor({
+			allowFileManager:true
+		});
+		K('#upload').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					fileUrl : K('#pic').val(),
+					clickFn : function(url, title) {
+						if(url.indexOf("http") > -1){
+							K('#pic').val(url);
+						}else{
+							K('#pic').val("{lanrain::C('site_url')}"+url);
+						}
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+ <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB"><h4>添加幻灯片</h4><a href="javascript:history.go(-1);"  class="right btnGrayS vm" style="margin-top:-27px" >返回</a></div> 
+<div class="msgWrap">
+  <form class="form" method="post"   action="{lanrain::U('Flash/insert')}"  target="_top" enctype="multipart/form-data" >
+<TABLE class="userinfoArea" style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+  <TBODY>
+<TR>
+  <TH valign="top"><label for="keyword">幻灯片描述：</label></TH>
+  <TD><input type="input" class="px" id="keyword" value="" name="info" style="width:500px" ><br />
+                  30个字简短分类描述，可为空   </TD>
+  <TD>&nbsp;</TD>
+</TR>
+<TR>
+  <TH valign="top"><label for="pic">上传本地图片：</label></TH>
+  <TD><input type="text" class="px" id="pic" value="" name="img" style="width:500px" readonly="readonly"><span class="ke-button-common" id="upload" style="margin-top: 3px;margin-left: 5px;"><input type="button" class="ke-button-common ke-button" value="上传"></span><br />
+  </TD>
+  <TD>&nbsp;</TD>
+</TR>
+<TR>
+  <TH valign="top"><label for="keyword">幻灯片链接地址 ：</label></TH>
+  <TD><input type="input" class="px" id="keyword" value="" name="url" style="width:500px" ><br />
+                   </TD>
+  <TD>&nbsp;</TD>
+</TR>
+
+<TR>
+  <TH></TH>
+  <TD><button type="submit"  name="button"  class="btnGreen left" >保存</button>
+  	<div class="clr"></div>
+  	</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+  </form>
+
+
+
+  </div> 
+
+        </div>
+        
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div> 
+
+<!--底部-->
+  	</div>
+<include file="Public:footer"/>

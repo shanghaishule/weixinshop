@@ -1,0 +1,1 @@
+{"0":"id","1":"username","2":"password","3":"role_id","4":"last_ip","5":"last_time","6":"email","7":"status","_autoinc":true,"_pk":"id","_type":{"id":"mediumint(6)","username":"varchar(50)","password":"varchar(32)","role_id":"smallint(5)","last_ip":"varchar(15)","last_time":"int(10)","email":"varchar(50)","status":"tinyint(1)"}}

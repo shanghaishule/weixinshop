@@ -1,0 +1,147 @@
+<include file="Public:head"/> 
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+ <link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/plugins/code/prettify.css" />
+<script src="{lanrain::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script type="text/javascript" src="{lanrain::RES}/js/formCheck/formcheck.js"> </script>
+<script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#intro', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : false,
+items : [
+'source','undo','clearhtml','hr',
+'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+'insertunorderedlist', '|', 'emoticons', 'image','link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut']
+});
+
+});
+</script>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+<h4 class="left">公司信息</h4>
+<div class="searchbar right">
+<form method="post" action="">
+
+<script>
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+function setlatlng(longitude,latitude){
+	art.dialog.data('longitude', longitude);
+	art.dialog.data('latitude', latitude);
+	// 此时 iframeA.html 页面可以使用 art.dialog.data('test') 获取到数据，如：
+	// document.getElementById('aInput').value = art.dialog.data('test');
+	art.dialog.open('{lanrain::U('Map/setLatLng',array('token'=>$token,'id'=>$id))}',{lock:false,title:'设置经纬度',width:600,height:400,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+</script>
+<if condition="($parentid neq  '0') and ($parentid neq '')"><a href="{lanrain::U('Product/cats',array('token'=>$token,'parentid'=>$parentCat['parentid']))}" class="btnGreen" style="margin-top:-27px">返回上</a></if>
+</form>
+</div>
+<div class="clr"></div>
+</div>
+
+<!--tab start-->
+<div class="tab">
+<ul>
+<li class="<if condition="$isBranch neq 1">current</if> tabli" id="tab0"><a href="{lanrain::U('Company/index',array('token'=>$token))}">公司信息</a></li>
+<li class="<if condition="$isBranch eq 1">current</if> tabli" id="tab2"><a href="{lanrain::U('Company/branches',array('token'=>$token,'isBranch'=>1))}">分支机构</a></li>
+</ul>
+</div>
+<!--tab end-->
+<div class="msgWrap">
+ <form class="form" method="post" id="form" action=""> 
+<if condition="$isUpdate eq 1">
+<input type="hidden" name="id" value="{lanrain:$set.id}" />
+</if>
+<input type="hidden" name="discount" id="discount" value="{lanrain:$set.discount}" />
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th><span class="red">*</span>名称：</th> 
+        <td><input type="text" id="name" name="name" value="{lanrain:$set.name}" class="px require" style="width:400px;" /></td> 
+       </tr>
+       <tr> 
+        <th><span class="red">*</span>简称：</th> 
+        <td><input type="text" id="shortname" name="shortname" value="{lanrain:$set.shortname}" class="px require" style="width:400px;" /></td> 
+       </tr>
+       <tr> 
+        <th><span class="red">*</span>电话：</th> 
+        <td><input type="text" id="tel" name="tel" value="{lanrain:$set.tel}" class="px require" style="width:400px;" /></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>手机：</th> 
+        <td><input type="text" id="mp" name="mp" value="{lanrain:$set.mp}" class="px require" style="width:400px;" /></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>地址：</th> 
+        <td><input type="text" id="address" name="address" value="{lanrain:$set.address}" class="px require" style="width:400px;" /></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>Logo地址：</th> 
+        <td><input type="text" id="logourl" name="logourl" value="{lanrain:$set.logourl}" class="px require" style="width:400px;" /></td> 
+       </tr>
+        <tr> 
+        <th><span class="red">*</span>经纬度：</th> 
+        <td>经度 <input type="text" id="longitude"  name="longitude" size="14" class="px" value="{lanrain:$set.longitude}" /> 纬度 <input type="text"  name="latitude" size="14" id="latitude" class="px" value="{lanrain:$set.latitude}" /> <a href="###" onclick="setlatlng($('#longitude').val(),$('#latitude').val())">在地图中查看/设置</a></td> 
+       </tr>
+       <tr> 
+        <th><span class="red"></span>顺序：</th> 
+        <td><input type="text" id="taxis" name="taxis" value="{lanrain:$set.taxis}" class="px require" style="width:100px;" /></td> 
+       </tr>
+        <TR>
+                  <TH valign="top"><label for="info">图文详细页内容：</label></TH>
+                  <TD><textarea name="intro" id="intro"  rows="5" style="width:590px;height:360px">{lanrain:$set.intro}</textarea></TD>
+                </TR>  
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <if condition="$isBranch eq 1">
+      <input type="hidden" name="isbranch" value="1" />
+      </if>
+      <input type="hidden" name="token" value="{lanrain::$token}" />
+       <button type="submit" name="button" class="btnGreen">保存</button></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+
+
+</div>
+<div class="cLine">
+
+<div class="clr"></div>
+</div>
+</div>
+<script language="javascript">
+$(function(){
+
+	$("#form").valid([
+	{ name:"name",simple:"名称",require:true},
+	{ name:"mp",type:"mobile",message:"手机号输入不正确"}
+	
+	],true,true);
+
+})
+</script>
+<include file="Public:footer"/>

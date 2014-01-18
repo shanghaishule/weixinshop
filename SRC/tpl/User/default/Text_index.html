@@ -1,0 +1,95 @@
+<include file="Public:head"/>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLine">
+            <div class="pageNavigator left">
+  <a href='{lanrain::U("Text/add")}' title='新增文本自定义回复' class='btnGrayS vm bigbtn'><img src="{lanrain::RES}/images/text.png" class="vm" />新增文本自定义回复</a>　
+  <a href='{lanrain::U("Img/add")}' title='新增图文自定义回复' class='btnGrayS vm bigbtn'><img src="{lanrain::RES}/images/pic.png" class="vm" />新增图文自定义回复</a>　
+  <!--<a class="btnGrayS vm bigbtn" onclick="location.href='index.php?ac=csv&id=9379';" ><img src="{lanrain::RES}/images/import.png" class="vm" />批量导入文本</a>　<a class="btnGrayS vm bigbtn" onclick="location.href='index.php?ac=outtxt&page=1&type=0&classid=0&wxid=gh_858dwjkeww5';" ><img src="{lanrain::RES}/images/export.png" class="vm" />批量导出本页文本结果</a>-->
+              
+            </div>
+          
+            <div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post"  action="index.php?ac=importtxt&amp;id=9379&amp;wxid=gh_858dwjkeww5" id="info" >
+          <input name="delall"  type="hidden" value="del" />
+           <input name="wxid"  type="hidden" value="gh_858dwjkeww5" />
+            <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <THEAD>
+                <TR>
+<TH >编号</TH>
+<TH class="keywords">关键词</TH>
+<TH class="answer">回答</TH>
+                    <TH  class="category" >匹配类型</TH>
+                    <TH class="time">浏览次数</TH>
+<TH class="time">时间</TH>
+                     
+<TH class="edit norightborder">操作</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+                <TR>
+				</TR>
+				<volist name="info" id="vo">
+				<tr>
+                  <td>  {lanrain:$i}</td>
+                  <td>{lanrain:$vo.keyword}</td>
+                  <td><div class="answer_text">{lanrain:$vo.text}</div></td>
+                  <td><eq name="vo.type" value="1">完全匹配<else/>模糊匹配</eq></td>
+                  <td>{lanrain:$vo.click}</td>
+                    <td><php>echo date('Y-m-d',$vo['updatetime']);</php></td>
+                   <td class="norightborder"> <a href="{lanrain::U('Text/edit',array('id'=>$vo['id']))}" title="编辑文本">编辑</a> <a href="{lanrain::U('Text/del',array('id'=>$vo['id']))}">删除</a></td>
+          
+                </tr>
+				</volist>
+                             
+              </TBODY>
+            </TABLE>
+           </form> 
+           <script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages">{lanrain:$page}</div>
+              </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+function checkAll(form, name) {
+for(var i = 0; i < form.elements.length; i++) {
+var e = form.elements[i];
+if(e.name.match(name)) {
+e.checked = form.elements['chkall'].checked;
+}
+}
+}
+
+
+  </script>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>

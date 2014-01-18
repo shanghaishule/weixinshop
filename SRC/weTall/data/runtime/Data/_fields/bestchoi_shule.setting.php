@@ -1,0 +1,1 @@
+{"0":"name","1":"data","2":"remark","_autoinc":false,"_type":{"name":"varchar(100)","data":"text","remark":"varchar(255)"}}

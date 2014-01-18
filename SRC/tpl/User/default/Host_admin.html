@@ -1,0 +1,124 @@
+<include file="Public:head"/>  
+       <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+         
+          <div class="cLineB">
+              <h4 class="left"> 在线预订管理</h4>
+                  <div class="searchbar right" style="display:none">  <form method="get" action="index.php">
+                  <input type="text" id="msgSearchInput" class="txt left" placeholder="输入关键词搜索" name="keyz" value="">
+                  <input type="hidden" name="ac" value="hotels-sncode">
+                  <input type="hidden" name="id" value="9878">
+ 
+                  <input type="hidden" name="tid" value="285">
+                  <input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+                  </form>
+                  </div>
+              <div class="clr"></div> 
+          </div>
+          <div class="cLineB">
+            本次收集订单总数：<span class="redamount">{lanrain:$count}</span>个　　预订成功：<span class="redamount">{lanrain:$ok_count}</span>个　　预订失败：<span class="redamount">{lanrain:$lost_count}</span>个　　未处理订单：<span class="redamount">{lanrain:$no_count}</span>个 <span class="redamount">入住时间填写格式:2013-08-25 19:30</span><a href="{lanrain::U('Host/lists',array('token'=>$token,'id'=>$_GET['id']))}" class="right btnGreen vm">返回</a>
+          </div>
+          <div class="msgWrap">
+          <form method="post" action="" id="info">
+          <input name="delall" type="hidden" value="">
+           <input name="wxid" type="hidden" value="">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+                    <th width="40">序号</th>
+                    <th width="60">预订人</th>
+                    <th width="100">电话</th>
+                    <th width="120">入住时间</th>
+                    <th width="80">房间类型</th>
+                    <th width="120">预订时间</th>
+                    <th width="70">预订数量</th>
+                    <th width="60">价格</th>
+                    <th width="80">订单状态</th>
+                    <th width="40" class="norightborder">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+<tr></tr>
+<volist name="li" id="list"> 
+ <form action="{lanrain::U('Host/admin')}" method="post">  
+<tr>
+<td>{lanrain:$i}</td>
+<td>{lanrain:$list.book_people}</td>
+<td>{lanrain:$list.tel}</td>
+<td>
+  
+  <input type="text" style="border:1px solid" name="check_in" value="<if condition="$list['check_in'] neq false">{lanrain:$list.check_in|date="Y-m-d H:i",###}<else/></if>"   placeholder="请手动输入入住时间"  />                
+
+ 
+</td>
+<td>{lanrain:$list.room_type}</td>
+ <td>{lanrain:$list.book_time|date="y-m-d H:i",###}</td>
+ <td>{lanrain:$list.book_num}</td>
+ <td>{lanrain:$list.price}</td>
+  <td>
+  <input type="hidden" name="id" value="{lanrain:$list.id}">
+    <input type="hidden" name="hid" value="{lanrain:$Think.get.id}">
+ <if condition="$list.order_status eq 1"> 成功 
+ <elseif condition="$list.order_status eq 2"/> 失败 
+ <else /> 
+   <select name="status" >    
+    <option value="1">成功</option>
+    <option value="2">失败</option>    
+  </select>
+ </if>  
+
+  </td>
+<td colspan="10" class="norightborder">  
+<!--
+<a href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::U('Host/list_del',array('id'=>$hostlist['id'],'token'=>$token))}');">删除</a>
+-->
+<if condition="$list.order_status eq 1">
+不可修改
+<else />
+<button type="submit" style="cursor:pointer" ><font color="red">修改</font></button>
+</if>
+
+
+</td>
+
+</tr>
+</form>
+</volist>
+
+ 
+</tbody>
+            </table>
+           </form> 
+            <div class="cLineB">
+            <span class="redamount">{lanrain:$page}</span>
+            <a href="{lanrain::U('Host/lists',array('token'=>$token,'id'=>$_GET['id']))}" class="right btnGreen vm">返回</a>
+          </div>
+           <script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script>
+          </div>
+            
+ 
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages"></div>
+              </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+</div>
+<include file="Public:footer"/>

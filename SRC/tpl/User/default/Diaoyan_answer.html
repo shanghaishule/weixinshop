@@ -1,0 +1,43 @@
+<include file="Public:head"/>
+<script src="{lanrain::RES}/js/date/WdatePicker.js"></script>
+<form class="form" method="post" action=""  target="_top" enctype="multipart/form-data" >
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<!--活动开始-->
+<div class="cLineB">
+  <h4>微调研问题统计结果</h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>  
+<div class="msgWrap bgfc">
+ 
+<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+<tr>
+  <th valign="top"><span class="red">*</span>问题：</th>
+  <td>
+  <input type="hidden" name="id" value="{lanrain:$quesob.id}" />
+  <label  id="question" >{lanrain:$quesob.question}</label></td>
+</tr><tr>
+  <th valign="top"><span class="red">*</span>A：</th>
+  <td><label  id="question" >{lanrain:$quesob.optionA}</label></td>
+  <td><label  id="question" >{lanrain:$quesob.answerA}票</label></td>
+</tr><tr>
+  <th valign="top"><span class="red"></span>B：</th>
+  <td><label id="question" >{lanrain:$quesob.optionB}</label></td>
+  <td><label  id="question" >{lanrain:$quesob.answerB}票</label></td>
+</tr><tr>
+  <th valign="top"><span class="red"></span>C：</th>
+  <td><label id="question" >{lanrain:$quesob.optionC}</label></td>
+  <td><label  id="question" >{lanrain:$quesob.answerC}票</label></td>
+</tr><tr>
+  <th valign="top"><span class="red"></span>D：</th>
+  <td><label id="question" >{lanrain:$quesob.optionD}</label></td>
+  <td><label  id="question" >{lanrain:$quesob.answerD}票</label></td>
+</tr><tr>
+  <th valign="top"><span class="red"></span>E：</th>
+  <td><label  id="question" >{lanrain:$quesob.optionE}</label></td>
+  <td><label  id="question" >{lanrain:$quesob.answerE}票</label></td>
+
+                                    </tr>
+</tbody>
+</table>
+</div> 
+</div>
+</form>
+<include file="Public:footer"/> 

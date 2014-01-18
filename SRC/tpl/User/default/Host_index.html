@@ -1,0 +1,81 @@
+<include file="Public:head"/>  
+        <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+<h4 class="left">商家订单订单信息 ({lanrain:$page}) </h4>
+<div class="searchbar right">
+<form method="post" action="">
+<input type="text" id="msgSearchInput" class="txt left" placeholder="输入关键词搜索" name="searchkey" value="">
+<input type="hidden" name="ac" value="hotels-list">
+<input type="hidden" name="id" value="9878">
+<input type="hidden" name="wxid" value="gh_423dwjkewad">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+</form>
+</div>
+<div class="clr"></div>
+</div>
+<div class="cLine">
+<div class="pageNavigator left"> <a href="{lanrain::U('Host/add',array('token'=>$token))}" title="新增订单商家" class="btnGrayS vm bigbtn"><img src="{lanrain::RES}/images/pic.png" class="vm">新增订单商家</a> </div>
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th class="select">选择</th>
+<th width="160">商家名称</th>
+<th width="60">关键词</th>
+<th width="170" style="display:none">地址</th>
+<th width="80">电话</th>
+<th width="130">创建时间</th>
+ 
+<th>外链代码</th>
+<th width="200" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="hostlist"> 
+<tr>
+<td><input type="checkbox" name="del_id[{lanrain:$i}]" value="285" class="checkitem"></td>
+<td>{lanrain:$hostlist.title}</td>
+<td>{lanrain:$hostlist.keyword}</td>
+<td style="display:none">{lanrain:$hostlist.address}</td>
+<td>{lanrain:$hostlist.tel}</td>
+<td>{lanrain:$hostlist.creattime|date="Y-m-d H:i:s",###}</td> 
+<td>商家订单 {lanrain:$hostlist.id}</td>
+<td class="norightborder"><a href="{lanrain::U('Host/admin',array('id'=>$hostlist['id'],'token'=>$token))}">订单管理</a> <a href="{lanrain::U('Host/set',array('id'=>$hostlist['id'],'token'=>$token))}">商家设置</a> <a href="{lanrain::U('Host/lists',array('id'=>$hostlist['id'],'token'=>$token))}">订单设置</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::U('Host/index_del',array('id'=>$hostlist['id'],'token'=>$token))}');">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+<script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script> 
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lanrain:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

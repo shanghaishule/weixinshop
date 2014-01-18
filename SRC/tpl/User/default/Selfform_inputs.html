@@ -1,0 +1,52 @@
+<include file="Public:head"/> 
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+        <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+<h4>“{lanrain:$thisForm['name']}”表单输入项管理 </h4>
+<a href="{lanrain::U('Selfform/index',array('token'=>$token))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+<div class="searchbar right">
+
+</div>
+<div class="clr"></div>
+</div>
+
+<div class="cLine">
+<div class="pageNavigator left"> <a href="{lanrain::U('Selfform/inputAdd',array('token'=>$token,'formid'=>$thisForm['id']))}" title="添加" class="btnGrayS vm bigbtn"><img src="{lanrain::RES}/images/product/add.png" width="16" class="vm">添加</a></div>
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th width="90">显示名称</th>
+<th width="90">字段名称</th>
+<th width="90">输入类型</th>
+<th width="200" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="item"> 
+<tr>
+<td>{lanrain:$item.displayname}</td>
+<td>{lanrain:$item.fieldname}</td>
+<td>{lanrain:$item.inputtype}</td>
+<td class="norightborder"><a href="{lanrain::U('Selfform/inputSet',array('id'=>$item['id'],'token'=>$token))}">修改</a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::U('Selfform/inputDelete',array('id'=>$item['id'],'token'=>$token))}');">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lanrain:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

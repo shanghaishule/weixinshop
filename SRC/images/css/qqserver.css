@@ -1,0 +1,43 @@
+/*初始化*/
+.onlinebox,.onlinebox dl,.onlinebox dd,.onlinebox dt,.onlinebox a,.onlinebox img{ margin:0px; padding:0px; border:0;}
+/*固定样式*/
+.onlinebox .clear{ clear:both; height:0px; font-size:0px; overflow:hidden;}
+.onlinebox{ position:absolute; font:12px/1.8 Verdana,Tahoma,Arial; z-index:999999;}
+.onlinebox .onlinebox-center-box{ padding:3px 0px; }
+.onlinebox .onlinebox-center-box dl{ padding:5px 0px 8px 5px; margin-bottom:5px;}
+.onlinebox .onlinebox-center-box dt{ margin-right:3px;}
+.onlinebox .onlinebox-center-box dd img{ margin:0px 6px 0px 0px;}
+.onlinebox .onlinebox-center-box .met_alibaba{ margin:5px;}
+.onlinebox .onlinebox-center-box .met_skype{ margin:5px;}
+.onlinebox .onlinebox-bottom-box .online-tbox{ padding:5px; white-space:nowrap;}
+.onlinebox .onlinebox-bottom-box{ line-height:1.6;}
+.onlinebox .onlinebox-conbox{ z-index:999;}
+/*样式1---------------------------------------------------------------------*/
+.onlinebox_1 .onlinebox-center-box dl{ float:left;}
+.onlinebox_1 .onlinebox-center-box dd{ clear:both;}
+.onlinebox_1 .onlinebox-showbox{ width:20px; text-align:center; padding:8px 3px; line-height:1.4; cursor:pointer; color:#fff; word-break:break-all; position:absolute; top:0; right:-25px;}
+.onlinebox_1 .onlinebox-conbox{ background:#fafafa; overflow:hidden;}
+.onlinebox_1 .onlinebox-top{ border-bottom:1px solid #ddd; text-align:center; padding:5px 0px; font-weight:bold; font-size:14px; color:#fff; cursor:pointer;}
+.onlinebox_1 .onlinebox-center-box{ padding:2px 0px 10px;}
+.onlinebox_1 .onlinebox-conbox dl{ padding:5px 0px 0px; margin-bottom:0px;}
+.onlinebox_1 .onlinebox-conbox dt{ white-space:nowrap; padding:0px 10px; margin-right:0px;}
+.onlinebox_1 .onlinebox-conbox dd{ padding:3px 10px 3px 5px; white-space:nowrap;}
+.onlinebox_1 .onlinebox-center-box dd img{ margin:0px 0px 0px 6px;}
+.onlinebox_1 .onlinebox-bottom{ border-top:1px dotted #ccc; }
+/*color1*/
+.onlinebox_1_1 .onlinebox-showbox{ background:#2691d0;}
+.onlinebox_1_1 .onlinebox-top{ background:#2691d0;}
+.onlinebox_1_1 .onlinebox-conbox dt{ color:#087bbf;}
+/*color2*/
+.onlinebox_1_2 .onlinebox-showbox{ background:#e80f32;}
+.onlinebox_1_2 .onlinebox-top{ background:#e80f32;}
+.onlinebox_1_2 .onlinebox-conbox dt{ color:#db1a3a;}
+.digg4 { padding:3px; margin:3px; text-align:center; font-family: Verdana,
+Arial, Helvetica, sans-serif; font-size: 12px;}.digg4 a,.digg4 span.miy{
+border:1px solid #ccdbe4; padding:2px 8px 2px 8px; background-position:50%;
+margin:2px; color:#0061de; text-decoration:none;}.digg4 a:hover { border:1px
+solid #2b55af; color:#fff; background-color:#3666d4;}.digg4 a:active {border:1px
+solid #000099; color:#000000;}.digg4 span.current { padding:2px 8px 2px
+8px; margin:2px; color:#000; text-decoration:none;}.digg4 span.disabled
+{ border:1px solid #ccdbe4; padding:2px 8px 2px 8px; margin:2px; color:#ddd;
+}

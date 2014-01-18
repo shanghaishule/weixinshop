@@ -1,0 +1,96 @@
+<include file="Public:head"/>
+
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+         
+          <div class="cLineB">
+              <h4 class="left">在线订餐</h4>
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator left">
+			  <a href="{lanrain::U('Ordering/set',array('token'=>session('token')))}" title="微信回复配置" class="btnGrayS vm bigbtn">订餐配置</a>　
+			  <a href="{lanrain::U('Ordering/class_list',array('token'=>session('token')))}" title="分类管理" class="btnGrayS vm bigbtn">分类管理</a>　
+			  <a href="{lanrain::U('Ordering/add',array('token'=>session('token')))}" title="发布菜单" class="btnGrayS vm bigbtn">发布菜单</a>              
+            </div>
+          
+            <div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post" action="index.php?ac=vote-manage&amp;id=9878" id="info">
+          <input name="delall" type="hidden" value="del">
+           <input name="wxid" type="hidden" value="gh_423dwjkewad">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+					<th class="select">选择</th>
+									
+					<th>标题</th>
+										<th>类型</th>
+										<th class="time">开始时间</th>
+					<th class="time">结束时间</th>
+										 <th>外链代码</th>
+					<th class="norightborder">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+                  
+                <tr>
+                  <td>  <input type="checkbox" name="del_id[]" value="674" class="checkitem"></td>
+                    
+                  <td>炒企鹅</td>
+                  <td>凉菜</td>
+                  <td>2013-07-30</td>
+                    <td>2013-07-30</td>
+                     <td>暂无</td>
+                   <td onclick="alert('内测中,暂时未放出');return false;" class="norightborder">
+				   <a href="{lanrain::U('Vote/list',array('type'=>'text','id'=>$vote['id']))}" title="投票结果">订单管理</a> 
+				   <a href="{lanrain::U('Vote/edit',array('type'=>'text','id'=>$vote['id']))}" title="编辑">编辑</a> 
+				   <a href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::U('Vote/del',array('type'=>'text','id'=>$vote['id']))}');">删除</a> 
+				   <a href="javascript:drop_confirm('开始投票活动将预先扣除1000金币，折合RMB 1元 ', '{lanrain::U('Vote/start',array('type'=>'text','id'=>$vote['id']))}');">开始</a>   </td>
+          
+                </tr>
+      			                 <tr>
+                <td colspan="8"> <input type="checkbox" id="chkall" name="chkall" onclick="checkAll(this.form, 'del_id')"><label for="checkallBottom">全选</label>
+<input type="radio" checked="checked" name="optype" value="1">
+删除
+
+
+<a href="JavaScript:void(0);" class="btnGreens" onclick="if(confirm('您确定操作吗?')){checkvotethis();}"><span>确定</span></a>
+</td>
+                </tr>
+              </tbody>
+            </table>
+           </form> 
+           <script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中内容！')
+}
+}
+
+   </script>
+          </div>
+            
+
+
+ 
+ 
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages"></div>
+              </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+<include file="Public:footer"/>

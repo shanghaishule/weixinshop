@@ -1,0 +1,122 @@
+<include file="Product:header"/>
+<div class="main">
+	<div class="banner" id="banner">
+		<a href="{lanrain::U('Product/product',array('token'=>$_GET['token'],'id'=>$product['id'],'wecha_id'=>$_GET['wecha_id']))}">
+			<img src="{lanrain:$product.logourl}" alt="{lanrain:$product.name}"/>
+			<h1 class="p_title">{lanrain:$product.name}</h1>
+		</a>
+	</div>
+	<div class="f_list_car p_buy clearfix">
+		<span class="all_price all_price_this">价格：<font>￥{lanrain:$product.price}</font> <span style="text-decoration:line-through">原价：{lanrain:$product.oprice}元</span></span>
+
+		<!--检查库存-->
+				<a href="javascript:;" class="p_btn_buy">
+			<span class="ts1" onclick="add_cart();">点菜</span>
+		</a>
+			</div>
+			<if condition="$product['groupon'] eq 1">
+<div class="p_buy clearfix" style="">
+<div id="remainTime" style="font-size:16px;font-weight:800;color:#FF9900"></div> 
+</div>
+<script type="text/javascript"> 
+ var SysSecond; 
+ var InterValObj; 
+  
+ $(document).ready(function() { 
+  SysSecond = parseInt($("#remainSeconds").html()); //这里获取倒计时的起始时间 
+  InterValObj = window.setInterval(SetRemainTime, 1000); //间隔函数，1秒执行 
+ }); 
+ 
+ //将时间减去1秒，计算天、时、分、秒 
+ function SetRemainTime() { 
+  if (SysSecond > 0) { 
+   SysSecond = SysSecond - 1; 
+   var second = Math.floor(SysSecond % 60);             // 计算秒     
+   var minite = Math.floor((SysSecond / 60) % 60);      //计算分 
+   var hour = Math.floor((SysSecond / 3600) % 24);      //计算小时 
+   var day = Math.floor((SysSecond / 3600) / 24);        //计算天 
+ 
+   $("#remainTime").html('&nbsp;&nbsp;还剩'+day + "天" + hour + "小时" + minite + "分" + second + "秒"); 
+  } else {//剩余时间小于或等于0的时候，就停止间隔函数 
+   window.clearInterval(InterValObj); 
+   //这里可以添加倒计时时间为0后需要执行的事件 
+  } 
+ } 
+</script> 
+<div id="remainSeconds" style="display:none">{lanrain:$leftSeconds}</div> 
+</if>
+        <script type="text/javascript">
+    //点击加入购物车
+    function add_cart() {
+    	$.ajax({
+    		url: "{lanrain::U('Product/addProductToCart',array('token'=>$token,'id'=>$product['id'],'price'=>$product['price'],'count'=>1,'wecha_id'=>$_GET['wecha_id']))}",
+    		success: function( data ) {
+    			if(data){
+    				var datas=data.split('|');
+    				$('#p_buy #all_price').html('￥'+datas[1]);
+                    $('#p_buy #all_numb').html(datas[0]); 
+    			}
+    		}
+    	});
+    }
+    </script>
+    <if condition="$product['groupon'] eq 1">
+    <div class="p_mod p_short_desc">
+		<h2 class="p_mod_title">团购信息</h2>
+		<div class="p_con">
+			<p>已售数量：<span style="color:#f60;font-size:16px;font-weight:bold">{lanrain:$product['salecount']+$product['fakemembercount']}</span></p>
+			<p>截止日期：{lanrain:$product.endtime|date="Y-m-d",###}</p>
+		</div>
+		
+	</div>
+	</if>
+	<div class="p_mod p_short_desc">
+		<h2 class="p_mod_title">商品简介</h2>
+		<div class="p_con">
+			<p>{lanrain:$intro}</p>
+		</div>
+		<a href="{lanrain::U('Product/productDetail',array('token'=>$_GET['token'],'id'=>$product['id'],'wecha_id'=>$_GET['wecha_id']))}" class="p_to_desc">
+			查看图文详情
+			<span class="gt"></span>
+		</a>
+	</div>
+	<div class="p_mod p_seller_info">
+		<a href="{lanrain::U('Product/company',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id'],'id'=>$product['id']))}">
+			查看商家信息
+			<font>共{lanrain:$branchStoreCount}家分店</font>
+			<span class="gt"></span>
+		</a>
+	</div>
+    
+
+	<!--套餐-->
+				    <section class="f_list f_mod i_list" >
+	    	<h2 class="p_mod_title">热门</h2>
+	    	<ul class="clearfix" id="f_list">
+	    	<volist name="products" id="hostlist"> 
+	    			 <li>
+			<div class="f_list_l">
+				<a href="{lanrain::U('Product/product',array('token'=>$_GET['token'],'id'=>$hostlist['id'],'wecha_id'=>$_GET['wecha_id']))}">
+					<img src="{lanrain:$hostlist.logourl}" />
+					<h3>{lanrain:$hostlist.name}</h3>
+					<p class="tui_price ts2" style="font-weight:normal;font-size:14px;color:#666;text-decoration:line-through">原价：{lanrain:$hostlist.price}&nbsp;元</p>
+										<div class="hot">
+						<strong style="display:none">热卖</strong>
+					</div>
+									</a>
+			</div>
+			<div class="f_list_r">
+				<p class="tui_price ts2">
+					<strong>￥{lanrain:$hostlist.price}</strong>
+				</p>
+				<a href="{lanrain::U('Product/product',array('token'=>$_GET['token'],'id'=>$hostlist['id'],'wecha_id'=>$_GET['wecha_id']))}" class="u_order_return ts1" id="in_car">去购买</a>
+			</div>
+		</li></volist>
+	            	   
+	            	    	</ul>
+	    </section>
+			
+<br>
+
+</body>
+</html>

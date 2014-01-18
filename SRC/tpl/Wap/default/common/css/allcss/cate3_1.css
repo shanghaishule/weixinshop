@@ -1,0 +1,116 @@
+html, body {
+	color:#222;
+	font-family:Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+	margin:0;
+	padding: 0;
+	text-decoration: none;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+	margin:0;
+	padding:0;
+}
+img {
+	border:0;
+}
+ol, ul {
+	list-style: none outside none;
+	margin:0;
+	padding: 0;
+}
+a {
+	color:#000000;
+	text-decoration: none;
+}
+.clr {
+	display:block;
+	clear:both;
+	height:0;
+	overflow:hidden;
+}
+.copyright{padding:8px;text-align:center;font-size:14px;color:#666;}
+.copyright a{color:#666;}
+h2 {
+	font-size:16px;
+}
+/*cate3*/
+#cate3{background-color: #151515;overflow-x: hidden;}
+#todayList {
+	display: block; margin: 0 auto;
+}
+.todayList li {
+	display: block;
+	color: #222222;
+	border-bottom:1px solid #000000;
+	font-weight: bold;
+	/*text-shadow: 0 1px 0 #FFFFFF;*/
+	text-decoration: none;
+	background:#151515;
+	-moz-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	position: relative;
+	/*padding:10px 8px;*/overflow:hidden;
+	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.05) inset;
+	-moz-box-shadow:0 1px 0 0 rgba(255, 255, 255, 0.05) inset;
+	-webkit-box-shadow:0 1px 0 0 rgba(255, 255, 255, 0.05) inset;
+}
+.todayList li a{
+	padding:10px 40px 9px 8px; display: block;
+}
+.todayList li.only3 a{
+	padding:10px 40px 9px 15px;display: block;
+}
+.todayList li:hover {
+	background-color:#202022;
+	font-weight:bold;
+	cursor:pointer;
+	text-decoration:none;
+}
+.todayList li:active {
+	background-color:#202022;
+	font-weight:bold;
+	cursor:pointer;
+	text-decoration:none;
+}
+.todayList li:hover h2{
+	color:#ffffff;
+}
+.todayList li:active h2{
+	color:#ffffff;
+}
+.todayList li h2 {
+	font-size: 16px;
+	color:#a8a8a8;
+	font-weight:normal;
+	height:20px;font-weight:normal;line-height:16px;padding:0;
+max-width:100%;text-overflow:ellipsis;white-space:nowrap !important;white-space:normal;overflow:hidden;
+text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.9);
+}
+.todayList li.only3 h2 {
+	padding:0;
+}
+.todayList li p {
+	display: block;
+	font-size: 12px;
+	color:#565656;
+	line-height: 16px;
+	font-weight: normal;
+	margin-top: 3px;
+	overflow: hidden;
+	text-overflow: ellipsis;/*white-space: nowrap;*/
+	padding-right:2px;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.9);
+}
+.todayList li.only3 p {
+	white-space: nowrap;
+}
+.todayList li .icon {
+	margin-top: -6px;
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	height: 16px;
+	width: 10px;
+	background:url(../../images/themes/ico-next2.png) no-repeat 0 0 ;
+	background-size: 8px auto;
+}

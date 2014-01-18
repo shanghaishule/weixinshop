@@ -1,0 +1,68 @@
+<include file="Public:head"/>  
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+  <h4>整合第三方接口<span class="FAQ">不懂技术的,请先观看教程,请勿乱操作</span></h4>             
+ </div>
+    <div class="msgWrap form"><form method="post"   action="<if condition="$api['url'] neq ''">{lanrain::U('Api/edit',array('token'=>$token))}</if>" >  
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="userinfoArea">
+              <tbody>
+               <tr>
+                  <th valign="top"><span class="red">*</span><label for="title">接口地址:</label></th>
+                  <td><input type="text"  name="url"  id="title" value="{lanrain:$api.url}"   class="px" tabindex="1" size="80"><br /><span class="red">填写您的接口完整地址,以http开头，不支持https</span></td>
+                </tr>
+				 <tr>
+                  <th valign="top"><span class="red">*</span><label for="title">数据显示条数:</label></th>
+                  <td><input type="text"  name="number"  id="title" value="{lanrain:$api.number}"   class="px" tabindex="1" size="80"><br /> <span class="red">调用条数  最多 10条 默认显示 </span></td>
+                </tr>
+				 <tr>
+                  <th valign="top"><span class="red">*</span><label for="title">数据排序:</label></th>
+                  <td><input type="text"  name="order"  id="title" value="{lanrain:$api.order}"   class="px" tabindex="1" size="80"><br /> <span class="red">1: 按发布时间排序 2: 按评论数排序 3:随机排序</span></td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td><button type="submit" name="appidsubmit" value="true" class="btnGreen vm" ><strong>保存</strong></button></td>
+                </tr>
+				<tr>
+				<td colspan="2">				
+				<ul class="changeapp2">
+		
+		<li>
+		<label><a class="btnGreen" href=""><b>DedeCMS接口下载</b></a><br> 		
+		<img src="http://www.dedecms.com/img/buttom_logo.gif" width="150" height="30">
+		</label>
+		</li>
+		<li>
+		<label><a class="btnGreen" href=""><b>WordPress接口下载</b></a><br> 		
+		<img src="http://www.crazyi.cn/wp-admin/images/logo-login.gif" width="150" height="30">
+		</label>
+		</li>
+		<li>
+		<label><a class="btnGreen" href=""><b>PHPCMS接口下载</b></a><br> 		
+		<img src="http://www.phpcms.cn/images/logo_88_31.gif" width="150" height="30">
+		</label>
+		</li>
+		<li>
+		<label><a class="btnGreen" href=""><b>emlog接口下载</b></a><br> 		
+		<img src="http://bbs.emlog.net/static/image/common/logo.png" width="150" height="30">
+		</label>
+		</li>
+			  <div class="clr"></div>
+		   </ul>
+		   
+				</td>
+			</tr>
+              </tbody>
+            </table>
+</form>
+            </div>
+            </div>        <div class="clr"></div>
+      </div>
+    </div>
+ 
+  </div>
+   
+  
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>  
+ 

@@ -1,0 +1,96 @@
+html, body {
+	color:#222;
+	font-family:Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+	margin:0;
+	padding: 0;
+	text-decoration: none;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+	margin:0;
+	padding:0;
+}
+img {
+	border:0;
+}
+ol, ul {
+	list-style: none outside none;
+	margin:0;
+	padding: 0;
+}
+a {
+	color:#000000;
+	text-decoration: none;
+}
+.clr {
+	display:block;
+	clear:both;
+	height:0;
+	overflow:hidden;
+}
+.copyright{padding:8px 0;text-align:center;font-size:14px;color:#666; position:fixed; bottom:0; width:100%; z-index:3}
+.copyright a{color:#666;}
+/*cate15*/
+#cate15{background-color: #000000;overflow-x: hidden;}
+#cate15 .mainbg{
+	width:100%;
+	position:fixed;
+	z-index:1
+}
+#cate15 .mainbg img{
+	width:100%;
+}
+#cate15 .mainmenu{
+	z-index: 2;
+	color: #FFF;
+	position: fixed;
+	bottom: 60px;
+	width: 100%;
+}
+#cate15 .mainmenu ul {
+	display: block;
+}
+#cate15 .mainmenu li {
+	display: block;
+}
+
+#cate15 .mainmenu li a {
+	display: inline-block;
+	background:url(../../images/libg.png) no-repeat right center rgba(255, 255, 255, 0.6);
+	background-size: 14px 14px;
+	padding:8px 20px 8px 8px;
+	margin:0 3px 3px 0;
+	font-size:14px;
+	color:rgba(0, 0, 0, 0.6);
+	text-decoration: none;
+	border-radius:0 3px 3px 0;
+}
+#cate15 .mainmenu li:nth-child(2) a {
+	padding:8px 30px 8px 8px;
+}
+#cate15 .mainmenu li:nth-child(3) a {
+	padding:8px 40px 8px 8px;
+}
+#cate15 .mainmenu li:nth-child(4) a {
+	padding:8px 65px 8px 8px;
+}
+#cate15 .mainmenu li:nth-child(5) a {
+	padding:8px 50px 8px 8px;
+}
+#cate15 .mainmenu li:nth-child(6) a {
+	padding:8px 60px 8px 8px;
+}
+#cate15 .mainmenu li:nth-child(7) a {
+	padding:8px 40px 8px 8px;
+}
+#cate15 .mainmenu li:nth-child(8) a {
+	padding:8px 55px 8px 8px;
+}
+#cate15 .mainmenu li:nth-child(9) a {
+	padding:8px 45px 8px 8px;
+}
+#cate15 .mainmenu li:nth-child(10) a {
+	padding:8px 35px 8px 8px;
+}
+#cate15 .mainmenu li:nth-child(11) a {
+	padding:8px 40px 8px 8px;
+}

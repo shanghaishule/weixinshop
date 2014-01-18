@@ -1,0 +1,118 @@
+<include file="Public:head"/>  
+ <link rel="stylesheet" href="{lanrain::RES}/css/diymen/tipswindown.css" type="text/css" media="all" />
+<script type="text/javascript" src="{lanrain::RES}/css/diymen/tipswindown.js"></script> 
+
+<script type="text/javascript">
+ $(document).ready(function() {
+	
+	$("#iframe1").click(function(){
+		tipsWindown("添加菜单","iframe:{lanrain::C('site_url')}{lanrain::U('Diymen/class_add')}","460","600","true","","true","leotheme");
+	});
+ });
+ </script>
+
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none;" >
+
+<div class="cLineB">
+  <h4><span ><h1>注意：1级菜单最多只能开启3个，2级子菜单最多开启5个!</h1></span></h4>
+			  <button style="margin-top:-27px" class="ajax right btnGreen cboxElement" id="iframe1" title="添加主菜单">添加菜单</button>
+ </div>
+ <div class="cLineD">
+ 	<form enctype="multipart/form-data" action="" method="post"> 
+    AppId:<input type="text" size="20" tabindex="1" class="px" value="{lanrain:$diymen.appid}" id="appid" name="appid">　 
+	AppSecret: <input type="text" size="20" tabindex="1" class="px" value="{lanrain:$diymen.appsecret}" id="appsecret" name="appsecret">
+	<button class=" btnGrayS vm" value="true" name="appidsubmit" type="submit"><strong>保存</strong></button>
+	<br><span style="color:red">通过认证服务号才能得到这2个值!</span>
+</form>
+         </div>
+         
+ <div class="msgWrap form">
+       <form enctype="multipart/form-data" action="" method="post"><input type="hidden" value="" name="anchor">
+       
+		没内容      	  
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="ListProduct"> 
+<thead>
+<tr>
+	<th style=" width:60px;">显示顺序</th>
+	<th style=" width:220px;">主菜单名称</th>
+	<th style=" width:170px;">关联关键词</th>
+	<th>外链URL</th>
+	<th class="norightborder" style=" width:160px;">操作</th>
+</tr>
+</thead>
+   <tbody>
+  	<volist id="class" name="class">
+	<tr class="hover">
+        <td class="td25">
+			<span>{lanrain:$class.sort}</span>
+		</td>
+        <td>
+          <div>
+			<span>{lanrain:$class.title}</span>
+          </div>
+        </td>
+        <td><span>{lanrain:$class.keyword}</span></td>
+        <td><span><if condition="$class['url'] eq false">无链接地址<else/>{lanrain:$class.url}</if></span></td>
+        <td>
+			<a class="ajax btnGreen  cboxElement" href='javascript:tipsWindown("修改菜单","iframe:{lanrain::C('site_url')}{lanrain::U('Diymen/class_edit',array('id'=>$class['id']))}","460","600","true","","true","leotheme");' title="修改主菜单">修改</a>
+			<a class=" btnGreen " href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::C('site_url')}{lanrain::U('Diymen/class_del',array('id'=>$class['id']))}');">删除</a>
+		</td>				
+      </tr>
+	  <volist id="class1" name="class['class']">
+	  <tr class="td29">
+			<td class="td25" colspan="1">
+				<span>{lanrain:$class1.sort}</span>
+			</td>
+			<td colspan="1">
+			  <div class="board">
+				<span>{lanrain:$class1.title}</span>
+			  </div>
+			</td>
+			
+			<td colspan="1">
+				<span>{lanrain:$class1.keyword}</span>
+			</td>
+			 <td><span><if condition="$class1['url'] eq false">无链接地址<else/>{lanrain:$class1.url}</if></span></td>
+			<td colspan="1">
+			<a class="ajax btnGreen cboxElement" href='javascript:tipsWindown("修改菜单","iframe:{lanrain::C('site_url')}/{lanrain::U('Diymen/class_edit',array('id'=>$class1['id']))}","460","600","true","","true","leotheme");' title="修改主菜单">修改</a>
+			<a class=" btnGreen " href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::C('site_url')}/{lanrain::U('Diymen/class_del',array('id'=>$class1['id']))}');">删除</a></td>				
+	 </tr>	
+	</volist>
+	</volist>
+	<tr class="hover">
+        <td class="td25" colspan="5">
+		<if condition="$class neq false">
+		<a class="btnGreen " onclick="drop_confirm('自定义菜单最多勾选3个，每个菜单的子菜单最多5个，请确认!', '{lanrain::U('Diymen/class_send')}');" title="">生成自定义菜单</a>
+		</if>
+		<span style="float:left;" id="cdul">
+		<style>
+			#cdul{
+				float:left;
+				color:red;
+			}
+		</style>
+		注：<br>
+		(使用前提是已经拥有了自定义菜单的用户才能够使用，)<br>
+		第一步:必须先填写【AppId】【 AppSecret】！<br>
+		第二步:添加菜单，<br>
+		第三步:点击生成!<br>
+		注意：1级菜单最多只能开启3个，2级子菜单最多开启5个<br>
+		官方说明：修改后，需要重新关注，或者最迟隔天才会看到修改后的效果！<br>
+		</span>
+		</td>				
+      </tr>
+	      	  
+    </tbody>
+</table>
+</form>
+       <p>
+
+       </p>
+       <div class="clear"></div>
+      </div>
+  </div>
+         </div>
+        </dd>
+</dl>
+<include file="Public:footer"/>  
+ 

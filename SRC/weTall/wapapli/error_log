@@ -1,0 +1,2 @@
+[14-Jan-2014 21:43:49] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/bestchoi/public_html/weTall/wapapli/alipayapi.php:7) in /home/bestchoi/public_html/weTall/wapapli/DB.php on line 3
+[14-Jan-2014 21:43:49] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home/bestchoi/public_html/weTall/wapapli/alipay.config.php on line 28

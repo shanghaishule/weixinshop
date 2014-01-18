@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>add</title>
+		<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+			color:#333;
+		}
+		a{
+			text-decoration: none;
+		}
+		body{
+			width: 600px;
+			margin: 0 auto;
+		}
+		ul.list{
+			list-style: none;
+			padding:10px 5px;
+			border-left: 1px dashed #ccc;
+			background: ;
+		}
+		ul.list li{
+			padding: 8px;
+			border: 1px solid #ccc;
+			margin: 0 0 5px 0;
+			border-radius: 8px;
+		}
+		a.del{
+			border: 1px solid #ccc;
+			border-radius: 8px;
+			font-size: 12px;
+			padding: 5px;
+			text-align: center;
+		}
+		input.re{
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			line-height: 25px;
+			height: 25px;
+			background: #999;
+			display: block;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<form action="{lanrain::U('Liuyan/runAdd')}" method="post">
+		<input type="hidden" name="uid" value="{lanrain:$uid}" />
+		<input type="hidden" name="createtime" value="{lanrain:$createtime}" />
+		<input type="hidden" name="token" value="{lanrain:$token}" />
+		<input type="hidden" name="wecha_id" value="{lanrain:$wecha_id}" />
+		<div>
+			<ul class="list">
+				<li>用户名:<input type="text" name="title" /></li>
+				<li>内容：<textarea name="text" cols="30" rows="10"></textarea></li>
+				<li><input type="submit" value="发布" class="re" /></li>
+			</ul>
+		</div>
+	</form>
+</body>
+</html>

@@ -1,0 +1,78 @@
+body{background:#FFFFFF;padding:0;margin:0;font-family:Arial, Helvetica, sans-serif;font-size:12px;}
+ul,li,form{list-style-type:none;margin:0;padding:0;}
+img{border:0;-ms-interpolation-mode:bicubic;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+* html>body .clearfix{display:inline-block;width:100%}
+* html .clearfix{/* Hides from IE-mac \*/ height:1%;/* End hide from IE-mac */ }
+*+html .clearfix{min-height:1%}
+
+body{ background:url(http://bcs.duapp.com/yuntuchuang1/NnsTOVvEOS.jpg) top no-repeat;font-family:MicroSoft YaHei,simHei;}
+.main{ width:1024px; margin:0 auto; position:relative;}
+.main .top{ height:137px; background:url(../images/top2.png) no-repeat;}
+.main .top .k{padding:34px 0 0 600px;color:#fff;font-size:20px;font-weight:bold;}
+.main .wall{ height:631px;}
+.main .left{ float:left;width:67px; height:631px;background:url(../images/left.png) no-repeat;}
+.main .right{ float:right;width:67px; height:631px;background:url(../images/right.png) no-repeat;}
+.main .center{ float:left; width:890px; background:#FCF9F8;}
+.main .list{ height:569px; padding-left:4px; overflow:hidden;}
+.main .footer{height:5px;background:url(../images/footer.png) no-repeat;}
+.list li{ float:left; display:inline; margin:2px 0 6px; width:883px; background:#73AE1F url(../images/libg.png) repeat-y;display:none;}
+.list li .pic{ float:left; padding:30px 14px 0 13px;}
+.list li .pic img{ background:#E8E8E8; border:#4E9B86 1px solid; padding:3px; font-size:0;}
+.list li .c{ float:left; width:736px; color:#FFFFFF;}
+.list li .c span{ color:#C8FB80;}
+.list li .num{color:#fff;text-align:right;}
+.m1{float:left;width:883px;padding-bottom:13px;background:url(../images/m2.png) left bottom no-repeat;}
+.m2{float:left;width:883px;min-height:155px;padding-bottom:13px;background:url(../images/m1.png) left top no-repeat;}
+.f5{padding-top:10px;font-size:22px;line-height:1.5em;}
+.f4{padding-top:10px;font-size:26px;line-height:1.5em;}
+.f3{padding-top:12px;font-size:32px;line-height:1.6em;}
+.f2{padding-top:20px;font-size:40px;line-height:1.6em;}
+.f1{padding-top:36px;font-size:50px;line-height:1.6em;}
+
+#footer{ padding-top:10px; position:relative;}
+.left-bottom{}
+.logo-b{ display:block; width:156px; height:43px; background:url(../images/common/logo-b.png) 0 0 no-repeat;}
+.code-bottom{}
+.code-wrap{ display:inline-block; width:50px; height:50px; cursor:pointer; overflow:hidden;}
+.wntcbox{ line-height:24px; font-size:18px; margin-left:10px; text-shadow:1px 1px 1px rgba(0,0,0,.7);}
+.account-name{ display:block; color:#ffff00;}
+.btns{ padding-top:10px;}
+.btn-icon{ display:inline-block; width:35px; height:35px; background:url(http://bcs.duapp.com/yuntuchuang1/2Kwb7sNDnm.png) no-repeat; text-indent:-9999em; margin-right:10px;}
+.btn-func{ display:inline-block; width:34px; height:34px; background:url(http://bcs.duapp.com/yuntuchuang1/N0dy1J0aAA.png) no-repeat; text-indent:-9999em; margin-left:15px;}
+.btn-wifi{ background-position:-40px 0;}
+.btn-pair{ background-position:0 -160px;}
+.btn-lottery{ background-position:0 -120px;}
+.btn-setting{ background-position:0 -80px;}
+.btn-full{ background-position:0 -40px;}
+.btn-old{ background-position:0 0;}
+.btn-prev{ background-position:-50px 0;}
+.btn-begin{ background-position:-198px -40px;}
+.btn-pause{ background-position:-198px 0; opacity:0.8;}
+.btn-next{ background-position:-100px 0; opacity:0.8;}
+.btn-new{ background-position:-150px 0;}
+.btn-pair:hover{ background-position:-40px -160px;}
+.btn-lottery:hover{ background-position:-40px -120px;}
+.btn-setting:hover{ background-position:-40px -80px;}
+.btn-full:hover{ background-position:-40px -40px;}
+.btn-old:hover{ background-position:0 -40px;}
+.btn-prev:hover{ background-position:-50px -40px;}
+.btn-begin:hover{ opacity:1;}
+.btn-pause:hover{ opacity:1;}
+.btn-next:hover{ background-position:-100px -40px;}
+.btn-new:hover{ background-position:-150px -40px;}
+.btn-wifi-disable{ background-position:0 0;}
+.btn-pair-disable,.btn-pair-disable:hover{ background-position:-80px -160px;}
+.btn-lottery-disable,.btn-lottery-disable:hover{ background-position:-80px -120px;}
+.prodres-box{ width:50px; height:50px; position:absolute; right:102px; top:12px; z-index:-1;}
+
+#explan{width:892px;height:570px;background:#8FBE4C;position:absolute;top:136px;left:66px;}
+#explan p{color:#fff;font-size:42px;padding:100px 0 0 42px;line-height:1.8em;}
+
+.mone{width:883px;position:absolute;top:136px;left:71px;background:#73AE1F url(../images/libg.png) repeat-y;display:none;}
+.mone .pic{float:left;padding:30px 14px 0 13px;}
+.mone .pic img{background:#E8E8E8;border:#4E9B86 1px solid; padding:3px; font-size:0;}
+.mone .c{float:left;width:736px;color:#FFFFFF;}
+.mone .c span{color:#C8FB80;}
+.mone .m2{height:544px;}
+.mone .num{position:absolute;right:5px;bottom:0;color:#fff;}

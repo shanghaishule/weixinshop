@@ -1,0 +1,59 @@
+<include file="Public:head"/> 
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+        <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+<h4>“{lanrain:$thisForm.name}”信息列表 <if condition="$page">({lanrain:$page})</if> &nbsp;&nbsp;&nbsp;&nbsp;<a href="{lanrain::U('Selfform/index',array('token'=>$token))}">返回</a> </h4>
+
+<div class="searchbar right">
+<form method="post" action="">
+<input type="text" id="msgSearchInput" class="txt left" placeholder="输入关键词搜索" name="searchkey" value="">
+<input type="hidden" name="ac" value="hotels-list">
+<input type="hidden" name="id" value="9878">
+<input type="hidden" name="wxid" value="gh_423dwjkewad">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+</form>
+</div>
+<div class="clr"></div>
+</div>
+
+<div class="cLine">
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th width="40">ID</th>
+<th width="120">时间</th>
+<volist name="fields" id="item">
+<th>{lanrain:$item.displayname}</th>
+</volist>
+<th width="30" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="item"> 
+<tr>
+<volist name="item" id="citem">
+<td>{lanrain:$citem}</td>
+</volist>
+<td class="norightborder"><a href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::U('Selfform/infoDelete',array('id'=>$item['id'],'token'=>$token))}');">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lanrain:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

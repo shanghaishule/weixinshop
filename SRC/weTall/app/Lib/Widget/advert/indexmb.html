@@ -1,0 +1,9 @@
+<ul class="id_login">
+    <volist name="ad_list" id="ad">
+    <li class="clearfix">
+        <img src="__UPLOAD__/advert/{$ad.extimg}" class="fl">
+        <a href="{:U('advert/tgo', array('id'=>$ad['id']))}" target="_blank">{$ad.html}</a>
+        <a href="{:U('advert/tgo', array('id'=>$ad['id']))}" class="top_active_btn" target="_blank">{$ad.desc}</a>
+    </li>
+    </volist>
+</ul>

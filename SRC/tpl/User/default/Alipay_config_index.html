@@ -1,0 +1,47 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+<div class="cLineB">
+  <h4>支付宝配置 </h4>
+ </div>
+ <!--tab start-->
+
+<!--tab end-->        
+    <div class="msgWrap bgfc" style="margin-top:10px;">
+	  <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">	 
+	  
+		<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tbody>
+			<tr>
+					<th>支付开关：</th>
+					<td><select name="open"><option value="0" <if condition="$config.open eq 0">selected</if>>关闭支付</option><option value="1" <if condition="$config.open eq 1"> selected</if>>开启支付</option></select> 开启支付后，商城等b2c功能将有支付功能</td>
+				</tr>
+				<tr>
+					<th width="120">支付宝帐号：</th>
+					<td><input type="text" name="name" value="{lanrain:$config.name}" class="px" style="width:550px;"></td>
+				</tr>
+				<tr>
+					<th width="120">支付宝PID：</th>
+					<td><input type="text" name="pid" value="{lanrain:$config.pid}" class="px" style="width:550px;"></td>
+				</tr>
+				<tr>
+					<th>支付宝KEY：</th>
+					<td><input type="text" name="key" value="{lanrain:$config.key}" class="px" style="width:550px;"></td>
+				</tr>
+				
+				<th>&nbsp;</th>
+					<td>
+					<input type="hidden" name="token" value="{lanrain:$token}" />
+						<button type="submit" name="button" class="btnGreen">保存</button>
+						<a href="javascript:history.go(-1);" class="btnGray vm">取消</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+  </div> 
+ 
+  
+        </div>
+<include file="Public:footer"/>

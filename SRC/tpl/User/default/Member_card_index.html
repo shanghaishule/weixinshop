@@ -1,0 +1,299 @@
+<include file="Public:head"/>  
+<script src="{lanrain::RES}/js/cart/jscolor.js" type="text/javascript"></script>
+<style type="text/css">
+.vipcard{
+margin: 0 auto;
+position: relative;
+height: 159px;
+text-align: left;
+width: 267px;
+}
+#cardbg{
+height: 159px;
+width: 267px;
+position:absolute;
+border-radius: 8px;
+-webkit-border-radius:8px;
+-moz-border-radius:8px;
+box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+-moz-box-shadow:0 0 4px rgba(0, 0, 0, 0.6);
+-webkit-box-shadow:0 0 8px rgba(0, 0, 0, 0.6);
+top:0;
+left:0;
+z-index:1;
+}
+.vipcard .logo {
+max-height:70px;
+position:absolute;
+top:8px;
+left:5px;
+z-index:2;
+}
+.vipcard .verify {
+display:inline-block;
+height:40px;
+top:105px;
+right:12px;
+text-align:right;
+line-height:24px;
+color:#000;
+font-size:20px;
+text-shadow:0 1px rgba(255, 255, 255, 0.2);
+z-index:2;
+}
+
+.vipcard h1 {
+position:absolute;
+right:10px;
+top:7px;
+text-shadow:0 1px rgba(255, 255, 255, 0.2);
+color:#000;
+font-size:11px;
+line-height:25px;
+text-align:right;
+font-weight: normal;
+z-index:2;
+}
+.vipcard .verify span {
+display:inline-block;
+text-align:left;
+}
+.vipcard .verify em {
+display:block;
+line-height:13px;
+font-size:10px;
+font-weight:normal;
+font-style:normal;
+}
+.pdo {
+position:absolute;
+top:0;
+left:0;
+display:inline-block;
+}
+.userinfoArea td {
+    padding: 0px 0px 0px 10px;
+}
+#tishi{
+text-align: center;display: block;
+}
+.banner{
+display:block; width:213px;height: 278px;overflow: hidden;
+}
+.banner img{
+display:block; width:213px; border:0;
+}
+.bannerbtn{ position:relative; display:block}
+.bannerbtn .qiaodaobtn{ position: absolute; display:block; bottom:0}
+
+</style>
+  <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">
+        <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+          <div class="cLineB">
+         <h4>会员卡版面设置<span class="FAQ">开始DIY你的会员卡吧，logo、背景以及字体颜色都可以自由调整。</span></h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-25px">返回</a></div>  
+<div class="msgWrap bgfc" style="padding:10px;">
+ 
+<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+<tr>
+<th width="303" rowspan="5" valign="top">
+	<div class="vipcard">
+		<img id="cardbg" src="{lanrain:$card.diybg}">
+		<img id="cardlogo" class="logo" src="{lanrain:$card.logo}">
+		<h1 id="vipname" style="color:{lanrain:$card.vipnamecolor}">{lanrain:$card.cardname}会员卡</h1>
+		<strong class="pdo verify" id="number" style="color:{lanrain:$card.vipnamecolor}"><span><em>会员卡号</em>2188 5539</span></strong>
+	</div>
+</th>
+<td colspan="2">会员卡的名称：
+<input type="text" name="cardname" value="{lanrain:$card.cardname}" id="cardname" class="px" style="width:200px;" onkeyup="DivFollowingText()"> 
+<script type="text/javascript">
+function DivFollowingText()
+{
+document.getElementById("vipname").innerHTML=document.getElementById("cardname").value;
+}
+</script>
+颜色：
+<input type="text" name="vipnamecolor" id="vipnamecolor" value="{lanrain:$card.vipnamecolor}" class="px color" style="width: 55px; background-image: none; background-color:{lanrain:$card.vipnamecolor}; color: rgb(255, 255, 255);" onblur="document.getElementById(&#39;vipname&#39;).style.color=document.getElementById(&#39;vipnamecolor&#39;).value;">
+</td>
+</tr>
+
+<tr>
+<td colspan="2">会员卡的图标：
+<input type="text" name="logo" id="logo" value="{lanrain:$card.logo}" class="px" style="width:200px;"> 
+<input type="button" onclick="document.getElementById(&#39;cardlogo&#39;).src=document.getElementById(&#39;logo&#39;).value;" value="显示效果" class="btnGrayS"> 请填写你的logo外链地址</td>
+</tr>
+<tr>
+<td colspan="2">会员卡的背景：
+	<select name="bg" onchange="document.getElementById(&#39;cardbg&#39;).src=this.options[this.selectedIndex].value;" class="pt" style="width:210px;"> 
+	<option selected="">请选择会员卡背景图</option>
+		<?php 
+			for($i=1;$i<=23;$i++){
+				$i=$i<10?'0'.$i:$i;
+				$str='./tpl/User/default/common/images/card/card_bg'.$i.'.png';
+				if($card['bg']==$str){
+					echo $str='<option value="'.$str.'" selected="selected" >'.$i.'</option>';
+				}else{
+					echo $str='<option value="'.$str.'">'.$i.'</option>';
+				
+				}
+			}
+		?>
+		
+	</select>
+</td>
+</tr>
+<tr>
+<td colspan="2">自己设计背景：
+	<input type="text" name="diybg" id="bg" class="px" value="{lanrain:$card.diybg}" style="width:200px;"> 
+	<input type="button" onclick="document.getElementById(&#39;cardbg&#39;).src=document.getElementById(&#39;bg&#39;).value;" value="显示效果" class="btnGrayS"> 
+	请填写你的背景图外链地址
+</td>
+</tr>
+<tr>
+<td colspan="2">卡号文字颜色：
+<input type="text" name="numbercolor" id="numbercolor" value="{lanrain:$card.numbercolor}" class="px color" style="width: 55px; background-image: none; background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);" onblur="document.getElementById(&#39;number&#39;).style.color=document.getElementById(&#39;numbercolor&#39;).value;"> </td>
+</tr>
+<tr>
+<td><span id="tishi">微时代会员卡，方便携带收藏，永不挂失</span></td>
+<td colspan="2">首页提示文字：
+<input type="text" name="msg" value="{lanrain:$card.msg}" id="tishi2" class="px" style="width:287px;" onkeyup="DivFollowingText2()"> 请不要超过20个字。
+<script type="text/javascript">
+function DivFollowingText2()
+{
+document.getElementById("tishi").innerHTML=document.getElementById("tishi2").value;
+}
+</script></td>
+</tr>
+<tr>
+<th valign="top" height="40"></th>
+<td colspan="2"><span class="red">备注：Logo宽370px高170px，图案上下左右居中，背景图宽534px高318px，图片类型png。</span><a href="{lanrain::RES}/images/cart_info/template.rar" class="green">请下载模板</a></td>
+</tr>
+<tr>
+<th>&nbsp;</th>
+<td width="70">&nbsp;</td>
+<td><button type="submit" name="button" class="btnGreen">保存</button></td>
+</tr>
+</tbody>
+</table>
+  </div> 
+  
+<div class="cLineB">
+          	<h4>各内容页头部Benner图片设置<span class="FAQ">根据你企业的特色设计内容页头部图片，完全展示出不同的会员卡风格。</span></h4></div> 
+<div class="msgWrap bgfc" style="padding:15px 5px 10px 5px;">
+ 
+  	<table class="userinfoArea" style=" margin: 0;padding:0px;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+	 <tr>
+		<td align="center" valign="top">
+			<div class="banner">
+				<img src="{lanrain::RES}/images/cart_info/news-2.jpg">
+				<img id="news" src="{lanrain:$card.Lastmsg}">
+				<img src="{lanrain::RES}/images/cart_info/news-3.jpg">
+			</div>
+		</td>
+		<td align="center" valign="top">
+			<div class="banner">
+				<img src="{lanrain::RES}/images/cart_info/vippower-2.jpg">
+				<img id="vippower" src="{lanrain:$card.vip}">
+				<img src="{lanrain::RES}/images/cart_info/vippower-3.jpg"></div>
+		</td>
+		<td align="center" valign="top">
+			<div class="banner">
+				<img src="{lanrain::RES}/images/cart_info/qiandao-2.jpg">
+				<img id="qiandao" src="{lanrain:$card.qiandao}">
+				<div class="bannerbtn">
+					<img src="{lanrain::RES}/images/cart_info/qiandao-3.jpg">
+					<img class="qiaodaobtn" src="{lanrain::RES}/images/cart_info/qiandao-4.png">
+				</div>
+			</div>
+		</td>
+		<td align="center" valign="top">
+			<div class="banner">
+				<img src="{lanrain::RES}/images/cart_info/shopping-2.jpg">
+				<img id="shopping" src="{lanrain:$card.shopping}">
+				<img src="{lanrain::RES}/images/cart_info/shopping-3.jpg">
+			</div>
+		</td>
+	</tr>
+<tr>
+<td align="center">填写外链地址查看效果</td>
+<td align="center">填写外链地址查看效果</td>
+<td align="center">填写外链地址查看效果</td>
+<td align="center">填写外链地址查看效果</td>
+</tr>
+<tr>
+	<td align="center">
+		<textarea name="Lastmsg" class="px" id="news2" style="width:200px; height:36px" onblur="document.getElementById(&#39;news&#39;).src=document.getElementById(&#39;news2&#39;).value;">{lanrain:$card.Lastmsg}</textarea>
+	</td>
+	<td align="center">
+		<textarea name="vip" class="px" id="vippower2" style="width:200px; height:36px" onblur="document.getElementById(&#39;vippower&#39;).src=document.getElementById(&#39;vippower2&#39;).value;">{lanrain:$card.vip}</textarea>
+	</td>
+	<td align="center">
+		<textarea name="qiandao" class="px" id="qiandao2" style="width:200px; height:36px" onblur="document.getElementById(&#39;qiandao&#39;).src=document.getElementById(&#39;qiandao2&#39;).value;">{lanrain:$card.qiandao}</textarea>
+	</td>
+	<td align="center">
+		<textarea name="shopping" class="px" id="shopping2" style="width:200px; height:36px" onblur="document.getElementById(&#39;shopping&#39;).src=document.getElementById(&#39;shopping2&#39;).value;">{lanrain:$card.shopping}</textarea>
+	</td>
+ </tr>
+<tr>
+<td></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="center" valign="top">
+	<div class="banner">
+		<img src="{lanrain::RES}/images/cart_info/user-2.jpg">
+		<img id="user" src="{lanrain:$card.memberinfo}">
+		<img src="{lanrain::RES}/images/cart_info/user-3.jpg">
+	</div>
+</td>
+<td align="center" valign="top">
+	<div class="banner">
+		<img src="{lanrain::RES}/images/cart_info/info-2.jpg">
+		<img id="info" src="{lanrain:$card.membermsg}">
+		<img src="{lanrain::RES}/images/cart_info/info-3.jpg">
+	</div>
+</td>
+<td align="center" valign="top">
+	<div class="banner">
+		<img src="{lanrain::RES}/images/cart_info/addr-2.jpg">
+		<img id="addr" src="{lanrain:$card.contact}">
+		<img src="{lanrain::RES}/images/cart_info/addr-3.jpg">
+	</div>
+</td>
+<td align="center" valign="middle">
+	<span class="red">备注：图片宽640px高109px或者更高，但是不要高太多；图片类型为jpg，签到图片外与其他图片高度不同，尽量根据模板图片修改。</span>
+	<a href="{lanrain::RES}/images/card//template2.rar" class="green">请下载模板</a>
+</td>
+</tr>
+<tr>
+<td align="center">填写外链地址查看效果</td>
+<td align="center">填写外链地址查看效果</td>
+<td align="center">填写外链地址查看效果</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="center">
+	<textarea name="memberinfo" class="px" id="user2" style="width:200px; height:36px" onblur="document.getElementById(&#39;user&#39;).src=document.getElementById(&#39;user2&#39;).value;">{lanrain:$card.memberinfo}</textarea>
+</td>
+<td align="center">
+	<textarea name="membermsg" class="px" id="info2" style="width:200px; height:36px" onblur="document.getElementById(&#39;info&#39;).src=document.getElementById(&#39;info2&#39;).value;">{lanrain:$card.membermsg}</textarea>
+</td>
+<td align="center">
+	<textarea name="contact" class="px" id="addr2" style="width:200px; height:36px" onblur="document.getElementById(&#39;addr&#39;).src=document.getElementById(&#39;addr2&#39;).value;">{lanrain:$card.contact}</textarea>
+</td>
+<td><button type="submit" name="button" class="btnGreen">保存</button></td>
+</tr>
+</tbody>
+</table>
+  </div> 
+        </div>
+</form>
+        
+      
+        <div class="clr"></div>
+		<include file="Public:footer"/>
+      </div>
+    </div>
+  </div> 

@@ -1,0 +1,186 @@
+<include file="public:header" />
+<!--阿里妈妈筛选采集-->
+<div class="subnav">
+    <h1 class="title_2 line_x">{:L('tbk_item_collect')}<em class="red">({:L('collect_need_autouser')})</em></h1>
+</div>
+<div class="pad_lr_10" >
+    <form id="J_alimama_form" name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="table_form">
+        <tbody>
+            <tr>
+                <th width="150">{:L('tbk_item_cate')}：</th>
+                <td>
+                    <select class="J_tbcats mr10">
+                        <option value="0">--{:L('all')}--</option>
+                        <volist name="item_cate" id="cate">
+                        <option value="{$cate.cid}">{$cate.name}</option>
+                        </volist>
+                    </select>
+                    <input type="hidden" id="J_cid" name="cid" val="">
+                    <span class="gray ml10">{:L('tbk_item_cate_desc')}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>{:L('keyword')}：</th>
+                <td>
+                    <input name="keyword" type="text" class="input-text" size="40" />
+                    <span class="gray ml10">{:L('tbk_keyword_desc')}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>{:L('sort_order')}：</th>
+                <td>
+                    <select name="sort">
+                        <option value="default">{:L('sort_default')}</option>
+                        <option value="price_desc">{:L('price_desc')}</option>
+                        <option value="price_asc">{:L('price_asc')}</option>
+                        <option value="credit_desc">{:L('credit_desc')}</option>
+                        <option value="commissionRate_desc">{:L('commissionRate_desc')}</option>
+                        <option value="commissionRate_asc">{:L('commissionRate_asc')}</option>
+                        <option value="commissionNum_desc">{:L('commissionNum_desc')}</option>
+                        <option value="commissionNum_asc">{:L('commissionNum_asc')}</option>
+                        <option value="commissionVolume_desc">{:L('commissionVolume_desc')}</option>
+                        <option value="commissionVolume_asc">{:L('commissionVolume_asc')}</option>
+                        <option value="delistTime_desc">{:L('delistTime_desc')}</option>
+                        <option value="delistTime_asc">{:L('delistTime_asc')}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>{:L('tbk_item_price')}：</th>
+                <td>
+                    <input type="text" name="start_price" size="8" class="input-text" /> - 
+                    <input type="text" name="end_price" size="8" class="input-text" /> {:L('price_unit')} 
+                    <span class="gray ml10">{:L('tbk_item_price_desc')}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>{:L('tbk_item_commission_rate')}：</th>
+                <td>
+                    <input type="text" name="start_commissionRate" size="5" class="input-text" /> % - 
+                    <input type="text" name="end_commissionRate" size="5" class="input-text" /> % 
+                    <span class="gray ml10">{:L('tbk_item_commission_rate_desc')}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>{:L('tbk_item_commission_num')}：</th>
+                <td>
+                    <input type="text" name="start_commissionNum" size="8" class="input-text" /> - 
+                    <input type="text" name="end_commissionNum" size="8" class="input-text" /> 
+                    <span class="gray ml10">{:L('tbk_item_commission_num_desc')}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>{:L('tbk_item_volume')}：</th>
+                <td>
+                    <input type="text" name="start_totalnum" size="8" class="input-text" /> - 
+                    <input type="text" name="end_totalnum" size="8" class="input-text" />
+                    <span class="gray ml10">{:L('tbk_item_volume_desc')}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>{:L('tbk_seller_credit')}：</th>
+                <td>
+                    <select name="start_credit">
+                        <option value="1heart">{:L('n1')}{:L('heart')}</option>
+                        <option value="2heart">{:L('n2')}{:L('heart')}</option>
+                        <option value="3heart">{:L('n3')}{:L('heart')}</option>
+                        <option value="4heart">{:L('n4')}{:L('heart')}</option>
+                        <option value="5heart">{:L('n5')}{:L('heart')}</option>
+                        <option value="1diamond">{:L('n1')}{:L('diamond')}</option>
+                        <option value="2diamond">{:L('n2')}{:L('diamond')}</option>
+                        <option value="3diamond">{:L('n3')}{:L('diamond')}</option>
+                        <option value="4diamond">{:L('n4')}{:L('diamond')}</option>
+                        <option value="5diamond">{:L('n5')}{:L('diamond')}</option>
+                        <option value="1crown">{:L('n1')}{:L('crown')}</option>
+                        <option value="2crown">{:L('n2')}{:L('crown')}</option>
+                        <option value="3crown">{:L('n3')}{:L('crown')}</option>
+                        <option value="4crown">{:L('n4')}{:L('crown')}</option>
+                        <option value="5crown">{:L('n5')}{:L('crown')}</option>
+                        <option value="1goldencrown">{:L('n1')}{:L('goldencrown')}</option>
+                        <option value="2goldencrown">{:L('n2')}{:L('goldencrown')}</option>
+                        <option value="3goldencrown">{:L('n3')}{:L('goldencrown')}</option>
+                        <option value="4goldencrown">{:L('n4')}{:L('goldencrown')}</option>
+                        <option value="5goldencrown">{:L('n5')}{:L('goldencrown')}</option>
+                    </select>
+                     - 
+                    <select name="end_credit">
+                        <option value="1heart">{:L('n1')}{:L('heart')}</option>
+                        <option value="2heart">{:L('n2')}{:L('heart')}</option>
+                        <option value="3heart">{:L('n3')}{:L('heart')}</option>
+                        <option value="4heart">{:L('n4')}{:L('heart')}</option>
+                        <option value="5heart">{:L('n5')}{:L('heart')}</option>
+                        <option value="1diamond">{:L('n1')}{:L('diamond')}</option>
+                        <option value="2diamond">{:L('n2')}{:L('diamond')}</option>
+                        <option value="3diamond">{:L('n3')}{:L('diamond')}</option>
+                        <option value="4diamond">{:L('n4')}{:L('diamond')}</option>
+                        <option value="5diamond">{:L('n5')}{:L('diamond')}</option>
+                        <option value="1crown">{:L('n1')}{:L('crown')}</option>
+                        <option value="2crown">{:L('n2')}{:L('crown')}</option>
+                        <option value="3crown">{:L('n3')}{:L('crown')}</option>
+                        <option value="4crown">{:L('n4')}{:L('crown')}</option>
+                        <option value="5crown">{:L('n5')}{:L('crown')}</option>
+                        <option value="1goldencrown">{:L('n1')}{:L('goldencrown')}</option>
+                        <option value="2goldencrown">{:L('n2')}{:L('goldencrown')}</option>
+                        <option value="3goldencrown">{:L('n3')}{:L('goldencrown')}</option>
+                        <option value="4goldencrown">{:L('n4')}{:L('goldencrown')}</option>
+                        <option value="5goldencrown" selected>{:L('n5')}{:L('goldencrown')}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>{:L('tbk_more_where')}：</th>
+                <td>
+                    <label class="mr10"><input type="checkbox" name="mall_item" value="1"> {:L('only_tmall')}</label>
+                    <label class="mr10"><input type="checkbox" name="guarantee" value="1"> {:L('only_guarantee')}</label>
+                    <label class="mr10"><input type="checkbox" name="sevendays_return" value="1"> {:L('only_sevendays_return')}</label>
+                    <label class="mr10"><input type="checkbox" name="real_describe" value="1"> {:L('only_real_describe')}</label>
+                    <label class="mr10"><input type="checkbox" name="cash_coupon" value="1"> {:L('only_cash_coupon')}</label>
+                </td>
+            </tr>
+            <tr>
+                <th>{:L('item_like_init')}：</th>
+                <td>
+                    <select name="like_init">
+                        <option value="0">{:L('item_like_default')}</option>
+                        <option value="volume">{:L('tbk_item_volume')}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="collect_alimama" />
+                    <input type="hidden" name="a" value="search" />
+                    <input type="submit" name="search" class="btn btn_submit mr10" value="{:L('search_filter')}" />
+                    <input type="button" name="import" class="J_showdialog btn" value="{:L('import_db')}" data-uri="{:U('collect_alimama/batch_publish')}" data-id="batch_publish" data-title="{:L('import_db')}" data-width="450" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+</div>
+<include file="public:footer" />
+<script>
+$(function(){
+    var uri = "{:U('collect_alimama/ajax_get_tbcats')}";
+    $('.J_tbcats').die('change').live('change', function(){
+        var _this = $(this),
+            _cid = _this.val();
+        _this.nextAll('.J_tbcats').remove();
+        $.getJSON(uri, {cid:_cid}, function(result){
+            if(result.status == '1'){
+                var _childs = $('<select class="J_tbcats mr10"><option value="0">--'+lang.all+'--</option></select>')
+                for(var i=0; i<result.data.length; i++){
+                    $('<option value="'+result.data[i].cid+'">'+result.data[i].name+'</option>').appendTo(_childs);
+                }
+                _childs.insertAfter(_this);
+            }
+        });
+        $('#J_cid').val(_cid);
+    });
+});
+</script>
+</body>
+</html>

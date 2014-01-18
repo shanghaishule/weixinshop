@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lanrain:$tpl.wxname}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="{lanrain::RES}/css/yl/news.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{lanrain::RES}/css/flash/css/plugmenu.css">
+</head>
+<script>
+window.onload = function ()
+{
+var oWin = document.getElementById("win");
+var oLay = document.getElementById("overlay");	
+var oBtn = document.getElementById("popmenu");
+var oClose = document.getElementById("close");
+oBtn.onclick = function ()
+{
+oLay.style.display = "block";
+oWin.style.display = "block"	
+};
+oLay.onclick = function ()
+{
+oLay.style.display = "none";
+oWin.style.display = "none"	
+}
+};
+</script>
+<body id="listhome1">
+<div id="ui-header">
+<div class="fixed">
+<a class="ui-title" id="popmenu">选择分类</a>
+<a class="ui-btn-left_pre" href="javascript:history.go(-1)"></a>
+<a class="ui-btn-right" href="{lanrain::U('Index/index',array('token'=>$tpl['token']))}"></a>
+</div>
+</div>
+<div id="overlay"></div>
+<div id="win">
+<ul class="dropdown"> 
+<volist name="info" id="vo">
+<li><a href="<if condition="$vo['url'] eq ''">{lanrain::U('Wap/Index/lists',array('classid'=>$vo['id'],'token'=>$vo['token']))}<else/>{lanrain:$vo.url|htmlspecialchars_decode}</if>"><span>{lanrain:$vo.name}</span></a></li>
+</volist> 	
+<div class="clr"></div>
+</ul>
+</div>
+<div class="Listpage">
+<div class="top46"></div>
+    <div id="todayList">
+<ul  class="todayList">
+   <volist name="res" id="so">   
+<li>
+<if condition="$so['url']">
+<a href="{lanrain:$so.url}">
+<else />
+<a href="{lanrain::U('Index/content',array('id'=>$so['id'],'token'=>$so['token']))}">
+</if>
+<div class="img"><eq name="so.showpic" value="1"><img src="{lanrain:$so.pic}"></eq></div>
+<h2>{lanrain:$so.title}</h2>
+<p class="onlyheight">{lanrain:$so.text}</p>
+<div class="commentNum"></div>
+</a>
+</li>
+ </volist>
+
+</ul>
+</div>
+<section id="Page_wrapper">
+<div id="pNavDemo" class="c-pnav-con">
+<section class="c-p-sec">
+<div class='c-p-pre <eq name="p" value="1"> c-p-grey </eq> '><span class="c-p-p"><em></em></span><a <eq name="p" value="1"><else/>href="{lanrain::C('site_url')}/index.php?g=Wap&m=Index&a=lists&classid=<php>echo $_GET['classid'];</php>&token={lanrain:$tpl.token}&p=<php>echo $p-1;</php>"</eq>  >上一页</a></div>
+<div class="c-p-cur">
+<div class="c-p-arrow c-p-down"><span>{lanrain:$p}/{lanrain:$page}</span><span></span></div>
+	<select class="c-p-select" onchange="dourl('{lanrain::C('site_url')}/index.php?g=Wap&m=Index&a=lists&classid=<php>echo $_GET['classid'];</php>&token={lanrain:$tpl.token}&p='+this.value)">
+		<?php
+			for($i=1;$i<=$page;$i++){
+				if($i==$p){
+					echo '<option value="'.$i.'" selected>第'.$i.'页</option>';
+				}else{
+					echo '<option value="'.$i.'">第'.$i.'页</option>';
+				}
+			}
+		?>
+	</select>
+</div>
+<div class='c-p-next <eq name="p" value="$page"> c-p-grey </eq>'  >
+
+<?php
+	if($p<$page){
+		echo '<a href="'.C('site_url').'/index.php?g=Wap&m=Index&a=lists&classid='.(int)$_GET['classid'].'&token='.$tpl['token'].'&p='.($p+1).'">';
+	}else{
+		echo '<a>';
+	}
+?>
+下一页</a><span class="c-p-p"><em></em></span></div>
+</section>
+</div>
+</section>
+</div>
+<script>
+function dourl(url){
+location.href= url;
+}
+</script>
+<div style="display:none"> </div>
+<div style="display:none">{lanrain:$tpl.tongji|htmlspecialchars_decode}</div>
+<if condition="$showPlugMenu">
+<div class="plug-div">
+        <div class="plug-phone">
+            <div class="plug-menu themeStyle" style="background:{lanrain:$homeInfo.plugmenucolor}"><span class="close"></span></div> 
+               <volist name="plugmenus" id="vo">
+                        <div class="themeStyle plug-btn plug-btn{lanrain:$i} close" style="background:{lanrain:$homeInfo.plugmenucolor}">
+							<a  href="{lanrain:$vo.url}">
+								<span style="background-image: url({lanrain::RES}/css/flash/images/img/{lanrain:$vo.name}.png);" ></span>
+							</a>
+						</div>
+                      </volist>   
+<div class="plug-btn plug-btn5 close"></div>
+                    </div>
+</div>
+</if>
+<script src="{lanrain::RES}/css/flash/js/zepto.min.js" type="text/javascript"></script>
+<script src="{lanrain::RES}/css/flash/js/plugmenu.js" type="text/javascript"></script>
+  <div class="copyright">
+<if condition="$iscopyright eq 1">
+{lanrain:$homeInfo.copyright}
+<else/>
+{lanrain:$siteCopyright}
+</if>
+</div> 
+</body>
+</html>

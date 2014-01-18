@@ -1,0 +1,110 @@
+<include file="Public:head"/>  
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB">
+              <h4 class="left">砸蛋活动信息 ({lanrain:$count}) 条<span class="FAQ">你本月有 {lanrain:$group.activitynum} 次机会可免收活动创建费，已经使用了 {lanrain:$activitynum} 次机会!</span></h4>
+                 
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator left">
+  <a href='{lanrain::U('Zadan/add',array('token'=>$token))}' title='新增砸金蛋活动' class='btnGrayS vm bigbtn'><img src="{lanrain::RES}/images/img/activity-scratch-card.png" class="vm" />新增砸金蛋活动</a>
+              
+            </div>
+          
+            <div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post"  action="" id="info" >
+          <input name="delall"  type="hidden" value="" />
+           <input name="wxid"  type="hidden" value="" />
+            <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <THEAD>
+                <TR>
+<TH class="select">选择</TH>
+<TH>活动名称</TH>
+<TH>关键字</TH>
+<TH>有效参与人数</TH>
+<TH>总浏览数</TH>
+<TH>开始时间/结束时间</TH>
+<TH>状态</TH>
+<TH>外链代码</TH>
+<TH class="norightborder">操作</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+                <TR></TR>
+                  <volist id="list" name="list">
+                <TR>
+                  <TD><input type="checkbox" name='del_id[]' value="842" class="checkitem"></TD>
+                  <TD>{lanrain:$list.title}</TD>
+                  <TD>{lanrain:$list.keyword}</TD> 
+				  <TD>{lanrain:$list.joinnum}</TD>
+                  <TD>{lanrain:$list.click}</TD>                  
+                  <TD>{lanrain:$list.statdate|date='Y-m-d',###}<br />{lanrain:$list.enddate|date='Y-m-d',###}</TD>
+                  <TD>
+				  <if condition="$list['status'] eq 0">未开始<elseif condition="$list['status'] eq 2"/>已经结束<else/>已经开始</if>
+				  
+				 </TD>
+                  <TD>砸金蛋 {lanrain:$list.id}</TD>
+                   <TD class="norightborder">
+				   <a href="index.php?g=User&m=Zadan&a=sn&id={lanrain:$list.id}&type=2">SN码管理</a> 
+				   <a href="index.php?g=User&m=Zadan&a=edit&id={lanrain:$list.id}">编辑</a>  
+				   <a href="
+				   <if condition="$list['status'] eq 1">				   
+				   javascript:drop_confirm('你确定要结束活动吗，结束后不可再开启本活动!', 'index.php?g=User&m=Zadan&a=setdes&id={lanrain:$list.id}');<else/>index.php?g=User&m=Zadan&a=setinc&id={lanrain:$list.id}   
+				   </if>">
+				   <if condition="$list['status'] eq 0">开始<elseif condition="$list['status'] eq 2"/><else/>结束</if>				   
+				   </a>
+				  
+				   <a href="index.php?g=User&m=Zadan&a=del&id={lanrain:$list.id}">删除</a></TD>
+                </TR>
+				</volist>
+              </TBODY>
+            </TABLE>
+           </form> 
+           <script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script>
+          </div>
+            
+ 
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages"></div>
+              </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+function checkAll(form, name) {
+for(var i = 0; i < form.elements.length; i++) {
+var e = form.elements[i];
+if(e.name.match(name)) {
+e.checked = form.elements['chkall'].checked;
+}
+}
+}</script>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>

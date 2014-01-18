@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>权限管理</title>
+<include file="common:public" />
+<div class="cr"></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="alist">
+	  <tr>
+		<td width="70">ID</td>
+		<td width="150">用户组名称</td>
+		<td width="150">价格</td>
+		<td >自义定图文条数</td>
+		<td width="100">请求次数</td>
+		<td width="150">是否显示版权</td>
+		<td width="150">活动创建次数</td>
+		<td width="70">状态</td>
+		<td width="100">管理操作</td>
+	  </tr>
+	    <volist name="list" id="vo">
+			<tr>
+				<td align='center'>{lanrain:$vo.id}</td>
+				<td >{lanrain:$vo.name}</td>
+				<td >{lanrain:$vo['price']}</td>
+				<td >{lanrain:$vo.diynum}</td>
+				<td align='center'>{lanrain:$vo.connectnum}</td>
+				<td align='center'><if condition="$vo['iscopyright'] eq 1">是<else/>否</if></td>
+				<td align='center'>{lanrain:$vo.activitynum}</td>
+				<td align='center'><eq name="vo.status" value="1"><font color="red">√</font><else/><font color="blue">×</font></eq> 
+				</td>
+				<td align='center'>
+					<a href="{lanrain::U('User_group/edit/',array('id'=>$vo['id']))}">修改</a>
+					| <eq name="vo.username" value="admin"><font color="#cccccc">删除</font><else/><a href="javascript:void(0)" onclick="return confirmurl('{lanrain::U('User_group/del/',array('id'=>$vo['id']))}','确定删除该用户吗?')">删除</a></eq>
+				</td>
+			</tr>
+	    </volist>
+     <tr bgcolor="#FFFFFF"> 
+      <td colspan="8"><div class="listpage">{lanrain:$page}</div></td>
+	  <td></td>
+    </tr>
+   
+</table>
+
+<div class="bottom">
+<span><b>选择：</b><a href="#">全选</a> <a href="#">反选</a> <a href="#">不选</a></span>
+<span><b>属性设定：</b><select><option value="">正常</option></select></span>
+<span><b>取消属性：</b><select><option value="">推荐</option></select></span>
+<span><b>批量转移：</b> 由 <select><option value="">栏目名称</option></select> 移动到 <select><option value="">栏目名称2</option></select></span>
+</div>
+
+</body>
+</html>

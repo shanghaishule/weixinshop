@@ -1,0 +1,79 @@
+<include file="Index:header"/>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB"><h4>添加微信公众号</h4></div>
+          <form method="post" action="{lanrain::U('User/Index/insert')}" enctype="multipart/form-data">
+          <div class="msgWrap">
+            <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+                  <th><span class="red">*</span>公众号名称：</th>
+                  <td><input type="text" required="" class="px" name="wxname" value="" tabindex="1" size="25">
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th><span class="red">*</span>公众号原始id：</th>
+                  <td><input type="text" required="" name="wxid" value="" onmouseup="this.value=this.value.replace('_430','')" class="px" tabindex="1" size="25">　<span class="red">请认真填写，错了不能修改。</span>比如：gh_423dwjkeww3 <a href="http://jingyan.baidu.com/article/63f23628eb6b490209ab3d6b.html" target="_blank"><img src="{lanrain::RES}/images/help.png" class="vm helpimg" title="帮助"></a></td>
+                </tr>
+                <tr>
+                  <th><span class="red">*</span>微信号：</th>
+                  <td><input type="text" required="" name="weixin" value="" class="px" tabindex="1" size="25">　比如：lanrain </td>
+                </tr>
+                  <tr style="display:none">
+                  <th><span class="red">*</span>头像地址（url）:</th>
+                  <td><input class="px" name="headerpic" value="{lanrain::RES}/images/portrait.jpg" size="60">请填写图片外链地址 <a onclick="alert('请填写以jpg,png,gif,bmp等后缀的图文')" target="_blank"><img src="{lanrain::RES}/images/help.png" class="vm helpimg" title="帮助"></a></td>
+                </tr>
+                 <tr style="display:none">
+                  <th><span class="red">*</span>TOKEN</th>
+                  <td><input type="text" name="token" value="{lanrain:$tokenvalue}" class="px" tabindex="1" size="40">(填写你的公众号)例：lanrainweixin,请勿填写文,或者其它特殊字符，此处token和腾讯平台必须一致!</td>
+                </tr>
+                
+                <tr>
+                  <th><span class="red">*</span>地区</th>
+                  <td>
+                  <input type="text" class="px" id="province" value="{lanrain:$province}" name="province" tabindex="1" size="20"> 省  <input id="city" value="{lanrain:$city}" type="text" name="city" class="px" tabindex="1" size="20"> 市
+               （此处关联公交等本地化查询）
+                  </td>
+                </tr>
+                <tr style="display:none">
+                  <th><span class="red">*</span>公众号邮箱：</th>
+                  <td><input type="text" required="" class="px" tabindex="1" value="{lanrain:$email}" name="qq" size="25"></td>
+                </tr>
+                 <tr style="display:none">
+                  <th><span class="red">*</span>粉丝数：</th>
+                  <td><input type="text" required="" name="wxfans" value="0" class="px" tabindex="1" size="25"></td>
+                </tr>
+             
+                <tr>
+                  <th>类型：</th>
+                  <td><select id="type" name="type">                  
+                  <option value="1,情感">情感</option>
+                  <option value="2,数码">数码</option>
+                  <option value="3,娱乐">娱乐</option>
+                  <option value="4,IT">IT</option>
+                  <option value="5,数码">数码</option>
+                  <option value="6,购物">购物</option>
+                  <option value="7,生活">生活</option>
+                  <option value="8,服务">服务</option>
+                  </select></td>
+                </tr>
+              
+                <tr>
+                  <th></th>
+                  <td><button type="submit" class="btnGreen" id="saveSetting">保存</button></td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+          </form>
+        </div>
+        
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>	

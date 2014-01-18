@@ -1,0 +1,243 @@
+<include file="Public:head"/>
+<style type="text/css">
+.plug-menu {
+width:36px;
+height:36px;
+border-radius:36px;
+-moz-box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);
+-webkit-box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);
+box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);
+background-color: FF0000;
+position:relative
+}
+.plug-menu span {
+display: block;
+width:28px;
+height:28px;
+background: url(tpl/User/default/common/images/photo/plugmenu.png) no-repeat;
+background-size: 28px 28px;
+text-indent: -999px;
+position:absolute;
+top:4px;
+left:4px;
+overflow: hidden;
+}
+</style>
+<script src="./tpl/User/default/common/js/cart/jscolor.js" type="text/javascript"></script>
+<form method="post" action="" enctype="multipart/form-data">
+ <input type="hidden" name="formhash" id="formhash" value="a68de075">
+ 
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+<div class="cLineB">
+  <h4>快捷菜单 <span class="FAQ">提供一键拨号，一键导航，一键email等等快捷功能</span></h4>
+  
+ </div>
+ <div class="msgWrap bgfc" style="padding: 5px 20px;">
+ 	<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+<tbody>
+<tr>
+<td width="60"><div class="plug-menu" id="plugmenucolor" style="background-color:{lanrain:$homeInfo.plugmenucolor}"><span class="close"></span></div></td>
+<td width="140"><strong>请选择快捷菜单的颜色：</strong></td>
+<td width="95"><input type="text" name="plugmenucolor" id="themeStyle" value="{lanrain:$homeInfo.plugmenucolor}" class="px color" style="width: 55px; background-image: none; background-color:{lanrain:$homeInfo.plugmenucolor}; color: rgb(255, 255, 255);" onblur="document.getElementById('plugmenucolor').style.backgroundColor=document.getElementById('themeStyle').value;"></td>
+<td width="536">请在手机上查看效果！</td>
+
+</tr>
+<if condition="$userGroup.iscopyright eq 1">
+                    <tr>
+<td width="60"> </td>
+<td><strong>设置页面版权：</strong></td>
+ 
+<td colspan="2"><textarea class="px" style="width:550px; height:35px" name="copyright">{lanrain:$homeInfo.copyright}</textarea><br>例如：© 2001-2013 某某版权所有 </td>
+
+</tr>
+</if>
+</tbody>
+</table>
+ </div>
+         
+ 
+ <div class="msgWrap form">
+         
+<div class="bdrcontent">
+<div id="div_ptype">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th style=" width:40px;">图标</th>
+                    <th style=" width:80px;">名称</th>
+<th style=" width:270px;"><span class="tooltips">外链网站或活动 <img src="{lanrain::RES}/images/price_help.png" align="absmiddle"><span>
+<p>比如你想跳转到百度，就填写<a class="red">http://www.baidu.com</a></p>
+<p>不需要跳转就不用填写，还可以外链活动，</p>
+<p>直接填写活动外链地址：<a class="red">大转盘 888</a></p>
+</span></span></th>
+<th style=" width:70px;">显示顺序</th>
+<th>显示(<span class="red">只显示勾选的前4项</span>) </th>
+                        </tr>
+</thead>
+                    
+<tbody><tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu1.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>电话</td>
+<td><input class="px" type="text" style="width:250px;" name="url_tel" value="<php>echo $menus['tel']['url'];</php>"></td>
+<td><input type="text" name="sort_tel" value="<php>echo $menus['tel']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_tel" value="1" <php>if($menus['tel']['display']){echo 'checked';}</php> /> 默认为商家电话，可以输入电话号码，比如：13888888888</td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu2.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>会员资料</td>
+<td><input class="px" type="text" style="width:250px;" name="url_memberinfo" value="<php>echo $menus['memberinfo']['url'];</php>"></td>
+<td><input type="text" name="sort_memberinfo" value="<php>echo $menus['memberinfo']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_memberinfo" value="1" <php>if($menus['memberinfo']['display']){echo 'checked';}</php> /> 默认为会员卡资料，可以填写外链</td></tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu3.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>导航</td>
+<td><input class="px" type="text" style="width:250px;" name="url_nav" value="<php>echo $menus['nav']['url'];</php>"></td>
+<td><input type="text" name="sort_nav" value="<php>echo $menus['nav']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_nav" value="1" <php>if($menus['nav']['display']){echo 'checked';}</php> /> 默认为商家地图</td></tr>
+
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu5.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>分享</td>
+<td><input class="px" type="text" style="width:250px;" name="url_share" value="<php>echo $menus['share']['url'];</php>"></td>
+<td><input type="text" name="sort_share" value="<php>echo $menus['share']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_share" value="1" <php>if($menus['share']['display']){echo 'checked';}</php> /> </td></tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu6.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>首页</td>
+<td><input class="px" type="text" style="width:250px;" name="url_home" value="<php>echo $menus['home']['url'];</php>"></td>
+<td><input type="text" name="sort_home" value="<php>echo $menus['home']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_home" value="1" <php>if($menus['home']['display']){echo 'checked';}</php> /> 默认为首页</td></tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu7.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>相册</td>
+<td><input class="px" type="text" style="width:250px;" name="url_album" value="<php>echo $menus['album']['url'];</php>"></td>
+<td><input type="text" name="sort_album" value="<php>echo $menus['album']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_album" value="1" <php>if($menus['album']['display']){echo 'checked';}</php> /> 默认为3g相册</td></tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu8.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>邮箱</td>
+<td><input class="px" type="text" style="width:250px;" name="url_email" value="<php>echo $menus['email']['url'];</php>"></td>
+<td><input type="text" name="sort_email" value="<php>echo $menus['email']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_email" value="1" <php>if($menus['email']['display']){echo 'checked';}</php> /> 请填写邮箱地址</td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu9.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>购物</td>
+<td><input class="px" type="text" style="width:250px;" name="url_shopping" value="<php>echo $menus['shopping']['url'];</php>"></td>
+<td><input type="text" name="sort_shopping" value="<php>echo $menus['shopping']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_shopping" value="1" <php>if($menus['shopping']['display']){echo 'checked';}</php> /> 默认为微商城</td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu10.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>会员卡</td>
+<td><input class="px" type="text" style="width:250px;" name="url_membercard" value="<php>echo $menus['membercard']['url'];</php>"></td>
+<td><input type="text" name="sort_membercard" value="<php>echo $menus['membercard']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_membercard" value="1" <php>if($menus['membercard']['display']){echo 'checked';}</php> /> 默认为会员卡</td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu11.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>活动</td>
+<td><input class="px" type="text" style="width:250px;" name="url_activity" value="<php>echo $menus['activity']['url'];</php>"></td>
+<td><input type="text" name="sort_activity" value="<php>echo $menus['activity']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_activity" value="1" <php>if($menus['activity']['display']){echo 'checked';}</php> /> 请填写活动外链代码</td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu12.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>新浪微博</td>
+<td><input class="px" type="text" style="width:250px;" name="url_weibo" value="<php>echo $menus['weibo']['url'];</php>"></td>
+<td><input type="text" name="sort_weibo" value="<php>echo $menus['weibo']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_weibo" value="1" <php>if($menus['weibo']['display']){echo 'checked';}</php> /> 请填写微博地址</td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu13.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>腾讯微博</td>
+<td><input class="px" type="text" style="width:250px;" name="url_tencentweibo" value="<php>echo $menus['tencentweibo']['url'];</php>"></td>
+<td><input type="text" name="sort_tencentweibo" value="<php>echo $menus['tencentweibo']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_tencentweibo" value="1" <php>if($menus['tencentweibo']['display']){echo 'checked';}</php> /> 请填写微博地址</td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu14.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>腾讯空间</td>
+<td><input class="px" type="text" style="width:250px;" name="url_qqzone" value="<php>echo $menus['qqzone']['url'];</php>"></td>
+<td><input type="text" name="sort_qqzone" value="<php>echo $menus['qqzone']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_qqzone" value="1" <php>if($menus['qqzone']['display']){echo 'checked';}</php> /> 请填写空间地址</td>
+</tr>
+<tr style="display:none">
+<td><img src="tpl/User/default/common/images/photo/plugmenu15.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>微信</td>
+<td><input class="px" type="text" style="width:250px;" name="url_wechat" value="<php>echo $menus['wechat']['url'];</php>"></td>
+<td><input type="text" name="sort_wechat" value="<php>echo $menus['wechat']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_wechat" value="1" <php>if($menus['wechat']['display']){echo 'checked';}</php> /> 默认为您的微信号</td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu16.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>音乐</td>
+<td><input class="px" type="text" style="width:250px;" name="url_music" value="<php>echo $menus['music']['url'];</php>"></td>
+<td><input type="text" name="sort_music" value="<php>echo $menus['music']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_music" value="1" <php>if($menus['music']['display']){echo 'checked';}</php> /> 请填写音乐地址</td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu17.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>视频</td>
+<td><input class="px" type="text" style="width:250px;" name="url_video" value="<php>echo $menus['video']['url'];</php>"></td>
+<td><input type="text" name="sort_video" value="<php>echo $menus['video']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_video" value="1" <php>if($menus['video']['display']){echo 'checked';}</php> /> 请填写视频地址</td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu18.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>推荐</td>
+<td><input class="px" type="text" style="width:250px;" name="url_recommend" value="<php>echo $menus['recommend']['url'];</php>"></td>
+<td><input type="text" name="sort_recommend" value="<php>echo $menus['recommend']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_recommend" value="1" <php>if($menus['recommend']['display']){echo 'checked';}</php> /></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu19.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>其他</td>
+<td><input class="px" type="text" style="width:250px;" name="url_other" value="<php>echo $menus['other']['url'];</php>"></td>
+<td><input type="text" name="sort_other" value="<php>echo $menus['other']['taxis'];</php>" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display_other" value="1" <php>if($menus['other']['display']){echo 'checked';}</php> /></td>
+</tr>
+             
+                 <tr>
+                 	<td class="norightborder">&nbsp;</td>
+                 	<td colspan="4" class="norightborder">
+                 		<button type="submit" name="batchsubmit" value="true" class="btnGreen vm"><strong>保存</strong></button></td>
+                 	</tr>
+  </tbody></table>
+</div>
+</div>
+
+
+
+     <script>
+
+$(document).ready(function(){
+ 
+ 
+  $(".checkbox").click(function(){
+var i=0; 
+ 
+  $("input:checked").each(function(){
+  
+ 
+    i++;
+  
+  });
+ if(i>4){
+ alert('最多只显示四项');
+ }
+});
+
+});
+
+
+
+</script>
+
+ 
+   
+          </div>
+  
+        </div></form>
+		  <include file="Public:footer"/>

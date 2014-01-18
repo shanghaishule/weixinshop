@@ -1,0 +1,109 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>{lanrain:$adma.title} 二维码宣传页 by {lanrain:$adma.copyright}</title>
+<meta name="keywords" content="LANRAIN 微信帮手 微信公众账号 微信公众平台 微信公众账号开发 微信二次开发 微信接口开发 微信托管服务 微信营销 微信公众平台接口开发"/>
+<meta name="description" content="微信公众平台接口开发、托管、营销活动、二次开发"/>
+<style type="text/css">
+.yulan {
+background: url(/tpl/User/default/common/images/adma/erweimabg.png) repeat scroll 0 0 #4E5359;
+color: #666666;
+font: 14px/1.5 Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+margin: 0;
+padding: 0;
+color: #666666;
+}
+* {
+padding: 0;
+margin: 0;
+border: none;
+}
+.userinfoArea th {
+width: 100px;
+}
+.clr{
+clear:both;
+}
+.yulan {
+    background: url(/tpl/User/default/common/images/adma/erweimabg.png) repeat scroll 0 0 #4E5359;
+    color: #666666;
+    font:14px/1.5  Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+    margin: 0;
+    padding: 0;
+color: #666666;
+}
+.yulan .main{ margin:0 auto; }
+.yulan h1{ font-size:26px; color:#f5f5f5; font-weight:normal; text-align: center; margin:35px 0 25px 0; text-shadow:0 1px 3px #111111;}
+.yulan .erweima{height: 301px;
+    margin: 0 auto;
+    width: 301px;}
+.yulan .erweima img{border: medium none;
+-moz-box-shadow: 0 4px 3px 2px #333333;
+-webkit-box-shadow: 0 4px 3px 2px #333333;
+    box-shadow: 0 4px 3px 2px #333333;
+-webkit-border-radius:6px;
+-moz-border-radius:6px;
+border-radius:6px;
+    width: 100%;}
+.yulan .beizhu{ margin:15px auto 5px;text-align: center;}
+.yulan .beizhu p{ line-height: 48px;}
+.yulan .beizhubg{color: #B4B7BC;background: url(/tpl/User/default/common/images/adma/erweima_bg2.png) repeat-x scroll 0 0 transparent;
+    font-size: 12px;
+    height: 48px;
+    margin: 10px auto;
+    width: 230px;text-shadow: 0 -1px 0 #111112;
+line-height: 48px;display: inline-block;position: relative;}
+.yulan .beizhuleft{background: url(/tpl/User/default/common/images/adma/erweima_bg2_left.png) no-repeat scroll 0 0 transparent;
+    display: block;
+    float: left;
+    height: 48px;
+    margin-left: -26px;
+    width: 26px;}
+.yulan .beizhuright{ background: url(/tpl/User/default/common/images/adma/erweima_bg2_right.png) no-repeat scroll 0 0 transparent;
+    display: block;
+    float: right;
+    height: 48px;
+    margin-right: -26px;
+    width: 26px;}
+.yulan .content{color: #B4B7BC; font-size:14px;padding:5px;width:300px; margin:0 auto;text-shadow: 0 -1px 0 #111112;
+float:none; background-color:transparent;min-height:40px;border:0;
+}
+.yulan .footer {
+background: url(/tpl/User/default/common/images/adma/erweimabg.png) repeat scroll 0 0  transparent;
+    color: #AAAAAA;
+    margin:20px auto 0;
+    text-shadow: 0 -1px 0 #111111;
+text-align:center;
+line-height: 48px;
+width: 100%;
+padding:0;
+}
+.yulan .footer p{
+    background: url(/tpl/User/default/common/images/adma/erweima_footer.png) no-repeat scroll center top transparent;
+font-size:12px;line-height: 48px;
+}
+</style>
+
+</head>
+<body class="yulan" oncontextmenu="return false" onselectstart ="return false">
+	
+		<div class="main">
+		<h1>{lanrain:$adma.title}</h1>
+		<div class="erweima"><img id="gzhewm" src="{lanrain:$adma.url}"></div>
+		<div class="beizhu">
+		<div class="beizhubg">
+		<div class="beizhuleft"></div>
+		<div class="beizhuright"></div>
+		<p>请使用微信扫描二维码关注此公众号</p>
+		</div>
+		</div>
+		<div class="content" id="gzhinfo">
+				{lanrain:$adma.info}
+		</div>
+		<div class="clr"></div>
+		<div class="footer"><p id="gzhcopyright">{lanrain:$adma.copyright}</p></div>
+		</div>
+	
+</body>
+</html>

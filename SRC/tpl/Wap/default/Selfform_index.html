@@ -1,0 +1,147 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{lanrain:$thisForm.name}</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="{lanrain::RES}/css/style/css/hotels.css" rel="stylesheet" type="text/css">
+<script src="{lanrain::RES}/css/style/js/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="{lanrain::$staticFilePath}/js/main.js"></script>
+
+</head>
+
+<body id="wrap">
+<style>
+.deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:13px 24px;border:solid #d6d482 1px;background:#f5f4c5;font-size:16px;color:#8f772f;line-height:18px;border-radius:3px;}
+</style>
+<div class="banner">
+<div id="wrapper">
+<div id="scroller" style="float:none">
+<ul id="thelist">
+               
+<li style="float:none"><p>{lanrain:$thisForm.name}</p>
+
+<if condition="$thisForm['logourl'] neq ''">
+<a href="{lanrain::U('Selfform/detail',array('token'=>$token,'id'=>$thisForm['id'],'wecha_id'=>$wecha_id))}">
+<img src="{lanrain:$thisForm.logourl}" alt="{lanrain:$thisForm.name}" style="width:100%"/></a>
+</if>
+
+</li>
+ 
+
+</ul>
+</div>
+</div>
+
+<div class="clr"></div>
+</div>
+
+
+<div class="cardexplain">
+
+
+<if condition="$_GET['success'] eq 1">
+<ul class="round roundyellow" id="success">
+<li style="height:40px;line-height:40px; font-size:16px; text-align:center">{lanrain:$thisForm.successtip}</li>
+</ul>
+<script type="text/javascript">
+$(function() {
+	$('#success').show().delay(1600).slideUp(1600);
+	return;
+});
+</script>
+</if>
+
+<!--intro-->
+<ul class="round">
+<li>
+<h2>简介</h2>
+<div class="text">
+{lanrain:$thisForm['intro']}
+</div>
+</li>
+<li><a href="{lanrain::U('Selfform/detail',array('token'=>$token,'id'=>$thisForm['id'],'wecha_id'=>$wecha_id))}"><span style="color:#666">详细介绍</span></a></li>
+</ul>
+
+
+<if condition="$submitted neq 1">
+<form method="post" action="" id="form" onSubmit="return tgSubmit()">   
+<ul class="round">
+<li class="title mb"><span class="none">请填写以下信息</span></li>
+<volist name="list" id="item">
+<li class="nob">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+<tr>
+<th>{lanrain:$item.displayname}</th>
+<td><if condition="$item['inputtype'] eq 'select'">
+    			<select style="line-height:35px;" id="{lanrain:$item.fieldname}" name="{lanrain:$item.fieldname}"  class="dropdown-select">{lanrain:$item.optionStr}</select>
+    			<elseif condition="$item['inputtype'] eq 'text'" />
+    			<input type="text" class="px" placeholder="请输入{lanrain:$item.displayname}" id="{lanrain:$item.fieldname}" name="{lanrain:$item.fieldname}" value="" />
+    			<elseif condition="$item['inputtype'] eq 'textarea'" />
+    			<textarea class="pxtextarea" style=" height:99px;overflow-y:visible" placeholder="请输入{lanrain:$item.displayname}" id="{lanrain:$item.fieldname}" name="{lanrain:$item.fieldname}"></textarea>
+    			</if></td>
+</tr>
+</table>
+</li>
+</volist>                                                          
+</ul>
+
+<div class="footReturn" style="text-align:center">
+<if condition="$submitted neq 1">
+<input type="submit" style="margin:0 auto 20px auto;width:90%"  class="submit" value="提交信息" />
+</if>
+</div>
+</form>
+<else/>
+<ul class="round">
+<li class="title mb"><span class="none">您提交的信息</span></li>
+<div style="margin:10px 0; text-align:center;line-height:26px;">您的二维码信息<br><img src="{lanrain::$imgSrc}" /></div>
+<volist name="submitInfo" id="item">
+<li class="nob" style="height:35px;line-height:35px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+<tr>
+<th>{lanrain:$item.displayname}</th>
+<td>{lanrain:$item.value}</td>
+</tr>
+</table>
+</li>
+</volist>                                                          
+</li>
+</ul>
+</if>
+<script>
+function showTip(tipTxt) {
+	var div = document.createElement('div');
+	div.innerHTML = '<div class="deploy_ctype_tip"><p>' + tipTxt + '</p></div>';
+	var tipNode = div.firstChild;
+	$("#wrap").after(tipNode);
+	setTimeout(function () {
+		$(tipNode).remove();
+	}, 1500);
+}
+function tgSubmit(){
+	//
+	<volist name="list" id="item">
+	var {lanrain:$item['fieldname']}=$("#{lanrain:$item['fieldname']}").val();
+	<if condition="$item['require'] neq 0">
+	if($.trim({lanrain:$item['fieldname']}) == ""){
+		showTip('{lanrain:$item['errortip']}')
+		return false;
+	}
+	</if>
+	<if condition="$item['regex'] neq ''">
+	var patrn = {lanrain:$item['regex']};
+	if (!patrn.exec($.trim({lanrain:$item['fieldname']}))) {
+		showTip('{lanrain:$item['errortip']}')
+		return false;
+	}
+	</if>
+	</volist>
+	return true;
+}
+	</script>
+</div>
+</body>
+</html>

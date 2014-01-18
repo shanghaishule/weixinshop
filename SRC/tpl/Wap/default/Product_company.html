@@ -1,0 +1,77 @@
+<include file="Product:header"/>
+<div class="main">
+	<div class="p_place">
+		<h1>{lanrain:$thisCompany.name}</h1>
+		<span style="display:none">{lanrain:$branchStoreCount}家分店</span>
+	</div>
+	
+	<div class="p_mod">
+		<h2 class="p_mod_title">{lanrain:$thisCompany.name}&nbsp;</h2>
+		<ul>
+			
+			<li class="p_phone">
+				<a href="tel:{lanrain:$s.tel}">
+					<strong>电话：</strong>
+					<font>{lanrain:$thisCompany.tel}&nbsp;</font>
+					<span class="gt"></span>
+				</a>
+			</li>
+			<li class="p_address">
+				<a href="{lanrain::U('Product/companyMap',array('token'=>$_GET['token'],'id'=>$_GET['id'],'wecha_id'=>$_GET['wecha_id']))}">
+					<strong>地址：</strong>
+					<font>{lanrain:$thisCompany.address}&nbsp;</font>
+					<span class="gt"></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+<volist name="branchStores" id="s">
+			<div class="p_mod">
+		<h2 class="p_mod_title">{lanrain:$s.name}&nbsp;</h2>
+		<ul>
+			
+			<li class="p_phone">
+				<a href="tel:{lanrain:$s.tel}">
+					<strong>电话：</strong>
+					<font>{lanrain:$s.tel}&nbsp;</font>
+					<span class="gt"></span>
+				</a>
+			</li>
+			<li class="p_address">
+				<a href="{lanrain::U('Product/companyMap',array('token'=>$_GET['token'],'id'=>$_GET['id'],'companyid'=>$s['id'],'wecha_id'=>$_GET['wecha_id']))}">
+					<strong>地址：</strong>
+					<font>{lanrain:$s.address}&nbsp;</font>
+					<span class="gt"></span>
+				</a>
+			</li>
+		
+		</ul>
+	</div>
+	
+	</volist>
+			
+		<div class="p_mod p_seller_info p_tips ts2">
+		<a href="{lanrain::U('Product/product',array('token'=>$_GET['token'],'id'=>$_GET['id'],'wecha_id'=>$_GET['wecha_id']))}">
+			查看商品详情
+			<span class="gt"></span>
+		</a>
+	</div>
+	</div>
+<script type="text/javascript">
+window.onload = function(){
+	//价格与抢购按钮浮动
+	var f_obj = document.getElementById('p_buy');
+	var f_y = f_obj.offsetTop;
+	var f_class = f_obj.className;
+	document.onscroll = function(){
+		if(document.body.scrollTop>f_y){
+			f_obj.className += " fixed_t";
+		}else{
+			f_obj.className = f_class;
+		}
+	}
+}
+</script>
+<br>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<include file="Public:head"/>
+
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB"><h4>编辑图文自定义内容</h4><a href="javascript:history.go(-1);"  class="right btnGrayS vm" style="margin-top:-27px" >返回</a></div>
+         
+          <form method="post"   action="{lanrain::U('Liuyan/runAdd')}" >
+          <div class="msgWrap form">
+            <TABLE class="userinfoArea" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              
+              <TBODY>
+			  <input type="hidden" name="uid" value="{lanrain:$uid}" />
+			  <input type="hidden" name="createtime" value="{lanrain:$createtime}" />
+			  <input type="hidden" name="uptatetime" value="{lanrain:$uptatetime}" />
+			  <input type="hidden" name="token" value="{lanrain:$token}" />
+               <TR>
+                  <TH><span class="red">*</span>
+                    <label for="title">用户名：</label></TH>
+                  <TD><input type="input" class="px" id="title" value=""    name="title" style="width:580px;"> </TD>
+                </TR>
+                <TR>
+                  <TH valign="top"><label for="text">留言内容：</label></TH>
+                  <TD><textarea  class="px" id="Hfcontent" name="text" style="width:580px;  height:100px"></textarea><br /></TD>
+                </TR>
+                <TR>
+                  <TH valign="top"><label for="info">回复内容：</label></TH>
+                  <TD><textarea name="re" id="re"  rows="5" style="width:590px;height:360px" class="px" ></textarea></TD>
+                </TR>
+                <TR>
+                  <TH></TH>
+                  <TD><input type="submit" value="保存" class="btnGreen left">　<a href="{lanrain::U('Liuyan/index')}"  class="btnGray vm">返回</a></TD>
+                </TR>
+              </TBODY>
+            </TABLE>
+            
+          </div>
+          </form>
+          
+        </div>     
+ 
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div> 
+<!--底部-->
+  	</div>
+<include file="Public:footer"/>

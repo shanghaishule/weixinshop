@@ -1,0 +1,5 @@
+<div class="set_top">
+	<volist name="nav" id="vo">
+		<li <if condition="ACTION_NAME eq $vo['name']">id="set_top_li_bg"</if>><a href="{lanrain::U($action.'/'.$vo['name'],array('pid'=>6,'level'=>3))}">{lanrain:$vo['title']}</a></li>
+	</volist>
+</div>

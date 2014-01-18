@@ -1,0 +1,26 @@
+.score_item{}
+.score_item .title{padding: 5px 12px;}
+.score_item .ec{padding: 0px 12px 10px 12px;}
+.score_item .ec .btn { height: 20px; line-height: 20px;}
+
+.score_item_detail {border: 1px solid #E7E7E7; width: 674px; padding: 20px;}
+.score_item_detail div{overflow: hidden;}
+.si_img{border: 1px solid #E9E9E9; width: 350px; height: 330px; overflow: hidden; text-align: center;}
+.si_attr{width: 300px;}
+.si_attr h3{ color: #2F579C;}
+.si_attr .attr_row{color: #343434; font-weight: 700;}
+
+.si_desc_tab { border-bottom: 1px solid #FA8100;}
+.si_desc_tab li { float: left;height: 28px; line-height: 28px; text-align: center; padding: 0 10px; cursor: pointer;}
+.si_desc_tab li:hover { color: #FA8100;}
+.si_desc_tab li.current {background-color: #FA8100;color: #FFFFFF;}
+.si_desc_panes { padding:10px;}
+.si_desc_panes *{ color: #595959;}
+
+.dialog_address{ padding:10px 20px;}
+.dialog_address .address_list{}
+.dialog_address .address_list li{ margin-top: 5px;}
+.dialog_address .address_list li input{ margin: 2px 5px 0 0;}
+.dialog_address table th,.dialog_address table td{ padding: 5px;}
+.dialog_address table th{ color: #595959; font-weight: normal;}
+.dialog_address .input_text { height: 24px;}

@@ -1,0 +1,45 @@
+ <include file="Public:head" /> 
+<style type="text/css">
+.userinfoArea td{width:auto;}
+</style>
+<input type="hidden" id="catUrl" value="{lanrain::U('Product/ajaxCatOptions',array('token'=>$token))}" />
+  <div class="content" style="width:900px; background:none; margin-left:275px; border:none; margin-bottom:30px;" > 
+   <div class="cLineB"> 
+    <h4>桌台设置</h4> 
+    <a href="{lanrain::U('Product/tables',array('token'=>$token,'dining'=>$isDining))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+   </div> 
+   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+<if condition="$isUpdate eq 1">
+<input type="hidden" name="id" value="{lanrain:$set.id}" />
+</if>
+<input type="hidden" name="discount" id="discount" value="{lanrain:$set.id}" />
+    <div class="msgWrap bgfc" style="width:920p"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th><span class="red">*</span>名称：</th> 
+        <td><input type="text" name="name" value="{lanrain:$set.name}" class="px" style="width:400px;" /></td> 
+       </tr> 
+      <tr> 
+        <th><span class="red">*</span>介绍：</th>
+        <td><input type="text" name="intro" value="{lanrain:$set.intro}" class="px" style="width:400px;" /></td> 
+       </tr>
+        <tr> 
+        <th><span class="red">*</span>顺序：</th> 
+        <td><input type="text" name="taxis" value="{lanrain:$set.taxis}" class="px" style="width:400px;" /></td> 
+       </tr>
+        <tr> 
+       
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <input type="hidden" name="id" value="{lanrain:$set.id}" />
+       <button type="submit" name="button" class="btnGreen">保存</button> &nbsp; <a href="{lanrain::U('Product/tables',array('token'=>$token))}" class="btnGray vm">取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+  </div> 
+  <include file="Public:footer" />

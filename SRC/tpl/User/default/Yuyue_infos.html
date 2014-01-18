@@ -1,0 +1,73 @@
+<include file="Public:head"/> 
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+<h4 class="left">订单列表 ({lanrain:$page}) </h4>
+<div class="searchbar right">
+<form method="post" action="">
+<input type="text" id="msgSearchInput" class="txt left" placeholder="输入关键词搜索" name="searchkey" value="{lanrain:$key}">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+</form>
+</div>
+<div class="clr"></div>
+</div>
+
+<div class="msgWrap">
+
+
+	<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<thead>
+	<tr>
+	<th width="160">状态</th>
+	<th width="160">姓名</th>
+	<th width="160">电话</th>
+	<th width="100">人数</th>
+	<th width="250">备注</th>
+	<th width="160">时间</th>
+	<th width="50" class="norightborder">操作</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr></tr>
+	<volist name="data" id="item"> 
+		<form method="post" action="" id="info">
+		<input name="delall" type="hidden" value="">
+		<input name="wxid" type="hidden" value="">
+		<tr>
+		<td>
+			<a href="{lanrain::U('Yuyue/setType',array('id'=>$item['id'],'token'=>$token, 'type'=>0 ))}">
+			<input type="radio" name="type" <php>if($item['type'] == 0 ) echo 'checked="checked"';</php> /><span style="background:#999; color:#fff;">等待</span>
+			</a>
+			<a href="{lanrain::U('Yuyue/setType',array('id'=>$item['id'],'token'=>$token, 'type'=>1 ))}">
+			<input type="radio" name="type" <php>if($item['type'] == 1 ) echo 'checked="checked"';</php> /><span style="background:#360; color:#fff;">确定</span>
+			</a>
+			<a href="{lanrain::U('Yuyue/setType',array('id'=>$item['id'],'token'=>$token, 'type'=>2 ))}">
+			<input type="radio" name="type" <php>if($item['type'] == 2 ) echo 'checked="checked"';</php> ><span style="background:red; color:#fff;">拒绝</span>
+			</a>
+		</td>
+		<td>{lanrain:$item.name}</td>
+		<td>{lanrain:$item.phone}</td>
+		<td>{lanrain:$item.num}</td>
+		<td>{lanrain:$item.memo}</td> 
+		<td>{lanrain:$item.date}</td> 
+
+		<td class="norightborder">
+			<a href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::U('Yuyue/delinfos',array('id'=>$item['id'],'token'=>$token))}');">删除 </a>
+			
+		</td>
+		</tr>
+	</form>
+	</volist>
+	</tbody>
+	</table>
+
+
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lanrain:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

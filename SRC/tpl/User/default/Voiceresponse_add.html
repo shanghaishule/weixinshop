@@ -1,0 +1,76 @@
+<include file="Public:head"/>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB"><h4>编辑语音回复</h4><a href="javascript:history.go(-1);"  class="right btnGrayS vm" style="margin-top:-27px" >返回</a></div> 
+<div class="msgWrap">
+  <form class="form" method="post"   action="{lanrain::U('Voiceresponse/insert')}"  target="_top" enctype="multipart/form-data" >
+<TABLE class="userinfoArea" style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+  <THEAD>
+                          <TR>
+  <TH valign="top"><span class="red">*</span><label for="keyword">关键词：</label></TH>
+  <TD><input type="input" class="px" id="keyword" value="" name="keyword" style="width:600px" ><br />
+                  多个关键词请用空格格开：例如: 美丽&nbsp;漂亮&nbsp;好看</TD>
+</TR>
+<TR>
+  <TH valign="top"><span class="red">*</span><label for="Title">音乐标题：</label></TH>
+  <TD><input type="input" class="px" id="Title" value="" name="title" style="width:600px" > <p>注明：添加QQ音乐因为腾讯防盗链，<span class="red">后台无法试听,但微信可以播放!</span></p>
+                  </TD>
+</TR>
+                            <TR>
+  <TH valign="top"><span class="red">*</span><label for="MusicUrl">音乐链接：</label></TH>
+  <TD><input type="input" class="px" id="MusicUrl" value="" name="musicurl" style="width:600px" ><br />
+                  </TD>
+</TR>
+                            <TR>
+  <TH valign="top"><span class="red">*</span><label for="HQMusicUrl">高品质音乐链接：</label></TH>
+  <TD><input type="input" class="px" id="HQMusicUrl" value="" name="hqmusicurl" style="width:600px" ><br />没有高品质音乐链接，请直接再填一遍音乐链接。（高质量音乐链接，WIFI环境优先使用该链接播放音乐）
+                  </TD>
+</TR>
+  </THEAD>
+  <TBODY>
+<TR>
+  <TH valign="top"><label for="Description">音乐描述：</label></TH>
+  <TD><textarea  class="px" id="Hfcontent" name="description" style="width:600px;"></textarea><br />请不要多于30字否则无法发送!
+ 
+ 
+
+</TD>
+   
+<TR>
+  <TH></TH>
+  <TD><button type="submit"  name="button"  class="btnGreen left" >保存</button>　<a href="index.php?ac=mp3list&amp;id=9379"  class="btnGray vm">取消</a>
+  <div class="clr"></div>
+</TD>
+</TR>
+  </TBODY>
+</TABLE>
+  </form>
+
+<script type="text/javascript">
+
+function addvotetouser(obj, type) {
+
+document.getElementById("Title").value =obj.getAttribute('user');
+document.getElementById("HQMusicUrl").value =obj.value;
+document.getElementById("MusicUrl").value =obj.value;
+document.getElementById("Hfcontent").value =obj.getAttribute('user');
+}
+
+
+
+
+
+</script>
+
+
+  </div> 
+
+        </div>   
+   
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div> 
+
+<!--底部-->
+  	</div>
+<include file="Public:footer"/>

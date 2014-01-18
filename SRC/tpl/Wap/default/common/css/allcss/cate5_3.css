@@ -1,0 +1,75 @@
+html, body {
+	color:#222;
+	font-family:Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+	margin:0;
+	padding: 0;
+	text-decoration: none;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+	margin:0;
+	padding:0;
+}
+img {
+	border:0;
+}
+ol, ul {
+	list-style: none outside none;
+	margin:0;
+	padding: 0;
+}
+a {
+	color:#000000;
+	text-decoration: none;
+}
+.clr {
+	display:block;
+	clear:both;
+	height:0;
+	overflow:hidden;
+}
+.copyright{padding:8px;text-align:center;font-size:14px;color:#666;}
+.copyright a{color:#666;}
+/*cate9*/
+#cate9{background: url(../../images/themes/bg004.jpg) #E2E3E6; background-size:256px auto;overflow-x: hidden;margin:0 auto;}
+#cate9 .banner img{
+	width:100%;
+}
+#cate9 .catemenu  {
+overflow: hidden;
+background-color: #fff;
+border-radius: 4px;
+margin: 10px 10px 4px 9px;
+box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.25);
+-moz-box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.25);
+-webkit-box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.25);
+}
+#cate9 .catemenu  ul {
+width: 100%;
+overflow: hidden;
+}
+#cate9 .catemenu  li {
+display: list-item;
+text-align: -webkit-match-parent;
+}
+#cate9 .catemenu  li {
+width: 33.3%;
+float: left;
+font-size: 15px;
+border-top: 1px solid rgba(171, 102, 0, 0.36);
+}
+#cate9 .catemenu  li:nth-child(-n+3) {
+border-top: 0 none;
+}
+#cate9 .catemenu  a{
+display: block;
+border-right: 1px solid rgba(171, 102, 0, 0.36);
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+padding:20px 5px;
+height:100%;
+text-align:center;
+}
+#cate9 .catemenu  li:nth-child(3n) a{
+border-right: 0 none;
+}

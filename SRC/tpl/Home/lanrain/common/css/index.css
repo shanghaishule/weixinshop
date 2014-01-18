@@ -1,0 +1,84 @@
+.slib {
+	WIDTH: 100%; BACKGROUND: url(img/bnar.jpg) center #22781A; HEIGHT: 400px;border-bottom:2px solid #ddd;
+}
+.sli {
+	MARGIN: 0px auto; WIDTH: 988px; HEIGHT: 401px;
+}
+.sliimg {MARGIN-TOP: 52px; WIDTH: 417px; FLOAT: left; HEIGHT: 349px;
+}
+.slit {
+	MARGIN-TOP: 80px; WIDTH: 342px; FLOAT: left; HEIGHT: 48px; MARGIN-LEFT:50px
+}
+.slic {
+	MARGIN-TOP: 90px; WIDTH: 402px; FLOAT: left; HEIGHT: 130px; COLOR: #fff; MARGIN-LEFT: 30px; FONT-WEIGHT: bold; text-shadow: 1px 1px 2px #333333; -webkit-text-shadow: 1px 1px 2px #333333
+}
+.slit LI {
+	WIDTH: 171px; FLOAT: left; HEIGHT: 48px
+}
+.slit IMG {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.c {
+	BACKGROUND-IMAGE: url(img/c.png); WIDTH: 100%; HEIGHT: 60px
+}
+.cT {
+	LINE-HEIGHT: 60px; MARGIN: 0px auto; WIDTH: 988px; HEIGHT: 60px; FONT-SIZE: 2em
+}
+.cT SPAN {
+	MARGIN-LEFT: 5px; FONT-SIZE: 13px
+}
+.bor {
+	PADDING-BOTTOM: 34px; MARGIN: 0px auto; WIDTH: 988px; HEIGHT: 187px; PADDING-TOP: 26px
+}
+.bor LI {
+	WIDTH: 329px; MARGIN-BOTTOM: 10px; FLOAT: left; HEIGHT: 83px
+}
+.leftI {
+	WIDTH: 119px; FLOAT: left; HEIGHT: 83px
+}
+.leftT {
+	WIDTH: 210px; FLOAT: left; HEIGHT: 83px
+}
+.leftT .t {
+	WIDTH: 210px; HEIGHT: 30px; COLOR: #444444; FONT-SIZE: 1em
+}
+.leftT .b {
+	LINE-HEIGHT: 20px; WIDTH: 210px; HEIGHT: 53px; COLOR: #a2a1a1; FONT-SIZE: 11px
+}
+.center {
+	PADDING-BOTTOM: 15px; BACKGROUND-COLOR: #f2f2f2; MARGIN: 0px auto; PADDING-LEFT: 15px; WIDTH: 958px; PADDING-RIGHT: 15px; HEIGHT: auto; PADDING-TOP: 15px
+}
+.centerc {
+	BORDER-BOTTOM: #bfbfbf 1px solid; BORDER-LEFT: #bfbfbf 1px solid; BACKGROUND-COLOR: #fff; WIDTH: 958px; HEIGHT: 555px; BORDER-TOP: #bfbfbf 1px solid; BORDER-RIGHT: #bfbfbf 1px solid; border-radius: .3em; -webkit-border-radius: .3em
+}
+.centercc {
+	MARGIN: 0px auto; WIDTH: 867px; HEIGHT: 529px
+}
+.centerccT {
+	WIDTH: 867px; HEIGHT: 104px
+}
+.centerccT .name {
+	LINE-HEIGHT: 36px; MARGIN-TOP: 10px; WIDTH: 867px; HEIGHT: 36px; FONT-SIZE: 1.3em; FONT-WEIGHT: bold
+}
+.centerccT .tag {
+	TEXT-ALIGN: center; PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #239509; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; COLOR: #fff; FONT-WEIGHT: bold; PADDING-TOP: 5px; border-radius: .3em; -webkit-border-radius: .3em
+}
+.centerccT .contex {
+	LINE-HEIGHT: 20px; WIDTH: 867px; HEIGHT: 60px; FONT-SIZE:12px;
+}
+.contex SPAN {
+	COLOR: #239509
+}
+.centercc .img {
+	WIDTH: 867px; HEIGHT: 425px
+}
+
+.index_virtue{height:325px; WIDTH: 988px; margin:0px auto; display:block; overflow:hidden; margin-top:30px;}
+.index_virtue ul{ width:1000px;}
+.index_virtue li {width:300px; float:left; list-style-type:none; margin-right:30px;}
+.index_virtue li .virtue_point_img {width:149px; height:149px; background:url(img/yuan-bg.png) no-repeat; text-align:center;}
+.index_virtue li .virtue_point_img img {margin:30px 0 0;}
+.index_virtue li .virtue_point_title {font-size:30px; margin:30px 0 0; color:#2e2e2e;}
+.index_virtue li .virtue_point_title a {font-size:30px; margin:30px 0 0; color:#2e2e2e; text-decoration:none;}
+.index_virtue li .virtue_point_title a:hover {font-size:30px; margin:30px 0 0; color:#84c400;}
+.index_virtue li .virtue_point_intro {font-size:18px; margin:20px 0 0; line-height:35px;}

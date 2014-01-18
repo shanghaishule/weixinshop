@@ -1,0 +1,24 @@
+<xml>
+    <ToUserName><![CDATA[oh8fUjpYcXSEftY2M0UQPBDEK620]]></ToUserName>
+    <FromUserName><![CDATA[gh_3bc67a3770f9]]></FromUserName>
+    <CreateTime>1378272945</CreateTime>
+    <MsgType><![CDATA[news]]></MsgType>
+    <Content><![CDATA[]]></Content>
+    <ArticleCount>2</ArticleCount>
+    <Articles>
+        <item>
+            <Title><![CDATA[发送成功]]></Title>
+            <Discription><![CDATA[]]></Discription>
+            <PicUrl><![CDATA[]]></PicUrl> 
+            <Url><![CDATA[http://weixin2.linying.cc/wall/]]></Url>
+        </item>
+        <item>
+            <Title><![CDATA[你已经成功发送，审核通过即可上墙！PS:点击我，查看微信墙！]]></Title>
+            <Discription><![CDATA[]]></Discription>
+            <PicUrl><![CDATA[]]></PicUrl> 
+            <Url><![CDATA[http://weixin2.linying.cc/wall/]]></Url>
+        </item>
+
+    </Articles>
+    <FuncFlag>1</FuncFlag>
+</xml> 

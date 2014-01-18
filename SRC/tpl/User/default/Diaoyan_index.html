@@ -1,0 +1,92 @@
+<include file="Public:head"/>  
+        <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB">
+              <h4 class="left">微调研 设置问题 ({lanrain:$count}) 条<span class="FAQ">你本月有 {lanrain:$group.activitynum} 次机会可免收活动创建费，已经使用了 {lanrain:$activitynum} 次机会!</span></h4>
+                 
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator left">
+  <a href='{lanrain::U('Diaoyan/add',array('token'=>$token))}' title='新增调研问题' class='btnGrayS vm bigbtn'><img src="{lanrain::RES}/images/product/add.png" class="vm" />新增调研问题</a>
+              
+            </div>
+          
+            <div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post"  action="" id="info" >
+          <input name="delall"  type="hidden" value="" />
+           <input name="wxid"  type="hidden" value="" />
+            <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <THEAD>
+                <TR>
+<TH class="select">显示</TH>
+<TH class="select">类型</TH>
+<TH>调研问题</TH>
+<TH class="norightborder">操作</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+                <TR></TR>
+                  <volist id="list" name="list">
+                <TR>
+                  <TD><input type="checkbox" name='del_id[]' <if condition="$list['display'] eq 'Y'">checked</if> value="842" class="checkitem"></TD>
+				  <TD><if condition="$list['type'] eq 'D'">单选<else/>多选</if></TD>
+                  <TD>{lanrain:$list.question}</TD>
+                  
+                   <TD class="norightborder">
+				   
+				   <a href="index.php?g=User&m=Diaoyan&a=edit&id={lanrain:$list.id}">编辑</a>  				  
+				   <a href="index.php?g=User&m=Diaoyan&a=delete&id={lanrain:$list.id}">删除</a>
+				   <a href="index.php?g=User&m=Diaoyan&a=answer&id={lanrain:$list.id}">选票情况</a></TD>
+                </TR>
+				</volist>
+              </TBODY>
+            </TABLE>
+           </form> 
+           <script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script>
+          </div>
+            
+ 
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages"></div>
+              </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+function checkAll(form, name) {
+for(var i = 0; i < form.elements.length; i++) {
+var e = form.elements[i];
+if(e.name.match(name)) {
+e.checked = form.elements['chkall'].checked;
+}
+}
+}</script>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>

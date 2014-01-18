@@ -1,0 +1,71 @@
+@charset "utf-8";
+/*global*/
+* {margin: 0;padding: 0;}
+html{color:#333;font-family:Arial,Helvetica,sans-serif,"宋体";font-size:12px;}
+body{font-family: Arial, Helvetica, sans-serif,"宋体"; margin:0; padding:0; font-size:12px; color:#333;background: url(/static/images/admin/pancl/page_bg.png) top repeat-x #f7fcfe;}
+img{vertical-align: middle;border:0px;}
+
+a{ color:#4D4D4D; text-decoration:none;}
+a:hover{ color:#0099cc; text-decoration:underline;}
+
+table{border-collapse:collapse;border-spacing:0;}
+input,textarea{margin:0;padding:0;font-size:12px;font-family:Arial,Helvetica,sans-serif,"宋体";outline:none;color:#333;}
+
+/*解决td内容为空时不显示边框问题*/
+.inTable td{empty-cells : show}
+table a{color:#2559A6; text-decoration:none;}
+
+/*html*/
+input,textarea,select {font: 12px tahoma, arial, verdana, geneva, sans-serif;}
+input.txt_focus {border: 1px solid #c00;}
+input.btn {padding:0px 0;border: 0px solid #ccc;cursor: pointer;}
+textarea.txt {padding: 2px 0 2px 3px;vertical-align: middle;border: 1px solid #ccc;background:#fff;color:#777;}
+textarea.txt_focus {border: 1px solid #c00;}
+
+/*text-align*/
+.txtl {text-align: left;}
+.txtc {text-align: center;}
+.txtr {text-align: right;}
+.txtb {font-weight: bold;}
+.vam {vertical-align: middle;}
+/*color*/
+.red {color: #f00;}
+.gray {color:#999;}
+.white {color: #fff;}
+.orange {color: #f60;}
+/*float*/
+.ftl {float: left;}
+.ftr {float: right;}
+.hand {cursor: pointer;}
+.clearfix,.clear {clear: both;height:0;overflow: hidden;}
+.blank { height:10px;}
+.h300{ height:300px;}
+/*input readonly*/
+input{ color:#000;}
+/*ReadOnly*/
+.readOnly {background-color:#f0f0f0;}
+/* disabled */
+.disabled { color:gray; }
+/* hidden */
+.hide,.hidden {display:none;}
+.b {font-weight:bold;}
+
+/*header*/
+#header{background: url(/static/images/admin/pancl/topbg.png) no-repeat scroll right 0 #218CC2;height: 56px; text-align:center; margin:0px 0px 20px 0px;width:100%;}
+#header .h-box{height:auto; padding:0; overflow:hidden; width:980px; margin:0px auto 0px auto;}
+
+.logobox{float:left;width:350px; height:50px; text-align:left;padding:6px 0 0 0; background: url(/static/images/admin/pancl/logo_s.png) no-repeat 0 center; _background:url(/static/images/admin/pancl/logo_s.gif) no-repeat 0 center; text-indent:-9999px;}
+.userbox{float:right;height:36px;margin:0 10px 0 0; text-align:right; color:#fff; border: 0px solid #70787B;padding:20px 0 0 0; border:0px solid #ccc;}
+.userbox span {color: #fff; margin:0px 6px 0px 0px;}
+.userbox a{color:#FFFFFF;}
+.userbox b{ margin:0 6px;}
+/*footer*/
+#footer{width:100%;}
+#footer .f-box{line-height:25px; text-align:center; width:980px; margin:0px auto 0px auto;padding:0; overflow:hidden;}
+#footer .f-box .copy{ color:#666;}
+#footer .f-box a{ margin:0px 6px 0px 6px;}
+
+/*mainer*/
+#mainer{min-height:500px; text-align:center;width:100%; margin:0px auto 20px auto;height:auto; padding:0px 0; overflow:hidden; background-color:#fff;}
+.errtip{color: #f00; padding:0 0 0 2px;}
+

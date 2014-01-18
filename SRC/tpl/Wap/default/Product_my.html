@@ -1,0 +1,36 @@
+<include file="Product:header"/>
+<if condition="$_GET['success'] eq 1"><a class="more" id="show_more" href="javascript:void(0);" style="color:#fff;background:#f90"></a>
+<script type="text/javascript">
+$(function() {
+	$('#show_more').show().html('订购成功').delay(1600).slideUp(1600);
+	return;
+});
+</script>
+</if>
+<div class="u_main">
+	
+        <ul class="u_order clearfix">
+        <if condition="$ordersCount neq 0">
+        <volist name="orders" id="o">
+            	<li>
+            <div class="u_img">
+              
+                            </div>
+            <div class="u_text">
+                <h2>{lanrain:$o.time|date="Y-m-d H:i:s",###}</h2>
+                <p class="u_color1">数量：<font class="org">{lanrain:$o.total}</font>  总价： <font class="org">￥{lanrain:$o.price}</font></p>
+				<php>if($alipayConfig['open']){</php>
+				<p><php>if($o['paid']){echo '<span style="color:green">已付款</span>';}else{echo '<span style="color:red">未付款(点查看付款)</span>';}</php></p>
+				<php>}</php>
+                                <p><span class="u_mt5">订购人：{lanrain:$o.truename}</span> <a class="u_btn ts1" href="{lanrain::U('Product/updateOrder',array('token'=>$token,'id'=>$o['id'],'wecha_id'=>$wecha_id))}" style="margin-left:10px;display:">查看</a> <if condition="$o.handled eq 0"><a class="u_btn ts1" href="{lanrain::U('Product/deleteOrder',array('token'=>$token,'id'=>$o['id'],'wecha_id'=>$wecha_id))}">删除</a></if></p>
+                            </div>
+        </li>
+         </volist>
+         <else/>
+         <div style="padding:10px; text-align:center">没有订单</div>
+         </if>
+                </ul>  
+      
+</div>
+</body>
+</html>

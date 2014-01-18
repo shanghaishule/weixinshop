@@ -1,0 +1,127 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/plugins/code/prettify.css" />
+<script src="{lanrain::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#info', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : false,
+items : [
+'source','undo','clearhtml','hr',
+'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+'insertunorderedlist', '|', 'emoticons', 'image','link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut']
+});
+
+
+
+});
+</script>
+<script>
+	KindEditor.ready(function(K){
+		var editor = K.editor({
+			allowFileManager:true
+		});
+		K('#upload').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					fileUrl : K('#pic').val(),
+					clickFn : function(url, title) {
+						if(url.indexOf("http") > -1){
+							K('#pic').val(url);
+						}else{
+							K('#pic').val("{lanrain::C('site_url')}"+url);
+						}
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB"><h4>编辑图文自定义内容</h4><a href="javascript:history.go(-1);"  class="right btnGrayS vm" style="margin-top:-27px" >返回</a></div>
+         
+          <form method="post"   action="{lanrain::U('Img/upsave')}"  enctype="multipart/form-data" >
+          <div class="msgWrap form">
+            <TABLE class="userinfoArea" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <THEAD>
+                <TR>
+                  <TH style="width:120px" valign="top"><label for="keyword">关键词：</label></TH>
+                  <TD><input type="input" class="px" id="keyword" value="{lanrain:$info.keyword}"  name="keyword" style="width:580px;"><br />
+                  多个关键词请用空格格开：例如: 美丽&nbsp;漂亮&nbsp;好看 </TD>
+                </TR>
+                 <TR>
+  <TH valign="top">关键词类型：</TH>
+  <TD>
+  <label for="radio1"><input id="radio1" class="radio" type="radio" name="type" value="2"  <eq name="info.type" value="2">checked="checked"</eq> /> 完全匹配  用户输入的和此关键词一样才会触发!</label>
+  <br />
+  <label for="radio2"><input class="radio" id="radio2" type="radio" name="type" value="1" <eq name="info.type" value="1">checked="checked"</eq> /> 包含匹配 (只要用户输入的文字包含本关键词就触发!v2用户才生效)</label></TD>
+</TR>
+              </THEAD>
+              <TBODY>
+               <TR>
+                  <TH><span class="red">*</span><label for="title">标题：</label></TH>
+                  <TD><input type="input" class="px" id="title" value="{lanrain:$info.title}"    name="title" style="width:580px;"> </TD>
+                </TR>
+                <TR>
+                  <TH valign="top"><label for="text">简介：</label></TH>
+                  <TD><textarea  class="px" id="Hfcontent"     name="text" style="width:580px;  height:100px">{lanrain:$info.text}</textarea><br />限制200字内
+</TD>
+                </TR>
+                <TR>
+                  <TH valign="top"><label for="classid">文章所属类别：</label></TH>
+                  <TD>
+                   <select name="classid"   > 
+                    <option  value="0">请选择</option>
+                      <volist name="res" id="vo">
+                     <option   value="{lanrain:$vo.id},{lanrain:$vo.name}" <if condition="$info['classid'] eq $vo['id']">selected</if>>{lanrain:$vo.name}</option>
+                      </volist>      
+                    </select><a href="{lanrain::U('Classify/add')}"  target="ddd" >添加分类</a>
+                  </TD>
+                </TR> 
+				<TR>
+                  <TH valign="top"><label for="picurl">封面图片：</label></TH>
+                  <TD>（尺寸：宽720像素，高400像素） 小于500k; (不上传不设置系统会自动随机分配)<div><input type="text" value="{lanrain:$info.pic}"  class="text textMiddle inputQ" name="pic" id="pic" readonly="readonly" /><span class="ke-button-common" id="upload" style="margin-top: 8px;margin-left: 5px;"><input type="button" class="ke-button-common ke-button" value="上传"></span></div></TD>
+                </TR>
+				<input type="hidden" name="id" value="{lanrain:$info.id}" />
+               <TR>
+                  <TH valign="top"><label for="showpic">详细页是否显示封面：</label></TH>
+                  <TD>
+				  是<input class="radio" type="radio" name="showpic" value="1" <eq name="info.showpic" value="1"> checked="checked"</eq> />
+				  否<input class="radio" type="radio" name="showpic" value="0" <eq name="info.showpic" value="0"> checked="checked"</eq> />
+                  
+</TD>
+                </TR>
+                <TR>
+                  <TH valign="top"><label for="info">图文详细页内容：</label></TH>
+                  <TD><textarea name="info" id="info"  rows="5" style="width:590px;height:360px">{lanrain:$info.info}</textarea></TD>
+                </TR>  
+                 <TR>
+                  <TH valign="top"><label for="url">图文外链网址：</label></TH>
+                  <TD><input type="input" class="px" id="url" value="{lanrain:$info.url}" name="url" style="width:580px;"><br /><span class="red">如需跳转到其他网址，请在这里填写网址(例如：http://baidu.com，记住必须有http://)</span>如果填写了图文详细内容，这里请留空，不要设置！</TD>
+                </TR>
+                <TR>
+                  <TH></TH>
+                  <TD><input type="submit" value="保存" name="sbmt" class="btnGreen left">　<a href="{lanrain::U('Img/index')}"  class="btnGray vm">取消</a></TD>
+                </TR>
+              </TBODY>
+            </TABLE>
+            
+          </div>
+          </form>
+          
+        </div>     
+ 
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div> 
+<!--底部-->
+  	</div>
+<include file="Public:footer"/>

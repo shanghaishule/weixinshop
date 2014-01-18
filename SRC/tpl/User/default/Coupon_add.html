@@ -1,0 +1,185 @@
+<include file="Public:head"/>
+<script src="{lanrain::RES}/js/date/WdatePicker.js"></script>
+<form class="form" method="post" action=""  target="_top" enctype="multipart/form-data" >
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<!--活动开始-->
+<div class="cLineB">
+  <h4>编辑优惠券活动开始内容</h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>  
+<div class="msgWrap bgfc">
+ 
+<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+<tr>
+  <th valign="top"><span class="red">*</span>关键词：</th>
+  <td><input type="input" class="px" id="keyword" value="{lanrain:$vo.keyword}" name="keyword" style="width:400px"><br>
+  	<span class="red">只能写一个关键词</span>，用户输入此关键词将会触发此活动。</td>
+  <td rowspan="7" valign="top"><div style="margin-left:20px"><img id="pic" src="{lanrain::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-start.jpg" width="373px">
+<br>
+<input class="px" name="starpicurl" value="<if condition="$vo['starpicul'] eq ''">{lanrain::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-start.jpg<else/>{picms:$vo.starpicurl}</if>" onclick="document.getElementById('pic').src=this.value;" style="width:363px;">
+<br>
+  	填写活动开始图片网址
+  </div><div style="margin-left:20px"><img id="zjpic" src="{lanrain::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-winning.jpg" width="373px">
+<br>
+<input class="px" name="zjpic" value="<if condition="$vo['zjpic'] eq ''">{lanrain::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-winning.jpg<else/>{picms:$vo.zjpic}</if>" onclick="document.getElementById('zjpic').src=this.value;" style="width:363px;">
+<br>
+  	填写中奖后显示的头部图片地址
+     <br>
+
+  </div></td>
+</tr>
+<tr>
+  <th valign="top"><span class="red">*</span>活动名称：</th>
+  <td><input type="input" class="px" id="title" value="{lanrain:$vo.title}" name="title" style="width:400px">
+  	<br>
+  	请不要多于50字!
+  	</td>
+  </tr>
+
+<tr>
+  	<th valign="top"><span class="red">*</span>优惠券介绍：</th>
+  	<td><textarea class="px" id="sttxt" name="sttxt" style="width:400px; height: 125px;">{lanrain:$vo.sttxt}</textarea>
+  		 </td>
+</tr>
+</TR>
+<tr>
+	<th><span class="red">*</span>活动时间：</th>
+	<td><input type="input" class="px" id="statdate" value="<if condition="$vo['statdate'] neq ''">{lanrain:$vo.statdate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker()" name="statdate" />                
+		到
+		<input type="input" class="px" id="enddate" value="<if condition="$vo['enddate'] neq ''">{lanrain:$vo.enddate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));?></if>" name="enddate" onClick="WdatePicker()"  /> 
+	</td>
+</tr>
+<tr>
+<th valign="top"><span class="red">*</span>优惠券活动说明：</th>
+<td><textarea class="px" id="info" name="info" style="width: 400px; height: 125px;">{lanrain:$vo.info}</textarea>
+活动说明. </td>
+</tr>
+<tr>
+<th><span class="red">*</span>兑换券使用说明：</th>
+<td><textarea id="aginfo" class="px" name="aginfo" style="width: 400px; height: 125px;">{lanrain:$vo.aginfo}</textarea>用户获取优惠券后显示的提示信息
+</td>
+</tr>
+</tbody>
+</table>
+ </div> 
+  
+<!--活动结束-->
+<div class="cLineB"><h4>活动结束内容</h4></div> 
+<div class="msgWrap bgfc">
+ 
+  	<table class="userinfoArea" style=" margin: 0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+  		<tbody>
+  			<tr>
+  				<th valign="top"><span class="red">*</span>活动结束公告主题：</th>
+  				<td><input type="input" class="px" id="endtite" value="{lanrain:$vo.endtite}" name="endtite" style="width:400px">
+  					<br>
+  					请不要多于50字! </td>
+  				<td rowspan="4" valign="top"><div style="margin-left:20px"><img id="end" src="{lanrain::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-end.jpg" width="373px"> <br>
+  					<input class="px" name="endpicurl" onchange="document.getElementById('end').src=this.value;" value="<if condition="$vo['zjpic'] eq ''">{lanrain::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-end.jpg<else/>{picms:$vo.endpicurl}</if>" style="width:363px;">
+  					<br>
+  					填写活动结束图片网址 </div></td>
+  				</tr>
+  			<tr>
+  				<th valign="top">活动结束说明：</th>
+  				<td valign="top"><textarea class="px" id="endinfo" name="endinfo" style="width: 400px; height: 125px;">{lanrain:$vo.endinfo}</textarea>活动结束显示
+  				 </td>
+  				</tr>
+  			</tbody>
+  		</table>
+  </div> 
+  
+  
+<!--奖项设置-->
+<div class="cLineB">
+          	<h4>优惠券设置</h4></div> 
+<div class="msgWrap bgfc">
+
+<table class="userinfoArea" style=" margin: 0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+<tr>
+<th valign="top"><span class="red">*</span>优惠券名称1：</th>
+<td><input type="input" class="px" id="fist" name="fist" value="{lanrain:$vo.fist}" style="width:250px">
+请不要多于50字! </td>
+  <td rowspan="9" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<th valign="top"><span class="red">*</span>优惠券数量：</th>
+<td><input type="input" class="px" id="fistnums" name="fistnums" value="{lanrain:$vo.fistnums}" style="width:60px">
+</td>
+</tr>
+
+
+<!--xxl start-->
+<tr>
+	<th><span class="red">*</span>活动时间：</th>
+	<td><input type="input" class="px" id="statdate" value="<if condition="$vo['statdate'] neq ''">{lanrain:$vo.statdate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker()" name="statdate" />                
+		到
+		<input type="input" class="px" id="enddate" value="<if condition="$vo['enddate'] neq ''">{lanrain:$vo.enddate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));?></if>" name="enddate" onClick="WdatePicker()"  /> 
+	</td>
+</tr>
+<!--xxl end-->
+
+
+<tr>
+<th valign="top">优惠券名称2：</th>
+<td><input type="input" class="px" id="second" name="second" value="{lanrain:$vo.second}" style="width:250px">
+请不要多于50字! </td>
+                                        </tr>
+<tr>
+<th valign="top">优惠券数量：</th>
+<td><input type="input" class="px" id="secondnums" name="secondnums" value="{lanrain:$vo.secondnums}" style="width:60px">
+</td>
+                                        </tr>
+<!--xxl start-->
+<tr>
+	<th><span class="red">*</span>活动时间：</th>
+	<td><input type="input" class="px" id="statdate" value="<if condition="$vo['statdate'] neq ''">{lanrain:$vo.statdate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker()" name="statdate" />                
+		到
+		<input type="input" class="px" id="enddate" value="<if condition="$vo['enddate'] neq ''">{lanrain:$vo.enddate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));?></if>" name="enddate" onClick="WdatePicker()"  /> 
+	</td>
+</tr>
+<!--xxl end-->
+                                        
+<tr>
+<th valign="top">优惠券名称3：</th>
+<td><input type="input" class="px" id="third" name="third" value="{lanrain:$vo.third}" style="width:250px">
+请不要多于50字! </td>
+                                        </tr>
+<tr>
+<th valign="top">优惠券数量：</th>
+<td><input type="input" class="px" id="thirdnums" name="thirdnums" value="{lanrain:$vo.thirdnums}" style="width:60px">
+ </td>
+
+  </tbody>
+
+<tbody>
+<tr>
+<th valign="top"><span class="red">*</span>预计活动的人数：</th>
+<td><input type="input" class="px" id="allpeople" name="allpeople"   value="{lanrain:$vo.allpeople}" style="width:150px"/>  预估活动人数直接影响抽奖概率：中奖概率 = 奖品总数/(预估活动人数*每人抽奖次数) 如果要确保任何时候都100%中奖建议设置为1人参加!<span class='red'>如果要确保任何时候都100%中奖建议设置为1人参加!并且奖项只设置一等奖.</span></td>
+  </tr>
+<tr>
+<th valign="top"><span class="red">*</span>每人最多允许抽奖次数：</th>
+<td><input type="input" class="px" id="canrqnums" name="canrqnums"   value="{lanrain:$vo.canrqnums}" style="width:150px"/>
+必须1-5之间的数字</td>
+ </tr>
+                                        
+<tr>
+<th valign="top">SN码生成设置：</th>
+<td>
+    <input class="radio" type="radio" checked name="snimport" value="0">自动生成  
+    <input class="radio" type="radio" name="snimport" value="1">手动生成(SN码管理)
+</td> 
+</tr>
+<tr>
+<th>&nbsp;</th>
+<td><button type="submit" name="button" class="btnGreen">保存</button>　<a href="" class="btnGray vm">取消</a>　<span class="red">请确认功能管理已开启优惠券功能</span></td>
+                                    </tr>
+</tbody>
+</table>
+</div> 
+</div>
+</form>
+<include file="Public:footer"/> 

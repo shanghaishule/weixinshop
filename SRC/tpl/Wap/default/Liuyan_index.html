@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="微盟、微信营销、微信代运营、微信定制开发、微信托管、微网站、微商城、微营销" name="Keywords">
+	<meta content="微盟，国内最大的微信公众智能服务平台，微盟八大微体系：微菜单、微官网、微会员、微活动、微商城、微推送、微服务、微统计，企业微营销必备。" name="Description">
+    <link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/liuyan/message.css" media="all">
+<script type="text/javascript" src="{lanrain::RES}/js/liuyan/jquery_min.js"></script>
+<title>请在此留言</title>
+
+    <!--[if lte IE 9]><script src="http://stc.weimob.com/src/watermark.js"></script><![endif]-->
+	<!--[if IE 7]><link href="http://stc.weimob.com/css/font_awesome_ie7.css" rel="stylesheet" /><![endif]-->
+</head>
+<body id="message" onselectstart="return true;" ondragstart="return false;">
+	
+
+
+	<title></title>
+	<meta charset="utf-8">
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+	<meta content="eric.wu" name="author">
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+	<meta content="no-cache" http-equiv="pragma">
+	<meta content="0" http-equiv="expires">
+	<meta content="telephone=no, address=no" name="format-detection">
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+ 
+	<script type="text/javascript"> 
+		$(document).ready(function () { 
+			$("#showcard1").click(function () { 
+				var btn = $(this);
+				var wxname = $("#wxname1").val();
+				if (wxname  == '') {
+					alert("请输入昵称");
+					return;
+				}
+				var info = $("#info1").val();
+					if (info == '') {
+					alert("请输入内容");
+					return;
+				}
+				var submitData = {
+					uid:'{lanrain:$uid}',
+					title:wxname,
+					text: info,
+					createtime:'{lanrain:$createtime}',
+					token:'{lanrain:$token}',
+					wecha_id:'{lanrain:$wecha_id}',
+					action: "liuyan"
+				};
+				$.post('index.php?g=wap&m=Liuyan&a=add', submitData,
+					function(data) {
+					if (data == '留言成功') {
+						alert('留言成功');
+						setTimeout('window.location.href=location.href',1000);
+					return;
+					}else {}
+				})
+			}); 
+			//
+			$("#showcard2").click(function () { 
+				var btn = $(this);
+				var wxname = $("#wxname2").val();
+					if (wxname  == '') {
+					alert("请输入昵称");
+					return;
+				}
+				var info = $("#info2").val();
+					if (info == '') {
+					alert("请输入内容");
+					return;
+				}
+				var submitData = {
+					uid:'{lanrain:$uid}',
+					title:wxname,
+					text: info,
+					createtime:'{lanrain:$createtime}',
+					token:'{lanrain:$token}',
+					wecha_id:'{lanrain:$wecha_id}',
+					action: "liuyan"
+				};
+				$.post('index.php?g=wap&m=Liuyan&a=add', submitData,
+					function(data) {
+					if (data == '留言成功') {
+						alert('留言成功');
+						setTimeout('window.location.href=location.href',1000);
+					return;
+					}else {}
+				})
+			});  
+			//
+			$(".hhsubmit").click(function () { 
+				var objid = $(this).attr("date");
+				var info = $(".hly"+objid).val();
+					if (info == '') {
+					alert("请输入内容");
+					return;
+				}
+				var submitData = {
+					uid:'{lanrain:$uid}',
+					title:wxname,
+					text: info,
+					createtime:'{lanrain:$createtime}',
+					token:'{lanrain:$token}',
+					wecha_id:'{lanrain:$wecha_id}',
+					action: "liuyan"
+				};
+				$.post('index.php?g=wap&m=Liuyan&a=add', submitData,
+					function(data) {
+					if (data == '留言成功') {
+						alert('留言成功');
+						setTimeout('window.location.href=location.href',1000);
+					return;
+					}else {}
+				})
+			});  
+			//
+			$(".hfinfo").click(function () { 
+				var objid = $(this).attr("date");
+				$(".hhly"+objid).slideToggle();
+			}); 
+			//
+			$(".hhbt").click(function () { 
+				var objid = $(this).attr("date");
+				$(".hhly"+objid).slideToggle();
+			});
+			//
+			$("#windowclosebutton").click(function () { 
+				$("#windowcenter").slideUp(500);
+			});
+			//
+			$("#alertclose").click(function () { 
+				$("#windowcenter").slideUp(500);
+			});
+		}); 
+		//
+		function alert(title){ 
+			window.scrollTo(0, -1);
+			$("#windowcenter").slideToggle("slow"); 
+			$("#txt").html(title);
+			setTimeout(function(){$("#windowcenter").slideUp(500);},4000);
+		}
+		//
+		$(document).ready(function(){
+			$(".first1").click(function(){
+				$(".ly1").slideToggle();
+			});
+			$(".first2").click(function(){
+				$(".ly2").slideToggle();
+			});
+		});
+	</script> 
+
+ 
+
+	<div class="container">
+	  	<div class="qiandaobanner">
+		  	<a href="javascript:history.go(-1);">
+				<php>
+					if($repic['picurl']){
+				</php>
+					<img src="{lanrain:$repic.picurl}" style="width:100%;">
+				<php>
+					}else{
+				</php>
+					<img src="{lanrain::RES}/images/liuyan/mpic.jpg" style="width:100%;">
+				<php>
+					}
+				</php>
+			</a>
+	  	</div>
+
+		<div class="cardexplain">
+			<div class="window" id="windowcenter">
+				<div id="title" class="wtitle">操作提示<span class="close" id="alertclose"></span></div>
+				<div class="content">
+					<div id="txt"></div>
+				</div>
+			</div>
+ 
+			<div class="history">
+				<div class="history-date">
+					<ul>
+						<a><h2 class="first first1" style="position: relative;">请点击留言</h2></a>
+						<!--<li class="nob  mb"><div class="beizhu">留言审核通过后才会显示在留言墙上！</div></li>-->
+						<li class="green bounceInDown nob ly1" style="display:none">
+							<dl>
+								<dt>
+									<input name="wxname" class="px" id="wxname1" placeholder="请输入您的昵称" type="text">
+								</dt>
+								<dt>
+									<textarea name="info" class="pxtextarea" style=" height:60px;" id="info1" placeholder="请输入留言"></textarea>
+								</dt>
+								<dt><a id="showcard1" class="submit" href="javascript:void(0)">提交留言</a></dt>
+							</dl>
+						</li>
+					<volist name="info" id="vo">
+						<li class="green bounceInDown">
+							<h3>
+								<!--<img src="http://www.apiwx.com/index/images/logo100x100.jpg">-->
+								{lanrain:$vo.title}
+								<div class="clr"></div>
+							</h3>
+							<dl>
+								<dt class="hfinfo" date="9055" >{lanrain:$vo.text} <b style="font-weight:100; font-size:10px; color:#1DB702; padding:0 0px 0 8px;"><php>echo date('Y-m-d H:i',$vo['createtime'])</php></b></dt>
+							</dl>
+							
+							<php>
+								if($vo['wecha_id'] == $wecha_id){
+							</php>
+					
+								<dl><a href="{lanrain::U('Liuyan/del',array('id'=>$vo['id'],'token'=> $token, 'wecha_id'=> $wecha_id))}"class="del">删除</a></dl>
+							<php>
+									}
+							</php>
+							<php>if($vo['re']){</php>
+								<dl class="huifu" style="width:80%; float:right">
+										<dt>回复：{lanrain:$vo.re}<b style="font-weight:100; font-size:10px; color:#1DB702; padding:0 0px 0 8px;"><php>if($vo['uptatetime'])echo date('Y-m-d H:i',$vo['uptatetime']);</php></b>
+										</dt>
+								</dl>
+							<php>}</php>
+						</li>
+					</volist>							
+												<li class="green bounceInDown nob ly2" style="display:none">
+							<dl>
+								<dt>
+									<input name="wxname" class="px" id="wxname2" placeholder="请输入您的昵称" type="text">
+								</dt>
+								<dt>
+									<textarea name="info" class="pxtextarea" style=" height:60px;" id="info2" placeholder="请输入留言"></textarea>
+								</dt>
+								<dt>
+									<a id="showcard2" class="submit" href="javascript:void(0)">提交留言</a>
+								</dt>
+							</dl>
+						</li>
+
+
+						<a><h2 class="first first2" style="position: relative;">请点击留言</h2></a>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	<script type="text/javascript">
+ 	        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        window.shareData = {  
+            "imgUrl": "http://stc.weimob.com/img/message/mpic.jpg", 
+            "timeLineLink": "http://www.weimob.com/Webmessage/Comment?wechatid=Q2QEQC31ZLR3JIHU1-XY&wxid=1ca6e2c6a760d9b7b89b615e681a99de",
+            "sendFriendLink": "http://www.weimob.com/Webmessage/Comment?wechatid=Q2QEQC31ZLR3JIHU1-XY&wxid=1ca6e2c6a760d9b7b89b615e681a99de",
+            "weiboLink": "http://www.weimob.com/Webmessage/Comment?wechatid=Q2QEQC31ZLR3JIHU1-XY&wxid=1ca6e2c6a760d9b7b89b615e681a99de",
+            "tTitle": "请在此留言",
+            "tContent": "请在此留言",
+            "fTitle": "请在此留言",
+            "fContent": "请在此留言",
+            "wContent": "请在此留言" 
+        };
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+            WeixinJSBridge.invoke('sendAppMessage', { 
+                "img_url": window.shareData.imgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "link": window.shareData.sendFriendLink,
+                "desc": window.shareData.fContent,
+                "title": window.shareData.fTitle
+            }, function (res) {
+                _report('send_msg', res.err_msg);
+            })
+        });
+
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function (argv) {
+            WeixinJSBridge.invoke('shareTimeline', {
+                "img_url": window.shareData.imgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "link": window.shareData.timeLineLink,
+                "desc": window.shareData.tContent,
+                "title": window.shareData.tTitle
+            }, function (res) {
+                _report('timeline', res.err_msg);
+            });
+        });
+
+        // 分享到微博
+        WeixinJSBridge.on('menu:share:weibo', function (argv) {
+            WeixinJSBridge.invoke('shareWeibo', {
+                "content": window.shareData.wContent,
+                "url": window.shareData.weiboLink,
+            }, function (res) {
+                _report('weibo', res.err_msg);
+            });
+        });
+        }, false)
+    </script>
+
+<footer style="text-align:center; color:#ffd800;margin-right:20px"><a href="">©demo</a></footer>
+
+
+</body></html>

@@ -1,0 +1,167 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,p,ul,li{
+	margin: 0px; 
+	padding: 0px;
+}
+body{
+	font-size:13px;
+	font-family:"宋体", "微软雅黑", Verdana, Geneva, sans-serif, Arial;
+	line-height:18px;
+	color:#333;
+}
+.center{
+	width:960px;
+	margin:0px auto;
+	overflow:hidden;
+}
+
+h4{
+	font-size:14px;
+}
+img{
+	border:none;
+}
+li{
+	list-style:none;
+}
+p{
+	line-height:24px;
+}
+.mt5{
+	margin-top:5px;
+}
+.mt10{
+	margin-top:10px;
+}
+.mt20{
+	margin-top:20px;
+}
+.mt2{
+	margin-top:2px;
+}
+.mb10{
+	margin-bottom:10px;
+}
+
+.pd10{
+	padding:10px;
+}
+.pd15{
+	padding:15px;
+}
+
+.pl10{
+	padding-left:10px;
+}
+.pr5{
+	padding-right:5px;
+}
+.pr50{
+	padding-right:50px;
+}
+
+.lh24{
+	line-height:24px;
+}
+.lh50{
+	line-height:50px;
+}
+
+.ml10{
+	margin-left:10px;
+}
+
+a{
+	color:#333;
+	text-decoration:none;
+}
+
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+.clear{
+	clear:both;
+}
+.pz{
+	position:relative;
+}
+
+.line10{
+	height:10px;
+}
+.line20{
+	height:20px;
+}
+.radius{
+	-moz-border-radius: 5px;      /* Gecko browsers */
+    -webkit-border-radius: 5px;   /* Webkit browsers */
+    border-radius:5px;            /* W3C syntax */
+}
+.t_a{
+	text-align:center;
+}
+.t_r{
+	text-align:right;
+}
+.bt1{
+	border-top:1px #ddd dashed;
+}
+.br1{
+	border-right:1px #ddd solid;
+}
+.bb1{
+	border-bottom:1px #dddddd dashed;
+}
+.col{
+	color:#497cd2;
+}
+.col1{
+	color:#ff7d2f;
+}
+.col2{
+	color:#FACD89;
+}
+.col3{
+	color:#ff0000;
+}
+.col4{
+	color:#996c33;
+	font-weight:bold;
+	font-size:20px;
+	font-family:"微软雅黑";
+}
+.col5{
+	color:#497cd2;
+	font-weight:bold;
+	font-size:20px;
+	font-family:"微软雅黑";
+	
+}
+.ft30{
+	font-size:30px;
+}
+.ft25{
+	font-size:25px;
+}
+.ft18{
+	font-size:18px;
+}
+.ft22{
+	font-size:22px;
+}
+.td_lt{
+	text-decoration:line-through;
+}
+.bg{
+	background:#efedee;
+}
+.ov{
+	overflow:hidden;
+}
+.bl{
+	border-right:1px #ddd solid;
+}
+
+

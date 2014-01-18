@@ -1,0 +1,27 @@
+[08-Jan-2014 03:49:41] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/bestchoi/public_html/Wall/vote/go.php:9) in /home/bestchoi/public_html/Wall/vote/go.php on line 34
+[08-Jan-2014 03:53:39] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/bestchoi/public_html/Wall/vote/go.php:2) in /home/bestchoi/public_html/Wall/vote/go.php on line 11
+[08-Jan-2014 03:56:27] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 20
+[08-Jan-2014 03:59:19] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 23
+[08-Jan-2014 04:01:33] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 24
+[08-Jan-2014 04:02:15] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 24
+[08-Jan-2014 04:02:17] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 24
+[08-Jan-2014 04:04:06] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 23
+[08-Jan-2014 04:06:12] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 20
+[08-Jan-2014 04:06:16] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 20
+[08-Jan-2014 04:08:02] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 21
+[08-Jan-2014 04:09:13] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 23
+[08-Jan-2014 04:10:57] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 24
+[08-Jan-2014 04:11:29] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 23
+[08-Jan-2014 04:11:44] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 23
+[08-Jan-2014 04:11:55] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 23
+[08-Jan-2014 04:11:57] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 23
+[08-Jan-2014 04:12:06] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 23
+[08-Jan-2014 04:12:26] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 23
+[08-Jan-2014 04:12:29] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 23
+[08-Jan-2014 04:12:46] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 24
+[08-Jan-2014 04:12:49] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 24
+[08-Jan-2014 04:12:51] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 24
+[08-Jan-2014 04:12:53] PHP Parse error:  syntax error, unexpected $end in /home/bestchoi/public_html/Wall/vote/go.php on line 24
+[08-Jan-2014 04:19:40] PHP Parse error:  syntax error, unexpected '.' in /home/bestchoi/public_html/Wall/vote/go.php on line 17
+[09-Jan-2014 21:36:11] PHP Warning:  mysql_fetch_row(): supplied argument is not a valid MySQL result resource in /home/bestchoi/public_html/Wall/vote/index.php on line 110
+[09-Jan-2014 21:38:50] PHP Warning:  mysql_fetch_row(): supplied argument is not a valid MySQL result resource in /home/bestchoi/public_html/Wall/vote/index.php on line 110

@@ -1,0 +1,245 @@
+<include file="Public:head"/>
+<style type="text/css">
+.plug-menu {
+width:36px;
+height:36px;
+border-radius:36px;
+-moz-box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);
+-webkit-box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);
+box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);
+background-color: FF0000;
+position:relative
+}
+.plug-menu span {
+display: block;
+width:28px;
+height:28px;
+background: url(tpl/User/default/common/images/photo/plugmenu.png) no-repeat;
+background-size: 28px 28px;
+text-indent: -999px;
+position:absolute;
+top:4px;
+left:4px;
+overflow: hidden;
+}
+</style>
+<script src="./tpl/User/default/common/js/cart/jscolor.js" type="text/javascript"></script>
+<form method="post" action="" enctype="multipart/form-data">
+ <input type="hidden" name="formhash" id="formhash" value="a68de075">
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+<div class="cLineB">
+  <h4>快捷菜单 <span class="FAQ">提供一键拨号，一键导航，一键email等等快捷功能</span></h4>
+  
+ </div>
+ <div class="msgWrap bgfc" style="padding: 5px 20px;">
+ 	<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+<tbody>
+<tr>
+<td width="60"><div class="plug-menu" id="plugmenucolor" style="background-color:#E83407"><span class="close"></span></div></td>
+<td width="140"><strong>请选择快捷菜单的颜色：</strong></td>
+<td width="95"><input type="text" name="namecolor" id="themeStyle" value="#E83407" class="px color" style="width: 55px; background-image: none; background-color: rgb(232, 52, 7); color: rgb(255, 255, 255);" onblur="document.getElementById('plugmenucolor').style.backgroundColor=document.getElementById('themeStyle').value;"></td>
+<td width="536">请在手机上查看效果！</td>
+
+</tr>
+                    <tr>
+<td width="60"> </td>
+<td><strong>设置页面版权：</strong></td>
+ 
+<td colspan="2"><textarea class="px" style="width:550px; height:35px" name="copyright"></textarea><br>© 2001-2013 某某版权所有 </td>
+
+</tr>
+</tbody>
+</table>
+ </div>
+         
+ 
+ <div class="msgWrap form">
+         
+<div class="bdrcontent">
+<div id="div_ptype">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th style=" width:40px;">图标</th>
+                    <th style=" width:80px;">名称</th>
+<th style=" width:270px;"><span class="tooltips">外链网站或活动 <img src="{lanrain::RES}/images/price_help.png" align="absmiddle">s<span>
+<p>比如你想跳转到百度，就填写<a class="red">http://www.baidu.com</a></p>
+<p>不需要跳转就不用填写，还可以外链活动，</p>
+<p>直接填写活动外链地址：<a class="red">大转盘387</a></p>
+</span></span></th>
+<th style=" width:70px;">显示顺序</th>
+<th>显示(<span class="red">只能勾选4项</span>) </th>
+                        </tr>
+</thead>
+                    
+<tbody><tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu1.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>电话</td>
+<td><input class="px" type="text" style="width:250px;" name="url[1]" value=""></td>
+<td><input type="text" name="sort[1]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[1]" value="1"> tel:13625008888</td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu2.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>会员资料</td>
+<td><input class="px" type="text" style="width:250px;" name="url[2]" value=""></td>
+<td><input type="text" name="sort[2]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[2]" value="1"></td></tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu3.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>导航</td>
+<td><input class="px" type="text" style="width:250px;" name="url[3]" value=""></td>
+<td><input type="text" name="sort[3]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[3]" value="1"></td></tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu4.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>留言</td>
+<td><input class="px" type="text" style="width:250px;" name="url[4]" value=""></td>
+<td><input type="text" name="sort[4]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[4]" value="1"></td></tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu5.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>分享</td>
+<td><input class="px" type="text" style="width:250px;" name="url[5]" value=""></td>
+<td><input type="text" name="sort[5]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[5]" value="1"></td></tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu6.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>首页</td>
+<td><input class="px" type="text" style="width:250px;" name="url[6]" value=""></td>
+<td><input type="text" name="sort[6]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[6]" value="1"></td></tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu7.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>相册</td>
+<td><input class="px" type="text" style="width:250px;" name="url[7]" value=""></td>
+<td><input type="text" name="sort[7]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[7]" value="1"></td></tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu8.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>邮箱</td>
+<td><input class="px" type="text" style="width:250px;" name="url[8]" value=""></td>
+<td><input type="text" name="sort[8]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[8]" value="1"></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu9.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>购物</td>
+<td><input class="px" type="text" style="width:250px;" name="url[9]" value=""></td>
+<td><input type="text" name="sort[9]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[9]" value="1"></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu10.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>会员卡</td>
+<td><input class="px" type="text" style="width:250px;" name="url[10]" value=""></td>
+<td><input type="text" name="sort[10]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[10]" value="1"></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu11.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>活动</td>
+<td><input class="px" type="text" style="width:250px;" name="url[11]" value=""></td>
+<td><input type="text" name="sort[11]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[11]" value="1"></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu12.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>新浪微博</td>
+<td><input class="px" type="text" style="width:250px;" name="url[12]" value=""></td>
+<td><input type="text" name="sort[12]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[12]" value="1"></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu13.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>腾讯微博</td>
+<td><input class="px" type="text" style="width:250px;" name="url[13]" value=""></td>
+<td><input type="text" name="sort[13]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[13]" value="1"></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu14.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>腾讯空间</td>
+<td><input class="px" type="text" style="width:250px;" name="url[14]" value=""></td>
+<td><input type="text" name="sort[14]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[14]" value="1"></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu15.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>微信</td>
+<td><input class="px" type="text" style="width:250px;" name="url[15]" value=""></td>
+<td><input type="text" name="sort[15]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[15]" value="1"></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu16.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>音乐</td>
+<td><input class="px" type="text" style="width:250px;" name="url[16]" value=""></td>
+<td><input type="text" name="sort[16]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[16]" value="1"></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu17.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>视频</td>
+<td><input class="px" type="text" style="width:250px;" name="url[17]" value=""></td>
+<td><input type="text" name="sort[17]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[17]" value="1"></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu18.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>推荐</td>
+<td><input class="px" type="text" style="width:250px;" name="url[18]" value=""></td>
+<td><input type="text" name="sort[18]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[18]" value="1"></td>
+</tr>
+<tr>
+<td><img src="tpl/User/default/common/images/photo/plugmenu19.png" align="absmiddle" style=" background-color:#CCC;width:32px;"></td>
+<td>其他</td>
+<td><input class="px" type="text" style="width:250px;" name="url[19]" value=""></td>
+<td><input type="text" name="sort[19]" value="" class="px" style="width:50px;"></td>
+<td><input class="checkbox" type="checkbox" name="display[19]" value="1"></td>
+</tr>
+             
+                 <tr>
+                 	<td class="norightborder">&nbsp;</td>
+                 	<td colspan="4" class="norightborder"><input type="hidden" name="mpurl" value="plugin.php?id=yb_vote:vote&amp;ac=admin&amp;op=manage&amp;subop=base&amp;gid=&amp;ctype=ptype">
+                 		<button type="submit" name="batchsubmit" value="true" class="btnGreen vm"><strong>保存</strong></button>　　<a href="index.php?ac=importtxt&amp;id=650" class="btnGray vm">取消</a></td>
+                 	</tr>
+  </tbody></table>
+</div>
+</div>
+
+
+
+     <script>
+
+$(document).ready(function(){
+ 
+ 
+  $(".checkbox").click(function(){
+var i=0; 
+ 
+  $("input:checked").each(function(){
+  
+ 
+    i++;
+  
+  });
+ if(i>4){
+ $(this).click();
+ }
+});
+
+});
+
+
+
+</script>
+
+ 
+   
+          </div>
+  
+        </div></form>
+		  <include file="Public:footer"/>

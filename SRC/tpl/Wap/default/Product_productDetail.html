@@ -1,0 +1,27 @@
+<include file="Product:header"/>
+<div class="main">
+	<div class="p_content">
+		<h1>{lanrain:$product.name}</h1>
+		<div class="p_con">
+			<img src="{lanrain:$product.logourl}" alt="{lanrain:$product.name}"/>
+            <br />
+{lanrain:$product.intro}</div>
+		<div class="p_mod p_seller_info p_tips ts2">
+			<a href="{lanrain::U('Product/product',array('token'=>$_GET['token'],'id'=>$product['id'],'wecha_id'=>$_GET['wecha_id']))}">
+				查看菜品品详情
+				<span class="gt"></span>
+			</a>
+		</div>
+	</div>
+	<div class="p_buy clearfix fixed_b">
+		<span class="p_price">
+			￥{lanrain:$product.price}
+		</span>
+		<a href="{lanrain::U('Product/product',array('token'=>$_GET['token'],'id'=>$product['id'],'wecha_id'=>$_GET['wecha_id']))}" class="p_btn_buy">
+			<span class="ts1">去购买</span>
+		</a>
+	</div>
+</div>
+
+</body>
+</html>

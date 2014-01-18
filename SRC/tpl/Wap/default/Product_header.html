@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>{lanrain:$metaTitle}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+	<meta name="format-detection" content="telephone=no" />
+	<link type="text/css" rel="stylesheet" href="{lanrain::$staticFilePath}/css/style.css" />
+	<script src="{lanrain::$staticFilePath}/js/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="{lanrain::$staticFilePath}/js/main.js"></script>
+</head>
+
+<body>
+	<!--头部-->
+	<header class="ts1">
+		<a class="u_back fl" href="javascript:history.go(-1)"></a>
+		<ul class="topbar fr">
+			<li>
+				<a class="icon_user" href="{lanrain::U('Product/my',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id'],'dining'=>$isDining))}"> <i></i>
+					我的
+				</a>
+			</li>
+			<li>
+				<a class="icon_shopping" href="{lanrain::U('Product/cart',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id'],'dining'=>$isDining))}"> <i></i>
+					已点菜
+				</a>
+			</li>
+			<li>
+				<a class="icon_class" href="{lanrain::U('Product/cats',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id'],'dining'=>$isDining))}">
+					<i></i>
+					分类
+				</a>
+			</li>
+			<li>
+				<a class="icon_index" href="{lanrain::U('Product/index',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id'],'dining'=>$isDining))}">
+					<i></i>
+					主页
+				</a>
+			</li>
+		</ul>
+	</header><!--主体-->
+	<div class="p_floatbox">
+    <div class="f_list_car p_buy clearfix" id="p_buy">
+    	<span class="all_price">总价格：<font id="all_price">￥{lanrain:$totalProductFee}</font></span>
+    	<span>总共<font id="all_numb">{lanrain:$totalProductCount}</font份菜品</span>
+    	<a href="{lanrain::U('Product/cart',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id'],'dining'=>$isDining))}" class="p_btn_buy"><span class="ts1">已点菜品</span></a>
+    </div>
+</div>

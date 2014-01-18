@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> {lanrain::C('site_title')} {lanrain::C('site_name')}</title>
+<meta name="keywords" content="{lanrain::C('keyword')}" />
+<meta name="description" content="{lanrain::C('content')}" />
+<meta http-equiv="MSThemeCompatible" content="Yes" />
+<script>var SITEURL='';</script>
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/style_2_common.css?BPm" />
+<script src="{lanrain::RES}/js/common.js" type="text/javascript"></script>
+</head>
+<body id="nv_member" class="pg_CURMODULE">
+<div class="topbg">
+<div class="top">
+<div class="toplink">
+<style>
+.topbg{BACKGROUND-IMAGE: url({lanrain::RES}/images/top.png);BACKGROUND-REPEAT: repeat-x; height:124px; box-shadow:0 0 10px #000;-moz-box-shadow:0 0 10px #000;-webkit-box-shadow:0 0 10px #000;}
+.top {
+	MARGIN: 0px auto; WIDTH: 988px; HEIGHT: 124px;
+}
+
+.top .toplink{ height:27px; line-height:27px; color:#999; font-size:12px;}
+.top .toplink .welcome{ float:left;}
+.top .toplink .memberinfo{ float:right;}
+.top .toplink .memberinfo a{ color:#999;}
+.top .toplink .memberinfo a:hover{ color:#F90}
+.top .toplink .memberinfo a.green{ background:none; color:#0C0}
+
+.top .logo {WIDTH: 990px;COLOR: #333; height:70px;  FONT-SIZE:16px; PADDING-TOP:25px}
+.top h1{ font-size:25px; margin-top:20px; float:left; width:230px; margin:0; padding:0;}
+.top .navr {WIDTH:750px; float:right; overflow:hidden; margin-top:10px;}
+.top .navr ul{ width:850px;}
+.navr LI {TEXT-ALIGN:center;FLOAT: left;HEIGHT:32px;FONT-SIZE:1em;width:103px; margin-right:5px;}
+.navr LI A {width:103px;TEXT-ALIGN:center; LINE-HEIGHT:30px; FLOAT: left;HEIGHT:32px;COLOR: #333; FONT-SIZE: 1em;TEXT-DECORATION: none
+}
+.navr LI A:hover {BACKGROUND: url({lanrain::RES}/images/navhover.gif) center no-repeat;color:#009900;}
+.navr LI.menuon {BACKGROUND: url({lanrain::RES}/images/navon.gif) center no-repeat; display:block;width:103px;HEIGHT:32px;}
+.navr LI.menuon a{color:#FFF;}
+.navr LI.menuon a:hover{BACKGROUND: url(img/navon.gif) center no-repeat;}
+.banner{height:200px; text-align:center; border-bottom:2px solid #ddd;}
+.hbanner{ background: url(img/h2003070126.jpg) center no-repeat #B4B4B4;}
+.gbanner{ background: url(img/h2003070127.jpg) center no-repeat #264C79;}
+.jbanner{ background: url(img/h2003070128.jpg) center no-repeat #E2EAD5;}
+.dbanner{ background: url(img/h2003070129.jpg) center no-repeat #009ADA;}
+.nbanner{ background: url(img/h2003070130.jpg) center no-repeat #ffca22;}
+</style>
+<div class="welcome">欢迎使用多用户微信营销服务平台!</div>
+    <div class="memberinfo"  id="destoon_member">	
+		<if condition="$_SESSION[uid]==false">
+			<a href="{lanrain::U('Index/login')}">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="{lanrain::U('Index/login')}">注册</a>
+			<else/>
+			你好,<a href="/#" hidefocus="true"  ><span style="color:red">{lanrain:$Think.session.uname}</span></a>（uid:{lanrain:$Think.session.uid}）
+			<a href="/#" onclick="Javascript:window.open('{lanrain::U('System/Admin/logout')}','_blank')" >退出</a>
+	</if>	
+	</div>
+</div>
+    <div class="logo">
+        <div style="float:left"></div>
+            <h1><a href="/" title="多用户微信营销服务平台"><img src="tpl/Home/lanrain/common/images/logo-lanrain.png" /></a></h1>
+            <div class="navr">
+        <ul id="topMenu">         
+            <li <if condition="(ACTION_NAME eq 'index') and (GROUP_NAME eq 'Home')">class="menuon"</if> ><a href="/" >首页</a></li>
+                <li <eq name="ACTION_NAME" value="fc">class="menuon"</eq>><a href="{lanrain::U('Home/Index/fc')}">功能介绍</a></li>
+                <li <eq name="ACTION_NAME" value="about">class="menuon"</eq>><a href="{lanrain::U('Home/Index/about')}">关于我们</a></li>
+                <li <eq name="ACTION_NAME" value="price">class="menuon"</eq>><a href="{lanrain::U('Home/Index/price')}">资费说明</a></li>
+                <li <eq name="ACTION_NAME" value="common">class="menuon"</eq>><a href="{lanrain::U('Home/Index/common')}">微信导航</a></li>
+                <li <eq name="GROUP_NAME" value="User">class="menuon"</eq>><a href="{lanrain::U('User/Index/index')}">管理中心</a></li>
+                <li <eq name="ACTION_NAME" value="help">class="menuon"</eq>><a href="{lanrain::U('Home/Index/help')}">帮助中心</a></li>
+            
+            </ul>
+        </div>
+        </div>
+    </div>
+</div>
+<div id="aaa"></div>
+
+<div id="wp" class="wp"><link href="{lanrain::RES}/css/style.css?id=1220000" rel="stylesheet" type="text/css" />
+  <!--中间内容-->
+  <script src="{lanrain::STATICS}/jquery-1.4.2.min.js" type="text/javascript"></script>
+  
+  <div class="contentmanage">
+    <div class="developer">
+       <div class="appTitle normalTitle2">
+        <div class="vipuser">
+
+
+<div class="logo">
+<img src="{lanrain:$wecha.headerpic}" width="100" height="100">
+</div>
+
+<div id="nickname">
+<strong>{lanrain:$wecha.wxname}</strong><a href="#" target="_blank" class="vipimg vip-icon<php>echo $userinfo['id']-1;</php>" title=""></a></div>
+<div id="weixinid">微信号:{lanrain:$wecha.weixin}</div>
+</div>
+
+        <div class="accountInfo">
+<table class="vipInfo" width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td><strong>VIP有效期：</strong><if condition="$_SESSION['viptime'] neq 0">{lanrain:$thisUser.viptime|date="Y-m-d",###}<else/>vip0不限时间</if></td>
+<td><strong>图文自定义：</strong>{lanrain:$thisUser.diynum}/{lanrain:$userinfo.diynum}</td>
+<td><strong>活动创建数：</strong>{lanrain:$thisUser.activitynum}/{lanrain:$userinfo.activitynum}</td>
+<td><strong>请求数：</strong>{lanrain:$thisUser.connectnum}/{lanrain:$userinfo.connectnum}</td>
+</tr>
+<tr>
+<td><strong>请求数剩余：</strong><php>echo ($userinfo['connectnum']-$_SESSION['connectnum']);</php></td>
+<td><strong>已使用：</strong><php>echo $_SESSION['diynum'];</php></td>
+<td><strong>当月赠送请求数：</strong>{lanrain:$userinfo.connectnum}</td>
+<td><strong>当月剩余请求数：</strong><php>echo $userinfo['connectnum']-$_SESSION['connectnum'];</php></td>
+</tr>
+
+</table>
+    </div>
+        <div class="clr"></div>
+      </div>
+     
+      <div class="tableContent">
+        
+        <!--左侧功能菜单-->
+           <div  class="sideBar" id="sideBar">
+<div class="catalogList">
+<ul>
+<div class="nav-header">基础设置</div>
+<li <if condition="MODULE_NAME eq 'Function'">class="selected" <else/> class="subCatalogList"</if>> <a href="{lanrain::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}">功能管理</a>
+</li>
+<li <if condition="MODULE_NAME eq 'Areply'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Areply/index',array('token'=>$token))}">关注时回复</a>
+</li>
+<li <if condition="MODULE_NAME eq 'Follow'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Follow/index',array('token'=>$token))}">关注列表</a>
+</li>
+<li <if condition="MODULE_NAME eq 'Call'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Call/index',array('token'=>$token))}">短信设置</a>
+</li>
+<li <if condition="MODULE_NAME eq 'Text'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Text/index',array('token'=>$token))}">文本回复</a>
+</li>
+<li <if condition="MODULE_NAME eq 'Img'">class="selected" <else/> class="subCatalogList"</if>> <a href="{lanrain::U('Img/index',array('token'=>$token))}">图文回复</a>
+</li>
+<li   <if condition="MODULE_NAME eq 'Voiceresponse'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Voiceresponse/index',array('token'=>$token))}">语音回复</a>
+</li>
+<li   <if condition="MODULE_NAME eq 'Company'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Company/index',array('token'=>$token))}">LBS回复</a>
+</li>
+<li <if condition="MODULE_NAME eq 'Other'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Other/index',array('token'=>$token))}">回答不上来的配置</a>
+</li>
+<!--li   <if condition="MODULE_NAME eq 'lbslist'">class="selected" <else/>class="subCatalogList"</if>> <a href="javascript:alert('已经实现智能地理位置回复，无需人工设置')">LBS回复</a><span class="new"></span>
+</li-->
+</ul>
+<ul>
+<div class="nav-header">3G网站设置</div>
+<li <if condition="MODULE_NAME eq 'Home'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Home/set',array('token'=>$token))}">首页回复配置</a>
+</li>
+<li <if condition="MODULE_NAME eq 'Classify'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Classify/index',array('token'=>$token))}">分类管理</a>
+</li>
+<li   <if condition="MODULE_NAME eq 'Tmpls'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Tmpls/index',array('token'=>$token))}">模板管理</a>
+</li>
+<li   <if condition="MODULE_NAME eq 'Flash'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Flash/index',array('token'=>$token))}">首页幻灯片<span class="new"></span></a>
+</li>
+<li   <if condition="MODULE_NAME eq 'Diymen'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Diymen/index',array('token'=>$token))}">自定义菜单<span class="new"></span></a>
+</li>
+</ul>
+<ul>
+<div class="nav-header">电商系统</div>
+	<li   <if condition="MODULE_NAME eq 'Taobao'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Taobao/index',array('token'=>$token))}">淘宝天猫店铺配置</a></li>
+	<li   <if condition="MODULE_NAME eq 'apilist'">class="selected"<else/>class="subCatalogList"</if> > <a href="{lanrain::U('Api/index',array('token'=>$token))}">融合第三方</a></li>
+	<li   <if condition="MODULE_NAME eq 'Adma'">class="selected"<else/>class="subCatalogList"</if> > <a href="{lanrain::U('Adma/index',array('token'=>$token))}">DIY宣传页</a></li>
+	<li   <if condition="MODULE_NAME eq 'Photo'">class="selected"<else/>class="subCatalogList"</if> > <a href="{lanrain::U('Photo/index',array('token'=>$token))}">3G图集(相册)</a><span class="new"></span></li>
+	 <li   <if condition="MODULE_NAME eq 'Host'">class="selected"<else/>class="subCatalogList"</if> > <a href="{lanrain::U('Host/index',array('token'=>$token))}">通用订单(酒店,KTV)</a></li> 
+	 <li   <if condition="(MODULE_NAME eq 'Product') and (ACTION_NAME eq 'index')">class="selected"<else/>class="subCatalogList"</if> > <a href="{lanrain::U('Groupon/index',array('token'=>$token))}">微团购</a></li>  <li   <if condition="(MODULE_NAME eq 'Product') and (ACTION_NAME eq 'index')">class="selected"<else/>class="subCatalogList"</if> > <a href="{lanrain::U('Product/index',array('token'=>$token))}">微商城</a></li> 
+	 <li   <if condition="ACTION_NAME eq 'orders'">class="selected"<else/>class="subCatalogList"</if> > <a href="{lanrain::U('Product/orders',array('token'=>$token,'dining'=>1))}">无线订餐（网络打印）</a></li>
+	 <li   <if condition="MODULE_NAME eq 'Selfform'">class="selected"<else/>class="subCatalogList"</if> > <a href="{lanrain::U('Selfform/index',array('token'=>$token))}">万能表单,报名,留言,预约</a></li>
+	<!--li   <if condition="MODULE_NAME eq 'Vote'">class="selected"<else/>class="subCatalogList"</if> > <a href="{lanrain::U('Vote/index',array('token'=>$token))}">3G投票活动</a><span class="new"></span></li>
+	<li   <if condition="MODULE_NAME eq 'Question'">class="selected"<else/>class="subCatalogList"</if> > <a href="{lanrain::U('Question/index',array('token'=>$token))}">一站到底</a><span class="new"></span></li>
+	<li   <if condition="MODULE_NAME eq 'Ordering'">class="selected"<else/>class="subCatalogList"</if> > <a href="{lanrain::U('Ordering/index',array('token'=>$token))}">在线订餐</a><span class="new"></span></li-->
+
+</ul>
+<ul>
+<div class="nav-header">推广活动</div>
+	<li   <if condition="MODULE_NAME eq 'Lottery'">class="selected" <else/>class="subCatalogList"</if> > <a href="{lanrain::U('Lottery/index',array('token'=>$token))}">幸运大转盘</a><span class="new"></span></li>
+	<li   <if condition="MODULE_NAME eq 'Coupon'">class="selected" <else/>class="subCatalogList"</if> > <a href="{lanrain::U('Coupon/index',array('token'=>$token))}">优惠券</a></li>
+	<li   <if condition="MODULE_NAME eq 'Guajiang'">class="selected" <else/>class="subCatalogList"</if> > <a href="{lanrain::U('Guajiang/index',array('token'=>$token))}">刮刮卡</a></li>
+</ul>
+<ul style="">
+<div class="nav-header">会员卡<span class="new"></span></div>
+	<li <if condition="ACTION_NAME eq ''">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Member_card/index',array('token'=>$token))}">会员卡设计</a></li>
+	<li  > <a href="{lanrain::U('Member_card/privilege',array('token'=>$token))}">最新通知</a></li>
+	<li <if condition="ACTION_NAME eq 'privilege'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Member_card/privilege',array('token'=>$token))}">会员特权</a></li>
+	<li <if condition="ACTION_NAME eq 'info'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Member_card/info',array('token'=>$token))}">会员卡详情</a></li>
+	<li <if condition="ACTION_NAME eq 'create'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Member_card/create',array('token'=>$token))}">在线开卡(自定义卡号)</a></li>
+	<li  <if condition="ACTION_NAME eq 'exchange'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Member_card/exchange',array('token'=>$token))}">积分设置</a></li>
+		<li   <if condition="MODULE_NAME eq 'Member'">class="selected" <else/>class="subCatalogList"</if>> <a href="{lanrain::U('Member/index',array('token'=>$token))}">会员资料管理</a><span class="new"></span></li>
+</ul>
+<ul>
+<div class="nav-header">统计分析</div>
+<li   <if condition="MODULE_NAME eq 'index'">class="selected" <else/>class="subCatalogList"</if> > <a href="javascript:alert('即将发布')">请求数详情</a>
+</li>
+</ul>
+</div>
+</div>

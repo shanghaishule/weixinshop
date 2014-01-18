@@ -1,0 +1,80 @@
+<include file="Public:head"/>
+
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB"><h4>商家开卡配置 <span class="FAQ">卡号自定义啦</span> <strong>本月可创建 <span style="color:red">{lanrain:$count}</span> 张，剩余<span style="color:red">{lanrain:$cancrnum}</span>张</strong></h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>
+         
+          <form method="post" action="">
+          <div class="msgWrap form">
+            <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <tbody>
+  <tr>
+              		<th>卡号英文编号：</th>
+              		<td><input type="input" class="px" id="title" value="" name="title" style="width:200px;"> 例：<font style="color:red">BSD</font>-65535 <font style="color:red">BSD</font>就是英文编号</td>
+              		</tr>
+  <tr>
+              		<th >选择人群：</th>
+              		<td>
+						<label><input name="group" type="radio" value="1" checked="checked">所有会员</label>　
+						<label><input type="radio" name="group" value="2">普通会员</label>　
+						<label><input type="radio" name="group" value="3">银卡会员</label>
+						<label><input type="radio" name="group" value="4">金卡会员</label>
+						<label><input type="radio" name="group" value="5">钻石会员</label>
+					</td>
+              		</tr>
+
+
+
+              	<tr>
+<th>卡号生成范围：</th>
+<td>
+	起始卡号：&nbsp;
+	<input type="input" class="px" id="stat" value="" onClick="WdatePicker()" name="stat">&nbsp;到
+	<input type="input" class="px" id="enddate" value="" name="end" onClick="WdatePicker()">&nbsp;结束卡号.
+	<font style="color:red">最小起始卡为:1,最大结束卡号为:65535,
+  <br />例如输入1到100那么就会创建99张会员卡</font>
+</td>
+</tr>
+
+</tr>
+
+<tr>
+	<th valign="top">使用说明：</th>
+	<td>
+			在此说明生成会员卡的说明，每次最多生成100张，请及时关注，会员卡是否被领取完了,全部被发放后请再次生成。
+	</td>
+</tr>
+<tr>
+	<th></th>
+	<td><button type="submit" id="button" name="button" class="btnGreen">保存</button>　<a href="javascript:history.go(-1);" class="btnGray vm">取消</a></td>
+</tr>
+ </tbody>
+</table>
+            
+          </div>
+          </form>
+          
+        </div>
+<script  type="text/javascript" charset="utf-8">
+
+  function inputchek(obj){
+    var reg = new RegExp("^[0-9]*[1-9]*$");
+    if(!reg.test(obj.value)){
+        alert("请输入大于零的整数!");
+    }
+   
+    if(obj.value > 65535){
+        alert("请不要输入大于 65535 的整数!");
+    }
+   
+  }
+
+  $("#stat").focusout(function(event) {
+      inputchek(this);
+  });
+  $("#enddate").focusout(function(event) {
+      inputchek(this);
+  });
+
+</script>
+
+<include file="Public:footer"/>

@@ -1,0 +1,82 @@
+<include file="Public:head"/>  
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+         
+          <div class="cLineB">
+              <h4 class="left">会员礼品对换卷</h4>
+               
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+			<div class="pageNavigator left">
+				<a href="{lanrain::U('Member_card/privilege',array('token'=>$token))}" title="查看会员特权" class="btnGrayS vm bigbtn">
+					<img src="{lanrain::RES}/images/cart_info/power1.png" width="24px" class="vm">查看会员特权
+				</a>
+			　<a href="{lanrain::U('Member_card/coupon',array('token'=>$token))}" title="查看优惠券" class="btnGrayS vm bigbtn">
+				<img src="{lanrain::RES}/images/cart_info/power2.png" width="24px" class="vm">查看优惠券
+			  </a>　
+				<a class="btnGrayS vm bigbtn" href="{lanrain::U('Member_card/integral_add',array('token'=>$token))}" title="发布礼品券">
+					<img src="{lanrain::RES}/images/cart_info/power3.png" width="24px" class="vm">发布礼品券
+				</a>　
+			</div>
+			<a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:10px">返回</a>          
+			<div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post" action="index.php?ac=importtxt&amp;id=9878&amp;wxid=gh_423dwjkewad" id="info">
+          <input name="delall" type="hidden" value="del">
+           <input name="wxid" type="hidden" value="gh_423dwjkewad">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+					<th class="select">选择</th>
+					<th class="answer">标题</th>
+					
+					<th class="time">创建时间</th>
+					<th class="time">过期时间</th>
+					<th class="edit norightborder">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="data_vip" id="data_vip">           
+                <tr>
+					  <td>  <input type="checkbox" name="del_id[]" value="" class="checkitem"></td>
+					  <td><div class="answer_text">{lanrain:$data_vip.title}</div></td>
+					  
+					  <td><if condition="$data_vip['type'] eq 1">无时间限制<else/>{lanrain:$data_vip.statdate|date='Y-m-d',###}</if></td>
+					  <td><if condition="$data_vip['type'] eq 1">无时间限制<else/>{lanrain:$data_vip.enddate|date='Y-m-d',###}</if></td>
+					  <td class="norightborder">
+						<!--a href="">使用统计</a--> 
+						<a href="{lanrain::U('Member_card/integral_edit',array('id'=>$data_vip['id']))}">编辑</a> <a href="{lanrain::U('Member_card/integral_del',array('id'=>$data_vip['id']))}">删除</a>
+					  </td>
+                </tr>
+				</volist>
+      			 
+              </tbody>
+            </table>
+           </form> 
+			<script>
+			   function checkvotethis() {
+					var aa=document.getElementsByName('del_id[]');
+					var mnum = aa.length;
+					j=0;
+					for(i=0;i<mnum;i++){
+					if(aa[i].checked){
+					j++;
+					}
+					}
+					if(j>0) {
+					document.getElementById('info').submit();
+					} else {
+					alert('未选中内容！')
+					}
+				}
+			</script>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages"></div>
+             </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+<include file="Public:footer"/>

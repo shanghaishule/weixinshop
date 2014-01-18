@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>权限管理</title>
+<include file="common:public" />
+<div class="cr"></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="alist">
+	  <tr>
+		<td >ID</td>
+		<td>模块名</td>
+		<td >等级条件</td>
+		<td >功能描述</td>
+		<td >使用次数</td>
+		
+		<td>状态</td>
+		<td>管理操作</td>
+	  </tr>
+	    <volist name="list" id="vo">
+			<tr>
+				<td align='center'>{lanrain:$vo.id}</td>
+				<td >{lanrain:$vo.name}</td>
+				<td >{lanrain:$vo.gid}</td>
+				<td >{lanrain:$vo.info}</td>
+				<td align='center'>{lanrain:$vo.usenum}</td>
+				<td align='center'><eq name="vo.status" value="1"><font color="red">√</font><else/><font color="blue">×</font></eq> 
+				</td>
+				<td align='center'>
+					<a href="{lanrain::U('Function/edit/',array('id'=>$vo['id']))}">修改</a>
+					| <eq name="vo.username" value="admin"><font color="#cccccc">删除</font><else/><a href="javascript:void(0)" onclick="return confirmurl('{lanrain::U('Function/del/',array('id'=>$vo['id']))}','确定删除该用户吗?')">删除</a></eq>
+				</td>
+			</tr>
+	    </volist>
+		<style>
+			.current{border: 0;padding: 1px 9px;color: #fff;background: #3F8EF3 url(main/pageh.png) no-repeat;}
+		</style>
+     <tr bgcolor="#FFFFFF"> 
+	 
+      <td colspan="7"><div class="listpage">{lanrain:$page}</div></td>
+     
+    </tr>
+   
+</table>
+
+<div class="bottom">
+<span>功能详细说明：</span>
+</div>
+
+</body>
+</html>

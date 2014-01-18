@@ -1,0 +1,60 @@
+<include file="Public:head"/>
+<link rel="stylesheet" href="./tpl/static/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="./tpl/static/kindeditor/plugins/code/prettify.css" />
+<script src="./tpl/static/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="./tpl/static/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="./tpl/static/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#info', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : false,
+items : [
+'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+ '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap']
+});
+});
+</script>
+<script src="{lanrain::RES}/js/date/WdatePicker.js"></script>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB"><h4>发布礼品券 <span class="FAQ">发布积分兑换礼品信息</span></h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>
+         
+          <form method="post" action="" enctype="multipart/form-data">
+          <div class="msgWrap form">
+            <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <tbody>
+				<tr>
+              		<th>礼品名称：</th>
+              		<td><input type="input" class="px" id="title" value="" name="title" style="width:400px;"> </td>
+              	</tr>
+				<tr>
+					<th>兑换礼品所需积分：</th>
+					<td><input type="input" class="px" id="title" value="" name="integral" style="width:50px;"> 积分				　
+				</td>
+				</tr>
+              	<tr>
+					<th>有效期：</th>
+					<td><input type="input" class="px" id="statdate" value="" onclick="WdatePicker()" name="statdate"> （含）到 
+					<input type="input" class="px" id="enddate" value="" name="enddate" onclick="WdatePicker()">（含）</td>
+				</tr>
+              	<tr>
+              		<th valign="top">使用说明：</th>
+              		<td><textarea name="info" id="info" rows="5" style="width: 410px; height: 250px; display: none;"></textarea></td>
+              		</tr>
+
+              	<tr>
+              		<th></th>
+              		<td><button type="submit" name="button" class="btnGreen">保存</button>　<a href="javascript:history.go(-1);" class="btnGray vm">取消</a></td>
+              		</tr>
+              	</tbody>
+            </table>
+            
+          </div>
+          </form>
+          
+        </div>
+<include file="Public:footer"/>

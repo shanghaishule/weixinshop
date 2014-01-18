@@ -1,0 +1,46 @@
+ <include file="Public:head" /> 
+  <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" > 
+   <div class="cLineB"> 
+    <h4>短信配置</h4> 
+    <a href="{lanrain::U('Product/cats',array('token'=>$token,'parentid'=>$parentid))}" class="right  btnGreen" style="margin-top:-27px;display:none">返回</a> 
+   </div> 
+   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+    <if condition="$isUpdate eq 1"><input type="hidden" name="id" value="{lanrain:$set.id}" /> </if>
+     
+    <div class="msgWrap bgfc"> 
+    <div>目前支持的短信平台：<volist name="servers" id="s"><a href="{lanrain:$s.url}" target="_blank">{lanrain:$s.name}</a>&nbsp;&nbsp;</volist></div>
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody>
+      <tr> 
+        <th><span class="red">*</span>选择平台：</th>
+        <td><select name="server"><option value="">请选择</option>{lanrain:$serverOptions}</select></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>用户名：</th> 
+        <td><input type="text" name="username" value="{lanrain:$set.username}" class="px" style="width:400px;" /></td> 
+       </tr>
+       <tr> 
+        <th><span class="red"></span>产品ID：</th> 
+        <td><input type="text" name="productid" value="{lanrain:$set.productid}" class="px" style="width:400px;" /> 使用“上海盛大短信平台”需要填写</td> 
+       </tr>
+       <tr> 
+        <th><span class="red">*</span>用户Key：</th> 
+        <td><input type="text" name="password" value="{lanrain:$set.password}" class="px" style="width:400px;" /></td> 
+       </tr>
+       
+        <tr> 
+        <th><span class="red">*</span>短信后缀：</th> 
+        <td><input type="text" name="subfix" value="{lanrain:$set.subfix}" class="px" style="width:400px;" /></td> 
+       </tr>
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <button type="submit" name="button" class="btnGreen">保存</button> &nbsp;</td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+  </div> 
+  <include file="Public:footer" />

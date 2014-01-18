@@ -1,0 +1,253 @@
+<include file="public:header" />
+<script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
+   <script>
+		     $(function(){
+		    
+        	 $('#free').change(function(){
+        	  if($(this).val()==2)
+        	  {
+        	  	$('#address_form').show();
+        	  }else
+        	  {
+        	  		$('#address_form').hide();
+        	  }
+        	 });
+        	 set_address();
+        })
+        
+          function set_address()
+          {
+          	 var addr_id =$("#free").find("option:selected").val();
+          	
+           if(addr_id == 2)
+            {
+               
+                $('#address_form').show();
+            }
+            else
+            {
+                $('#address_form').hide();
+     
+            }
+          }
+		    </script>
+<!--添加商品-->
+<div class="subnav">
+    <h1 class="title_2 line_x">添加商品</h1>
+</div>
+<form id="info_form" action="{:u('item/add')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">基本信息</li>
+            <li>展示图片</li>
+			<!--<li>SEO设置</li>
+            <li>附加属性</li>-->
+		</ul>
+		<div class="J_panes">
+        <div class="content_list pad_10">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+			<tr>
+				<th width="120">所属分类 :</th>
+                <td><select class="J_cate_select mr10" data-pid="0" data-uri="{:U('item_cate/ajax_getchilds', array('type'=>0))}" data-selected=""></select><input type="hidden" name="cate_id" id="J_cate_id" value="" /></td>
+			</tr>
+			<tr>
+				<th width="120">所属品牌 :</th>
+                <td>
+                <select  name="brand" >
+                <option value="">--请选择--</option>
+                <volist name='brandlist' id='vo' >
+                <option value="{$vo.id}" >{$vo.name}</option>
+                </volist>
+                </select></td>
+			</tr>
+            <tr>
+				<th>商品名称 :</th>
+				<td><input type="text" name="title" id="J_title" class="input-text" size="60"></td>
+			</tr>
+			<tr>
+                <th>商品简介 :</th>
+                <td><textarea name="intro" cols="80" rows="2"></textarea></td>
+            </tr>
+            <tr>
+				<th>商品图片 :</th>
+				<td><input type="file" name="img" /></td>
+ 			</tr>
+		
+            <tr>
+				<th>商品价格 :</th>
+				<td><input type="text" name="price" class="input-text" size="10"> 元</td>
+			</tr>
+		    <tr>
+				<th>商品库存 :</th>
+				<td><input type="text" name="goods_stock" class="input-text" size="10"> </td>
+			</tr>
+		    <tr>
+		      <th>是否推荐:</th>
+		      <td><input type="checkbox" name="news" >新品&nbsp; <input type="checkbox" name="tuijian" >推荐</td>
+		    </tr>
+		     <tr>
+		      <th>运费:</th>
+		      <td>
+		      <select id='free' name="free">
+		      <option value="1">卖家承担运费</option>
+		      <option  value="2">买家承担运费</option>
+		      </select>
+		      </td>
+		    </tr>
+		    
+		 
+		    
+		    <tr id="address_form" style="display:none;">
+		    <th></th>
+		    <td> 
+		      平邮:<input onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="pingyou" />
+		      快递:<input onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="kuaidi" />
+		      EMS:<input onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="ems" /></td>
+		    </tr>
+		    
+		           <tr>
+						<th>商品详情 :</th>
+		                <td><textarea name="info" id="info" style="width:68%;height:400px;visibility:hidden;resize:none;"></textarea></td>
+					</tr>
+		</table>
+		</div>
+        <div class="content_list pad_10 hidden">
+            <table width="100%" cellpadding="2" cellspacing="1" class="table_form" id="first_upload_file">
+                <tbody class="uplode_file">
+                <tr>
+                    <th width="100"><a href="javascript:void(0);" class="blue" onclick="add_file();"><img src="__STATIC__/css/admin/bgimg/tv-expandable.gif" /></a> 上传文件 :</th>
+                    <td><input type="file" name="imgs[]"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+		<div class="content_list pad_10 hidden">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+			<tr>
+				<th width="120">{:L('seo_title')} :</th>
+ 				<td><input type="text" name="seo_title" id="seo_title" class="input-text" size="60"></td>
+			</tr>
+			<tr>
+				<th>{:L('seo_keys')} :</th>
+				<td><input type="text" name="seo_keys" id="seo_keys" class="input-text" size="60"></td>
+			</tr>
+			<tr>
+				<th>{:L('seo_desc')} :</th>
+				<td><textarea name="seo_desc" id="seo_desc" cols="80" rows="8"></textarea></td>
+			</tr>
+		</table>
+		</div>
+        <div class="content_list pad_10 hidden">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form" id="item_attr">
+			<tbody class="add_item_attr">
+            <tr>
+                <th width="210">
+                <a href="javascript:void(0);" class="blue" onclick="add_attr();"><img src="__STATIC__/css/admin/bgimg/tv-expandable.gif" /></a> 属性名 :<input type="text" name="attr[name][]" class="input-text" size="20">
+                </th>
+                <td> 属性值 :<input type="text" name="attr[value][]" class="input-text" size="30"></td>
+            </tr>
+            </tbody>
+		</table>
+		</div>
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" class="btn btn_submit"></div>
+	</div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+</form>
+
+<include file="public:footer" />
+<script type="text/javascript">
+$('.J_cate_select').cate_select('请选择');
+$(function() { 		   
+	$('ul.J_tabs').tabs('div.J_panes > div');
+	//自动获取标签
+	$('#J_gettags').live('click', function() {
+		var title = $.trim($('#J_title').val());
+		if(title == ''){
+			$.pinphp.tip({content:lang.article_title_isempty, icon:'alert'});
+			return false;
+		}
+		$.getJSON('{:U("item/ajax_gettags")}', {title:title}, function(result){
+			if(result.status == 1){
+				$('#J_tags').val(result.data);
+			}else{
+				$.pinphp.tip({content:result.msg});
+			}
+		});
+	});
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+	$("#J_title").formValidator({onshow:'请填写商品名称',onfocus:'请填写商品名称'}).inputValidator({min:1,onerror:'请填写商品名称'});
+});
+
+function add_file()
+{
+    $("#next_upload_file .uplode_file").clone().insertAfter($("#first_upload_file .uplode_file:last"));
+}
+function del_file_box(obj)
+{
+	$(obj).parent().parent().remove();
+}
+function add_attr()
+{
+    $("#hidden_attr .add_item_attr").clone().insertAfter($("#item_attr .add_item_attr:last"));
+}
+function del_attr(obj)
+{
+	$(obj).parent().parent().remove();
+}
+</script>
+<table id="next_upload_file" style="display:none;">
+<tbody class="uplode_file">
+   <tr>
+      <th width="100"><a href="javascript:void(0);" onclick="del_file_box(this);" class="blue"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>上传文件 :</th>
+      <td><input type="file" name="imgs[]"></td>
+   </tr>
+</tbody>
+</table>
+<table id="hidden_attr" style="display:none;">
+<tbody class="add_item_attr">
+<tr>
+    <th width="200">
+    <a href="javascript:void(0);" class="blue" onclick="del_attr(this);"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>属性名 :<input type="text" name="attr[name][]" class="input-text" size="20">
+    </th>
+    <td>属性值 :<input type="text" name="attr[value][]" class="input-text" size="30"></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
+<script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
+<script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
+<script>
+
+$(function() {
+	KindEditor.create('#info', {
+		uploadJson : '{:U("attachment/editer_upload")}',
+		fileManagerJson : '{:U("attachment/editer_manager")}',
+		allowFileManager : true
+	});
+	$('ul.J_tabs').tabs('div.J_panes > div');
+
+	//颜色选择器
+	$('.J_color_picker').colorpicker();
+
+	//自动获取标签
+	$('#J_gettags').live('click', function() {
+		var title = $.trim($('#J_title').val());
+		if(title == ''){
+			$.pinphp.tip({content:lang.article_title_isempty, icon:'alert'});
+			return false;
+		}
+		$.getJSON('{:U("article/ajax_gettags")}', {title:title}, function(result){
+			if(result.status == 1){
+				$('#J_tags').val(result.data);
+			}else{
+				$.pinphp.tip({content:result.msg});
+			}
+		});
+	});
+	
+});
+</script>

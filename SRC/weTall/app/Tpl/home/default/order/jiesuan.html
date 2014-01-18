@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<include file="public:headtop" />
+</head>
+
+<body  onload="setup()" >
+<include file="public:head" />
+<div id="content">
+    <h4 class="add_title"><a class="enter" href="{:U('user/address')}">管理收货地址</a></h4>
+    <div class="order_address_list">
+        <h4 class="add_title">收货人地址</h4>
+        <script type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" charset="utf-8"></script>
+         <!-- <script type="text/javascript" src="__STATIC__/weixin/js/area.js" charset="utf-8"></script>-->
+        <script type="text/javascript" src="__STATIC__/weixin/js/jquery_003.js" charset="utf-8"></script>
+        <script type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js" charset="utf-8"></script>
+        <link href="__STATIC__/weixin/css/dialog.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" id="dialog_js" charset="utf-8"></script>
+        <script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/dizhi2.js'></script>
+<script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/diqu2.js'></script>
+       <script type="text/javascript">
+
+       <script type="text/javascript">
+       $(function(){
+       	$('#order_form').validate({
+       		errorPlacement: function(error, element){
+       			$(element).next("label").append(error);
+       		},
+       		success       : function(label){
+       			//label.addClass('validate_right').text('OK!');
+       		},
+       		onsubmit:true,// 是否在提交是验证
+       		onkeyup : false,
+       		rules : {
+       			consignee : {
+       				required : true,
+       			},
+       			address : {
+       				required : true
+       			},
+
+       		},
+       		messages : {
+       			consignee : {
+       				required : '您必须提供一个用户名',
+       				remote   : '用户名不存在！'
+       			},
+       			address  : {
+       				required : '请如实填写收货人详细地址'
+       			}
+       		}
+       	});
+       });
+        </script>
+      
+        <script>
+        $(function(){
+
+        	$('input[name=address_options]').change(function(){
+        		if($(this).val()==0)
+        		{
+        			$('#address_form').show();
+        		}else
+        		{
+        			$('#address_form').hide();
+        		}
+        	});
+        	set_address();
+        })
+
+        function set_address()
+        {
+        	var addr_id = $("input[name='address_options']:checked").val();
+
+        	if(addr_id == 0)
+        	{
+
+        		$('#address_form').show();
+        	}
+        	else
+        	{
+        		$('#address_form').hide();
+
+        	}
+        }
+
+        function ordertj()
+        {
+        	var addr_id = $("input[name='address_options']:checked").val();
+        	if(addr_id == 0)
+        	{
+        		var consignee=  $.trim($('#consignee').val());
+        		var address=  $.trim($('#address').val());
+        		var phone_mob=  $.trim($('#phone_mob').val());
+        		var sheng=  $.trim($('#s1').val());
+
+        		if(consignee=='')
+        		{
+        			alert('请输入收货人姓名');
+        			return false;
+        		}
+        		if(sheng=='')
+        		{
+        			alert('请选择所在地区');return false;
+        		}
+
+        		if(address=='')
+        		{
+        			alert('请输入详细地址');
+        			return false;
+        		}
+        		if(phone_mob=='')
+        		{
+        			alert('请输入手机号码');
+        			return false;
+        		}
+        		if(isNaN(phone_mob))
+        		{
+        			alert('请输入正确的手机号码');return false;
+        		}
+        	}
+        	$('#order_form').submit();
+
+        }
+        </script>
+       
+         
+       <form method="POST"  action="{:U('Order/pay')}" id="order_form" name="order_form"   >
+        <?php if(count($address_list)!=0){ ?>
+        
+        <volist name='address_list' id='vo' >
+        <ul class="receive_add address_item selected_address">
+            <li class="radio"><input id="address_{$vo.id}" checked="checked"  name="address_options" value="{$vo.id}" type="radio"></li>
+            <li class="particular">{$vo.sheng}&nbsp;{$vo.shi}&nbsp;{$vo.qu}&nbsp;{$vo.address}</li>
+            <li class="name">收货人姓名: {$vo.consignee}</li>
+            <li class="mobile">手机号码:{$vo.mobile}</li>
+        </ul>
+       </volist>
+        <ul class="new_receive_add address_item">
+            <li class="radio">
+            <input name="address_options" id="use_new_address" value="0"  type="radio">
+            </li><li class="particular">使用新的收货地址</li>
+        </ul>    
+           
+        <ul style="display: none;" class="fill_in_content" id="address_form">
+            <li>
+                <p class="title">收货人姓名</p>
+                <p><input value="" name="consignee" id="consignee" class="text" type="text"></p>
+            </li>
+            <li>
+                <p class="title">所在地区</p>
+                <p></p>
+                <div id="region">
+                 <select name="sheng" id="s1"></select>
+                <select name="shi" id="s2"></select>
+                <select name="qu" id="s3"></select>
+                </div>
+                	<script language="javascript">
+								new PCAS("sheng","shi","qu","","","");
+			</script>
+                <p></p>
+            </li>
+            <li>
+                <p class="title">详细地址</p>
+                <p><input value="" name="address" id="address" class="text width1" type="text"></p>
+            </li>
+            <li>
+                <p class="title">手机号码</p>
+                <p><input value="" id="phone_mob" name="phone_mob" class="text" type="text"></p>
+            </li>
+            <li>
+                <p class="title">&nbsp;</p>
+                <p>
+                    <label>
+                        <input value="1" id="save_address" name="save_address" type="checkbox">&nbsp;自动保存收货地址
+                        <span class="explain">&nbsp;(&nbsp;选择后该地址将会保存到您的收货地址列表&nbsp;)&nbsp;</span>
+                    </label>
+                </p>
+            </li>
+        </ul>
+        <?php }else{ ?>
+           <ul class="new_receive_add address_item">
+            <li class="radio">
+            <input checked='checked' name="address_options" id="use_new_address" value="0"  type="radio">
+            </li><li class="particular">使用新的收货地址</li>
+            </ul> 
+       
+        <ul  class="fill_in_content" id="address_form">
+            <li>
+                <p class="title">收货人姓名</p>
+                <p><input value="" name="consignee" id="consignee" class="text" type="text"></p>
+            </li>
+            <li>
+                <p class="title">所在地区</p>
+                <p></p>
+                <div id="region">
+                 <select name="sheng" id="s1"></select>
+                <select name="shi" id="s2"></select>
+                <select name="qu" id="s3"></select>
+                </div>
+                	<script language="javascript">
+								new PCAS("sheng","shi","qu","","","");
+			</script>
+                <p></p>
+            </li>
+            <li>
+                <p class="title">详细地址</p>
+                <p><input value="" name="address" id="address" class="text width1" type="text"></p>
+            </li>
+            <li>
+                <p class="title">手机号码</p>
+                <p><input value="" id="phone_mob" name="phone_mob" class="text" type="text"></p>
+            </li>
+            <li>
+                <p class="title">&nbsp;</p>
+                <p>
+                    <label>
+                        <input value="1" id="save_address" name="save_address" type="checkbox">&nbsp;自动保存收货地址
+                        <span class="explain">&nbsp;(&nbsp;选择后该地址将会保存到您的收货地址列表&nbsp;)&nbsp;</span>
+                    </label>
+                </p>
+            </li>
+        </ul>
+        <?php } ?>
+        
+    </div>			
+    <div class="order_delivery">
+     <?php if($freesum<=0) {?>
+     卖家承担运费
+     <?php }else{ ?>
+        <h4 class="add_title">选择配送方式</h4>
+        <div class="fashion_list">
+        <volist name='freearr' id='vo' key='k' >
+              <ul class="receive_add" shipping_id="{$vo.value}">
+                  <li class="radio"><input id="{$vo.price}" <if condition='$k eq 1'>checked="checked"</if>  name="shipping_id" value="{$vo.value}" type="radio"></li>
+                  <li class="fashion">
+                  <switch name="vo.value">
+                  <case value="1">平邮</case>
+                  <case value="2">快递</case>
+                  <default />EMS
+                  </switch>
+                  </li>
+                  <li class="pay">配送费用:&nbsp;<span class="money" ectype="shipping_fee">¥{$vo.price}</span></li>
+                  <li class="explain"></li>
+                  <input type="hidden" id="price_{$vo.value}" value="{$vo.price}" >
+              </ul>
+        </volist>
+            <!--   <ul class="receive_add" shipping_id="2">
+                  <li class="radio"><input checked="checked" name="shipping_id" value="2" type="radio"></li>
+                  <li class="fashion">快递</li>
+                  <li class="pay">配送费用:&nbsp;<span class="money" ectype="shipping_fee">¥0.01</span></li>
+                  <li class="explain"></li>
+              </ul>
+               <ul class="receive_add" shipping_id="3">
+                  <li class="radio"><input checked="checked" name="shipping_id" value="3" type="radio"></li>
+                  <li class="fashion">EMS</li>
+                  <li class="pay">配送费用:&nbsp;<span class="money" ectype="shipping_fee">¥0.01</span></li>
+                  <li class="explain"></li>
+              </ul>-->
+        </div>
+        <?php } ?>
+    </div>
+    <div class="message_box">
+        <script type="text/javascript">
+        function postscript_activation(tt){
+        	if (!tt.name)
+        	{
+        		tt.value    = '';
+        		tt.name = 'postscript';
+        	}
+
+        }
+        </script>
+        <span class="add_title">给卖家的附言</span>
+        <div class="message">
+            <textarea id="postscript"  onclick="postscript_activation(this);">选填，可以告诉卖家您对商品的特殊需求，如颜色、尺码等</textarea>
+        </div>
+    </div> 
+    </form>
+    <div class="make_sure">
+        <p class="order_amount">订单总价:<strong class="fontsize3" id="order_amount">¥<font id='order_amount2'></strong><input class="btn1" onclick="$(this).parent('p').next().toggle();$('#coupon_sn').val('');" style="display:none" type="button"></p>
+
+        <div>
+            <a onclick="ordertj();" class="btn enter">下单完成并支付</a>
+            <a href="{:U('Shopcart/index')}" class="back">返回购物车</a>
+        </div>
+    </div>
+    
+    <input type="hidden" id="summoney" value="{$sumPrice}" />
+</div>
+<include file="public:footer" />
+</body>
+</html>
+
+
+  <script>
+		     $(function(){
+		    
+        	 $('input[name=shipping_id]').change(function(){
+        	  if($(this).val()!=null)
+        	  {
+        	  
+        	    var sumPrice=$('#summoney').val();
+            	var freePrice= $('#price_'+$(this).val()).val();
+            //alert(sumPrice);
+            //	return false;
+            	$('#order_amount2').html(Number(freePrice)+Number(sumPrice));
+        	  }
+        	 });
+        	 set_free();
+        })
+        
+          function set_free()
+          {
+          	var addr_id = $("input[name='shipping_id']:checked").val();
+          //	 var addr_id =$("input[name=shipping_id]").find("option:checked").val();
+          	
+           if(addr_id !=null)
+            {          
+            	var sumPrice='{$sumPrice}';
+            	var freePrice= $('#price_'+addr_id).val();
+            	$('#order_amount2').html(Number(freePrice)+Number(sumPrice));
+            }
+            else
+            {
+            $('#order_amount2').html('{$sumPrice}');
+            }
+          }
+		    </script>

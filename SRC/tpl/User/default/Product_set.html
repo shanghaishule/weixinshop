@@ -1,0 +1,138 @@
+<include file="Public:head" /> 
+ <link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/plugins/code/prettify.css" />
+<script src="{lanrain::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#intro', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : false,
+items : [
+'source','undo','clearhtml','hr',
+'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+'insertunorderedlist', '|', 'emoticons', 'image','link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut']
+});
+
+});
+</script>
+<script>
+	KindEditor.ready(function(K){
+		var editor = K.editor({
+			allowFileManager:true
+		});
+		K('#upload').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					fileUrl : K('#pic').val(),
+					clickFn : function(url, title) {
+						if(url.indexOf("http") > -1){
+							K('#pic').val(url);
+						}else{
+							K('#pic').val("{lanrain::C('site_url')}"+url);
+						}
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+<script>
+function showChildCats(value){
+	$("#catid").html('<option value="0">请选择...</option>');
+	if(value==0){
+		document.getElementById('catid').disabled=true;
+	}else{
+		$.ajax({
+			url: $('#catUrl').attr("value")+'&parentid='+value,
+			success: function( data ) {
+				document.getElementById('catid').disabled=false;
+				$("#catid").html($("#catid").html()+data);
+			}
+		});
+	}
+}
+function toDecimal(x) {  
+            var f = parseFloat(x);  
+            if (isNaN(f)) {  
+                return;  
+            }  
+            f = Math.round(x*10)/10;  
+            return f;  
+        }  
+function calDiscount(){
+	var price=$('#price').attr('value');
+	var oprice=$('#oprice').attr('value');
+	if(oprice!=0&&oprice!=''){
+		var dis=oprice-price;
+		var discount=10-toDecimal((dis/oprice)*10);
+	}else{
+		discount=10;
+	}
+	$('#discount').attr('value',discount);
+}
+</script>
+<input type="hidden" id="catUrl" value="{lanrain::U('Product/ajaxCatOptions',array('token'=>$token))}" />
+  <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" > 
+   <div class="cLineB"> 
+    <h4><if condition="$isDining neq 1">商品<else/>菜品</if>设置</h4> 
+    <a href="{lanrain::U('Product/index',array('token'=>$token,'dining'=>$isDining))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+   </div> 
+   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+<if condition="$isUpdate eq 1">
+<input type="hidden" name="id" value="{lanrain:$set.id}" />
+</if>
+<input type="hidden" name="discount" id="discount" value="{lanrain:$set.discount}" />
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th><span class="red">*</span>名称：</th> 
+        <td><input type="text" name="name" value="{lanrain:$set.name}" class="px" style="width:400px;" /></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>类别：</th> 
+        <td><select id="catid" name="catid"><option value="0">请选择分类...</option>{lanrain:$catsOptions}</select></td> 
+       </tr>
+        <tr style="display:none"> 
+        <th><span class="red">*</span>店铺：</th> 
+        <td><input type="text" name="storeid" value="1" class="px" style="width:400px;" /></td> 
+       </tr>
+        <tr> 
+        <th><span class="red">*</span>价格：</th>
+        <td><input type="text" id="price" onchange="calDiscount();" name="price" value="{lanrain:$set.price}" class="px" style="width:100px;" /> 元</td> 
+       </tr>
+       <tr> 
+        <th><span class="red">*</span>原价：</th> 
+        <td><input type="text" id="oprice" onchange="calDiscount();" name="oprice" value="{lanrain:$set.oprice}" class="px" style="width:100px;" /> 元</td> 
+       </tr>
+        <tr> 
+        <th><span class="red">*</span>关键词：</th>
+        <td><input type="text" name="keyword" value="{lanrain:$set.keyword}" class="px" style="width:400px;" /></td> 
+       </tr>
+        <tr> 
+        <th><span class="red">*</span>Logo地址：</th>
+        <td><input type="text" id="pic" name="logourl" value="{lanrain:$set.logourl}" class="px" style="width:400px;" readonly="readonly"/><span class="ke-button-common" id="upload" style="margin-top: 3px;margin-left: 5px;"><input type="button" class="ke-button-common ke-button" value="上传"></span></td> 
+       </tr>
+        <TR>
+                  <TH valign="top"><label for="info">图文详细页内容：</label></TH>
+                  <TD><textarea name="intro" id="intro"  rows="5" style="width:590px;height:360px">{lanrain:$set.intro}</textarea></TD>
+                </TR>  
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <if condition="$isDining neq 1"><input type="hidden" value="0" name="dining" /><else/><input type="hidden" value="1" name="dining" /></if>
+       <button type="submit" name="button" class="btnGreen">保存</button> &nbsp; <a href="{lanrain::U('Product/index',array('token'=>$token))}" class="btnGray vm">取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+  </div> 
+  <include file="Public:footer" />

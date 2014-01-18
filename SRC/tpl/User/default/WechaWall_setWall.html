@@ -1,0 +1,99 @@
+<include file="Public:head"/>
+<script src="{lanrain::RES}/js/date/WdatePicker.js"></script>
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="{lanrain::STATICS}/kindeditor/plugins/code/prettify.css" />
+<script src="{lanrain::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{lanrain::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+	KindEditor.ready(function(K){
+		var editor = K.editor({
+			allowFileManager:true
+		});
+		K('#upload').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					fileUrl : K('#pic').val(),
+					clickFn : function(url, title) {
+						if(url.indexOf("http") > -1){
+							K('#pic').val(url);
+						}else{
+							K('#pic').val("{lanrain::C('site_url')}"+url);
+						}
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+		K('#upload2').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					fileUrl : K('#pic2').val(),
+					clickFn : function(url, title) {
+						if(url.indexOf("http") > -1){
+							K('#pic2').val(url);
+						}else{
+							K('#pic2').val("{lanrain::C('site_url')}"+url);
+						}
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+<form class="form" method="post" action=""  target="_top" enctype="multipart/form-data" >
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<!--活动开始-->
+<div class="cLineB">
+  <h4>摇一摇奖项设置</h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a></div>  
+<div class="msgWrap bgfc">
+ 
+<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"><tbody>
+<!--
+<tr>
+  <th valign="top">序列码：（不填相当于没有开启，请跟商家联系）</th>
+  <td>
+  <input type="input" class="px" id="xunlie"  value=""  name="xunlie" style="width:500px"></td>
+</tr>-->
+<tr>
+  <th valign="top">第一名：</th>
+  <td><input type="hidden" name="token" value="{lanrain:$token}">
+  <input type="input" class="px" id="email" value="{lanrain:$wechawall_api.email}"  name="email" style="width:500px"></td>
+</tr>
+<tr>
+  <th valign="top">第二名：</th>
+  <td>
+  <input type="input"  value="{lanrain:$wechawall_api.password}" class="px" id="password"  name="password" style="width:500px"></td>
+</tr>
+
+<tr>
+  <th valign="top">其他奖项说明：</th>
+  <td>
+  <textarea class="px" id="url"  name="url" style="width:500px;height:300px;">{lanrain:$wechawall_api.url}</textarea></td>
+</tr>
+<tr>
+  <th valign="top">上传二维码：</th>
+  <td><input type="text" name="tdcode" value="{lanrain:$wechawall_api.tdcode}" id="pic" class="px" style="width:550px;" readonly="readonly"><span class="ke-button-common" id="upload" style="margin-top: 3px;margin-left: 5px;"><input type="button" class="ke-button-common ke-button" value="上传"></span>
+  </td>
+</tr>
+<tr>
+  <th valign="top">活动背景图：</th>
+  <td><input type="text" name="imgurl" value="{lanrain:$wechawall_api.imgurl}" id="pic2" class="px" style="width:550px;" readonly="readonly"><span class="ke-button-common" id="upload2" style="margin-top: 3px;margin-left: 5px;"><input type="button" class="ke-button-common ke-button" value="上传"></span><br/> 填写图片外链地址，大小为1024x768
+  </td>
+</tr>
+<tr>
+  <th valign="top">活动说明：</th>
+  <td>
+  <textarea class="px" id="descr"  name="descr" style="width:500px;height:300px;">{lanrain:$wechawall_api.descr}</textarea></td>
+</tr>
+<tr>
+<th>&nbsp;</th>
+<td><button type="submit" name="button" class="btnGreen">保存</button>　<a href="index.php?g=User&m=Diaoyan&a=index" class="btnGray vm">取消</a></td>
+                                    </tr>
+</tbody>
+</table>
+</div> 
+</div>
+</form>
+<include file="Public:footer"/> 

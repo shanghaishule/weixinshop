@@ -1,0 +1,67 @@
+<include file="Public:head"/>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+<div class="cLineB">
+  <h4>幻灯片管理 <span class="FAQ">3G网站头部幻灯片。</span></h4>
+  
+ </div>
+         <div class="cLineC" style="line-height: 32px;">
+ <a  target="ddd" href="{lanrain::U('Flash/add')}" class="btnGrayS vm bigbtn" >添加幻灯片</a>　 
+</div>
+ 
+ <div class="msgWrap form">
+
+<div class="bdrcontent">
+<div id="div_ptype">
+<table class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+<thead>
+<tr>
+                   
+                   <th style=" width:120px;">幻灯片描述</th>
+
+<th>幻灯片图片外链地址(宽720高400) <a  target="999" class="tooltips" ><img src="{lanrain::RES}/images/price_help.png" align="absmiddle" /><span>
+<p>分类图片最佳尺寸：宽720高400</p>
+<p>不支持上传图片，请把图片上传到腾讯微博，再这里填写图片的外链地址。</p>
+<p>如果不填写分类图片地址系统将随机分配默认图片。</p>
+</span></a></th>
+                        <th>幻灯片外链地址 <span class="tooltips" ><img src="{lanrain::RES}/images/price_help.png" align="absmiddle" /><span>
+<p>比如你想跳转到百度，就填写<a class="red">http://www.baidu.com</a></p>
+<p>不需要跳转就不用填写，还可以外链活动，</p>
+<p>直接填写活动外链地址：<a class="red">大转盘387</a></p>
+</span></span></th>
+
+                        <th style=" width:100px;" class="norightborder">操作</th>
+</tr>
+</thead>
+<volist name="info" id="vo">
+<tr>
+
+<td>{lanrain:$vo.info}</td>
+<td><div class="cateimg"><img src="{lanrain:$vo.img}" class="cateimg_small"  /><img src="{lanrain:$vo.img}" class="cateimg_big"  /></div></td>
+<td>{lanrain:$vo.url}</td>
+<td class="norightborder">
+	<a target="ddd" href="{lanrain::U('Wap/Index/flash',array('token'=>$_SESSION['token']))}">查看</a>
+	<a target="ddd" href="{lanrain::U('Flash/edit',array('id'=>$vo['id']))}">编辑</a>
+	<a href="{lanrain::U('Flash/del',array('id'=>$vo['id']))}">删除</a>
+</td>
+</tr>
+</volist>
+               
+  </table>
+</div>
+</div>
+<div class="footactions" style="padding-left:10px">
+  <div class="pages">{lanrain:$page}</div>
+</div>
+          </div>
+  
+        </div>
+   
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div> 
+  <!--底部-->
+  	</div>
+
+<include file="Public:footer"/>

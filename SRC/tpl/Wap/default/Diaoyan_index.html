@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="">
+
+<title>万达微调研</title>
+<link href="{lanrain::RES}/css/guajiang/diaoyan.css" rel="stylesheet" type="text/css"> 
+
+</head>
+<body class="activity-lottery-winning" >
+<div  class="main" >
+<script type="text/javascript">
+function nextFun(){
+ var nex = document.getElementById("nextOne");
+ nex.disabled=false;
+}
+</script>
+<div class="titleN"><p>总共<span style="color:red;">{lanrain:$totalNum}</span>道题  你目前在第<span style="color:red;">{lanrain:$currNum}</span>道题</p></div>
+<div class="questionBanner">
+<br>
+<volist id="Diaoyan" name="Diaoyan">
+<if condition="$Diaoyan['id'] eq $id">
+<if condition="$last eq 'X'">
+<form class="form" method="post" action="index.php?g=Wap&m=Diaoyan&a=next" enctype="multipart/form-data" >
+<else/>
+<form class="form" method="post" action="index.php?g=Wap&m=Diaoyan&a=finish" enctype="multipart/form-data" >
+</if>
+<input type="hidden" name="id" value="{lanrain:$Diaoyan.id}"/>
+
+<if condition="$Diaoyan['type'] eq 'D'">
+    <div class="activity-lottery-end" >
+    <div  class="main" >
+    <div class="content" style=" margin-top:10px">
+        <div class="boxcontent boxyellow">
+            <div class="box">
+                <div class="title-red">{lanrain:$Diaoyan.question}</div>
+                <div class="option">
+                <div class="title-option"><input type="radio" name="answer" onchange="nextFun();" value="optionA">    {lanrain:$Diaoyan.optionA}</div>
+                <if condition="$Diaoyan['optionB'] neq ''">
+                <div class="title-option"><input type="radio" name="answer" onchange="nextFun();" value="optionB">    {lanrain:$Diaoyan.optionB}</div>
+                </if> <if condition="$Diaoyan['optionC'] neq ''">
+                <div class="title-option"><input type="radio" name="answer" onchange="nextFun();" value="optionC">    {lanrain:$Diaoyan.optionC}</div>
+                </if> <if condition="$Diaoyan['optionD'] neq ''">
+                <div class="title-option"><input type="radio" name="answer" onchange="nextFun();" value="optionD">    {lanrain:$Diaoyan.optionD}</div>
+                </if> <if condition="$Diaoyan['optionE'] neq ''">
+                <div class="title-option"><input type="radio" name="answer" onchange="nextFun();" value="optionE">    {lanrain:$Diaoyan.optionE}</div>
+                </if>
+                </div>
+                <div class="title-next">
+                   <if condition="$last eq 'X'"><input id="nextOne" disabled="disabled" type="submit" name="submit" value="下一步"></input>
+                   <else/><input type="submit" id="nextOne" disabled="disabled" name="submit" value="完成"></input>
+                   </if></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+<else/>
+    <div class="title-red">{lanrain:$Diaoyan.question}</div>
+                <div class="option">
+                <div class="title-option"><input type="checkbox" name="answer" onchange="nextFun();" value="optionA">    {lanrain:$Diaoyan.optionA}</div>
+                <if condition="$Diaoyan['optionB'] neq ''">
+                <div class="title-option"><input type="checkbox" name="answer" onchange="nextFun();" value="optionB">    {lanrain:$Diaoyan.optionB}</div>
+                </if> <if condition="$Diaoyan['optionC'] neq ''">
+                <div class="title-option"><input type="checkbox" name="answer" onchange="nextFun();" value="optionC">    {lanrain:$Diaoyan.optionC}</div>
+                </if> <if condition="$Diaoyan['optionD'] neq ''">
+                <div class="title-option"><input type="checkbox" name="answer" onchange="nextFun();" value="optionD">    {lanrain:$Diaoyan.optionD}</div>
+                </if> <if condition="$Diaoyan['optionE'] neq ''">
+                <div class="title-option"><input type="checkbox" name="answer" onchange="nextFun();" value="optionE">    {lanrain:$Diaoyan.optionE}</div>
+                </if>
+                </div>
+                <div class="title-next">
+                <if condition="$last eq 'X'"><input id="nextOne" disabled="disabled" type="submit" name="submit" value="下一步"></input>
+                   <else/><input type="submit" id="nextOne" disabled="disabled" name="submit" value="完成"></input>
+                   </if></div>
+</if>
+</form>
+</if>
+</volist>
+</div>
+<div style="height:60px;"></div>
+
+</body>
+</html>

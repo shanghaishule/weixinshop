@@ -1,0 +1,1 @@
+var loadJS=function(B,D){var A=document.getElementsByTagName("head");if(A&&A.length){A=A[0]}else{A=document.body}var C=document.createElement("script");C.src=B;C.type="text/javascript";A.appendChild(C);if(arguments.length==2){document.addEventListener("DOMContentLoaded",function(){C.onload=function(){D();C.onload=null}})}};

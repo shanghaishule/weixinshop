@@ -1,0 +1,27 @@
+<include file="public:header" />
+<!--附件设置-->
+<div class="pad_lr_10">
+	<form id="info_form" action="{:u('setting/edit')}" method="post" enctype="multipart/form-data">
+	<table width="100%" class="table_form">
+        <tr>
+            <th width="150">{:L('attach_path')} :</th>
+            <td><input type="text" name="setting[attach_path]" class="input-text" size="50" value="{:C('pin_attach_path')}"></td>
+        </tr>
+        <tr>
+            <th>{:L('attr_allow_exts')} :</th>
+            <td><input type="text" name="setting[attr_allow_exts]" class="input-text" size="50" value="{:C('pin_attr_allow_exts')}"></td>
+        </tr>
+        <tr>
+            <th>{:L('attr_allow_size')} :</th>
+            <td><input type="text" name="setting[attr_allow_size]" class="input-text" value="{:C('pin_attr_allow_size')}"></td>
+        </tr>
+        <tr>
+        	<th></th>
+        	<td><input type="hidden" name="menuid"  value="{$menuid}"/><input type="submit" class="btn btn_submit" name="do" value="{:L('submit')}"/></td>
+    	</tr>
+	</table>
+	</form>
+</div>
+<include file="public:footer" />
+</body>
+</html>

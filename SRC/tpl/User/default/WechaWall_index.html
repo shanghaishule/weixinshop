@@ -1,0 +1,62 @@
+<include file="Public:head"/>  
+        <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+          <div class="cLineB">
+              <h4 class="left">摇一摇设置</span></h4>
+                 
+              <div class="clr"></div>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator left">
+            <a href='{lanrain::U('WechaWall/setWall',array('token'=>$token))}' title='设置' class='btnGrayS vm bigbtn'><img src="{lanrain::RES}/images/icons/pencil.png" class="vm" />设置摇一摇</a>
+  <a href='{lanrain::U('WechaWall/Tozero',array('token'=>$token))}' title='数据清零' class='btnGrayS vm bigbtn'><img src="{lanrain::RES}/images/product/cup.png" class="vm" />数据清零</a>
+<a href='{lanrain::U('WechaWall/gameAgain',array('token'=>$token))}' title='重新开始' class='btnGrayS vm bigbtn'><img src="{lanrain::RES}/images/icons/arrow_refresh.png" class="vm" />重新开始</a> 
+<a href='{lanrain::U('WechaWall/deleteAll',array('token'=>$token))}' title='删除所有' class='btnGrayS vm bigbtn'><img src="{lanrain::RES}/images/icons/basket_delete.png" class="vm" />删除所有人</a> 
+ <a href='/Wall/vote/index.php?tokenTall={lanrain:$token}' target="new" title='摇一摇' class='btnGrayS vm bigbtn'><img src="{lanrain::RES}/images/icons/bell.png" class="vm" />摇一摇</a> 参与人数： {lanrain:$count}    
+            </div>
+          
+            <div class="clr"></div>
+          
+          </div>
+          <div class="msgWrap">
+          <form method="post"  action="" id="info" >
+          <input name="delall"  type="hidden" value="" />
+           <input name="wxid"  type="hidden" value="" />
+            <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <THEAD>
+                <TR>
+<TH class="select">姓名</TH>
+<TH class="select">名次</TH>
+<TH>得分</TH>
+<TH>电话号码</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+                <TR></TR>
+                  <volist id="list" name="list" key = "k">
+                <TR>
+                  <TD>{lanrain:$list.name}</TD>
+                  <TD>第{lanrain:$k}名</TD>                  
+                  <TD>{lanrain:$list.res} </TD>
+                  <TD>{lanrain:$list.tel} </TD>
+                </TR>
+				</volist>
+              </TBODY>
+            </TABLE>
+           </form> 
+           </div>
+      </div>
+  <script>
+
+function checkAll(form, name) {
+for(var i = 0; i < form.elements.length; i++) {
+var e = form.elements[i];
+if(e.name.match(name)) {
+e.checked = form.elements['chkall'].checked;
+}
+}
+}</script>
+  <!--底部-->
+  	</div>
+  	
+  	</div>
+<include file="Public:footer"/>

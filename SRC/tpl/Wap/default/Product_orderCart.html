@@ -1,0 +1,165 @@
+<include file="Product:header"/>
+<style>
+.deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:13px 24px;border:solid #d6d482 1px;background:#f5f4c5;font-size:16px;color:#8f772f;line-height:18px;border-radius:3px;}
+</style>
+<form method="post" action="" onsubmit="return tgSubmit()">
+<if condition="$cartIsDining eq 1">
+<a class="more" id="show_more" href="javascript:void(0);" style="color:#fff;background:#f90">属于餐饮类订单，请先填写点餐方式等信息</a>
+<input type="hidden" name="diningtype" id="diningtype" value="3" />
+   <div class="p_mod table_1 table_3 desks" id="desks" style="display: block;" >
+        <h2 class="p_mod_title">请填写就餐时间</h2>
+        <dl class="f_order_list single">
+        <select name="buytimestamp" id="buytimestamp" onchange="tables()">
+        <volist name="dateTimes" id="d">
+        <option value="{lanrain:$d}"><php>echo date('m月d日',$d);</php></option>
+        </volist>
+        </select> <select name="hour" id="hour" onchange="tables()">
+        <option value="" selected>选择时间</option>
+        <volist name="hours" id="h">
+        <option value="{lanrain:$h}"><php>echo $h.'时';</php></option>
+        </volist>
+        </select>
+          <input type="hidden" placeholder="请输入具体日期和时间" id="buytime" name="buytime" value="" />
+                  </dl>
+        </div>
+<if condition="$totalProductCount neq 0">
+<div class="p_mod">
+        <h2 class="p_mod_title">您的点餐方式</h2>
+        <dl class="f_order_list single dining_type">
+          <dd><label for="table_1">点餐</label>
+            <input type="radio" id="table_1" name="diningtypes" title="点餐" value="1" />
+          </dd>
+          <php>if($diningConfig['diningwaimai']==1){</php>
+          <dd><label for="table_2">外卖</label>
+            <input type="radio" id="table_2" name="diningtypes" title="外卖" value="2" />
+          </dd>
+         <php>}</php>
+         <php>if($diningConfig['diningyuding']==1){</php>
+          <dd class="on"><label for="table_3">预定</label>
+            <input type="radio" id="table_3" name="diningtypes" title="预定" value="3" checked="true" />
+          </dd>
+          <php>}</php>
+        </dl>
+        </div>
+</if>       
+
+        
+        
+     
+        
+        
+        <if condition="$tables">
+        <div class="p_mod table_1 table_3 desks" id="desks" style="display: block;">
+        <h2 class="p_mod_title">请选择桌台</h2>
+        <dl class="f_order_list single">
+            <volist name="tables" id="t">
+          <dd id="table_radio_{lanrain:$t.id}" <if condition="$i eq 0"> class = "on"</if>><label>{lanrain:$t.name}
+            <input type="radio" class="radio_tableid" name="tableid" value="{lanrain:$t.id}" /></label>
+          </dd>
+            </volist>
+         
+                  </dl>
+        </div>
+       </if>
+        
+</if>
+        
+<div class="main" id="wrap">
+    
+    	<div class="p_mod o_address">
+    		<h2 class="p_mod_title">请填写个人信息</h2>
+            <div id="city">
+    		<ul>
+    			<li><strong>姓名：</strong><input type="text" placeholder="请输入姓名" id="truename" name="truename" value="{lanrain:$thisUser.truename}" /></li>
+    			<li><strong>手机：</strong><input type="text" placeholder="请输入联系人手机号" id="tel" name="tel" value="{lanrain:$thisUser.tel}" /></li>
+    			<li><strong>地址：</strong><input type="text" placeholder="请输入详细地址" id="address" name="address" value="{lanrain:$thisUser.address}" /></li>
+                <li><strong>联系方式保存到用户库：</strong><input type="checkbox" value="1" name="saveinfo" style="width: 16px;" checked="true" /></li>
+    		</ul>
+            </div>
+    	</div>
+    	<div class="o_btn clearfix">
+    		<input type="button" class="o_btn_back ts1" onclick="history.go(-1);" value="返回" />
+    		<input type="submit" class="o_btn_submit ts1" value="<if condition="($alipayConfig.open eq 0) OR ($totalProductFee lt 0.1)">保存<else/>保存并付款</if>" />
+    	</div>
+    
+</div>
+</form>
+<script>
+$(".dining_type dd").click(function(){
+    $(this).parent().children('.on').removeClass('on');
+    $(this).addClass('on');
+    $(this).parent().children('input').removeAttr('checked');
+    $(this).children('input').attr('checked', 'true');
+   $('#diningtype').attr('value',$(this).children('input').attr('value'));
+    var table_class = $(this).children('input').attr('id');
+    $('.desks').hide();
+    $('.'+table_class).show();
+})
+$('.desks dd').click(function(){
+    $(this).parent().children('.on').removeClass('on');
+    $(this).addClass('on');
+    $(this).parent().children('input').removeAttr('checked');
+    $(this).children('input').attr('checked', 'true');    
+}) 
+function showTip(tipTxt) {
+        var div = document.createElement('div');
+        div.innerHTML = '<div class="deploy_ctype_tip"><p>' + tipTxt + '</p></div>';
+        var tipNode = div.firstChild;
+        $("#wrap").after(tipNode);
+        setTimeout(function () {
+            $(tipNode).remove();
+        }, 1500);
+		}
+	function tgSubmit(){
+		if($('#hour')&&$('#desks').css.display=='block'){
+			if($('#hour').val()==""){
+				showTip('请选择时间')
+				return false;
+			}
+		}
+		//
+		var userName=$('#truename').val();
+		if($.trim(userName) == ""){
+			showTip('请填写姓名')
+			return false;
+		}
+		//
+		var userPhone = $("#tel").val()
+		if ($.trim(userPhone) == "") {
+			showTip('请填写您的手机号码')
+			
+			return false;
+		}
+
+		var patrn = /^(1(([35][0-9])|(47)|[8][01256789]))\d{8}$/;
+		if (!patrn.exec($.trim(userPhone))) {
+			showTip('手机号格式错误')
+			return false;
+		}
+		return true;
+	}
+	function tables(){
+		$.ajax({
+					url:'?g=Wap&m=Product&a=ajaxTables&token={lanrain:$token}&time='+$('#buytimestamp').attr('value')+'&hour='+$('#hour').attr('value'),
+					success : function(data) {
+						var tableids=data.split(',');
+
+						var count=tableids.length;
+						if(count){
+							$('.radio_tableid').checked=false;
+							$('.f_order_list dd').removeClass('on');
+							$('.f_order_list dd').css('display','');
+							for(i=0;i<count;i++){
+								var id=tableids[i];
+								if($('#table_radio_'+id)){
+									$('#table_radio_'+id).css('display','none');
+								}
+							}
+						}
+
+					}
+				});
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>用户注册 - {$page_seo.title}</title>
+<link href="__STATIC__/weixin/css/shop.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/weixin/js/index.js"></script>
+<script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="__STATIC__/weixin/js/ecmall.js" charset="utf-8"></script>
+<script type="text/javascript" src="__STATIC__/weixin/js/touchslider.js" charset="utf-8"></script>
+<script type="text/javascript">
+//<!CDATA[
+var SITE_URL = "http://store.weiapps.cn";
+var REAL_SITE_URL = "http://store.weiapps.cn";
+var PRICE_FORMAT = '¥%s';
+
+$(function(){
+    var span = $("#child_nav");
+    span.hover(function(){
+        $("#float_layer:not(:animated)").show();
+    }, function(){
+        $("#float_layer").hide();
+    });
+});
+//]]>
+</script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js"></script>
+</head>
+
+<body>
+<include file="public:head" />
+<script type="text/javascript">
+//注册表单验证
+$(function(){
+    $('#register_form').validate({
+    	
+    	/*errorLabelContainer: $('#warning'),
+        invalidHandler: function(form, validator) {
+           var errors = validator.numberOfInvalids();
+           if(errors)
+           {
+               $('#warning').show();
+           }
+           else
+           {
+               $('#warning').hide();
+           }
+        },*/
+      /*  errorPlacement: function(error, element){
+            var error_td = element.next("label");
+            error_td.append(error);
+        },*/
+        success  : function(label){
+            //label.addClass('validate_right').text('OK!');
+        },
+        onkeyup: false,
+        rules : {
+            user_name : {
+                required : true,
+                byteRange: [3,15,'utf-8'],
+                remote   : {
+                    url :'index.php?m=Index&a=ajaxRegister',
+                    type:'post',
+                    dataType:"json",  
+                    data:{
+                        user_name : function(){
+                        return $('#user_name').val();
+                        }
+                    },
+                   beforeSend:function(){
+                        var _checking = $('#checking_user');
+                        _checking.next('label').hide();
+                        $(_checking).show();
+                    },
+                    complete :function(){
+                        $('#checking_user').show();
+                    }
+                }
+            },
+            password : {
+                required : true,
+                minlength: 6
+            },
+            password_confirm : {
+                required : true,
+                equalTo  : '#password'
+            },
+            email : {
+                required : true,
+                email    : true
+            }
+           
+        },
+        messages : {
+            user_name : {
+                required : '您必须提供一个用户名',
+                byteRange: '用户名必须在3-15个字符之间',
+                remote : '您提供的用户名已存在'
+            },
+            password  : {
+                required : '您必须提供一个密码',
+                minlength: '密码长度应在6-20个字符之间'
+            },
+            password_confirm : {
+                required : '您必须再次确认您的密码',
+                equalTo  : '两次输入的密码不一致'
+            },
+            email : {
+                required : '您必须提供您的电子邮箱',
+                email    : '这不是一个有效的电子邮箱'
+            }
+        }
+    });
+});
+</script>
+
+<div id="content">
+    <form name="" id="register_form" method="post" action="{:U('User/register')}">
+        <input id="user_name" name="user_name" placeholder="用户名" class="text width10" type="text">
+        <label id="checking_user" class="checking"></label>
+        <input id="password" name="password" placeholder="密&nbsp;&nbsp;&nbsp;码" class="text width10" type="password">
+        <input name="password_confirm" placeholder="确认密码" class="text width10" type="password">
+        <input name="email" placeholder="电子邮箱" class="text width10" type="text">
+        <input name="Submit" value="立即注册" class="login_btn" title="立即注册" type="submit">
+        <input name="ret_url" value=" " type="hidden">
+    </form>
+</div>
+
+<include file="public:footer" />
+</body>
+</html>

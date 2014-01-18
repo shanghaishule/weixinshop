@@ -1,0 +1,102 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+    
+	  <div class="cLineB">
+		  <h4 class="left">留言列表</h4>
+		  <div class="clr"></div>
+	  </div>
+	<!--tab start-->
+	<div class="tab">
+	<ul>
+	<li class="tabli current" id="tab0"><a href="{lanrain::U('Liuyan/index',array('token'=>$token))}">留言管理</a></li>
+	<li class="tabli" id="tab2"><a href="{lanrain::U('Reply_info/set',array('token'=>$token,'infotype'=>'Liuyan'))}">回复配置</a></li>
+	</ul>
+	</div>
+	<!--tab end-->  
+          <div class="cLine">
+              <div class="pageNavigator left">
+  <a href="{lanrain::U('Liuyan/add')}" title='新增留言信息' class='btnGrayS vm bigbtn'><img src="{lanrain::RES}/images/pic.png" class="vm" />新增留言</a>　
+              
+            </div>
+          
+            <div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+            <TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <THEAD>
+                <TR>
+					
+					<TH class="keywords">用户名</TH>
+					<TH class="answer">留言</TH>
+                    <TH  class="category" >回复</TH>
+                    <TH class="time">留言时间</TH>
+					<TH class="edit norightborder">回复时间</TH>
+					<TH class="edit norightborder">操作</TH>
+                </TR>
+              </THEAD>
+              <TBODY>
+				<volist name="info" id="vo">
+				<tr>
+                  
+                  <td>{lanrain:$vo.title}</td>
+                  <td><div class="cateimg">{lanrain:$vo.text}</div></td>
+                  <td>{lanrain:$vo.re}</td>
+                  <td><php>if($vo['createtime'])echo date('Y-m-d',$vo['createtime']);</php></td>
+                   
+                   <td class="norightborder"><php>if($vo['uptatetime'])echo date('Y-m-d',$vo['uptatetime']);</php></td>
+                   <td class="norightborder">
+				   <a href="{lanrain::U('Liuyan/edit',array('id'=>$vo['id']))}" title="编辑图文自定义回复">回复</a>
+				   <a href="{lanrain::U('Liuyan/del',array('id'=>$vo['id']))}">删除</a></td>
+                </tr>
+				</volist>
+              </TBODY>
+            </TABLE>
+
+           <script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script>
+          </div>
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages">{lanrain:$page}</div>
+              </div>
+            <div class="clr"></div>
+          </div>
+        </div>
+
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+function checkAll(form, name) {
+for(var i = 0; i < form.elements.length; i++) {
+var e = form.elements[i];
+if(e.name.match(name)) {
+e.checked = form.elements['chkall'].checked;
+}
+}
+}
+
+
+  </script>
+  <!--底部-->
+  	</div>
+<include file="Public:footer"/>

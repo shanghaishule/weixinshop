@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* CSS Document */
+
+.all_list{ overflow:hidden; width:95%;}
+.all_list li{ width:30%; float:left; font-size:14px; color:#4f4f4f; padding:12px 3px; text-align:center; -o-text-overflow:ellipsis; text-overflow:ellipsis; white-space: nowrap; overflow:hidden;}
+
+.top_logo{ padding-left:5px;}
+.top_right{ float:right; padding-right:5px;}
+.top_right ul{ padding:10px 0; float:right;}
+.top_right ul li{ float:left; padding:0 5px;}
+
+.banner{ width:100%; overflow:hidden; height:163px;}
+.banner ul#BanCont { width:100%; overflow:hidden; height:161px; position:relative;}
+.banner ul#BanCont li { position:absolute; top:0; left:0; width:100%; overflow:hidden; height:161px;}
+
+.banner_link { width:100%; overflow:hidden;}
+.banner_link li{ float:left; width:20%; height:2px; background-color:#d3d3d3; font-size:0;}
+.banner_link .banner_link_red1 { background-color:#c00f18;}
+.banner_link .banner_link_red2 { background-color:#c00f18;}
+
+.btn_big{ width:100%; overflow:hidden;}
+.btn_big li{ float:left; width:102px; height:49px; line-height:49px; background:url(/images/mobi/cn/images/btn_big.jpg) no-repeat; color:#4f4f4f; font-size:14px; text-align:center; font-family:"microsoft yahei", Arial, SimSun; padding:0 2px; overflow:hidden;}
+.btn_big li a{ width:102px; height:49px; display:block;}
+
+.pr_list{ overflow:hidden; padding:0 5px;}
+.pr_list_frist ul { float:right;}
+.pr_list_frist li { float:left; color:#4f4f4f; background-color:#e9e9e9; margin:0 5px; height:17px; line-height:17px; overflow:hidden; padding:0 5px; cursor:pointer;}
+.pr_list_frist .pr_list_frist_link{ color:#FFF; background:url(/images/mobi/cn/images/pr_list_frist_link.jpg) no-repeat center top; height:21px;}
+.pr_list_second ul{ overflow:hidden;}
+.pr_list_second li { color:#666666; border:1px solid #dddddd; float:left; padding:3px 5px; margin:5px; white-space: nowrap; }
+.pr_list_more{ font-size:14px; color:#c00f18; text-align:center; overflow:hidden; padding:5px 0;}
+.pr_list_more a,.pr_list_more a:link,.pr_list_more a:visited{ color:#c00f18;}
+.pr_list_more a:hover{ color:#c00f18; text-decoration:underline;}
+
+.pr_link{ width:100%; overflow:hidden;}
+.pr_link li{ font-size:14px; color:#666666; border:1px solid #dddddd; padding:8px; margin:8px 0; overflow:hidden;}
+.pr_link span{ color:#c00f18; float:right;}
+
+/* ---------- king ---------- */
+.Pr_list_Cont { width:100%; position:relative; height:145px; overflow:hidden;}
+.pr_list_second { position:absolute; left:0; top:0; width:100%; overflow:hidden;}
+
+.banner_Cont { width:100%; position:relative; height:230px; overflow:hidden;}
+.pr_list_3 {  position:absolute; left:0; top:0; width:100%; overflow:hidden;}

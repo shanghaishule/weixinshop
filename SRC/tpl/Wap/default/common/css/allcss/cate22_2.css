@@ -1,0 +1,86 @@
+html, body {
+	color:#222;
+	font-family:Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+	margin:0;
+	padding: 0;
+	text-decoration: none;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+	margin:0;
+	padding:0;
+}
+img {
+	border:0;
+}
+ol, ul {
+	list-style: none outside none;
+	margin:0;
+	padding: 0;
+}
+a {
+	color:#000000;
+	text-decoration: none;
+}
+.clr {
+	display:block;
+	clear:both;
+	height:0;
+	overflow:hidden;
+}
+.copyright{padding:8px;text-align:center;font-size:14px;color:#666;}
+.copyright a{color:#666;}
+/*cate10*/
+#cate10{background: url(../../images/themes/bg003.jpg) #E2E3E6; background-size:150px auto;overflow-x: hidden;margin:0 auto;}
+#cate10 .banner img{
+	width:100%;
+}
+
+#cate10 .catemenu {
+overflow: hidden;
+background-color: transparent;
+border-radius: 4px;
+margin: 7px 5px 0 4px;
+}
+#cate10 .catemenu ul {
+width: 100%;
+overflow: hidden;
+}
+#cate10 .catemenu li {
+display: list-item;
+text-align: -webkit-match-parent;
+}
+#cate10 .catemenu li {
+width: 33.3%;
+float: left;
+font-size: 15px;
+border-top:0;
+}
+#cate10 .catemenu li:nth-child(n+4) a{
+padding:10px 5px;
+}
+#cate10 .catemenu li:nth-child(n+4) img{
+display:none
+}
+#cate10 .catemenu a{
+display: block;
+background-color: #FFFFFF;
+border: 1px solid #E3E3E3;
+border-radius: 3px;
+margin: 0 0 3px 3px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+padding:20px 5px 10px;
+height:100%;
+text-align:center;
+}
+#cate10 .catemenu img {
+width: 48px;
+height: 48px;
+display:block;
+margin: 0 auto;
+position: relative;
+top: -5px;
+vertical-align: middle;
+border-radius: 3px;
+}

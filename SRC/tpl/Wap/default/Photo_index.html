@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>3G相册列表</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta charset="utf-8">
+<link href="{lanrain::RES}/css/Photo/css/photo.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="photo">
+<div class="qiandaobanner"><a> <img src="{lanrain::RES}/css/Photo/banner.jpg" ></a></div>
+<div id="todayList">
+<ul  class="chatPanel">  
+<volist name="photo" id="photo">
+<li class="media mediaFullText">
+<a href="{lanrain::U('Photo/plist',array('token'=>$_GET['token'],'id'=>$photo['id']))}">
+	<div class="mediaPanel">
+		<div class="mediaHead"> 
+			<div class="clr"></div>
+		</div>
+		<div class="mediaImg"><img src="{lanrain:$photo.picurl}"></div>                                                        
+		<div class="mediaFooter">
+			<span class="mesgIcon right"></span><span class="bt">{lanrain:$photo.title}</span>
+			<div class="clr"></div>
+		</div>
+	</div>
+</a>
+</li>  
+</volist>
+</ul>
+
+ 
+   
+</div>
+<!--??????-->
+
+<script>
+function dourl(url){
+location.href= url;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/cymain.css" />  
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+<div class="cLineB">
+<h4 class="left"><if condition="($parentid eq '0') or ($parentid eq '')"><if condition="$isDining neq 1">分类管理<else/>菜品分类</if><else/>“{lanrain::$parentCat['name']}”的子分类</if> ({lanrain:$page}) </h4>
+<div class="searchbar right">
+<form method="post" action="">
+<input type="text" id="msgSearchInput" class="txt left" placeholder="输入关键词搜索" name="searchkey" value="">
+<input type="hidden" name="ac" value="hotels-list">
+<input type="hidden" name="id" value="9878">
+<input type="hidden" name="wxid" value="gh_423dwjkewad">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+
+<if condition="($parentid neq  '0') and ($parentid neq '')"><a href="{lanrain::U('Product/cats',array('token'=>$token,'parentid'=>$parentCat['parentid']))}" class="btnGreen" style="margin-top:-27px">返回上一级</a></if>
+</form>
+</div>
+<div class="clr"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul>
+<li class="tabli" id="tab0"><a href="{lanrain::U('Product/index',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品<else/>菜品</if>管理</a></li>
+<li class="current tabli" id="tab2"><a href="{lanrain::U('Product/cats',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>管理</a></li>
+<li class="tabli" id="tab2"><a href="{lanrain::U('Product/orders',array('token'=>$token,'dining'=>$isDining))}">订单管理</a></li>
+<if condition="$isDining eq 1"><li class="tabli" id="tab2"><a href="{lanrain::U('Product/tables',array('token'=>$token,'dining'=>1))}">桌台管理</a></li></if>
+<if condition="$isDining neq 1">
+<li class="tabli" id="tab5"><a href="{lanrain::U('Reply_info/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+<else/>
+<li class="tabli" id="tab5"><a href="{lanrain::U('Reply_info/set',array('token'=>$token,'infotype'=>'Dining'))}">订餐回复配置</a></li>
+</if>
+</ul>
+</div>
+<!--tab end-->
+<div class="cLine">
+<div class="pageNavigator left"> <a href="{lanrain::U('Product/catAdd',array('token'=>$token,'parentid'=>$parentid,'dining'=>$isDining))}" title="新增分类" class="btnGrayS vm bigbtn"><img src="{lanrain::RES}/images/product/add.png" class="vm">新增分类</a></div>
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th class="select">名称</th>
+<th width="160">分类名称</th>
+<th width="260">简介</th>
+<th width="130">创建时间</th>
+ 
+
+<th width="150" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="hostlist"> 
+<tr>
+<td><input type="checkbox" name="del_id[{lanrain:$i}]" value="285" class="checkitem"></td>
+<td>{lanrain:$hostlist.name}</td>
+<td>{lanrain:$hostlist.des}</td>
+<td>{lanrain:$hostlist.time|date="Y-m-d H:i:s",###}</td> 
+
+<td class="norightborder"><a href="{lanrain::U('Product/catSet',array('token'=>$token,'id'=>$hostlist['id'],'dining'=>$isDining))}">修改</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{lanrain::U('Product/catDel',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}');">删除</a><span style="display:none"><if condition="($parentid eq '0') or ($parentid eq '')">&nbsp;|&nbsp;<a href="{lanrain::U('Product/cats',array('parentid'=>$hostlist['id'],'token'=>$token))}">子分类</a> <a href="{lanrain::U('Product/catAdd',array('token'=>$token,'parentid'=>$hostlist['id']))}">添加子分类</a></span></if></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+<script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script> 
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{lanrain:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

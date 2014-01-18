@@ -1,0 +1,95 @@
+$prize_arr = array( 
+    '0' => array('id'=>1,'min'=>1,'max'=>29,'prize'=>'一等奖','v'=>1), 
+    '1' => array('id'=>2,'min'=>302,'max'=>328,'prize'=>'二等奖','v'=>2), 
+    '2' => array('id'=>3,'min'=>242,'max'=>268,'prize'=>'三等奖','v'=>5), 
+    '3' => array('id'=>4,'min'=>182,'max'=>208,'prize'=>'四等奖','v'=>7), 
+    '4' => array('id'=>5,'min'=>122,'max'=>148,'prize'=>'五等奖','v'=>10), 
+    '5' => array('id'=>6,'min'=>62,'max'=>88,'prize'=>'六等奖','v'=>25), 
+    '6' => array('id'=>7,'min'=>array(32,92,152,212,272,332), 
+'max'=>array(58,118,178,238,298,358),'prize'=>'七等奖','v'=>50) 
+); 
+数组$prize_arr，id用来标识不同的奖项，min表示圆盘中各奖项区间对应的最小角度，max表示最大角度，如一等奖对应的最小角度：0，最大角度30，这里我们设置max值为1、max值为29，是为了避免抽奖后指针指向两个相邻奖项的中线。由于圆盘中设置了多个七等奖，所以我们在数组中设置每个七等奖对应的角度范围。prize表示奖项内容，v表示中奖几率，我们会发现，数组中七个奖项的v的总和为100，如果v的值为1，则代表中奖几率为1%，依此类推。
+关于中奖概率算法，本站文章：PHP+jQuery实现翻板抽奖有介绍经典的概率算法，本文直接将代码拿来。
+ 
+function getRand($proArr) { 
+    $result = ''; 
+ 
+    //概率数组的总概率精度 
+    $proSum = array_sum($proArr); 
+ 
+    //概率数组循环 
+    foreach ($proArr as $key => $proCur) { 
+        $randNum = mt_rand(1, $proSum); 
+        if ($randNum <= $proCur) { 
+            $result = $key; 
+            break; 
+        } else { 
+            $proSum -= $proCur; 
+        } 
+    } 
+    unset ($proArr); 
+ 
+    return $result; 
+} 
+函数getRand()会根据数组中设置的几率计算出符合条件的id，我们可以接着调用getRand()。
+ 
+foreach ($prize_arr as $key => $val) { 
+    $arr[$val['id']] = $val['v']; 
+} 
+ 
+$rid = getRand($arr); //根据概率获取奖项id 
+ 
+$res = $prize_arr[$rid-1]; //中奖项 
+$min = $res['min']; 
+$max = $res['max']; 
+if($res['id']==7){ //七等奖 
+    $i = mt_rand(0,5); 
+    $result['angle'] = mt_rand($min[$i],$max[$i]); 
+}else{ 
+    $result['angle'] = mt_rand($min,$max); //随机生成一个角度 
+} 
+$result['prize'] = $res['prize']; 
+ 
+echo json_encode($result); 
+代码中，我们调用getRand()，获得通过概率运算后得到的奖项，然后根据奖项中配置的角度范围，在最小角度和最大角度间生成一个角度值，并构建数组，包含角度angle和奖项prize，最终以json格式输出。
+jQuery
+在上文的基础上，我们对前端jQuery代码进行改造，当点击“开始抽奖”按钮后，向后台data.php发送一个ajax请求，如果请求成功并返回奖项信息，则转动指针，将指针最终指向位置转动到data.php返回的角度值。
+ 
+$(function(){ 
+     $("#startbtn").click(function(){ 
+        lottery(); 
+    }); 
+}); 
+function lottery(){ 
+    $.ajax({ 
+        type: 'POST', 
+        url: 'data.php', 
+        dataType: 'json', 
+        cache: false, 
+        error: function(){ 
+            alert('出错了！'); 
+            return false; 
+        }, 
+        success:function(json){ 
+            $("#startbtn").unbind('click').css("cursor","default"); 
+            var a = json.angle; //角度 
+            var p = json.prize; //奖项 
+            $("#startbtn").rotate({ 
+                duration:3000, //转动时间 
+                angle: 0, 
+                animateTo:1800+a, //转动角度 
+                easing: $.easing.easeOutSine, 
+                callback: function(){ 
+                    var con = confirm('恭喜你，中得'+p+'\n还要再来一次吗？'); 
+                    if(con){ 
+                        lottery(); 
+                    }else{ 
+                        return false; 
+                    } 
+                } 
+            }); 
+        } 
+    }); 
+} 
+我们构建自定义函数lottery()，在lottery()我们向data.php发送一个POST请求，如果成功返回中奖信息后，调用rotate插件开始转动，转动角度由后台返回的角度决定，这里我们用1800+a表示转动的角度，即指针转动6圈+a度后停止，然后我们在单击“开始抽奖”按钮时调用lottery()，于是转盘抽奖就完成。
+如果您对本文的转盘转动效果不太明白，建议您先阅读本站文章：幸运大转盘-jQuery+PHP实现的抽奖程序(上)

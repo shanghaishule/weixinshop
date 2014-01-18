@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+h4{background: url(/static/images/admin/pancl/tit_bj.jpg) repeat 0 0;height: 32px; width:auto; line-height:32px; text-align: left; padding:0px 0px 0px 10px;font-size:14px;font-family: "微软雅黑","宋体";color:#333; font-weight: normal;}
+.mleft{ width:70%; height:auto; float:left; margin:0px 0;border: 0px solid #ccc; min-height:300px;}
+.mright{ width:30%; height:auto; float:right; margin:0px 0;border: 0px solid #ccc;min-height:300px;}
+
+.th{margin-top:10px;}
+.mbar{width:auto; height:auto; clear:both; margin:10px 0px 10px 0px;border: 1px solid #ededed;overflow: hidden;}
+.mbar p{ line-height:28px; border:0px solid #ccc; text-align:left; padding:0px 0px 0px 20px;font-family:"宋体";}
+.mbar a{color:#0099cc; margin:0px 10px 0px 0px;font-family:"宋体";}
+.mbar a:hover{color:#0066ff;}
+.mbar .info{background: url(/static/images/admin/pancl/icon_14.jpg) no-repeat 0 8px;height:25px; width:auto;border:0px solid #ccc; display:block; text-indent:20px;}
+.mbar .services{height:150px; width:345px; overflow:hidden;}
+.mbar .services a{margin:0;}
+.mbar .tel{font-size:12px;font-family:"宋体";color:#666;background: url(/static/images/admin/pancl/icon_11.jpg) no-repeat 0 center;height:25px; width:auto;border:0px solid #ccc; display:block; text-indent:20px;}
+.mbar .remark {color:gray;line-height:20px;}
+.mbar .more {float:right;font-size:12px;}
+.mbar .notice{text-align:center; margin:2px 0px 0px 1px;}
+.mbar .notice li { text-align:left;padding:0px 10px;line-height:24px;height:24px;width:210px; overflow:hidden;font-size:12px;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;}
+.mbar hr{ width:96%; border-top: 1px solid #ccc; height:0px; margin:0px auto 0px auto; color:#0099cc;}
+.mtishi{width:auto; height:auto; margin:10px 10px 10px 10px;border: 1px solid #FC9;min-height:25px; background:#fff8d9;}
+.mtishi p{height:28px; line-height:28px; border:0px solid #ccc; text-align:left; padding:0px 0px 0px 10px;font-family:"宋体";}
+.count{ color:#ff9900;font-size:12px;font-family:"微软雅黑";}
+
+.lbar{ float:left; width:190px;padding:10px 0px 5px 0px;}
+.lbar img{ height:90px; width:90px;}
+.lbar p{ text-align:center; height:auto;}
+.sname{display:block; float:left;}
+.vok{background: url(/static/images/admin/pancl/icon.png) no-repeat 0px 5px; line-height:25px; height:25px; width:20px; display:block; text-indent:-9999px; float:right;}
+.vshop{width:auto; margin:10px 10px 10px 10px;border: 1px solid #3399cc;height:30px; background:#e8f2ff; text-align:left; line-height:30px; text-indent:10px; font-weight:bold;}
+.vlogo{height:auto; margin:0px 0px 0px 0px;border: 0px solid #FC9;}
+.vlogo img{ height:90px; width:90px;}
+.bindwx{background: url(/static/images/admin/pancl/wx2.gif) no-repeat 0px 5px; line-height:25px; height:25px; width:20px; display:block; text-indent:-9999px; float:right;}
+
+.hand {cursor:hand;}
+.seltext { border:0;background:#fbe6d4;cursor:pointer;padding:3px;width:350px; }
+.shoplink { text-align:left;line-height: 30px;padding-left:60px; }
+
+/* 幻灯右下角 */
+/*容器*/
+ul.slider{ margin: 0; padding: 0;list-style: none;overflow:hidden;}
+ul.slider li{margin: 0; padding: 0;}
+ul.slider li img{ border: 0;}
+/*数字导航样式*/
+#slider_btn{ bottom: 10px; position: absolute; right: 50px; width: 90px;}
+#slider_btn span{ background: transparent url(/static/images/admin/pancl/flashbutton.gif) no-repeat scroll -15px 0; color: #86A2B8;cursor: pointer; float: left; font-family: Arial;font-size: 12px;height: 15px; line-height: 15px; margin: 1px;text-align: center; width: 15px;}
+#slider_btn span.on{  background: transparent url(/static/images/admin/pancl/flashbutton.gif) no-repeat scroll 0 0; color: #FFFFFF; height: 15px; line-height: 15px; width: 15px;}

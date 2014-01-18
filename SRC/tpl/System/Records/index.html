@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<include file="common:public" />
+<div class="cr"></div>
+<div id="artlist">
+
+	 <div class="ksearch">
+    	<div class="fl">
+			<form action="{lanrain::U('Users/search')}" method="post">
+			<b class="kserico">快速搜索：</b>搜索类型：
+			<select name="type">
+				<option value="1">用户名</option>
+				<option value="2">用户ID</option>
+				<option value="3">用户邮箱</option>
+			</select> 
+			<input name="name" class="ipt" type="text" value=""> 
+			<input type="submit" class="ksub" value="">
+			</form>
+        </div>
+        <div class="fl">
+			<b>排序方式：</b>
+			<select>
+				<option value="">注册时间（降序）</option>
+				<option value="">登陆时间（降序）</option>
+			</select>
+		</div>
+        <div class="fl">
+			<b>查看方式：</b>
+			<select>
+				<option value="">按分类查看</option>
+			</select>
+		</div>
+    </div>
+ 	
+</div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="alist">
+	  <tr>
+		<td width="60">id</td>
+		<td width="150">订单名称</td>
+		<td width="150">充值用户</td>
+		<td width="150">订单号</td>
+		<td width="150">金额</td>
+		<td width="150">充值时间</td>
+		<td width="150">状态</td>
+		<td width="">操作</td>
+	  </tr>
+	    <volist name="info" id="vo">
+			<tr>
+				<td align='center'>{lanrain:$vo.id}</td>
+				<td align='center'>{lanrain:$vo.title}</td>
+				<td align='center'>{lanrain:$vo.uname}</td>
+				<td align='center'>{lanrain:$vo.indent_id}</td>
+				<td align='center'>{lanrain:$vo.price}</td>
+				<td align='center'>{lanrain:$vo.create_time|date='Y-m-d H:i:s',###}</td>
+				<td align='center'><if condition="$vo['status'] eq 1">已付款(未确认)<elseif condition="$vo['status'] eq 2"/>完成<else/>未付款</if></td>
+				<td align='center'><a href="{lanrain::U('System/Records/send',array('price'=>$vo['price'],'uid'=>$vo['uid'],'id'=>$vo['id']))}">入金</a> 删除 </td>
+
+			</tr>
+	    </volist>
+     <tr bgcolor="#FFFFFF"> 
+      <td colspan="8"><div class="listpage">{lanrain:$page}</div></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,55 @@
+.finish_div{
+font-weight:900;
+ font-size:18px;
+ height:20px;
+ padding-left:45px;
+ padding-top:80px;
+ color:blue;
+ text-align: left;
+}
+.titleN{
+ border:1px solid #ccc;
+   background:#fff;
+   padding-left:60px;
+   -moz-border-radius: 10px;
+   -webkit-border-radius: 10px;
+   border-radius: 10px;
+}
+.titleN p{ position:relative;}
+
+.activity-lottery-winning{
+ background:url(images/reseach.jpg) repeat-x 0 0;
+}
+.questionBanner {
+ background:url(images/diaoyan.png) no-repeat 0 0;
+ height:320px;
+ color:white;
+
+ text-align: left;
+ padding-top:10px;
+}
+.questionBanner .title-red{
+ font-weight:900;
+ font-size:18px;
+ height:20px;
+ padding-left:50px;
+ color:red;
+ text-align: left;
+}
+.questionBanner .option{
+ padding-top:10px;
+}
+.questionBanner .title-option{
+ font-size:16px;
+ text-align: left;
+ height:35px;
+ color:white;
+ padding-left:30px;
+}
+.questionBanner .title-next{
+ font-size:16px;
+ float:right;
+ text-align: right;
+ color:red;
+ padding-right:50px;
+}

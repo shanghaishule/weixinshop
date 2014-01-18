@@ -1,0 +1,88 @@
+<include file="Public:head"/>
+<div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
+
+<div class="cLineB">
+  <h4>商品分类管理</h4><a href="{lanrain::U('Ordering/index',array('token'=>session('token')))}" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+  
+ </div>
+ 
+ <div class="cLineB">
+
+<div class="clr"></div>
+</div>
+ <div class="msgWrap form">
+           
+   <input type="hidden" name="formhash" value="7566c850">
+   <input type="hidden" name="wxid" value="gh_423dwjkewad">
+<div class="bdrcontent">
+<div id="div_ptype">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<form action="" method="post">
+<thead>
+	<tr>
+		<th style=" width:120px;">名称</th>                   
+		<th style=" width:70px;">显示顺序</th>		
+		<th style=" width:70px;">分类简单说明（可不填）</th>
+		<th style=" width:80px;">显示</th>
+		<th style=" width:100px;" class="norightborder">操作</th>
+	</tr>
+</thead>  
+<tr>
+	<td><input type="text" name="name" value=""  class="px"/></td>
+	<td><input type="text" name="sort" value="0"  class="px" style="width:50px;" /></td>
+	<td><input class="px" type="text"  style="width:300px;"  name="info" value=""  /></td>
+	<td><input class="checkbox" type="checkbox" name="status" value="1"  checked ></td>
+	<td class="norightborder">
+		<button type="submit" id="vtype" class="btnGray vm" ><strong>添加</strong></button>　
+	</td>
+</tr> 
+</form>
+
+
+ <tr>
+	<td colspan="6"><div class="cLineB">
+  <h4>分类列表</h4>  
+ </div></td>
+ </tr>
+ <thead>
+ 
+<tr>
+<th style=" width:120px;">名称</th>
+                   
+<th style=" width:70px;">显示顺序</th>
+
+  <th>图片简单说明（可不填）</th>
+<th style=" width:80px;">显示</th>
+<th style=" width:100px;" class="norightborder">操作</th>
+</tr>
+</thead> 
+<volist name="list" id="list">
+ <form method="post" action="{lanrain::U('Ordering/class_edit',array('token'=>session('token')))}">              
+<tr>
+	<td><input type="text" name="name" value="{lanrain:$list.name}"  class="px"    /></td>
+	<td><input type="text" name="sort" value="{lanrain:$list.sort}"  class="px" style="width:50px;" /></td>
+	
+	<td><input class="px" type="text"  style="width:250px;"  name="info" value="{lanrain:$list.info}"  /></td>
+	<td>
+		<input class="checkbox" type="checkbox" name="status" value="1"  <if condition="$list['status'] eq 1">checked</if>>
+		<input type="hidden"   name="id" value="{lanrain:$list.id}"  /></td>
+	<td class="norightborder">
+		<button type="submit" name="edit" value="true" class="btnGreen vm" style="height:20px;font-size:12px;line-height:10px;">
+			<strong>修改</strong>
+		</button>
+	<a href="{lanrain::U('Ordering/class_del',array('id'=>$list['id'],'token'=>session('token')))}">删除</a>
+	</td>
+</tr>
+</form>
+</volist>
+  </table>
+</div>
+</div>
+<div class="footactions" style="padding-left:10px">
+  <div class="pages">{lanrain:$page}</div>
+</div>
+ </div>
+  
+        </div>
+<include file="Public:footer"/>  
+ 

@@ -1,0 +1,17 @@
+<include file="Product:header"/>
+<!--主体-->
+<section class="c_list">
+	<h1><if condition="$parentid neq 0">{lanrain:$thisCat.name}</if>全部分类：</h1>
+	<volist name="cats" id="hostlist"> 
+			<dl>
+		<dt>
+			<a href="<if condition="$hostlist['parentid'] eq 0">{lanrain::U('Product/products',array('token'=>$_GET['token'],'catid'=>$hostlist['id'],'wecha_id'=>$wecha_id,'dining'=>$isDining))}<else/>{lanrain::U('Product/products',array('token'=>$_GET['token'],'catid'=>$hostlist['id'],'wecha_id'=>$wecha_id))}</if>">
+				{lanrain:$hostlist.name}
+				<i></i>
+			</a>
+		</dt>
+	</dl>
+	</volist> 
+		</section>
+</body>
+</html>

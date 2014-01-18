@@ -1,0 +1,79 @@
+<include file="public:header" />
+<!--添加文章-->
+<form id="info_form" action="{:U('score_item/add')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">基本资料</li>
+            <li class="current">商品描述</li>
+		</ul>
+		<div class="J_panes">
+			<div class="content_list pad_10">
+				<table width="100%" cellspacing="0" class="table_form">
+					<tr>
+						<th width="120">{:L('article_cateid')} :</th>
+						<td>
+						<select name="cate_id" id="cate_id">
+            			<option value="">--请选择分类--</option>
+            			<volist name="cate_list" id="val">
+            			<option value="{$val.id}">{$val.name}</option>
+            			</volist>
+            			</select>
+					</td>
+					</tr>
+		            <tr>
+						<th>商品名称 :</th>
+						<td>
+							<input type="text" name="title" id="J_title" class="input-text" size="30">
+		                </td>
+					</tr>
+					<tr>
+						<th>商品图片 :</th>
+						<td><input type="file" name="img" id="img" class="input-text"  style="width:200px;" /></td>
+		 			</tr>
+		            <tr>
+						<th>所需积分 :</th>
+						<td><input type="text" name="score" id="score" class="input-text" size="10" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"></td>
+					</tr>
+					<tr>
+						<th>库存 :</th>
+						<td><input type="text" name="stock" id="stock" class="input-text" size="10" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"></td>
+					</tr>     
+					<tr>
+						<th>每人限兑换数 :</th>
+						<td><input type="text" name="user_num" id="user_num" class="input-text" size="10" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"></td>
+					</tr> 
+					<tr>
+						<th>排序值 :</th>
+						<td><input type="text" name="ordid" id="ordid" class="input-text" size="10" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"></td>
+					</tr>
+
+				</table>
+			</div>
+            <div class="content_list pad_10 hidden">
+				<table width="100%" cellspacing="0" class="table_form">
+                	<tr>
+						<th>商品描述 :</th>
+		                <td><textarea name="desc" id="desc" style="width:68%;height:400px;visibility:hidden;resize:none;"></textarea></td>
+					</tr>
+				</table>
+			</div>
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"><br /><br /><br /></div>
+	</div>
+</div>
+</form>
+<include file="public:footer" />
+<script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
+<script>
+$(function() {
+	KindEditor.create('#desc', {
+		uploadJson : '{:U("attachment/editer_upload")}',
+		fileManagerJson : '{:U("attachment/editer_manager")}',
+		allowFileManager : true
+	});
+	$('ul.J_tabs').tabs('div.J_panes > div');
+});
+</script>
+</body>
+</html>
