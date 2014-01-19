@@ -2,20 +2,25 @@
 class indexAction extends frontendAction {
     
     public function index() {
+    	//取商家token值，取不到则默认为空
+    	$tokenTall = $this->_get('tokenTall', 'trim', '');
+    	//!$tokenTall && $this->_404();
+    	
     	/*****首页广告***/
     	$ad= M('ad');
-    	$ads= $ad->field('url,content,desc')->where('board_id=1 and status=1')->order('ordid asc')->select();
+    	$where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
+    	$ads = $ad->field('url,content,desc')->where($where)->order('ordid asc')->select();
         $this->assign('ad',$ads);
         /*****首页广告end******/
         
         /****最新商品*****/
-        $wherenews=array('news'=>1);
-        $news=$this->getItem($wherenews);
+        $where = array('news'=>1, 'tokenTall'=>$tokenTall);
+        $news = $this->getItem($where);
          /****最新商品 END*****/
          
           /****推荐商品*****/
-        $wherenews=array('tuijian'=>1);
-        $tuijian=$this->getItem($wherenews);
+        $where = array('tuijian'=>1, 'tokenTall'=>$tokenTall);
+        $tuijian = $this->getItem($where);
       
         $this->assign('news',$news);
         $this->assign('tuijian',$tuijian);
@@ -24,7 +29,7 @@ class indexAction extends frontendAction {
     }
     public function getItem($where = array())
     {
-    	 $where_init = array('status'=>'1');
+    	$where_init = array('status'=>'1');
         $where =array_merge($where_init, $where);
     	
     	return $item=M('item')->where($where)->select();
