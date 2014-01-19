@@ -2,7 +2,7 @@
 return array (
   'site_name' => '微信微信营销专家',
   'site_title' => '微信营销专家',
-  'site_url' => 'http://www.bestchoice88.com',
+  'site_url' => 'localhost:8081',
   'site_my' => 'cccc',
   'ischeckuser' => 'true',
   'ipc' => '',

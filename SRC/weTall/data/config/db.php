@@ -1,9 +1,9 @@
 <?php
 return $arr= array (
   'DB_HOST' => 'localhost',
-  'DB_NAME' => 'bestchoi_shule',//Êý¾Ý¿âÃû
-  'DB_USER' => 'bestchoi_shule',//Êý¾Ý¿âÓÃ»§,Ò»°ã²»ÓÃ¸Ä	
-  'DB_PWD' => 'shule_123',      //Êý¾Ý¿âÃÜÂë
+  'DB_NAME' => 'bestchoi_shule',//ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½
+  'DB_USER' => 'bestchoi_shule',//ï¿½ï¿½Ý¿ï¿½ï¿½Ã»ï¿½,Ò»ï¿½ã²»ï¿½Ã¸ï¿½	
+  'DB_PWD' => 'shule_123',      //ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
   'DB_PORT' => '3306',
-  'DB_PREFIX' => 'tp_weixin_',
+  'DB_PREFIX' => 'tp_',
 );
