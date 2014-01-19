@@ -4,7 +4,6 @@ class indexAction extends frontendAction {
     public function index() {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->_get('tokenTall', 'trim', '');
-    	//!$tokenTall && $this->_404();
     	
     	/*****首页广告***/
     	$ad= M('ad');

@@ -15,64 +15,28 @@ class itemAction extends frontendAction {
      * 商品详细页
      */
     public function index() {
-    	
         $id = $this->_get('id', 'intval');
         !$id && $this->_404();
+        $tokenTall = $this->_get('tokenTall', 'trim', '');
         $item_mod = M('item');
-        $item = $item_mod->field('id,title,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color')->where(array('id' => $id, 'status' => 1))->find();
+        $item = $item_mod->field('id,title,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color')->where(array('id' => $id, 'status' => 1, 'tokenTall' => $tokenTall))->find();
         !$item && $this->_404();
     
-          /**
-         * ***品牌 
-         */
-        $brand=M('brandlist')->field('name')->find($item['brand']);
-        $item['brand']=$brand['name'];
+        //品牌 
+        $brand = M('brandlist')->field('name')->find($item['brand']);
+        $item['brand'] = $brand['name'];
         
         //商品相册
-        $img_list = M('item_img')->field('url')->where(array('item_id' => $id))->order('ordid')->select();
-        //标签
-        $item['tag_list'] = unserialize($item['tag_cache']);
-        //可能还喜欢
-     /*   $item_tag_mod = M('item_tag');
-        $db_pre = C('DB_PREFIX');
-        $item_tag_table = $db_pre . 'item_tag';
-        $maylike_list = array_slice($item['tag_list'], 0, 3, true);
-        foreach ($maylike_list as $key => $val) {
-            $maylike_list[$key] = array('name' => $val);
-            $maylike_list[$key]['list'] = $item_tag_mod->field('i.id,i.img,i.intro,' . $item_tag_table . '.tag_id')->where(array($item_tag_table . '.tag_id' => $key, 'i.id' => array('neq', $id)))->join($db_pre . 'item i ON i.id = ' . $item_tag_table . '.item_id')->order('i.id DESC')->limit(9)->select();
-        }
-*/
-        //第一页评论不使用AJAX利于SEO
-      /*  $item_comment_mod = M('item_comment');
-        $pagesize = 8;
-        $map = array('item_id' => $id);
-        $count = $item_comment_mod->where($map)->count('id');
-        $pager = $this->_pager($count, $pagesize);
-        $pager->path = 'comment_list';
-        $pager_bar = $pager->fshow();
-        $cmt_list = $item_comment_mod->where($map)->order('id DESC')->limit($pager->firstRow . ',' . $pager->listRows)->select();
-    
-        $item_mod->where(array('id' => $id))->setInc('hits'); //点击量*/
+        $img_list = M('item_img')->field('url')->where(array('item_id' => $id, 'tokenTall' => $tokenTall))->order('ordid')->select();
+
         $this->assign('item', $item);
-       
-        //$this->assign('maylike_list', $maylike_list);
         $this->assign('img_list', $img_list);
-        $this->assign('cmt_list', $cmt_list);
-        $this->assign('page_bar', $pager_bar);
+
         $this->_config_seo(C('pin_seo_config.item'), array(
             'item_title' => $item['title'],
             'item_intro' => $item['intro'],
-            'item_tag' => implode(' ', $item['tag_list']),
-            'user_name' => $item['uname'],
-            'seo_title' => $item['seo_title'],
-            'seo_keywords' => $item['seo_keys'],
-            'seo_description' => $item['seo_desc'],
         ));
-        
-     
-        
-  
-       
+
         $this->display();
     }
 
