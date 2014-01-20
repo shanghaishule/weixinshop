@@ -10,168 +10,163 @@ class orderAction extends userbaseAction {
 	
 	public  function cancelOrder()//取消订单
 	{
-	  $orderId=$_GET['orderId'];
-	  !$orderId && $this->_404();
+	    $orderId=$_GET['orderId'];
+	    !$orderId && $this->_404();
 	 
-	  $this->assign('orderId',$orderId);
-	  $this->_config_seo();
-	  $this->display();
+	    $this->assign('orderId',$orderId);
+	    $this->_config_seo();
+	    $this->display();
 	}
 	public function confirmOrder()//确认收货
 	{
-		 $orderId=$_GET['orderId'];
-		 $status=$_GET['status'];
-	     !$orderId && $this->_404();
-	     $item_order=M('item_order');
-	     $item=M('item');
-	     $item_orders= $item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'].' and status=3')->find();
-	     if(!is_array($item_orders))
-	     {
-	     	$this->error('该订单不存在!');
-	     }
-	     $data['status']=4;//收到货
-	     if($item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'])->save($data))
-	     {
-	     	$order_detail=M('order_detail');
-	     	$order_details = $order_detail->where('orderId='.$orderId)->select();
+		$orderId=$_GET['orderId'];
+		$status=$_GET['status'];
+	    !$orderId && $this->_404();
+	    $item_order=M('item_order');
+	    $item=M('item');
+	    $item_orders= $item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'].' and status=3')->find();
+	    if(!is_array($item_orders))
+	    {
+	    	$this->error('该订单不存在!');
+	    }
+	    $data['status']=4;//收到货
+	    if($item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'])->save($data))
+	    {
+	    	$order_detail=M('order_detail');
+	    	$order_details = $order_detail->where('orderId='.$orderId)->select();
 	    	foreach ($order_details as $val)
-	     	{
-	     	$item->where('id='.$val['itemId'])->setInc('buy_num',$val['quantity']);
+	    	{
+	    		$item->where('id='.$val['itemId'])->setInc('buy_num',$val['quantity']);
 	        }
-	     	$this->redirect('User/index?status='.$status);
-	     }else 
-	     {
-	     	$this->error('确定收货失败');
-	     }
-	     
+	    	$this->redirect('User/index?status='.$status);
+	    }else 
+	    {
+	    	$this->error('确定收货失败');
+	    }
+	    
 	}
 	
 	public function closeOrder()//关闭订单
 	{
 		 
-	  $orderId=$_POST['orderId'];
-	 $cancel_reason=$_POST['cancel_reason'];
-	  !$orderId && $this->_404();
-	  $item_order=M('item_order');
-	  $item=M('item');
-	  $order_detail=M('order_detail');
-	  $order=$item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'])->find();
-	 
-	  if(!is_array($order))
-	  {
-	  	$this->error('该订单不存在');
-	  }else 
-	  {
-	  	$data['status']=5;
-	  	$data['closemsg']=$cancel_reason;
-	   	if($item_order->where('orderId='.$orderId)->save($data))//设置为关闭
-	   	{
-	   		$order_details=$order_detail->where('orderId='.$orderId)->select();
-	   		
-	   		foreach ($order_details as $val)
+	    $orderId=$_POST['orderId'];
+	    $cancel_reason=$_POST['cancel_reason'];
+	    !$orderId && $this->_404();
+	    $item_order=M('item_order');
+	    $item=M('item');
+	    $order_detail=M('order_detail');
+	    $order=$item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'])->find();
+
+	    if(!is_array($order))
+	    {
+	  		$this->error('该订单不存在');
+	    }
+	    else 
+	    {
+		  	$data['status']=5;
+		  	$data['closemsg']=$cancel_reason;
+		   	if($item_order->where('orderId='.$orderId)->save($data))//设置为关闭
 	   		{
-	   	$item->where('id='.$val['itemId'])->setInc('goods_stock',$val['quantity']);
-	   		}
-	   		$this->redirect('User/index');
-	   	}else{
+	   			$order_details=$order_detail->where('orderId='.$orderId)->select();
+		   		foreach ($order_details as $val)
+		   		{
+		   			$item->where('id='.$val['itemId'])->setInc('goods_stock',$val['quantity']);
+		   		}
+	   			$this->redirect('User/index');
+	   		}else{
 	   		  $this->error('关闭订单失败!');
-	   	}
-	  }
+	   		}
+	    }
 		
 	}
 	
 	public  function checkOrder()//查看订单
 	{
-	   $orderId=$_GET['orderId'];
-	  !$orderId && $this->_404();
-	  $status=$_GET['status'];
-	  $item_order=M('item_order');
-	  $order=$item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'])->find();
-	  if(!is_array($order))
-	  {
-	  	$this->error('该订单不存在');
-	  }else 
-	  {
-	  	
-	  	$order_detail=M('order_detail');
-	 
-	  	$order_details= $order_detail->where("orderId='".$order['orderId']."'")->select();
-	  	$item_detail=array();
-	  	foreach ($order_details as $val)
-	  	{
-	  		$items= array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity']);
-	  		//$order[$key]['items'][]=$items;
-	  		$item_detail[]=$items;
-	  	}
-	  }
-	 
-	
+	    $orderId=$_GET['orderId'];
+	    !$orderId && $this->_404();
+	    $status=$_GET['status'];
+	    $item_order=M('item_order');
+	    $order=$item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'])->find();
+	    if(!is_array($order))
+	    {
+	    	$this->error('该订单不存在');
+	    }
+	    else 
+	    {
+	  	    $order_detail=M('order_detail');
+	  	    $order_details= $order_detail->where("orderId='".$order['orderId']."'")->select();
+	  	    $item_detail=array();
+	  	    foreach ($order_details as $val)
+	  	    {
+	  		    $items= array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity']);
+	  		    //$order[$key]['items'][]=$items;
+	  		    $item_detail[]=$items;
+	  	    }
+	    }
+
 	    $this->assign('item_detail',$item_detail);
 		$this->assign('order',$order);
 		
 		$this->_config_seo();
 		$this->display();
 	}
+	
 	public function jiesuan(){//结算
-		
-		
 		if(count($_SESSION['cart'])>0)
 		{
-		$user_address_mod = M('user_address');
-		$address_list = $user_address_mod->where(array('uid'=>$this->visitor->info['id']))->select();
-		$this->assign('address_list', $address_list);
-		$items=M('item');
-		$pingyou=0;
-		$kuaidi=0;
-		$ems=0;
-		$freesum=0;
-		foreach ($_SESSION['cart'] as $item)
-		{
-			$free= $items->field('free,pingyou,kuaidi,ems')->where('free=2')->find($item['id']);
-			if(is_array($free))
+			$tokenTall = $this->_get('tokenTall', 'trim', '');
+			$user_address_mod = M('user_address');
+			$address_list = $user_address_mod->where(array('uid' => $this->visitor->info['id'], 'tokenTall' => $tokenTall))->select();
+			$this->assign('address_list', $address_list);
+			$items=M('item');
+			$pingyou=0;
+			$kuaidi=0;
+			$ems=0;
+			$freesum=0;
+			foreach ($_SESSION['cart'] as $item)
 			{
-				$pingyou+=$free['pingyou'];
-				$kuaidi+=$free['kuaidi'];
-				$ems+=$free['ems'];
-				$freesum+=$free['pingyou']+$free['kuaidi']+$free['ems'];
+				$free= $items->field('free,pingyou,kuaidi,ems')->where(array('free' => 2, 'tokenTall' => $tokenTall))->find($item['id']);
+				if(is_array($free))
+				{
+					$pingyou+=$free['pingyou'];
+					$kuaidi+=$free['kuaidi'];
+					$ems+=$free['ems'];
+					$freesum+=$free['pingyou']+$free['kuaidi']+$free['ems'];
+				}
 			}
-		}
-		
-		//   $dingdanhao = date("Y-m-dH-i-s");
-		// $dingdanhao = str_replace("-","",$dingdanhao);
-		// $dingdanhao .= rand(1000,2000);
-		  import('Think.ORG.Cart');// 导入分页类
-    	 $cart=new Cart();
-    	 $sumPrice= $cart->getPrice();
-    	 
-    	 $freearr=array();
-    	 if($pingyou>0)
-    	 {
-    	 	$freearr[]=array('value'=>1,'price'=>$pingyou);
-    	 }
-    	  if($kuaidi>0)
-    	 {
-    	 	$freearr[]=array('value'=>2,'price'=>$kuaidi);
-    	 }
-    	  if($ems>0)
-    	 {
-    	 	$freearr[]=array('value'=>3,'price'=>$ems);
-    	 }
-    	 
-    	
-    	// var_dump($freearr);
-    	 $this->assign('freearr',$freearr);
-    	 $this->assign('freesum',$freesum);
-    	 $this->assign('sumPrice',$sumPrice);
-	    //$this->assign('pingyou',$pingyou);
-		//$this->assign('kuaidi',$kuaidi);
-	    //$this->assign('ems',$ems);
-	    
-		$this->_config_seo();
-		$this->display();
+			
+			import('Think.ORG.Cart');// 导入购物车类
+	    	$cart=new Cart();
+	    	$sumPrice= $cart->getPrice();
+	    	 
+	    	$freearr=array();
+	    	if($pingyou>0)
+	    	{
+	    		$freearr[]=array('value'=>1,'price'=>$pingyou);
+	    	}
+	    	if($kuaidi>0)
+	    	{
+	    		$freearr[]=array('value'=>2,'price'=>$kuaidi);
+	    	}
+	    	if($ems>0)
+	    	{
+	    		$freearr[]=array('value'=>3,'price'=>$ems);
+	    	}
+	    	 
+	    	
+	    	// var_dump($freearr);
+	    	$this->assign('freearr',$freearr);
+	    	$this->assign('freesum',$freesum);
+	    	$this->assign('sumPrice',$sumPrice);
+		    //$this->assign('pingyou',$pingyou);
+			//$this->assign('kuaidi',$kuaidi);
+		    //$this->assign('ems',$ems);
+		    
+			$this->_config_seo();
+			$this->display();
 		}else 
 		{
-			$this->redirect('Shopcart/index');
+			$this->redirect('shopcart/index');
 		}
 	}
 	

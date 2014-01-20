@@ -67,19 +67,18 @@
 	     	$.post(url,{goodId:goodId,quantity:quantity},function(data){
 	     		if(data.status==1)
 	     		{
-	     			
 	     			$('.dialog_title').html(data.msg);
 	     			$('.bold_num').text(data.count);
-	     			 $('.bold_mly').html(data.sumPrice);
-	     			 $('.ware_cen').slideDown('slow');
-	     			 setTimeout(slideUp_fn, 5000);
+	     			$('.bold_mly').html(data.sumPrice);
+	     			$('.ware_cen').slideDown('slow');
+	     			setTimeout(slideUp_fn, 5000);
 	     		}else
 	     		{
 	     			$('.dialog_title').html(data.msg);
 	     			$('.bold_num').text(data.count);
-	     			 $('.bold_mly').html(data.sumPrice);
-	     			 $('.ware_cen').slideDown('slow');
-	     			 setTimeout(slideUp_fn, 5000);
+	     			$('.bold_mly').html(data.sumPrice);
+	     			$('.ware_cen').slideDown('slow');
+	     			setTimeout(slideUp_fn, 5000);
 	     		}
 	     	},"json");	
 	    }
@@ -171,7 +170,7 @@
                         <div class="ware_cen_btn">
                             <p class="ware_text_p">购物车内共有 <span class="bold_num"></span> 种商品 共计 <span class="bold_mly"></span></p>
                             <p class="ware_text_btn">
-                                <a href="{:U('shopcart/index')}"><input type="submit" onclick="#" value="查看购物车" name="" class="btn1"></a>
+                                <a href="{:U('shopcart/index',array('tokenTall'=>$tokenTall))}"><input type="submit" onclick="#" value="查看购物车" name="" class="btn1"></a>
                                 <input type="submit" onclick="$('.ware_cen').css({'display':'none'});" value="继续挑选商品" name="" class="btn2">
                             </p>
                         </div>

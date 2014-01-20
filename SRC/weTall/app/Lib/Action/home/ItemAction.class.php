@@ -31,6 +31,7 @@ class itemAction extends frontendAction {
 
         $this->assign('item', $item);
         $this->assign('img_list', $img_list);
+        $this->assign('tokenTall', $tokenTall);
 
         $this->_config_seo(C('pin_seo_config.item'), array(
             'item_title' => $item['title'],
