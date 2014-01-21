@@ -67,3 +67,4 @@ class BrandAction extends BackAction
     }
     
 }
+?>

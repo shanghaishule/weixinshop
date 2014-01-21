@@ -101,7 +101,7 @@ $(function(){
                 <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{Lanrain:$val.status}" src="__ROOT__/weTall/static/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
                 <td align="center">
                 	<a href="javascript:;" class="J_showdialog" data-uri="/weTall/index.php?g=admin&m=brandlist&a=edit&id={Lanrain:$val.id}" data-title="编辑 - {Lanrain:$val.name}"  data-id="edit" data-acttype="ajax" data-width="400" data-height="130">编辑</a> | 
-                    <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=brandlist&a=edit&id={Lanrain:$val.id}" data-msg="确定删除{Lanrain:$val.name}吗?">删除</a>
+                    <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=brandlist&a=delete&id={Lanrain:$val.id}" data-msg="确定删除{Lanrain:$val.name}吗?">删除</a>
                 </td>
             </tr>
             </volist>
