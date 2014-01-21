@@ -1,0 +1,97 @@
+<?php if (!defined('THINK_PATHSLAPP')) exit();?><!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<link href="__STATIC__/css/admin/style.css" rel="stylesheet"/>
+	<title>商品分类</title>
+	<script>
+	var URL = '/weTall/index.php/admin-index';
+	var SELF = '/weTall/index.php?g=admin&m=index&a=index';
+	var ROOT_PATH = '/weTall';
+	var APP	 =	 '/weTall/index.php';
+	//语言项目
+	var lang = new Object();
+	lang.connecting_please_wait = "请稍后...";lang.confirm_title = "提示消息";lang.move = "移动";lang.dialog_title = "消息";lang.dialog_ok = "确定";lang.dialog_cancel = "取消";lang.please_input = "请输入";lang.please_select = "请选择";lang.not_select = "不选择";lang.all = "所有";lang.input_right = "输入正确";lang.plsease_select_rows = "请选择要操作的项目！";lang.upload = "上传";lang.uploading = "上传中";lang.upload_type_error = "不允许上传的文件类型！";lang.upload_size_error = "文件大小不能超过{sizeLimit}！";lang.upload_minsize_error = "文件大小不能小于{minSizeLimit}！";lang.upload_empty_error = "文件为空，请重新选择！";lang.upload_nofile_error = "没有选择要上传的文件！";lang.upload_onLeave = "正在上传文件，离开此页将取消上传！";
+	</script>
+
+<!--鏍忕洰鍒楄〃-->
+<script src="/weTall/static/js/jquery/jquery.js"></script>
+<script src="/weTall/static/js/jquery/plugins/jquery.tools.min.js"></script>
+<script src="/weTall/static/js/jquery/plugins/formvalidator.js"></script>
+<script src="/weTall/static/js/pinphp.js"></script>
+<script src="/weTall/static/js/admin.js"></script>
+<script>
+//初始化弹窗
+(function (d) {
+    d['okValue'] = lang.dialog_ok;
+    d['cancelValue'] = lang.dialog_cancel;
+    d['title'] = lang.dialog_title;
+})($.dialog.defaults);
+</script>
+
+<script src="/weTall/static/js/jquery/plugins/listTable.js"></script>
+<script>
+$(function(){
+	$('.J_tablelist').listTable();
+});
+</script><script src="/weTall/static/js/jquery/plugins/jquery.treetable.js"></script>
+<script>
+$(function(){
+    //initialState:'expanded'
+    $("#J_cate_tree").treeTable({indent:20,treeColumn:2});
+    $(".J_preview").preview();
+});        
+</script> 
+
+<link rel="stylesheet" type="text/css" href="/weTall/static/css/admin/style.css" />
+ 
+</head>
+
+<body>
+<div id="J_ajax_loading" class="ajax_loading">提交请求中，请稍候...</div>
+<div class="subnav">
+    <div class="content_menu ib_a blue line_x">
+    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=Admin&m=item_cate&a=add" data-title="添加分类" data-id="add" data-width="520" data-height="360"><em>添加分类</em></a>　            </div>
+</div><!--鏍忕洰鍒楄〃-->
+
+<div class="pad_lr_10">
+    <div class="J_tablelist table_list" data-acturi="/weTall/index.php?g=admin&m=item_cate&a=ajax_edit">
+    <table width="100%" cellspacing="0" id="J_cate_tree">
+        <thead>
+            <tr>
+                <th width="30"><input type="checkbox" name="checkall" class="J_checkall"></th> 
+                <th width="30"><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <th>分类名称</th>
+                <th width="100">分类图片</th>
+                <th width="80"><span data-tdtype="order_by" data-field="type">分类类型</span></th>
+              	<th width="60"><span data-tdtype="order_by" data-field="ordid">排序</span></th>
+                <th width="60"><span data-tdtype="order_by" data-field="index">首页显示</span></th>
+				<th width="60"><span data-tdtype="order_by" data-field="status">状态</span></th>
+                <th width="180">管理操作</th>
+            </tr>
+        </thead>
+    	<tbody>
+        <?php echo ($list); ?>
+    	</tbody>
+    </table>
+    </div>
+    <div class="btn_wrap_fixed">
+        <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">全选/取消全选</label>
+        <input type="button" class="btn btn_submit" data-tdtype="batch_action" data-acttype="ajax_form" data-id="move" data-uri="/weTall/index.php?g=Admin&m=item_cate&a=move" data-name="id" data-title="移动分类" value="移动分类" /> 
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="/weTall/index.php?g=Admin&m=item_cate&a=delete" data-name="id" data-msg="删除分类" value="删除分类" />
+        <div id="pages"><?php echo ($page); ?></div>
+    </div>
+</div>
+
+<script src="__ROOT__/weTall/static/js/jquery/plugins/jquery.treetable.js"></script>
+<script>
+$(function(){
+    //initialState:'expanded'
+    $("#J_cate_tree").treeTable({indent:20,treeColumn:2});
+    $(".J_preview").preview();
+});        
+</script> 
+</body>
+</html>
