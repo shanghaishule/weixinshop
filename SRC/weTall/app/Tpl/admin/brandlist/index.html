@@ -1,5 +1,26 @@
-<include file="public:header" />
-<!--标签-->
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<link href="__STATIC__/css/admin/style.css" rel="stylesheet"/>
+	<title>{:L('website_manage')}</title>
+	<script>
+	var URL = '__URL__';
+	var SELF = '__SELF__';
+	var ROOT_PATH = '__ROOT__';
+	var APP	 =	 '__APP__';
+	//语言项目
+	var lang = new Object();
+	<volist name=":L('js_lang')" id="val">
+		lang.{$key} = "{$val}";
+	</volist>
+	</script>
+</head>
+<div id="J_ajax_loading" class="ajax_loading">{:L('ajax_loading')}</div>
+
+<body>
 <div class="pad_lr_10" >
 
 	<form name="searchform" method="get" >
@@ -26,26 +47,26 @@
     <table width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
+                <!-- <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th> -->
 				<th width="50"><span tdtype="order_by" fieldname="id">ID</span></th>
                 <th align="left"><span data-tdtype="order_by" data-field="name">分类名称</span></th>
                 <th width="50" align="left"><span data-tdtype="order_by" data-field="ordid">排序</span></th>
                 <th width="40"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
-                <th width="120">{:L('operations_manage')}</th>
+                <!-- <th width="120">{:L('operations_manage')}</th> -->
             </tr>
         </thead>
     	<tbody>
             <volist name="list" id="val">
             <tr>
-                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <!-- <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td> -->
 				<td align="center">{$val.id}</td>
                 <td align="left"><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit">{$val.name}</span></td>
                 <td align="left"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit" style="color:{$val.colors};">{$val.ordid}</span></td>
                 <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
-                <td align="center">
+                <!--<td align="center">
                 	<a href="javascript:;" class="J_showdialog" data-uri="{:U('brandlist/edit', array('id'=>$val['id']))}" data-title="{:L('edit')} - {$val.name}"  data-id="edit" data-acttype="ajax" data-width="400" data-height="130">{:L('edit')}</a> | 
                     <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('brandlist/deletebrand', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['name'])}">{:L('delete')}</a>
-                </td>
+                </td>-->
             </tr>
             </volist>
     	</tbody>
@@ -53,8 +74,8 @@
     </div>
 
     <div class="btn_wrap_fixed">
-    	<label><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
-    	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('brandlist/deletebrand')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+    	<!-- <label><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+    	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('brandlist/deletebrand')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" /> -->
     	<div id="pages">{$page}</div>
     </div>
 

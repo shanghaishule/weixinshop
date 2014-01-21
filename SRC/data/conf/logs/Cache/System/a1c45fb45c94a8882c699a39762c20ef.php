@@ -1,4 +1,4 @@
-<!doctype html>
+<?php if (!defined('THINK_PATHSLAPP')) exit();?><!doctype html>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -73,7 +73,7 @@ $(function(){
             </tr>
         </thead>
     	<tbody>
-        {Lanrain:$list}
+        <?php echo ($list); ?>
     	</tbody>
     </table>
     </div>
@@ -81,7 +81,7 @@ $(function(){
         <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">全选/取消全选</label>
         <input type="button" class="btn btn_submit" data-tdtype="batch_action" data-acttype="ajax_form" data-id="move" data-uri="/weTall/index.php?g=Admin&m=item_cate&a=move" data-name="id" data-title="移动分类" value="移动分类" /> 
         <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="/weTall/index.php?g=Admin&m=item_cate&a=delete" data-name="id" data-msg="删除分类" value="删除分类" />
-        <div id="pages">{Lanrain:$page}</div>
+        <div id="pages"><?php echo ($page); ?></div>
     </div>
 </div>
 

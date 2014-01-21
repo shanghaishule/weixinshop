@@ -196,9 +196,8 @@ select{ vertical-align:middle;background:none repeat scroll 0 0 #F9F9F9;border-c
 .disabled{display:inline-block;cursor:pointer;width:17px;height:17px;background:url(bgimg/msg_bg.png) no-repeat;}
 
 /*头部*/
-#header { background:url("/static/images/admin/pancl/topbg.png") no-repeat scroll right 0 #218CC2; height:55px; overflow:hidden;
-font-size:16px;color:red;padding-top:25px;text-align:center;}
-#header a{color:red;}
+#header { background:black; height:55px; overflow:hidden;}
+
 #header .logo{float:left;margin-right:20px; padding:8px 0 0 0;}
 #header .logo a{display:block;text-decoration: none;height:40px; width:250px; background:url(bgimg/logo.png) no-repeat;}
 #header .nav{ display:inline-block; height:34px; position:relative; margin-top:15px;}
