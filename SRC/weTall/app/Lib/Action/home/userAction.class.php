@@ -3,9 +3,8 @@
 class userAction extends userbaseAction {
 
 	
-	   public function ajaxlogin()
+	public function ajaxlogin()
     {
-    	
        $user_name=$_POST['user_name'];
        $password=$_POST['password'];
        
@@ -143,19 +142,6 @@ class userAction extends userbaseAction {
     public function register() {
         $this->visitor->is_login && $this->redirect('user/index');
         if (IS_POST) {
-        
-            //方式
-         /*   $type = $this->_post('type', 'trim', 'reg');
-            if ($type == 'reg') {
-                //验证
-                $agreement = $this->_post('agreement');
-                !$agreement && $this->error(L('agreement_failed'));
-
-                $captcha = $this->_post('captcha', 'trim');
-                if(session('captcha') != md5($captcha)){
-                    $this->error(L('captcha_failed'));
-                }
-            }*/
             $username = $this->_post('user_name', 'trim');
             $email = $this->_post('email','trim');
             $password = $this->_post('password', 'trim');
@@ -168,43 +154,30 @@ class userAction extends userbaseAction {
             $ipban_mod = D('ipban');
             $ipban_mod->clear(); //清除过期数据
             $is_ban = $ipban_mod->where("(type='name' AND name='".$username."') OR (type='email' AND name='".$email."')")->count();
-  
             $is_ban && $this->error(L('register_ban'));
          
             //连接用户中心
             $passport = $this->_user_server();
             //注册
             $uid = $passport->register($username, $password, $email, $gender);
-          
             !$uid && $this->error($passport->get_error());
-            //第三方帐号绑定
-         /*   if (cookie('user_bind_info')) {
-                $user_bind_info = object_to_array(cookie('user_bind_info'));
-                $oauth = new oauth($user_bind_info['type']);
-                $bind_info = array(
-                    'pin_uid' => $uid,
-                    'keyid' => $user_bind_info['keyid'],
-                    'bind_info' => $user_bind_info['bind_info'],
-                );
-                $oauth->bindByData($bind_info);
-                //临时头像转换
-                $this->_save_avatar($uid, $user_bind_info['temp_avatar']);
-                //清理绑定COOKIE
-                cookie('user_bind_info', NULL);
-            }*/
+
             //注册完成钩子
             $tag_arg = array('uid'=>$uid, 'uname'=>$username, 'action'=>'register');
-            tag('register_end', $tag_arg);
+            //tag('register_end', $tag_arg);
+            
             //登陆
             $this->visitor->login($uid);
+            
             //登陆完成钩子
             $tag_arg = array('uid'=>$uid, 'uname'=>$username, 'action'=>'login');
-            tag('login_end', $tag_arg);
+            //tag('login_end', $tag_arg);
+            
             //同步登陆
             $synlogin = $passport->synlogin($uid);
-          $this->redirect('user/index');
+            $this->redirect('user/index');
            // $this->success(L('register_successe').$synlogin, U('user/index'));
-              
+
             exit;
         } else {
             //关闭注册

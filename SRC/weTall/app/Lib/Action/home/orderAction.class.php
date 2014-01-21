@@ -112,9 +112,9 @@ class orderAction extends userbaseAction {
 	}
 	
 	public function jiesuan(){//结算
+		$tokenTall = $this->_get('tokenTall', 'trim', '');
 		if(count($_SESSION['cart'])>0)
 		{
-			$tokenTall = $this->_get('tokenTall', 'trim', '');
 			$user_address_mod = M('user_address');
 			$address_list = $user_address_mod->where(array('uid' => $this->visitor->info['id'], 'tokenTall' => $tokenTall))->select();
 			$this->assign('address_list', $address_list);
@@ -166,7 +166,7 @@ class orderAction extends userbaseAction {
 			$this->display();
 		}else 
 		{
-			$this->redirect('shopcart/index');
+			$this->redirect('shopcart/index', array('tokenTall'=>$tokenTall));
 		}
 	}
 	

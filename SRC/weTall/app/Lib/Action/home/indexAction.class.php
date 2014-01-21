@@ -39,37 +39,50 @@ class indexAction extends frontendAction {
     {
     	
         $user_name=$_POST['user_name'];
-       $password=$_POST['password'];
+        $password=$_POST['password'];
        
-       $user=M('user');
-       $users= $user->where("username='".$user_name."' and password='".md5($password)."'")->find(); 
-       if(is_array($users))
-       {
-    	$data = array('status'=>1);
-    	$_SESSION['user_info']=$users;
-       }else {
-       	$data = array('status'=>0);
-       }
+        $user=M('user');
+        $users= $user->where("username='".$user_name."' and password='".md5($password)."'")->find(); 
+        if(is_array($users))
+        {
+    		$data = array('status'=>1);
+    		$_SESSION['user_info']=$users;
+        }else {
+       		$data = array('status'=>0);
+        }
     	
-    	echo json_encode($data);
+		echo json_encode($data);
     	exit;
     }
+    
     public function ajaxRegister()
     {
-    	$username=$_POST['user_name'];
-    	$user=M('user');
-    	$count=$user->where("username='".$username."'")->find();
+    	$username = $_GET['user_name'];
+    	$user = M('user');
+    	$count = $user->where("username='".$username."'")->find();
     	if(is_array($count))
     	{
-        echo 'false';
-       // echo json_encode(array('user_nameData'=>true));
+        	echo 'false';
     	}else 
     	{
     		echo 'true';
-        //echo json_encode(array('user_nameData'=>true));
+    	}
+    }
+    
+    public function ajaxCheckuser()
+    {
+    	$username = $_GET['user_name'];
+    	$user = M('user');
+    	$count = $user->where("username='".$username."'")->find();
+    	if(is_array($count))
+    	{
+    		echo 'true';
+    	}
+    	else
+    	{
+    		echo 'false';
     	}
     	
-    
     }
     
 }

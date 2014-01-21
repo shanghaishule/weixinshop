@@ -89,7 +89,7 @@ if (strpos($user_agent, 'MicroMessenger') === false) {
     public function login($uid, $remember = null) {
         $user_mod = M('user');
         //更新用户信息
-        $user_mod->where(array('id' => $uid))->save(array('last_time' => time(), 'last_ip' => get_client_ip()));
+        $user_mod->where(array('id' => $uid))->save(array('last_login_time' => time(), 'last_login_ip' => get_client_ip()));
         $user_info = $user_mod->field('id,username,password')->find($uid);
         //保持状态
         $this->assign_info($user_info);
