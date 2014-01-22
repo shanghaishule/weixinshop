@@ -26,6 +26,7 @@ class indexAction extends frontendAction {
         $this->_config_seo();
         $this->display();
     }
+    
     public function getItem($where = array())
     {
     	$where_init = array('status'=>'1');
@@ -45,7 +46,8 @@ class indexAction extends frontendAction {
         $users= $user->where("username='".$user_name."' and password='".md5($password)."'")->find(); 
         if(is_array($users))
         {
-    		$data = array('status'=>1);
+        	$tokenTall = $this->_get('tokenTall', 'trim', '');
+    		$data = array('status'=>1, 'url'=>U('user/index', array('tokenTall'=>$tokenTall)));
     		$_SESSION['user_info']=$users;
         }else {
        		$data = array('status'=>0);

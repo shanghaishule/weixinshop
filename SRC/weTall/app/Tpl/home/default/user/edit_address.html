@@ -17,19 +17,11 @@
 <script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/diqu2.js'></script>
 <link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.ui.css" /></head>
 
-
-
-
-
-
-
-
-
 <body onLoad="setup()">
 <include file="public:head" />
 <script type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js" charset="utf-8"></script>
 <script type="text/javascript">
-//<!CDATA[
+
 $(function(){
     regionInit("region");
     $('#address_form').validate({
@@ -40,7 +32,7 @@ $(function(){
         },
         success       : function(label){
             label.addClass('validate_right').text('OK!');
-        },*/
+        },
         errorLabelContainer: $('#warning'),
         invalidHandler: function(form, validator) {
            var errors = validator.numberOfInvalids();
@@ -52,7 +44,7 @@ $(function(){
            {
                $('#warning').hide();
            }
-        },
+        },*/
         onkeyup : false,
         rules : {
             consignee : {
@@ -96,58 +88,41 @@ function check_phone(){
 function hide_error(){
     $('#region').find('.error').hide();
 }
-//]]>
+
 </script>
 <div class="eject_con" id="content">
     <div class="add">
-    
         <div id="warning"></div>
-        <form method="post" action="{:U('User/address')}" id="address_form">
+        <form method="post" action="{:U('user/address',array('tokenTall'=>$tokenTall))}" id="address_form">
         <input type="hidden" name="id" value="{$info.id}" />
             <ul class="form_address">
                 <li>
-                    <!-- <h3>收货人姓名: </h3> -->
                     <input class="text width_normal" value="{$info.consignee}" name="consignee" placeholder="请填写您的真实姓名" type="text">
                     <label class="field_message"><span class="field_notice"></span></label>
                 </li>
                 <li>
-                    <!-- <h3>所在地区: </h3> -->
-                  <!--  <div id="region">
-                         <input name="region_id" value="" id="region_id" class="mls_id" type="hidden">
-                         <input name="region_name" value="" class="mls_names" type="hidden">
-                         <select onchange="hide_error();">
-                           <option selected="selected">请选择...</option>
-                           <option value="1">中国</option>
-                         </select>
-                       
-                         <b class="field_message" style="font-weight:normal;"><label class="field_notice"></label></b>
-                    </div>-->
-            <select name="sheng" id="s1"></select>
-<select name="shi" id="s2"></select>
-<select name="qu" id="s3"></select>
+            		<select name="sheng" id="s1"></select>
+					<select name="shi" id="s2"></select>
+					<select name="qu" id="s3"></select>
                 </li>
-                
-                 	<script language="javascript">
-								new PCAS("sheng","shi","qu","{$info.sheng}","{$info.shi}","{$info.qu}");
+                <script language="javascript">
+					new PCAS("sheng","shi","qu","{$info.sheng}","{$info.shi}","{$info.qu}");
 				</script>
                 
                 <li>
-                    <!-- <h3>详细地址: </h3> -->
                     <input value="{$info.address}" class="text width_normal" name="address" placeholder="不必重复填写地区" type="text"><label class="field_message"><span class="field_notice"></span></label>
                 </li>
                 <li>
-                    <!-- <h3>手机号码:</h3> -->
                     <input value="{$info.mobile}" class="text width_normal" name="phone_mob" placeholder="电话号码" type="text"><label class="field_message"><span class="field_notice"></span></label>
                 </li>
             </ul>
             <div class="submit">
-                <input class="btn enter" value="新增地址" type="submit">
+                <input class="btn enter" value="保存地址" type="submit">
             </div>
         </form>
     </div>
      
 </div>
 <include file="public:footer" />
-
-</body></html>
-
+</body>
+</html>

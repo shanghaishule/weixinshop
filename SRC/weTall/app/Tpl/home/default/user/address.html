@@ -8,18 +8,21 @@
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" ></script>
 <link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.ui.css" /></head>
 
+<script type="text/javascript">
+	function deleteAddr(id){
+		var url = "{:U('user/address',array('id'=>'addr_id','type'=>'del','tokenTall'=>$tokenTall))}"; 
+		var newurl = url.replace("addr_id",id);
+		if(confirm('确定要删除该地址吗？')){
+			location.href = newurl;
+		}
+	}
+</script>
+
 <body>
 <include file="public:head" />
 <div id="content">
     <div class="wrap">
-        <div class="eject_btn" title="新增地址"><a class="enter" href="{:U('user/addaddress')}">新增地址</a></div> 
-        <!-----------
-        <ul class="address_list">
-            <li class="no_address">
-            <span class="noaddress">您没有添加收货地址</span>
-            </li>
-        </ul>
-        ------>
+        <div class="eject_btn" title="新增地址"><a class="enter" href="{:U('user/addaddress',array('tokenTall'=>$tokenTall))}">新增地址</a></div> 
         <ul class="address_list">
         <volist name='address_list' id='vo' >
             <li>
@@ -27,15 +30,15 @@
                 <p>{$vo.sheng}&nbsp;{$vo.shi}&nbsp;{$vo.qu}&nbsp;{$vo.address}</p>
                 <p class="new_line"><br /></p>
                 <p class="address_action">
-                    <span class="edit"><a href="{:U('User/edit_address',array('id'=>$vo['id']))}"><i class="edit_icon"></i>编辑</a></span>
-                    <span><a href="{:U('User/address',array('id'=>$vo['id'],'type'=>'del'))}" class="delete float_none"><i class="delete_icon"></i>删除</a></span>
+                    <span class="edit"><a href="{:U('user/edit_address',array('id'=>$vo['id'],'tokenTall'=>$tokenTall))}"><i class="edit_icon"></i>编辑</a></span>
+                    <!--span><a href="{:U('user/address',array('id'=>$vo['id'],'type'=>'del','tokenTall'=>$tokenTall))}" class="delete float_none"><i class="delete_icon"></i>删除</a></span -->
+                    <span><a href="javascript:void(0)" onclick="deleteAddr({$vo['id']})" class="delete float_none"><i class="delete_icon"></i>删除</a></span>
                 </p>
             </li>
           </volist>
         </ul>
         <div class="public table" style="display:none;">
             <table class="table_head_line">
-               
                 <tr class="line_bold">
                     <th colspan="6"></th>
                 </tr>
@@ -47,7 +50,6 @@
                     <th class="width5">电话/手机</th>
                     <th>操作</th>
                 </tr>
-                
                 <tr>
                     <td colspan="6" class="member_no_records padding6">您没有添加收货地址</td>
                 </tr>

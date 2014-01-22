@@ -20,23 +20,7 @@ class bookAction extends frontendAction {
         $tag = $this->_get('tag', 'trim'); //当前标签
 
         $where = array();
-        /*
-          if ($tag) {
-          $item_tag_table = C('DB_PREFIX').'item_tag';
-          $tag_id = M('tag')->where(array('name'=>$tag))->getField('id');
-          $where = array($item_tag_table.'.tag_id'=>$tag_id);
-          //排序：最热(hot)，最新(new)
-          switch ($sort) {
-          case 'hot':
-          $order = 'i.hits DESC,i.id DESC';
-          break;
-          case 'new':
-          $order = 'i.id DESC';
-          break;
-          }
-          $this->tcate_waterfall($where, $order);
-          } else {
-         */
+
         $tag && $where['intro'] = array('like', '%' . $tag . '%');
         //排序：最热(hot)，最新(new)
         switch ($sort) {
@@ -48,7 +32,6 @@ class bookAction extends frontendAction {
                 break;
         }
         $this->waterfall($where, $order, '', $page_max);
-        //}
 
         $this->assign('hot_tags', $hot_tags);
         $this->assign('tag', $tag);
@@ -77,6 +60,10 @@ class bookAction extends frontendAction {
      * 按分类查看
      */
     public function cate() {
+    	//取商家token值，取不到则默认为空
+    	$tokenTall = $this->_get('tokenTall', 'trim', '');
+    	$this->assign('tokenTall',$tokenTall);
+    	
         $cid = $this->_get('cid', 'intval');
         !$cid && $this->_404();
         //分类数据
@@ -126,8 +113,8 @@ class bookAction extends frontendAction {
             //实物分类
             $cate_relate[$cid]['sids'][] = $cid;
             $where['cate_id'] = array('in', $cate_relate[$cid]['sids']);
-         // var_dump($cate_relate[$cid]['sids']);exit;
-           // $this->waterfall($where, $order);
+            // var_dump($cate_relate[$cid]['sids']);exit;
+            // $this->waterfall($where, $order);
         } else {
             //标签组
             $min_price && $where['i.price'][] = array('egt', $min_price);
@@ -149,14 +136,15 @@ class bookAction extends frontendAction {
         }
         
       
-          $cid = $this->_get('cid', 'intval');
-          $item=M('item');
-          $where['cate_id']=array('eq',$cid);
-          $where['status']=array('eq',1);
-          $where['cate_id'] = array('in', $cate_relate[$cid]['sids']);
-         $items=  $item->field('id,title,img,price')->order('ordid asc,id desc')->where($where)->select();
-         //var_dump($items);exit;
-         $this->assign('item_list',$items);
+        $cid = $this->_get('cid', 'intval');
+        $item=M('item');
+        $where['cate_id']=array('eq',$cid);
+        $where['status']=array('eq',1);
+        $where['cate_id'] = array('in', $cate_relate[$cid]['sids']);
+        $where['tokenTall']=array('eq',$tokenTall);
+        $items=  $item->field('id,title,img,price')->order('ordid asc,id desc')->where($where)->select();
+        //var_dump($items);exit;
+        $this->assign('item_list',$items);
         $this->assign('cate_list', $cate_list); //分类
         $this->assign('tid', $tid); //顶级分类ID
         $this->assign('cate_info', $cate_info); //当前分类信息
