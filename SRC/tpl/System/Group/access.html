@@ -9,12 +9,12 @@
 	<link rel='stylesheet' type='text/css' href='{lanrain::STATICS}/treetable/css/jquery.treeTable.css' />
 </head>
 <body>
-	<form action="{lanrain::U('Group/access_edit')}" method="post">
+	<form action="{lanrain::U('Group/access_edit')}" method="post" >
 		<input type="hidden" name="roleid" value="{lanrain:$Think.get.roleid}" />
 		<table id="tree" width="100%" border="0" cellpadding="4" cellspacing="1" class="table">
 			{lanrain:$html_tree}
 			<tr class="tr lt">
-				<td>
+				<td>				  
 					<input class="bginput" type="submit" name="dosubmit" value="提 交" ></td>
 			</tr>
 		</table>

@@ -1,6 +1,6 @@
 <?php
 
-class AdNTAXAction extends BackAction
+class StatisticsAction extends BackAction
 {
 
 	private $_ad_type = array('image'=>'图片', 'code'=>'代码', 'flash'=>'Flash', 'text'=>'文字');

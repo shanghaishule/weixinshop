@@ -72,7 +72,7 @@ class AdminAction extends Action{
            
             redirect(U('Home/Index/index'));
         }else {
-            $this->error('已经登出！',U('Home/Index/index'));
+            $this->error('已经登出！',U('System/Admin/index'));
         }
     }
 }

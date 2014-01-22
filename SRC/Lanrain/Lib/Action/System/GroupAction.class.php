@@ -100,7 +100,7 @@ class GroupAction extends BackAction{
             $node[$n]['pid_node'] = ($t['pid'])? ' class="tr lt child-of-node-'.$t['pid'].'"' : '';
         }
         $str  = "<tr id='node-\$id' \$pid_node>
-                    <td style='padding-left:30px;'>\$spacer<input type='checkbox' name='nodeid[]' value='\$id' class='radio' level='\$depth' \$checked onclick='javascript:checknode(this);'/ > \$title (\$name)</td>
+                    <td style='padding-left:30px;'>\$spacer<input type='checkbox' name='nodeid\$id' value='\$id' class='radio' level='\$depth' \$checked onclick='javascript:checknode(this);'/ > \$title (\$name)</td>
                 </tr>";
 
         $Tree->init($node);
@@ -113,9 +113,16 @@ class GroupAction extends BackAction{
     //权限编辑
     public function access_edit(){
         $roleid = $this->_post('roleid','intval',0);
-        $nodeid = $this->_post('nodeid');
+        $i = 0;
+        foreach ($_POST as $node_id_num){
+        	if(($i != 0) and is_numeric($node_id_num)){
+        	$nodeid[] = $node_id_num;
+        	}
+        	$i = $i + 1;
+        }
+        // = $this->_post('nodeid');
         if(!$roleid) $this->error('参数错误!');
-        $AccessDB = D('Access');
+        $AccessDB = D('Access');//var_dump($nodeid);die();
         if (is_array($nodeid) && count($nodeid) > 0) {  //提交得有数据，则修改原权限配置
             $AccessDB -> delAccess(array('role_id'=>$roleid));  //先删除原用户组的权限配置
             $NodeDB = D('Node');

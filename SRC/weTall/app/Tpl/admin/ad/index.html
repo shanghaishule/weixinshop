@@ -67,7 +67,7 @@
             <td align="center">{$val.id}</td>
             <td><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit">{$val.name}</span></td>
             <td><span data-tdtype="edit" data-field="url" data-id="{$val.id}" class="tdedit">{$val.url}</span></td>
-            <td align="center">{$ad_type_arr[$val['type']]}<if condition="$val.type eq 'image'"><notempty name="val['content']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{$img_dir}{$val.content}"><img src="__STATIC__/images/filetype/image_s.gif" /></span></notempty></if></td>
+            <td align="center">{$ad_type_arr[$val['type']]}<if condition="$val.type eq 'image'"><notempty name="val['content']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="/weTall/data/upload/advert/{$img_dir}{$val.content}"><img src="__STATIC__/images/filetype/image_s.gif" /></span></notempty></if></td>
             <td align="center"><em class="red">(id:{$val.board_id})</em>{$val.adbord.name}</td>
             <td align="center">{$val.start_time|date='Y-m-d',###} / {$val.end_time|date='Y-m-d',###}</td>
             <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">{$val.ordid}</span></td>
