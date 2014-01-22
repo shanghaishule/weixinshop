@@ -42,9 +42,7 @@ class backendAction extends baseAction
         $map = $this->_search();
         
         $mod = D($this->_name);
-       
         !empty($mod) && $this->_list($mod, $map);
-        
         $this->display();
     }
 
@@ -160,7 +158,122 @@ class backendAction extends baseAction
             $this->error(L('illegal_parameters'));
         }
     }
-
+    /**
+     * 设置
+     */
+    public  function set(){
+    	$mod = D($this->_name);
+    	$pid = $this->_get('id',"trim");
+    	$data['id'] = $pid;
+    	$data['checkstatus'] = '1';
+    	$data['boadid'] = '1';
+    	$data1['boadid'] = '1';
+    	$data2['boadid'] = '2';
+    	$data3['boadid'] = '3';
+    	$data1['status'] = '1';
+    	$data2['status'] = '1';
+    	$data3['status'] = '1';
+    	$data1['checkstatus'] = '1';
+    	$data2['checkstatus'] = '1';
+    	$data3['checkstatus'] = '1';
+    	$countNum1 = count($mod->where($data1)->select());
+    	$countNum2 = count($mod->where($data2)->select());
+    	$countNum3 = count($mod->where($data3)->select());
+    	if($countNum1 <= 6) {
+    		$data['checkstatus'] = '1';
+    	}else if($countNum2 <= 1){
+    		$data['checkstatus'] = '1';
+    		$data['boadid'] = '2';
+    	}else if($countNum3 <= 1){
+    		$data['checkstatus'] = '1';
+    		$data['boadid'] = '3';
+    	}else{
+    		$data['checkstatus'] = '2';
+    		$data['boadid'] = '0';
+    	}
+    	$pk = $mod->getPk();
+    	$ids = trim($this->_request($pk), ',');
+    	if ($ids) {
+    		if (false !== $mod->save($data)) {
+    			IS_AJAX && $this->ajaxReturn(1, L('operation_success'));
+    			$this->success(L('operation_success'));
+    		} else {
+    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+    			$this->error(L('operation_failure'));
+    		}
+    	} else {
+    		IS_AJAX && $this->ajaxReturn(0, L('illegal_parameters'));
+    		$this->error(L('illegal_parameters'));
+    	}
+    }
+    /**
+     * 申请首页广告
+     */
+    public  function appliyhome(){
+    	$mod = D($this->_name);
+    	$pid = $this->_get('id',"trim");
+    	$modad = D("ad");
+    	$data['adid'] = $pid;
+    	$data['checkstatus'] = '0';
+    	$data['boadid'] = '1';
+    	$data1['boadid'] = '1';
+    	$data2['boadid'] = '2';
+    	$data3['boadid'] = '3';
+    	$data1['status'] = '1';
+    	$data2['status'] = '1';
+    	$data3['status'] = '1';
+    	$countNum1 = count($mod->where($data1)->select());
+    	$countNum2 = count($mod->where($data2)->select());
+    	$countNum3 = count($mod->where($data3)->select());
+    	$total['checkstatus'] = '2';
+    	$totalNum = count($mod->where($total)->select());
+    	if($countNum1 <= 5) {
+    		$data['checkstatus'] = '1';
+    	}else if($countNum2 <= 1){
+    		$data['checkstatus'] = '1';
+    		$data['boadid'] = '2';
+    	}else if($countNum3 <= 1){
+    		$data['checkstatus'] = '1';
+    		$data['boadid'] = '3';
+    	}else{
+    		$data['checkstatus'] = '2';
+    		$data['boadid'] = '0';
+    	}
+    	$pk = $mod->getPk();
+    	$ids = trim($this->_request($pk), ',');
+    	if($totalNum >= 50){
+    		IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+    		$this->error("等待人数过多，请您稍等！");
+    	}else if ($ids) {
+    		$addata["id"] = $pid;
+    		$updata = $modad->where($addata)->find();
+    		$addata["checkstatus"] = "1";
+    		$data["name"] = $updata["name"];
+    		$data["type"] = $updata["type"];
+    		$data["url"] = $updata["url"];
+    		$data["desc"] = $updata["desc"];
+    		$data["start_time"] = $updata["start_time"];
+    		$data["end_time"] = $updata["end_time"];
+    		$data["board_id"] = $updata["board_id"];
+    		$data["extval"] = $updata["extval"];
+    		$data["add_time"] = $updata["add_time"];
+    		$data["ordid"] = $updata["ordid"];
+    		$data["content"] = $updata["content"];
+    		$data["status"] = $updata["status"];
+    		if (false !== $mod->add($data)) {   			
+    			if(false !== $modad->save($addata)){
+	    			IS_AJAX && $this->ajaxReturn(1, L('operation_success'));
+	    			$this->success(L('operation_success'));
+    			}
+    		} else {
+    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+    			$this->error(L('operation_failure'));
+    		}
+    	} else {
+    		IS_AJAX && $this->ajaxReturn(0, L('illegal_parameters'));
+    		$this->error(L('illegal_parameters'));
+    	}
+    }
     /**
      * 获取请求参数生成条件数组
      */
