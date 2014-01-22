@@ -58,8 +58,8 @@ class AdminAction extends Action{
         }
     }
 	
-	public function verify(){
-		Image::buildImageVerify();
+	public function verify(){		
+		Image::buildImageVerify();echo "h";
 	}
 	
     // 用户登出
