@@ -100,7 +100,7 @@ $(function(){
                 <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="<?php echo ($val["status"]); ?>" src="__ROOT__/weTall/static/images/admin/toggle_<?php if($val["status"] == 0): ?>disabled<?php else: ?>enabled<?php endif; ?>.gif" /></td>
                 <td align="center">
                 	<a href="javascript:;" class="J_showdialog" data-uri="/weTall/index.php?g=admin&m=brandlist&a=edit&id=<?php echo ($val["id"]); ?>" data-title="编辑 - <?php echo ($val["name"]); ?>"  data-id="edit" data-acttype="ajax" data-width="400" data-height="130">编辑</a> | 
-                    <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=brandlist&a=edit&id=<?php echo ($val["id"]); ?>" data-msg="确定删除<?php echo ($val["name"]); ?>吗?">删除</a>
+                    <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=brandlist&a=delete&id=<?php echo ($val["id"]); ?>" data-msg="确定删除<?php echo ($val["name"]); ?>吗?">删除</a>
                 </td>
             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
     	</tbody>

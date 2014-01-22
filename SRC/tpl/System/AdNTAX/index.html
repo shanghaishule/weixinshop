@@ -52,7 +52,7 @@ $(function(){
 <div class="subnav">
     <div class="content_menu ib_a blue line_x">
     	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=adforhome&a=add" data-title="添加广告" data-id="add" data-width="520" data-height="410"><em>添加广告</em></a>
-    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=adforhome&a=add" data-title="设置汇率" data-id="add" data-width="520" data-height="410"><em>设置汇率</em></a>　            </div>
+    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=set_tax&a=edit" data-title="设置汇率" data-id="edit" data-width="400" data-height="180"><em>设置汇率</em></a>　            </div>
 </div><!--广告列表-->
 
 <!--广告列表-->
@@ -75,6 +75,7 @@ $(function(){
                 <input type="text" name="end_time_min" id="end_time_min" class="date" size="12" value="{Lanrain:$search.end_time_min}">
                 -
                 <input type="text" name="end_time_max" id="end_time_max" class="date" size="12" value="{Lanrain:$search.end_time_max}">
+            	<font size="3px" color="red">&nbsp;&nbsp;&nbsp;基本汇率: {Lanrain:$currentTax.shoptax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优惠券汇率：{Lanrain:$currentTax.coupontax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分汇率：{Lanrain:$currentTax.giftpointtax}</font>
             	<div class="bk3"></div>
                 	广告位：
                 <select name="board_id" class="mr10">
