@@ -27,38 +27,18 @@
     <div class="mainbox">
        <div class="mleft">
             <div class="mbar">
-               <h4>微商城信息</h4>
-             <!--  <div class="vshop" id="divShopName"><a class="bindwx" href="#">已绑定</a><span class="sname">您的微商城名称: 厦门易全贸易有限公司</span><a title="资料已认证" class="vok" href="#">已认证</a><sapn class="red">您的店铺已过期，请与管理员联系</sapn></div>-->
-               <div class="clear"></div>
-                       
-               <div class="lbar">
-                   <p><img height="90" id="imgWxQRCode" src="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>"></p>
-                   <p><span>微信公众号二维码</span></p>
-                   <p>
-                       <a href="{:U('setting/index')}">[设置]</a>
-                       <a title="微信公众号二维码" class="group1" id="aDownLoadWxQRcode" href="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">[预览]</a>
-                   </p>
-               </div>
-           
-               <div class="lbar">
-                   <p><img height="90" id="imgShopQRcode" src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>"></p>
-                   <p><span>微商城二维码</span></p>
-                   <p>
-                       <a href="{:U('setting/index')}">[设置]</a>
-                       <a class="group1" title="微商城二维码" id="aDownLoadShopQRcode" href="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">[预览]</a>
-                   </p>
-               </div>
-               <div class="clear"></div>
-              <!-- <div class="shoplink" id="divShopLink">
-                    微商城链接：<input type="text" value="<?php echo $_SERVER['SERVER_NAME']; ?>" title="选中，按Ctrl + C可复制！"; onclick="this.select()" class="seltext hand" readonly="readonly" id="txtShopLink" name="txtShopLink">
-                    <a id="btn-copy" href="#">[复制]</a>
-               </div>-->
-               
-                <div class="shoplink" >
-                    微商接口配置URL：<input type="text" value="http://<?php echo $_SERVER['SERVER_NAME']; ?>/index.php?m=Weixin&a=index"  class="seltext hand" readonly="readonly" id="txtShopLink" name="txtShopLink">
-               </div>
-               <div class="shoplink" >
-                    微商接口配置Token：<input type="text" value="weixin"  class="seltext hand" readonly="readonly" id="txtShopLink" name="txtShopLink">
+               <h4>公告栏<span class="more"><a target="_blank" href="/index.php?g=System&m=Info_Notice&a=index">更多&gt;&gt;</a></span></h4>
+               <div class="mtishi"><br></br>
+                    <table width="100%">
+		            <volist name="list" id="val"> 
+		               <tr>
+		                <td width="100"  align="left">{$val.title}</td>
+		                <td width="300"  align="left">{$val.content}</td>
+		                <td width="100"  align="left">{$val.ptime}</td>   
+		               </tr> 
+		            </volist>
+		            </table>
+		            <br></br>			    
                </div>
             </div>
         
@@ -88,13 +68,19 @@
        </div>
        <div class="mright"> 
         
-            <div class="mbar">
-               <h4>最新动态<span class="more"><a target="_blank" href="http://www.changxiao.cn/weixin.html">更多&gt;&gt;</a></span></h4>
-               <ul class="notice">
-                      <li><a target="_blank" href="http://www.changxiao.cn/weixin.html">喜讯：关注畅销宝!</a></li>                  
-                       <li><a target="_blank" href="http://home.ebrun.com/blog-38270.html"> 我为什么看好微信电商的前景？</a></li>    
-                       <li><a target="_blank" href="http://home.ebrun.com/blog-38125.html">写在微信5.0出来前的一些关于微信电商的思考</a></li>    
-               </ul>
+            <div style="background:#E5E5E5;">
+               <h4>微商城信息二维码</h4>
+                       
+               <div>
+                   <img height="90" id="imgWxQRCode" src="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">  
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <img height="90" id="imgShopQRcode" src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>">
+                    <br></br><a href="{:U('setting/index')}">[设置]</a>
+                       <a title="微信公众号二维码" class="group1" id="aDownLoadWxQRcode" href="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">[预览]</a>
+					 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('setting/index')}">[设置]</a>
+                       <a class="group1" title="微商城二维码" id="aDownLoadShopQRcode" href="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">[预览]</a>
+                   <br></br>
+               </div>
+              
             </div>
 
             <div class="mbar">
