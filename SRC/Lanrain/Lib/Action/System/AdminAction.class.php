@@ -33,9 +33,9 @@ class AdminAction extends Action{
             session('userid',$authInfo['id']);  //用户ID
 			session('username',$authInfo['username']);   //用户名
             session('roleid',$authInfo['role']);    //角色ID
-            if($authInfo['username']==C('SPECIAL_USER')) {
+            //if($authInfo['username']==C('SPECIAL_USER')) {
                 session(C('ADMIN_AUTH_KEY'), true);
-            }
+            //}
             //保存登录信息
             $User	=	M(C('USER_AUTH_MODEL'));
             $ip		=	get_client_ip();
