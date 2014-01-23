@@ -61,7 +61,7 @@ class bookAction extends frontendAction {
      */
     public function cate() {
     	//取商家token值，取不到则默认为空
-    	$tokenTall = $this->_get('tokenTall', 'trim', '');
+    	$tokenTall = $this->getTokenTall();
     	$this->assign('tokenTall',$tokenTall);
     	
         $cid = $this->_get('cid', 'intval');

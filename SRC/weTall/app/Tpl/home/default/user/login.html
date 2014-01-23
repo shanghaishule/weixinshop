@@ -49,13 +49,16 @@ $(function(){
     	var user_name= $('#user_name').val();
     	var password= $('#password').val();
     	
-    	var url  = "{:U('index/ajaxlogin')}";
+    	var url  = "{:U('index/ajaxlogin',array('tokenTall'=>$tokenTall))}";
     	$.post(url,{user_name:user_name,password:password},function(data){
     	
     		if(data.status==1) {
     			$('#login_text').html("<b>登陆成功！</b>");
     			//function a(){location.href=decodeURIComponent("%2Findex.php%3Fapp%3Dmemberbuy%26store_id%3D9");}
-    			function a(){location.href=data.url;}
+    			function a(){
+    				location.href=data.url;
+    			    //alert(data.url);
+    			}
     			setTimeout(a,1000);
     		} else {
     			//var jsonObj = eval('('+result+')');

@@ -8,17 +8,20 @@ class indexAction extends backendAction {
         
     }
 
-    public function index() {  
+    public function index() {
         $this->login();   
         $top_menus = $this->_mod->admin_menu(0);
         $this->assign('top_menus', $top_menus);
         $my_admin = array('username'=>$_SESSION['admin']['username'], 'rolename'=>$_SESSION['admin']['role_id']);
         $this->assign('my_admin', $my_admin);
-        
+        $this->assign('tokenTall', $this->getTokenTall());
         $this->display();
     }
 
     public function panel() {
+    	$tokenTall = $this->getTokenTall();
+    	$this->assign('tokenTall', $tokenTall);
+    	
         $message = array();
         if (is_dir('./install')) {
             $message[] = array(
@@ -57,12 +60,12 @@ class indexAction extends backendAction {
         
         
         
-        $buycount= M('item')->where('status=1')->count();
-         $nobuycount= M('item')->where('status=0')->count();
+        $buycount= M('item')->where(array('status'=>1,'tokenTall'=>$tokenTall))->count();
+        $nobuycount= M('item')->where(array('status'=>0,'tokenTall'=>$tokenTall))->count();
         
-        $fukuan= $this->item_order->where('status=1')->count();
-        $fahuo= $this->item_order->where('status=2')->count();
-        $yfahuo= $this->item_order->where('status=3')->count();
+        $fukuan= $this->item_order->where(array('status'=>1,'tokenTall'=>$tokenTall))->count();
+        $fahuo= $this->item_order->where(array('status'=>2,'tokenTall'=>$tokenTall))->count();
+        $yfahuo= $this->item_order->where(array('status'=>3,'tokenTall'=>$tokenTall))->count();
         $this->assign('count',
         array('fukuan'=>$fukuan,
         'fahuo'=>$fahuo,
@@ -71,6 +74,7 @@ class indexAction extends backendAction {
         'nobuycount'=>$nobuycount
         )
         );
+        
         $this->display();
     }
 
@@ -132,43 +136,45 @@ class indexAction extends backendAction {
             if ($r = $this->_mod->where(array('often'=>2))->select()) {
                 $left_menu[1]['sub'] = $r;
             }
-              $left_menu[2] = array('id'=>2,'name'=>'客户管理');
+            
+            $left_menu[2] = array('id'=>2,'name'=>'客户管理');
             $left_menu[2]['sub'] = array();
             if ($r = $this->_mod->where(array('often'=>3))->select()) {
                 $left_menu[2]['sub'] = $r;
             }
             
             
-           /* $left_menu[3] = array('id'=>3,'name'=>'微信管理');
+            /*
+            $left_menu[3] = array('id'=>3,'name'=>'微信管理');
             $left_menu[3]['sub'] = array();
             if ($r = $this->_mod->where(array('often'=>4))->select()) {
                 $left_menu[3]['sub'] = $r;
             }
             */
-              $left_menu[3] = array('id'=>3,'name'=>'首页广告设置');
+            
+            $left_menu[3] = array('id'=>3,'name'=>'首页广告设置');
             $left_menu[3]['sub'] = array();
             if ($r = $this->_mod->where(array('often'=>5))->select()) {
                 $left_menu[3]['sub'] = $r;
             }
             
-            
-              $left_menu[4] = array('id'=>4,'name'=>'店铺管理');
+            $left_menu[4] = array('id'=>4,'name'=>'店铺管理');
             $left_menu[4]['sub'] = array();
             if ($r = $this->_mod->where(array('often'=>6))->select()) {
                 $left_menu[4]['sub'] = $r;
             }
             
-           /*    $left_menu[6] = array('id'=>6,'name'=>'管理员管理');
+            /*    $left_menu[6] = array('id'=>6,'name'=>'管理员管理');
             $left_menu[6]['sub'] = array();
             if ($r = $this->_mod->where(array('often'=>7))->select()) {
                 $left_menu[6]['sub'] = $r;
             }
-            
-           */ 
+            */ 
             
             array_unshift($left_menu[0]['sub'], array('id'=>0,'name'=>'后台首页','module_name'=>'index','action_name'=>'often_menu'));
         }
         $this->assign('left_menu', $left_menu);
+        $this->assign('tokenTall', $this->getTokenTall());
         $this->display();
     }
 

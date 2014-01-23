@@ -17,9 +17,9 @@ class itemAction extends frontendAction {
     public function index() {
         $id = $this->_get('id', 'intval');
         !$id && $this->_404();
-        $tokenTall = $this->_get('tokenTall', 'trim', '');
+        $tokenTall = $this->getTokenTall();
         $item_mod = M('item');
-        $item = $item_mod->field('id,title,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color')->where(array('id' => $id, 'status' => 1, 'tokenTall' => $tokenTall))->find();
+        $item = $item_mod->field('id,title,intro,price,info,comments,add_time,goods_stock,buy_num,brand,size,color')->where(array('id' => $id, 'status' => 1))->find();
         !$item && $this->_404();
     
         //品牌 
@@ -27,7 +27,7 @@ class itemAction extends frontendAction {
         $item['brand'] = $brand['name'];
         
         //商品相册
-        $img_list = M('item_img')->field('url')->where(array('item_id' => $id, 'tokenTall' => $tokenTall))->order('ordid')->select();
+        $img_list = M('item_img')->field('url')->where(array('item_id' => $id))->order('ordid')->select();
 
         $this->assign('item', $item);
         $this->assign('img_list', $img_list);

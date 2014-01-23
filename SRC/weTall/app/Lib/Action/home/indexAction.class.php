@@ -3,7 +3,7 @@ class indexAction extends frontendAction {
     
     public function index() {
     	//取商家token值，取不到则默认为空
-    	$tokenTall = $this->_get('tokenTall', 'trim', '');
+    	$tokenTall = $this->getTokenTall();
     	
     	/*****首页广告***/
     	$ad= M('ad');
@@ -46,7 +46,7 @@ class indexAction extends frontendAction {
         $users= $user->where("username='".$user_name."' and password='".md5($password)."'")->find(); 
         if(is_array($users))
         {
-        	$tokenTall = $this->_get('tokenTall', 'trim', '');
+        	$tokenTall = $this->getTokenTall();
     		$data = array('status'=>1, 'url'=>U('user/index', array('tokenTall'=>$tokenTall)));
     		$_SESSION['user_info']=$users;
         }else {

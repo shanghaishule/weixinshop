@@ -26,7 +26,8 @@ class userAction extends userbaseAction {
      * 用户登陆
      */
     public function login() {
-    	$tokenTall = $this->_get('tokenTall', 'trim', '');
+    	$tokenTall = $this->getTokenTall();
+    	$this->assign('tokenTall', $tokenTall);
         $this->visitor->is_login && $this->redirect('user/index', array('tokenTall'=>$tokenTall));
         if (IS_POST) {
             $username = $this->_post('username', 'trim');
@@ -75,7 +76,6 @@ class userAction extends userbaseAction {
                 $ret_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : __APP__;
                 $this->assign('ret_url', $ret_url);
                 $this->assign('synlogout', $synlogout);
-                $this->assign('tokenTall', $tokenTall);
                 $this->_config_seo();
                 $this->display();
             }
@@ -85,7 +85,7 @@ class userAction extends userbaseAction {
     public function addaddress()
     {
     	//取商家token值，取不到则默认为空
-    	$tokenTall = $this->_get('tokenTall', 'trim', '');
+    	$tokenTall = $this->getTokenTall();
 
     	if(IS_POST)
     	{
@@ -127,7 +127,7 @@ class userAction extends userbaseAction {
         $synlogout = $passport->synlogout();
         //跳转到退出前页面（执行同步操作）
         //取商家token值，取不到则默认为空
-        $tokenTall = $this->_get('tokenTall', 'trim', '');
+        $tokenTall = $this->getTokenTall();
         $this->assign('tokenTall',$tokenTall);
         $this->success(L('logout_successe').$synlogout, U('user/index',array('tokenTall'=>$tokenTall)));
     }
@@ -146,7 +146,7 @@ class userAction extends userbaseAction {
     * 用户注册
     */
     public function register() {
-    	$tokenTall = $this->_get('tokenTall', 'trim', '');
+    	$tokenTall = $this->getTokenTall();
         $this->visitor->is_login && $this->redirect('user/index', array('tokenTall'=>$tokenTall));
         if (IS_POST) {
             $username = $this->_post('user_name', 'trim');
@@ -226,7 +226,7 @@ class userAction extends userbaseAction {
     */
     public function index() {
     	//取商家token值，取不到则默认为空
-    	$tokenTall = $this->_get('tokenTall', 'trim', '');
+    	$tokenTall = $this->getTokenTall();
     	
         $item_order=M('item_order');
         $order_detail=M('order_detail');
@@ -399,7 +399,7 @@ class userAction extends userbaseAction {
         $info = $user_address_mod->find($id);
         $this->assign('info', $info);
         //取商家token值，取不到则默认为空
-        $tokenTall = $this->_get('tokenTall', 'trim', '');
+        $tokenTall = $this->getTokenTall();
         $this->assign('tokenTall',$tokenTall);
     	$this->display();
     }
@@ -465,7 +465,7 @@ class userAction extends userbaseAction {
         $address_list = $user_address_mod->where(array('uid'=>$this->visitor->info['id']))->select();
         $this->assign('address_list', $address_list);
         //取商家token值，取不到则默认为空
-        $tokenTall = $this->_get('tokenTall', 'trim', '');
+        $tokenTall = $this->getTokenTall();
         $this->assign('tokenTall',$tokenTall);
         
         $this->_config_seo();

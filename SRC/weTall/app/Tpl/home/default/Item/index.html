@@ -65,6 +65,7 @@
 	    	
 	     	var url  = "{:U('shopcart/add_cart')}";
 	     	$.post(url,{goodId:goodId,quantity:quantity},function(data){
+	     		//alert(data.msg);
 	     		if(data.status==1)
 	     		{
 	     			$('.dialog_title').html(data.msg);
@@ -74,7 +75,7 @@
 	     			setTimeout(slideUp_fn, 5000);
 	     		}else
 	     		{
-	     			$('.dialog_title').html(data.msg);
+	     			$('.dialog_title').html("<font color='red'>"+data.msg+"</font>");
 	     			$('.bold_num').text(data.count);
 	     			$('.bold_mly').html(data.sumPrice);
 	     			$('.ware_cen').slideDown('slow');

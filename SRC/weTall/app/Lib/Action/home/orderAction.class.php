@@ -11,7 +11,7 @@ class orderAction extends userbaseAction {
 	public  function cancelOrder()//取消订单
 	{
 		//取商家token值，取不到则默认为空
-		$tokenTall = $this->_get('tokenTall', 'trim', '');
+		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		
 		$orderId=$_GET['orderId'];
@@ -24,7 +24,7 @@ class orderAction extends userbaseAction {
 	public function confirmOrder()//确认收货
 	{
 		//取商家token值，取不到则默认为空
-		$tokenTall = $this->_get('tokenTall', 'trim', '');
+		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		
 		$orderId=$_GET['orderId'];
@@ -57,7 +57,7 @@ class orderAction extends userbaseAction {
 	public function closeOrder()//关闭订单
 	{
 		//取商家token值，取不到则默认为空
-		$tokenTall = $this->_get('tokenTall', 'trim', '');
+		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		 
 	    $orderId=$_POST['orderId'];
@@ -94,7 +94,7 @@ class orderAction extends userbaseAction {
 	public  function checkOrder()//查看订单
 	{
 		//取商家token值，取不到则默认为空
-		$tokenTall = $this->_get('tokenTall', 'trim', '');
+		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		
 	    $orderId=$_GET['orderId'];
@@ -127,7 +127,7 @@ class orderAction extends userbaseAction {
 	}
 	
 	public function jiesuan(){//结算
-		$tokenTall = $this->_get('tokenTall', 'trim', '');
+		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		if(count($_SESSION['cart'])>0)
 		{
@@ -189,7 +189,7 @@ class orderAction extends userbaseAction {
 	public function pay()//出订单
 	{
 		//取商家token值，取不到则默认为空
-		$tokenTall = $this->_get('tokenTall', 'trim', '');
+		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 
 		if(IS_POST && count($_SESSION['cart'])>0)

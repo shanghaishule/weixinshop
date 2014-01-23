@@ -23,16 +23,13 @@ class frontendAction extends baseAction {
         $this->assign('nav_curr', '');
         $this->_index_cate();
         
-        //取商家token值，取不到则默认为空
-        $tokenTall = $this->_get('tokenTall', 'trim', '');
-        $this->assign('tokenTall',$tokenTall);
     }
     
     
     private  function _index_cate()
     {
     	//取商家token值，取不到则默认为空
-    	$tokenTall = $this->_get('tokenTall', 'trim', '');
+    	$tokenTall = $this->getTokenTall();;
     	$this->assign('tokenTall',$tokenTall);
     	 //分类
         if (false === $index_cate_list = F('index_cate_list')) {
