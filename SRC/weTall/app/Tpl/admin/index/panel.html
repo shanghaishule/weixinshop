@@ -75,16 +75,11 @@
                       <!-- <a href="{:U('item_order/index',array('status'=>1,'menuid'=>296,'tokenTall'=>$tokenTall))}">退款中订单 [<span class="count">0</span>]</a>-->
                    </p>
                    <p><span>商品提醒:</span> <a href="{:U('item/index',array('status'=>0,'tokenTall'=>$tokenTall))}">待上架商品 [<span class="count">{$count.nobuycount}</span>]</a></p>
+                   <p><span>商品管理:</span> <a href="{:U('item/index',array('status'=>1,'tokenTall'=>$tokenTall))}">出售中商品 [<span class="count">{$count.buycount}</span>]</a></p>
                </div>
-           
-               <p><span>商品管理:</span> <a href="{:U('item/index',array('status'=>1,'tokenTall'=>$tokenTall))}">出售中商品 [<span class="count">{$count.buycount}</span>]</a></p>
-            <!--   <p><span>购买咨询:</span> <a href="#">待回复咨询 [<span class="count">0</span>]</a></p>-->
+                          
             </div>            
-        
-           <!-- <div class="mbar">
-               <h4>服务专区</h4>
-               <p class="th"><strong>您的套餐类型:【企业型】<span class="red">（试用）</span><br>有效期: 2013-7-11 始至 2013-7-20 止</strong> </p>             
-            </div>-->	
+
        </div>
        <div class="mright"> 
         

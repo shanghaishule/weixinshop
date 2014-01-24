@@ -65,22 +65,25 @@ class item_orderAction extends backendAction {
         
         ($price_min = $this->_request('price_min', 'trim')) && $map['order_sumPrice'][] = array('egt', $price_min);
         ($price_max = $this->_request('price_max', 'trim')) && $map['order_sumPrice'][] = array('elt', $price_max);
-      //  ($rates_min = $this->_request('rates_min', 'trim')) && $map['rates'][] = array('egt', $rates_min);
-       // ($rates_max = $this->_request('rates_max', 'trim')) && $map['rates'][] = array('elt', $rates_max);
+
         ($userName = $this->_request('userName', 'trim')) && $map['userName'] = array('like', '%'.$userName.'%');
-          ($status = $this->_request('status', 'trim')) && $map['status'] = array('eq', $status);
+        ($status = $this->_request('status', 'trim')) && $map['status'] = array('eq', $status);
         ($orderId = $this->_request('orderId', 'trim')) && $map['orderId'] = array('like', '%'.$orderId.'%');
+        
+        $tokenTall = $this->getTokenTall(); 
+        $map['tokenTall'] = array('eq', $tokenTall);
+                
         $this->assign('search', array(
             'time_start' => $time_start,
             'time_end' => $time_end,
             'price_min' => $price_min,
-           'price_max' => $price_max,
+            'price_max' => $price_max,
             'start_support_time' => $time_start_support,
-           'end_support_time' => $time_end_support,
+            'end_support_time' => $time_end_support,
             'userName' => $userName,
             'status' =>$status,
-            'selected_ids' => $spid,
             'orderId' => $orderId,
+        	'tokenTall' => $tokenTall,
         ));
         return $map;
     }

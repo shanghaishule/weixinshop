@@ -143,15 +143,6 @@ class indexAction extends backendAction {
                 $left_menu[2]['sub'] = $r;
             }
             
-            
-            /*
-            $left_menu[3] = array('id'=>3,'name'=>'微信管理');
-            $left_menu[3]['sub'] = array();
-            if ($r = $this->_mod->where(array('often'=>4))->select()) {
-                $left_menu[3]['sub'] = $r;
-            }
-            */
-            
             $left_menu[3] = array('id'=>3,'name'=>'首页广告设置');
             $left_menu[3]['sub'] = array();
             if ($r = $this->_mod->where(array('often'=>5))->select()) {
@@ -164,12 +155,11 @@ class indexAction extends backendAction {
                 $left_menu[4]['sub'] = $r;
             }
             
-            /*    $left_menu[6] = array('id'=>6,'name'=>'管理员管理');
-            $left_menu[6]['sub'] = array();
-            if ($r = $this->_mod->where(array('often'=>7))->select()) {
-                $left_menu[6]['sub'] = $r;
+            $left_menu[5] = array('id'=>5,'name'=>'账务管理');
+            $left_menu[5]['sub'] = array();
+            if ($r = $this->_mod->where(array('often'=>8))->select()) {
+            	$left_menu[5]['sub'] = $r;
             }
-            */ 
             
             array_unshift($left_menu[0]['sub'], array('id'=>0,'name'=>'后台首页','module_name'=>'index','action_name'=>'often_menu'));
         }

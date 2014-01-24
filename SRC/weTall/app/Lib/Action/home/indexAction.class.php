@@ -15,12 +15,13 @@ class indexAction extends frontendAction {
         /****最新商品*****/
         $where = array('news'=>1, 'tokenTall'=>$tokenTall);
         $news = $this->getItem($where);
-         /****最新商品 END*****/
+        /****最新商品 END*****/
          
-          /****推荐商品*****/
+        /****推荐商品*****/
         $where = array('tuijian'=>1, 'tokenTall'=>$tokenTall);
         $tuijian = $this->getItem($where);
-      
+        /****推荐商品 END*****/
+        
         $this->assign('news',$news);
         $this->assign('tuijian',$tuijian);
         $this->_config_seo();
