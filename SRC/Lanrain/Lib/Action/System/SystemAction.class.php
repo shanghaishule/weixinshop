@@ -20,7 +20,7 @@ class SystemAction extends BackAction{
 					$navNode[] = $menuNav;
 				}
 			}
-		}	
+		}
 		$this->assign('nav',$navNode);
 		$this->display();
 	}

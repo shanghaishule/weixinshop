@@ -9,7 +9,8 @@ alter table tp_item_order add `tokenTall` varchar(20) NOT NULL DEFAULT '';
 /*终端用户表，加email*/
 alter table tp_user add `email` varchar(90) NOT NULL DEFAULT '';
 
-/*隐藏：商品分类、品牌管理 often=1 => 0*/
+/*隐藏：商品分类、品牌管理 often=1 => 0
 update tp_menu set often = 0 where id in(56,291);
+*/
 /*隐藏：注册登录 often=6 => 0*/
 update tp_menu set often = 0 where id in(286);
