@@ -32,7 +32,7 @@
         <notempty name="sub_menu">
         <volist name="sub_menu" id="val" key="key">
         <if condition="$key neq 1"><span>|</span></if>
-        <a href="{:U($val['module_name'].'/'.$val['action_name'],array('menuid'=>$menuid))}{$val.data}" class="{$val.class}"><em>{:L($val['name'])}</em></a>
+        <a href="{:U($val['module_name'].'/'.$val['action_name'],array('menuid'=>$menuid, 'tokenTall'=>$tokenTall))}{$val.data}" class="{$val.class}"><em>{:L($val['name'])}</em></a>
         </volist>
         </notempty>
     </div>

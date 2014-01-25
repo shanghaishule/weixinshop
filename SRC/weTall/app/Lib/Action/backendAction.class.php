@@ -34,6 +34,7 @@ class backendAction extends baseAction
             $this->assign('sub_menu', $sub_menu);
         }
         $this->assign('menuid', $this->menuid);
+        $this->assign('tokenTall', $this->getTokenTall());
     }
 
     /**

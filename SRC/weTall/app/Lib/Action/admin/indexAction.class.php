@@ -151,14 +151,14 @@ class indexAction extends backendAction {
             if ($r = $this->_mod->where(array('often'=>2))->select()) {
                 $left_menu[1]['sub'] = $r;
             }
-            
+            /*
             $left_menu[2] = array('id'=>2,'name'=>'客户管理');
             $left_menu[2]['sub'] = array();
             if ($r = $this->_mod->where(array('often'=>3))->select()) {
                 $left_menu[2]['sub'] = $r;
             }
-            
-            $left_menu[3] = array('id'=>3,'name'=>'首页广告设置');
+            */
+            $left_menu[3] = array('id'=>3,'name'=>'广告设置');
             $left_menu[3]['sub'] = array();
             if ($r = $this->_mod->where(array('often'=>5))->select()) {
                 $left_menu[3]['sub'] = $r;

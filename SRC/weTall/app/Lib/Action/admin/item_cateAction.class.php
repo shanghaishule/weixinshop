@@ -27,12 +27,12 @@ class item_cateAction extends backendAction {
             $array[] = $r;
         }
         $str  = "<tr id='node-\$id' \$parentid_node>
-                <!--<td align='center'><input type='checkbox' value='\$id' class='J_checkitem'></td>-->
+                <td align='center'><input type='checkbox' value='\$id' class='J_checkitem'></td>
                 <td align='center'>\$id</td>
-                <td>\$spacer<span data-tdtype='edit' data-field='name' data-id='\$id' class='tdedit'  style='color:\$fcolor'>\$name</span></td>
+                <td>\$spacer<span data-tdtype='view' data-field='name' data-id='\$id' class='tdview'  style='color:\$fcolor'>\$name</span></td>
                 <td align='center'>\$str_img</td>
                 <td align='center'>\$str_type</td>
-                <td align='center'><span data-tdtype='edit' data-field='ordid' data-id='\$id' class='tdedit'>\$ordid</span></td>
+                <td align='center'><span data-tdtype='view' data-field='ordid' data-id='\$id' class='tdview'>\$ordid</span></td>
                 <td align='center'>\$str_index</td>
                 <td align='center'>\$str_status</td>
                 <!--<td align='center'>\$str_manage</td>-->

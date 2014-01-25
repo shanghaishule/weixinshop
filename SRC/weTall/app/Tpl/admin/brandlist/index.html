@@ -43,7 +43,8 @@
     </table>
     </form>
 
-    <div class="J_tablelist table_list" data-acturi="{:U('brandlist/ajax_edit')}">
+    <!--div class="J_tablelist table_list" data-acturi="{:U('brandlist/ajax_edit')}"-->
+    <div class="J_tablelist table_list">
     <table width="100%" cellspacing="0">
         <thead>
             <tr>
@@ -60,9 +61,9 @@
             <tr>
                 <!-- <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td> -->
 				<td align="center">{$val.id}</td>
-                <td align="left"><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit">{$val.name}</span></td>
-                <td align="left"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit" style="color:{$val.colors};">{$val.ordid}</span></td>
-                <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
+                <td align="left"><span data-tdtype="view" data-field="name" data-id="{$val.id}" class="tdview">{$val.name}</span></td>
+                <td align="left"><span data-tdtype="view" data-field="ordid" data-id="{$val.id}" class="tdview" style="color:{$val.colors};">{$val.ordid}</span></td>
+                <td align="center"><img data-tdtype="view" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
                 <!--<td align="center">
                 	<a href="javascript:;" class="J_showdialog" data-uri="{:U('brandlist/edit', array('id'=>$val['id']))}" data-title="{:L('edit')} - {$val.name}"  data-id="edit" data-acttype="ajax" data-width="400" data-height="130">{:L('edit')}</a> | 
                     <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('brandlist/deletebrand', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['name'])}">{:L('delete')}</a>

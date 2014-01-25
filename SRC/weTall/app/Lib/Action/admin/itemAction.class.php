@@ -30,13 +30,11 @@ class itemAction extends backendAction {
 
     protected function _search() {
         $map = array();
-        //'status'=>1
+
         ($time_start = $this->_request('time_start', 'trim')) && $map['add_time'][] = array('egt', strtotime($time_start));
         ($time_end = $this->_request('time_end', 'trim')) && $map['add_time'][] = array('elt', strtotime($time_end)+(24*60*60-1));
         ($price_min = $this->_request('price_min', 'trim')) && $map['price'][] = array('egt', $price_min);
         ($price_max = $this->_request('price_max', 'trim')) && $map['price'][] = array('elt', $price_max);
-      //  ($rates_min = $this->_request('rates_min', 'trim')) && $map['rates'][] = array('egt', $rates_min);
-       // ($rates_max = $this->_request('rates_max', 'trim')) && $map['rates'][] = array('elt', $rates_max);
         ($uname = $this->_request('uname', 'trim')) && $map['uname'] = array('like', '%'.$uname.'%');
         $cate_id = $this->_request('cate_id', 'intval');
         if ($cate_id) {
@@ -56,18 +54,21 @@ class itemAction extends backendAction {
         }
         $status>=0 && $map['status'] = array('eq',$status);
         ($keyword = $this->_request('keyword', 'trim')) && $map['title'] = array('like', '%'.$keyword.'%');
+        
+        $tokenTall = $this->getTokenTall();
+        $map['tokenTall'] = array('eq', $tokenTall);
+        
         $this->assign('search', array(
             'time_start' => $time_start,
             'time_end' => $time_end,
             'price_min' => $price_min,
-           'price_max' => $price_max,
-           // 'rates_min' => $rates_min,
-          //  'rates_max' => $rates_max,
+            'price_max' => $price_max,
             'uname' => $uname,
             'status' =>$status,
             'selected_ids' => $spid,
             'cate_id' => $cate_id,
             'keyword' => $keyword,
+        	'tokenTall' => $tokenTall,
         ));
         return $map;
     }

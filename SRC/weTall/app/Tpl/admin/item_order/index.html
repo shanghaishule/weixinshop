@@ -1,5 +1,4 @@
 <include file="public:header" />
-
 <!--商品列表-->
 <div class="pad_lr_10" >
     <form name="searchform" method="get" >
@@ -41,7 +40,32 @@
                     <input type="text" name="price_max" class="input-text" size="5" value="{$search.price_max}" />
 					
                     <input type="submit" name="search" class="btn" value="搜索" />
-					
+					<script>
+					Calendar.setup({
+						inputField : "J_time_start",
+						ifFormat   : "%Y-%m-%d",
+						showsTime  : false,
+						timeFormat : "24"
+					});
+					Calendar.setup({
+						inputField : "J_time_end",
+						ifFormat   : "%Y-%m-%d",
+						showsTime  : false,
+						timeFormat : "24"
+					});
+					Calendar.setup({
+						inputField : "J_time_start_support",
+						ifFormat   : "%Y-%m-%d",
+						showsTime  : false,
+						timeFormat : "24"
+					});
+					Calendar.setup({
+						inputField : "J_time_end_support",
+						ifFormat   : "%Y-%m-%d",
+						showsTime  : false,
+						timeFormat : "24"
+					});
+					</script>
                 </div>
                 </td>
             </tr>
@@ -113,38 +137,14 @@
         <div id="pages">{$page}</div>
     </div>
 </div>
-<include file="public:footer" />
-<link rel="stylesheet" href="__STATIC__/js/calendar/calendar-blue.css"/>
-<script src="__STATIC__/js/calendar/calendar.js"></script>
-<script>
-Calendar.setup({
-	inputField : "J_time_start",
-	ifFormat   : "%Y-%m-%d",
-	showsTime  : false,
-	timeFormat : "24"
-});
-Calendar.setup({
-	inputField : "J_time_end",
-	ifFormat   : "%Y-%m-%d",
-	showsTime  : false,
-	timeFormat : "24"
-});
-Calendar.setup({
-	inputField : "J_time_start_support",
-	ifFormat   : "%Y-%m-%d",
-	showsTime  : false,
-	timeFormat : "24"
-});
-Calendar.setup({
-	inputField : "J_time_end_support",
-	ifFormat   : "%Y-%m-%d",
-	showsTime  : false,
-	timeFormat : "24"
-});
 
+<include file="public:footer" />
+
+<script>
 $('.J_preview').preview(); //查看大图
 $('.J_cate_select').cate_select({top_option:lang.all}); //分类联动
 $('.J_tooltip[title]').tooltip({offset:[10, 2], effect:'slide'}).dynamic({bottom:{direction:'down', bounce:true}});
 </script>
+
 </body>
 </html>
