@@ -16,6 +16,14 @@
 			<th width="80">公告时间:</th>
 			<td>
 			<input type="text" name="ptime" id="start_time_min" class="date" size="12">
+			<script type="text/javascript">
+			Calendar.setup({
+				inputField : "start_time_min",
+				ifFormat   : "%Y-%m-%d",
+				showsTime  : false,
+				timeFormat : "24"
+			});
+			</script>
 			</td>
 		</tr>
         <tr>
@@ -32,14 +40,7 @@
 	</table>
 	</form>
 </div>
-<script type="text/javascript">
-	Calendar.setup({
-		inputField : "start_time_min",
-		ifFormat   : "%Y-%m-%d",
-		showsTime  : false,
-		timeFormat : "24"
-	});
-	</script>
+
 <script>
 var check_name_url = "{:U('info_notice/ajax_check_name')}";
 $(function(){

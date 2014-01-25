@@ -1,11 +1,14 @@
-BODY { PADDING: 0px; MARGIN: 0px; font-family: Century Gothic, 微软雅黑E\8F6F\96C5\9ED1,幼圆E7C\5706, Arial, Verdana;BACKGROUND: url(img/body-bg.gif);font: 12px/1.5 Microsoft YaHei,Helvitica,Verdana,Arial,san-serif;}
-input,ul,h1,h2,h3,h4,input,ol,p,dl,dt,dd{ margin:0px; padding:0px;}
+BODY { PADDING: 0px; MARGIN: 0px; font-family: Century Gothic, 微软雅黑E\8F6F\96C5\9ED1,幼圆E7C\5706, Arial, Verdana;background: url(img/bg.jpg);
+background-size: cover;
+font: 12px/1.5 Microsoft YaHei,Helvitica,Verdana,Arial,san-serif;}
+input,ul,h1,h2,h3,h4,input,ol,p,dl,dt,dd{ margin:0px; padding:0px;
+}
+
 ul{ list-style:none;}
 a{text-decoration: none;color: #666}
 a:hover {color:#C00;text-decoration: none;}
 img,input{ border:none; vertical-align:middle;}
 .clearfix:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
-.topbg{BACKGROUND-IMAGE: url(img/top.png);BACKGROUND-REPEAT: repeat-x; height:124px; box-shadow:0 0 10px #000;-moz-box-shadow:0 0 10px #000;-webkit-box-shadow:0 0 10px #000;}
 .top {
 	MARGIN: 0px auto; WIDTH: 988px; HEIGHT: 124px;
 }
@@ -15,7 +18,7 @@ img,input{ border:none; vertical-align:middle;}
 .top .toplink .memberinfo{ float:right;}
 .top .toplink .memberinfo a{ color:#999;}
 .top .toplink .memberinfo a:hover{ color:#F90}
-.top .toplink .memberinfo a.green{ background:none; color:#0C0}
+.top .toplink .memberinfo a.green{ background:none; }
 
 .top .logo {WIDTH: 990px;COLOR: #333; height:70px;  FONT-SIZE:16px; PADDING-TOP:25px}
 .top h1{ font-size:25px; margin-top:20px; float:left; width:230px; margin:0; padding:0;}

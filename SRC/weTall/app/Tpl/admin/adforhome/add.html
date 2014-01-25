@@ -76,6 +76,20 @@
       <td>
         <input type="text" name="start_time" id="start_time" class="date" size="12"> - 
         <input type="text" name="end_time" id="end_time" class="date" size="12">
+        <script>
+        Calendar.setup({
+            inputField : "start_time",
+            ifFormat   : "%Y-%m-%d",
+            showsTime  : false,
+            timeFormat : "24"
+        });
+        Calendar.setup({
+            inputField : "end_time",
+            ifFormat   : "%Y-%m-%d",
+            showsTime  : false,
+            timeFormat : "24"
+        });
+        </script>
       </td>
     </tr>
     <tr>
@@ -96,18 +110,7 @@
 </div>
 <script src="__STATIC__/js/fileuploader.js"></script>
 <script>
-Calendar.setup({
-    inputField : "start_time",
-    ifFormat   : "%Y-%m-%d",
-    showsTime  : false,
-    timeFormat : "24"
-});
-Calendar.setup({
-    inputField : "end_time",
-    ifFormat   : "%Y-%m-%d",
-    showsTime  : false,
-    timeFormat : "24"
-});
+
 $(function(){
     $("#type").change(function(){
         $(".bill_media").hide();
