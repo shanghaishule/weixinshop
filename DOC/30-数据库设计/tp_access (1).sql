@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 --
 -- 表的结构 `tp_access`
 --
-
+DROP table tp_access;
 CREATE TABLE IF NOT EXISTS `tp_access` (
   `role_id` smallint(6) unsigned NOT NULL,
   `node_id` smallint(6) unsigned NOT NULL,

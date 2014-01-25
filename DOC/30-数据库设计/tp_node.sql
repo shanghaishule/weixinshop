@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 --
 -- 表的结构 `tp_node`
 --
-
+drop table `tp_node`;
 CREATE TABLE IF NOT EXISTS `tp_node` (
   `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL COMMENT '节点名称',
