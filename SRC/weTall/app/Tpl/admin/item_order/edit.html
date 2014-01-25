@@ -58,17 +58,13 @@
 </style>
 <script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
 <!--编辑商品-->
-<form id="info_form" action="{:u('item_order/edit')}" method="post" enctype="multipart/form-data">
+<form id="info_form" action="{:U('item_order/edit',array('tokenTall'=>$info.tokenTall))}" method="post" enctype="multipart/form-data">
 <div class="pad_lr_10">
 	<div class="col_tab">
 		
 		<div class="J_panes">
         <div class="content_list pad_10">
         <div align="center" style="background:none repeat scroll 0 0 #E6F1F6;font-size:14px;font-weight:bold;padding:10px 0;">基本信息</div>
-		
-        
-       
-        
         
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbdetail">
                     <tbody>
@@ -307,27 +303,25 @@
       
 		
         </div>
-      <!--  <a data-height="130" data-width="400" data-id="add" data-title="添加收货地址" data-uri="/index.php?g=admin&amp;m=address&amp;a=add" href="javascript:void(0);" class="add fb J_showdialog"><em>添加收货地址</em></a>-->
-      
 		<div class="mt10" style="text-align:center;">
 		  <switch name="info.status" >
                 <case value="1"><!-- 待付款-->
-                <a href="{:U('item_order/status',array('orderId'=>$info['orderId'],'status'=>2))}">	<input type="button" value="设为已付款" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
+                <a href="{:U('item_order/status',array('orderId'=>$info['orderId'],'status'=>2,'tokenTall'=>$info['tokenTall']))}">	<input type="button" value="设为已付款" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
                 </case>  
                 <case value="2"><!-- 待发货-->
                 
                <a data-height="130" data-width="650"
-                 data-id="add" data-title="发货管理" data-uri="/index.php?g=admin&amp;m=item_order&amp;a=fahuo&amp;id={$info.id}" href="javascript:void(0);" class="add fb J_showdialog"> 	<input type="button" value="发货" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
+                 data-id="add" data-title="发货管理" data-uri="/index.php?g=admin&amp;m=item_order&amp;a=fahuo&amp;id={$info.id}&amp;tokenTall={$info.tokenTall}" href="javascript:void(0);" class="add fb J_showdialog"> 	<input type="button" value="发货" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
                 </case>  
                 <case value="3"><!-- 待收货 -->
-                  <a href="{:U('item_order/status',array('orderId'=>$info['orderId'],'status'=>4))}"><input type="button" value="设为已收货" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
+                  <a href="{:U('item_order/status',array('orderId'=>$info['orderId'],'status'=>4,'tokenTall'=>$info['tokenTall']))}"><input type="button" value="设为已收货" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
                 </case>  
                 
                 <default />
              </switch>
 		
 		
-		<a href="{:U('item_order/index')}">  <input type="button"  value=" 返回列表 " class="btn btn_cannel"></a></div>
+		<a href="{:U('item_order/index',array('tokenTall'=>$info['tokenTall']))}">  <input type="button"  value=" 返回列表 " class="btn btn_cannel"></a></div>
 	</div>
 </div>
 <input type="hidden" name="menuid"  value="{$menuid}"/>

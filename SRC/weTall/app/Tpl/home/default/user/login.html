@@ -49,13 +49,17 @@ $(function(){
     	var user_name= $('#user_name').val();
     	var password= $('#password').val();
     	
-    	var url  = "{:U('index/ajaxlogin')}";
+    	var url  = "{:U('index/ajaxlogin',array('tokenTall'=>$tokenTall))}";
     	$.post(url,{user_name:user_name,password:password},function(data){
     	
     		if(data.status==1) {
     			$('#login_text').html("<b>登陆成功！</b>");
-    			function a(){location.href=decodeURIComponent("%2Findex.php%3Fapp%3Dmemberbuy%26store_id%3D9");}
-    			setTimeout(a,2000);
+    			//function a(){location.href=decodeURIComponent("%2Findex.php%3Fapp%3Dmemberbuy%26store_id%3D9");}
+    			function a(){
+    				location.href=data.url;
+    			    //alert(data.url);
+    			}
+    			setTimeout(a,1000);
     		} else {
     			//var jsonObj = eval('('+result+')');
     			$('#login_text').html("<i>密码错误！</i>");
@@ -78,7 +82,7 @@ $(function(){
             <a href="#" class="clew" style="display:none;">忘记密码？</a>
     </form>
     <div class="login_right">
-        <h4>如果您还不是会员，请<a href="{:U('user/register')}" title="立即注册">立即注册</a></h4>
+        <h4>如果您还不是会员，请<a href="{:U('user/register', array('tokenTall'=>$tokenTall))}" title="立即注册">立即注册</a></h4>
     </div>
 </div>
 

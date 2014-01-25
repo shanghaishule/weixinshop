@@ -8,6 +8,7 @@ class backendAction extends baseAction
 {
     protected $_name = '';
     protected $menuid = 0;
+
     public function _initialize() {
         parent::_initialize();
         $this->_name = $this->getActionName();
@@ -40,6 +41,7 @@ class backendAction extends baseAction
      */
     public function index() {
         $map = $this->_search();
+        //var_dump($map);exit;
         
         $mod = D($this->_name);
         !empty($mod) && $this->_list($mod, $map);
@@ -281,6 +283,7 @@ class backendAction extends baseAction
         //生成查询条件
         $mod = D($this->_name);
         $map = array();
+           
         foreach ($mod->getDbFields() as $key => $val) {
             if (substr($key, 0, 1) == '_') {
                 continue;

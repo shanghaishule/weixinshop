@@ -1,5 +1,4 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<!-- saved from url=(0048)http://store.weiapps.cn/index.php -->
 <html>
 <head>
 <include file="public:headtop" />
@@ -46,39 +45,22 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                 <div class="major">
                      <ul class="list">
                      <volist name="item_list" id="item">
-                      <li>
-                    <div class="pic">
-                     <a href="{:U('Item/index',array('id'=>$item['id']))}"><img  src="{:attach(get_thumb($item['img'], '_b'), 'item')}"></a>
-                    </div>
-                   <div class="good_content">
-                    <h3>
-                    <a  href="{:U('Item/index',array('id'=>$item['id']))}">{$item.title}</a>
-                   </h3>
-                    <p>¥{$item.price}</p>
-                    </div>
-                    <span class="show_good">
-                      <a  href="{:U('Item/index',array('id'=>$item['id']))}"></a>
-                    </span>
-                      </li>
-                      </volist>
-                   </ul>
-      <!-- <div class="wall_wrap clearfix">
-        <div id="J_waterfall" class="wall_container clearfix" data-uri="__ROOT__/?m=book&a=cate_ajax&cid={$cate_info.id}&p={$p}">
-           
-        <include file="public:waterfall" />
-           
-        </div>
-        <present name="show_load">
-        <div id="J_wall_loading" class="wall_loading tc gray"><span>{:L('loading')}</span></div>
-        </present>
-        <present name="page_bar">
-        <div id="J_wall_page" class="wall_page" <present name="show_page">style="display:block;"</present>>
-            <div class="page_bar">{$page_bar}</div>
-        </div>
-        </present>
-      </div>-->
-                      
-                   
+                     <li>
+                     <div class="pic">
+                     	<a href="{:U('Item/index',array('id'=>$item['id'],'tokenTall'=>$tokenTall))}"><img  src="{:attach(get_thumb($item['img'], '_b'), 'item')}"></a>
+                     </div>
+                     <div class="good_content">
+                     <h3>
+                     	<a  href="{:U('Item/index',array('id'=>$item['id'],'tokenTall'=>$tokenTall))}">{$item.title}</a>
+                     </h3>
+                     <p>¥{$item.price}</p>
+                     </div>
+                     <span class="show_good">
+                     	<a  href="{:U('Item/index',array('id'=>$item['id']))}"></a>
+                     </span>
+                     </li>
+                     </volist>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -88,7 +70,6 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
 </div>
 
 <include file="public:footer" />
-
 
 </body>
 </html>

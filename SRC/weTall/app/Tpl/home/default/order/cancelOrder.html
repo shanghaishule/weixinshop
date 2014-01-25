@@ -7,7 +7,7 @@
 <include file="public:head" />
 <div id="content">
 	<div id="warning"></div>
-    <form method="post" action="{:U('Order/closeOrder')}" >
+    <form method="post" action="{:U('order/closeOrder',array('tokenTall'=>$tokenTall))}" >
   
         <div class="order_cancel_box">
             <h1>您是否确定要取消以下订单？</h1>

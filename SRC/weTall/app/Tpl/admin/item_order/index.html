@@ -1,4 +1,5 @@
 <include file="public:header" />
+
 <!--商品列表-->
 <div class="pad_lr_10" >
     <form name="searchform" method="get" >
@@ -10,6 +11,7 @@
                     <input type="hidden" name="g" value="admin" />
                     <input type="hidden" name="m" value="item_order" />
                     <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="tokenTall" value="{$search.tokenTall}" />
                     <input type="hidden" name="menuid" value="{$menuid}" />
                      订单编号 :
                     <input name="orderId" type="text" class="input-text" size="25" value="{$search.orderId}" />
@@ -33,16 +35,11 @@
                     <input type="text" name="start_support_time" id="J_time_start_support" class="date" size="12" value="{$search.start_support_time}">
                     -
                     <input type="text" name="end_support_time" id="J_time_end_support" class="date" size="12" value="{$search.end_support_time}">
-                   
-
                     订单价格区间 :
                     <input type="text" name="price_min" class="input-text" size="5" value="{$search.price_min}" />
                     -
                     <input type="text" name="price_max" class="input-text" size="5" value="{$search.price_max}" />
 					
-					
-
-                    
                     <input type="submit" name="search" class="btn" value="搜索" />
 					
                 </div>
@@ -72,7 +69,7 @@
                 <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
                 <td align="center">{$val.id}</td>
        
-                <td align="center"><a href="{:u('item_order/edit', array('id'=>$val['id'], 'menuid'=>$menuid))}">{$val.orderId}</a><br> 
+                <td align="center"><a href="{:U('item_order/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">{$val.orderId}</a><br> 
                <if condition="$val.sellerRemark neq ''"> 
                 <a title="【客服备注】{$val.sellerRemark}">
                 <img src="__STATIC__/weixin/images/remark.gif" >
@@ -103,7 +100,7 @@
                  </switch>
                 </td> 
                 <td align="center">{$val.add_time|date='Y-m-d H:i:s',###}--<br><if condition="$val.support_time neq '' ">{$val.support_time|date='Y-m-d H:i:s',###}</if></td>
-                <td align="center"><a href="{:u('item_order/edit', array('id'=>$val['id'], 'menuid'=>$menuid))}">查看</a>| <a href="javascript:void(0);" class="J_confirmurl" data-uri="{:u('item_order/delete', array('id'=>$val['id']))}" data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),$val['orderId'])}">{:L('delete')}</a> </td>
+                <td align="center"><a href="{:U('item_order/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">查看</a>| <a href="javascript:void(0);" class="J_confirmurl" data-uri="{:U('item_order/delete', array('id'=>$val['id'], 'tokenTall'=>$val['tokenTall']))}" data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),$val['orderId'])}">{:L('delete')}</a> </td>
             </tr>
             </volist>
     	</tbody>
@@ -112,7 +109,7 @@
    
     <div class="btn_wrap_fixed">
       <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
-        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item_order/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item_order/delete', array('tokenTall'=>$search.tokenTall))}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
         <div id="pages">{$page}</div>
     </div>
 </div>

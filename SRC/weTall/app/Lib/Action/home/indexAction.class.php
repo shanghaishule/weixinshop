@@ -3,7 +3,7 @@ class indexAction extends frontendAction {
     
     public function index() {
     	//取商家token值，取不到则默认为空
-    	$tokenTall = $this->_get('tokenTall', 'trim', '');
+    	$tokenTall = $this->getTokenTall();
     	
     	/*****首页广告***/
     	$ad= M('ad');
@@ -15,17 +15,19 @@ class indexAction extends frontendAction {
         /****最新商品*****/
         $where = array('news'=>1, 'tokenTall'=>$tokenTall);
         $news = $this->getItem($where);
-         /****最新商品 END*****/
+        /****最新商品 END*****/
          
-          /****推荐商品*****/
+        /****推荐商品*****/
         $where = array('tuijian'=>1, 'tokenTall'=>$tokenTall);
         $tuijian = $this->getItem($where);
-      
+        /****推荐商品 END*****/
+        
         $this->assign('news',$news);
         $this->assign('tuijian',$tuijian);
         $this->_config_seo();
         $this->display();
     }
+    
     public function getItem($where = array())
     {
     	$where_init = array('status'=>'1');
@@ -45,7 +47,8 @@ class indexAction extends frontendAction {
         $users= $user->where("username='".$user_name."' and password='".md5($password)."'")->find(); 
         if(is_array($users))
         {
-    		$data = array('status'=>1);
+        	$tokenTall = $this->getTokenTall();
+    		$data = array('status'=>1, 'url'=>U('user/index', array('tokenTall'=>$tokenTall)));
     		$_SESSION['user_info']=$users;
         }else {
        		$data = array('status'=>0);

@@ -22,11 +22,15 @@ class frontendAction extends baseAction {
         //网站导航选中
         $this->assign('nav_curr', '');
         $this->_index_cate();
+        
     }
     
     
     private  function _index_cate()
     {
+    	//取商家token值，取不到则默认为空
+    	$tokenTall = $this->getTokenTall();;
+    	$this->assign('tokenTall',$tokenTall);
     	 //分类
         if (false === $index_cate_list = F('index_cate_list')) {
             $item_cate_mod = M('item_cate');
@@ -58,9 +62,9 @@ class frontendAction extends baseAction {
             F('index_cate_list', $index_cate_list);
         }
 
-      // echo "<pre>";
-        // var_dump($index_cate_list);
-         //echo "</pre>";
+        //echo "<pre>";
+        //var_dump($index_cate_list);
+        //echo "</pre>";
         $this->assign('index_cate_list', $index_cate_list);
     }
     

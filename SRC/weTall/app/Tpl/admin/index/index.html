@@ -38,7 +38,7 @@
 </div>
 <div id="content">
 	<div class="left_menu fl">
-    	<div id="J_lmenu" class="J_lmenu" data-uri="{:U('index/left')}"></div>
+    	<div id="J_lmenu" class="J_lmenu" data-uri="{:U('index/left',array('tokenTall'=>$tokenTall))}"></div>
         <a href="javascript:;" id="J_lmoc" style="outline-style: none; outline-color: invert; outline-width: medium;" hidefocus="true" class="open" title="{:L('expand_or_contract')}"></a>
     </div>
     <div class="right_main">
@@ -61,7 +61,7 @@
         </div>
         
     	<div id="J_rframe" class="rframe_b">
-        	<iframe id="rframe_0" src="{:U('index/panel')}" frameborder="0" scrolling="auto" style="height:100%;width:100%;"></iframe>
+        	<iframe id="rframe_0" src="{:U('index/panel',array('tokenTall'=>$tokenTall))}" frameborder="0" scrolling="auto" style="height:100%;width:100%;"></iframe>
         </div>
     </div>
 </div>

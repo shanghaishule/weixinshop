@@ -1,7 +1,6 @@
 <?php
 
 class userAction extends userbaseAction {
-
 	
 	public function ajaxlogin()
     {
@@ -27,8 +26,9 @@ class userAction extends userbaseAction {
      * 用户登陆
      */
     public function login() {
-    
-        $this->visitor->is_login && $this->redirect('user/index');
+    	$tokenTall = $this->getTokenTall();
+    	$this->assign('tokenTall', $tokenTall);
+        $this->visitor->is_login && $this->redirect('user/index', array('tokenTall'=>$tokenTall));
         if (IS_POST) {
             $username = $this->_post('username', 'trim');
             $password = $this->_post('password', 'trim');
@@ -84,33 +84,36 @@ class userAction extends userbaseAction {
     
     public function addaddress()
     {
+    	//取商家token值，取不到则默认为空
+    	$tokenTall = $this->getTokenTall();
+
     	if(IS_POST)
     	{
-    	$user_address=M('user_address');
+	    	$user_address = M('user_address');
+	    	
+	    	$consignee= $this->_post('consignee', 'trim');
+	    	$sheng= $this->_post('sheng', 'trim');
+	    	$shi= $this->_post('shi', 'trim');
+	    	$qu= $this->_post('qu', 'trim');
+	    	$address= $this->_post('address', 'trim');
+	    	$phone_mob= $this->_post('phone_mob', 'trim');
+	    	
+	    	$data['uid']=$this->visitor->info['id'];
+	    	$data['consignee']=$consignee;
+	        $data['sheng']=$sheng;
+	    	$data['shi']=$shi;
+	    	$data['qu']=$qu;
+	    	$data['address']=$address;
+	    	$data['mobile']=$phone_mob;
     	
-    	$consignee= $this->_post('consignee', 'trim');
-    	$sheng= $this->_post('sheng', 'trim');
-    	$shi= $this->_post('shi', 'trim');
-    	$qu= $this->_post('qu', 'trim');
-    	$address= $this->_post('address', 'trim');
-    	$phone_mob= $this->_post('phone_mob', 'trim');
+    		//echo $this->visitor->info['id'];
     	
-    	$data['uid']=$this->visitor->info['id'];
-    	$data['consignee']=$consignee;
-        $data['sheng']=$sheng;
-    	$data['shi']=$shi;
-    	$data['qu']=$qu;
-    	$data['address']=$address;
-    	$data['mobile']=$phone_mob;
-    	
-    	//echo $this->visitor->info['id'];
-    	
-        if($user_address->data($data)->add()!==false)
-        {
-       $this->redirect('user/address');
-        }
-     
+	        if($user_address->data($data)->add()!==false)
+	        {
+	        	$this->redirect('user/address',array('tokenTall'=>$tokenTall));
+	        }
     	}
+    	$this->assign('tokenTall',$tokenTall);
     	$this->display();
     }
 
@@ -123,7 +126,10 @@ class userAction extends userbaseAction {
         $passport = $this->_user_server();
         $synlogout = $passport->synlogout();
         //跳转到退出前页面（执行同步操作）
-        $this->success(L('logout_successe').$synlogout, U('user/index'));
+        //取商家token值，取不到则默认为空
+        $tokenTall = $this->getTokenTall();
+        $this->assign('tokenTall',$tokenTall);
+        $this->success(L('logout_successe').$synlogout, U('user/index',array('tokenTall'=>$tokenTall)));
     }
 
     /**
@@ -140,7 +146,8 @@ class userAction extends userbaseAction {
     * 用户注册
     */
     public function register() {
-        $this->visitor->is_login && $this->redirect('user/index');
+    	$tokenTall = $this->getTokenTall();
+        $this->visitor->is_login && $this->redirect('user/index', array('tokenTall'=>$tokenTall));
         if (IS_POST) {
             $username = $this->_post('user_name', 'trim');
             $email = $this->_post('email','trim');
@@ -175,7 +182,7 @@ class userAction extends userbaseAction {
             
             //同步登陆
             $synlogin = $passport->synlogin($uid);
-            $this->redirect('user/index');
+            $this->redirect('user/index', array('tokenTall'=>$tokenTall));
            // $this->success(L('register_successe').$synlogin, U('user/index'));
 
             exit;
@@ -218,33 +225,36 @@ class userAction extends userbaseAction {
     * 基本信息修改
     */
     public function index() {
-    
-      $item_order=M('item_order');
-      $order_detail=M('order_detail');
-      if(!isset($_GET['status']))
-      {
-      	$status=1;
-      }
-      else 
-      {
-      	$status=$_GET['status'];
-      }
+    	//取商家token值，取不到则默认为空
+    	$tokenTall = $this->getTokenTall();
+    	
+        $item_order=M('item_order');
+        $order_detail=M('order_detail');
+        if(!isset($_GET['status']))
+        {
+      	    $status=1;
+        }
+        else
+        {
+      	    $status=$_GET['status'];
+        }
       
-      $item_orders= $item_order->order('id desc')->where('status='.$status.' and userId='.$this->visitor->info['id'])->select();
-      foreach ($item_orders as  $key=>$val)
-      {
-      	$order_details= $order_detail->where("orderId='".$val['orderId']."'")->select();
-      	foreach ($order_details as $val)
-      	{
-      	 $items= array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity'],'itemId'=>$val['itemId']);
-      	 $item_orders[$key]['items'][]=$items;
-      	}
-      }  
+        $item_orders= $item_order->order('id desc')->where(array('status'=>$status,userId=>$this->visitor->info['id'],tokenTall=>$tokenTall))->select();
+        foreach ($item_orders as $key=>$val)
+        {
+      		$order_details = $order_detail->where("orderId='".$val['orderId']."'")->select();
+	      	foreach ($order_details as $val)
+	      	{
+	      		$items = array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity'],'itemId'=>$val['itemId']);
+	      		$item_orders[$key]['items'][] = $items;
+	      	}
+        }
       
        $this->assign('item_orders',$item_orders);
        $this->assign('status',$status);
-        $this->_config_seo();
-        $this->display();
+       $this->assign('tokenTall',$tokenTall);
+       $this->_config_seo();
+       $this->display();
     }
 
     /**
@@ -384,11 +394,13 @@ class userAction extends userbaseAction {
     
     public function edit_address()
     {
-       $user_address_mod = M('user_address');
+        $user_address_mod = M('user_address');
         $id = $this->_get('id', 'intval');
         $info = $user_address_mod->find($id);
-       
-       $this->assign('info', $info);
+        $this->assign('info', $info);
+        //取商家token值，取不到则默认为空
+        $tokenTall = $this->getTokenTall();
+        $this->assign('tokenTall',$tokenTall);
     	$this->display();
     }
     
@@ -412,21 +424,21 @@ class userAction extends userbaseAction {
         if (IS_POST) {
             $consignee = $this->_post('consignee', 'trim');
             $address = $this->_post('address', 'trim');
-         //   $zip = $this->_post('zip', 'trim');
-         $mobile = $this->_post('phone_mob', 'trim');
-         $sheng = $this->_post('sheng', 'trim');
-         $shi = $this->_post('shi', 'trim');
-         $qu = $this->_post('qu', 'trim');
+         	//   $zip = $this->_post('zip', 'trim');
+	        $mobile = $this->_post('phone_mob', 'trim');
+	        $sheng = $this->_post('sheng', 'trim');
+	        $shi = $this->_post('shi', 'trim');
+	        $qu = $this->_post('qu', 'trim');
             $id = $this->_post('id', 'intval');
             if ($id) {
                 $result = $user_address_mod->where(array('id'=>$id, 'uid'=>$this->visitor->info['id']))->save(array(
                     'consignee' => $consignee,
                     'address' => $address,
-                   // 'zip' => $zip,
+                    // 'zip' => $zip,
                     'mobile' => $mobile,
-                     'sheng' => $sheng,
-                      'shi' => $shi,
-                       'qu' => $qu,
+                    'sheng' => $sheng,
+                    'shi' => $shi,
+                    'qu' => $qu,
                 ));
                 if ($result) {
                     $msg = array('status'=>1, 'info'=>L('edit_success'));
@@ -452,6 +464,10 @@ class userAction extends userbaseAction {
         
         $address_list = $user_address_mod->where(array('uid'=>$this->visitor->info['id']))->select();
         $this->assign('address_list', $address_list);
+        //取商家token值，取不到则默认为空
+        $tokenTall = $this->getTokenTall();
+        $this->assign('tokenTall',$tokenTall);
+        
         $this->_config_seo();
         $this->display();
     }

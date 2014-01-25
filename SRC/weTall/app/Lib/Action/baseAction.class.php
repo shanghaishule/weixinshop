@@ -129,4 +129,10 @@ class baseAction extends Action
             'dialog' => $dialog,
         ));
     }
+    
+    /*取商家token值，取不到则默认为空*/
+    public function getTokenTall(){
+    	$tokenTall = $this->_request('tokenTall', 'trim', '');
+    	return $tokenTall;
+    }
 }

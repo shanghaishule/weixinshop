@@ -11,7 +11,8 @@ class userbaseAction extends frontendAction {
         //访问者控制
         if (!$this->visitor->is_login && !in_array(ACTION_NAME, array('login', 'register', 'binding', 'ajax_check'))) {
             IS_AJAX && $this->ajaxReturn(0, L('login_please'));
-            $this->redirect('user/login');
+            $tokenTall = $this->_get('tokenTall', 'trim', '');
+            $this->redirect('user/login', array('tokenTall'=>$tokenTall));
         }
         $this->_curr_menu(ACTION_NAME);
     }

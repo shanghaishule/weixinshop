@@ -33,8 +33,7 @@ DD_belatedPNG.fix(".logo a img,.shade img");
     });
 
     function refresh() {
-        var randomRZ = Math.random();
-        $("#imgCheckB").attr("src", "/index.php?g=Admin&m=Admin&a=verify&rz=" + randomRZ);
+        document.getElementById("imgCheckB").src ="/index.php?g=System&m=Admin&a=verify";
     }
 </script>
 </head>
@@ -57,7 +56,7 @@ DD_belatedPNG.fix(".logo a img,.shade img");
                    	    <p><span><input name="password" type="password" id="pw" class="ps_input" /></span></p>
                     	<p>
                         	<span><input name="code" type="text" id="txtCheckCode" class="chk_input" maxlength="4" /></span>
-                        	<span class="chk_img"><img src="<?php echo U('Admin/verify');?>" id="imgCheckB"/></span>
+                        	<span class="chk_img"><img onclick="refresh();" src="<?php echo U('Admin/verify');?>" id="imgCheckB"/></span>
                             <span class="chk_txt"><a href="javascript:refresh();" style="color: #0033CC">看不清？换一张</a></span>
                         </p>
                       

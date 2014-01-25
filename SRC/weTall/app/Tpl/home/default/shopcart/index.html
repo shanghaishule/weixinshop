@@ -23,7 +23,6 @@ $(function(){
         $("#float_layer").hide();
     });
 });
-
 </script>
 </head>
 
@@ -58,8 +57,53 @@ $(function(){
                           <img src="__STATIC__/weixin/images/adding.gif" onClick="add_quantity({$vo.id});" alt="increase" style="vertical-align: middle;width=:16px">
                       </span><br>
                       <span>
-                          <a class="del" href="javascript:;" onClick="drop_cart_item({$vo.id});"> <img src="__STATIC__/weixin/images/del.png"  style="vertical-align: middle;height:20px;width=:20px"></a>
+                          <a class="del" href="javascript:void(0)" onClick="drop_cart_item({$vo.id});"> <img src="__STATIC__/weixin/images/del.png"  style="vertical-align: middle;height:20px;width=:20px"></a>
                       </span>
+                      <script type="text/javascript">
+						function drop_cart_item(id){
+							//alert(id);
+							var url = "{:U('shopcart/remove_cart_item')}";
+							$.post(url, {'itemId' : id}, function(data){
+								//刷新当前页面，如果传参数true进去，则为强制刷新(shift+F5)
+								window.location.reload();  
+							},"json");
+						}
+						function decrease_quantity(id){
+							//alert(id);
+							var url = "{:U('shopcart/change_quantity')}";
+							var qty = parseInt($("#input_item_{$vo.id}").val()) - 1;
+							$.post(url, {'itemId':id, quantity:qty}, function(data){
+								if(data.status == 0){
+									alert(data.msg);
+								}else{
+									window.location.reload();
+								}
+							},"json");
+						}
+						function add_quantity(id){
+							var url = "{:U('shopcart/change_quantity')}";
+							var qty = parseInt($("#input_item_{$vo.id}").val()) + 1;
+							$.post(url, {'itemId':id, quantity:qty}, function(data){
+								if(data.status == 0){
+									alert(data.msg);
+								}else{
+									window.location.reload();
+								}
+							},"json");
+						}
+						function change_quantity(id,th){
+							var url = "{:U('shopcart/change_quantity')}";
+							var qty = parseInt($("#input_item_{$vo.id}").val());
+							$.post(url, {'itemId':id, quantity:qty}, function(data){
+								if(data.status == 0){
+									alert(data.msg);
+								}else{
+									window.location.reload();
+								}
+							},"json");
+						}
+						
+					  </script>
                   </span>
               </p>
               <p class="buy_info">

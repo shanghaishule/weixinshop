@@ -1,10 +1,15 @@
 use bestchoi_shule;
-/*商品表*/
+/*商品表，加tokenTall*/
 alter table tp_item add `tokenTall` varchar(20) NOT NULL DEFAULT '';
-/*广告和广告位*/
+/*广告，加tokenTall*/
 alter table tp_ad add `tokenTall` varchar(20) NOT NULL DEFAULT '';
-alter table tp_adboard add `tokenTall` varchar(20) NOT NULL DEFAULT '';
-/*商品图片*/
-alter table tp_item_img add `tokenTall` varchar(20) NOT NULL DEFAULT '';
-/*终端用户表*/
+/*订单表，加tokenTall*/
+alter table tp_item_order add `tokenTall` varchar(20) NOT NULL DEFAULT '';
+
+/*终端用户表，加email*/
 alter table tp_user add `email` varchar(90) NOT NULL DEFAULT '';
+
+/*隐藏：商品分类、品牌管理 often=1 => 0*/
+update tp_menu set often = 0 where id in(56,291);
+/*隐藏：注册登录 often=6 => 0*/
+update tp_menu set often = 0 where id in(286);
