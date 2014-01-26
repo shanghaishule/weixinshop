@@ -11,13 +11,7 @@ class itemModel extends Model
      * $album_id 专辑ID
      * $ac_id 专辑分类ID
      */
-    public function publish($item, $album_id = 0, $ac_id = 0) {
-        //已经存在？
-        /*if ($this->where(array('key_id'=>$item['key_id']))->count()) {
-            $this->error = L('item_exists');
-            return false;
-        }*/
-        
+    public function publish($item, $album_id = 0, $ac_id = 0) {        
         //检测敏感词
         $badword_mod = D('badword');
         $check_result = $badword_mod->check($item['title']);
@@ -59,10 +53,10 @@ class itemModel extends Model
         if (!$item['cate_id']) {
             $item['cate_id'] = $this->get_cid_by_tags($tag_list);
         }
-        //来源
-        //!$item['orig_id'] && $item['orig_id'] = D('item_orig')->get_id_by_url($item['url']);
+
         $this->create($item);
         $item_id = $this->add();
+        //dump($item);exit;
         if ($item_id) {
             //商品相册处理
             if (isset($item['imgs']) && $item['imgs']) {
@@ -73,40 +67,8 @@ class itemModel extends Model
                     $item_img_mod->add();
                 }
             }
-            //商品标签处理
-            if ($tag_list) {
-                $item_tag_arr = $tag_cache = array();
-                $tag_mod = M('tag');
-                foreach ($tag_list as $_tag_name) {
-                    $tag_id = $tag_mod->where(array('name'=>$_tag_name))->getField('id');
-                    !$tag_id && $tag_id = $tag_mod->add(array('name' => $_tag_name)); //标签入库
-                    $item_tag_arr[] = array('item_id'=>$item_id, 'tag_id'=>$tag_id);
-                    $tag_cache[$tag_id] = $_tag_name;
-                }
-                if ($item_tag_arr) {
-                    //商品标签关联
-                    M('item_tag')->addAll($item_tag_arr);
-                    //商品标签缓存
-                    $this->update_tag_cache($item_id, $tag_cache);
-                }
-            }
 
-            //增加分享数
-            M('user')->where(array('id'=>$item['uid']))->setInc('shares');
-
-            //添加到专辑 更新专辑封面
-            $album_mod = D('album');
-            !$album_id && $album_id = $album_mod->default_album(array('id'=>$item['uid'], 'name'=>$item['uname']), $ac_id); //处理默认专辑
-            $album_mod->add_item($item_id, $album_id, $item['intro']);
-            //发布动态
-            $topic_mod = D('topic');
-            $topic_mod->publish(array(
-                'uid' => $item['uid'],
-                'uname' => $item['uname'],
-                'content' => $item['intro'],
-                'extra' => $item['img'],
-                'src_id' => $item_id
-            ));
+          
             return $item_id;
         } else {
             $this->error = L('publish_item_failed');

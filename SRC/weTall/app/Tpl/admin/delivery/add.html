@@ -1,6 +1,6 @@
-<!--添加禁止IP-->
+
 <div class="dialog_content">
-	<form id="info_form" name="info_form" action="{:u('delivery/add')}" method="post">
+	<form id="info_form" name="info_form" action="{:U('delivery/add',array('tokenTall'=>$tokenTall))}" method="post">
 	<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
 		<tr>
 			<th width="80">快递名称 :</th>
@@ -21,23 +21,28 @@
 	</form>
 </div>
 <script>
-var check_name_url = "{:U('delivery/ajax_check_name')}";
 $(function(){
+	var check_name_url = "{:U('delivery/ajax_check_name',array('tokenTall'=>$tokenTall))}";
 	$.formValidator.initConfig({formid:"info_form",autotip:true});
-	$("#name").formValidator({onshow:lang.please_input+'名称',onfocus:lang.please_input+'名称'}).inputValidator({min:1,onerror:lang.please_input+'名称'}).ajaxValidator({
+	$("#name").formValidator({
+		onshow:lang.please_input+'名称',
+		onfocus:lang.please_input+'名称'
+	}).inputValidator({
+		min:1,
+		onerror:lang.please_input+'名称！'
+	}).ajaxValidator({
 	    type : "get",
 		url : check_name_url,
 		datatype : "json",
-		async:'false',
-		success : function(result){	
+		async : 'false',
+		success : function(result){
             if(result.status == 0){
                 return false;
 			}else{
                 return true;
 			}
 		},
-		onerror : '名称已存在',
-		onwait : lang.connecting_please_wait
+		onerror:'名称已存在！'
 	});
 	
 	$('#info_form').ajaxForm({success:complate,dataType:'json'});

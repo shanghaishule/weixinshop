@@ -14,3 +14,7 @@ update tp_menu set often = 0 where id in(56,291);
 */
 /*隐藏：注册登录 often=6 => 0*/
 update tp_menu set often = 0 where id in(286);
+
+/*快递表，加tokenTall*/
+alter table tp_delivery add `tokenTall` varchar(20) NOT NULL DEFAULT '';
+

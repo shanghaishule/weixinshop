@@ -1,48 +1,43 @@
 <include file="public:header" />
 <script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
-   <script>
-		     $(function(){
-		    
-        	 $('#free').change(function(){
-        	  if($(this).val()==2)
-        	  {
+<script>
+	$(function(){
+    	$('#free').change(function(){
+        	if($(this).val()==2)
+        	{
         	  	$('#address_form').show();
-        	  }else
-        	  {
-        	  		$('#address_form').hide();
-        	  }
-        	 });
-        	 set_address();
-        })
+        	}
+        	else
+        	{
+        	  	$('#address_form').hide();
+        	}
+        });
+        set_address();
+    })
         
-          function set_address()
-          {
-          	 var addr_id =$("#free").find("option:selected").val();
-          	
-           if(addr_id == 2)
-            {
-               
-                $('#address_form').show();
-            }
-            else
-            {
-                $('#address_form').hide();
-     
-            }
-          }
-		    </script>
+    function set_address()
+    {
+        var addr_id =$("#free").find("option:selected").val();
+        if(addr_id == 2)
+        {
+            $('#address_form').show();
+        }
+        else
+        {
+            $('#address_form').hide();
+        }
+    }
+</script>
 <!--添加商品-->
 <div class="subnav">
     <h1 class="title_2 line_x">添加商品</h1>
 </div>
-<form id="info_form" action="{:u('item/add')}" method="post" enctype="multipart/form-data">
+<form id="info_form" action="{:U('item/add',array('tokenTall'=>$tokenTall))}" method="post" enctype="multipart/form-data">
 <div class="pad_lr_10">
 	<div class="col_tab">
 		<ul class="J_tabs tab_but cu_li">
 			<li class="current">基本信息</li>
             <li>展示图片</li>
-			<!--<li>SEO设置</li>
-            <li>附加属性</li>-->
 		</ul>
 		<div class="J_panes">
         <div class="content_list pad_10">
@@ -64,16 +59,7 @@
             <tr>
 				<th>商品名称 :</th>
 				<td><input type="text" name="title" id="J_title" class="input-text" size="60"></td>
-			</tr>
-		  <!--   <tr>
-				<th>颜色 :</th>
-				<td><input type="text" name="color" id="J_color" class="input-text" size="30"><font color="#FD5873">（不需要可不填, 格式：多个用竖杆“|”隔开，如：蓝色|红色|白色）</font></td>
-			</tr>
-			   <tr>
-				<th>尺寸 :</th>
-				<td><input type="text" name="size" id="J_size" class="input-text" size="30"><font color="#FD5873">（不需要可不填, 格式：多个用竖杆“|”隔开，如：蓝色|红色|白色）</font></td>
-			</tr>-->
-			
+			</tr>			
 			<tr>
                 <th>商品简介 :</th>
                 <td><textarea name="intro" cols="80" rows="2"></textarea></td>
@@ -104,21 +90,17 @@
 		      </select>
 		      </td>
 		    </tr>
-		    
-		 
-		    
 		    <tr id="address_form" style="display:none;">
 		    <th></th>
 		    <td> 
-		      平邮:<input onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="pingyou" />
-		      快递:<input onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="kuaidi" />
-		      EMS:<input onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="ems" /></td>
+		           平邮:<input onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="pingyou" />
+		           快递:<input onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="kuaidi" />
+		    EMS:<input onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="ems" /></td>
 		    </tr>
-		    
-		           <tr>
-						<th>商品详情 :</th>
-		                <td><textarea name="info" id="info" style="width:68%;height:400px;visibility:hidden;resize:none;"></textarea></td>
-					</tr>
+		    <tr>
+				<th>商品详情 :</th>
+		        <td><textarea name="info" id="info" style="width:68%;height:400px;visibility:hidden;resize:none;"></textarea></td>
+			</tr>
 		</table>
 		</div>
         <div class="content_list pad_10 hidden">
@@ -169,7 +151,7 @@
 <include file="public:footer" />
 <script type="text/javascript">
 $('.J_cate_select').cate_select('请选择');
-$(function() { 		   
+$(function() {
 	$('ul.J_tabs').tabs('div.J_panes > div');
 	//自动获取标签
 	$('#J_gettags').live('click', function() {

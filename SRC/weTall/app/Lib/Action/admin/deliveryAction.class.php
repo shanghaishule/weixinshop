@@ -9,9 +9,11 @@ class deliveryAction extends backendAction
     }
 
     public function _before_index() {
+    	$tokenTall = $this->getTokenTall();
+    	$this->assign('tokenTall',$tokenTall);
         $big_menu = array(
-            'title' => L('添加分类'),
-            'iframe' => U('delivery/add'),
+            'title' => L('添加快递'),
+            'iframe' => U('delivery/add',array('tokenTall'=>$tokenTall)),
             'id' => 'add',
             'width' => '400',
             'height' => '130'
@@ -22,27 +24,41 @@ class deliveryAction extends backendAction
         $this->sort = 'ordid';
         $this->order = 'ASC';
     }
+    
+    public function _before_insert($data) {
+    	$tokenTall = $this->getTokenTall();
+    	$data[tokenTall] = $tokenTall;
+    	return $data;
+    	
+    }
 
     protected function _search() {
         $map = array();
         ($keyword = $this->_request('keyword', 'trim')) && $map['name'] = array('like', '%'.$keyword.'%');
+        
+        $tokenTall = $this->getTokenTall();
+        $map['tokenTall'] = array('eq', $tokenTall);
+        
         $this->assign('search', array(
             'keyword' => $keyword,
+        	'tokenTall' => $tokenTall,
         ));
         return $map;
     }
 
     public function ajax_check_name() {
-        $name = $this->_get('name', 'trim');
+    	$name = $this->_get('name', 'trim');
         $id = $this->_get('id', 'intval');
+
         if (D('delivery')->name_exists($name, $id)) {
-            $this->ajaxReturn(0, L('该分类名称已存在'));
+            $this->ajaxReturn(0, L('该名称已存在'));
         } else {
             $this->ajaxReturn(1);
         }
+        
     }
     
-      public function deletebrand()
+    public function deletebrand()
     {
     	 
         $mod = D($this->_name);

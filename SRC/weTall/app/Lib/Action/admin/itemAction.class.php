@@ -74,7 +74,8 @@ class itemAction extends backendAction {
     }
 
     public function add() {
-    	
+    	$tokenTall = $this->getTokenTall();
+    	$this->assign('tokenTall',$tokenTall);
         if (IS_POST) {
             //获取数据
             if (false === $data = $this->_mod->create()) {
@@ -117,19 +118,6 @@ class itemAction extends backendAction {
             $data['kuaidi']=$this->_post('kuaidi');
             $data['ems']=$this->_post('ems');
             }
-            
-            //获取马甲
-           /*$auid = $this->_post('auid', 'intval');
-            $auto_user_mod = M('auto_user');
-            $user_mod = M('user');
-            $unames = $auto_user_mod->where(array('id'=>$auid))->getField('users');
-            $unamea = explode(',', $unames);
-            $users = $user_mod->field('id,username')->where(array('username'=>array('in', $unamea)))->select();
-            !$users && $this->error('请选择发布马甲');
-            //发布用户
-            $user_rand = array_rand($users);
-            $data['uid'] = $users[$user_rand]['id'];
-            $data['uname'] = $users[$user_rand]['username'];*/
 
             //上传图片
             $date_dir = date('ym/d/'); //上传目录
@@ -178,29 +166,12 @@ class itemAction extends backendAction {
                 }
             }
             $data['imgs'] = $item_imgs;
+            $data['tokenTall'] = $tokenTall;
+            
             $item_id = $this->_mod->publish($data);
             !$item_id && $this->error(L('operation_failure'));
-
-            //附加属性
-         /*  $attr = $this->_post('attr', ',');
-            if( $attr ){
-                foreach( $attr['name'] as $key=>$val ){
-                    if( $val&&$attr['value'][$key] ){
-                        $atr['item_id'] = $item_id;
-                        $atr['attr_name'] = $val;
-                        $atr['attr_value'] = $attr['value'][$key];
-                        M('item_attr')->add($atr);
-                    }
-                }
-            }*/
             $this->success(L('operation_success'));
         } else {
-            //来源
-          /*  $orig_list = M('item_orig')->where(array('status'=>1))->select();
-            $this->assign('orig_list',$orig_list);
-            //采集马甲
-            $auto_user = M('auto_user')->select();
-            $this->assign('auto_user', $auto_user);*/
             $this->display();
         }
     }
