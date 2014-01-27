@@ -263,6 +263,10 @@ class backendAction extends baseAction
     		$data["ordid"] = $updata["ordid"];
     		$data["content"] = $updata["content"];
     		$data["status"] = $updata["status"];
+    		
+    		$tokenTall = $this->getTokenTall();
+    		$data["tokenTall"] = $tokenTall;
+    		
     		if (false !== $mod->add($data)) {   			
     			if(false !== $modad->save($addata)){
 	    			IS_AJAX && $this->ajaxReturn(1, L('operation_success'));

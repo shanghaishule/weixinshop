@@ -21,7 +21,7 @@ class deliveryAction extends backendAction
         $this->assign('big_menu', $big_menu);
 
         //默认排序
-        $this->sort = 'ordid';
+        $this->sort = 'ordid, id';
         $this->order = 'ASC';
     }
     

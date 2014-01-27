@@ -10,6 +10,7 @@
             	<input type="hidden" name="g" value="admin" />
                 <input type="hidden" name="m" value="ad" />
                 <input type="hidden" name="a" value="index" />
+                <input type="hidden" name="tokenTall" value="{$search.tokenTall}" />
                 <input type="hidden" name="menuid" value="{$menuid}" />
             	{:L('ad_start_time')}：
             	<input type="text" name="start_time_min" id="start_time_min" class="date" size="12" value="{$search.start_time_min}">
@@ -74,9 +75,9 @@
             <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
             <td width="140" align="center">
             	<a href="javascript:void(0);" class="J_showdialog" data-uri="{:U('ad/edit', array('id'=>$val['id']))}" data-title="{:L('edit')} - {$val.name}" data-id="edit" data-width="520" data-height="410">{:L('edit')}</a> | 
-                <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="{:u('ad/delete', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['name'])}">{:L('delete')}</a> | 
+                <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('ad/delete', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['name'])}">{:L('delete')}</a> | 
                 <if condition="$val.checkstatus eq 0">
-                <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="{:u('adforhome/appliyhome', array('id'=>$val['id']))}" data-msg="申请{:$val。name}到微指购首页吗？">申请商城首页</a></td>
+                <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('adforhome/appliyhome', array('id'=>$val['id'],'tokenTall'=>$val['tokenTall']))}" data-msg="申请“{$val.name}”到微指购首页吗？">申请商城首页</a></td>
                 <else/>
                 	已申请
                 </if>
@@ -86,7 +87,7 @@
       	</table>
 		<div class="btn_wrap_fixed">
     		<label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
-            <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('ad/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+            <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('ad/delete',array('tokenTall'=>$search.tokenTall))}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
     		<div id="pages">{$page}</div>
     	</div>
     </div>

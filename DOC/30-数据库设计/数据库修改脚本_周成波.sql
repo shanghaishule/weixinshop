@@ -18,3 +18,8 @@ update tp_menu set often = 0 where id in(286);
 /*快递表，加tokenTall*/
 alter table tp_delivery add `tokenTall` varchar(20) NOT NULL DEFAULT '';
 
+/*发货地址表，加tokenTall*/
+alter table tp_address add `tokenTall` varchar(20) NOT NULL DEFAULT '';
+
+/*平台广告表，加tokenTall*/
+alter table tp_adforhome add `tokenTall` varchar(20) NOT NULL DEFAULT '';

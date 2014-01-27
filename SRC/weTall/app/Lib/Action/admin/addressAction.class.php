@@ -10,17 +10,17 @@ class addressAction extends backendAction
     
     public function check()
     {
-     $id = $this->_post('id', 'intval');
-     
-     
-     $this->_mod->where('id='.$id)->data(array('isno'=>1))->save();
-       $this->_mod->where('id !='.$id)->data(array('isno'=>0))->save();
+    	$id = $this->_post('id', 'intval');
+    	$this->_mod->where('id='.$id)->data(array('isno'=>1))->save();
+        $this->_mod->where('id !='.$id)->data(array('isno'=>0))->save();
     }
 
     public function _before_index() {
+    	$tokenTall = $this->getTokenTall();
+    	$this->assign('tokenTall',$tokenTall);
         $big_menu = array(
-            'title' => L('添加收货地址'),
-            'iframe' => U('address/add'),
+            'title' => L('添加发货地址'),
+            'iframe' => U('address/add',array('tokenTall'=>$tokenTall)),
             'id' => 'add',
             'width' => '550',
             'height' => '130'
@@ -28,32 +28,28 @@ class addressAction extends backendAction
         $this->assign('big_menu', $big_menu);
 
         //默认排序
-        $this->sort = 'ordid';
+        $this->sort = 'ordid, id';
         $this->order = 'ASC';
     }
 
     protected function _search() {
         $map = array();
         ($keyword = $this->_request('keyword', 'trim')) && $map['name'] = array('like', '%'.$keyword.'%');
+        
+        $tokenTall = $this->getTokenTall();
+        $map['tokenTall'] = array('eq', $tokenTall);
+        
         $this->assign('search', array(
             'keyword' => $keyword,
+        	'tokenTall' => $tokenTall,
         ));
         return $map;
     }
 
-    public function ajax_check_name() {
-        $name = $this->_get('name', 'trim');
-        $id = $this->_get('id', 'intval');
-        if (D('address')->name_exists($name, $id)) {
-            $this->ajaxReturn(0, L('该分类名称已存在'));
-        } else {
-            $this->ajaxReturn(1);
-        }
-    }
     
-      public function edit()
+    public function edit()
     {
-        $mod = D($this->_name);
+    	$mod = D($this->_name);
         $pk = $mod->getPk();
         if (IS_POST) {
             if (false === $data = $mod->create()) {
@@ -96,6 +92,7 @@ class addressAction extends backendAction
     }
    
      public function add() {
+     	$tokenTall = $this->getTokenTall();
         $mod = D($this->_name);
         if (IS_POST) {
             if (false === $data = $mod->create()) {
@@ -105,6 +102,7 @@ class addressAction extends backendAction
             if (method_exists($this, '_before_insert')) {
                 $data = $this->_before_insert($data);
             }
+            $data['tokenTall']=$tokenTall;
             if( $addid=$mod->add($data) ){
             
                 if( method_exists($this, '_after_insert')){
@@ -136,20 +134,19 @@ class addressAction extends backendAction
     }
     
     
-      public function deletebrand()
+    public function deletebrand()
     {
-    	 
+    	$tokenTall = $this->getTokenTall();
         $mod = D($this->_name);
       
         $pk = $mod->getPk();
         $ids = trim($this->_request($pk), ',');
         
         if ($ids) {
-        
-        	$count=M('item_order')->where("fahuoaddress in (".$ids.")")->count();
+        	$count=M('item_order')->where("fahuoaddress in (".$ids.") and tokenTall='".$tokenTall."'")->count();
         	if($count>0)
         	{
-          IS_AJAX && $this->ajaxReturn(0,'此地址已被引用，不能删除');exit;
+                IS_AJAX && $this->ajaxReturn(0,'此地址已被引用，不能删除');exit;
         	}
         	
             if (false !== $mod->delete($ids)) {

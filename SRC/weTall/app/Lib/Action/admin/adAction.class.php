@@ -20,6 +20,10 @@ class adAction extends backendAction {
         $style = $this->_request('style', 'trim');
         $style && $map['type'] = array('eq',$style);
         ($keyword = $this->_request('keyword', 'trim')) && $map['name'] = array('like', '%'.$keyword.'%');
+        
+        $tokenTall = $this->getTokenTall();
+        $map['tokenTall'] = array('eq', $tokenTall);
+        
         $this->assign('search', array(
             'start_time_min' => $start_time_min,
             'start_time_max' => $start_time_max,
@@ -28,14 +32,17 @@ class adAction extends backendAction {
             'board_id' => $board_id,
             'style'   => $style,
             'keyword' => $keyword,
+        	'tokenTall' => $tokenTall,
         ));
         return $map;
     }
 
     public function _before_index() {
+    	$tokenTall = $this->getTokenTall();
+    	$this->assign('tokenTall',$tokenTall);
         $big_menu = array(
             'title' => L('ad_add'),
-            'iframe' => U('ad/add'),
+            'iframe' => U('ad/add',array('tokenTall'=>$tokenTall)),
             'id' => 'add',
             'width' => '520',
             'height' => '410',
@@ -64,6 +71,8 @@ class adAction extends backendAction {
     }
 
     protected function _before_insert($data) {
+    	$tokenTall = $this->getTokenTall();
+    	$data['tokenTall'] = $tokenTall;
         //判断开始时间和结束时间是否合法
         $data['start_time'] = strtotime($data['start_time']);
         $data['end_time'] = strtotime($data['end_time']);
