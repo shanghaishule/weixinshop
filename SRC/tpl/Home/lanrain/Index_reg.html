@@ -6,8 +6,8 @@
 <meta name="keywords" content="LANRAIN 微信帮手 微信公众账号 微信公众平台 微信公众账号开发 微信二次开发 微信接口开发 微信托管服务 微信营销 微信公众平台接口开发"/>
 <meta name="description" content="微信公众平台接口开发、托管、营销活动、二次开发"/>
 <include file="Public:header"/>
-<div class="banner gbanner"></div>
-<div class="main">
+
+<div class="main2">
 <style>
 
 .contaier{ zoom: 1; }
@@ -48,68 +48,22 @@ a:hover{ text-decoration: underline; }
 .login-other .head strong{ font-weight: normal; color: #999; }
 </style>
 <div class="abody">
-        <div class="contaier wp cf">
+        <div class="">
 
-    <div class="think-login">
-        <div class="head">
-            <strong>用户登录</strong>
-        </div>
-        <div class="body think-form ">
-            <form action="{lanrain::U('Users/checklogin')}" method="post" class="login">
-                <table>
-                    <tbody><tr>
-                        <th>用户名</th>
-                        <td>
-                            <input class="text" type="text" name="username">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>密　码</th>
-                        <td>
-                            <input class="text" type="password" name="password">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            <input class="submit" type="submit" value="登录">
-                        </td>
-                    </tr>
-					<tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr><tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr><!--
-					   <tr>
-                        <th>帐号审核：</th>
-                        <td>
-                            QQ:{lanrain::C('site_qq')}
-                        </td>
-                    </tr>-->
-                </tbody></table>
-            </form>
-        </div>
-    </div>
-    <div class="login-other">
+    <div id="think-login2">
+        
           <div class="head">
-            <strong style="font-weight: normal;font-size: 30px;vertical-align: bottom;color: #323232;">用户注册</strong>
+            <strong style="font-weight: normal;font-size: 30px;vertical-align: bottom;color: white;">用户注册</strong>
 		　</div>
         <div class="body think-form ">
             <form action="{lanrain::U('Users/checkreg')}" method="post" class="login">
-                <table>
+                <table width="100%" class="tablefield" border="0">
                     <tbody><tr>
                         <th>用户名</th>
                         <td>
                             <input class="text" required="" value="请输入用户名" onclick="if(this.value=='请输入用户名'){this.value=''}" onblur="if(this.value==''){this.value='请输入用户名'}" type="text" name="username">
                         </td>
-                    </tr>
-                    <tr>
+                    
                         <th>密　码</th>
                         <td>
                             <input class="text" type="password" name="password">
@@ -120,24 +74,22 @@ a:hover{ text-decoration: underline; }
                         <td>
                             <input class="text" type="password" name="repassword">
                         </td>
-                    </tr>
-					<tr>
+                    
                         <th>邮　箱</th>
                         <td>
                             <input class="text" type="text" name="email" value="请输入电子邮箱" onclick="if(this.value=='请输入电子邮箱'){this.value=''}" onblur="if(this.value==''){this.value='请输入电子邮箱'}">
                         </td>
                     </tr>
                     <tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            <input class="submit" type="submit" value="注册">
+                        
+                        <td colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;   <input id="submit" class="submit" type="submit" value="注册" />
                         </td>
-                    </tr>
-					<tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            &nbsp;
-                        </td>
+                   
+                        
                     </tr><!--
 					   <tr>
                         <th>帐号审核：</th>

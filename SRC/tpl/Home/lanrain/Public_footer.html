@@ -1,18 +1,17 @@
-</div>
-<div class="IndexFoot" style="height:120px;">
-<div class="foot">
-<div class="foot_page">
-<a href="{lanrain::C('site_url')}">微信微信营销平台</a><br/>
-帮助您快速搭建属于自己的营销平台，构建自己的客户群体。<br/>
-大转盘、刮刮卡、会员卡、优惠卷、订餐、订房等营销模块，客户易用，易懂，易营销。
-</div>
-
-    </div>
-</div>
-<script src="/images/css/qqserver.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/images/css/qqserver.css"/>
-<div style="display:none">
-<script src="http://s15.cnzz.com/stat.php?id=5524076&web_id=5524076" language="JavaScript"></script>
-</div>
+<div class="logo">
+            
+            <div class="navr">
+        <ul id="topMenu">           
+			 <li <if condition="(ACTION_NAME eq 'index') and (GROUP_NAME eq 'Home')">class="menuon"</if> ><a href="/" >首页</a></li>
+           <li <eq name="ACTION_NAME" value="fc">class="menuon"</eq>><a href="{lanrain::U('Home/Index/fc')}">功能介绍</a></li>
+                <li <eq name="ACTION_NAME" value="about">class="menuon"</eq>><a href="{lanrain::U('Home/Index/about')}">关于我们</a></li>
+				
+                <li <eq name="ACTION_NAME" value="price">class="menuon"</eq>><a href="{lanrain::U('Home/Index/price')}">资费说明</a></li>
+				<li <eq name="GROUP_NAME" value="User">class="menuon"</eq>><a href="{lanrain::U('User/Index/index')}">管理中心</a></li>
+                <li <eq name="ACTION_NAME" value="help">class="menuon"</eq>><a href="{lanrain::U('Home/Index/help')}">帮助中心</a></li>
+            
+            </ul>
+        </div>
+        </div>
 </body>
 </html>
