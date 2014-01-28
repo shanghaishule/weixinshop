@@ -142,40 +142,33 @@ class indexAction extends backendAction {
         } else {
             $left_menu[0] = array('id'=>0,'name'=>'商品管理');
             $left_menu[0]['sub'] = array();
-            if ($r = $this->_mod->where(array('often'=>1))->select()) {
+            if ($r = $this->_mod->where(array('often'=>0))->select()) {
                 $left_menu[0]['sub'] = $r;
             }
             
             $left_menu[1] = array('id'=>1,'name'=>'交易管理');
             $left_menu[1]['sub'] = array();
-            if ($r = $this->_mod->where(array('often'=>2))->select()) {
+            if ($r = $this->_mod->where(array('often'=>1))->select()) {
                 $left_menu[1]['sub'] = $r;
             }
-            /*
-            $left_menu[2] = array('id'=>2,'name'=>'客户管理');
+            $left_menu[2] = array('id'=>2,'name'=>'广告管理');
             $left_menu[2]['sub'] = array();
-            if ($r = $this->_mod->where(array('often'=>3))->select()) {
+            if ($r = $this->_mod->where(array('often'=>2))->select()) {
                 $left_menu[2]['sub'] = $r;
             }
-            */
-            $left_menu[3] = array('id'=>3,'name'=>'广告设置');
+            $left_menu[3] = array('id'=>3,'name'=>'账务管理');
             $left_menu[3]['sub'] = array();
-            if ($r = $this->_mod->where(array('often'=>5))->select()) {
-                $left_menu[3]['sub'] = $r;
+            if ($r = $this->_mod->where(array('often'=>3))->select()) {
+            	$left_menu[3]['sub'] = $r;
             }
             
-            $left_menu[4] = array('id'=>4,'name'=>'店铺管理');
-            $left_menu[4]['sub'] = array();
-            if ($r = $this->_mod->where(array('often'=>6))->select()) {
-                $left_menu[4]['sub'] = $r;
-            }
             
-            $left_menu[5] = array('id'=>5,'name'=>'账务管理');
-            $left_menu[5]['sub'] = array();
-            if ($r = $this->_mod->where(array('often'=>8))->select()) {
-            	$left_menu[5]['sub'] = $r;
+            $left_menu[99] = array('id'=>99,'name'=>'店铺管理');
+            $left_menu[99]['sub'] = array();
+            if ($r = $this->_mod->where(array('often'=>99))->select()) {
+                $left_menu[99]['sub'] = $r;
             }
-            
+
             array_unshift($left_menu[0]['sub'], array('id'=>0,'name'=>'后台首页','module_name'=>'index','action_name'=>'often_menu'));
         }
         $this->assign('left_menu', $left_menu);
