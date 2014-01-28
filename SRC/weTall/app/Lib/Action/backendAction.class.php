@@ -98,7 +98,7 @@ class backendAction extends baseAction
             }
             if (method_exists($this, '_before_update')) {
                 $data = $this->_before_update($data);
-            }
+            }//var_dump($data);die();
             if (false !== $mod->save($data)) {
                 if( method_exists($this, '_after_update')){
                     $id = $data['id'];

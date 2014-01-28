@@ -1,0 +1,5 @@
+#noticeTable{
+	margin:10px 0 10px 0;
+	font-size:14px;
+}
+tr:nth-child(2n+1){background:#E0E0E0;opacity:0.7;}

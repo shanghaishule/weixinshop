@@ -16,13 +16,25 @@ class info_noticeAction extends backendAction
             'width' => '400',
             'height' => '130'
         );
+        $map["id"]=$_GET["id"];
+        $UserDB = D('info_notice'); 
+        $list = $UserDB->where($map)->find();
+        //var_dump($list);die();
+        $this->assign('volist',$list);
         $this->assign('big_menu', $big_menu);
 
-        //默认排序
-        $this->sort = 'ordid';
-        $this->order = 'ASC';
+       
     }
-
+    public function _before_update(){
+    	$data=$_POST;
+    	$data["ptime"] = strtotime($_POST["ptime"]);
+    	return $data;
+    }
+    public function _before_insert(){
+    	$data=$_POST;
+    	$data["ptime"] = strtotime($_POST["ptime"]);
+    	return $data;
+    }
     protected function _search() {
         $map = array();
         ($keyword = $this->_request('keyword', 'trim')) && $map['name'] = array('like', '%'.$keyword.'%');
