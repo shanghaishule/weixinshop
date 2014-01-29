@@ -42,11 +42,11 @@
                 <th><span data-tdtype="order_by" data-field="id">ID</span></th>
                 <th><span data-tdtype="order_by" data-field="billnum">账单单号</span></th>
                 <th><span data-tdtype="order_by" data-field="status">状态</span></th>
-                <th><span data-tdtype="order_by" data-field="gen">生成人</span></th>
                 <th><span data-tdtype="order_by" data-field="gen_time">生成时间</span></th>
-                <th><span data-tdtype="order_by" data-field="start_time">账单开始时间</span></th>
-                <th><span data-tdtype="order_by" data-field="end_time">账单结束时间</span></th>
+                <th><span data-tdtype="order_by" data-field="start_time">账单统计时间段</span></th>
                 <th><span data-tdtype="order_by" data-field="totalamt">账单总金额(元)</span></th>
+                <th><span data-tdtype="order_by" data-field="rate">扣率</span></th>
+                <th><span data-tdtype="order_by" data-field="yingjie">应结金额(元)</span></th>
                 <th width="80">{:L('operations_manage')}</th>
             </tr>
         </thead>
@@ -55,12 +55,12 @@
             <tr>
                 <td align="center">{$val.id}</td>
                 <td align="center"><span data-tdtype="view" data-field="billnum" data-id="{$val.billnum}" class="tdview" >{$val.billnum}</span></td>
-                <td align="center"><b><?php foreach($account_status as $key=>$item){ if($val.status==$key) echo $item; }?></b></td>
-                <td align="center">{$val.gen}</td>
-                <td align="center">{$val.gen_time|date='Y-m-d H:i:s',###}</td>
-                <td align="center"><b>{$val.start_time|date='Y-m-d H:i:s',###}</b></td>
-                <td align="center"><b>{$val.end_time|date='Y-m-d H:i:s',###}</b></td>
-                <td align="center" class="red">{$val.totalamt}</td> 
+                <td align="center"><b><?php foreach($account_status as $key=>$item){ if($val['status']==$key){echo $item; }}?></b></td>
+                <td align="center"><?php if($val['gen_time']){ echo date('Y-m-d H:i:s',$val['gen_time']); }?></td>
+                <td align="center"><b><?php if($val['start_time']){ echo date('Y-m-d H:i:s',$val['start_time']); }?> -- <?php if($val['end_time']){ echo date('Y-m-d H:i:s',$val['end_time']); }?></b></td>
+                <td align="center" class="red">{$val.totalamt}</td>
+                <td align="center">{$val.rate}</td>
+                <td align="center" class="red">{$val.yingjie}</td>
                 <td align="center">
                 <a href="{:U('account/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">{:L('edit')}</a>
                 </td>

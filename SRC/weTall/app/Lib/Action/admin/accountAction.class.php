@@ -104,6 +104,39 @@ class accountAction extends backendAction
     	$this->display();
     }
     
+    public function status()
+    {
+    	$id= $this->_get('id', 'trim');
+    	!$id && $this->_404();
+    	$status= $this->_get('status', 'trim');
+    	!$status && $this->_404();
+    	
+    	if($status == 'shop_confirm'){
+	    	$before_status_arr = $this->_mod_bill_mst->field('status')->where('id='.$id)->select();
+	    	$before_status = $before_status_arr[0]['status'];
+	    	//dump($before_status);exit;
+	    	if($before_status == '0' || $before_status == '1' ){
+	    		if($before_status == '0')
+					$data['status']='2';
+	    		if($before_status == '1')
+	    			$data['status']='3';
 
+	    		//dump($this->_session());exit;
+	    		$data['duizhang2']=$this->_session('uname');
+	    		$data['duizhang2_time']=time();
+	    		
+				if($this->_mod_bill_mst->where('id='.$id)->save($data))
+	    		{
+	    			$this->success('操作成功!');
+	    		}else{
+	    			$this->error('操作失败!');
+	    		}
+	    	}else{
+	    		$this->error('前置状态错误!');
+	    	}
+    	}
+    
+    
+    }
     
 }

@@ -2,159 +2,130 @@
 
 class StatisticsAction extends BackAction
 {
-
-	private $_ad_type = array('image'=>'图片', 'code'=>'代码', 'flash'=>'Flash', 'text'=>'文字');
-	public $list_relation = true;	
-
-    public function index() {
-        $map = array();
-		$UserDB = D('adforhome');
-		$tax = D("set_tax");
-		$currentTax = $tax->find();
-		$count = $UserDB->where($map)->count();
-		$Page       = new Page($count,6);// 实例化分页类 传入总记录数
-		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
-		$nowPage = isset($_GET['p'])?$_GET['p']:1;
-		$show       = $Page->show();// 分页显示输出
-		$list = $UserDB->where($map)->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();			
-		$this->assign('list',$list);
-		$this->assign("currentTax",$currentTax);
-		$this->assign('page',$show);// 赋值分页输出
-		$this->display();
-       
+	public function _initialize() {
+        $account_status = array(
+        		0=>'已生成，未对账',
+        		1=>'商城已对账，商家未对账',
+        		2=>'商城未对账，商家已对账',
+        		3=>'商城已对账，商家已对账',
+        		4=>'已付款',
+        		5=>'已作废'
+        );
+        $this->assign('account_status',$account_status);
+        $this->_mod_setting = D('account_setting');
+        $this->_mod_bill_mst = D('account_bill_mst');
+        $this->_mod_bill_dtl = D('account_bill_dtl');
     }
-	public function _search() {
-		$map = array();
-		($start_time_min = $this->_request('start_time_min', 'trim')) && $map['start_time'][] = array('egt', strtotime($start_time_min));
-		($start_time_max = $this->_request('start_time_max', 'trim')) && $map['start_time'][] = array('elt', strtotime($start_time_max)+(24*60*60-1));
-		($end_time_min = $this->_request('end_time_min', 'trim')) && $map['end_time'][] = array('egt', strtotime($end_time_min));
-		($end_time_max = $this->_request('end_time_max', 'trim')) && $map['end_time'][] = array('elt', strtotime($end_time_max)+(24*60*60-1));
-		$board_id = $this->_get('board_id', 'intval');
-		$board_id && $map['board_id'] = $board_id;
-		$style = $this->_request('style', 'trim');
-		$style && $map['type'] = array('eq',$style);
-		($keyword = $this->_request('keyword', 'trim')) && $map['name'] = array('like', '%'.$keyword.'%');
-		$this->assign('search', array(
-				'start_time_min' => $start_time_min,
-				'start_time_max' => $start_time_max,
-				'end_time_min' => $end_time_min,
-				'end_time_max' => $end_time_max,
-				'board_id' => $board_id,
-				'style'   => $style,
-				'keyword' => $keyword,
-		));
-		return $map;
-	}
-	
-	public function _before_index() {
-		$big_menu = array(
-				'title' => L('ad_add'),
-				'iframe' => U('ad/add'),
-				'id' => 'add',
-				'width' => '520',
-				'height' => '410',
-		);
-		$this->assign('big_menu', $big_menu);
-	
-		$res = M('adboard')->field('id,name')->select();
-		$board_list = array();
-		foreach ($res as $val) {
-			$board_list[$val['id']] = $val['name'];
-		}
-		$this->assign('board_list', $board_list);
-		$this->assign('ad_type_arr', $this->_ad_type);
-	}
-	
-	public function _before_add() {
-		$result = M('adboard')->where(array('status'=>1))->select();
-		$adboard_types = M('adboard')->get_tpl_list();
-		$adboards = array();
-		foreach ($result as $val) {
-			$val['allow_type'] = implode('|', $adboard_types[$val['tpl']]['allow_type']);
-			$adboards[] = $val;
-		}
-		$this->assign('adboards', $adboards);
-		$this->assign('ad_type_arr', $this->_ad_type);
-	}
-	
-	protected function _before_insert($data) {
-		//判断开始时间和结束时间是否合法
-		$data['start_time'] = strtotime($data['start_time']);
-		$data['end_time'] = strtotime($data['end_time']);
-		if ($data['start_time'] >= $data['end_time']) {
-			$this->ajaxReturn(0, L('ad_endtime_less_startime'));
-		}
-	
-		switch ($data['type']) {
-			case 'text':
-				$data['content'] = $this->_post('text', 'trim');
-				break;
-			case 'image':
-				$data['content'] = $this->_post('img', 'trim');
-				break;
-			case 'code':
-				$data['content'] = $this->_post('code', 'trim');
-				break;
-			case 'flash':
-				$data['content'] = $this->_post('flash', 'trim');
-				break;
-			default :
-				$this->ajaxReturn(0, L('ad_type_error'));
-				break;
-		}
-		return $data;
-	}
-	
-	public function _before_edit() {
-		$id = $this->_get('id', 'intval');
-		$board_id = M('ad')->where(array('id'=>$id))->getField('board_id');
-		$board_info = M('adboard')->field('name,width,height')->where(array('id'=>$board_id))->find();
-		$this->assign('board_info', $board_info);
-		$this->assign('ad_type_arr', $this->_ad_type);
-	}
-	
-	protected function _before_update($data) {
-		//判断开始时间和结束时间是否合法
-		$data['start_time'] = strtotime($data['start_time']);
-		$data['end_time'] = strtotime($data['end_time']);
-		if ($data['start_time'] >= $data['end_time']) {
-			$this->ajaxReturn(0, L('ad_endtime_less_startime'));
-		}
-		switch ($data['type']) {
-			case 'text':
-				$data['content'] = $this->_post('text', 'trim');
-				break;
-			case 'image':
-				$data['content'] = $this->_post('img', 'trim');
-				break;
-			case 'code':
-				$data['content'] = $this->_post('code', 'trim');
-				break;
-			case 'flash':
-				$data['content'] = $this->_post('flash', 'trim');
-				break;
-			default :
-				$this->ajaxReturn(0, L('ad_type_error'));
-				break;
-		}
-		return $data;
-	}
-	
-	//上传图片
-	public function ajax_upload_img() {
-		$type = $this->_get('type', 'trim', 'img');
-		if (!empty($_FILES[$type]['name'])) {
-			$dir = date('ym/d/');
-			$result = $this->_upload($_FILES[$type], 'advert/'. $dir );
-			if ($result['error']) {
-				$this->ajaxReturn(0, $result['info']);
-			} else {
-				$savename = $dir . $result['info'][0]['savename'];
-				$this->ajaxReturn(1, L('operation_success'), $savename);
-			}
-		} else {
-			$this->ajaxReturn(0, L('illegal_parameters'));
-		}
-	}
-	}
+
+	public function index() {
+    	$map = $this->_search();
+    	//dump($map);exit;
+    	$mod = $this->_mod_bill_mst;
+    	!empty($mod) && $this->_list($mod, $map);
+    	$this->display();
+    }
+    
+    protected function _search() {
+    	$map = array();
+    	($billnum = $this->_request('billnum', 'trim')) && $map['billnum'] = array('like', '%'.$billnum.'%');
+    	($time_start = $this->_request('time_start', 'trim')) && $map['gen_time'][] = array('egt', strtotime($time_start));
+    	($time_end = $this->_request('time_end', 'trim')) && $map['gen_time'][] = array('elt', strtotime($time_end)+(24*60*60-1));
+    	if( $_GET['status']==null ){
+    		$status = -1;
+    	}else{
+    		$status = intval($_GET['status']);
+    	}
+    	$status>=0 && $map['status'] = array('eq',$status);
+    
+    	$this->assign('search', array(
+    			'billnum' => $billnum,
+    			'time_start' => $time_start,
+    			'time_end' => $time_end,
+    			'status' =>$status,
+    	));
+    	return $map;
+    }
+    
+    public function edit() {
+    	$id = $this->_get('id','intval');
+    	$account_master = $this->_mod_bill_mst->where(array('id'=>$id))->find();
+    	$account_detail = $this->_mod_bill_dtl->where('billnum='.$account_master['billnum'])->select();
+    	$this->assign('account_detail',$account_detail);
+    	$this->assign('account_master', $account_master);
+    	$this->display();
+    }
+
+    public function status()
+    {
+    	$id= $this->_get('id', 'trim');
+    	!$id && $this->_404();
+    	$status= $this->_get('status', 'trim');
+    	!$status && $this->_404();
+    	
+    	$before_status_arr = $this->_mod_bill_mst->field('status')->where('id='.$id)->select();
+    	$before_status = $before_status_arr[0]['status'];
+    	
+    	if($status == 'mall_confirm'){
+    		if($before_status == '0' || $before_status == '2' ){
+    			if($before_status == '0')
+    				$data['status']='1';
+    			if($before_status == '2')
+    				$data['status']='3';
+
+    			$data['duizhang']=$this->_session('uname');
+    			$data['duizhang_time']=time();
+    	   
+    			if($this->_mod_bill_mst->where('id='.$id)->save($data))
+    			{
+    				$this->success('操作成功!');
+    			}else{
+    				$this->error('操作失败!');
+    			}
+    		}else{
+    			$this->error('前置状态错误!');
+    		}
+    	}elseif ($status == 'haspay'){
+    		if($before_status == '3'){
+    			$data['status']='4';
+    		
+    			$data['pay']=$this->_session('uname');
+    			$data['pay_time']=time();
+    		
+    			if($this->_mod_bill_mst->where('id='.$id)->save($data))
+    			{
+    				$this->success('操作成功!');
+    			}else{
+    				$this->error('操作失败!');
+    			}
+    		}else{
+    			$this->error('前置状态错误!');
+    		}
+    	}
+    
+    
+    }
+    
+    public function delete()
+    {
+    	$mod = $this->_mod_bill_mst;
+    	//需要删除主从表
+    	
+    	
+    	
+    	
+    	$ids = trim($this->_request('id'), ',');
+    	if ($ids) {
+    		if (false !== $mod->delete($ids)) {
+    			IS_AJAX && $this->ajaxReturn(1, L('operation_success'));
+    			$this->success(L('operation_success'));
+    		} else {
+    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+    			$this->error(L('operation_failure'));
+    		}
+    	} else {
+    		IS_AJAX && $this->ajaxReturn(0, L('illegal_parameters'));
+    		$this->error(L('illegal_parameters'));
+    	}
+    }
+}
 ?>

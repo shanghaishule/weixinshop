@@ -54,15 +54,15 @@ CREATE TABLE IF NOT EXISTS `tp_account_bill_mst` (
   `start_time` int(10) NOT NULL DEFAULT '0' COMMENT '账单开始时间',
   `end_time` int(10) NOT NULL DEFAULT '0' COMMENT '账单结束时间',
   `totalamt` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '账单总金额',
+  `rate` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '扣率',
+  `yingjie` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '应结金额',
   `tokenTall` varchar(20) NOT NULL DEFAULT '' COMMENT '商家token',
   `duizhang` varchar(50) NULL COMMENT '商城对账人',
   `duizhang_time` int(10) NULL COMMENT '商城对账时间',
-	`duizhang2` varchar(50) NULL COMMENT '商家对账人',
+  `duizhang2` varchar(50) NULL COMMENT '商家对账人',
   `duizhang2_time` int(10) NULL COMMENT '商家对账时间',
-	`pay` varchar(50) NULL COMMENT '付款人',
+  `pay` varchar(50) NULL COMMENT '付款人',
   `pay_time` int(10) NULL COMMENT '付款时间',
-	`zuofei` varchar(50) NULL COMMENT '作废人',
-  `zuofei_time` int(10) NULL COMMENT '作废时间',
   PRIMARY KEY (`id`), UNIQUE (`billnum`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `tp_account_bill_mst` (
 drop table IF EXISTS `tp_account_bill_dtl`;
 CREATE TABLE IF NOT EXISTS `tp_account_bill_dtl` (
   `billnum` varchar(50) NOT NULL COMMENT '账单单号',
-  `itemno` int NOT NULL COMMENT '明细号',
+  `itemno` int NOT NULL COMMENT '序号',
   `orderId` varchar(50) NOT NULL COMMENT '订单号',
   `goods_sumPrice` decimal(10,2) NOT NULL COMMENT '商品总额',
   `order_sumPrice` decimal(10,2) NOT NULL COMMENT '订单总额',

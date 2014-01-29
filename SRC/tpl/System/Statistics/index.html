@@ -4,14 +4,11 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<script src="/weTall/static/js/jquery/jquery.js"></script>
-<script src="/weTall/static/js/jquery/plugins/jquery.tools.min.js"></script>
-<script src="/weTall/static/js/jquery/plugins/formvalidator.js"></script>
-<script src="/weTall/static/js/pinphp.js"></script>
-<script src="/weTall/static/js/admin.js"></script>
-
-
-<link rel="stylesheet" type="text/css" href="/weTall/static/css/admin/style.css" />
- 
+	<script src="/weTall/static/js/jquery/plugins/jquery.tools.min.js"></script>
+	<script src="/weTall/static/js/jquery/plugins/formvalidator.js"></script>
+	<script src="/weTall/static/js/pinphp.js"></script>
+	<script src="/weTall/static/js/admin.js"></script>
+	<link rel="stylesheet" type="text/css" href="/weTall/static/css/admin/style.css" />
 	<link href="/weTall/static/css/admin/style.css" rel="stylesheet"/>
 	<link rel="stylesheet" type="text/css" href="/weTall/static/js/calendar/calendar-blue.css"/>
 	<script type="text/javascript" src="/weTall/static/js/calendar/calendar.js"></script>	
@@ -25,37 +22,26 @@
 	var lang = new Object();
 	lang.connecting_please_wait = "请稍后...";lang.confirm_title = "提示消息";lang.move = "移动";lang.dialog_title = "消息";lang.dialog_ok = "确定";lang.dialog_cancel = "取消";lang.please_input = "请输入";lang.please_select = "请选择";lang.not_select = "不选择";lang.all = "所有";lang.input_right = "输入正确";lang.plsease_select_rows = "请选择要操作的项目！";lang.upload = "上传";lang.uploading = "上传中";lang.upload_type_error = "不允许上传的文件类型！";lang.upload_size_error = "文件大小不能超过{sizeLimit}！";lang.upload_minsize_error = "文件大小不能小于{minSizeLimit}！";lang.upload_empty_error = "文件为空，请重新选择！";lang.upload_nofile_error = "没有选择要上传的文件！";lang.upload_onLeave = "正在上传文件，离开此页将取消上传！";	
 
-(function (d) {
-    d['okValue'] = lang.dialog_ok;
-    d['cancelValue'] = lang.dialog_cancel;
-    d['title'] = lang.dialog_title;
-})($.dialog.defaults);
-</script>
-
-<script src="/weTall/static/js/jquery/plugins/listTable.js"></script>
-<script>
-$(function(){
-	$('.J_tablelist').listTable();
-});
-</script><script src="/weTall/static/js/jquery/plugins/jquery.treetable.js"></script>
-<script>
-$(function(){
-    //initialState:'expanded'
-    $("#J_cate_tree").treeTable({indent:20,treeColumn:2});
-    $(".J_preview").preview();
-});        
-</script> 
+	(function (d) {
+	    d['okValue'] = lang.dialog_ok;
+	    d['cancelValue'] = lang.dialog_cancel;
+	    d['title'] = lang.dialog_title;
+	})($.dialog.defaults);
+	</script>
+	<script src="/weTall/static/js/jquery/plugins/listTable.js"></script>
+	<script>
+	$(function(){
+		$('.J_tablelist').listTable();
+	});
+	</script>
 </head>
 
 <body>
-<div id="J_ajax_loading" class="ajax_loading">提交请求中，请稍候...</div>
 <div class="subnav">
     <div class="content_menu ib_a blue line_x">
-    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=adforhome&a=add" data-title="添加广告" data-id="add" data-width="520" data-height="410"><em>添加广告</em></a>
-    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=set_tax&a=edit" data-title="设置汇率" data-id="edit" data-width="400" data-height="180"><em>设置汇率</em></a>　            </div>
-</div><!--广告列表-->
-
-<!--广告列表-->
+    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="{Lanrain::U('Statistics/genbill')}" data-title="生成账单" data-id="genbill" data-width="520" data-height="410"><em>生成账单</em></a>
+    </div>
+</div>
 <div class="pad_lr_10">
     <form name="searchform" method="get" >
     <table width="100%" cellspacing="0" class="search_form">
@@ -63,37 +49,24 @@ $(function(){
             <tr>
             <td>
             <div class="explain_col">
-            	<input type="hidden" name="g" value="admin" />
-                <input type="hidden" name="m" value="ad" />
+            	<input type="hidden" name="g" value="System" />
+                <input type="hidden" name="m" value="Statistics" />
                 <input type="hidden" name="a" value="index" />
                 <input type="hidden" name="menuid" value="{Lanrain:$menuid}" />
-            	开始时间：
-            	<input type="text" name="start_time_min" id="start_time_min" class="date" size="12" value="{Lanrain:$search.start_time_min}">
+            	账单单号:
+                <input name="billnum" type="text" class="input-text" size="25" value="{Lanrain:$search.billnum}" />
+				生成时间 :
+                <input type="text" name="time_start" id="J_time_start" class="date" size="12" value="{Lanrain:$search.time_start}">
                 -
-                <input type="text" name="start_time_max" id="start_time_max" class="date mr10" size="12" value="{Lanrain:$search.start_time_max}">
-                                                      结束时间：
-                <input type="text" name="end_time_min" id="end_time_min" class="date" size="12" value="{Lanrain:$search.end_time_min}">
-                -
-                <input type="text" name="end_time_max" id="end_time_max" class="date" size="12" value="{Lanrain:$search.end_time_max}">
-            	<font size="3px" color="red">&nbsp;&nbsp;&nbsp;基本汇率: {Lanrain:$currentTax.shoptax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优惠券汇率：{Lanrain:$currentTax.coupontax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分汇率：{Lanrain:$currentTax.giftpointtax}</font>
-            	<div class="bk3"></div>
-                	广告位：
-                <select name="board_id" class="mr10">
-                    <option value="">--所有--</option>
-                    <volist name="board_list" id="val" >
-                    <option value="{Lanrain:$key}" <if condition="$search.board_id eq $key">selected="selected"</if>>{Lanrain:$val}</option>
-                    </volist>
-                </select>
-                	广告类型：
-                <select name="style" class="mr10">
-                    <option value="">--不限--</option>
-                    <volist name="ad_type_arr" id="val" >
-                    <option value="{Lanrain:$key}" <if condition="$search.style eq $key">selected="selected"</if>>{Lanrain:$val}</option>
-                    </volist>
-                </select>
-                	关键字：
-                <input name="keyword" type="text" class="input-text mr10" size="25" value="{Lanrain:$search.keyword}" />
-                <input type="submit" name="search" class="btn" value="搜索" />
+                <input type="text" name="time_end" id="J_time_end" class="date" size="12" value="{Lanrain:$search.time_end}">
+          		状态 :
+		        <select name="status" >
+		        <option value="">--所有--</option>
+		        <?php foreach($account_status as $key=>$item){ ?>
+                <option <?php if($search['status']==$key) echo "selected=''"; ?> value="<?php echo $key; ?>"><?php echo $item; ?></option>
+                <?php } ?>
+		        </select>
+				<input type="submit" name="search" class="btn" value="搜索" />
         	</div>
             </td>
             </tr>
@@ -101,75 +74,53 @@ $(function(){
     </table>
     </form>
     
-    <div class="J_tablelist table_list" data-acturi="{Lanrain:U('adforhome/ajax_edit')}">
-		<table width="100%" cellspacing="0">
+    <div class="J_tablelist table_list">
+    <table width="100%" cellspacing="0">
         <thead>
-          <tr>
-            <th width="25"><input type="checkbox" name="checkall" class="J_checkall"></th>
-            <!-- <th>ID</th> -->
-            <th align="left"><span data-tdtype="order_by" data-field="name">广告名称</span></th>
-            <th align="left"><span data-tdtype="order_by" data-field="url">广告链接地址</span></th>
-            <th><span data-tdtype="order_by" data-field="type">广告类型</span></th>
-            <th><span data-tdtype="order_by" data-field="board_id">广告位</span></th>
-            <th width="150">有效时间</th>
-            <th width="60"><span data-tdtype="order_by" data-field="ordid">广告排序</span></th>
-            <th width="60"><span data-tdtype="order_by" data-field="status">状态</span></th>
-            <th width="100"><span data-tdtype="order_by" data-field="checkstatus">审核状态</span></th>
-            <th width="80">管理操作</th>
-          </tr>
+            <tr>
+                <th><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <th><span data-tdtype="order_by" data-field="billnum">账单单号</span></th>
+                <th><span data-tdtype="order_by" data-field="status">状态</span></th>
+                <th><span data-tdtype="order_by" data-field="gen_time">生成时间</span></th>
+                <th><span data-tdtype="order_by" data-field="start_time">账单统计时间段</span></th>
+                <th><span data-tdtype="order_by" data-field="totalamt">账单总金额(元)</span></th>
+                <th><span data-tdtype="order_by" data-field="rate">扣率</span></th>
+                <th><span data-tdtype="order_by" data-field="yingjie">应结金额(元)</span></th>
+                <th width="80">管理操作</th>
+            </tr>
         </thead>
-        <tbody>
-          <volist name="list" id="val" >
-          <tr>
-            <td align="center"><input type="checkbox" class="J_checkitem" value="{Lanrain:$val.id}"></td>
-            <!-- <td align="center">{Lanrain:$val.id}</td> -->
-            <td><span data-tdtype="edit" data-field="name" data-id="{Lanrain:$val.id}" class="tdedit">{Lanrain:$val.name}</span></td>
-            <td><span data-tdtype="edit" data-field="url" data-id="{Lanrain:$val.id}" class="tdedit">{Lanrain:$val.url}</span></td>
-            <td align="center">{Lanrain:$ad_type_arr[$val['type']]}<if condition="$val.type eq 'image'"><notempty name="val['content']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{Lanrain:$img_dir}{Lanrain:$val.content}"><img src="__ROOT__/weTall/static/images/filetype/image_s.gif" /></span></notempty></if></td>
-            <td align="center"><if condition="$val.boadid eq 0">未投入</if><if condition="$val.boadid eq 1">首页头部</if><if condition="$val.boadid eq 2">首页中部</if><if condition="$val.boadid eq 3">首页下部</if></td>
-            <td align="center">{Lanrain:$val.start_time|date='Y-m-d',###} / {Lanrain:$val.end_time|date='Y-m-d',###}</td>
-            <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{Lanrain:$val.id}" class="tdedit">{Lanrain:$val.ordid}</span></td>
-            <td align="center"><img data-tdtype="toggle" data-id="{Lanrain:$val.id}" data-field="status" data-value="{Lanrain:$val.status}" src="__ROOT__/weTall/static/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
-            <td align="center"><span data-tdtype="toggle" data-id="{Lanrain:$val.id}" data-field="checkstatus" data-value="{Lanrain:$val.checkstatus}" ><if condition="$val.checkstatus eq 0">未审核</if><if condition="$val.checkstatus eq 1">审核通过</if><if condition="$val.checkstatus eq 2">等待上榜</if> </span></td>            
-            <td align="center" width="100">
-            	<a href="javascript:void(0);" class="J_showdialog" data-uri="{Lanrain:U('adforhome/edit', array('id'=>$val['id']))}" data-title="编辑 - {Lanrain:$val.name}" data-id="edit" data-width="520" data-height="410">编辑</a> | 
-                <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=adforhome&a=delete&id={Lanrain:$val.id}" data-msg="确定删除{Lanrain:$val.name}吗">删除</a> | 
-                <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=adforhome&a=set&id={Lanrain:$val.id}" data-msg="设为{Lanrain:$val.name}微指购首页展示吗">审核</a></td>
-          </tr>
-          </volist>
-        </tbody>
-      	</table>
-		<div class="btn_wrap_fixed">
-    		<label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">全选/取消全选</label>
-            <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=adforhome&a=delete" data-name="id" data-msg="确定删除" value="删除" />
-    		<div id="pages">{Lanrain:$page}</div>
-    	</div>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center">{Lanrain:$val.id}</td>
+                <td align="center"><span data-tdtype="view" data-field="billnum" data-id="{Lanrain:$val.billnum}" class="tdview" >{Lanrain:$val.billnum}</span></td>
+                <td align="center"><b><?php foreach($account_status as $key=>$item){ if($val['status']==$key){echo $item; }}?></b></td>
+                <td align="center"><?php if($val['gen_time']){ echo date('Y-m-d H:i:s',$val['gen_time']); }?></td>
+                <td align="center"><b><?php if($val['start_time']){ echo date('Y-m-d H:i:s',$val['start_time']); }?> -- <?php if($val['end_time']){ echo date('Y-m-d H:i:s',$val['end_time']); }?></b></td>
+                <td align="center" class="red">{Lanrain:$val.totalamt}</td>
+                <td align="center">{Lanrain:$val.rate}</td>
+                <td align="center" class="red">{Lanrain:$val.yingjie}</td>
+                <td align="center">
+                <a href="{Lanrain::U('Statistics/edit',array('id'=>$val['id']))}">编辑</a>
+                <if condition = "$val['status'] eq '0' ">
+                    <a href="javascript:void(0);" class="J_confirmurl" data-uri="{Lanrain::U('Statistics/delete', array('id'=>$val['id']))}" data-acttype="ajax" data-msg="确认删除该账单吗">删除</a>
+                </if>
+                </td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
     </div>
 </div>
-<include file="public:footer" />
-<link rel="stylesheet" type="text/css" href="__ROOT__/weTall/static/js/calendar/calendar-blue.css"/>
-<script type="text/javascript" src="__ROOT__/weTall/static/js/calendar/calendar.js"></script>
 <script type="text/javascript">
 Calendar.setup({
-	inputField : "start_time_min",
+	inputField : "J_time_start",
 	ifFormat   : "%Y-%m-%d",
 	showsTime  : false,
 	timeFormat : "24"
 });
 Calendar.setup({
-	inputField : "start_time_max",
-	ifFormat   : "%Y-%m-%d",
-	showsTime  : false,
-	timeFormat : "24"
-});
-Calendar.setup({
-	inputField : "end_time_min",
-	ifFormat   : "%Y-%m-%d",
-	showsTime  : false,
-	timeFormat : "24"
-});
-Calendar.setup({
-	inputField : "end_time_max",
+	inputField : "J_time_end",
 	ifFormat   : "%Y-%m-%d",
 	showsTime  : false,
 	timeFormat : "24"
