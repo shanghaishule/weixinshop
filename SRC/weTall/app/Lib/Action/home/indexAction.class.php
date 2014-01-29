@@ -8,7 +8,7 @@ class indexAction extends frontendAction {
     	/*****首页广告***/
     	$ad= M('ad');
     	$where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
-    	$ads = $ad->field('url,content,desc')->where($where)->order('ordid asc')->select();
+    	$ads = $ad->field('url,content,desc')->where($where)->limit(5)->order('ordid asc')->select();
         $this->assign('ad',$ads);
         /*****首页广告end******/
         
@@ -21,6 +21,16 @@ class indexAction extends frontendAction {
         $where = array('tuijian'=>1, 'tokenTall'=>$tokenTall);
         $tuijian = $this->getItem($where);
         /****推荐商品 END*****/
+        
+        /*店铺信息*/
+        $weChaShop = M("wecha_shop");
+        if($tokenTall == ""){
+          $weshopData["tokenTall"] = $_SESSION["tokenTall"];
+        }else{
+        	$weshopData["tokenTall"] = $tokenTall;
+        }
+        $weChaShopDetail = $weChaShop->where($weshopData)->find();//var_dump($weshopData);die();
+        $this->assign("weshopData",$weChaShopDetail);
         
         $this->assign('news',$news);
         $this->assign('tuijian',$tuijian);

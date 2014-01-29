@@ -32,7 +32,7 @@
                         <img src="{lanrain::RES}/images/weTall/list_ico.png" /></a></li>
                     <li class="PicIEPng"><a href="/mobi/cn/shopping/cart.html">
                         <img src="{lanrain::RES}/images/weTall/shop_ico.png"></a></li>
-                    <li class="PicIEPng"><a href="/mobi/cn/member/">
+                    <li class="PicIEPng"><a href="/weTall/index.php?g=home&m=user&a=index">
                         <img src="{lanrain::RES}/images/weTall/login_ico.png" /></a></li>
                 </ul>
             </div>
@@ -42,11 +42,11 @@
         <!--幻灯片广告-->
         <div class="banner">
 <ul id="BanCont">
-<li><a href="/mobi/cn/index.html" title="牛仔VT"><img src="http://www.shopbest.com.cn/images/mobi/cn/advertising/HomeSlides1.jpg" width="320" height="161" alt="牛仔VT"></a></li>
-<li><a href="/mobi/cn/index.html" title="闺蜜装"><img src="http://www.shopbest.com.cn/images/mobi/cn/advertising/HomeSlides2.jpg" width="320" height="161" alt="闺蜜装"></a></li>
-<li><a href="/mobi/cn/index.html" title="闺蜜装"><img src="http://www.shopbest.com.cn/images/mobi/cn/advertising/HomeSlides3.jpg" width="320" height="161" alt="闺蜜装"></a></li>
-<li><a href="/mobi/cn/index.html" title="闺蜜装"><img src="http://www.shopbest.com.cn/images/mobi/cn/advertising/HomeSlides4.jpg" width="320" height="161" alt="闺蜜装"></a></li>
-<li><a href="/mobi/cn/index.html" title="闺蜜装"><img src="http://www.shopbest.com.cn/images/mobi/cn/advertising/HomeSlides5.jpg" width="320" height="161" alt="闺蜜装"></a></li>
+  <volist name="weTallboard" id="bolist">
+     <if condition="$bolist['boadid'] eq 1">
+     <li><a href="{Lanrain:$bolist.url}" title="{Lanrain:$bolist.desc}"><img src="/weTall/data/upload/advert/{Lanrain:$img_dir}{Lanrain:$bolist.content}" width="320" height="161" alt="{Lanrain:$bolist.desc}" /></a></li> 
+     </if>
+  </volist>
 </ul>
 <ul class="banner_link"></ul>
 </div>
@@ -85,7 +85,13 @@
             </ul>
         </div>
         <!--幻灯片底部广告-->
-        <div class="widthMAX MarginTop10"><a href="/mobi/cn/index.html" title="引领时尚风格 提升生活品味"><img src="http://www.shopbest.com.cn/images/mobi/cn/advertising/HomeSlidesFoot.jpg" width="320" height="87" alt="引领时尚风格 提升生活品味"></a></div>
+        <div class="widthMAX MarginTop10">
+        <volist name="weTallboard" id="bolist">
+		     <if condition="$bolist['boadid'] eq 2">
+		     <a href="{Lanrain:$bolist.url}" title="{Lanrain:$bolist.desc}"><img src="/weTall/data/upload/advert/{Lanrain:$img_dir}{Lanrain:$bolist.content}" width="320" height="100" alt="{Lanrain:$bolist.desc}" /></a>
+		     </if>
+		  </volist>
+          </div>
 
         <!--热门分类-->
         <div class="widthMAX MarginTop10" id="LeftRight1">
@@ -162,14 +168,20 @@
 </div>
 <div class="banner_Cont">
 <div class="pr_list_3 MarginTop10">
-<div class="FloatLeft"><a href="" title=""><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/20140109104055101875.jpg" alt="" width="217" height="127" /></a></div>
+<div class="FloatLeft">
+ <volist name="weTallboard" id="bolist">
+		     <if condition="$bolist['boadid'] eq 3">
+		     <a href="{Lanrain:$bolist.url}" title="{Lanrain:$bolist.desc}"><img src="/weTall/data/upload/advert/{Lanrain:$img_dir}{Lanrain:$bolist.content}" width="320" height="110" alt="{Lanrain:$bolist.desc}" /></a>
+		     </if>
+		  </volist>       
+</div><!-- 
 <div class="FloatRight">
 <ul>
 <li><a href="" title=""><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/20140109104055164375.jpg" alt="" width="103" height="41" /></a></li>
 <li><a href="" title=""><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/20140109104055226875.jpg" alt="" width="103" height="43" /></a></li>
 <li><a href="" title=""><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/20140109104055289375.jpg" alt="" width="103" height="43" /></a></li>
 </ul>
-</div>
+</div> -->
 <div class="pr_link">
 <ul>
 <li>

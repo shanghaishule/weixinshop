@@ -24,6 +24,7 @@ class indexAction extends backendAction {
 
     	$map = array();
     	$UserDB = D('info_notice');
+    	/*店铺*/
     	$weChaShop = M("wecha_shop");
     	$count = $UserDB->where($map)->count();
     	$Page       = new Page($count,8);// 实例化分页类 传入总记录数
@@ -33,7 +34,7 @@ class indexAction extends backendAction {
     	$list2 = $UserDB->where($map)->order('ptime DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
     	foreach ($list2 as $content){
     		if(strlen($content["content"]) > 60){
-    			$content["content"] = mb_substr($content["content"], 0,40,"utf-8")."...";
+    			$content["content"] = mb_substr($content["content"], 0,33,"utf-8")."...";
     		}
     		if(strlen($content["title"]) > 10){
     			$content["title"] = mb_substr($content["title"], 0,10,"utf-8")."...";

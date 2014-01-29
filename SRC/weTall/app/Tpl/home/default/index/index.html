@@ -34,11 +34,27 @@
 	   </div>
 	   <div class="favi">
 	      <div id="shopname">
-	        语嫣鞋店
+	         {$weshopData.name}
 	      </div>
 	        <ul id="operdetail">
 	          <li id="m_1">
-	            五星<br>信用
+	              <if condition="$weshopData['credit'] lt 4"><img width="20" height="20" src="__STATIC__/images/Level/1_0.png"/>
+                        <elseif condition="$weshopData['credit'] lt 11" /><img width="20" height="20" src="__STATIC__/images/Level/1_1.png"/>
+                        <elseif condition="$weshopData['credit'] lt 50" /><img width="20" height="20" src="__STATIC__/images/Level/1_2.png"/>
+                        <elseif condition="$weshopData['credit'] lt 110" /><img width="20" height="20" src="__STATIC__/images/Level/1_3.png"/>
+                        <elseif condition="$weshopData['credit'] lt 250" /><img width="20" height="20" src="__STATIC__/images/Level/1_4.png"/>
+                        <elseif condition="$weshopData['credit'] lt 500" /><img width="20" height="20" src="__STATIC__/images/Level/2_0.png"/>
+                        <elseif condition="$weshopData['credit'] lt 1000" /><img width="20" height="20" src="__STATIC__/images/Level/2_1.png"/>
+                        <elseif condition="$weshopData['credit'] lt 2000" /><img width="20" height="20" src="__STATIC__/images/Level/2_2.png"/>
+                        <elseif condition="$weshopData['credit'] lt 5000" /><img width="20" height="20" src="__STATIC__/images/Level/2_3.png"/>
+                        <elseif condition="$weshopData['credit'] lt 10000" /><img width="20" height="20" src="__STATIC__/images/Level/2_4.png"/>
+                        <elseif condition="$weshopData['credit'] lt 20000" /><img width="20" height="20" src="__STATIC__/images/Level/3_0.png"/>
+                        <elseif condition="$weshopData['credit'] lt 50000" /><img width="20" height="20" src="__STATIC__/images/Level/3_1.png"/>
+                        <elseif condition="$weshopData['credit'] lt 100000" /><img width="20" height="20" src="__STATIC__/images/Level/3_2.png"/>
+                        <elseif condition="$weshopData['credit'] lt 200000" /><img width="20" height="20" src="__STATIC__/images/Level/3_3.png"/>
+                        <else/><img width="20" height="20" src="__STATIC__/images/Level/3_4.png"/>
+                        </if>
+                        <br>信用
 	          </li>
 	          <li id="m_2">
 	            <img width="20" height="20" src="__STATIC__/weixin/images/share.png"/><br>分享
