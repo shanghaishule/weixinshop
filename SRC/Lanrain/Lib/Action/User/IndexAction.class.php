@@ -81,6 +81,15 @@ class IndexAction extends UserAction{
 			if($id){
 				M('Users')->field('wechat_card_num')->where(array('id'=>session('uid')))->setInc('wechat_card_num');
 				$this->addfc();
+				$weChaShop = M("wecha_shop");
+				$data1["name"] = $_POST["wxname"];
+				$headurl = $_POST["headerpic"];
+				$data1["headurl"] = substr($headurl, 0,strlen($headurl));
+				$data1["weName"] = $_POST["wxname"];
+				$data1["HaveReal"] = 0;
+				$data1["credit"] = 0;
+				$data1["tokenTall"] = $_POST['token'];
+				$weChaShop->add($data1);
 				//
 				$this->success('操作成功',U('Index/index'));
 			}else{

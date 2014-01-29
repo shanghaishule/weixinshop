@@ -132,7 +132,7 @@ $(function(){
             <td align="center"><img data-tdtype="toggle" data-id="{Lanrain:$val.id}" data-field="status" data-value="{Lanrain:$val.status}" src="__ROOT__/weTall/static/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
             <td align="center"><span data-tdtype="toggle" data-id="{Lanrain:$val.id}" data-field="checkstatus" data-value="{Lanrain:$val.checkstatus}" ><if condition="$val.checkstatus eq 0">未审核</if><if condition="$val.checkstatus eq 1">审核通过</if><if condition="$val.checkstatus eq 2">等待上榜</if> </span></td>            
             <td align="center" width="100">
-            	<a href="javascript:void(0);" class="J_showdialog" data-uri="{Lanrain:U('adforhome/edit', array('id'=>$val['id']))}" data-title="编辑 - {Lanrain:$val.name}" data-id="edit" data-width="520" data-height="410">编辑</a> | 
+            	<a href="javascript:void(0);" class="J_showdialog" data-uri="/weTall/index.php?g=admin&m=adforhome&a=edit&id={Lanrain:$val.id}" data-title="编辑 - {Lanrain:$val.name}" data-id="edit" data-width="520" data-height="410">编辑</a> | 
                 <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=adforhome&a=delete&id={Lanrain:$val.id}" data-msg="确定删除{Lanrain:$val.name}吗">删除</a> | 
                 <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="/weTall/index.php?g=admin&m=adforhome&a=set&id={Lanrain:$val.id}" data-msg="设为{Lanrain:$val.name}微指购首页展示吗">审核</a></td>
           </tr>

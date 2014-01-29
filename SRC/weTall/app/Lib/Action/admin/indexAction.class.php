@@ -16,23 +16,28 @@ class indexAction extends backendAction {
         $this->assign('my_admin', $my_admin);
 
         $this->assign('tokenTall', $this->getTokenTall());
-
-        $this->display();
+        $_SESSION["tokenTall"] = $this->getTokenTall();
+        $this->display(); 
     }
 
     public function panel() {
 
     	$map = array();
     	$UserDB = D('info_notice');
+    	/*店铺*/
+    	$weChaShop = M("wecha_shop");
     	$count = $UserDB->where($map)->count();
-    	$Page       = new Page($count,5);// 实例化分页类 传入总记录数
+    	$Page       = new Page($count,8);// 实例化分页类 传入总记录数
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$nowPage = isset($_GET['p'])?$_GET['p']:1;
     	$show       = $Page->show();// 分页显示输出
     	$list2 = $UserDB->where($map)->order('ptime DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
     	foreach ($list2 as $content){
     		if(strlen($content["content"]) > 60){
-    			$content["content"] = mb_substr($content["content"], 0,30,"utf-8")."...";
+    			$content["content"] = mb_substr($content["content"], 0,33,"utf-8")."...";
+    		}
+    		if(strlen($content["title"]) > 10){
+    			$content["title"] = mb_substr($content["title"], 0,10,"utf-8")."...";
     		}
     		$list[] = $content;
     	}
@@ -40,6 +45,9 @@ class indexAction extends backendAction {
     	$this->assign('page',$show);// 赋值分页输出pti
 
     	$tokenTall = $this->getTokenTall();
+    	$weshopData["tokenTall"] = $tokenTall;
+    	$weChaShopDetail = $weChaShop->where($weshopData)->find();//商城基本信息var_dump($weChaShopDetail);die();
+    	$this->assign("weshopData",$weChaShopDetail);
     	$this->assign('tokenTall', $tokenTall);
 
     	

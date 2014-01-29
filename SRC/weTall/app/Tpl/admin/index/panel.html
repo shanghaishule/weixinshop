@@ -29,13 +29,13 @@
        <div class="mleft">
             <div class="mbar">
                <h4>公告栏<span class="more"><a target="_blank" href="/index.php?g=System&m=Info_Notice&a=index">更多&gt;&gt;</a></span></h4>
-               <div class="mtishi">
+               <div class="mtishi" id="mtishi2">
                     <table width="100%" id="noticeTable">
 		            <volist name="list" id="val"> 
 		               <tr>
-		                <td width="40" align="center"><img src="__STATIC__/images/score.png" alt="公告" /></td>
+		                <td width="20" align="center"><img src="__STATIC__/images/score.png" alt="公告" /></td>
 		                <td width="50"  align="left">{$val.ptime||date='Y-m-d',###}</td>
-		                <td width="100"  align="left">{$val.title}</td>
+		                <td width="80"  align="left">{$val.title}</td>
 		                <td width="300"  align="left">{$val.content}</td>
 		                <td width="20"  align="left"><a href="/weTall/index.php?g=admin&m=info_notice&a=index&id={$val.id}" target="new">详情</a></td>   
 		               </tr> 
@@ -43,6 +43,7 @@
 		            </table>
 		            		    
                </div>
+               <div id="pages">共{$page}</div>
             </div>
         
             <div class="mbar">
@@ -67,14 +68,48 @@
        <div class="mright"> 
         
             <div style="background:#E5E5E5;">
-               <h4>微商城信息二维码</h4>
+               <h4>{$weshopData.name} 基本信息：</h4>
                        
                <div>
-                   <img height="90" id="imgWxQRCode" src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>">
-                    <br></br>
-					&nbsp;&nbsp;<a href="{:U('setting/index')}">[设置]</a>
+                  <table border="1">
+                     <tr><td rowspan="4">&nbsp;<img src="{$weshopData.headurl}" alt="店铺头像" />&nbsp;<br></br>
+                      
+                     </td><td rowspan="3">
+                        &nbsp;<img height="90" id="imgWxQRCode" src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>">                    
+                     &nbsp;</td><td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;店铺名称：
+                     </td><td>{$weshopData.name}</td>
+                     
+                     </tr><tr><td>
+                     &nbsp;&nbsp;&nbsp;&nbsp;信誉：
+                     </td><td>
+                        <if condition="$weshopData['credit'] lt 4"><img width="40" height="40" src="__STATIC__/images/Level/1_0.png"/>
+                        <elseif condition="$weshopData['credit'] lt 11" /><img width="40" height="40" src="__STATIC__/images/Level/1_1.png"/>
+                        <elseif condition="$weshopData['credit'] lt 50" /><img width="40" height="40" src="__STATIC__/images/Level/1_2.png"/>
+                        <elseif condition="$weshopData['credit'] lt 110" /><img width="40" height="40" src="__STATIC__/images/Level/1_3.png"/>
+                        <elseif condition="$weshopData['credit'] lt 250" /><img width="40" height="40" src="__STATIC__/images/Level/1_4.png"/>
+                        <elseif condition="$weshopData['credit'] lt 500" /><img width="40" height="40" src="__STATIC__/images/Level/2_0.png"/>
+                        <elseif condition="$weshopData['credit'] lt 1000" /><img width="40" height="40" src="__STATIC__/images/Level/2_1.png"/>
+                        <elseif condition="$weshopData['credit'] lt 2000" /><img width="40" height="40" src="__STATIC__/images/Level/2_2.png"/>
+                        <elseif condition="$weshopData['credit'] lt 5000" /><img width="40" height="40" src="__STATIC__/images/Level/2_3.png"/>
+                        <elseif condition="$weshopData['credit'] lt 10000" /><img width="40" height="40" src="__STATIC__/images/Level/2_4.png"/>
+                        <elseif condition="$weshopData['credit'] lt 20000" /><img width="40" height="40" src="__STATIC__/images/Level/3_0.png"/>
+                        <elseif condition="$weshopData['credit'] lt 50000" /><img width="40" height="40" src="__STATIC__/images/Level/3_1.png"/>
+                        <elseif condition="$weshopData['credit'] lt 100000" /><img width="40" height="40" src="__STATIC__/images/Level/3_2.png"/>
+                        <elseif condition="$weshopData['credit'] lt 200000" /><img width="40" height="40" src="__STATIC__/images/Level/3_3.png"/>
+                        <else/><img width="40" height="40" src="__STATIC__/images/Level/3_4.png"/>
+                        </if></td></tr>
+                     <tr><td>
+                     &nbsp;&nbsp;&nbsp;&nbsp;有无实体店：
+                     </td><td><if condition="$weshopData['HaveReal'] eq 0">无<else/>有</if></td></tr>
+                     <tr><td >
+                     <a href="{:U('setting/index')}">[设置]</a>
                        <a class="group1" title="微商城二维码" id="aDownLoadShopQRcode" href="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">[预览]</a>
-                   <br></br>
+                     </td>
+                     <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('setting/index')}">更改店铺名称</a></td>
+                     </tr>
+                  </table>
+                   
                </div>
               
             </div>

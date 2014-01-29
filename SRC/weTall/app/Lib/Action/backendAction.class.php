@@ -182,12 +182,12 @@ class backendAction extends baseAction
     	$countNum1 = count($mod->where($data1)->select());
     	$countNum2 = count($mod->where($data2)->select());
     	$countNum3 = count($mod->where($data3)->select());
-    	if($countNum1 <= 6) {
+    	if($countNum1 <= 4) {
     		$data['checkstatus'] = '1';
-    	}else if($countNum2 <= 1){
+    	}else if($countNum2 <= 0){
     		$data['checkstatus'] = '1';
     		$data['boadid'] = '2';
-    	}else if($countNum3 <= 1){
+    	}else if($countNum3 <= 0){
     		$data['checkstatus'] = '1';
     		$data['boadid'] = '3';
     	}else{
@@ -230,13 +230,13 @@ class backendAction extends baseAction
     	$countNum3 = count($mod->where($data3)->select());
     	$total['checkstatus'] = '2';
     	$totalNum = count($mod->where($total)->select());
-    	if($countNum1 <= 5) {
-    		$data['checkstatus'] = '1';
-    	}else if($countNum2 <= 1){
-    		$data['checkstatus'] = '1';
+    	if($countNum1 <= 4) {
+    		$data['checkstatus'] = '0';
+    	}else if($countNum2 <= 0){
+    		$data['checkstatus'] = '0';
     		$data['boadid'] = '2';
-    	}else if($countNum3 <= 1){
-    		$data['checkstatus'] = '1';
+    	}else if($countNum3 <= 0){
+    		$data['checkstatus'] = '0';
     		$data['boadid'] = '3';
     	}else{
     		$data['checkstatus'] = '2';
