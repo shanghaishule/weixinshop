@@ -30,3 +30,15 @@ update tp_menu set often = 2 where id in(12);
 update tp_menu set often = 3 where name = '结账方式管理';
 /*设置*/
 update tp_menu set often = 99 where id in(275);
+
+/*结账方式管理表*/
+drop table IF EXISTS `tp_account_setting`;
+CREATE TABLE IF NOT EXISTS `tp_account_setting` (
+  `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
+  `bankname` varchar(200) NOT NULL COMMENT '银行名称',
+  `account` varchar(100) NOT NULL COMMENT '银行账号',
+  `payee` varchar(255) NOT NULL COMMENT '收款人',
+  `mobile` varchar(255) DEFAULT NULL COMMENT '手机号码',
+  `tokenTall` varchar(20) NOT NULL DEFAULT '' COMMENT '商家token',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
