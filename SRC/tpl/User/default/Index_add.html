@@ -1,67 +1,67 @@
 <include file="Index:header"/>
 <div class="content" style="width:920px; background:none; margin-left:275px; border:none; margin-bottom:30px;" >
-          <div class="cLineB"><h4>添加微信公众号</h4></div>
+          <div class="cLineB"><h4>æ·»åŠ å¾®ä¿¡å…¬ä¼—å�·</h4></div>
           <form method="post" action="{lanrain::U('User/Index/insert')}" enctype="multipart/form-data">
           <div class="msgWrap">
             <table class="userinfoArea" border="0" cellspacing="0" cellpadding="0" width="100%">
               <thead>
                 <tr>
-                  <th><span class="red">*</span>公众号名称：</th>
+                  <th><span class="red">*</span>å…¬ä¼—å�·å��ç§°ï¼š</th>
                   <td><input type="text" required="" class="px" name="wxname" value="" tabindex="1" size="25">
                   </td>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th><span class="red">*</span>公众号原始id：</th>
-                  <td><input type="text" required="" name="wxid" value="" onmouseup="this.value=this.value.replace('_430','')" class="px" tabindex="1" size="25">　<span class="red">请认真填写，错了不能修改。</span>比如：gh_423dwjkeww3 <a href="http://jingyan.baidu.com/article/63f23628eb6b490209ab3d6b.html" target="_blank"><img src="{lanrain::RES}/images/help.png" class="vm helpimg" title="帮助"></a></td>
+                  <th><span class="red">*</span>å…¬ä¼—å�·åŽŸå§‹idï¼š</th>
+                  <td><input type="text" required="" name="wxid" value="" onmouseup="this.value=this.value.replace('_430','')" class="px" tabindex="1" size="25">ã€€<span class="red">è¯·è®¤çœŸå¡«å†™ï¼Œé”™äº†ä¸�èƒ½ä¿®æ”¹ã€‚</span>æ¯”å¦‚ï¼šgh_423dwjkeww3 <a href="http://jingyan.baidu.com/article/63f23628eb6b490209ab3d6b.html" target="_blank"><img src="{lanrain::RES}/images/help.png" class="vm helpimg" title="å¸®åŠ©"></a></td>
                 </tr>
                 <tr>
-                  <th><span class="red">*</span>微信号：</th>
-                  <td><input type="text" required="" name="weixin" value="" class="px" tabindex="1" size="25">　比如：lanrain </td>
+                  <th><span class="red">*</span>å¾®ä¿¡å�·ï¼š</th>
+                  <td><input type="text" required="" name="weixin" value="" class="px" tabindex="1" size="25">ã€€æ¯”å¦‚ï¼šlanrain </td>
                 </tr>
                   <tr style="display:none">
-                  <th><span class="red">*</span>头像地址（url）:</th>
-                  <td><input class="px" name="headerpic" value="{lanrain::RES}/images/portrait.jpg" size="60">请填写图片外链地址 <a onclick="alert('请填写以jpg,png,gif,bmp等后缀的图文')" target="_blank"><img src="{lanrain::RES}/images/help.png" class="vm helpimg" title="帮助"></a></td>
+                  <th><span class="red">*</span>å¤´åƒ�åœ°å�€ï¼ˆurlï¼‰:</th>
+                  <td><input class="px" name="headerpic" value="/tpl/User/default/common/images/portrait.jpg" size="60">è¯·å¡«å†™å›¾ç‰‡å¤–é“¾åœ°å�€ <a onclick="alert('è¯·å¡«å†™ä»¥jpg,png,gif,bmpç­‰å�Žç¼€çš„å›¾æ–‡')" target="_blank"><img src="{lanrain::RES}/images/help.png" class="vm helpimg" title="å¸®åŠ©"></a></td>
                 </tr>
                  <tr style="display:none">
                   <th><span class="red">*</span>TOKEN</th>
-                  <td><input type="text" name="token" value="{lanrain:$tokenvalue}" class="px" tabindex="1" size="40">(填写你的公众号)例：lanrainweixin,请勿填写文,或者其它特殊字符，此处token和腾讯平台必须一致!</td>
+                  <td><input type="text" name="token" value="{lanrain:$tokenvalue}" class="px" tabindex="1" size="40">(å¡«å†™ä½ çš„å…¬ä¼—å�·)ä¾‹ï¼šlanrainweixin,è¯·å‹¿å¡«å†™æ–‡,æˆ–è€…å…¶å®ƒç‰¹æ®Šå­—ç¬¦ï¼Œæ­¤å¤„tokenå’Œè…¾è®¯å¹³å�°å¿…é¡»ä¸€è‡´!</td>
                 </tr>
                 
                 <tr>
-                  <th><span class="red">*</span>地区</th>
+                  <th><span class="red">*</span>åœ°åŒº</th>
                   <td>
-                  <input type="text" class="px" id="province" value="{lanrain:$province}" name="province" tabindex="1" size="20"> 省  <input id="city" value="{lanrain:$city}" type="text" name="city" class="px" tabindex="1" size="20"> 市
-               （此处关联公交等本地化查询）
+                  <input type="text" class="px" id="province" value="{lanrain:$province}" name="province" tabindex="1" size="20"> çœ�  <input id="city" value="{lanrain:$city}" type="text" name="city" class="px" tabindex="1" size="20"> å¸‚
+               ï¼ˆæ­¤å¤„å…³è�”å…¬äº¤ç­‰æœ¬åœ°åŒ–æŸ¥è¯¢ï¼‰
                   </td>
                 </tr>
                 <tr style="display:none">
-                  <th><span class="red">*</span>公众号邮箱：</th>
+                  <th><span class="red">*</span>å…¬ä¼—å�·é‚®ç®±ï¼š</th>
                   <td><input type="text" required="" class="px" tabindex="1" value="{lanrain:$email}" name="qq" size="25"></td>
                 </tr>
                  <tr style="display:none">
-                  <th><span class="red">*</span>粉丝数：</th>
+                  <th><span class="red">*</span>ç²‰ä¸�æ•°ï¼š</th>
                   <td><input type="text" required="" name="wxfans" value="0" class="px" tabindex="1" size="25"></td>
                 </tr>
              
                 <tr>
-                  <th>类型：</th>
+                  <th>ç±»åž‹ï¼š</th>
                   <td><select id="type" name="type">                  
-                  <option value="1,情感">情感</option>
-                  <option value="2,数码">数码</option>
-                  <option value="3,娱乐">娱乐</option>
+                  <option value="1,æƒ…æ„Ÿ">æƒ…æ„Ÿ</option>
+                  <option value="2,æ•°ç �">æ•°ç �</option>
+                  <option value="3,å¨±ä¹�">å¨±ä¹�</option>
                   <option value="4,IT">IT</option>
-                  <option value="5,数码">数码</option>
-                  <option value="6,购物">购物</option>
-                  <option value="7,生活">生活</option>
-                  <option value="8,服务">服务</option>
+                  <option value="5,æ•°ç �">æ•°ç �</option>
+                  <option value="6,è´­ç‰©">è´­ç‰©</option>
+                  <option value="7,ç”Ÿæ´»">ç”Ÿæ´»</option>
+                  <option value="8,æœ�åŠ¡">æœ�åŠ¡</option>
                   </select></td>
                 </tr>
               
                 <tr>
                   <th></th>
-                  <td><button type="submit" class="btnGreen" id="saveSetting">保存</button></td>
+                  <td><button type="submit" class="btnGreen" id="saveSetting">ä¿�å­˜</button></td>
                 </tr>
               </tbody>
             </table>
@@ -74,6 +74,6 @@
       </div>
     </div>
   </div>
-  <!--底部-->
+  <!--åº•éƒ¨-->
   	</div>
 <include file="Public:footer"/>	

@@ -46,6 +46,10 @@ class settingAction extends backendAction {
             $val = is_array($val) ? serialize($val) : $val;
             $this->_mod->where(array('name' => $key))->save(array('data' => $val));
         }
+        $weChaShop = M("wecha_shop");
+        $wechaData["name"]=$setting["site_name"];
+        $wechaData1["tokenTall"] = $_SESSION["tokenTall"];
+        $weChaShop->where($wechaData1)->save($wechaData);
         $type = $this->_post('type', 'trim', 'index');
         $this->success(L('operation_success'));
     }
