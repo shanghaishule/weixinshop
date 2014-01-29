@@ -46,7 +46,7 @@ $(function() {
 	$("#J_account").formValidator({onshow:'请填写银行账号',onfocus:'请填写银行账号'}).inputValidator({min:1,onerror:'请填写银行账号'});
 	$("#J_payee").formValidator({onshow:'请填写收款人',onfocus:'请填写收款人'}).inputValidator({min:1,onerror:'请填写收款人'});
 	$("#J_mobile").formValidator({onshow:'请填写收款人手机号',onfocus:'请填写收款人手机号'}).inputValidator({min:1,onerror:'请填写收款人手机号'});
-	$("#J_tokenTall").attr('readOnly',true);
+	$("#J_tokenTall").attr('readOnly',true).formValidator({onshow:'系统自动填写',onfocus:'系统自动填写'});
 });
 </script>
 </body>
