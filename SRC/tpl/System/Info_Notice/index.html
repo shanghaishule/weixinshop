@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	
 	<link href="__ROOT__/weTall/static/css/admin/style.css" rel="stylesheet"/>
+	
 	<title>公告管理</title>
 	<script>
 	var URL = '/weTall/index.php/admin-index';
@@ -100,7 +101,7 @@ $(function(){
 				<td align="center">{Lanrain:$val.id}</td>
                 <td align="left"><span data-tdtype="edit" data-field="title" data-id="{$val.id}" >{Lanrain:$val.title}</span></td>
                 <td align="left"><span data-tdtype="edit" data-field="content" data-id="{$val.id}" >{Lanrain:$val.content}</span></td>
-                <td align="left"><span data-tdtype="edit" data-field="ptime" data-id="{$val.id}" >{Lanrain:$val.ptime}</span></td>
+                <td align="left"><span data-tdtype="edit" data-field="ptime" data-id="{$val.id}" >{Lanrain:$val.ptime|date='Y-m-d',###}</span></td>
                 <td align="left"><span data-tdtype="edit" data-field="ordid" data-id="{Lanrain:$val.id}" class="tdedit" style="color:{Lanrain:$val.colors};">{Lanrain:$val.ordid}</span></td>
                 <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{Lanrain:$val.status}" src="__ROOT__/weTall/static/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
                 <td align="center">
@@ -120,11 +121,12 @@ $(function(){
     </div>
 
 </div>
+<!-- 
 <script src="/weTall/static/js/jquery/jquery.js"></script>
 <script src="/weTall/static/js/jquery/plugins/jquery.tools.min.js"></script>
 <script src="/weTall/static/js/jquery/plugins/formvalidator.js"></script>
 <script src="/weTall/static/js/pinphp.js"></script>
-<script src="/weTall/static/js/admin.js"></script>
+<script src="/weTall/static/js/admin.js"></script> -->
 <script>
 //初始化弹窗
 (function (d) {

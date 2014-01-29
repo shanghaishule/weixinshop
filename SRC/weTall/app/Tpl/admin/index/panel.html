@@ -5,6 +5,7 @@
 <title>商城后台</title>
 <link href="__STATIC__/css/admin/pancl01.css" type="text/css" rel="stylesheet" />
 <link href="__STATIC__/css/admin/pancl02.css" type="text/css" rel="stylesheet" />
+<link href="__STATIC__/css/admin/notice.css" type="text/css" rel="stylesheet" />
 <link href="__STATIC__/weixin/colorbox.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="__STATIC__/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="__STATIC__/js/all.js"></script>
@@ -28,17 +29,19 @@
        <div class="mleft">
             <div class="mbar">
                <h4>公告栏<span class="more"><a target="_blank" href="/index.php?g=System&m=Info_Notice&a=index">更多&gt;&gt;</a></span></h4>
-               <div class="mtishi"><br></br>
-                    <table width="100%">
+               <div class="mtishi">
+                    <table width="100%" id="noticeTable">
 		            <volist name="list" id="val"> 
 		               <tr>
+		                <td width="40" align="center"><img src="__STATIC__/images/score.png" alt="公告" /></td>
+		                <td width="50"  align="left">{$val.ptime||date='Y-m-d',###}</td>
 		                <td width="100"  align="left">{$val.title}</td>
 		                <td width="300"  align="left">{$val.content}</td>
-		                <td width="100"  align="left">{$val.ptime}</td>   
+		                <td width="20"  align="left"><a href="/weTall/index.php?g=admin&m=info_notice&a=index&id={$val.id}" target="new">详情</a></td>   
 		               </tr> 
 		            </volist>
 		            </table>
-		            <br></br>			    
+		            		    
                </div>
             </div>
         
@@ -67,11 +70,9 @@
                <h4>微商城信息二维码</h4>
                        
                <div>
-                   <img height="90" id="imgWxQRCode" src="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">  
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <img height="90" id="imgShopQRcode" src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>">
-                    <br></br><a href="{:U('setting/index')}">[设置]</a>
-                       <a title="微信公众号二维码" class="group1" id="aDownLoadWxQRcode" href="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">[预览]</a>
-					 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('setting/index')}">[设置]</a>
+                   <img height="90" id="imgWxQRCode" src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>">
+                    <br></br>
+					&nbsp;&nbsp;<a href="{:U('setting/index')}">[设置]</a>
                        <a class="group1" title="微商城二维码" id="aDownLoadShopQRcode" href="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">[预览]</a>
                    <br></br>
                </div>

@@ -3,39 +3,52 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <title>微信-微信营销专家</title>
+
 <meta name="keywords" content="LANRAIN 微信帮手 微信公众账号 微信公众平台 微信公众账号开发 微信二次开发 微信接口开发 微信托管服务 微信营销 微信公众平台接口开发"/>
 <meta name="description" content="微信公众平台接口开发、托管、营销活动、二次开发"/>
-<include file="Public:header"/>
-   <br></br>
-        <br></br><br></br>
-        <div class="slit">
-            <ul>
-                <li><a href="{lanrain::U('Index/login')}"><img src="{lanrain::RES}/images/zc.png" /></a></li>
-                    <li><a href="{lanrain::U('Index/reg')}"><img src="{lanrain::RES}/images/dl.png" /></a></li>
-                </ul>
+<include file="Public:header2"/>
+   
+        <div class="homepage"><br />
+        <span id="title">微信-微信公众号管理服务平台</span><br /><br />
+        <form action="{lanrain::U('Users/checklogin')}" method="post" class="login">
+        <table width="700" border="0" align="center">
+        <tr>
+          <td>
+            	<span class="usedata">用户名：</span>
+          </td>
+          <td>
+           		<span class="usedata"> 密码：</span>
+            
+          </td>
+        </tr>
+        <tr>
+         <td>
+         	 <input id="username" type="text" name="username"></input>
+          </td>
+          <td>
+            <input id="password" type="text" name="password"></input>
+          </td>
+        </tr>
+        <tr>
+        <td colspan="2">
+          <input id="login" type="image" src="{lanrain::RES}/images/login.png" onclick="return dosubmit();" />  
+    <a href="{lanrain::U('Index/reg')}"><img class="img2" width="150" height="48" src="{lanrain::RES}/images/register.png" /></a>
+        </td>
+        </tr>
+        <tr>
+        <td colspan="2" align="center"><br></br><br></br>
+          <img  src="{lanrain::RES}/images/1.png" />
+          <img  src="{lanrain::RES}/images/2.png" />
+          <img  src="{lanrain::RES}/images/3.png" />
+        </td>
+        </tr>
+        </table>
+       
+	    
+	     
+       </form>        
+                
+                
             </div>
- <br></br>
-        <br></br><br></br> <br></br>
-        <br></br><br></br> <br></br>
-        <br></br><br></br> <br></br>
-        <br></br><br></br> <br></br>
-        <br></br><br></br>
-        <div class="logo">
-        <div style="float:left"></div>
-            
-            <div class="navr">
-        <ul id="topMenu">           
-			 <li <if condition="(ACTION_NAME eq 'index') and (GROUP_NAME eq 'Home')">class="menuon"</if> ><a href="/" >首页</a></li>
-           <li <eq name="ACTION_NAME" value="fc">class="menuon"</eq>><a href="{lanrain::U('Home/Index/fc')}">功能介绍</a></li>
-                <li <eq name="ACTION_NAME" value="about">class="menuon"</eq>><a href="{lanrain::U('Home/Index/about')}">关于我们</a></li>
-				
-                <li <eq name="ACTION_NAME" value="price">class="menuon"</eq>><a href="{lanrain::U('Home/Index/price')}">资费说明</a></li>
-				
-                <li <eq name="ACTION_NAME" value="common">class="menuon"</eq>><a href="{lanrain::U('Home/Index/common')}">微信导航</a></li>
-                <li <eq name="GROUP_NAME" value="User">class="menuon"</eq>><a href="{lanrain::U('User/Index/index')}">管理中心</a></li>
-                <li <eq name="ACTION_NAME" value="help">class="menuon"</eq>><a href="{lanrain::U('Home/Index/help')}">帮助中心</a></li>
-            
-            </ul>
-        </div>
-        </div>
-<!-- <include file="Public:footer"/> -->
+
+ <include file="Public:footer"/> 

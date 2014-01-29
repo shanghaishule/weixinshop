@@ -1,0 +1,65 @@
+.homepage{
+	background:black; margin:36px 0 20px 200px; width:900px;padding:10px 0px 10px 21px;
+	-moz-border-radius: 25px;      /* Gecko browsers */
+    -webkit-border-radius: 25px;
+     opacity:0.7;
+}
+#title{
+	color:white;
+	margin:56px 0 100px 220px;
+	font-size:30px;
+	align:center;
+}
+.usedata{
+	color:white;
+	font-size:20px;
+}
+.homepage #username{
+	width:330px;
+    height:40px;
+	-moz-border-radius: 8px;      /* Gecko browsers */
+    -webkit-border-radius: 8px;
+	font-size:21px;
+}
+.homepage #password{
+	width:330px;
+    height:40px;
+	-moz-border-radius: 8px;      /* Gecko browsers */
+    -webkit-border-radius: 8px;
+	font-size:21px;
+}
+.img2{
+	margin-top: 30px;
+}
+.homepage #login{
+	width:150px;
+    height:50px;
+    margin: 30px 0 0 380px;
+	
+}
+.abody{
+	background:black; margin:36px 0 20px 200px; width:900px;padding:10px 0px 10px 21px;
+	-moz-border-radius: 25px;      /* Gecko browsers */
+    -webkit-border-radius: 25px;
+     opacity:0.8;
+}
+.tablefield{
+	align:center;
+}
+#submit{
+	margin-lef:200px;
+}
+.body think-form{
+	opacity:1;
+}
+.abody #think-login2 input{
+	-moz-border-radius: 8px;      /* Gecko browsers */
+    -webkit-border-radius: 8px;
+}
+.navr {WIDTH:750px; background:none;  overflow:hidden; margin:18px 0 30px 300px;}
+.top .navr ul{ width:100px;}
+.navr LI {TEXT-ALIGN:center;FLOAT: left;HEIGHT:32px;FONT-SIZE:1em;width:103px; margin-right:5px;}
+.navr LI A {width:103px;TEXT-ALIGN:center; LINE-HEIGHT:30px; FLOAT: left;HEIGHT:32px;font-size:18px;color:red;font-weight:700;TEXT-DECORATION: none
+}
+.navr LI A:hover {BACKGROUND: url(img/navhover.gif) center no-repeat;color:#009900;}
+.navr LI.menuon {BACKGROUND: none center no-repeat; display:block;width:103px;HEIGHT:32px;font-size:18px;color:white;font-weight:900;}
