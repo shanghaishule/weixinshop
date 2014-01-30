@@ -43,6 +43,12 @@
     -webkit-border-radius: 25px;
      opacity:0.8;
 }
+.aboday{
+	background:none; margin:16px 0 20px 0px; width:900px;padding:10px 0px 10px 21px;
+	-moz-border-radius: 25px;      /* Gecko browsers */
+    -webkit-border-radius: 25px;
+     opacity:0.8;
+}
 .tablefield{
 	align:center;
 }
@@ -56,7 +62,13 @@
 	-moz-border-radius: 8px;      /* Gecko browsers */
     -webkit-border-radius: 8px;
 }
-.navr {WIDTH:750px; background:none;  overflow:hidden; margin:18px 0 30px 300px;}
+#titleprice{
+	background:none;margin:20px 0 0 200px;padding-left:100px;color:#5CADAD;font-size:44px;font-weight:900;
+	text-shadow:1px 1px rgba(197, 223, 248,0.8),2px 2px rgba(197, 223, 248,0.8),3px 3px rgba(197, 223, 248,0.8),4px 4px rgba(197, 223, 248,0.8),5px 5px rgba(197, 223, 248,0.8),6px 6px rgba(197, 223, 248,0.8);
+}
+#topMenu{display:inline; list-style-type:none; margin:0px;} 
+#topMenu li{float:left; display:block; text-align:left;margin-left:0px;} 
+.navr {WIDTH:750px; background:none;  overflow:hidden; margin:18px 0 30px 250px;}
 .top .navr ul{ width:100px;}
 .navr LI {TEXT-ALIGN:center;FLOAT: left;HEIGHT:32px;FONT-SIZE:1em;width:103px; margin-right:5px;}
 .navr LI A {width:103px;TEXT-ALIGN:center; LINE-HEIGHT:30px; FLOAT: left;HEIGHT:32px;font-size:18px;color:red;font-weight:700;TEXT-DECORATION: none

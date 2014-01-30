@@ -7,7 +7,6 @@
 <meta name="description" content="微信公众平台接口开发、托管、营销活动、二次开发"/>
 <link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/style.css"/>
 <link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/index.css"/>
-<link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/home.css"/>
 <!--[if lte IE 6]>
 <link rel="stylesheet" type="text/css" href="{lanrain::RES}/css/ie6.css"/>
 <![endif]-->
@@ -42,25 +41,22 @@ var searchid = 5;
     <div class="logo">
         <div style="float:left"></div>
             <h1><a href="/" title="多用户微信营销服务平台"><img src="{lanrain::RES}/images/logo-lanrain.png" /></a></h1>
-            
-            
             <div class="navr">
         <ul id="topMenu">           
 			 <li <if condition="(ACTION_NAME eq 'index') and (GROUP_NAME eq 'Home')">class="menuon"</if> ><a href="/" >首页</a></li>
-           <li <eq name="ACTION_NAME" value="fc">class="menuon"</eq>><a href="{lanrain::U('Home/Index/fc')}">功能介绍</a></li>
+                <li <eq name="ACTION_NAME" value="fc">class="menuon"</eq>><a href="{lanrain::U('Home/Index/fc')}">功能介绍</a></li>
                 <li <eq name="ACTION_NAME" value="about">class="menuon"</eq>><a href="{lanrain::U('Home/Index/about')}">关于我们</a></li>
-				
                 <li <eq name="ACTION_NAME" value="price">class="menuon"</eq>><a href="{lanrain::U('Home/Index/price')}">资费说明</a></li>
-				<li <eq name="GROUP_NAME" value="User">class="menuon"</eq>><a href="{lanrain::U('User/Index/index')}">管理中心</a></li>
+                <li <eq name="ACTION_NAME" value="common">class="menuon"</eq>><a href="{lanrain::U('Home/Index/common')}">微信导航</a></li>
+                <li <eq name="GROUP_NAME" value="User">class="menuon"</eq>><a href="{lanrain::U('User/Index/index')}">管理中心</a></li>
                 <li <eq name="ACTION_NAME" value="help">class="menuon"</eq>><a href="{lanrain::U('Home/Index/help')}">帮助中心</a></li>
             
             </ul>
         </div>
-     
         </div>
     </div>
 </div>
-
+<div class="banner nbanner"></div>
 <div class="main">
    <div class="pos"> 当前位置&raquo;<a href="{lanrain::C('site_url')} ">{lanrain::C('site_name')}</a> &raquo; <a href="">帮助中心</a></div>
 <style type="text/css">
