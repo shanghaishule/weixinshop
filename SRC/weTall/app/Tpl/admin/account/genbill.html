@@ -1,0 +1,56 @@
+<!--生成账单-->
+<div class="dialog_content">
+<form id="info_form" action="{:U('account/genbill')}" method="post">
+<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+    <tr>
+      <th>商家：</th>
+      <td>
+         <select name="shop" >
+		        <option value="">--所有--</option>
+		        <?php foreach($account_shop as $key=>$item){ ?>
+                <option <?php if($search['shop']==$key) echo "selected=''"; ?> value="<?php echo $key; ?>"><?php echo $item; ?></option>
+                <?php } ?>
+		 </select>  
+      </td>
+    </tr>
+	<tr>
+      <th>时间段：</th>
+      <td>
+        <input type="text" name="start_time" id="start_time" class="date" size="20">
+        --
+        <input type="text" name="end_time" id="end_time" class="date" size="20">
+        <script>
+        Calendar.setup({
+            inputField : "start_time",
+            ifFormat   : "%Y-%m-%d 00:00:00",
+            showsTime  : false,
+            timeFormat : "24"
+        });
+        Calendar.setup({
+            inputField : "end_time",
+            ifFormat   : "%Y-%m-%d 23:59:59",
+            showsTime  : false,
+            timeFormat : "24"
+        });
+        </script>
+      </td>
+    </tr>
+</table>
+</form>
+</div>
+
+<script>
+$(function(){
+    $.formValidator.initConfig({formid:"info_form",autotip:true});
+    $('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+})
+</script>

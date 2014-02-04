@@ -1,20 +1,28 @@
 <?php
 
 class StatisticsAction extends BackAction
-{
+{	
 	public function _initialize() {
         $account_status = array(
         		0=>'已生成，未对账',
-        		1=>'商城已对账，商家未对账',
-        		2=>'商城未对账，商家已对账',
-        		3=>'商城已对账，商家已对账',
+        		1=>'商城已对账，店铺未对账',
+        		2=>'商城未对账，店铺已对账',
+        		3=>'商城已对账，店铺已对账',
         		4=>'已付款',
-        		5=>'已作废'
         );
         $this->assign('account_status',$account_status);
         $this->_mod_setting = D('account_setting');
         $this->_mod_bill_mst = D('account_bill_mst');
         $this->_mod_bill_dtl = D('account_bill_dtl');
+        
+        $account_shop = array();
+        $account_shop_arr = $this->_mod_bill_mst->Distinct(true)->field('tokenTall')->select();
+        foreach ($account_shop_arr as $valarr){
+        	$tokenValue = $valarr['tokenTall'];
+        	$account_shop[$tokenValue] = $tokenValue;
+        }
+        $this->assign('account_shop',$account_shop);
+        //dump($account_shop);exit;
     }
 
 	public function index() {
@@ -30,18 +38,29 @@ class StatisticsAction extends BackAction
     	($billnum = $this->_request('billnum', 'trim')) && $map['billnum'] = array('like', '%'.$billnum.'%');
     	($time_start = $this->_request('time_start', 'trim')) && $map['gen_time'][] = array('egt', strtotime($time_start));
     	($time_end = $this->_request('time_end', 'trim')) && $map['gen_time'][] = array('elt', strtotime($time_end)+(24*60*60-1));
+    	
     	if( $_GET['status']==null ){
     		$status = -1;
     	}else{
     		$status = intval($_GET['status']);
     	}
     	$status>=0 && $map['status'] = array('eq',$status);
-    
+    	
+    	if( $_GET['shop']==null ){
+    		$shop = -1;
+    	}else{
+    		$shop = trim($_GET['shop']);
+    	}
+    	if($shop>=0){
+    		$map['tokenTall'] = array('eq',$shop);
+    	}
+    	
     	$this->assign('search', array(
     			'billnum' => $billnum,
     			'time_start' => $time_start,
     			'time_end' => $time_end,
     			'status' =>$status,
+    			'shop' =>$shop,
     	));
     	return $map;
     }
@@ -57,6 +76,8 @@ class StatisticsAction extends BackAction
 
     public function status()
     {
+    	//dump($_SESSION);exit;
+    	
     	$id= $this->_get('id', 'trim');
     	!$id && $this->_404();
     	$status= $this->_get('status', 'trim');
@@ -72,7 +93,7 @@ class StatisticsAction extends BackAction
     			if($before_status == '2')
     				$data['status']='3';
 
-    			$data['duizhang']=$this->_session('uname');
+    			$data['duizhang']=$_SESSION['username'];
     			$data['duizhang_time']=time();
     	   
     			if($this->_mod_bill_mst->where('id='.$id)->save($data))
@@ -88,7 +109,7 @@ class StatisticsAction extends BackAction
     		if($before_status == '3'){
     			$data['status']='4';
     		
-    			$data['pay']=$this->_session('uname');
+    			$data['pay']=$this->$_SESSION['username'];
     			$data['pay_time']=time();
     		
     			if($this->_mod_bill_mst->where('id='.$id)->save($data))
@@ -107,25 +128,28 @@ class StatisticsAction extends BackAction
     
     public function delete()
     {
-    	$mod = $this->_mod_bill_mst;
-    	//需要删除主从表
-    	
-    	
-    	
-    	
+    	$mod_mst = $this->_mod_bill_mst;
+    	$mod_dtl = $this->_mod_bill_dtl;
     	$ids = trim($this->_request('id'), ',');
     	if ($ids) {
-    		if (false !== $mod->delete($ids)) {
-    			IS_AJAX && $this->ajaxReturn(1, L('operation_success'));
-    			$this->success(L('operation_success'));
-    		} else {
-    			IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
-    			$this->error(L('operation_failure'));
+    		$billmst = $mod_mst->where("id = '".$ids."'")->select();
+    		if ($billmst[0]['status'] != '0') {
+    			$this->error('状态不正确！');
+    		}else{
+    			//需要删除主从表
+    			$dtldel = $mod_dtl->where("billnum = '".$billmst[0]['billnum']."'")->delete();
+    			$dtlmst = $mod_mst->where("id = '".$ids."'")->delete();
+
+	    		if (false !== $dtldel && false !== $dtlmst) {
+	    			$this->success('删除成功');
+	    		} else {
+	    			$this->error('删除失败');
+	    		}
     		}
     	} else {
-    		IS_AJAX && $this->ajaxReturn(0, L('illegal_parameters'));
-    		$this->error(L('illegal_parameters'));
+    		$this->error('参数错误');
     	}
     }
+
 }
 ?>

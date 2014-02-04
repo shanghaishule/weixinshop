@@ -5,16 +5,23 @@ class accountAction extends backendAction
         parent::_initialize();
         $account_status = array(
         		0=>'已生成，未对账',
-        		1=>'商城已对账，商家未对账',
-        		2=>'商城未对账，商家已对账',
-        		3=>'商城已对账，商家已对账',
+        		1=>'商城已对账，店铺未对账',
+        		2=>'商城未对账，店铺已对账',
+        		3=>'商城已对账，店铺已对账',
         		4=>'已付款',
-        		5=>'已作废'
         );
         $this->assign('account_status',$account_status);
         $this->_mod_setting = D('account_setting');
         $this->_mod_bill_mst = D('account_bill_mst');
         $this->_mod_bill_dtl = D('account_bill_dtl');
+        
+        $account_shop = array();
+        $account_shop_arr = $this->_mod_bill_mst->Distinct(true)->field('tokenTall')->select();
+        foreach ($account_shop_arr as $valarr){
+        	$tokenValue = $valarr['tokenTall'];
+        	$account_shop[$tokenValue] = $tokenValue;
+        }
+        $this->assign('account_shop',$account_shop);
     }
     
     public function index() {
@@ -137,6 +144,141 @@ class accountAction extends backendAction
     	}
     
     
+    }
+    
+    public function genbill() {
+    	if (IS_POST) {
+    		//取得post参数
+    		$shop = $_POST['shop'] == null ? '' : trim($_POST['shop']);
+    		$start_time = $_POST['start_time'] == null ? '' : strtotime(trim($_POST['start_time']));
+    		$end_time = $_POST['end_time'] == null ? '' : strtotime(trim($_POST['end_time']));
+
+    		if ($start_time != '' && $end_time != '') {
+    			if ( $start_time >= $end_time ) {
+    				IS_AJAX && $this->ajaxReturn(0, '开始时间必须小于结束时间！');
+    				$this->error('开始时间必须小于结束时间！');
+    			}else{
+    				if ($shop == '') {
+    					$account_shop_arr = $this->_mod_bill_mst->Distinct(true)->field('tokenTall')->select();
+    					foreach ($account_shop_arr as $valarr){
+    						$tokenValue = $valarr['tokenTall'];
+    						$rtn = $this->genbillaction($tokenValue, $start_time, $end_time);
+    						if (is_array($rtn) && $rtn['success']) {
+    							
+    						}else{
+    							IS_AJAX && $this->ajaxReturn(0, $rtn['msg']);
+    							$this->error($rtn['msg']);
+    						}
+    					}
+    					IS_AJAX && $this->ajaxReturn(1, 'ok','','genbill');
+    					$this->success('ok');
+    					
+    				}else{
+    					$rtn = $this->genbillaction($shop, $start_time, $end_time);
+    					if (is_array($rtn) && $rtn['success']) {
+    						IS_AJAX && $this->ajaxReturn(1, 'ok','','genbill');
+    						$this->success('ok');
+    					}else{
+    						IS_AJAX && $this->ajaxReturn(0, $rtn['msg']);
+    						$this->error($rtn['msg']);
+    					}
+    				}
+    			}
+    		}else{
+    			//时间中有空，不行。
+    			IS_AJAX && $this->ajaxReturn(0, '必须有起止时间！');
+    			$this->error('必须有起止时间！');
+    		}
+    		
+    	} else {
+    		$this->assign('open_validator', true);
+    		if (IS_AJAX) {
+    			$response = $this->fetch();
+    			$this->ajaxReturn(1, '', $response);
+    		} else {
+    			$this->display();
+    		}
+    	}
+    }
+    
+    public function genbillaction($shop, $start_time, $end_time){
+    	$rtn = array();
+    	//检查是否有重复时间段
+    	$rows = $this->_mod_bill_mst->where(array('tokenTall'=>$shop))->select();
+    	foreach ($rows as $value){
+    		if ($end_time < $value['start_time'] || $start_time > $value['end_time']) {
+    			//符合要求
+    		}else{
+    			$rtn['success'] = false;
+    			$rtn['msg'] = '该时间段与已有账单的时间段存在重复，请检查！';
+    			return $rtn;
+    		}
+    	}
+    	
+    	//查找时间段中的已完成订单：status=4 and 下单时间在范围中
+    	$orders = M('item_order')->where(array('tokenTall'=>$shop, 'status'=>4, 'add_time'=>array('egt',$start_time), 'add_time'=>array('elt',$end_time)))->select();
+    	if ($orders) {
+	    	//生成账单号
+	    	$num = date("Y-m-dH-i-s");
+	    	$num = str_replace("-","",$num);
+	    	$num .= rand(1000,2000);
+	    		    	
+	    	//生成明细数据
+	    	$dtl_data = array();
+	    	$dtl = array();
+	    	$orders_totalamt = 0;
+	    	foreach ($orders as $key => $value){
+	    		$dtl_data['billnum'] = $num;
+	    		$dtl_data['itemno'] = intval($key)+1;
+	    		$dtl_data['orderId'] = $value['orderId'];
+	    		$dtl_data['goods_sumPrice'] = $value['goods_sumPrice'];
+	    		$dtl_data['order_sumPrice'] = $value['order_sumPrice'];
+	    		
+	    		$dtl[] = $dtl_data;
+	    		
+	    		$orders_totalamt = $orders_totalamt + floatval($value['order_sumPrice']);
+	    		
+	    	}
+	    	//生成汇总数据
+	    	$mst_data = array();
+	    	$mst_data['billnum'] = $num;
+	    	$mst_data['status'] = 0;
+	    	$mst_data['gen'] = $_SESSION['username'];
+	    	$mst_data['gen_time'] = time();
+	    	$mst_data['start_time'] = $start_time;
+	    	$mst_data['end_time'] = $end_time;
+	    	$mst_data['totalamt'] = $orders_totalamt;
+	    	$rate = M('set_tax')->field('shoptax')->where(array('id'=>1))->find();
+	    	$mst_data['rate'] = $rate['shoptax'];
+	    	$mst_data['yingjie'] = floatval($orders_totalamt) * (1 - floatval($rate['shoptax']));
+	    	$mst_data['tokenTall'] = $shop;
+	    	
+	    	//写入主从表
+	    	foreach ($dtl as $value){
+	    		$dtlrst = $this->_mod_bill_dtl->add($value);
+	    		if ($dtlrst) {
+	    		}else{
+	    			$rtn['success'] = false;
+	    			$rtn['msg'] = '生成账单失败！';
+	    			return $rtn;
+	    		}
+	    	}
+	    	
+	    	$mstrst = $this->_mod_bill_mst->add($mst_data);
+	    	if ($mstrst) {
+	    	}else{
+	    		$rtn['success'] = false;
+	    		$rtn['msg'] = '生成账单失败！';
+	    		return $rtn;
+	    	}
+	    	
+	    	$rtn['success'] = true;
+	    	return $rtn;
+    	}else{
+    		$rtn['success'] = true;
+    		$rtn['msg'] = '这段时间店铺 '.$shop.' 未发生交易！';
+    		return $rtn;
+    	}
     }
     
 }

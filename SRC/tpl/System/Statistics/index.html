@@ -39,7 +39,7 @@
 <body>
 <div class="subnav">
     <div class="content_menu ib_a blue line_x">
-    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="{Lanrain::U('Statistics/genbill')}" data-title="生成账单" data-id="genbill" data-width="520" data-height="410"><em>生成账单</em></a>
+    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="/weTall/index.php?g=admin&m=account&a=genbill" data-title="生成账单" data-id="genbill" data-width="520" data-height="100"><em>生成账单</em></a>
     </div>
 </div>
 <div class="pad_lr_10">
@@ -66,6 +66,13 @@
                 <option <?php if($search['status']==$key) echo "selected=''"; ?> value="<?php echo $key; ?>"><?php echo $item; ?></option>
                 <?php } ?>
 		        </select>
+		                      商家:
+		        <select name="shop" >
+		        <option value="">--所有--</option>
+		        <?php foreach($account_shop as $key=>$item){ ?>
+                <option <?php if($search['shop']==$key) echo "selected=''"; ?> value="<?php echo $key; ?>"><?php echo $item; ?></option>
+                <?php } ?>
+		        </select>                
 				<input type="submit" name="search" class="btn" value="搜索" />
         	</div>
             </td>
@@ -79,6 +86,7 @@
         <thead>
             <tr>
                 <th><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <th><span data-tdtype="order_by" data-field="shop">商家</span></th>
                 <th><span data-tdtype="order_by" data-field="billnum">账单单号</span></th>
                 <th><span data-tdtype="order_by" data-field="status">状态</span></th>
                 <th><span data-tdtype="order_by" data-field="gen_time">生成时间</span></th>
@@ -93,6 +101,7 @@
             <volist name="list" id="val" >
             <tr>
                 <td align="center">{Lanrain:$val.id}</td>
+                <td align="center">{Lanrain:$val.tokenTall}</td>
                 <td align="center"><span data-tdtype="view" data-field="billnum" data-id="{Lanrain:$val.billnum}" class="tdview" >{Lanrain:$val.billnum}</span></td>
                 <td align="center"><b><?php foreach($account_status as $key=>$item){ if($val['status']==$key){echo $item; }}?></b></td>
                 <td align="center"><?php if($val['gen_time']){ echo date('Y-m-d H:i:s',$val['gen_time']); }?></td>
@@ -103,7 +112,7 @@
                 <td align="center">
                 <a href="{Lanrain::U('Statistics/edit',array('id'=>$val['id']))}">编辑</a>
                 <if condition = "$val['status'] eq '0' ">
-                    <a href="javascript:void(0);" class="J_confirmurl" data-uri="{Lanrain::U('Statistics/delete', array('id'=>$val['id']))}" data-acttype="ajax" data-msg="确认删除该账单吗">删除</a>
+                    <a href="javascript:void(0);" class="J_confirmurl" data-uri="{Lanrain::U('Statistics/delete', array('id'=>$val['id']))}" data-msg="确认删除该账单吗？">删除</a>
                 </if>
                 </td>
             </tr>
