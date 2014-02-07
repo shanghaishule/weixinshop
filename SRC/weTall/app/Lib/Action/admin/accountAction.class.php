@@ -1,6 +1,8 @@
 <?php
 class accountAction extends backendAction
 {
+	public $shop_array = array();
+	
     public function _initialize() {
         parent::_initialize();
         $account_status = array(
@@ -16,7 +18,8 @@ class accountAction extends backendAction
         $this->_mod_bill_dtl = D('account_bill_dtl');
         
         $account_shop = array();
-        $account_shop_arr = $this->_mod_bill_mst->Distinct(true)->field('tokenTall')->select();
+        $account_shop_arr = M('item_order')->Distinct(true)->field('tokenTall')->where("tokenTall != ''")->select();
+        $this->shop_array = $account_shop_arr;
         foreach ($account_shop_arr as $valarr){
         	$tokenValue = $valarr['tokenTall'];
         	$account_shop[$tokenValue] = $tokenValue;
@@ -158,40 +161,82 @@ class accountAction extends backendAction
     				IS_AJAX && $this->ajaxReturn(0, '开始时间必须小于结束时间！');
     				$this->error('开始时间必须小于结束时间！');
     			}else{
+    				$allcount_ok = 0;
+    				$allcount_fail = 0;
+    				$allstr = '';
     				if ($shop == '') {
-    					$account_shop_arr = $this->_mod_bill_mst->Distinct(true)->field('tokenTall')->select();
+    					$account_shop_arr = $this->shop_array;
     					foreach ($account_shop_arr as $valarr){
     						$tokenValue = $valarr['tokenTall'];
     						$rtn = $this->genbillaction($tokenValue, $start_time, $end_time);
     						if (is_array($rtn) && $rtn['success']) {
-    							
+    							$allstr .= 
+    							'<tr>
+    								<td align="center">'.$tokenValue.'</td>
+    								<td align="center" style="color:green">成功</td>
+    								<td align="center">账单号：'.$rtn['msg'].'</td>
+    							</tr>';
+    							$allcount_ok ++;
     						}else{
-    							IS_AJAX && $this->ajaxReturn(0, $rtn['msg']);
-    							$this->error($rtn['msg']);
+    							$allstr .=
+    							'<tr>
+    								<td align="center">'.$tokenValue.'</td>
+    								<td align="center" style="color:red">失败</td>
+    								<td align="center">'.$rtn['msg'].'</td>
+    							</tr>';
+    							$allcount_fail ++;
     						}
     					}
-    					IS_AJAX && $this->ajaxReturn(1, 'ok','','genbill');
-    					$this->success('ok');
-    					
     				}else{
     					$rtn = $this->genbillaction($shop, $start_time, $end_time);
     					if (is_array($rtn) && $rtn['success']) {
-    						IS_AJAX && $this->ajaxReturn(1, 'ok','','genbill');
-    						$this->success('ok');
+    							$allstr .= 
+    							'<tr>
+    								<td align="center">'.$tokenValue.'</td>
+    								<td align="center" style="color:green">成功</td>
+    								<td align="center">账单号：'.$rtn['msg'].'</td>
+    							</tr>';
+    							$allcount_ok ++;
     					}else{
-    						IS_AJAX && $this->ajaxReturn(0, $rtn['msg']);
-    						$this->error($rtn['msg']);
+    							$allstr .=
+    							'<tr>
+    								<td align="center">'.$tokenValue.'</td>
+    								<td align="center" style="color:red">失败</td>
+    								<td align="center">'.$rtn['msg'].'</td>
+    							</tr>';
+    							$allcount_fail ++;
     					}
     				}
+    				
+    				$resultstr =
+    				'<table width="90%" cellspacing="1" class="table_list">
+						<thead>
+							<tr>
+								<th align="center">商家</th>
+								<th align="center">操作结果</th>
+    							<th align="center">信息</th>
+							</tr>
+						</thead>
+						<tbody>
+							'.$allstr.'
+						</tbody>
+						<tfoot style="background-color:#FFFF99">
+							<tr>
+								<td align="center"><b>合计</b></td>
+								<td align="center" colspan="2"><b><span style="color:green">成功：'.$allcount_ok.'</span><span style="color:red;margin-left:10px;">失败：'.$allcount_fail.'</span></b></td>
+							</tr>
+						</tfoot>
+    				</table>';
+    				IS_AJAX && $this->ajaxReturn(1, $resultstr, '', 'genbill');
+    				$this->success('ok');
     			}
     		}else{
-    			//时间中有空，不行。
+    			//时间段不全
     			IS_AJAX && $this->ajaxReturn(0, '必须有起止时间！');
     			$this->error('必须有起止时间！');
     		}
     		
     	} else {
-    		$this->assign('open_validator', true);
     		if (IS_AJAX) {
     			$response = $this->fetch();
     			$this->ajaxReturn(1, '', $response);
@@ -199,6 +244,19 @@ class accountAction extends backendAction
     			$this->display();
     		}
     	}
+    }
+    
+    function ajaxReturn($status=1, $msg='', $data='', $dialog='') {
+    	$alldata = array(
+    			'status' => $status,
+    			'msg' => $msg,
+    			'data' => $data,
+    			'dialog' => $dialog,
+    	);
+    	 
+    	// 返回JSON数据格式到客户端 包含状态信息
+    	header('Content-Type:text/html; charset=utf-8');
+    	exit(json_encode($alldata));
     }
     
     public function genbillaction($shop, $start_time, $end_time){
@@ -210,13 +268,17 @@ class accountAction extends backendAction
     			//符合要求
     		}else{
     			$rtn['success'] = false;
-    			$rtn['msg'] = '该时间段与已有账单的时间段存在重复，请检查！';
+    			$rtn['msg'] = '该时间段内本店铺已存在其他账单！';
     			return $rtn;
     		}
     	}
     	
     	//查找时间段中的已完成订单：status=4 and 下单时间在范围中
-    	$orders = M('item_order')->where(array('tokenTall'=>$shop, 'status'=>4, 'add_time'=>array('egt',$start_time), 'add_time'=>array('elt',$end_time)))->select();
+    	//$orders = M('item_order')->where(array('tokenTall'=>$shop, 'status'=>4, 'add_time'=>array('egt',$start_time), 'add_time'=>array('elt',$end_time)))->select();
+    	$where = "tokenTall='".$shop."' and status=4 and add_time>='".$start_time."' and add_time<='".$end_time."'";
+    	//Log::write($where);
+    	$orders = M('item_order')->where($where)->select();
+    	
     	if ($orders) {
 	    	//生成账单号
 	    	$num = date("Y-m-dH-i-s");
@@ -273,12 +335,15 @@ class accountAction extends backendAction
 	    	}
 	    	
 	    	$rtn['success'] = true;
+	    	$rtn['msg'] = $num;
 	    	return $rtn;
     	}else{
-    		$rtn['success'] = true;
-    		$rtn['msg'] = '这段时间店铺 '.$shop.' 未发生交易！';
+    		$rtn['success'] = false;
+    		$rtn['msg'] = '该时间段内没有已完成订单！';
     		return $rtn;
     	}
     }
+    
+    
     
 }

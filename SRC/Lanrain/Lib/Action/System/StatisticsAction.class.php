@@ -23,6 +23,8 @@ class StatisticsAction extends BackAction
         }
         $this->assign('account_shop',$account_shop);
         //dump($account_shop);exit;
+        $order_status=array(1=>'待付款',2=>'待发货',3=>'待收货',4=>'完成',5=>'关闭');
+        $this->assign('order_status',$order_status);
     }
 
 	public function index() {
@@ -68,7 +70,14 @@ class StatisticsAction extends BackAction
     public function edit() {
     	$id = $this->_get('id','intval');
     	$account_master = $this->_mod_bill_mst->where(array('id'=>$id))->find();
-    	$account_detail = $this->_mod_bill_dtl->where('billnum='.$account_master['billnum'])->select();
+    	
+    	$model=new Model();
+    	$account_detail=$model->table("tp_account_bill_dtl m, tp_item_order c")
+    	->where("m.orderId=c.orderId and m.billnum='".$account_master['billnum']."'")
+    	->field("m.*, c.add_time, c.status")
+    	->select();
+    	
+    	//$account_detail = $this->_mod_bill_dtl->where('billnum='.$account_master['billnum'])->select();
     	$this->assign('account_detail',$account_detail);
     	$this->assign('account_master', $account_master);
     	$this->display();
@@ -109,7 +118,7 @@ class StatisticsAction extends BackAction
     		if($before_status == '3'){
     			$data['status']='4';
     		
-    			$data['pay']=$this->$_SESSION['username'];
+    			$data['pay']=$_SESSION['username'];
     			$data['pay_time']=time();
     		
     			if($this->_mod_bill_mst->where('id='.$id)->save($data))
