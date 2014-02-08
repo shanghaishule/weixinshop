@@ -28,7 +28,7 @@
     <div class="mainbox">
        <div class="mleft">
             <div class="mbar">
-               <h4>公告栏<span class="more"><a target="_blank" href="/index.php?g=System&m=Info_Notice&a=index">更多&gt;&gt;</a></span></h4>
+               <h4>公告栏<!-- <span class="more"><a target="_blank" href="/index.php?g=System&m=Info_Notice&a=index">更多&gt;&gt;</a></span> --></h4>
                <div class="mtishi" id="mtishi2">
                     <table width="100%" id="noticeTable">
 		            <volist name="list" id="val"> 
@@ -65,11 +65,10 @@
             </div>            
 
        </div>
-       <div class="mright"> 
-            <font size="2px" color="red">基本汇率: {$currentTax.shoptax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优惠券汇率：{$currentTax.coupontax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分汇率：{$currentTax.giftpointtax}</font>
-            <div style="background:#E5E5E5;">
+       <div class="mright">
+            <div style="background:#E5E5E5;margin-top:11px;">
                <h4>{$weshopData.name} 基本信息：</h4>
-                       
+               <font size="2px" color="red">基本汇率: {$currentTax.shoptax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优惠券汇率：{$currentTax.coupontax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分汇率：{$currentTax.giftpointtax}</font>       
                <div>
                   <table border="1">
                      <tr><td rowspan="4">&nbsp;<img src="{$weshopData.headurl}" alt="店铺头像" />&nbsp;<br></br>
@@ -117,15 +116,13 @@
             <div class="mbar">
                <h4>服务热线</h4>
                <p style="padding:5px 0 2px 20px;">
-                   <a href="http://wpa.qq.com/msgrd?v=3&uin=1492662116&site=qq&menu=yes" target="_blank"><img border="0" title="点击这里给我发消息" alt="点击这里给我发消息" src="__STATIC__/images/admin/pancl/online2.jpg"></a>
-               </p>
-               <p>
-                   <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1492662116&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2411589211:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+                   <a href="http://wpa.qq.com/msgrd?v=3&uin={$weQQ}&site=qq&menu=yes" target="_blank"><img border="0" title="点击这里给我发消息" alt="点击这里给我发消息" src="__STATIC__/images/admin/pancl/online2.jpg"></a>
+                   <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$weQQ}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:{$weQQ}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
                 
                </p>
              
-               <p><span class="tel">服务热线: 0592-5927951</span></p>
-               <p class="remark">（热线服务时间：周一至周六 9:00 - 20:00，其他时间段请选择QQ留言，谢谢合作！）</p>
+               <p>服务热线: 0312 - 4888382</p>
+               <p class="remark">热线服务时间：周一至周六 9:00 - 20:00</p>
             <!--   <p><a href="#">培训中心</a> <a href="#">帮助中心</a> <a href="#">续签FAQ</a></p>-->
             </div>
         
@@ -135,9 +132,9 @@
                <div class="services">
                    <div id="slider" class="slider" style="height: 150px; width: 345px; overflow: hidden; position: relative;">
                         <ul class="slider">
-                            <li style="float: left;"><a title="" target="_blank" href="http://www.changxiao.cn/weixin.html"><img src="__STATIC__/images/admin/pancl/ad.gif" alt="" style="width: 345px; height: 150px;"></a></li>
-                            <li style="float: left;"><a title="" target="_blank" href="http://www.changxiao.cn/weixin.html"><img src="__STATIC__/images/admin/pancl/ad1.gif" alt="" style="width: 345px; height: 150px;"></a></li>
-                            <li style="float: left;"><a title="" target="_blank" href="http://www.changxiao.cn/weixin.html"><img src="__STATIC__/images/admin/pancl/ad2.gif" alt="" style="width: 345px; height: 150px;"></a></li>
+                            <li style="float: left;"><a title="" target="_blank" href="/index.php"><img src="__STATIC__/images/admin/pancl/ad.gif" alt="" style="width: 345px; height: 150px;"></a></li>
+                            <li style="float: left;"><a title="" target="_blank" href="/index.php"><img src="__STATIC__/images/admin/pancl/ad1.gif" alt="" style="width: 345px; height: 150px;"></a></li>
+                            <li style="float: left;"><a title="" target="_blank" href="/index.php"><img src="__STATIC__/images/admin/pancl/ad2.gif" alt="" style="width: 345px; height: 150px;"></a></li>
                         </ul>
                         <div id="slider_btn"><span class="on">1</span><span class="">2</span><span class="">3</span></div>
                    </div>
@@ -149,7 +146,7 @@
             <div class="mbar">
                <h4>提意见区</h4>
                <p><span class="info">请帮助我们提高，谢谢！</span></p>
-               <p><a  target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1492662116&site=qq&menu=yes">意见反馈</a></p>
+               <p><a  target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$weQQ}&site=qq&menu=yes">意见反馈</a></p>
             </div>
             
        </div>

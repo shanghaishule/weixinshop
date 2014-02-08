@@ -56,6 +56,8 @@ class indexAction extends backendAction {
     	$this->assign("weshopData",$weChaShopDetail);
     	$this->assign('tokenTall', $tokenTall);
 
+    	$result2 = include './../data/conf/info.php';
+    	$this->assign("weQQ",$result2["site_qq"]);
     	
         $message = array();
         if (is_dir('./install')) {
