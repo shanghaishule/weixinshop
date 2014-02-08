@@ -360,9 +360,7 @@ class itemAction extends backendAction {
             
             $sizestr = $item["size"];
             $sizearr = explode("|",$sizestr);
-            foreach ($sizearr as $size){
-               $this->assign("sizearr".$size,$size);
-            }
+            $this->assign("sizearr",$sizearr);
             
             $colorstr = $item["color"];
             $colorarr = explode("|",$colorstr);

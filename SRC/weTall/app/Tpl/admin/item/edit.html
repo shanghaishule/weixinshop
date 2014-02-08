@@ -32,8 +32,8 @@
                 </select></td>
 			</tr>
 			<tr>
-				<th width="120">尺码 :</th>
-                <td>          
+				<th width="120">型号 :</th>
+                <td>  <!--        
                 <input type="checkbox" name="size[]" <if condition="$sizearr34 eq 34 ">checked</if> value="34">34</input>&nbsp;
                     <input type="checkbox" name="size[]" <if condition="$sizearr35 eq 35 ">checked</if> value="35">35</input>&nbsp;
                     <input type="checkbox" name="size[]" <if condition="$sizearr36 eq 36 ">checked</if> value="36">36</input>&nbsp;
@@ -45,7 +45,13 @@
                     <input type="checkbox" name="size[]" <if condition="$sizearr42 eq 42 ">checked</if> value="42">42</input>&nbsp;
                     <input type="checkbox" name="size[]" <if condition="$sizearr43 eq 43 ">checked</if> value="43">43</input>&nbsp;
                     <input type="checkbox" name="size[]" <if condition="$sizearr44 eq 44 ">checked</if> value="44">44</input>&nbsp;
-                    
+                     --> <div id="size"><input type="button" value="  添加    " onclick="addSize()">
+                     <volist name="sizearr" id="sizearr">
+                      <if condition="$sizearr neq ''">
+                      <input type="text" name="size[]" value="{$sizearr}" size='12'>
+                      </if>
+                     </volist>
+                     </div>
                     </td>
 			</tr>
 			<tr>
@@ -343,7 +349,11 @@ function del_attr(id,obj)
 <script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
 <script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
 <script>
-
+function addSize()
+{
+    var sizeid=$("#size");
+    sizeid.append("<input name='size[]' type='text' size='12'>&nbsp;");
+}
 $(function() {
 	KindEditor.create('#info', {
 		uploadJson : '{:U("attachment/editer_upload")}',
@@ -372,4 +382,4 @@ $(function() {
 	});
 	
 });
-</script>
+</script><br>

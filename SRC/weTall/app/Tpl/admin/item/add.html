@@ -27,6 +27,11 @@
             $('#address_form').hide();
         }
     }
+	function addSize()
+    {
+        var sizeid=$("#size");
+        sizeid.append("<input name='size[]' type='text' size='12'>&nbsp;");
+    }
 </script>
 <!--添加商品-->
 <div class="subnav">
@@ -47,8 +52,8 @@
                 <td><select class="J_cate_select mr10" data-pid="0" data-uri="{:U('item_cate/ajax_getchilds', array('type'=>0))}" data-selected=""></select><input type="hidden" name="cate_id" id="J_cate_id" value="" /></td>
 			</tr>
 			<tr>
-				<th width="120">尺码 :</th>
-                <td><input type="checkbox" name="size[]" value="34">34</input>&nbsp;
+				<th width="120">型号:</th>
+                <td><!-- <input type="checkbox" name="size[]" value="34">34</input>&nbsp;
                     <input type="checkbox" name="size[]" value="35">35</input>&nbsp;
                     <input type="checkbox" name="size[]" value="36">36</input>&nbsp;
                     <input type="checkbox" name="size[]" value="37">37</input>&nbsp;
@@ -58,7 +63,8 @@
                     <input type="checkbox" name="size[]" value="41">41</input>&nbsp;
                     <input type="checkbox" name="size[]" value="42">42</input>&nbsp;
                     <input type="checkbox" name="size[]" value="43">43</input>&nbsp;
-                    <input type="checkbox" name="size[]"value="44">44</input>&nbsp;
+                    <input type="checkbox" name="size[]"value="44">44</input>&nbsp; -->
+                    <div id="size"><input type="button" value="  添加    " onclick="addSize()"></div>
                     </td>
 			</tr>
 			<tr>
@@ -274,4 +280,4 @@ $(function() {
 	});
 	
 });
-</script>
+</script><br>
