@@ -786,6 +786,18 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .former { +height: 18px; }
 .die6 { margin-bottom: 10px; width: 780px; _overflow-x: auto; }
 /*
+*
+*/
+.search_all{ width:320px; overflow:hidden; padding:5px 0;}
+.search_content{ width:248px; height:33px; border:2px solid #d3d3d3; -moz-border-radius: 8px;-khtml-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px; background:white; padding-left:-2px;}
+.search_textbox{ width:170px; height:33px; line-height:35px; border:0; font-size:14px; color:#c4c4c4; text-align:left; overflow:hidden; background:none;}
+.search_btn{ width:60px;padding:1px 0px 0 0;}
+#search_method{ height:35px; border:1px solid #d3d3d3;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;}
+.FloatLeft{float:left; margin:0;}
+.FloatRight { float:right; margin:0;}
+
+
+/*
  * -------------------------------------------------------
  * ******************** end hack.css *********************
  * -------------------------------------------------------

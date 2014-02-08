@@ -33,7 +33,7 @@ p {line-height:20px;}
 .top { width:100%; height:100px;}
 .TopMin320 { min-width:320px;}
 *html .top_bg {position:absolute; top:expression(eval(document.documentElement.scrollTop));}
-.top_bg{ width:100%; left:0; height:45px; background:url(http://bestchoice88.com/tpl/Wap/default/common/images/weTall/top_bg.jpg) repeat-x; position:fixed; top:0; z-index:99999;}
+.top_bg{ width:100%; left:0; height:45px; background:url(/tpl/Wap/default/common/images/weTall/top_bg.jpg) repeat-x; position:fixed; top:0; z-index:99999;}
 /* ---------- king start ---------- */
 .Top_King_top { width:100%; height:45px; overflow:hidden;}
 /* ---------- king end ---------- */
@@ -42,7 +42,7 @@ p {line-height:20px;}
 /* -------------------- bottom --------------------  */
 .BottomKingTop { width:100%; height:44px;}
 .BottomBg { width:100%; left:0; height:44px; background:url(/images/mobi/cn/images/BottomBg.jpg) repeat-x; position:fixed; bottom:0; z-index:99999;}
-*html .BottomBg {position:absolute; top:expression(offsetParent.scrollTop+document.documentElement.clientHeight-this.offsetHeight);}
+。html .BottomBg {position:absolute; top:expression(offsetParent.scrollTop+document.documentElement.clientHeight-this.offsetHeight);}
 .BottomBg .Bottom1Width { width:320px; position:relative; height:43px; background:url(/images/mobi/cn/images/BottomBor.jpg) no-repeat left bottom; padding-top:1px; z-index:5;}
 .BottomBg .Bottom1Width li { float:left; width:106px; font-size:14px; line-height:43px; text-align:center; background:url(/images/mobi/cn/images/BottomBor.jpg) no-repeat right bottom; cursor:pointer;}
 
@@ -81,10 +81,11 @@ p {line-height:20px;}
 /* -------------------- other --------------------  */
 .title{ font-size:14px; color:#4f4f4f; text-align:center; border-bottom:1px solid #c00f18;}
 
-.search_all{ width:95%; overflow:hidden; padding:10px 0;}
-.search_content{ width:202px; height:33px; border:2px solid #d3d3d3; -moz-border-radius: 8px;-khtml-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px; background:url(/images/mobi/cn/images/search_ico.jpg) no-repeat center left; padding-left:30px;}
-.search_textbox{ width:170px; height:35px; line-height:35px; border:0; font-size:14px; color:#c4c4c4; text-align:left; overflow:hidden; background:none;}
+.search_all{ width:99%; overflow:hidden; padding:5px 0;}
+.search_content{ width:240px; height:33px; border:2px solid #d3d3d3; -moz-border-radius: 8px;-khtml-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px; background:white; padding-left:0px;}
+.search_textbox{ width:170px; height:33px; line-height:35px; border:0; font-size:14px; color:#c4c4c4; text-align:left; overflow:hidden; background:none;}
 .search_btn{ padding:1px 5px 0 0;}
+#search_method{ height:35px; border:1px solid #d3d3d3;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;}
 
 .top_title_all{ padding:10px;}
 .top_title{ width:100%; height:45px; line-height:45px; color:#FFF; font-size:14px; text-align:center;}
