@@ -41,6 +41,12 @@ class indexAction extends backendAction {
     		}
     		$list[] = $content;
     	}
+    	
+    	//tax for mall
+    	$tax = M("set_tax");
+    	$currentTax = $tax->find();//var_dump($currentTax);die();
+    	
+    	$this->assign("currentTax",$currentTax);
     	$this->assign('list',$list);
     	$this->assign('page',$show);// 赋值分页输出pti
 

@@ -311,7 +311,7 @@
                 <case value="2"><!-- 待发货-->
                 
                <a data-height="130" data-width="650"
-                 data-id="add" data-title="发货管理" data-uri="/index.php?g=admin&amp;m=item_order&amp;a=fahuo&amp;id={$info.id}&amp;tokenTall={$info.tokenTall}" href="javascript:void(0);" class="add fb J_showdialog"> 	<input type="button" value="发货" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
+                 data-id="add" data-title="发货管理" data-uri="/weTall/index.php?g=admin&amp;m=item_order&amp;a=fahuo&amp;id={$info.id}&amp;tokenTall={$info.tokenTall}" href="javascript:void(0);" class="add fb J_showdialog"> 	<input type="button" value="发货" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
                 </case>  
                 <case value="3"><!-- 待收货 -->
                   <a href="{:U('item_order/status',array('orderId'=>$info['orderId'],'status'=>4,'tokenTall'=>$info['tokenTall']))}"><input type="button" value="设为已收货" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
