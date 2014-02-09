@@ -859,7 +859,7 @@ class WeixinAction extends Action
         } else {
           
             if ($home['apiurl'] == false) {
-                $url = 'http://bestchoice88.com/weTall' . '/index.php?g=home&m=index&a=index&token='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
+                $url = '/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
             } else {
                 $url = $home['apiurl'];
             }

@@ -2,7 +2,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1"><title>微指购商城,中国最大的手机商场，微网商城上线站点</title>
+<head id="Head1"><title>微指购商城,中国最大的手机商城，微网商城上线站点</title>
 <meta name="Keywords" content="Micronet，服装商城,专业服装批发，服饰" />
 <meta name="Description" content="Micronet商城" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /><meta http-equiv="x-ua-compatible" content="ie=7" /><link rel="stylesheet" type="text/css" href="{lanrain::RES}/js/weTall/public.css" /><link rel="stylesheet" type="text/css" href="{lanrain::RES}/js/weTall/index.css" />
@@ -50,15 +50,22 @@
 </ul>
 <ul class="banner_link"></ul>
 </div>
-
+<script>
+function submitForm(){
+	$("#form1").submit(function(e){
+		
+		});
+	
+}
+</script>
 <div class="search_all">
-    <form id="kewSearchForm" action="" defaultbutton="imgSearch">       
+    <form id="form1" action="/weTall/index.php?m=index&a=search" method="post">       
         <div class="search_content FloatLeft">
-        <select id="search_method" name="method"><option selected value="shop">搜店铺</option><option selected value="goods">搜商品</option></select>
+        <select id="search_method" name="method"><option selected value="weFig">搜商品</option><option value="shop">搜店铺</option></select>
             <input type="text" id="txtKeyword" autocomplete="off" placeholder="请输入搜索内容" value=""
-                class="search_textbox" /></div>
+               name="txtkeyword" class="search_textbox" /></div>
         <div class="search_btn FloatRight">
-            <input type="image" id="imgSearch" src="{lanrain::RES}/images/weTall/search_btn.jpg" /></div>
+            <input type="image" id="submit" onclick="submitForm();" src="/tpl/Wap/default/common/images/weTall/search_btn.jpg" /></div>
     </form>
 </div>
 

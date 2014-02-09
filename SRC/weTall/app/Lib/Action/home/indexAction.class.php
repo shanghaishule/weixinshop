@@ -4,6 +4,7 @@ class indexAction extends frontendAction {
     public function index() {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();
+    	$_SESSION["tokenTall"]=$tokenTall;
     	
     	/*****首页广告***/
     	$ad= M('ad');
@@ -37,7 +38,80 @@ class indexAction extends frontendAction {
         $this->_config_seo();
         $this->display();
     }
-    
+    public function search() {
+    	if(IS_POST){
+    		$keyword=$this->_post("txtkeyword","trim");
+    		$method=$this->_post("method");
+    		$tokenTall = $this->getTokenTall();
+    		if($tokenTall != ""){
+    			$token= $tokenTall;
+    		}else{
+    			$token=$_SESSION["tokenTall"];
+    		}
+    		if($keyword == ""){
+    			$this->error("请输入关键字！");
+    		}
+    		else if($method=="local"){
+    			$this->nextPage($method, $keyword, $token);
+                $_SESSION['keyword']=$keyword;
+                $_SESSION['token']=$token;
+                $_SESSION['method']=$method;
+    		}else if($method=="weFig"){
+    			$this->nextPage($method, $keyword);
+                $_SESSION['keyword']=$keyword;
+                $_SESSION['method']=$method;
+    		}else{
+    			$this->nextPage($method, $keyword);
+    			$_SESSION['keyword']=$keyword;
+    			$_SESSION['method']=$method;
+    		}
+    	}else{
+    		if($_SESSION['method'] == "local"){
+    		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'], $_SESSION['token']);
+    		}else{
+    			$this->nextPage($_SESSION['method'], $_SESSION['keyword']);
+    		}
+    	}
+    }
+    public function nextPage($method,$keyword,$token){
+    	if($method=="shop"){   		
+    		$item = M("wecha_shop");   		
+    		$condition["name"] = array("like", "%".$keyword."%");
+    		$count = $item->where($condition)->count();
+    		$Page       = new Page($count,2);// 实例化分页类 传入总记录数
+    		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+    		$nowPage = isset($_GET['p'])?$_GET['p']:1;
+    		$show       = $Page->show();// 分页显示输出
+    		$carryrecord  = $item->where($condition)->order('id DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+ 
+    		$this->assign("item",$carryrecord);
+    		$this->assign("method",$method);
+    		$this->assign('page',$show);// 赋值分页输出pti
+    		$this->assign("count",$count);
+    		$this->display();
+    	}else{
+	    	$tokenTall = $token;
+	    	$this->assign('tokenTall',$tokenTall);
+	    	
+	    	$item = M("item");
+	    	if($token != ""){
+	    	   $condition["tokenTall"]=$token;
+	    	}
+	    	$condition["title"] = array("like", "%".$keyword."%");
+	    	$count = $item->where($condition)->count();
+	    	$Page       = new Page($count,2);// 实例化分页类 传入总记录数
+	    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+	    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
+	    	$show       = $Page->show();// 分页显示输出
+	    	$carryrecord  = $item->where($condition)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+	    	 
+	    	$this->assign("item",$carryrecord);
+	    	$this->assign("method",$method);
+	    	$this->assign('page',$show);// 赋值分页输出pti
+	    	$this->assign("count",$count);
+	    	$this->display();
+    	}
+    }
     public function getItem($where = array())
     {
     	$where_init = array('status'=>'1');
