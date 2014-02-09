@@ -785,8 +785,10 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .no_former { +height: 18px; }
 .former { +height: 18px; }
 .die6 { margin-bottom: 10px; width: 780px; _overflow-x: auto; }
-/*
-*
+
+/*-------------------------------------------------------------
+*Search area
+*--------------------------------------------------------------
 */
 .search_all{ width:320px; overflow:hidden; padding:5px 0;}
 .search_content{ width:248px; height:33px; border:2px solid #d3d3d3; -moz-border-radius: 8px;-khtml-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px; background:white; padding-left:-2px;}

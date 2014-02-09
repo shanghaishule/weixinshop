@@ -124,8 +124,9 @@
                  </switch>
                 </td> 
                 <td align="center">{$val.add_time|date='Y-m-d H:i:s',###}--<br><if condition="$val.support_time neq '' ">{$val.support_time|date='Y-m-d H:i:s',###}</if></td>
-                <td align="center"><a href="{:U('item_order/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">查看</a>| <a href="javascript:void(0);" class="J_confirmurl" data-uri="{:U('item_order/delete', array('id'=>$val['id'], 'tokenTall'=>$val['tokenTall']))}" data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),$val['orderId'])}">{:L('delete')}</a> </td>
-            </tr>
+                <td align="center"><a href="{:U('item_order/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">查看</a>| <a href="javascript:void(0);" class="J_confirmurl" data-uri="{:U('item_order/delete', array('id'=>$val['id'], 'tokenTall'=>$val['tokenTall']))}" data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),$val['orderId'])}">{:L('delete')}</a>
+                | <a href="javascript:;" class="J_showdialog" data-uri="{:U('item_order/update', array('id'=>$val['id'], 'tokenTall'=>$val['tokenTall']))}" data-title="编辑 - {$val.orderId}"  data-id="update" data-acttype="ajax" data-width="800" data-height="130">修改价格</a> </td>
+            </tr> 
             </volist>
     	</tbody>
     </table>
