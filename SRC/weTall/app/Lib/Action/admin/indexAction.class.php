@@ -104,14 +104,34 @@ class indexAction extends backendAction {
         $fahuo= $this->item_order->where(array('status'=>2,'tokenTall'=>$tokenTall))->count();
         $yfahuo= $this->item_order->where(array('status'=>3,'tokenTall'=>$tokenTall))->count();
         $this->assign('count',
-        array('fukuan'=>$fukuan,
-        'fahuo'=>$fahuo,
-        'yfahuo'=>$yfahuo,
-        'buycount'=>$buycount,
-        'nobuycount'=>$nobuycount
-        )
+	        array('fukuan'=>$fukuan,
+	        'fahuo'=>$fahuo,
+	        'yfahuo'=>$yfahuo,
+	        'buycount'=>$buycount,
+	        'nobuycount'=>$nobuycount
+	        )
         );
         
+        $account_mod = M('account_bill_mst');
+        $account_weiduizhang = $account_mod->where("status in (0,1) and tokenTall='".$tokenTall."'")->count();
+        $account_where_weijie = "status != 4 and tokenTall = '".$tokenTall."'";
+        $account_weijie_cnt = $account_mod->where($account_where_weijie)->count();
+        $account_weijie_amt = $account_mod->where($account_where_weijie)->sum('yingjie');
+        $account_weijie_amt = $account_weijie_amt ? $account_weijie_amt : 0;
+        $account_where_yijie = "status = 4 and tokenTall = '".$tokenTall."'";
+        $account_yijie_cnt = $account_mod->where($account_where_yijie)->count();
+        $account_yijie_amt = $account_mod->where($account_where_yijie)->sum('yingjie');
+        $account_yijie_amt = $account_yijie_amt ? $account_yijie_amt : 0;
+
+        $this->assign('account_cnt',
+        	array('weiduizhang'=>$account_weiduizhang,
+				'weijie_cnt'=>$account_weijie_cnt,
+        		'weijie_amt'=>$account_weijie_amt,
+        		'yijie_cnt'=>$account_yijie_cnt,
+        		'yijie_amt'=>$account_yijie_amt,
+        	)
+        );
+
         $this->display();
     }
 
@@ -191,7 +211,7 @@ class indexAction extends backendAction {
                 $left_menu[99]['sub'] = $r;
             }
 
-            array_unshift($left_menu[0]['sub'], array('id'=>0,'name'=>'后台首页','module_name'=>'index','action_name'=>'often_menu'));
+            array_unshift($left_menu[0]['sub'], array('id'=>0,'name'=>'后台首页','module_name'=>'index','action_name'=>'panel'));
         }
         $this->assign('left_menu', $left_menu);
         $this->assign('tokenTall', $this->getTokenTall());

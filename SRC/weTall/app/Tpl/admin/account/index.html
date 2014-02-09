@@ -62,7 +62,7 @@
                 <td align="center">{$val.rate}</td>
                 <td align="center" class="red">{$val.yingjie}</td>
                 <td align="center">
-                <a href="{:U('account/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">查看和操作</a>
+                <a href="{:U('account/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall'], 'status'=>$search['status']))}">查看和操作</a>
                 </td>
             </tr>
             </volist>

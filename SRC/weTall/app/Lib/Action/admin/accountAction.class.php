@@ -11,6 +11,8 @@ class accountAction extends backendAction
         		2=>'商城未对账，店铺已对账',
         		3=>'商城已对账，店铺已对账',
         		4=>'已付款',
+        		5=>'--所有--未对账--',
+        		6=>'--所有--未付款--',
         );
         $this->assign('account_status',$account_status);
         $this->_mod_setting = D('account_setting');
@@ -29,7 +31,7 @@ class accountAction extends backendAction
     
     public function index() {
     	$map = $this->_search();
-    	//var_dump($map);exit;
+    	//dump($map);exit;
     	$mod = $this->_mod_bill_mst;
     	!empty($mod) && $this->_list($mod, $map);
     	$this->display();
@@ -45,8 +47,16 @@ class accountAction extends backendAction
     	}else{
     		$status = intval($_GET['status']);
     	}
-    	$status>=0 && $map['status'] = array('eq',$status);
-    	
+    	if ($status >= 0) {
+    		if ($status == 5) {
+    			$map['status'] = array('in', '0,1');
+    		}else if ($status == 6) {
+    			$map['status'] = array('neq', '4');
+    		}else{
+    			$map['status'] = array('eq',$status);
+    		}
+    	}
+
     	$tokenTall = $this->getTokenTall();
     	$map['tokenTall'] = array('eq', $tokenTall);
     
@@ -62,10 +72,14 @@ class accountAction extends backendAction
     
     public function edit() {
     		$id = $this->_get('id','intval');
+    		$status = $this->_get('status','intval');
     		$account_master = $this->_mod_bill_mst->where(array('id'=>$id))->find();
-    		$account_detail = $this->_mod_bill_dtl->where('billnum='.$account_master['billnum'])->select();
+    		//dump($account_master);exit;
+    		$account_detail = $this->_mod_bill_dtl->where("billnum='".$account_master['billnum']."'")->select();
+    		
     		$this->assign('account_detail',$account_detail);
     		$this->assign('account_master', $account_master);
+    		$this->assign('status', $status);
     		$this->display();
     }
     

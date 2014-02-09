@@ -9,6 +9,8 @@ class StatisticsAction extends BackAction
         		2=>'商城未对账，店铺已对账',
         		3=>'商城已对账，店铺已对账',
         		4=>'已付款',
+        		//5=>'未对账',
+        		//6=>'未付款',
         );
         $this->assign('account_status',$account_status);
         $this->_mod_setting = D('account_setting');
