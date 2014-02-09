@@ -9,7 +9,7 @@ class indexAction extends backendAction {
     }
 
     public function index() {
-        $this->login();   
+           
         $top_menus = $this->_mod->admin_menu(0);
         $this->assign('top_menus', $top_menus);
         $my_admin = array('username'=>$_SESSION['admin']['username'], 'rolename'=>$_SESSION['admin']['role_id']);
@@ -158,6 +158,8 @@ class indexAction extends backendAction {
                 'username' => $admin['username'],
             ));
             M('admin')->where(array('id'=>$admin['id']))->save(array('last_time'=>time(), 'last_ip'=>get_client_ip()));
+            $tokenTall = $_SESSION["tokenTall"];
+            header("location: /weTall/index.php?g=admin&m=index&a=index&tokenTall=".$tokenTall);
         //    $this->success(L('login_success'), U('index/index'));
        // } else {
        //     $this->display();
@@ -166,6 +168,7 @@ class indexAction extends backendAction {
 
     public function logout() {
         session('admin', null);
+        session('tokenTall', null);
         $this->success(L('logout_success'), U('index/login'));
         exit;
     }

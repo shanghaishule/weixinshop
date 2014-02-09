@@ -13,6 +13,10 @@ class baseAction extends Action
         if (false === $setting = F('setting')) {
             $setting = D('setting')->setting_cache();
         }
+        //设置tokenTall值
+        $tokenTall = $this->_request('tokenTall', 'trim', '');
+        if($tokenTall != "") {$_SESSION["tokenTall"]=$tokenTall;}
+        
         C($setting);
         //发送邮件
         $this->assign('async_sendmail', session('async_sendmail'));
@@ -133,6 +137,7 @@ class baseAction extends Action
     /*取商家token值，取不到则默认为空*/
     public function getTokenTall(){
     	$tokenTall = $this->_request('tokenTall', 'trim', '');
+    	if($tokenTall != "") {$_SESSION["tokenTall"]=$tokenTall;}
     	return $tokenTall;
     }
 }
