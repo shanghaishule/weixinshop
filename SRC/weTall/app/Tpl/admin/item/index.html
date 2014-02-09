@@ -65,7 +65,7 @@
         <thead>
             <tr>
                 <th width=25><input type="checkbox" id="checkall_t" class="J_checkall"></th>
-                <th><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <!-- <th><span data-tdtype="order_by" data-field="id">ID</span></th> -->
                 <th width="40">&nbsp;</th>
                 <th align="left"><span data-tdtype="order_by" data-field="title">商品名称</span></th>
                 <th width="70"><span data-tdtype="order_by" data-field="buy_num">卖出数量</span></th>
@@ -83,7 +83,7 @@
             <volist name="list" id="val" >
             <tr>
                 <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
-                <td align="center">{$val.id}</td>
+                <!-- <td align="center">{$val.id}</td> -->
                 <td align="right">
                     <notempty name="val['img']"><div class="img_border"><img src="{:attach(get_thumb($val['img'], '_s'), 'item')}" width="32" width="32" class="J_preview" data-bimg="{:attach($val['img'], 'item')}"></div></notempty>
                 </td>

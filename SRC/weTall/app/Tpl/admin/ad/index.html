@@ -50,7 +50,7 @@
         <thead>
           <tr>
             <th width="25"><input type="checkbox" name="checkall" class="J_checkall"></th>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th align="left"><span data-tdtype="order_by" data-field="name">{:L('ad_name')}</span></th>
             <th align="left"><span data-tdtype="order_by" data-field="url">{:L('ad_url')}</span></th>
             <th width="70"><span data-tdtype="order_by" data-field="type">{:L('ad_type')}</span></th>
@@ -65,7 +65,7 @@
           <volist name="list" id="val" >
           <tr>
             <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
-            <td align="center">{$val.id}</td>
+            <!-- <td align="center">{$val.id}</td> -->
             <td><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit">{$val.name}</span></td>
             <td><span data-tdtype="edit" data-field="url" data-id="{$val.id}" class="tdedit">{$val.url}</span></td>
             <td align="center">{$ad_type_arr[$val['type']]}<if condition="$val.type eq 'image'"><notempty name="val['content']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="/weTall/data/upload/advert/{$img_dir}{$val.content}"><img src="__STATIC__/images/filetype/image_s.gif" /></span></notempty></if></td>

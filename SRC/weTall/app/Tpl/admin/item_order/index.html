@@ -78,7 +78,7 @@
         <thead>
             <tr>
                 <th width=25><input type="checkbox" id="checkall_t" class="J_checkall"></th>
-                <th width="100"><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <!-- <th width="100"><span data-tdtype="order_by" data-field="id">ID</span></th> -->
                 <th width="100"><span data-tdtype="order_by" data-field="orderId">订单编号&状态</span></th>
                 <th width="70"><span data-tdtype="order_by" data-field="order_sumPrice">订单金额</span></th>
                 <th width="60">收货人&电话</span></th>
@@ -91,7 +91,7 @@
             <volist name="list" id="val" >
             <tr>
                 <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
-                <td align="center">{$val.id}</td>
+                <!-- <td align="center">{$val.id}</td> -->
        
                 <td align="center"><a href="{:U('item_order/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">{$val.orderId}</a><br> 
                <if condition="$val.sellerRemark neq ''"> 
