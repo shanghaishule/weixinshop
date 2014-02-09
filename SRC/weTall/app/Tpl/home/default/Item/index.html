@@ -40,7 +40,21 @@
 	    	
 	        var goodId = $("#goodId").val();
 	        var quantity = $("#quantity").val();
+	        var size =  $("input[name='size']:checked").val();
+	        var color = $("input[name='color']:checked").val();
+	        //alert(size);
 
+	        if (typeof(size) == "undefined")
+	        {
+	            alert('请选择大小');
+	            return;
+	        }
+	        if (typeof(color) == "undefined")
+	        {
+	            alert('请选择颜色');
+	            return;
+	        }
+	        
 	        if (quantity == '')
 	        {
 	            alert('请输入购买数量');
@@ -57,14 +71,14 @@
 	           return;
 	        }
 	        
-	        add_cart(goodId, quantity);
+	        add_cart(goodId, quantity, size, color);
 	    }
 	    
-	    function add_cart(goodId,quantity)//商品ID，购买数量
+	    function add_cart(goodId,quantity,size,color)//商品ID，购买数量
 	    {
 	    	
 	     	var url  = "{:U('shopcart/add_cart')}";
-	     	$.post(url,{goodId:goodId,quantity:quantity},function(data){
+	     	$.post(url,{goodId:goodId,quantity:quantity,size:size,color:color},function(data){
 	     		//alert(data.msg);
 	     		if(data.status==1)
 	     		{
@@ -155,7 +169,23 @@
 			</div>
             <div class="handle">
                 <ul>
-                    <li class="handle_title">购买数量: </li>
+                	<li class="handle_title">大小:</li>
+                    <li>
+                    <volist name='size' id='vo'>
+                    	<input type="radio" name="size" value="{$vo}" />{$vo}
+                    </volist>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="handle_title">颜色:</li>
+                    <li>
+                    <volist name='color' id='vo'>
+                    	<input type="radio" name="color" value="{$vo}" />{$vo}
+                    </volist>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="handle_title">购买数量:</li>
                     <li>
                         <input type="text" value="1" id="quantity" name="" class="text width1" onafterpaste="this.value=this.value.replace(/\D/g,'')" onkeyup="this.value=this.value.replace(/\D/g,'')" />件（库存<span ectype="goods_stock" class="stock">{$item.goods_stock}</span>件）
                     </li>

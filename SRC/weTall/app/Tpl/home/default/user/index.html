@@ -43,6 +43,8 @@
                     <div class="con">
                         <p class="ware_pic"><a href="{:U('Item/index',array('id'=>$item['itemId'],'tokenTall'=>$tokenTall))}" ><img src="{:attach(get_thumb($item['img'], '_b'), 'item')}" height="80" width="80"></a></p>
                         <p class="ware_text"><a href="{:U('Item/index',array('id'=>$item['itemId'],'tokenTall'=>$tokenTall))}">{$item.title}</a><br><span class="attr"></span></p>
+                        <p>大小: <span>{$item.size}</span></p>
+                        <p>颜色: <span>{$item.color}</span></p>
                         <p class="price">价格: <span>¥{$item.price}</span></p>
                         <p class="amount">数量: <span>{$item.quantity}</span></p>
                     </div>

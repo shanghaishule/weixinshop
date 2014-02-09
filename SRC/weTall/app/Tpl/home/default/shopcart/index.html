@@ -49,6 +49,8 @@ $(function(){
                   <span class="img"><a href="{:U('Item/index',array('id'=>$vo['id'],'tokenTall'=>$tokenTall))}" ><img src="{:attach(get_thumb($vo['img'], '_m'), 'item')}" height="80" width="80"></a></span>
                   <span class="tit">
                       <a href="{:U('Item/index',array('id'=>$vo['id'],'tokenTall'=>$tokenTall))}" >{$vo.name}</a><br>
+                      <span>大小:</span><span class="price1">{$vo.size}</span><br>
+                      <span>颜色:</span><span class="price1">{$vo.color}</span><br>
                       <span>价格:</span><span class="price1">¥{$vo.price}</span><br>
                       <span>数量:</span>
                       <span>

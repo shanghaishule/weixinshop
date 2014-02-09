@@ -113,7 +113,7 @@ class orderAction extends userbaseAction {
 	  	    $item_detail=array();
 	  	    foreach ($order_details as $val)
 	  	    {
-	  		    $items= array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity']);
+	  		    $items= array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity'],'size'=>$val['size'],'color'=>$val['color']);
 	  		    //$order[$key]['items'][]=$items;
 	  		    $item_detail[]=$items;
 	  	    }
@@ -284,6 +284,8 @@ class orderAction extends userbaseAction {
 					$orders['img']=$item['img'];//商品图片
 					$orders['price']=$item['price'];//商品价格 
 					$orders['quantity']=$item['num'];//购买数量
+					$orders['size']=$item['size'];//大小
+					$orders['color']=$item['color'];//颜色
 					$order_detail->data($orders)->add();
 				}
 

@@ -16,25 +16,37 @@ class shopcartAction extends frontendAction {
 		$this->assign('item',$_SESSION['cart']);
 		$this->assign('sumPrice',$cart->getPrice());
 		$this->assign('tokenTall',$tokenTall);
+		
+		//header("content-Type: text/html; charset=Utf-8");
+		//dump($_SESSION['cart']);exit;
+		
 		$this->_config_seo();
 		$this->display();
     }
     
     public function add_cart()//添加进购物车
     {
+    	header("content-Type: text/html; charset=Utf-8");
+    	
     	import('Think.ORG.Cart');// 导入分页类
     	$cart=new Cart();
     	
     	$goodId= $this->_post('goodId', 'intval');//商品ID
     	$quantity=$this->_post('quantity', 'intval');//购买数量
+    	$size= $this->_post('size', 'intval');//大小
+    	$color=$this->_post('color', 'trim');//颜色
+    	   
     	$item=M('item')->field('id,title,img,price,goods_stock')->find($goodId);
+    	$item['size'] = $size;
+    	$item['color'] = $color; //mb_convert_encoding($color, "UTF-8", "GBK");
+    	
     	if(!is_array($item))
     	{
     		$data=array('status'=>0,'msg'=>'不存在该商品','count'=>$cart->getCnt(),'sumPrice'=>$cart->getPrice());
     	}elseif($item['goods_stock']<$quantity){
     		$data=array('status'=>0,'msg'=>'没有足够的库存','count'=>$cart->getCnt(),'sumPrice'=>$cart->getPrice());
     	}else {
-    		$result= $cart->addItem($item['id'],$item['title'],$item['price'],$quantity,$item['img']);
+    		$result= $cart->addItem($item['id'],$item['title'],$item['price'],$quantity,$item['img'],$item['size'],$item['color']);
     		if($result==1)//购物车存在该商品
     		{
     			$data=array('result'=>$result,'status'=>1,'count'=>$cart->getCnt(),'sumPrice'=>$cart->getPrice(),'msg'=>'该商品已经存在购物车');

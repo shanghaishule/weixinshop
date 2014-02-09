@@ -80,3 +80,9 @@ CREATE TABLE IF NOT EXISTS `tp_account_bill_dtl` (
 /*增加账单管理*/
 insert into tp_menu(`name`,pid,module_name,action_name,`data`,remark,often)
 values('账单管理',0,'account','index','','',3);
+
+/*订单商品明细表，加大小和颜色*/
+alter table tp_order_detail add `size` varchar(255) NOT NULL DEFAULT '';
+alter table tp_order_detail add `color` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '';
+
+
