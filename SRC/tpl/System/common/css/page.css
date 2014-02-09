@@ -20,7 +20,7 @@
 	.chk_input{padding-left:13px;background-color:#fff;width:103px;height:33px;vertical-align:middle;border:solid 1px #d2d9dc;border-radius:2px;}
 	.chk_img{display:inline-block;margin-left:5px;padding:0px 10px 14px 0px;vertical-align:middle;width:51px;height:14px;line-height:33px;background-color:#fff;border:solid 1px #d2d9dc;}
 	.chk_txt{display:inline-block;margin-left:5px;color:#386693;height:33px;line-height:33px;}
-	.subBtn{cursor:pointer;margin-top:18px;margin-left:33px;background:url(http://img1.youxinpai.com/image/chengxp/experience/ty_button.gif) no-repeat 0 0;border:0;height:33px;width:290px;}
+	.subBtn{cursor:pointer;margin-top:18px;margin-left:33px;background:url(../images/ty_button.png) no-repeat 0 0;border:0;height:33px;width:290px;}
 /*表单获取焦点样式*/
 	.inputFocus{border:solid 1px #b7d4ea;}
 

@@ -17,8 +17,9 @@ img{vertical-align:top;}
 .mt8 {margin-top:8px;}
 .ins {display:none}
 
-#header {background:url(headbg.png) repeat-x;height:178px;width:100%;z-index:8;position:relative;overflow:hidden}
-.top{background:url(topbg.jpg) no-repeat;height:92px;}
+#header {background:url(headbg2.png) repeat-x;height:178px;width:100%;z-index:8;position:relative;overflow:hidden}
+/*.top{background:url(topbg.jpg) no-repeat;height:92px;}*/
+.top{background:url(/tpl/User/default/common/images/weizhigou_logo.png) no-repeat;height:92px;}
 .top .login {margin:50px 20px 0 0;float:right;font-size:14px;color:#fff;font-weight:bold}
 .top .login a,.top .login a:visited {color:#fff;}
 .top .login a:hover {color:#ff0}
