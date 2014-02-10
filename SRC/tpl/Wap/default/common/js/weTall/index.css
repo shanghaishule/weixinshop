@@ -19,8 +19,9 @@
 .banner_link .banner_link_red2 { background-color:#c00f18;}
 
 .btn_big{ width:100%; overflow:hidden;}
-.btn_big li{ float:left; width:102px; height:49px; line-height:49px; background:url(/tpl/Wap/default/common/images/weTall/btn_big.jpg) no-repeat; color:#4f4f4f; font-size:14px; text-align:center; font-family:"microsoft yahei", Arial, SimSun; padding:0 2px; overflow:hidden;}
-.btn_big li a{ width:102px; height:49px; display:block;}
+.btn_big li{ float:left; width:100px; height:98px;border:1px solid #D9D9D9; line-height:49px; background:white; color:#4f4f4f; font-size:14px; text-align:center; font-family:"microsoft yahei", Arial, SimSun; padding:0 2px; overflow:hidden;}
+.btn_big li a{ width:100px; height:49px; display:block;}
+.btn_big li a span{ display:block;margin-top:-10px;}
 
 .pr_list{ overflow:hidden; padding:5px;background:white;border-top:1px solid #D9D9D9;border-bottom:1px dashed #D9D9D9;}
 .pr_list_frist{border-left:1px dashed #D9D9D9;}
@@ -37,6 +38,22 @@
 .pr_link li{ font-size:14px; color:#666666; border:1px solid #dddddd; padding:8px; margin:8px 0; overflow:hidden;}
 .pr_link span{ color:#c00f18; float:right;}
 
+/* ---------------new product --------*/
+.newPro{ background-image:url('/tpl/Wap/default/common/images/weTall/tuan.png');
+		 background-position:-20px -52px;
+		 width:64px;
+		 height:64px;
+		 margin-top:8px;}
+.tuanPro{ background-image:url('/tpl/Wap/default/common/images/weTall/tuan.png');
+		 background-position:-96px -52px;
+		 width:64px;
+		 height:64px;
+		 margin-top:8px;}
+.mailPro{ background-image:url('/tpl/Wap/default/common/images/weTall/tuan.png');
+		 background-position:-336px -52px;
+		 width:64px;
+		 height:64px;
+		 margin-top:8px;}
 /* ---------- king ---------- */
 .Pr_list_Cont { width:100%; position:relative; height:145px; overflow:hidden; background:white;border-bottom:1px solid #D9D9D9;}
 .pr_list_second { position:absolute; left:0; top:0; width:100%; overflow:hidden;}
