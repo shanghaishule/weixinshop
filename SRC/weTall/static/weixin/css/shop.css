@@ -800,7 +800,15 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .FloatLeft{float:left; margin:0;}
 .FloatRight { float:right; margin:0;}
 
-
+/*-------------------------------------------------------
+ **
+ **分页css
+ */
+#pages{
+	width:100%;
+	text-align:center;
+	padding:5px;
+}
 /*
  * -------------------------------------------------------
  * ******************** end hack.css *********************

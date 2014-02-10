@@ -33,6 +33,8 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
 
 <div id="content">
     <div class="module_special tbr">
+        <if condition="$count eq 0"><div id="pages">没有记录!</div></if>
+        <if condition="$itemcate neq 'Y'">
         <h2 class="common_title veins2">
             <div class="ornament1"></div>
             <div class="ornament2"></div>
@@ -40,6 +42,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                 <span class="ico2">搜索到{$count}个<if condition="$method neq 'shop'">商品<else/>店铺</if></span>
             </span>
         </h2>
+        </if>
         <if condition="$method eq 'shop'">
         <div class="wrap">
             <div class="wrap_child">
@@ -57,7 +60,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                      </volist>
                    </table>
                 </div>
-                <div id="pages">共{$page}</div>
+                <div id="pages">{$page}</div>
             </div>
         </div><else/>
         <div class="wrap">
@@ -82,7 +85,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                      </volist>
                     </ul>
                 </div>
-                <div id="pages">共{$page}</div>
+                <div id="pages">{$page}</div>
             </div>
         </div></if>
     </div>

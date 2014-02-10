@@ -66,12 +66,62 @@ class indexAction extends frontendAction {
     			$_SESSION['method']=$method;
     		}
     	}else{
-    		if($_SESSION['method'] == "local"){
+    		$itemid=$this->_get("itemid","trim");
+    		$brandid=$this->_get("brandid","trim");
+    		if ($brandid != ""){
+    			$this->nextPageBrand($_SESSION['token'],$brandid);
+    		}else if ($itemid != "") {
+    			$this->nextPageCate($_SESSION['token'],$itemid);
+    		}else if($_SESSION['method'] == "local"){
     		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'], $_SESSION['token']);
     		}else{
     			$this->nextPage($_SESSION['method'], $_SESSION['keyword']);
     		}
     	}
+    }
+    public function nextPageBrand($token,$itemid){
+    	$tokenTall = $token;
+    	$this->assign('tokenTall',$tokenTall);
+    	 
+    	$item = M("item");
+    	if($token != ""){
+    		$condition["tokenTall"]=$token;
+    	}
+    	$condition["brand"] = $itemid;
+    	$count = $item->where($condition)->count();
+    	$Page       = new Page($count,2);// 实例化分页类 传入总记录数
+    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
+    	$show       = $Page->show();// 分页显示输出
+    	$carryrecord  = $item->where($condition)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+    
+    	$this->assign("item",$carryrecord);
+    	$this->assign("itemcate","Y");
+    	$this->assign('page',$show);// 赋值分页输出pti
+    	$this->assign("count",$count);
+    	$this->display();
+    }
+    public function nextPageCate($token,$itemid){
+    	$tokenTall = $token;
+    	$this->assign('tokenTall',$tokenTall);
+    	
+    	$item = M("item");
+    	if($token != ""){
+    		$condition["tokenTall"]=$token;
+    	}
+    	$condition["cate_id"] = $itemid;
+    	$count = $item->where($condition)->count();
+    	$Page       = new Page($count,2);// 实例化分页类 传入总记录数
+    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
+    	$show       = $Page->show();// 分页显示输出
+    	$carryrecord  = $item->where($condition)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+    	 
+    	$this->assign("item",$carryrecord);
+    	$this->assign("itemcate","Y");
+    	$this->assign('page',$show);// 赋值分页输出pti
+    	$this->assign("count",$count);
+    	$this->display();
     }
     public function nextPage($method,$keyword,$token){
     	if($method=="shop"){   		
