@@ -47,14 +47,14 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
         <div class="wrap">
             <div class="wrap_child">
                 <div class="major">
-                  <table>
+                  <table width="100%" style="background:white;margin:10px;border:1;text-align:left;">
                      <volist name="item" id="item">
-                      <tr style="background:white;margin:10px"><td>
+                      <tr border="1"><td>
                      	<a  href="{:U('index/index',array('tokenTall'=>$item['tokenTall']))}">
-                     	<img src="{$item.headurl}"/ width="30" height="30" /></a>
-                     	</td><td style="padding-left:20px">
+                     	<img src="{$item.headurl}"/ width="50" height="50" /></a>
+                     	</td><td style="padding-left:20px"><div  class="shopClass"> 
                      	<a  href="{:U('index/index',array('tokenTall'=>$item['tokenTall']))}">
-                     	{$item.name} | 信誉:{$item.credit}</a>
+                     	{$item.name} | 信誉:{$item.credit}</a>{$item.info}</div>
 						</td>
                       </tr>
                      </volist>

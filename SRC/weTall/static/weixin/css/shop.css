@@ -809,6 +809,15 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 	text-align:center;
 	padding:5px;
 }
+.shopClass{
+	display:block;
+	margin:-10px;
+	font-size:14px;
+	
+}
+.shopClass a{
+	color:blue;
+}
 /*
  * -------------------------------------------------------
  * ******************** end hack.css *********************
