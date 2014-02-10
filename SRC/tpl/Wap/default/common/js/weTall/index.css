@@ -19,13 +19,13 @@
 .banner_link .banner_link_red2 { background-color:#c00f18;}
 
 .btn_big{ width:100%; overflow:hidden;}
-.btn_big li{ float:left; width:102px; height:49px; line-height:49px; background:url(/images/mobi/cn/images/btn_big.jpg) no-repeat; color:#4f4f4f; font-size:14px; text-align:center; font-family:"microsoft yahei", Arial, SimSun; padding:0 2px; overflow:hidden;}
+.btn_big li{ float:left; width:102px; height:49px; line-height:49px; background:url(/tpl/Wap/default/common/images/weTall/btn_big.jpg) no-repeat; color:#4f4f4f; font-size:14px; text-align:center; font-family:"microsoft yahei", Arial, SimSun; padding:0 2px; overflow:hidden;}
 .btn_big li a{ width:102px; height:49px; display:block;}
 
 .pr_list{ overflow:hidden; padding:0 5px;}
 .pr_list_frist ul { float:right;}
 .pr_list_frist li { float:left; color:#4f4f4f; background-color:#e9e9e9; margin:0 5px; height:17px; line-height:17px; overflow:hidden; padding:0 5px; cursor:pointer;}
-.pr_list_frist .pr_list_frist_link{ color:#FFF; background:url(/images/mobi/cn/images/pr_list_frist_link.jpg) no-repeat center top; height:21px;}
+.pr_list_frist .pr_list_frist_link{ color:#FFF; background:url(/tpl/Wap/default/common/images/weTall/pr_list_frist_link.jpg) no-repeat center top; height:21px;}
 .pr_list_second ul{ overflow:hidden;}
 .pr_list_second li { color:#666666; border:1px solid #dddddd; float:left; padding:3px 5px; margin:5px; white-space: nowrap; }
 .pr_list_more{ font-size:14px; color:#c00f18; text-align:center; overflow:hidden; padding:5px 0;}
