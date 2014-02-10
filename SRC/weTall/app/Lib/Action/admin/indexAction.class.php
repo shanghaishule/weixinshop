@@ -20,6 +20,55 @@ class indexAction extends backendAction {
         $this->display(); 
     }
 
+    public function edithead(){
+    	if(IS_POST){
+    		//必须上传图片
+    		if (empty($_FILES['headurl']['name'])) {
+    			$this->error('请上传头像图片');
+    		}
+    		//上传图片
+    		$date_dir = date('ym/d/'); //上传目录
+    		$item_headurls = array(); //相册
+    		$result = $this->_upload($_FILES['headurl'], 'item/'.$date_dir, array(
+    				'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'),
+    				'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height'),
+    				'suffix' => '_b,_m,_s',
+    				//'remove_origin'=>true
+    		));
+    		if ($result['error']) {
+    			$this->error($result['info']);
+    		} else {
+    			$data['headurl'] = $date_dir . $result['info'][0]['savename'];
+    			//保存一份到相册
+    			$item_imgs[] = array(
+    					'headurl'     => $data['headurl'],
+    			);
+    		}
+    		$datahead['headurl'] = "/weTall/data/upload/item/".$data['headurl'];
+    		$datahead2['tokenTall'] = $_SESSION["tokenTall"];
+    		$wshop=M("wecha_shop");
+    		if($wshop->where($datahead2)->save($datahead)){
+    			$this->success("头像修改成功");
+    		}else{
+    			$this->error("头像修改失败");
+    		}
+    		
+    	}else{
+    		$token=$this->_get("tokenTall","trim");
+    		
+    		$data["tokenTall"]=$token;
+    		if($token != "") $_SESSION["tokenTall"] = $token;
+    		$weChaShop = M("wecha_shop")->where($data)->find();
+    		$this->assign("we_shop", $weChaShop);
+    		
+    	    if (IS_AJAX) {
+    			$response = $this->fetch();
+    			$this->ajaxReturn(1, '', $response);
+    		} else {
+    			$this->display();
+    		}
+    	}
+    }
     public function panel() {
 
     	$map = array();

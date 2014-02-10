@@ -39,13 +39,13 @@
 .pr_link span{ color:#c00f18; float:right;}
 
 /* ---------------new product --------*/
-.newPro{ background-image:url('/tpl/Wap/default/common/images/weTall/tuan.png');
-		 background-position:-20px -52px;
+.newPro{ background-image:url('/tpl/Wap/default/common/images/weTall/new.png');
+		 background-position:0px 0px;
 		 width:64px;
 		 height:64px;
 		 margin-top:8px;}
-.tuanPro{ background-image:url('/tpl/Wap/default/common/images/weTall/tuan.png');
-		 background-position:-96px -52px;
+.tuanPro{ background-image:url('/tpl/Wap/default/common/images/weTall/recom.png');
+		 background-position:0px 0px;
 		 width:64px;
 		 height:64px;
 		 margin-top:8px;}

@@ -1,5 +1,5 @@
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td, img {margin:0;padding:0;}
-body {font-family: Arial;font-size: 12px;line-height: 1.5;}
+body {font-family: Arial;font-size: 10px;line-height: 1.5;}
 html.off,html.off body {background: #ebefef url(bgimg/left_bg.png) repeat-y -40px top;}
 html.on,html.on body{background: #e2e9ea; background-image:none;}
 html.addbg,html.addbg body{background:#e2e9ea}
