@@ -107,57 +107,25 @@ function submitForm(){
 <div class="title FloatLeft">热门分类</div>
 <div class="pr_list_frist FloatRight">
 <ul>
-<li>品牌男装</li>
-<li>时尚女装</li>
-<li>优质童装</li>
+<volist name="item1" id="item1">
+ <li>{Lanrain:$item1.name}</li>
+</volist>
 </ul>
+
 </div>
 </div>
 <div class="Pr_list_Cont">
-<div class="pr_list_second MarginTop5">
-<ul>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/22_0_0_0___.html">基础卫衣</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/16_0_0_0___.html">针织衫</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/35_0_0_0___.html">家居服</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/41_0_0_0___.html">内衣裤</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/28_0_0_0___.html">运动服饰</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/45_0_0_0___.html">泳装</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/48_0_0_0___.html">针织毛衫</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/4_0_0_0___.html">品牌衬衫</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/519_0_0_0___.html">外套</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/12_0_0_0___.html">POLO衫</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/9_0_0_0___.html">潮流T恤</a></li>
-</ul>
-</div>
-<div class="pr_list_second MarginTop5">
-<ul>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/73_0_0_0___.html">外套</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/233_0_0_0___.html">家居服</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/66_0_0_0___.html">休闲T恤</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/231_0_0_0___.html">泳装</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/8_0_0_0___.html">时尚衬衫</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/71_0_0_0___.html">POLO衫</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/232_0_0_0___.html">内衣裤</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/74_0_0_0___.html">基础卫衣</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/75_0_0_0___.html">裙子</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/230_0_0_0___.html">裤子</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/517_0_0_0___.html">袜子</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/72_0_0_0___.html">针织衫</a></li>
-</ul>
-</div>
-<div class="pr_list_second MarginTop5">
-<ul>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/524_0_0_0___.html">折扣童装</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/141_0_0_0___.html">男童服饰</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/143_0_0_0___.html">婴童服饰</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/521_0_0_0___.html">儿童袜子</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/523_0_0_0___.html">特价童装</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/520_0_0_0___.html">精美配饰</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/144_0_0_0___.html">亲子装</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/142_0_0_0___.html">女童服饰</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/goods_list/522_0_0_0___.html">儿童内衣裤</a></li>
-</ul>
-</div>
+  <volist name="item" id="item">  
+	<div class="pr_list_second MarginTop5">
+	<ul>
+	    <volist name="itemtwo" id="itemval">
+	     <if condition="$itemval['pid'] eq $item['id']">
+	     	<li><a href="#">{Lanrain:$itemval.name}</a></li>
+	     </if>
+	    </volist>
+    </ul>
+   </div>
+ </volist>
 </div>
 <div class="widthMAX pr_list_more"><a href="http://www.shopbest.com.cn/mobi/cn/category_show.html">查看更多分类&gt;&gt;</a></div>
 </div>
@@ -375,39 +343,28 @@ function submitForm(){
         <!--所有分类-->
         <div class="widthMAX all_list">
 <div class="widthMAX">
-<div class="title FloatLeft">全部分类</div>
+<div class="title FloatLeft">所有品牌</div>
 </div>
 <ul>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/1.html">品牌男装</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/7.html">时尚女装</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/56.html">优质童装</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/654.html">一元贺卡（用于测试）</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/653.html">套餐购买</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/60.html">居家日用</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/498.html">餐厨用品</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/190.html">精美摆设</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/57.html">新款鞋子</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/497.html">美妆护肤</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/59.html">粮油调味</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/58.html">流行配件</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/496.html">品牌箱包</a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/channel/505.html">台湾食品</a></li>
+<volist name="brandlist" id="brandlist">
+ <li><a href="http://www.shopbest.com.cn/mobi/cn/channel/1.html">{Lanrain:$brandlist.name}</a></li>
+</volist>
 </ul>
 </div>
 
     </div>
     <div class="widthMAX footer_function">
-<a href="http://www.shopbest.com.cn/mobi/cn/shopping/cart.html" class="shopping_car">我的购物车[<span id="shoppingCartAmount" class="Cred">0</span>]</a>
+<a href="/weTall/index.php?m=shopcart&a=index" class="shopping_car">我的购物车[<span id="shoppingCartAmount" class="Cred">0</span>]</a>
 <a href="http://www.shopbest.com.cn/mobi/cn/help/list.html" class="help">帮助中心</a>
 <a href="http://www.shopbest.com.cn/mobi/cn/article/list_0_1.html" class="into">资讯中心</a>
 </div>
 <div class="footer_bg">
 <div class="FloatLeft">
-<a href="http://www.shopbest.com.cn/mobi/cn/login.html">登录</a> | <a href="http://www.shopbest.com.cn/mobi/cn/register.html">注册</a>
+<a href="/weTall/index.php?g=home&m=user&a=index">登录</a> | <a href="/weTall/index.php?m=user&a=register">注册</a>
 </div>
 <span><a href="#top"><img src="http://www.shopbest.com.cn/images/mobi/cn/images/top.jpg"></a></span>
 </div>
-<div class="footer_txt">Copyright © 2007 - 2014 <a href="http://www.shopbest.com.cn/mobi/cn/help/15.html">微网·中国</a> <a href="http://www.micronet.com.cn/mobi">Micronet</a></div>
+<div class="footer_txt">Copyright © 微指购 <a href="/index.php?g=Wap&m=weTall&a=index">微指购·中国</a> </div>
 <script type="text/javascript" src="http://www.shopbest.com.cn/js/mobi/cn/FootMenu.js"></script>
 <div class="BottomKingTop"></div>
 <div class="BottomBg">
