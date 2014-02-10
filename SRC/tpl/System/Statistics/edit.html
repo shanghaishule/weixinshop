@@ -104,8 +104,8 @@
                    <td width="30%"><?php if($account_master['start_time']){ echo date('Y-m-d H:i:s',$account_master['start_time']); }?> -- <?php if($account_master['end_time']){ echo date('Y-m-d H:i:s',$account_master['end_time']); }?></td>
                </tr>
                <tr>
-                   <td width="10%" class="tdtitle">商家token值：</td>
-                   <td width="20%">{Lanrain:$account_master.tokenTall}</td>
+                   <td width="10%" class="tdtitle">商家：</td>
+                   <td width="20%"><?php foreach($shopinfo as $item){ if($account_master['tokenTall']==$item['tokenTall']) echo $item['name']; } ?></td>
                    <td width="10%" class="tdtitle" ></td>
                    <td width="20%"></td>
                    <td width="10%" class="tdtitle"></td>
