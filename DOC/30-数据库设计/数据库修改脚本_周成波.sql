@@ -85,4 +85,19 @@ values('账单管理',0,'account','index','','',3);
 alter table tp_order_detail add `size` varchar(255) NOT NULL DEFAULT '';
 alter table tp_order_detail add `color` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '';
 
+/*总商城增加留言管理*/
+/*插入节点表*/
+insert into tp_node(`name`,title,`status`,remark,pid,`level`,sort,display)
+values('Suggestion','留言和建议',1,0,84,2,0,2);
+/*给admin组加权限*/
+INSERT into tp_access(role_id, node_id, pid, `level`)
+select 5,id,pid,`level` from tp_node where title = '留言和建议';
+
+/*总商城增加申请开店管理*/
+/*插入节点表*/
+insert into tp_node(`name`,title,`status`,remark,pid,`level`,sort,display)
+values('Application','申请开店信息',1,0,84,2,0,2);
+/*给admin组加权限*/
+INSERT into tp_access(role_id, node_id, pid, `level`)
+select 5,id,pid,`level` from tp_node where title = '申请开店信息';
 

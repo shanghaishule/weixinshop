@@ -69,8 +69,8 @@
                    </p>
                    <p><strong>您需要关注:</strong></p>
                    <p><span>结账信息:</span>
-                       <a  href="{:U('account/index',array('status'=>6,'tokenTall'=>$tokenTall))}">未结算账单[<span class="count">{$account_cnt.weijie_cnt}</span>][<span class="count">{$account_cnt.weijie_amt}&nbsp;元</span>]</a>
-                       <a  href="{:U('account/index',array('status'=>4,'tokenTall'=>$tokenTall))}">已结算账单[<span class="count">{$account_cnt.yijie_cnt}</span>][<span class="count">{$account_cnt.yijie_amt}&nbsp;元</span>]</a>
+                       <a  href="{:U('account/index',array('status'=>6,'tokenTall'=>$tokenTall))}">未结算账单[<span class="count">{$account_cnt.weijie_cnt}</span>][<span class="count">合计&nbsp;{$account_cnt.weijie_amt}&nbsp;元</span>]</a>
+                       <a  href="{:U('account/index',array('status'=>4,'tokenTall'=>$tokenTall))}">已结算账单[<span class="count">{$account_cnt.yijie_cnt}</span>][<span class="count">合计&nbsp;{$account_cnt.yijie_amt}&nbsp;元</span>]</a>
                    </p>
                </div>
             </div>

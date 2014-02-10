@@ -9,29 +9,39 @@ class StatisticsAction extends BackAction
         		2=>'商城未对账，店铺已对账',
         		3=>'商城已对账，店铺已对账',
         		4=>'已付款',
-        		//5=>'未对账',
-        		//6=>'未付款',
+        		5=>'--所有--未对账--',
+        		6=>'--所有--未付款--',
         );
         $this->assign('account_status',$account_status);
+        
         $this->_mod_setting = D('account_setting');
-        $this->_mod_bill_mst = D('account_bill_mst');
+        $this->_mod_bill_mst = M('account_bill_mst');
         $this->_mod_bill_dtl = D('account_bill_dtl');
+        $this->_mod_shop = D('wecha_shop');
+        
+        $shopinfo = $this->_mod_shop->select();
+        $this->assign('shopinfo',$shopinfo);
         
         $account_shop = array();
         $account_shop_arr = $this->_mod_bill_mst->Distinct(true)->field('tokenTall')->select();
         foreach ($account_shop_arr as $valarr){
         	$tokenValue = $valarr['tokenTall'];
-        	$account_shop[$tokenValue] = $tokenValue;
+        	foreach ($shopinfo as $valarr2){
+        		if ($tokenValue == $valarr2['tokenTall']) {
+        			$account_shop[$tokenValue] = $valarr2['name'];
+        		}
+        	}
         }
         $this->assign('account_shop',$account_shop);
         //dump($account_shop);exit;
         $order_status=array(1=>'待付款',2=>'待发货',3=>'待收货',4=>'完成',5=>'关闭');
         $this->assign('order_status',$order_status);
+        
+        
     }
 
 	public function index() {
     	$map = $this->_search();
-    	//dump($map);exit;
     	$mod = $this->_mod_bill_mst;
     	!empty($mod) && $this->_list($mod, $map);
     	$this->display();
@@ -48,7 +58,16 @@ class StatisticsAction extends BackAction
     	}else{
     		$status = intval($_GET['status']);
     	}
-    	$status>=0 && $map['status'] = array('eq',$status);
+    	//$status>=0 && $map['status'] = array('eq',$status);
+    	if ($status >= 0) {
+    		if ($status == 5) {
+    			$map['status'] = array('in', '0,2');
+    		}else if ($status == 6) {
+    			$map['status'] = array('neq', '4');
+    		}else{
+    			$map['status'] = array('eq',$status);
+    		}
+    	}
     	
     	if( $_GET['shop']==null ){
     		$shop = -1;
