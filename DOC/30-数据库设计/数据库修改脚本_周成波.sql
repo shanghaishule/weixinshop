@@ -1,3 +1,5 @@
+/*本脚本可以反复执行，重复执行*/
+
 use bestchoi_shule;
 /*商品表，加tokenTall*/
 alter table tp_item add `tokenTall` varchar(20) NOT NULL DEFAULT '';
@@ -16,6 +18,7 @@ alter table tp_adforhome add `tokenTall` varchar(20) NOT NULL DEFAULT '';
 
 
 /*增加结账方式*/
+delete from tp_menu where `name` = '结账方式管理';
 insert into tp_menu(`name`,pid,module_name,action_name,`data`,remark,often)
 values('结账方式管理',0,'account','setting','','',3);
 /*菜单重置*/
@@ -27,7 +30,7 @@ update tp_menu set often = 1 where id in(296,297,298);
 /*广告管理*/
 update tp_menu set often = 2 where id in(12);
 /*结账方式管理*/
-update tp_menu set often = 3 where name = '结账方式管理';
+update tp_menu set often = 3 where `name` = '结账方式管理';
 /*设置*/
 update tp_menu set often = 99 where id in(275);
 
@@ -78,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `tp_account_bill_dtl` (
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 /*增加账单管理*/
+delete from tp_menu where `name` = '账单管理';
 insert into tp_menu(`name`,pid,module_name,action_name,`data`,remark,often)
 values('账单管理',0,'account','index','','',3);
 
@@ -87,17 +91,43 @@ alter table tp_order_detail add `color` varchar(255) CHARACTER SET utf8 NOT NULL
 
 /*总商城增加留言管理*/
 /*插入节点表*/
+delete from tp_node where `name` = 'Suggestion';
 insert into tp_node(`name`,title,`status`,remark,pid,`level`,sort,display)
 values('Suggestion','留言和建议',1,0,84,2,0,2);
 /*给admin组加权限*/
+delete a from tp_access a , tp_node b where a.node_id = b.id and b.title = '留言和建议';
 INSERT into tp_access(role_id, node_id, pid, `level`)
 select 5,id,pid,`level` from tp_node where title = '留言和建议';
 
 /*总商城增加申请开店管理*/
 /*插入节点表*/
+delete from tp_node where `name` = 'Application';
 insert into tp_node(`name`,title,`status`,remark,pid,`level`,sort,display)
 values('Application','申请开店信息',1,0,84,2,0,2);
 /*给admin组加权限*/
+delete a from tp_access a , tp_node b where a.node_id = b.id and b.title = '申请开店信息';
 INSERT into tp_access(role_id, node_id, pid, `level`)
 select 5,id,pid,`level` from tp_node where title = '申请开店信息';
+
+/*开店申请表*/
+DROP TABLE IF EXISTS `tp_application`;
+CREATE TABLE `tp_application` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(10) DEFAULT NULL COMMENT '用户id',
+  `uname` varchar(30) DEFAULT NULL COMMENT '用户名',
+  `umail` varchar(30) DEFAULT NULL COMMENT '用户邮箱',
+  `applicant` varchar(30) DEFAULT NULL COMMENT '申请人',
+  `addr` varchar(255) DEFAULT NULL COMMENT '地址',
+  `phone` varchar(50) DEFAULT NULL COMMENT '电话',
+  `licence` varchar(255) DEFAULT NULL COMMENT '营业执照',
+  `shopname` varchar(255) DEFAULT NULL COMMENT '店铺名称',
+  `trueshop` SMALLINT(1) DEFAULT 0 COMMENT '是否有实体店',
+  `text` varchar(500) DEFAULT NULL COMMENT '其他说明',
+  `createtime` int(20) DEFAULT NULL COMMENT '申请时间',
+  `uptatetime` int(20) DEFAULT NULL,
+  `tokenTall` varchar(30) NOT NULL,
+  `re` varchar(500) DEFAULT NULL,
+  `wecha_id` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

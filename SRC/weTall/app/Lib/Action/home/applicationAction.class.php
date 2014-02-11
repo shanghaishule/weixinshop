@@ -1,10 +1,10 @@
 <?php
-class suggestionAction extends frontendAction{
-	public $liuyan_mod;
+class applicationAction extends frontendAction{
+	public $application_mod;
 	
 	public function _initialize(){
 		parent::_initialize();
-		$this->liuyan_mod = M('liuyan');
+		$this->application_mod = M('application');
 	}
 
 	public function index(){
@@ -12,14 +12,17 @@ class suggestionAction extends frontendAction{
 		if ($user) {
 			$uid = $user['id'];
 			$username = $user['username'];
+			$umail = $user['email'];
 		}else{
 			$uid = '0';
 			$username = '匿名';
+			$umail = '';
 		}
 		
 		//dump($user);exit;
 		$this->assign('uid',$uid);
 		$this->assign('username',$username);
+		$this->assign('umail',$umail);
 		
 		$createtime = time();
 		$this->assign('createtime',$createtime);
@@ -33,19 +36,19 @@ class suggestionAction extends frontendAction{
 
 	public function add(){
 		if($_POST){
-			if ($this->liuyan_mod->create()) {
-				if($this->liuyan_mod->add()){
-					echo '您的留言已经成功提交！感谢您的大力支持！';
+			if ($this->application_mod->create()) {
+				if($this->application_mod->add()){
+					echo '您的开店申请已经成功提交！我们会尽快与您联系！';
 				}else{
-					echo '很遗憾，您的留言保存失败了！';
+					echo '很遗憾，您的申请失败了！';
 				}
 			}
 		}
 	}
 	
 	public function showinfo(){
-		$liuyan = $this->liuyan_mod->select();
-		$this->assign('liuyan',$liuyan);
+		$application = $this->application_mod->select();
+		$this->assign('application',$application);
 		$this->display();
 	}
 }

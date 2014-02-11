@@ -56,8 +56,8 @@
 	</script> 
 </head>
 
-<body id="message" onselectstart="return true;" ondragstart="return false;">
-
+<body id="message">
+<include file="public:head" />
 	<div class="container">
 	
 	  	<div class="qiandaobanner">
@@ -74,18 +74,17 @@
  
 			<div class="history">
 				<div class="history-date">
-					<ul>
-						<a><h2 class="first first1" style="position: relative;">请留下您的宝贵意见和建议</h2></a>
-						<li class="green bounceInDown nob ly1" >
+					<ul class="history-ul">
+						<h2 class="first" style="position: relative;">请留下您的宝贵意见和建议</h2>
+						<li class="green ly1" >
 							<dl>
 								<dt>
-									<textarea name="info" class="pxtextarea" style=" height:60px;" id="info1" placeholder="请您输入留言"></textarea>
+									<textarea name="info" class="pxtextarea" style="height:150px;" id="info1" placeholder="请您留言……"></textarea>
 								</dt>
 								<dt><a id="showcard1" class="submit" href="javascript:void(0)">提交留言</a></dt>
 							</dl>
 						</li>
-									
-							
+						<li></li>
 					</ul>
 				</div>
 			</div>
