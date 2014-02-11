@@ -159,8 +159,13 @@ class indexAction extends frontendAction {
     		$nowPage = isset($_GET['p'])?$_GET['p']:1;
     		$show       = $Page->show();// 分页显示输出
     		$carryrecord  = $item->where($condition)->order('id DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+    		
+    		foreach ($carryrecord as $val){    			
+    			$val["descr"]=mb_substr($val["descr"], 0,35,"utf-8")."...";
+    			$carryrecord2[]=$val;
+    		}
  
-    		$this->assign("item",$carryrecord);
+    		$this->assign("item",$carryrecord2);
     		$this->assign("method",$method);
     		$this->assign('page',$show);// 赋值分页输出pti
     		$this->assign("count",$count);

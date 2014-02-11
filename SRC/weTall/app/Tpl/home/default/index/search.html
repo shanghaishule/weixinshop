@@ -47,15 +47,33 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
         <div class="wrap">
             <div class="wrap_child">
                 <div class="major">
-                  <table width="100%" style="background:white;margin:10px;border:1;text-align:left;">
+                  <table border="1" width="100%" align="left" >
                      <volist name="item" id="item">
-                      <tr border="1"><td>
+                      <tr ><td rowspan="2">
                      	<a  href="{:U('index/index',array('tokenTall'=>$item['tokenTall']))}">
                      	<img src="{$item.headurl}"/ width="50" height="50" /></a>
-                     	</td><td style="padding-left:20px"><div  class="shopClass"> 
+                     	</td><td style="padding-left:8px"><div  class="shopClass"> 
                      	<a  href="{:U('index/index',array('tokenTall'=>$item['tokenTall']))}">
-                     	{$item.name} | 信誉:{$item.credit}</a>{$item.info}</div>
-						</td>
+                     	{$item.name} <!-- {$item.credit} -->
+                     	<if condition="$item['credit'] lt 4"><img width="20" height="20" src="__STATIC__/images/Level/1_0.png"/>
+                        <elseif condition="$item['credit'] lt 11" /><img width="20" height="20" src="__STATIC__/images/Level/1_1.png"/>
+                        <elseif condition="$item['credit'] lt 50" /><img width="20" height="20" src="__STATIC__/images/Level/1_2.png"/>
+                        <elseif condition="$item['credit'] lt 110" /><img width="20" height="20" src="__STATIC__/images/Level/1_3.png"/>
+                        <elseif condition="$item['credit'] lt 250" /><img width="20" height="20" src="__STATIC__/images/Level/1_4.png"/>
+                        <elseif condition="$item['credit'] lt 500" /><img width="20" height="20" src="__STATIC__/images/Level/2_0.png"/>
+                        <elseif condition="$item['credit'] lt 1000" /><img width="20" height="20" src="__STATIC__/images/Level/2_1.png"/>
+                        <elseif condition="$item['credit'] lt 2000" /><img width="20" height="20" src="__STATIC__/images/Level/2_2.png"/>
+                        <elseif condition="$item['credit'] lt 5000" /><img width="20" height="20" src="__STATIC__/images/Level/2_3.png"/>
+                        <elseif condition="$item['credit'] lt 10000" /><img width="20" height="20" src="__STATIC__/images/Level/2_4.png"/>
+                        <elseif condition="$item['credit'] lt 20000" /><img width="20" height="20" src="__STATIC__/images/Level/3_0.png"/>
+                        <elseif condition="$item['credit'] lt 50000" /><img width="20" height="20" src="__STATIC__/images/Level/3_1.png"/>
+                        <elseif condition="$item['credit'] lt 100000" /><img width="20" height="20" src="__STATIC__/images/Level/3_2.png"/>
+                        <elseif condition="$item['credit'] lt 200000" /><img width="20" height="20" src="__STATIC__/images/Level/3_3.png"/>
+                        <else/><img width="20" height="20" src="__STATIC__/images/Level/3_4.png"/>
+                        </if>
+                     	</a></div>
+						</td></tr><tr><td><span class="descrClass">{$item.descr}</span></td>
+						</tr><tr><td colspan="2"><hr></td>
                       </tr>
                      </volist>
                    </table>
@@ -76,7 +94,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                      <h3>
                      	<a  href="{:U('Item/index',array('id'=>$item['id'],'tokenTall'=>$item['tokenTall']))}">{$item.title}</a>
                      </h3>
-                     <p>¥{$item.price}</p>
+                     <p>¥{$item.price}   已售出:{$item.buy_num}</p>
                      </div>
                      <span class="show_good">
                      	<a  href="{:U('Item/index',array('id'=>$item['id']))}"></a>
