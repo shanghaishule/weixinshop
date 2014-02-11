@@ -24,11 +24,11 @@
     <div class="top_bg">
         <div class="TopMin320">
             <!--LOGO-->
-            <div class="top_logo FloatLeft PicIEPng">微指购商城</div>
+            <div class="top_logo FloatLeft PicIEPng"><a href="/index.php?g=Wap&m=weTall&a=index" style="color:white;">微指购商城</a></div>
 
             <div class="top_right">
                 <ul>
-                    <li class="PicIEPng"><a href="/index.php?g=Wap&m=weTall&a=index">
+                    <li class="PicIEPng"><a href="/index.php?g=Wap&m=weTall&a=allCate">
                         <img src="{lanrain::RES}/images/weTall/list_ico.png" /></a></li>
                     <li class="PicIEPng"><a href="/weTall/index.php?g=home&m=shopcart&a=index">
                         <img src="{lanrain::RES}/images/weTall/shop_ico.png"></a></li>
@@ -114,92 +114,46 @@ function submitForm(){
 </div>
 <div class="widthMAX pr_list_more"></div>
 </div>
-
+<div class="widthMAX MarginTop10">
+        <volist name="weTallboard" id="bolist">
+		     <if condition="$bolist['boadid'] eq 3">
+		     <a href="{Lanrain:$bolist.url}" title="{Lanrain:$bolist.desc}"><img src="/weTall/data/upload/advert/{Lanrain:$img_dir}{Lanrain:$bolist.content}" width="320" height="150" alt="{Lanrain:$bolist.desc}" /></a>
+		     </if>
+		  </volist>
+          </div>
         <!--新品上市-->
         <div class="widthMAX MarginTop10" id="LeftRight2">
 <div class="pr_list">
 <div class="title FloatLeft">新品上市</div>
-<div class="pr_list_frist FloatRight">
-<ul>
-<volist name="item1" id="itemL">
- <li>{Lanrain:$itemL.name}</li>
-</volist>
-</ul>
-</div>
+
 </div>
 <div class="banner_Cont">
 <div class="pr_list_3 MarginTop10">
-<div class="FloatLeft">
- <volist name="weTallboard" id="bolist">
-		     <if condition="$bolist['boadid'] eq 3">
-		     <a href="{Lanrain:$bolist.url}" title="{Lanrain:$bolist.desc}"><img src="/weTall/data/upload/advert/{Lanrain:$img_dir}{Lanrain:$bolist.content}" width="320" height="210" alt="{Lanrain:$bolist.desc}" /></a>
-		     </if>
-		  </volist>       
-</div><!-- 
-<div class="FloatRight">
-<ul>
-<li><a href="" title=""><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/20140109104055164375.jpg" alt="" width="103" height="41" /></a></li>
-<li><a href="" title=""><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/20140109104055226875.jpg" alt="" width="103" height="43" /></a></li>
-<li><a href="" title=""><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/20140109104055289375.jpg" alt="" width="103" height="43" /></a></li>
-</ul>
-</div> -->
-<div class="pr_link">
-<ul>
-<li>
-<div class="FloatLeft"><a href="http://www.shopbest.com.cn/mobi/cn/goods/190.html" title="经典免烫小方领长袖衬衫">经典免烫小方领长袖衬衫</a></div>
-<span>￥97.00</span>
-</li>
-<li>
-<div class="FloatLeft"><a href="http://www.shopbest.com.cn/mobi/cn/goods/191.html" title="时尚修身弹力长袖衬衫">时尚修身弹力长袖衬衫</a></div>
-<span>￥79.00</span>
-</li>
-</ul>
-</div>
-</div>
-<div class="pr_list_3 MarginTop10">
-<div class="FloatLeft"><a href="http://www.shopbest.com.cn/mobi/cn/index.html"><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/homeNewLeft.jpg" width="217" height="127" /></a></div>
-<div class="FloatRight">
-<ul>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/index.html"><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/homeNewRightOne.jpg" /></a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/index.html"><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/homeNewRightTwo.jpg" /></a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/index.html"><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/homeNewRightThree.jpg" /></a></li>
-</ul>
-</div>
-<div class="pr_link">
-<ul>
-<li>
-<div class="FloatLeft"><a href="http://www.shopbest.com.cn/mobi/cn/goods/199.html" title="明朗彩格水洗衬衫 卡其红格纹">明朗彩格水洗衬衫 卡其红格纹</a></div>
-<span>￥79.00</span>
-</li>
-<li>
-<div class="FloatLeft"><a href="http://www.shopbest.com.cn/mobi/cn/goods/200.html" title="飘逸简约休闲衬衫">飘逸简约休闲衬衫</a></div>
-<span>￥79.00</span>
-</li>
-</ul>
-</div>
-</div>
-<div class="pr_list_3 MarginTop10">
-<div class="FloatLeft"><a href="http://www.shopbest.com.cn/mobi/cn/index.html"><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/homeNewLeft.jpg" width="217" height="127" /></a></div>
-<div class="FloatRight">
-<ul>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/index.html"><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/homeNewRightOne.jpg" /></a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/index.html"><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/homeNewRightTwo.jpg" /></a></li>
-<li><a href="http://www.shopbest.com.cn/mobi/cn/index.html"><img src="http://www.shopbest.com.cn/images/mobi/cn/category_ad/homeNewRightThree.jpg" /></a></li>
-</ul>
-</div>
-<div class="pr_link">
-<ul>
-<li>
-<div class="FloatLeft"><a href="http://www.shopbest.com.cn/mobi/cn/goods/213.html" title="圆领印花卫衣俏皮猫咪">圆领印花卫衣俏皮猫咪</a></div>
-<span>￥59.00</span>
-</li>
-<li>
-<div class="FloatLeft"><a href="http://www.shopbest.com.cn/mobi/cn/goods/214.html" title="经典时尚修身长款棉服">经典时尚修身长款棉服</a></div>
-<span>￥79.00</span>
-</li>
-</ul>
-</div>
-</div>
+
+       <volist name="goods" id="good" key="key">
+          <if condition="$key eq 1">
+			<div class="FloatLeft">
+			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="320" height=110" alt="{Lanrain:$good.intro}" /></a>    
+			</div>
+			</if>
+			<div class="pr_link">
+			<ul><if condition="$key eq 2">
+			<li>
+			
+			<div class="FloatLeft"><a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}">{Lanrain:$good.title}</a></div>
+			<span>￥{Lanrain:$good.price}</span>
+			
+			</li></if><if condition="$key eq 3">
+			<li>
+			
+			<div class="FloatLeft"><a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}">{Lanrain:$good.title}</a></div>
+			<span>￥{Lanrain:$good.price}</span>
+			
+			</li></if>
+			</ul>
+			</div>
+		</volist>
+	  
 </div>
 </div>
 
@@ -208,12 +162,19 @@ function submitForm(){
 <div class="pr_list">
 <div class="title FloatLeft">主题馆族</div>
 	<div class="themeZone">
+	    <a href="/weTall/index.php?m=index&a=search&method=new">
 		<div class="clother"><span class="yifu">服装鞋帽</span><p>最in时尚服装</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/yifu.jpg"></img></div>
+		</a><a href="/weTall/index.php?m=index&a=search&method=new">
 		<div class="clother"><span class="jiadian">数码家电</span><p>全网最低价</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/xiangji.jpg"></img></div>
+		</a><a href="/weTall/index.php?m=index&a=search&method=new">
 		<div class="clother"><span class="shenghuo">生活用品</span><p>日用底价特惠</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/shehuo.jpg"></img></div>
+		</a><a href="/weTall/index.php?m=index&a=search&method=new">
 		<div class="clother"><span class="huazhuang">化妆用品</span><p>最天然的保养</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/huazhuang.jpg"></img></div>
+		</a><a href="/weTall/index.php?m=index&a=search&method=new">
 		<div class="clother"><span class="haoshu">好书汇</span><p>热门畅销图书</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/shu.jpg"></img></div>
+		</a><a href="/weTall/index.php?m=index&a=search&method=new">
 		<div class="clother"><span class="meishi">美食广场</span><p>买食品送饮料</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/shipin.jpg"></img></div>
+	    </a>
 	</div>
 </div>
 
@@ -233,9 +194,11 @@ function submitForm(){
 
     </div>
     <div class="widthMAX footer_function">
-<a href="/weTall/index.php?m=shopcart&a=index" class="shopping_car">我的购物车[<span id="shoppingCartAmount" class="Cred">0</span>]</a>
-<a href="http://www.shopbest.com.cn/mobi/cn/help/list.html" class="help">帮助中心</a>
-<a href="http://www.shopbest.com.cn/mobi/cn/article/list_0_1.html" class="into">资讯中心</a>
+<a href="/weTall/index.php?m=shopcart&a=index" class="shopping_car">我的购物车[<span id="shoppingCartAmount" class="Cred">{Lanrain:$cartNum}</span>]</a>
+<!-- <a href="http://www.shopbest.com.cn/mobi/cn/help/list.html" class="help">帮助中心</a> -->
+<a href="/weTall/index.php?g=home&m=suggestion&a=index" class="help">我要留言</a>
+<a href="/weTall/index.php?g=home&m=application&a=index" class="into">申请开店</a>
+
 </div>
 <div class="footer_bg">
 <div class="FloatLeft">
