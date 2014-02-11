@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1"><title>微指购商城,中国最大的手机商城，微网商城上线站点</title>
-<meta name="Keywords" content="Micronet，服装商城,专业服装批发，服饰" />
-<meta name="Description" content="Micronet商城" />
+<meta name="Keywords" content="微指购，服装商城,微信" />
+<meta name="Description" content="微指购商城" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /><meta http-equiv="x-ua-compatible" content="ie=7" /><link rel="stylesheet" type="text/css" href="{lanrain::RES}/js/weTall/public.css" /><link rel="stylesheet" type="text/css" href="{lanrain::RES}/js/weTall/index.css" />
 
     <script type="text/javascript" src="{lanrain::RES}/js/weTall/jquery.min.js"></script>
@@ -111,8 +111,9 @@ function submitForm(){
     </ul>
    </div>
  </volist>
+ <div class="widthMAX pr_list_more"><br></br><br></br><br></br>---------------------------------------------------><a href="/index.php?g=Wap&m=weTall&a=allCate">所有分类</a></div>
 </div>
-<div class="widthMAX pr_list_more"></div>
+
 </div>
 <div class="widthMAX MarginTop10">
         <volist name="weTallboard" id="bolist">
@@ -135,9 +136,9 @@ function submitForm(){
 			<div class="FloatLeft">
 			<volist name="goods" id="good" key="key">
 			   <if condition="$key eq 1">
-			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=110" alt="{Lanrain:$good.intro}" /></a>    
+			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=130" alt="{Lanrain:$good.intro}" /></a>    
 			   </if><if condition="$key eq 2">
-			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=110" alt="{Lanrain:$good.intro}" /></a>
+			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=130" alt="{Lanrain:$good.intro}" /></a>
 			</if>
 			</volist>
 			</div>
@@ -165,20 +166,22 @@ function submitForm(){
 
         <!--主题馆族-->
         <div class="widthMAX MarginTop10" id="LeftRight4">
-<div class="pr_list">
-<div class="title FloatLeft">主题馆族</div>
+<div class="pr_list343">
+    <div class="titlezone">
+     <div class="title FloatLeft">主题馆族</div>
+    </div>
 	<div class="themeZone">
-	    <a href="/weTall/index.php?m=index&a=search&method=new">
+	    <a href="/weTall/index.php?m=index&a=search&method=fuzhuang">
 		<div class="clother"><span class="yifu">服装鞋帽</span><p>最in时尚服装</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/yifu.jpg"></img></div>
-		</a><a href="/weTall/index.php?m=index&a=search&method=new">
+		</a><a href="/weTall/index.php?m=index&a=search&method=shuma">
 		<div class="clother"><span class="jiadian">数码家电</span><p>全网最低价</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/xiangji.jpg"></img></div>
-		</a><a href="/weTall/index.php?m=index&a=search&method=new">
+		</a><a href="/weTall/index.php?m=index&a=search&method=shenghuo">
 		<div class="clother"><span class="shenghuo">生活用品</span><p>日用底价特惠</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/shehuo.jpg"></img></div>
-		</a><a href="/weTall/index.php?m=index&a=search&method=new">
+		</a><a href="/weTall/index.php?m=index&a=search&method=huazhuang">
 		<div class="clother"><span class="huazhuang">化妆用品</span><p>最天然的保养</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/huazhuang.jpg"></img></div>
-		</a><a href="/weTall/index.php?m=index&a=search&method=new">
+		</a><a href="/weTall/index.php?m=index&a=search&method=tushu">
 		<div class="clother"><span class="haoshu">好书汇</span><p>热门畅销图书</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/shu.jpg"></img></div>
-		</a><a href="/weTall/index.php?m=index&a=search&method=new">
+		</a><a href="/weTall/index.php?m=index&a=search&method=meishi">
 		<div class="clother"><span class="meishi">美食广场</span><p>买食品送饮料</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/shipin.jpg"></img></div>
 	    </a>
 	</div>
