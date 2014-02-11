@@ -30,9 +30,9 @@
 .pr_list_frist .pr_list_frist_link{ color:#FFF; background:url(/tpl/Wap/default/common/images/weTall/pr_list_frist_link.jpg) no-repeat center top; height:21px;}
 .pr_list_second ul{ overflow:hidden;}
 .pr_list_second li { color:#666666; border:1px solid #dddddd; float:left; padding:3px 5px; margin:5px; white-space: nowrap; }
-.pr_list_more{ font-size:14px; color:#c00f18; text-align:center; overflow:hidden; padding:5px 0;}
-.pr_list_more a,.pr_list_more a:link,.pr_list_more a:visited{ color:#c00f18;}
-.pr_list_more a:hover{ color:#c00f18; text-decoration:underline;}
+.pr_list_more{ font-size:14px; color:#BFBFBF;  overflow:hidden; margin-right:35px;text-align:right;}
+.pr_list_more a,.pr_list_more a:link,.pr_list_more a:visited{ color:#c00f18;margin-right:15px;}
+.pr_list_more a:hover{ color:#1C86EE; text-decoration:underline;}
 
 .allcate{width:100%;border-left:7px solid #1874CD;font-weight:700;color:#668B8B;  padding-left:10px;margin-top:10px;font-size:14px;border-bottom:1px dashed #1874CD;}
 .childcate{ float:none;margin-top:5px;}
