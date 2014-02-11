@@ -130,29 +130,35 @@ function submitForm(){
 <div class="banner_Cont">
 <div class="pr_list_3 MarginTop10">
 
-       <volist name="goods" id="good" key="key">
-          <if condition="$key eq 1">
+       
+          
 			<div class="FloatLeft">
-			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="320" height=110" alt="{Lanrain:$good.intro}" /></a>    
-			</div>
+			<volist name="goods" id="good" key="key">
+			   <if condition="$key eq 1">
+			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=110" alt="{Lanrain:$good.intro}" /></a>    
+			   </if><if condition="$key eq 2">
+			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=110" alt="{Lanrain:$good.intro}" /></a>
 			</if>
+			</volist>
+			</div>
+			
 			<div class="pr_link">
-			<ul><if condition="$key eq 2">
+			<ul><volist name="goods" id="good" key="key"><if condition="$key eq 3">
 			<li>
 			
 			<div class="FloatLeft"><a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}">{Lanrain:$good.title}</a></div>
 			<span>￥{Lanrain:$good.price}</span>
 			
-			</li></if><if condition="$key eq 3">
+			</li></if><if condition="$key eq 4">
 			<li>
 			
 			<div class="FloatLeft"><a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}">{Lanrain:$good.title}</a></div>
 			<span>￥{Lanrain:$good.price}</span>
 			
-			</li></if>
+			</li></if></volist>
 			</ul>
 			</div>
-		</volist>
+		
 	  
 </div>
 </div>

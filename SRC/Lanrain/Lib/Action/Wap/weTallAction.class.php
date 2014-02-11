@@ -14,7 +14,7 @@
     	$item_l2=M("item_cate")->where($iteml2)->select();
     	
     	//商品
-    	$goods=M("item")->select();
+    	$goods=M("item")->limit(4)->order('rand()')->select();
     	
     	$data["status"]=1;
     	$data["checkstatus"]=1;
