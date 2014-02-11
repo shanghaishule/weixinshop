@@ -6,9 +6,10 @@
 <link href="{lanrain::RES}/images/main.css" type="text/css" rel="stylesheet">
 <meta http-equiv="x-ua-compatible" content="ie=7" />
 <style>
+
 #shop_cnt {
-	text-align:left;
-	font:italic bold 60px/300px arial,sans-serif;
+	text-align: center;
+	font:italic bold 100px arial,sans-serif;
 	color: black;
 	/*
 	background-color:green;
@@ -23,17 +24,32 @@
 	text-shadow:2px 2px 8px #FF0000;
 	*/
 	
-
-	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 40px #0000FF , 0 0 70px #0000FF ;
-		
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 40px #FF6600, 0 0 70px #FF6600;
+	margin-top:30px;
 }
 
 #order_amt {
-	text-align:center;
-	font:italic bold 100px/300px arial,sans-serif;
-	color: red;
-	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 40px #0000FF , 0 0 70px #0000FF ;
-		
+	text-align: center;
+	font:italic bold 100px arial,sans-serif;
+	color: black;
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 40px #CC00FF, 0 0 70px #CC00FF;
+	margin-top:30px;
+}
+.xup{
+	text-align: left;
+	font:italic bold 50px arial,sans-serif;
+	color: black;
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 40px #FFFF00, 0 0 70px #FFFF00;
+	margin-top:20px;
+}
+
+.xdown{
+	text-align: right;
+	font:italic bold 50px arial,sans-serif;
+	color: black;
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 40px #FFFF00, 0 0 70px #FFFF00;
+	margin-top:20px;
+	margin-right:30px;
 }
 
 </style>
@@ -41,35 +57,29 @@
 <body style="background:none">
 <div class="content">
 <div class="box">
-	<h3>已入住商家：<span class="blue">[{lanrain:$shop_cnt}]</span></h3>
+	<!--h3>已入住商家：<span class="blue">[{lanrain:$shop_cnt}]</span></h3-->
+	<h3>商家信息：</h3>
     <div class="con dcon">
     <div class="update">
-    <p id="shop_cnt">已入住商家：{lanrain:$shop_cnt}</p>
-    </div>
-    <!-- 
-    <table class="myinfo" width="100%">
-    	<tr><th>店铺名称</th><th>店铺信誉</th></tr>
-    	<volist name='shop_info' id='vo'>
-    	<tr>
-    		<td align="center"><p class="blue">{lanrain:$vo.name}</p></td>
-    		<td align="center"><p class="blue">{lanrain:$vo.credit}</p></td>
-    	</tr>
-    	</volist>
-    </table>
-     -->
-    </div>
-</div>
-<!--/box-->
-<div class="box">
-	<h3>已成交金额：<span class="red">[{lanrain:$order_amt}]</span></h3>
-    <div class="con dcon">
-    <div class="update">
-    <p id="order_amt">{lanrain:$order_amt}</p>
+    <p class="xup">已入住商户：</p>
+    <p id="shop_cnt">{lanrain:$shop_cnt}</p>
+    <p class="xdown">家</p>
     </div>
     </div>
 </div>
 
-<!--/box-->
+<div class="box">
+	<!--h3>已成交金额：<span class="red">[{lanrain:$order_amt}]</span></h3-->
+	<h3>成交信息：</h3>
+    <div class="con dcon">
+    <div class="update">
+    <p class="xup">已成交金额：</p>
+    <p id="order_amt" class="xmiddle">{lanrain:$order_amt}</p>
+    <p class="xdown">元</p>
+    </div>
+    </div>
+</div>
+
 </div>
 </body>
 </html>
