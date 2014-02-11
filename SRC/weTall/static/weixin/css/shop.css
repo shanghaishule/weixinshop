@@ -727,7 +727,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 #footer { width:100%;margin: 0 auto; border-top: 1px solid #ddd; text-align: center; color: #aaa; line-height: 20px;}
 #footer p { color: #a6a6a6; word-spacing: 5px; padding: 10px 0; }
 #footer a { color: #a6a6a6; text-decoration: none; }
-#footer p.foot_nav a {font-size:16px; }
+#footer p.foot_nav a {font-size:13px; }
 #footer a:hover { text-decoration: underline; }
 
 /*
