@@ -30,14 +30,14 @@
 .pr_list_frist .pr_list_frist_link{ color:#FFF; background:url(/tpl/Wap/default/common/images/weTall/pr_list_frist_link.jpg) no-repeat center top; height:21px;}
 .pr_list_second ul{ overflow:hidden;}
 .pr_list_second li { color:#666666; border:1px solid #dddddd; float:left; padding:3px 5px; margin:5px; white-space: nowrap; }
-.pr_list_more{ font-size:14px; color:#c00f18; text-align:center; overflow:hidden; padding:5px 0;}
-.pr_list_more a,.pr_list_more a:link,.pr_list_more a:visited{ color:#c00f18;}
-.pr_list_more a:hover{ color:#c00f18; text-decoration:underline;}
+.pr_list_more{ font-size:14px; color:#BFBFBF;  overflow:hidden; margin-right:35px;text-align:right;}
+.pr_list_more a,.pr_list_more a:link,.pr_list_more a:visited{ color:#c00f18;margin-right:15px;}
+.pr_list_more a:hover{ color:#1C86EE; text-decoration:underline;}
 
-.allcate{width:100%;border-left:7px solid #1874CD;font-weight:700;color:#668B8B;  padding-left:10px;margin-top:20px;font-size:14px;border-bottom:1px dashed #1874CD;}
-.childcate{ float:none;margin-top:10px;}
+.allcate{width:100%;border-left:7px solid #1874CD;font-weight:700;color:#668B8B;  padding-left:10px;margin-top:10px;font-size:14px;border-bottom:1px dashed #1874CD;}
+.childcate{ float:none;margin-top:5px;}
 .childcate ul { float:none;}
-.childcate li { display:inline-block;font-size:13px;font-weight:500; color:#4f4f4f; background-color:#e9e9e9; margin:0 5px; height:17px; line-height:17px; overflow:hidden; padding:0 5px; cursor:pointer;}
+.childcate li { display:inline-block;font-size:13px;font-weight:500; color:#4f4f4f; background-color:#e9e9e9; margin:5px 5px; height:17px; line-height:17px; overflow:hidden; padding:0 5px; cursor:pointer;}
 
 
 .pr_link{ width:100%; overflow:hidden;}
@@ -69,6 +69,7 @@
 
 /*主题馆*/
 .clother{
+	background:#fff;
 	width:151px;
 	height:80px;
 	padding-top:15px;
@@ -132,15 +133,22 @@
 	font-weight:700;
 }
 .themeZone{
-	margin-top:30px;
+	margin-top:10px;
 	float:none;
 	height:260px;
+	width:100%;	
+	background:#fff;
+}
+.titlezone{
+	border-bottom:1px dashed #d9d9d9;
 	width:100%;
-	border-top:1px dashed #d9d9d9;
+	height:20px;
+	background:#fff;
 }
 .FloatLeft img{
 	margin-left:5px;
 	border:1px solid #d9d9d9;
-	box-shadow:1px 1px 5px #888888;
-	box-shadow:2px 2px 5px #888888;box-shadow:3px 3px 5px #888888;
+	box-shadow:1px 1px 5px #888888,
+	 		   2px 2px 5px #888888,
+			   3px 3px 5px #888888;
 }

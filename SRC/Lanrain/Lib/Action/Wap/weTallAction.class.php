@@ -7,7 +7,7 @@
     	$broadlist=M("brandlist")->select();
     	//一级菜单
     	$iteml["pid"]="0";
-    	$item_l1=M("item_cate")->where($iteml)->limit(4)->select();
+    	$item_l1=M("item_cate")->where($iteml)->limit(3)->select();
     	
     	//二级菜单	
     	$iteml2["pid"]=array("NEQ","0");

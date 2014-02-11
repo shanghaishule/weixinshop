@@ -91,17 +91,37 @@ class indexAction extends frontendAction {
     		case "new": $method="0";break;
     		case "recom":$method="1";break;
     		case "free":$method="2";break;
+    		case "fuzhuang":$itemCate="服装鞋帽";break;
+    		case "shuma":$itemCate="数码家电";break;
+    		case "shenghuo":$itemCate="生活用品";break;
+    		case "tushu":$itemCate="图书";break;
+    		case "huazhuang":$itemCate="化妆用品";break;
+    		case "meishi":$itemCate="食品";break;
     	}
     
     	$item = M("item");
-    	$condition["tuijian"] = $method;
+    	if($itemCate == ""){
+    		$condition["tuijian"] = $method;
+    	}else{
+    		$name["name"]=$itemCate;
+    		$item_cate=M("item_cate")->where($name)->select();
+    		foreach ($item_cate as $val){
+    			$data["pid"]=$val["id"];
+    			$itemID=M("item_cate")->where($data)->select();
+    		}
+    		foreach ($itemID as $varL){
+    			$condition2[]=$varL["id"];
+    		}
+    		$condition["cate_id"]=array('in',$condition2);
+    	}    	
+    
     	$count = $item->where($condition)->count();
     	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$nowPage = isset($_GET['p'])?$_GET['p']:1;
     	$show       = $Page->show();// 分页显示输出
     	$carryrecord  = $item->where($condition)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
-    
+
     	$this->assign("item",$carryrecord);
     	$this->assign("itemcate","Y");
     	$this->assign('page',$show);// 赋值分页输出pti
