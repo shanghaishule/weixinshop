@@ -60,3 +60,75 @@
 
 .banner_Cont { width:100%; position:relative; height:230px; overflow:hidden;}
 .pr_list_3 {  position:absolute; left:0; top:0; width:100%; overflow:hidden;}
+
+/*主题馆*/
+.clother{
+	width:151px;
+	height:80px;
+	padding-top:15px;
+	margin:1px;
+	float:left;
+	border:1px solid #d9d9d9;
+}
+.clother img{
+	display:block;
+	margin:-45px 0px 0px 79px;
+}
+.clother p{
+	margin-left:8px;
+}
+.yifu{
+	margin:0px 8px 0px 10px;
+	display:block;
+	padding-top:10px;
+	font-size:15px;
+	color:#8B2323;
+	font-weight:700;
+}
+.meishi{
+	margin:0px 8px 0px 10px;
+	display:block;
+	padding-top:10px;
+	font-size:15px;
+	color:#EE3A8C;
+	font-weight:700;
+}
+.haoshu{
+	margin:0px 8px 0px 10px;
+	display:block;
+	padding-top:10px;
+	font-size:15px;
+	color:#3A5FCD;
+	font-weight:700;
+}
+.huazhuang{
+	margin:0px 8px 0px 10px;
+	display:block;
+	padding-top:10px;
+	font-size:15px;
+	color:#8B6914;
+	font-weight:700;
+}
+.jiadian{
+	margin:0px 8px 0px 10px;
+	display:block;
+	padding-top:10px;
+	font-size:15px;
+	color:#4F94CD;
+	font-weight:700;
+}
+.shenghuo{
+	margin:0px 8px 0px 10px;
+	display:block;
+	padding-top:10px;
+	font-size:15px;
+	color:#7FFF00;
+	font-weight:700;
+}
+.themeZone{
+	margin-top:30px;
+	float:none;
+	height:260px;
+	width:100%;
+	border-top:1px dashed #d9d9d9;
+}

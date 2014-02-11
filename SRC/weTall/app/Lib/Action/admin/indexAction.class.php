@@ -13,10 +13,29 @@ class indexAction extends backendAction {
         $top_menus = $this->_mod->admin_menu(0);
         $this->assign('top_menus', $top_menus);
         $my_admin = array('username'=>$_SESSION['admin']['username'], 'rolename'=>$_SESSION['admin']['role_id']);
-        $this->assign('my_admin', $my_admin);
+        $this->assign('my_admin', $my_admin);        
 
         $this->assign('tokenTall', $this->getTokenTall());
         $_SESSION["tokenTall"] = $this->getTokenTall();
+        
+        $token=$_SESSION["tokenTall"];
+        $weshop=M("wecha_shop");
+        $where["tokenTall"]=$token;
+        $where2["token"]=$token;
+        if (false == $weshop->where($where)->find()) {
+        	$data["tokenTall"] = $token;
+        	$data["headurl"] = "/tpl/User/default/common/images/portrait.jpg";
+        	$data["HaveReal"] = "0";
+        	$wxUser=M("wxuser")->where($where2)->find();
+        	
+        	$data["name"]=$wxUser["wxname"];
+        	$data["weName"]=$wxUser["wxname"];
+        	$data["title"]="微指购店铺";
+        	$data["descr"]="微指购店铺";
+        	$data["keywords"]="微指购店铺";
+        	$weshop->add($data);
+        }
+        
         $this->display(); 
     }
 

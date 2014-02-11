@@ -27,6 +27,7 @@
 body {font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3"; line-height:1.6; background:#f6f6f6; }
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0; }
 h1, h2, h3, h4, h5, h6 { font-size: 16px;}
+hr{border:1px dashed #D9D9D9;}
 img, table, td, th { border: 0; }
 ul, ol { list-style-type:none; }
 a{ text-decoration:none; color:#666;}
@@ -811,9 +812,15 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 }
 .shopClass{
 	display:block;
-	margin:-10px;
+	margin:2px;
 	font-size:14px;
-	
+	text-align:left;
+}
+.descrClass{
+	display:block;
+	margin:2px;
+	padding-left:8px;
+	font-size:8px;
 }
 .shopClass a{
 	color:blue;
