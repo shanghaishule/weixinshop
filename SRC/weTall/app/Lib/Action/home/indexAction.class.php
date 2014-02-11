@@ -42,6 +42,7 @@ class indexAction extends frontendAction {
     	if(IS_POST){
     		$keyword=$this->_post("txtkeyword","trim");
     		$method=$this->_post("method");
+    		
     		$tokenTall = $this->getTokenTall();
     		if($tokenTall != ""){
     			$token= $tokenTall;
@@ -68,7 +69,10 @@ class indexAction extends frontendAction {
     	}else{
     		$itemid=$this->_get("itemid","trim");
     		$brandid=$this->_get("brandid","trim");
-    		if ($brandid != ""){
+    		$method2=$this->_get("method","trim");
+    		if($method2 != ""){
+    			$this->nextPagetuan($_SESSION['token'],$method2);
+    		}else if ($brandid != ""){
     			$this->nextPageBrand($_SESSION['token'],$brandid);
     		}else if ($itemid != "") {
     			$this->nextPageCate($_SESSION['token'],$itemid);
@@ -79,17 +83,39 @@ class indexAction extends frontendAction {
     		}
     	}
     }
+    public function nextPagetuan($token,$itemid){
+    	$tokenTall = $token;
+    	$this->assign('tokenTall',$tokenTall);
+    	
+    	switch ($itemid) {
+    		case "new": $method="0";break;
+    		case "recom":$method="1";break;
+    		case "free":$method="2";break;
+    	}
+    
+    	$item = M("item");
+    	$condition["tuijian"] = $method;
+    	$count = $item->where($condition)->count();
+    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
+    	$show       = $Page->show();// 分页显示输出
+    	$carryrecord  = $item->where($condition)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+    
+    	$this->assign("item",$carryrecord);
+    	$this->assign("itemcate","Y");
+    	$this->assign('page',$show);// 赋值分页输出pti
+    	$this->assign("count",$count);
+    	$this->display();
+    }
     public function nextPageBrand($token,$itemid){
     	$tokenTall = $token;
     	$this->assign('tokenTall',$tokenTall);
     	 
     	$item = M("item");
-    	if($token != ""){
-    		$condition["tokenTall"]=$token;
-    	}
     	$condition["brand"] = $itemid;
     	$count = $item->where($condition)->count();
-    	$Page       = new Page($count,2);// 实例化分页类 传入总记录数
+    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$nowPage = isset($_GET['p'])?$_GET['p']:1;
     	$show       = $Page->show();// 分页显示输出
@@ -111,7 +137,7 @@ class indexAction extends frontendAction {
     	}
     	$condition["cate_id"] = $itemid;
     	$count = $item->where($condition)->count();
-    	$Page       = new Page($count,2);// 实例化分页类 传入总记录数
+    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$nowPage = isset($_GET['p'])?$_GET['p']:1;
     	$show       = $Page->show();// 分页显示输出
@@ -128,7 +154,7 @@ class indexAction extends frontendAction {
     		$item = M("wecha_shop");   		
     		$condition["name"] = array("like", "%".$keyword."%");
     		$count = $item->where($condition)->count();
-    		$Page       = new Page($count,2);// 实例化分页类 传入总记录数
+    		$Page       = new Page($count,10);// 实例化分页类 传入总记录数
     		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     		$nowPage = isset($_GET['p'])?$_GET['p']:1;
     		$show       = $Page->show();// 分页显示输出
@@ -149,7 +175,7 @@ class indexAction extends frontendAction {
 	    	}
 	    	$condition["title"] = array("like", "%".$keyword."%");
 	    	$count = $item->where($condition)->count();
-	    	$Page       = new Page($count,2);// 实例化分页类 传入总记录数
+	    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
 	    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
 	    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
 	    	$show       = $Page->show();// 分页显示输出
