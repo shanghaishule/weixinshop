@@ -136,9 +136,9 @@ function submitForm(){
 			<div class="FloatLeft">
 			<volist name="goods" id="good" key="key">
 			   <if condition="$key eq 1">
-			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=130" alt="{Lanrain:$good.intro}" /></a>    
+			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}&tokenTall={Lanrain:$good.tokenTall}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=130" alt="{Lanrain:$good.intro}" /></a>    
 			   </if><if condition="$key eq 2">
-			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=130" alt="{Lanrain:$good.intro}" /></a>
+			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}&tokenTall={Lanrain:$good.tokenTall}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=130" alt="{Lanrain:$good.intro}" /></a>
 			</if>
 			</volist>
 			</div>
@@ -147,13 +147,13 @@ function submitForm(){
 			<ul><volist name="goods" id="good" key="key"><if condition="$key eq 3">
 			<li>
 			
-			<div class="FloatLeft"><a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}">{Lanrain:$good.title}</a></div>
+			<div class="FloatLeft"><a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}&tokenTall={Lanrain:$good.tokenTall}" title="{Lanrain:$good.title}">{Lanrain:$good.title}</a></div>
 			<span>￥{Lanrain:$good.price}</span>
 			
 			</li></if><if condition="$key eq 4">
 			<li>
 			
-			<div class="FloatLeft"><a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}">{Lanrain:$good.title}</a></div>
+			<div class="FloatLeft"><a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}&tokenTall={Lanrain:$good.tokenTall}" title="{Lanrain:$good.title}">{Lanrain:$good.title}</a></div>
 			<span>￥{Lanrain:$good.price}</span>
 			
 			</li></if></volist>

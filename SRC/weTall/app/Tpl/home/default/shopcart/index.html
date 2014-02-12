@@ -36,7 +36,11 @@ $(function(){
           <div class="cart_pic"></div>
           <h4>您还没有宝贝，赶快去逛逛吧！</h4>
           <p>
+              <if condition="$tokenTall eq ''">
+              <a class="enter" href="/index.php?g=Wap&m=weTall&a=index">马上去逛逛</a>
+              <else/>
               <a class="enter" href="{:U('index/index',array('tokenTall'=>$tokenTall))}">马上去逛逛</a>
+              </if>
           </p>
       </div>  
    <?php }else{  ?>   

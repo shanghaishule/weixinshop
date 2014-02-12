@@ -42,7 +42,7 @@
 		<ul>
 		    <volist name="itemtwo" id="itemval">
 		     <if condition="$itemval['pid'] eq $itemL['id']">
-		     	<li><a href="/weTall/index.php?m=index&a=search&itemid={Lanrain:$itemval.id}">{Lanrain:$itemval.name}</a></li>
+		     	<li><a href="/weTall/index.php?m=index&a=search&itemid={Lanrain:$itemval.id}&tokenTall={Lanrain:$itemval.tokenTall}">{Lanrain:$itemval.name}</a></li>
 		     </if>
 		    </volist>
 	    </ul>

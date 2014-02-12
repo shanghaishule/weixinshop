@@ -154,9 +154,9 @@ class indexAction extends frontendAction {
     	$this->assign('tokenTall',$tokenTall);
     	
     	$item = M("item");
-    	if($token != ""){
-    		$condition["tokenTall"]=$token;
-    	}
+    	//if($token != ""){
+    	//	$condition["tokenTall"]=$token;
+    	//}
     	$condition["cate_id"] = $itemid;
     	$count = $item->where($condition)->count();
     	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
