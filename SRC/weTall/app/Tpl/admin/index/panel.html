@@ -96,7 +96,7 @@
        </div>
        <div class="mright">
             <div style="background:#E5E5E5;margin-top:11px;">
-               <h4>{$weshopData.name} 基本信息：</h4>
+               <h4>{$weshopData.name} 基本信息：<span>(<a href="{:U('setting/realShop')}">申请实体店认证</a>)</span></h4>
                <font size="2px" color="red">基本汇率: {$currentTax.shoptax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优惠券汇率：{$currentTax.coupontax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分汇率：{$currentTax.giftpointtax}</font>       
                <div>
                   <table border="1">
@@ -136,7 +136,7 @@
                      <a href="{:U('setting/index')}">[设置]</a>
                        <a class="group1" title="微商城二维码" id="aDownLoadShopQRcode" href="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">[预览]</a>
                      </td>
-                     <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('setting/index')}">更改店铺名称</a></td>
+                     <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('setting/index')}">修改店铺信息</a></td>
                      </tr>
                   </table>
                    

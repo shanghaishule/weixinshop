@@ -18,6 +18,34 @@ class settingAction extends backendAction {
         $this->display();
     }
 
+    public function realShop(){
+    	$where["tokenTall"]=$_SESSION["tokenTall"];
+    	$wecha_shop = $this->_mod->where($where)->find();
+    	if (IS_POST) {
+    		$licence = $this->_post("licence","trim");
+    		$address = $this->_post("address","trim");
+    		if($licence == ""){
+    			$this->error("请填写营业执照号码");
+    		}else if($address == ""){
+    			$this->error("请填写营业执照号码");
+    		}else{
+    			$data["licence"]=$licence;
+    			$data["address"]=$address;
+    			$data["HaveReal"]="2";
+    			$data2["licence"]=$licence;
+    			if($this->_mod->where($data2)->find()){
+    				$this->error("营业执照已经存在，请选择其他的营业执照!");
+    			}else if($this->_mod->where($where)->save($data)){
+    				$this->success("您已经提交申请，审核需要3-5个工作日！");
+    			}else{
+    				$this->error("系统故障，请重新提交!");
+    			}
+    		}
+    	}
+    	
+    	$this->assign("wecha_shop",$wecha_shop);
+    	$this->display();
+    }
     public function edit() {
 //         $setting = $this->_post('setting', ',');
         

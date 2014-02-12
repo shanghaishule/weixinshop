@@ -1,11 +1,13 @@
 @charset "utf-8";
 
-h4{background: url(/weTall/static/images/admin/pancl/p_top_bg.png) repeat 0 0;height: 32px; width:auto; line-height:32px; text-align: left; padding:0px 0px 0px 10px;font-size:14px;font-family: "微软雅黑","宋体";color:#333; font-weight: normal;}
+h4{background: url(/weTall/static/images/admin/pancl/p_top_bg.png) repeat 0 0;height: 32px; width:auto; line-height:32px; text-align: left; font-size:14px;font-family: "微软雅黑","宋体";color:#333; font-weight: normal;}
 .mleft{ width:70%; height:auto; float:left; margin:0px 0;border: 0px solid #ccc; min-height:300px;}
 .mright{ width:30%; height:auto; float:right; margin:0px 0;border: 0px solid #ccc;min-height:300px;}
 
 .th{margin-top:10px;}
 .mbar{width:auto; height:auto; clear:both; margin:10px 0px 10px 0px;border: 1px solid #ededed;overflow: hidden;}
+.mbar h4{padding-left:20px;}
+.mbar span{text-align:right;}
 .mbar p{ line-height:28px; border:0px solid #ccc; text-align:left; padding:0px 0px 0px 20px;font-family:"宋体";}
 .mbar a{color:#0099cc; margin:0px 10px 0px 0px;font-family:"宋体";}
 .mbar a:hover{color:#0066ff;}

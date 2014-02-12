@@ -115,13 +115,15 @@ class indexAction extends frontendAction {
     		$condition["cate_id"]=array('in',$condition2);
     	}    	
     
-    	$count = $item->where($condition)->count();
-    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
-    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
-    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
-    	$show       = $Page->show();// 分页显示输出
-    	$carryrecord  = $item->where($condition)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
-
+    	if(count($condition2) != 0){
+    		$count = $item->where($condition)->count();   	
+	    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+	    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+	    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
+	    	$show       = $Page->show();// 分页显示输出
+	    	$carryrecord  = $item->where($condition)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+    	}
+	    	
     	$this->assign("item",$carryrecord);
     	$this->assign("itemcate","Y");
     	$this->assign('page',$show);// 赋值分页输出pti
