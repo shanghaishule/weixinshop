@@ -77,7 +77,7 @@
                 <td align="center">
                     <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/index.php?g=System&m=RealShop&a=delete&id={Lanrain:$val.id}" data-msg="确定删除该条申请吗?">删除</a>
                      | <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/index.php?g=System&m=RealShop&a=checkPass&id={Lanrain:$val.id}" data-msg="确定认证实体店？">审核</a>
-                      | <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/index.php?g=System&m=RealShop&a=checkNoPass&id={Lanrain:$val.id}" data-msg="拒绝实体店认证？">拒绝审核</a>
+                      | <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/index.php?g=System&m=RealShop&a=checkNoPass&id={Lanrain:$val.id}" data-msg="拒绝实体店认证？">拒绝审核</a>                
                 </td>
             </tr>
             </volist>
@@ -88,9 +88,10 @@
     <div class="btn_wrap_fixed">
     	<label><input type="checkbox" name="checkall" class="J_checkall">全选/取消</label>
     	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="/index.php?g=System&m=RealShop&a=delete" data-name="id" data-msg="确定删除吗？" value="删除" />
-    	<div id="pages">{Lanrain:$page}</div>筛选：<a href="/index.php?g=System&m=RealShop&a=index&status=4">全部</a> | <a href="/index.php?g=System&m=RealShop&a=index&status=1">已认证</a>
+    	筛选：<a href="/index.php?g=System&m=RealShop&a=index&status=4">全部</a> | <a href="/index.php?g=System&m=RealShop&a=index&status=1">已认证</a>
     	 | <a href="/index.php?g=System&m=RealShop&a=index&status=2">认证中</a> | <a href="/index.php?g=System&m=RealShop&a=index&status=0">无实体店</a> | <a href="/index.php?g=System&m=RealShop&a=index&status=3">审核不通过</a>
-    </div>
+    <div id="pages">{Lanrain:$page}</div>
+    </div>    
 </div>
 </body>
 </html>

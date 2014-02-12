@@ -9,6 +9,17 @@ class AdNTAXAction extends BackAction
     public function index() {
         $map = array();
 		$UserDB = D('adforhome');
+		$updateData = $UserDB->select();
+		$today=strtotime(date("Y-m-d"));
+		foreach ($updateData as $varData){
+			if($varData["end_time"]<$today){
+				$data=$varData;
+				$data["status"]="0";
+				$data["checkstatus"]="0";
+				$data["board_id"]="0";
+				M("adforhome")->save($data);
+			}
+		}
 		$tax = D("set_tax");
 		$currentTax = $tax->find();
 		$count = $UserDB->where($map)->count();

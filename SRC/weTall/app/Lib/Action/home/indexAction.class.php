@@ -115,7 +115,7 @@ class indexAction extends frontendAction {
     		$condition["cate_id"]=array('in',$condition2);
     	}    	
     
-    	if(count($condition2) != 0){
+    	if(count($condition2) != 0 or $method != ""){
     		$count = $item->where($condition)->count();   	
 	    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
 	    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取

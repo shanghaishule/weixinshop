@@ -10,14 +10,25 @@ class RealShopAction extends BackAction
 	public function index() {
 		$status=$this->_get("status","trim");
 		if ($status == "4") {
-			$mod = $this->_mod_application->select();;
+			$count = $this->_mod_application->count();
+			$Page       = new Page($count,15);// 实例化分页类 传入总记录数
+			// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+			$nowPage = isset($_GET['p'])?$_GET['p']:1;
+			$show       = $Page->show();// 分页显示输出
+	    	$mod = $this->_mod_application->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
 		}else{
 			if ($status == "") {
 				$status = "2";
 			}
 			$where["HaveReal"]=$status;
-	    	$mod = $this->_mod_application->where($where)->select();
+			$count = $this->_mod_application->where($where)->count();
+			$Page       = new Page($count,15);// 实例化分页类 传入总记录数
+			// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+			$nowPage = isset($_GET['p'])?$_GET['p']:1;
+			$show       = $Page->show();// 分页显示输出
+	    	$mod = $this->_mod_application->where($where)->order('id ASC')->limit($Page->firstRow.','.$Page->listRows)->select();
 		}//dump($mod);exit;
+		$this->assign('page',$show);// 赋值分页输出
     	$this->assign("list",$mod);
     	$this->display();
     }
