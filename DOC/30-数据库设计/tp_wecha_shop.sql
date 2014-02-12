@@ -48,7 +48,7 @@ ADD  `status` TINYINT NOT NULL DEFAULT  '1' AFTER  `twodcode` ;
 ALTER TABLE  `tp_wecha_shop` ADD  `closeReason` TEXT NULL AFTER  `status` ;
 
 /*实体店认证*/
-ALTER TABLE`tp_wecha_shop`CHANGE`HaveReal``HaveReal` TINYINT( 4)NOTNULL DEFAULT'0' COMMENT'0-无实体店 1-有实体店 2-认证中';
+ALTER TABLE`tp_wecha_shop`CHANGE`HaveReal``HaveReal` TINYINT( 4)NOTNULL DEFAULT'0' COMMENT'0-无实体店 1-有实体店 2-认证中 3-审核不通过';
 ALTER TABLE`tp_wecha_shop`ADD`licence` VARCHAR( 255)NULL ;
 ALTER TABLE`tp_wecha_shop`ADD`address` VARCHAR( 255)NULL ;
 
