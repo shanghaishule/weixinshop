@@ -9,11 +9,11 @@
         </tr>
         <tr>
             <th>营业执照 :</th>
-            <td><input type="text" <if condition="$wecha_shop['HaveReal'] neq '0'">disabled</if> name="licence" class="input-text" size="50" value="{$wecha_shop.licence}"></td>
+            <td><input type="text" <if condition="$wecha_shop['HaveReal'] eq '1'">disabled<elseif condition="$wecha_shop['HaveReal'] eq '2'"/>disabled</if> name="licence" class="input-text" size="50" value="{$wecha_shop.licence}"></td>
         </tr>
         <tr>
             <th>实体店地址 :</th>
-            <td><input type="text" <if condition="$wecha_shop['HaveReal'] neq '0'">disabled</if> name="address" class="input-text" size="50" value="{$wecha_shop.address}"></td>
+            <td><input type="text" <if condition="$wecha_shop['HaveReal'] eq '1'">disabled<elseif condition="$wecha_shop['HaveReal'] eq '2'"/>disabled</if> name="address" class="input-text" size="50" value="{$wecha_shop.address}"></td>
         </tr>
         
         <tr>
@@ -22,9 +22,11 @@
         	   <if condition="$wecha_shop['HaveReal'] eq '0'" >
         	   <input type="hidden" name="menuid"  value="{$menuid}"/><input type="submit" class="btn btn_submit" value="申请认证"/>
         	   <elseif condition="$wecha_shop['HaveReal'] eq '1'" />
-        	   <input type="hidden" name="menuid" disabled  value="{$menuid}"/><input type="submit" disabled class="btn btn_submit" value=" 已认证"/>        	       	   
+        	   <input type="hidden" name="menuid"  value="{$menuid}"/><input type="submit" disabled class="btn btn_submit" value=" 已认证"/>       	       	   
+        	   <elseif condition="$wecha_shop['HaveReal'] eq '3'" />
+        	   <input type="hidden" name="menuid" value="{$menuid}"/><input type="submit" class="btn btn_submit" value="重新申请"/>        	       	   
         	   <else/>
-        	   <input type="hidden" name="menuid" disabled  value="{$menuid}"/><input type="submit" disabled class="btn btn_submit" value=" 审核中"/>
+        	   <input type="hidden" name="menuid" value="{$menuid}"/><input type="submit" disabled class="btn btn_submit" value=" 审核中"/>
         	   </if>
         	   请注意：审核需要3-5个工作日
         	</td>

@@ -33,6 +33,7 @@ class settingAction extends backendAction {
     			$data["address"]=$address;
     			$data["HaveReal"]="2";
     			$data2["licence"]=$licence;
+    			$data2["HaveReal"]=array("neq","3");
     			if($this->_mod->where($data2)->find()){
     				$this->error("营业执照已经存在，请选择其他的营业执照!");
     			}else if($this->_mod->where($where)->save($data)){
