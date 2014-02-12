@@ -239,7 +239,7 @@ class userAction extends userbaseAction {
       	    $status=$_GET['status'];
         }
       
-        $item_orders= $item_order->order('id desc')->where(array('status'=>$status,userId=>$this->visitor->info['id'],tokenTall=>$tokenTall))->select();
+        $item_orders= $item_order->order('id desc')->where(array('status'=>$status,userId=>$this->visitor->info['id']))->select();
         foreach ($item_orders as $key=>$val)
         {
       		$order_details = $order_detail->where("orderId='".$val['orderId']."'")->select();
