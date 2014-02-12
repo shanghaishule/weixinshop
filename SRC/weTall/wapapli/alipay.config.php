@@ -23,7 +23,7 @@
 
 include_once('DB.php');
 
-$sql="select * from weixin_alipay";
+$sql="select * from tp_alipay";
 $result=mysql_query($sql,$conn);
  $row=mysql_fetch_array($result);
 

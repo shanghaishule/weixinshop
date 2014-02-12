@@ -27,6 +27,12 @@ class SiteAction extends BackAction{
 		unset($_POST[C('TOKEN_NAME')]);
 		
 		if($this->update_config($_POST,CONF_PATH.$file)){
+			$alipay=M('alipay');
+			$alipayData["alipayname"]=$this->_post("alipay_name","trim");
+			$alipayData["partner"]=$this->_post("alipay_pid","trim");
+			$alipayData["key"]=$this->_post("alipay_key","trim");
+			$alipay->where("1=1")->delete();
+			$alipay->add($alipayData);
 			$this->success('操作成功',U('Site/index',array('pid'=>6,'level'=>3)));
 		}else{
 			$this->success('操作失败',U('Site/index',array('pid'=>6,'level'=>3)));
