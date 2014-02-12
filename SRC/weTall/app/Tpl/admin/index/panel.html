@@ -10,7 +10,21 @@
 <script type="text/javascript" src="__STATIC__/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="__STATIC__/js/all.js"></script>
 <script type="text/javascript" src="__STATIC__/weixin/js/colorbox.js"></script>
-
+<link href="__STATIC__/css/admin/style.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>	
+	<title>{:L('website_manage')}</title>
+	<script>
+	var URL = '__URL__';
+	var SELF = '__SELF__';
+	var ROOT_PATH = '__ROOT__';
+	var APP	 =	 '__APP__';
+	//语言项目
+	var lang = new Object();
+	<volist name=":L('js_lang')" id="val">
+		lang.{$key} = "{$val}";
+	</volist>
+	</script>
 <script>
 
 			$(document).ready(function(){
@@ -55,8 +69,8 @@
                    </p>
                    <p><strong>您需要关注:</strong></p>
                    <p><span>结账信息:</span>
-                       <a  href="{:U('account/index',array('status'=>6,'tokenTall'=>$tokenTall))}">未结算账单[<span class="count">{$account_cnt.weijie_cnt}</span>][<span class="count">{$account_cnt.weijie_amt}&nbsp;元</span>]</a>
-                       <a  href="{:U('account/index',array('status'=>4,'tokenTall'=>$tokenTall))}">已结算账单[<span class="count">{$account_cnt.yijie_cnt}</span>][<span class="count">{$account_cnt.yijie_amt}&nbsp;元</span>]</a>
+                       <a  href="{:U('account/index',array('status'=>6,'tokenTall'=>$tokenTall))}">未结算账单[<span class="count">{$account_cnt.weijie_cnt}</span>][<span class="count">合计&nbsp;{$account_cnt.weijie_amt}&nbsp;元</span>]</a>
+                       <a  href="{:U('account/index',array('status'=>4,'tokenTall'=>$tokenTall))}">已结算账单[<span class="count">{$account_cnt.yijie_cnt}</span>][<span class="count">合计&nbsp;{$account_cnt.yijie_amt}&nbsp;元</span>]</a>
                    </p>
                </div>
             </div>
@@ -86,11 +100,13 @@
                <font size="2px" color="red">基本汇率: {$currentTax.shoptax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优惠券汇率：{$currentTax.coupontax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分汇率：{$currentTax.giftpointtax}</font>       
                <div>
                   <table border="1">
-                     <tr><td rowspan="4">&nbsp;<img src="{$weshopData.headurl}" alt="店铺头像" />&nbsp;<br></br>
-                      
-                     </td><td rowspan="3">
-                     &nbsp;<img height="90" id="imgWxQRCode" src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>">                    
-                     &nbsp;</td><td>
+                     <tr><td rowspan="4" style="padding:2px;width:108px;">
+                     <a href="{:U('index/edithead',array('tokenTall'=>$tokenTall))}" >
+                     <img width="104px" height="104px" src="{$weshopData.headurl}" alt="更改头像" /></a>
+                    <a href="{:U('index/edithead',array('tokenTall'=>$tokenTall))}" >  点击更改头像</a>
+                     </td><td rowspan="3" style="padding:2px;">
+                     <img height="90" id="imgWxQRCode" src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>">                    
+                    </td><td>
                     &nbsp;&nbsp;&nbsp;&nbsp;店铺名称：
                      </td><td>{$weshopData.name}</td>
                      

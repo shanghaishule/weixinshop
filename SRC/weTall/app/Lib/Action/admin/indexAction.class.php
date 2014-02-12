@@ -13,13 +13,81 @@ class indexAction extends backendAction {
         $top_menus = $this->_mod->admin_menu(0);
         $this->assign('top_menus', $top_menus);
         $my_admin = array('username'=>$_SESSION['admin']['username'], 'rolename'=>$_SESSION['admin']['role_id']);
-        $this->assign('my_admin', $my_admin);
+        $this->assign('my_admin', $my_admin);        
 
         $this->assign('tokenTall', $this->getTokenTall());
         $_SESSION["tokenTall"] = $this->getTokenTall();
+        
+        $token=$_SESSION["tokenTall"];
+        $weshop=M("wecha_shop");
+        $where["tokenTall"]=$token;
+        $where2["token"]=$token;
+        if (false == $weshop->where($where)->find()) {
+        	$data["tokenTall"] = $token;
+        	$data["headurl"] = "/tpl/User/default/common/images/portrait.jpg";
+        	$data["HaveReal"] = "0";
+        	$wxUser=M("wxuser")->where($where2)->find();
+        	
+        	$data["name"]=$wxUser["wxname"];
+        	$data["weName"]=$wxUser["wxname"];
+        	$data["title"]="微指购店铺";
+        	$data["descr"]="微指购店铺";
+        	$data["keywords"]="微指购店铺";
+        	$weshop->add($data);
+        }
+        
         $this->display(); 
     }
 
+    public function edithead(){
+    	if(IS_POST){
+    		//必须上传图片
+    		if (empty($_FILES['headurl']['name'])) {
+    			$this->error('请上传头像图片');
+    		}
+    		//上传图片
+    		$date_dir = date('ym/d/'); //上传目录
+    		$item_headurls = array(); //相册
+    		$result = $this->_upload($_FILES['headurl'], 'item/'.$date_dir, array(
+    				'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'),
+    				'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height'),
+    				'suffix' => '_b,_m,_s',
+    				//'remove_origin'=>true
+    		));
+    		if ($result['error']) {
+    			$this->error($result['info']);
+    		} else {
+    			$data['headurl'] = $date_dir . $result['info'][0]['savename'];
+    			//保存一份到相册
+    			$item_imgs[] = array(
+    					'headurl'     => $data['headurl'],
+    			);
+    		}
+    		$datahead['headurl'] = "/weTall/data/upload/item/".$data['headurl'];
+    		$datahead2['tokenTall'] = $_SESSION["tokenTall"];
+    		$wshop=M("wecha_shop");
+    		if($wshop->where($datahead2)->save($datahead)){
+    			$this->success("头像修改成功");
+    		}else{
+    			$this->error("头像修改失败");
+    		}
+    		
+    	}else{
+    		$token=$this->_get("tokenTall","trim");
+    		
+    		$data["tokenTall"]=$token;
+    		if($token != "") $_SESSION["tokenTall"] = $token;
+    		$weChaShop = M("wecha_shop")->where($data)->find();
+    		$this->assign("we_shop", $weChaShop);
+    		
+    	    if (IS_AJAX) {
+    			$response = $this->fetch();
+    			$this->ajaxReturn(1, '', $response);
+    		} else {
+    			$this->display();
+    		}
+    	}
+    }
     public function panel() {
 
     	$map = array();

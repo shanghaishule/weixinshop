@@ -1,0 +1,221 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><title>微指购商城,中国最大的手机商城，微网商城上线站点</title>
+<meta name="Keywords" content="微指购，服装商城,微信" />
+<meta name="Description" content="微指购商城" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /><meta http-equiv="x-ua-compatible" content="ie=7" /><link rel="stylesheet" type="text/css" href="{lanrain::RES}/js/weTall/public.css" /><link rel="stylesheet" type="text/css" href="{lanrain::RES}/js/weTall/index.css" />
+
+    <script type="text/javascript" src="{lanrain::RES}/js/weTall/jquery.min.js"></script>
+    
+    <script type="text/javascript" src="{lanrain::RES}/js/weTall/MobileSlide.js"></script>
+
+    <script type="text/javascript" src="{lanrain::RES}/js/weTall/js.js"></script>
+
+    <script type="text/javascript" src="{lanrain::RES}/js/weTall/index.js"></script>
+
+<title>
+
+</title></head>
+<body>
+    <div class="Top_King_top">
+        <a name="top">&nbsp;</a>&nbsp;</div>
+    <div class="top_bg">
+        <div class="TopMin320">
+            <!--LOGO-->
+            <div class="top_logo FloatLeft PicIEPng"><a href="/index.php?g=Wap&m=weTall&a=index" style="color:white;">微指购商城</a></div>
+
+            <div class="top_right">
+                <ul>
+                    <li class="PicIEPng"><a href="/index.php?g=Wap&m=weTall&a=allCate">
+                        <img src="{lanrain::RES}/images/weTall/list_ico.png" /></a></li>
+                    <li class="PicIEPng"><a href="/weTall/index.php?g=home&m=shopcart&a=index">
+                        <img src="{lanrain::RES}/images/weTall/shop_ico.png"></a></li>
+                    <li class="PicIEPng"><a href="/weTall/index.php?g=home&m=user&a=index">
+                        <img src="{lanrain::RES}/images/weTall/login_ico.png" /></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="MinWidth">
+        <!--幻灯片广告-->
+        <div class="banner">
+<ul id="BanCont">
+  <volist name="weTallboard" id="bolist">
+     <if condition="$bolist['boadid'] eq 1">
+     <li><a href="{Lanrain:$bolist.url}" title="{Lanrain:$bolist.desc}"><img src="/weTall/data/upload/advert/{Lanrain:$img_dir}{Lanrain:$bolist.content}" width="320" height="161" alt="{Lanrain:$bolist.desc}" /></a></li> 
+     </if>
+  </volist>
+</ul>
+<ul class="banner_link"></ul>
+</div>
+<script>
+function submitForm(){
+	$("#form1").submit(function(e){
+		
+		});
+	
+}
+</script>
+<div class="search_all">
+    <form id="form1" action="/weTall/index.php?m=index&a=search" method="post">       
+        <div class="search_content FloatLeft">
+        <select id="search_method" name="method"><option selected value="weFig">搜商品</option><option value="shop">搜店铺</option></select>
+            <input type="text" id="txtKeyword" autocomplete="off" placeholder="请输入搜索内容" value=""
+               name="txtkeyword" class="search_textbox" /></div>
+        <div class="search_btn FloatRight">
+            <input type="image" id="submit" onclick="submitForm();" src="{lanrain::RES}/images/weTall/search_btn.jpg" /></div>
+    </form>
+</div>
+
+
+
+        <div class="btn_big">
+            <ul>
+                <li><a href="/weTall/index.php?m=index&a=search&method=new"><div class="newPro"></div><span>新品上市</span></a></li>
+                <li><a href="/weTall/index.php?m=index&a=search&method=recom"><div class="tuanPro"></div><span>商城推荐</span></a></li>
+                <li><a href="/weTall/index.php?m=index&a=search&method=free"><div class="mailPro"></div><span>包邮专场</span></a></li>
+            </ul>
+        </div>
+        <!--幻灯片底部广告-->
+        <div class="widthMAX MarginTop10">
+        <volist name="weTallboard" id="bolist">
+		     <if condition="$bolist['boadid'] eq 2">
+		     <a href="{Lanrain:$bolist.url}" title="{Lanrain:$bolist.desc}"><img src="/weTall/data/upload/advert/{Lanrain:$img_dir}{Lanrain:$bolist.content}" width="320" height="100" alt="{Lanrain:$bolist.desc}" /></a>
+		     </if>
+		  </volist>
+          </div>
+
+        <!--热门分类-->
+        <div class="widthMAX MarginTop10" id="LeftRight1">
+<div class="pr_list">
+<div class="title FloatLeft">热门分类</div>
+<div class="pr_list_frist FloatRight">
+<ul>
+<volist name="item1" id="itemHot">
+ <li>{Lanrain:$itemHot.name}</li>
+</volist>
+</ul>
+</div>
+</div>
+<div class="Pr_list_Cont">
+  <volist name="item" id="item">  
+	<div class="pr_list_second MarginTop5">
+	<ul>
+	    <volist name="itemtwo" id="itemval">
+	     <if condition="$itemval['pid'] eq $item['id']">
+	     	<li><a href="/weTall/index.php?m=index&a=search&itemid={Lanrain:$itemval.id}">{Lanrain:$itemval.name}</a></li>
+	     </if>
+	    </volist>
+    </ul>
+   </div>
+ </volist>
+ <div class="widthMAX pr_list_more"><br></br><br></br><br></br>-----------><a href="/index.php?g=Wap&m=weTall&a=allCate">所有分类</a></div>
+</div>
+
+</div>
+<div class="widthMAX MarginTop10">
+        <volist name="weTallboard" id="bolist">
+		     <if condition="$bolist['boadid'] eq 3">
+		     <a href="{Lanrain:$bolist.url}" title="{Lanrain:$bolist.desc}"><img src="/weTall/data/upload/advert/{Lanrain:$img_dir}{Lanrain:$bolist.content}" width="320" height="150" alt="{Lanrain:$bolist.desc}" /></a>
+		     </if>
+		  </volist>
+          </div>
+        <!--新品上市-->
+        <div class="widthMAX MarginTop10" id="LeftRight2">
+<div class="pr_list">
+<div class="title FloatLeft">新品上市</div>
+
+</div>
+<div class="banner_Cont">
+<div class="pr_list_3 MarginTop10">
+
+       
+          
+			<div class="FloatLeft">
+			<volist name="goods" id="good" key="key">
+			   <if condition="$key eq 1">
+			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=130" alt="{Lanrain:$good.intro}" /></a>    
+			   </if><if condition="$key eq 2">
+			    <a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}"><img src="/weTall/data/upload/item/{Lanrain:$good.img}" width="150" height=130" alt="{Lanrain:$good.intro}" /></a>
+			</if>
+			</volist>
+			</div>
+			
+			<div class="pr_link">
+			<ul><volist name="goods" id="good" key="key"><if condition="$key eq 3">
+			<li>
+			
+			<div class="FloatLeft"><a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}">{Lanrain:$good.title}</a></div>
+			<span>￥{Lanrain:$good.price}</span>
+			
+			</li></if><if condition="$key eq 4">
+			<li>
+			
+			<div class="FloatLeft"><a href="/weTall/index.php?g=home&m=Item&a=index&id={Lanrain:$good.id}" title="{Lanrain:$good.title}">{Lanrain:$good.title}</a></div>
+			<span>￥{Lanrain:$good.price}</span>
+			
+			</li></if></volist>
+			</ul>
+			</div>
+		
+	  
+</div>
+</div>
+
+        <!--主题馆族-->
+        <div class="widthMAX MarginTop10" id="LeftRight4">
+<div class="pr_list343">
+    <div class="titlezone">
+     <div class="title FloatLeft">主题馆族</div>
+    </div>
+	<div class="themeZone">
+	    <a href="/weTall/index.php?m=index&a=search&method=fuzhuang">
+		<div class="clother"><span class="yifu">服装鞋帽</span><p>最in时尚服装</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/yifu.jpg"></img></div>
+		</a><a href="/weTall/index.php?m=index&a=search&method=shuma">
+		<div class="clother"><span class="jiadian">数码家电</span><p>全网最低价</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/xiangji.jpg"></img></div>
+		</a><a href="/weTall/index.php?m=index&a=search&method=shenghuo">
+		<div class="clother"><span class="shenghuo">生活用品</span><p>日用底价特惠</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/shehuo.jpg"></img></div>
+		</a><a href="/weTall/index.php?m=index&a=search&method=huazhuang">
+		<div class="clother"><span class="huazhuang">化妆用品</span><p>最天然的保养</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/huazhuang.jpg"></img></div>
+		</a><a href="/weTall/index.php?m=index&a=search&method=tushu">
+		<div class="clother"><span class="haoshu">好书汇</span><p>热门畅销图书</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/shu.jpg"></img></div>
+		</a><a href="/weTall/index.php?m=index&a=search&method=meishi">
+		<div class="clother"><span class="meishi">美食广场</span><p>买食品送饮料</p><img height="60" width="68" src="{lanrain::RES}/images/weTall/shipin.jpg"></img></div>
+	    </a>
+	</div>
+</div>
+
+</div>
+
+        <!--所有分类-->
+        <div class="widthMAX all_list">
+<div class="widthMAX2">
+<div class="title FloatLeft">所有品牌</div>
+</div>
+<ul>
+<volist name="brandlist" id="brandlist">
+ <li><a href="/weTall/index.php?m=index&a=search&brandid={Lanrain:$brandlist.id}">{Lanrain:$brandlist.name}</a></li>
+</volist>
+</ul>
+</div>
+
+    </div>
+    <div class="widthMAX footer_function">
+<a href="/weTall/index.php?m=shopcart&a=index" class="shopping_car">我的购物车[<span id="shoppingCartAmount" class="Cred">{Lanrain:$cartNum}</span>]</a>
+<!-- <a href="http://www.shopbest.com.cn/mobi/cn/help/list.html" class="help">帮助中心</a> -->
+<a href="/weTall/index.php?g=home&m=suggestion&a=index" class="help">我要留言</a>
+<a href="/weTall/index.php?g=home&m=application&a=index" class="into">申请开店</a>
+
+</div>
+<div class="footer_bg">
+<div class="FloatLeft">
+<a href="/weTall/index.php?g=home&m=user&a=index">登录</a> | <a href="/weTall/index.php?m=user&a=register">注册</a>
+</div>
+<span><a href="#top"><img src="{lanrain::RES}/images/weTall/top.jpg"></a></span>
+</div>
+<div class="footer_txt">Copyright © 微指购 <a href="/index.php?g=Wap&m=weTall&a=index">微指购·中国</a> </div>
+
+</body>
+</html>

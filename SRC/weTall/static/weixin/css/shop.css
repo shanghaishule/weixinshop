@@ -27,6 +27,7 @@
 body {font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3"; line-height:1.6; background:#f6f6f6; }
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0; }
 h1, h2, h3, h4, h5, h6 { font-size: 16px;}
+hr{border:1px dashed #D9D9D9;}
 img, table, td, th { border: 0; }
 ul, ol { list-style-type:none; }
 a{ text-decoration:none; color:#666;}
@@ -321,17 +322,17 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
  * -------------------------------------------------------
  */
 
-#nav {width:100%; left:0px;position:fixed; top:0px; z-index: 100; margin: 0 auto;display:block;background:url(http://bestchoice88.com/tpl/Wap/default/common/images/weTall/top_bg.jpg) repeat-x;}
-#nav ul.navlist { position: relative; z-index:9999; height:45px; margin:0 auto; background:url(http://bestchoice88.com/tpl/Wap/default/common/images/weTall/top_bg.jpg) repeat-x; border-bottom:1px solid #ccc;}
+#nav {width:100%; left:0px;position:fixed; top:0px; z-index: 100; margin: 0 auto;display:block;background:#FF7F24;opacity:0.8;}
+#nav ul.navlist { position: relative; z-index:9999; height:45px; margin:0 auto; background:#FF7F24;opacity:0.8; border-bottom:1px solid #ccc;}
 #nav .navlist li { float: left; margin: 0px 0px 0 0;width:12%;height:45px;  position:relative;}
 #nav .navlist li#n_3 i{ position:absolute; height:14px; width:14px;background:#C00; color:#fff; left:55%; top:10px; border-radius:50%; font-style:normal; text-align:center; font-size:12px; display:none;}
 #nav .navlist li span{ display:inline-block; width:100%; height:45px; cursor:pointer;}
 #nav .navlist li a{ display:block; height:45px;}
-#nav .navlist li#n_0 span{ background:url(http://bestchoice88.com/tpl/Wap/default/common/images/weTall/list_ico.png) no-repeat center center;}
+#nav .navlist li#n_0 span{ background:url(/tpl/Wap/default/common/images/weTall/list_ico.png) no-repeat center center;}
 #nav .navlist li#n_1 span{ background:url(../images/tilttle_btn06.png) no-repeat center center;}
-#nav .navlist li#n_2 span{ background:url(http://bestchoice88.com/tpl/Wap/default/common/images/weTall/login_ico.png) no-repeat center center;}
-#nav .navlist li#n_3 span{ background:url(http://bestchoice88.com/tpl/Wap/default/common/images/weTall/shop_ico.png) no-repeat center center;}
-#nav .navlist li#n_4 span{ text-align:left;padding-top:9px; color:white;}
+#nav .navlist li#n_2 span{ background:url(/tpl/Wap/default/common/images/weTall/login_ico.png) no-repeat center center;}
+#nav .navlist li#n_3 span{ background:url(/tpl/Wap/default/common/images/weTall/shop_ico.png) no-repeat center center;}
+#nav .navlist li#n_4 span{ text-align:left;padding-top:9px; color:white;font-weight:900;}
 #nav .navlist li#n_4{width:50%;}
 
 .banner{position: relative;}
@@ -726,7 +727,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 #footer { width:100%;margin: 0 auto; border-top: 1px solid #ddd; text-align: center; color: #aaa; line-height: 20px;}
 #footer p { color: #a6a6a6; word-spacing: 5px; padding: 10px 0; }
 #footer a { color: #a6a6a6; text-decoration: none; }
-#footer p.foot_nav a {font-size:16px; }
+#footer p.foot_nav a {font-size:13px; }
 #footer a:hover { text-decoration: underline; }
 
 /*
@@ -800,7 +801,30 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .FloatLeft{float:left; margin:0;}
 .FloatRight { float:right; margin:0;}
 
-
+/*-------------------------------------------------------
+ **
+ **分页css
+ */
+#pages{
+	width:100%;
+	text-align:center;
+	padding:5px;
+}
+.shopClass{
+	display:block;
+	margin:2px;
+	font-size:14px;
+	text-align:left;
+}
+.descrClass{
+	display:block;
+	margin:2px;
+	padding-left:8px;
+	font-size:8px;
+}
+.shopClass a{
+	color:blue;
+}
 /*
  * -------------------------------------------------------
  * ******************** end hack.css *********************

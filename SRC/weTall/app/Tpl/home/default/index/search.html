@@ -2,6 +2,14 @@
 <html>
 <head>
 <include file="public:headtop" />
+	<style>
+		.showhavereal{
+			margin-left: 5px;
+			font:italic bold 15px arial,sans-serif;
+			color: #c00000 ;
+			text-shadow: 5px 5px 2px #ff6000 ;
+		}
+	</style>
 </head>
 
 <body>
@@ -33,6 +41,8 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
 
 <div id="content">
     <div class="module_special tbr">
+        <if condition="$count eq 0"><div id="pages">没有记录!</div></if>
+        <if condition="$itemcate neq 'Y'">
         <h2 class="common_title veins2">
             <div class="ornament1"></div>
             <div class="ornament2"></div>
@@ -40,24 +50,43 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                 <span class="ico2">搜索到{$count}个<if condition="$method neq 'shop'">商品<else/>店铺</if></span>
             </span>
         </h2>
+        </if>
         <if condition="$method eq 'shop'">
         <div class="wrap">
             <div class="wrap_child">
                 <div class="major">
-                  <table>
+                  <table border="1" width="100%" align="left" >
                      <volist name="item" id="item">
-                      <tr style="background:white;margin:10px"><td>
+                      <tr ><td rowspan="2">
                      	<a  href="{:U('index/index',array('tokenTall'=>$item['tokenTall']))}">
-                     	<img src="{$item.headurl}"/ width="30" height="30" /></a>
-                     	</td><td style="padding-left:20px">
+                     	<img src="{$item.headurl}"/ width="50" height="50" /></a>
+                     	</td><td style="padding-left:8px"><div  class="shopClass"> 
                      	<a  href="{:U('index/index',array('tokenTall'=>$item['tokenTall']))}">
-                     	{$item.name} | 信誉:{$item.credit}</a>
-						</td>
+                     	{$item.name} <!-- {$item.credit} -->
+                     	<if condition="$item['credit'] lt 4"><img width="20" height="20" src="__STATIC__/images/Level/1_0.png"/>
+                        <elseif condition="$item['credit'] lt 11" /><img width="20" height="20" src="__STATIC__/images/Level/1_1.png"/>
+                        <elseif condition="$item['credit'] lt 50" /><img width="20" height="20" src="__STATIC__/images/Level/1_2.png"/>
+                        <elseif condition="$item['credit'] lt 110" /><img width="20" height="20" src="__STATIC__/images/Level/1_3.png"/>
+                        <elseif condition="$item['credit'] lt 250" /><img width="20" height="20" src="__STATIC__/images/Level/1_4.png"/>
+                        <elseif condition="$item['credit'] lt 500" /><img width="20" height="20" src="__STATIC__/images/Level/2_0.png"/>
+                        <elseif condition="$item['credit'] lt 1000" /><img width="20" height="20" src="__STATIC__/images/Level/2_1.png"/>
+                        <elseif condition="$item['credit'] lt 2000" /><img width="20" height="20" src="__STATIC__/images/Level/2_2.png"/>
+                        <elseif condition="$item['credit'] lt 5000" /><img width="20" height="20" src="__STATIC__/images/Level/2_3.png"/>
+                        <elseif condition="$item['credit'] lt 10000" /><img width="20" height="20" src="__STATIC__/images/Level/2_4.png"/>
+                        <elseif condition="$item['credit'] lt 20000" /><img width="20" height="20" src="__STATIC__/images/Level/3_0.png"/>
+                        <elseif condition="$item['credit'] lt 50000" /><img width="20" height="20" src="__STATIC__/images/Level/3_1.png"/>
+                        <elseif condition="$item['credit'] lt 100000" /><img width="20" height="20" src="__STATIC__/images/Level/3_2.png"/>
+                        <elseif condition="$item['credit'] lt 200000" /><img width="20" height="20" src="__STATIC__/images/Level/3_3.png"/>
+                        <else/><img width="20" height="20" src="__STATIC__/images/Level/3_4.png"/>
+                        </if>
+                     	</a><span class="showhavereal"><eq name="item.HaveReal" value="1"><img src="__STATIC__/images/shiti3.png" width="25" height="25"/></eq></span></div>
+						</td></tr><tr><td><span class="descrClass">{$item.descr}</span></td>
+						</tr><tr><td colspan="2"><hr></td>
                       </tr>
                      </volist>
                    </table>
                 </div>
-                <div id="pages">共{$page}</div>
+                <div id="pages">{$page}</div>
             </div>
         </div><else/>
         <div class="wrap">
@@ -67,13 +96,13 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                      <volist name="item" id="item">
                      <li>
                      <div class="pic">
-                     	<a href="{:U('Item/index',array('id'=>$item['id'],'tokenTall'=>$tokenTall))}"><img  src="{:attach(get_thumb($item['img'], '_b'), 'item')}"></a>
+                     	<a href="{:U('Item/index',array('id'=>$item['id'],'tokenTall'=>$item['tokenTall']))}"><img  src="{:attach(get_thumb($item['img'], '_b'), 'item')}"></a>
                      </div>
                      <div class="good_content">
                      <h3>
-                     	<a  href="{:U('Item/index',array('id'=>$item['id'],'tokenTall'=>$tokenTall))}">{$item.title}</a>
+                     	<a  href="{:U('Item/index',array('id'=>$item['id'],'tokenTall'=>$item['tokenTall']))}">{$item.title}</a>
                      </h3>
-                     <p>¥{$item.price}</p>
+                     <p>¥{$item.price}   已售出:{$item.buy_num}</p>
                      </div>
                      <span class="show_good">
                      	<a  href="{:U('Item/index',array('id'=>$item['id']))}"></a>
@@ -82,7 +111,7 @@ var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:functio
                      </volist>
                     </ul>
                 </div>
-                <div id="pages">共{$page}</div>
+                <div id="pages">{$page}</div>
             </div>
         </div></if>
     </div>
