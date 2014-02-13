@@ -54,6 +54,7 @@ class indexAction extends frontendAction {
         $this->display();
     }
     public function search() {
+    	//排序字段和方式的获得
     	$sortByStr=$this->_get("sortid","trim");
     	$sortmethod=$this->_get("sortmethod","trim");
     	if($sortByStr == "" or $sortmethod == ""){
@@ -76,7 +77,9 @@ class indexAction extends frontendAction {
     	$this->assign("sortfield",$sortByStr);//$_SESSION["sortstr"]=$sortByStr;
     	$this->assign("sortmethod",$sortmethod);
     	if(IS_POST){
+    	 //搜索关键字时候	
     		$keyword=$this->_post("txtkeyword","trim");
+    		//搜索的方式本店，微指购，店铺
     		$method=$this->_post("method");
     		
     		$tokenTall = $this->getTokenTall();
@@ -89,16 +92,16 @@ class indexAction extends frontendAction {
     		if($keyword == ""){
     			$this->error("请输入关键字！");
     		}
-    		else if($method=="local"){
+    		else if($method=="local"){//本店
     			$this->nextPage($method, $keyword, $token,$sortBy);
                 $_SESSION['keyword']=$keyword;
                 $_SESSION['token']=$token;
                 $_SESSION['method']=$method;
-    		}else if($method=="weFig"){
+    		}else if($method=="weFig"){//微指购
     			$this->nextPage($method, $keyword,$sortBy);
                 $_SESSION['keyword']=$keyword;
                 $_SESSION['method']=$method;
-    		}else{
+    		}else{//店铺内搜索微指购
     			$this->nextPage($method, $keyword,$sortBy);
     			$_SESSION['keyword']=$keyword;
     			$_SESSION['method']=$method;
@@ -108,19 +111,19 @@ class indexAction extends frontendAction {
     		$itemid=$this->_get("itemid","trim");
     		$brandid=$this->_get("brandid","trim");
     		$method2=$this->_get("method","trim");
-    		if($method2 != ""){
+    		if($method2 != ""){//类别搜索
     			$this->assign("method",$method2);
     			$this->nextPagetuan($_SESSION['token'],$method2,$sortBy);
-    		}else if ($brandid != ""){
+    		}else if ($brandid != ""){//品牌
     			$this->assign("method",$brandid);
     			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
-    		}else if ($itemid != "") {
+    		}else if ($itemid != "") {//新品上市  服装鞋帽等
     			$this->assign("method",$itemid);
     			$this->nextPageCate($_SESSION['token'],$itemid,$sortBy);
-    		}else if($_SESSION['method'] == "local"){
+    		}else if($_SESSION['method'] == "local"){//本店搜索
     			$this->assign("method",$_SESSION['method']);
     		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'], $_SESSION['token'],$sortBy);
-    		}else{
+    		}else{//关键字搜索后的分页
     			$this->assign("method",$_SESSION['method']);
     			$this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy);
     		}
