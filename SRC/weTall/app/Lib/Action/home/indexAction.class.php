@@ -33,6 +33,21 @@ class indexAction extends frontendAction {
         $weChaShopDetail = $weChaShop->where($weshopData)->find();//var_dump($weshopData);die();
         $this->assign("weshopData",$weChaShopDetail);
         
+        /*收藏*/
+        if ($_SESSION['user_info']) {
+        	$userid = $_SESSION['user_info']['id'];
+        	$shopfav_mod = M('shop_favi');
+        	$wheredata = array('userid'=>$userid, 'tokenTall'=>$tokenTall);
+        	if ($shopfav_mod->where($wheredata)->find()) {
+        		$favi = "yes";
+        	}else{
+        		$favi = "no";
+        	}
+        }else{
+        	$favi = "no";
+        }
+        $this->assign('favi',$favi);
+        
         $this->assign('news',$news);
         $this->assign('tuijian',$tuijian);
         $this->_config_seo();
@@ -303,5 +318,63 @@ class indexAction extends frontendAction {
     	}
     	
     }
-    
+    //收藏
+    public function favi()
+    {
+    	//dump($_SESSION);exit;
+    	//0-未登录 1-保存成功 2-保存失败 3-无动作类型
+    	header("content-Type: text/html; charset=Utf-8");
+    	$tokenTall = $this->getTokenTall();
+    	if($_POST['act']){
+    		$act = $_POST['act'];
+    		if ($_SESSION['user_info']) {
+	    		$userid = $_SESSION['user_info']['id'];
+	    		$shopfav_mod = M('shop_favi');
+	    		$insdata = array('userid'=>$userid, 'tokenTall'=>$tokenTall);
+	    		if ($shopfav_mod->where($insdata)->find()) {
+	    			//已经有记录的情况下
+	    			if ($act == "add") {
+	    				//收藏
+	    				$data = array('status'=>2);
+	    			}else{
+	    				//取消收藏
+	    				if($shopfav_mod->where($insdata)->delete()){
+	    					//成功
+	    					$data = array('status'=>1);
+	    				}else{
+	    					//失败
+	    					$data = array('status'=>2);
+	    				}
+	    			}
+	    			
+	    		}else{
+	    			//没有记录的情况下
+	    			if ($act == "add") {
+	    				//收藏
+		    			if ($shopfav_mod->add($insdata)) {
+		    				//成功
+		    				$data = array('status'=>1);
+		    			}else{
+		    				//失败
+		    				$data = array('status'=>2);
+		    			}
+	    			}else{
+	    				//取消收藏
+	    				//成功
+	    				$data = array('status'=>1);
+	    			}
+	    		}
+	    	}else{
+	    		//当前未登录
+	    		$data = array('status'=>0, 'url'=>U('user/index', array('tokenTall'=>$tokenTall)));
+	    	}
+    	}else{
+    		//没有动作类型
+    		$data = array('status'=>3);
+    	}
+    	
+    	echo json_encode($data);
+    }
+    	 
+
 }
