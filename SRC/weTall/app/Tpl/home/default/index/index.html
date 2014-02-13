@@ -112,7 +112,7 @@ function submitForm(){
                 </div>
 	            <div>
                     <div>                       
-                        <span onclick="document.getElementById('mcover').style.display='block';">  
+                        <span onclick="document.getElementById('mcover').style.display='block';">
                         <img src="/tpl/User/default/common/images/friend.jpg" width="20" height="20" />                            
                          <br>分享
                         </span>
@@ -120,7 +120,11 @@ function submitForm(){
                 </div>
 	          </li>
 	          <li id="m_3">
-	            <img width="20" height="20" src="__STATIC__/weixin/images/favi.png"/><br>收藏店铺
+	            <eq name="favi" value="no">
+	            	<a href="javascript:void(0)" onclick="favi_action('add');"><img width="20" height="20" src="__STATIC__/weixin/images/favi.png"/><br>收藏店铺</a>
+	            <else />
+	            	<a href="javascript:void(0)" onclick="favi_action('cancel');"><img width="20" height="20" src="__STATIC__/weixin/images/favi2.png"/><br>已收藏</a>
+				</eq>
 	          </li>
 	        </ul>
 	   </div>
@@ -130,6 +134,43 @@ function submitForm(){
 	<div class="s_bottom"></div>
 
 	<script type="text/javascript">
+	function favi_action(act){
+		if(act == "add"){
+			//收藏
+			$.post("{:U('index/favi')}", {act: act}, function(data){
+				//alert("Data Loaded: "+data.status);
+				if(data.status == '0'){
+					alert("您还没有登录，请登录！")
+					window.location.href=data.url;
+				}else if(data.status == '2'){
+					alert("该店铺您已收藏！")
+				}else{
+					alert("收藏成功！")
+					window.location.reload();
+				}
+			},"json");
+		}else{
+			//取消收藏
+			var truthBeTold = window.confirm("您确定要取消收藏吗？"); 
+			if (truthBeTold){
+				$.post("{:U('index/favi')}", {act: act}, function(data){
+					//alert("Data Loaded: "+data.status);
+					if(data.status == '0'){
+						alert("您还没有登录，请登录！")
+						window.location.href=data.url;
+					}else if(data.status == '1'){
+						alert("取消收藏成功！")
+						window.location.reload();
+					}else{
+						window.location.reload();
+					}
+				},"json");
+			}
+		}
+		
+	}
+	
+	
 	$(function(){
 		$("div.module_special .wrap .major ul.list li:last-child").addClass("remove_bottom_line");
 	});

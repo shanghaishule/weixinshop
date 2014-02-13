@@ -131,3 +131,11 @@ CREATE TABLE `tp_application` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+/*店铺收藏表*/
+DROP TABLE IF EXISTS `tp_shop_favi`;
+CREATE TABLE `tp_shop_favi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) DEFAULT NULL COMMENT '用户id',
+  `tokenTall` varchar(30) DEFAULT NULL COMMENT '店铺token',
+  PRIMARY KEY (`id`), UNIQUE (`userid`,`tokenTall`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

@@ -138,6 +138,7 @@ class baseAction extends Action
     public function getTokenTall(){
     	$tokenTall = $this->_request('tokenTall', 'trim', '');
     	if($tokenTall != "") {$_SESSION["tokenTall"]=$tokenTall;}
+    	if($tokenTall == "" && $_SESSION["tokenTall"] != "") {$tokenTall = $_SESSION["tokenTall"];}
     	return $tokenTall;
     }
 }
