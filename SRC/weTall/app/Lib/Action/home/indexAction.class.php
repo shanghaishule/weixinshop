@@ -54,6 +54,10 @@ class indexAction extends frontendAction {
         $this->display();
     }
     public function search() {
+    	$sortBy=$this->_get("sortid","trim");
+    	if($sortBy == ""){
+    		$sortBy = "'add_time DESC'";
+    	}
     	if(IS_POST){
     		$keyword=$this->_post("txtkeyword","trim");
     		$method=$this->_post("method");
@@ -68,16 +72,16 @@ class indexAction extends frontendAction {
     			$this->error("请输入关键字！");
     		}
     		else if($method=="local"){
-    			$this->nextPage($method, $keyword, $token);
+    			$this->nextPage($method, $keyword, $token,$sortBy);
                 $_SESSION['keyword']=$keyword;
                 $_SESSION['token']=$token;
                 $_SESSION['method']=$method;
     		}else if($method=="weFig"){
-    			$this->nextPage($method, $keyword);
+    			$this->nextPage($method, $keyword,$sortBy);
                 $_SESSION['keyword']=$keyword;
                 $_SESSION['method']=$method;
     		}else{
-    			$this->nextPage($method, $keyword);
+    			$this->nextPage($method, $keyword,$sortBy);
     			$_SESSION['keyword']=$keyword;
     			$_SESSION['method']=$method;
     		}
@@ -86,19 +90,19 @@ class indexAction extends frontendAction {
     		$brandid=$this->_get("brandid","trim");
     		$method2=$this->_get("method","trim");
     		if($method2 != ""){
-    			$this->nextPagetuan($_SESSION['token'],$method2);
+    			$this->nextPagetuan($_SESSION['token'],$method2,$sortBy);
     		}else if ($brandid != ""){
-    			$this->nextPageBrand($_SESSION['token'],$brandid);
+    			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
     		}else if ($itemid != "") {
-    			$this->nextPageCate($_SESSION['token'],$itemid);
+    			$this->nextPageCate($_SESSION['token'],$itemid,$sortBy);
     		}else if($_SESSION['method'] == "local"){
-    		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'], $_SESSION['token']);
+    		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'], $_SESSION['token'],$sortBy);
     		}else{
-    			$this->nextPage($_SESSION['method'], $_SESSION['keyword']);
+    			$this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy);
     		}
     	}
     }
-    public function nextPagetuan($token,$itemid){
+    public function nextPagetuan($token,$itemid,$sortBy){
     	$tokenTall = $token;
     	$this->assign('tokenTall',$tokenTall);
     	
@@ -136,7 +140,7 @@ class indexAction extends frontendAction {
 	    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
 	    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
 	    	$show       = $Page->show();// 分页显示输出
-	    	$carryrecord  = $item->where($condition)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+	    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
     	}
 	    	
     	$this->assign("item",$carryrecord);
@@ -145,7 +149,7 @@ class indexAction extends frontendAction {
     	$this->assign("count",$count);
     	$this->display();
     }
-    public function nextPageBrand($token,$itemid){
+    public function nextPageBrand($token,$itemid,$sortBy){
     	$tokenTall = $token;
     	$this->assign('tokenTall',$tokenTall);
     	 
@@ -156,7 +160,7 @@ class indexAction extends frontendAction {
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$nowPage = isset($_GET['p'])?$_GET['p']:1;
     	$show       = $Page->show();// 分页显示输出
-    	$carryrecord  = $item->where($condition)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
     
     	$this->assign("item",$carryrecord);
     	$this->assign("itemcate","Y");
@@ -164,7 +168,7 @@ class indexAction extends frontendAction {
     	$this->assign("count",$count);
     	$this->display();
     }
-    public function nextPageCate($token,$itemid){
+    public function nextPageCate($token,$itemid,$sortBy){
     	$tokenTall = $token;
     	$this->assign('tokenTall',$tokenTall);
     	
@@ -178,7 +182,7 @@ class indexAction extends frontendAction {
     	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     	$nowPage = isset($_GET['p'])?$_GET['p']:1;
     	$show       = $Page->show();// 分页显示输出
-    	$carryrecord  = $item->where($condition)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
     	 
     	$this->assign("item",$carryrecord);
     	$this->assign("itemcate","Y");
@@ -186,7 +190,7 @@ class indexAction extends frontendAction {
     	$this->assign("count",$count);
     	$this->display();
     }
-    public function nextPage($method,$keyword,$token){
+    public function nextPage($method,$keyword,$token,$sortBy){
     	if($method=="shop"){   		
     		$item = M("wecha_shop");   		
     		$condition["name"] = array("like", "%".$keyword."%");
@@ -195,7 +199,7 @@ class indexAction extends frontendAction {
     		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
     		$nowPage = isset($_GET['p'])?$_GET['p']:1;
     		$show       = $Page->show();// 分页显示输出
-    		$carryrecord  = $item->where($condition)->order('id DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+    		$carryrecord  = $item->where($condition)->order('credit DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
     		
     		foreach ($carryrecord as $val){    			
     			$val["descr"]=mb_substr($val["descr"], 0,35,"utf-8")."...";
@@ -221,7 +225,7 @@ class indexAction extends frontendAction {
 	    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
 	    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
 	    	$show       = $Page->show();// 分页显示输出
-	    	$carryrecord  = $item->where($condition)->order('add_time DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+	    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
 	    	 
 	    	$this->assign("item",$carryrecord);
 	    	$this->assign("method",$method);
