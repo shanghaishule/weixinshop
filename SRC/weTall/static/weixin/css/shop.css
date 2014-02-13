@@ -358,6 +358,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .banner .slider #pagenavi a.active{ background:#C00;}
 
  .s_bottom{background: url(../images/gallery_btn.png) repeat-x left top; height:90px; margin-top:-105px;float:none;}
+ .s_bottom_search{background: url(../images/gallery_btn.png) repeat-x left top; height:93px; margin-top:-65px;float:none;}
 
 .shoplogo{width:320px;position: relative;z-index:1;}
 .shoplogourl{width:20%;float:left;}
@@ -864,3 +865,16 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .main_nav .main_li2 .img{ width:160px; height:114px; background:url(../images/cuxiao2.jpg) no-repeat left center; background-size:contain; }
 .main_nav .main_li3 .img{ width:160px; height:114px; background:url(../images/cuxiao3.jpg) no-repeat left center; background-size:contain; }
 .main_nav .main_li4 .img{ width:160px; height:114px; background:url(../images/cuxiao4.jpg) no-repeat left center; background-size:contain; }
+
+/*
+ * -------------------------------------------------------
+ * ******************** search sort **********************
+ * -------------------------------------------------------
+ */
+
+#sort_bg {width:100%;  left:0px;position:fixed; top:45px; z-index: 100; margin: 0 auto;display:block;background:url(/tpl/User/default/common/images/header.png) repeat-x;}
+#sort_bg ul.sortlist { position: relative; z-index:9999; height:45px; margin:0 auto; background:url(/tpl/User/default/common/images/header.png) repeat-x; border-bottom:1px solid #ccc;}
+#sort_bg .sortlist li { float: left; width:79px;height:45px;  position:relative;text-align:center;border-left:1px solid white;}
+#sort_bg .sortlist li a{ display:block; margin-top:10px;height:45px;color:white;font-weight:700;}
+#sort_bg .sortlist li img{ margin-top:0px;}
+

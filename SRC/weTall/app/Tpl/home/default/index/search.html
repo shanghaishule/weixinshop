@@ -14,7 +14,34 @@
 
 <body>
 <include file="public:headsearch" />
-<div class="s_bottom"></div>
+<if condition="$method neq 'shop'">
+<div id="sort_bg">
+	<ul class="sortlist">
+		<li id="n_0">
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=add_time&sortmethod={$sortmethod}">最新
+		     <if condition="$sortfield eq 'add_time'">
+		     <img width="15px" height="20px" src="__STATIC__/images/add_time_{$curSortmethod}.png"><else/>
+		     <img width="15px" height="20px" src="__STATIC__/images/BottomKingTop.png"></if></a></li>
+		<li id="n_1">
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=buy_num&sortmethod={$sortmethod}">销量
+		     <if condition="$sortfield eq 'buy_num'">
+		     <img width="15px" height="20px" src="__STATIC__/images/buy_num_{$curSortmethod}.png"><else/>
+		     <img width="15px" height="20px" src="__STATIC__/images/BottomKingTop.png">
+		     </if></a></li>
+		<li id="n_3">
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=price&sortmethod={$sortmethod}">价格
+		     <if condition="$sortfield eq 'price'">
+		     <img width="15px" height="20px" src="__STATIC__/images/price_{$curSortmethod}.png"><else/>
+		     <img width="15px" height="20px" src="__STATIC__/images/BottomKingTop.png"></if></a></li>
+		<li id="n_4">
+		     <a href="/weTall/index.php?m=index&a=search&method={$method}&sortid=ordid&sortmethod={$sortmethod}">综合
+		     <if condition="$sortfield eq 'ordid'">
+		     <img width="15px" height="20px" src="__STATIC__/images/ordid_{$curSortmethod}.png"><else/>
+		     <img width="15px" height="20px" src="__STATIC__/images/BottomKingTop.png"></if></a></li>      
+    </ul>
+</div>
+</if>
+<div class="s_bottom_search"></div>
 <script type="text/javascript">
 $(function(){
 	$("div.module_special .wrap .major ul.list li:last-child").addClass("remove_bottom_line");

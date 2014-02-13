@@ -1,6 +1,6 @@
 <?php
 class indexAction extends frontendAction {
-    
+
     public function index() {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();
@@ -39,10 +39,27 @@ class indexAction extends frontendAction {
         $this->display();
     }
     public function search() {
-    	$sortBy=$this->_get("sortid","trim");
-    	if($sortBy == ""){
-    		$sortBy = "'add_time DESC'";
+    	$sortByStr=$this->_get("sortid","trim");
+    	$sortmethod=$this->_get("sortmethod","trim");
+    	if($sortByStr == "" or $sortmethod == ""){
+    		$sortBy = "add_time desc";
+    		$sortByStr="add_time";
+    		$sortmethod="desc";
+    	}else{
+    		$sortBy = $sortByStr." ".$sortmethod;
     	}
+    	$this->assign("curSortmethod",$sortmethod);
+    	//if ($_SESSION["sortstr"] == $sortByStr) {    			
+	    	if($sortmethod == "asc"){
+	    		$sortmethod="desc";
+	    	}else{
+	    		$sortmethod="asc";
+	    	}
+    	//}else{
+    	//	$sortmethod="desc";
+    	//}
+    	$this->assign("sortfield",$sortByStr);//$_SESSION["sortstr"]=$sortByStr;
+    	$this->assign("sortmethod",$sortmethod);
     	if(IS_POST){
     		$keyword=$this->_post("txtkeyword","trim");
     		$method=$this->_post("method");
@@ -53,6 +70,7 @@ class indexAction extends frontendAction {
     		}else{
     			$token=$_SESSION["tokenTall"];
     		}
+    		$this->assign("method",$method);
     		if($keyword == ""){
     			$this->error("请输入关键字！");
     		}
@@ -70,22 +88,29 @@ class indexAction extends frontendAction {
     			$_SESSION['keyword']=$keyword;
     			$_SESSION['method']=$method;
     		}
+    		
     	}else{
     		$itemid=$this->_get("itemid","trim");
     		$brandid=$this->_get("brandid","trim");
     		$method2=$this->_get("method","trim");
     		if($method2 != ""){
+    			$this->assign("method",$method2);
     			$this->nextPagetuan($_SESSION['token'],$method2,$sortBy);
     		}else if ($brandid != ""){
+    			$this->assign("method",$brandid);
     			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
     		}else if ($itemid != "") {
+    			$this->assign("method",$itemid);
     			$this->nextPageCate($_SESSION['token'],$itemid,$sortBy);
     		}else if($_SESSION['method'] == "local"){
+    			$this->assign("method",$_SESSION['method']);
     		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'], $_SESSION['token'],$sortBy);
     		}else{
+    			$this->assign("method",$_SESSION['method']);
     			$this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy);
     		}
     	}
+    	
     }
     public function nextPagetuan($token,$itemid,$sortBy){
     	$tokenTall = $token;
@@ -102,7 +127,7 @@ class indexAction extends frontendAction {
     		case "huazhuang":$itemCate="化妆用品";break;
     		case "meishi":$itemCate="食品";break;
     	}
-    
+    	
     	$item = M("item");
     	if($itemCate == ""){
     		$condition["tuijian"] = $method;
@@ -127,7 +152,7 @@ class indexAction extends frontendAction {
 	    	$show       = $Page->show();// 分页显示输出
 	    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
     	}
-	    	
+	    	//var_dump($carryrecord);die();
     	$this->assign("item",$carryrecord);
     	$this->assign("itemcate","Y");
     	$this->assign('page',$show);// 赋值分页输出pti

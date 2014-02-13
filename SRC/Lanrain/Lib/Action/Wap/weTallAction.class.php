@@ -17,7 +17,7 @@
     	$goodbuy=M("item")->limit(4)->order('rand()')->select();
     	foreach ($goodbuy as $vallist){
     		$itemLm=$vallist;
-    		$itemLm["title"]=mb_substr($vallist["title"], 0,17,"utf-8")."...";
+    		$itemLm["title"]=mb_substr($vallist["title"], 0,17,"utf-8");
     		$goods[]=$itemLm;
     	}
     	//var_dump($goods);
