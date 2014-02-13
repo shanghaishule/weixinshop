@@ -105,7 +105,7 @@
                      <img width="104px" height="104px" src="{$weshopData.headurl}" alt="更改头像" /></a>
                     <a href="{:U('index/edithead',array('tokenTall'=>$tokenTall))}" >  点击更改头像</a>
                      </td><td rowspan="3" style="padding:2px;">
-                     <img height="90" id="imgWxQRCode" src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>">                    
+                     <img height="90" width="90" id="imgWxQRCode" src="{$weshopData.twodcode}">                    
                     </td><td>
                     &nbsp;&nbsp;&nbsp;&nbsp;店铺名称：
                      </td><td>{$weshopData.name}</td>
@@ -136,7 +136,7 @@
                      </td></tr>
                      <tr><td >
                      <a href="{:U('setting/index')}">[设置]</a>
-                       <a class="group1" title="微商城二维码" id="aDownLoadShopQRcode" href="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">[预览]</a>
+                       <a class="group1" title="微商城二维码" id="aDownLoadShopQRcode" href="{$weshopData.twodcode}">[预览]</a>
                      </td>
                      <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('setting/index')}">修改店铺信息</a></td>
                      </tr>

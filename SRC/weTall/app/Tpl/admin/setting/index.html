@@ -19,24 +19,21 @@
             <th>{:L('seo_desc')} :</th>
             <td><textarea rows="3" cols="50" name="descr">{$wecha_shop.descr}</textarea></td>
         </tr>
+        <tr>
+            <th>店铺logo :</th>
+            <td>
+  	               <input type="file" name="logo" />宽高比例建议:60 * 60     
+  	               <img width="60" height="60" alt="店铺logo" src="{$wecha_shop.logo}"/>
+  	        </td>
+        </tr>
          <tr>
             <th>微信公众号二维码 :</th>
             <td>
-            <?php if(C('pin_weixin_img')!=''){ ?>
-            <img src="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>" width="100" height="100"/><br />
-            <?php }else{ ?>
-            <?php } ?>
-  	<input type="file" name="twodcode" /></td>
+            <input type="file" name="twodcode" /> 宽高比例建议:90 * 90       
+            <img width="90" height="90" alt="店铺二维码" src="{$wecha_shop.twodcode}"/>
+  			</td>
         </tr>
-         <tr>
-            <th>微信公商城二维码 :</th>
-            <td>
-            <?php if(C('pin_weixinshop_img')!=''){ ?>
-            <img src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>" width="100" height="100"/><br />
-            <?php }else{ ?>
-            <?php } ?>
-  	<input type="file" name="twodcode" /></td>
-        </tr>
+         
         	
        <!-- <tr>
             <th>{:L('site_icp')} :</th>
