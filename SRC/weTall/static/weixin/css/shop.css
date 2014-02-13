@@ -27,7 +27,7 @@
 body {font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3"; line-height:1.6; background:#f6f6f6; }
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0; }
 h1, h2, h3, h4, h5, h6 { font-size: 16px;}
-hr{border:1px dashed #D9D9D9;}
+hr{border:1px solid #D9D9D9;}
 img, table, td, th { border: 0; }
 ul, ol { list-style-type:none; }
 a{ text-decoration:none; color:#666;}
@@ -41,7 +41,19 @@ a:visited{ color:#666;}
 
 
 .home_page_logo{background:url(/tpl/User/default/common/images/home_page.png) no-repeat 0 0;background-size: 140px 40px; height:40px;width:140px;}
-
+#shopname{border-bottom:1px solid #d9d9d9;border-left:1px solid #d9d9d9;}
+.dail{
+	margin-left:50px;
+	padding:3px;
+	font-size:12px;
+	border:1px solid gray;
+	-webkit-box-shadow: -2px -2px 4px gray,-1px -1px 4px gray;  
+    -moz-box-shadow: -2px -2px 4px gray,-1px -1px 4px gray;  
+    box-shadow: -2px -2px 4px gray,-1px -1px 4px gray ;
+	-moz-border-radius: 20px;      /* Gecko browsers */
+    -webkit-border-radius: 20px;   /* Webkit browsers */
+    border-radius:20px;            /* W3C syntax */
+}
 
 /*
  * -------------------------------------------------------
@@ -349,9 +361,9 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 
 .shoplogo{width:320px;position: relative;z-index:1;}
 .shoplogourl{width:20%;float:left;}
-.favi{width:80%;float:left;}
+.favi{width:80%;float:left;border-top: 1px solid #EAEAEA;}
 .favi #operdetail li{display:inline-block;font-size:10px;width:30%;text-align:center;}
-.favi #operdetail #m_1,.favi #operdetail #m_2{border-right: 1px solid #EAEAEA;}
+.favi #operdetail #m_1,.favi #operdetail #m_2,.favi #operdetail #m_3{border-left: 1px solid #EAEAEA;}
 
 #nav .normal { display: block; font-size: 12px; font-weight: bold; color: #666; text-decoration: none; background: url(../images/normal.gif) no-repeat right top; }
 #nav .normal:hover { text-decoration: underline; }

@@ -3,11 +3,8 @@
 <html>
 <head>
 	<include file="public:headtop" />
-	<link rel="stylesheet" type="text/css" href="http://imgcache.life.qq.com/www/misc/styles/wei_dialog_v1.2.1.css?v=1.0.1" />
-<link rel="stylesheet" type="text/css" href="http://imgcache.life.qq.com/www/misc/styles/wei_canyin_v1.6.8.css?v=1.0.11" />
-<script src="http://imgcache.life.qq.com/www/misc/scripts/wei_webapp_v2_common_v1.6.4.js?v=1.0.5"></script>
-<script src="http://imgcache.life.qq.com/www/misc/scripts/wei_industry_common_v1.3.0.js?v=1.0.5"></script>
-<link rel="stylesheet" href="http://www.bestchoice88.com/tpl/Wap/default/common/css/content.css" />
+	
+<link rel="stylesheet" href="__STATIC__/weixin/css/content.css" />
 	<style>
 		.showhavereal{
 			margin-left: 5px;
@@ -85,6 +82,7 @@ function submitForm(){
 	   <div class="favi">
 	      <div id="shopname">
 	         {$weshopData.name}<span class="showhavereal"><eq name="weshopData.HaveReal" value="1"><img src="__STATIC__/images/shiti3.png" width="20" height="20"/></eq></span>
+	         <botton class="dail"><a href="tel:{$weshopData.phone}" class="order">联系客服</a></botton>
 	      </div>
 	        <ul id="operdetail">
 	          <li id="m_1">
