@@ -577,4 +577,27 @@ class userAction extends userbaseAction {
             $this->ajaxReturn(0, L('delete_fans_failed'));
         }
     }
+    
+    /**
+     * 我的收藏
+     */
+    public function favi() {
+    	//取商家token值，取不到则默认为空
+    	$tokenTall = $this->getTokenTall();
+    	
+    	//$favi_mod = M('shop_favi');
+    	//$favi_list = $favi_mod->where(array('userid'=>$this->visitor->info['id']))->select();
+    	$userid = $this->visitor->info['id'];
+    	/*店铺信息*/
+    	$model=new Model();
+    	$weChaShop = $model->table('tp_shop_favi a, tp_wecha_shop b')
+    	->where("a.tokenTall = b.tokenTall and a.userid='".$userid."'")
+    	->field("b.*, '/weTall/index.php?g=home&m=index&a=index&tokenTall=".$tokenTall."' url")
+    	->select();
+    	//dump($weChaShop);exit;
+    	$this->assign("weshopData",$weChaShop);
+
+    	$this->assign('tokenTall',$tokenTall);
+    	$this->display();
+    }
 }

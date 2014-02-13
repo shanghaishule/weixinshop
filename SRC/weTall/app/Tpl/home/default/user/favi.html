@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<include file="public:headtop" />
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" ></script>
+<link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.ui.css" />
+	<style>
+		.showhavereal{
+			margin-left: 5px;
+			font:italic bold 15px arial,sans-serif;
+			color: #c00000 ;
+			text-shadow: 5px 5px 2px #ff6000 ;
+		}
+	</style>
+</head>
+<body>
+<include file="public:head" />
+<div id="content">
+<div class="eject_btn"><a class="enter" style="background: purple;" href="javascript:void(0)">我的收藏</a></div>
+    <div class="order_form">
+    <volist name="weshopData"  id="vo">
+	<a href="{$vo.url}">
+	<div class="shoplogo">
+	   <div class="shoplogourl">
+	    <if condition="$vo['logo'] eq ''">
+	        <img width="60" height="60" src="{$vo.headurl}"/>
+	    <else/>
+	        <img width="60" height="60" src="{$vo.logo}" />
+	    </if>
+	    
+	   </div>
+	   <div class="favi">
+	      <div id="shopname">
+	         {$vo.name}<span class="showhavereal"><eq name="vo.HaveReal" value="1"><img src="__STATIC__/images/shiti3.png" width="20" height="20"/></eq></span>
+	      </div>
+	        <ul id="operdetail">
+	          <li id="m_1">
+	              <if condition="$vo['credit'] lt 4"><img width="20" height="20" src="__STATIC__/images/Level/1_0.png"/>
+                        <elseif condition="$vo['credit'] lt 11" /><img width="20" height="20" src="__STATIC__/images/Level/1_1.png"/>
+                        <elseif condition="$vo['credit'] lt 50" /><img width="20" height="20" src="__STATIC__/images/Level/1_2.png"/>
+                        <elseif condition="$vo['credit'] lt 110" /><img width="20" height="20" src="__STATIC__/images/Level/1_3.png"/>
+                        <elseif condition="$vo['credit'] lt 250" /><img width="20" height="20" src="__STATIC__/images/Level/1_4.png"/>
+                        <elseif condition="$vo['credit'] lt 500" /><img width="20" height="20" src="__STATIC__/images/Level/2_0.png"/>
+                        <elseif condition="$vo['credit'] lt 1000" /><img width="20" height="20" src="__STATIC__/images/Level/2_1.png"/>
+                        <elseif condition="$vo['credit'] lt 2000" /><img width="20" height="20" src="__STATIC__/images/Level/2_2.png"/>
+                        <elseif condition="$vo['credit'] lt 5000" /><img width="20" height="20" src="__STATIC__/images/Level/2_3.png"/>
+                        <elseif condition="$vo['credit'] lt 10000" /><img width="20" height="20" src="__STATIC__/images/Level/2_4.png"/>
+                        <elseif condition="$vo['credit'] lt 20000" /><img width="20" height="20" src="__STATIC__/images/Level/3_0.png"/>
+                        <elseif condition="$vo['credit'] lt 50000" /><img width="20" height="20" src="__STATIC__/images/Level/3_1.png"/>
+                        <elseif condition="$vo['credit'] lt 100000" /><img width="20" height="20" src="__STATIC__/images/Level/3_2.png"/>
+                        <elseif condition="$vo['credit'] lt 200000" /><img width="20" height="20" src="__STATIC__/images/Level/3_3.png"/>
+                        <else/><img width="20" height="20" src="__STATIC__/images/Level/3_4.png"/>
+                        </if>
+                        <br>信用
+	          </li>
+	          <li id="m_3">
+	            	<img width="20" height="20" src="__STATIC__/weixin/images/favi2.png"/><br>已收藏
+	          </li>
+	        </ul>
+	   </div>
+	   <hr>
+	</div></a>
+	</volist>
+    </div>
+</div>
+<include file="public:footer" />
+
+</body>
+</html>
