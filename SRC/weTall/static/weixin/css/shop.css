@@ -40,7 +40,7 @@ a:visited{ color:#666;}
  */
 
 
-
+.home_page_logo{background:url(/tpl/User/default/common/images/home_page.png) no-repeat 0 0;background-size: 140px 40px; height:40px;width:140px;}
 
 
 /*
@@ -322,8 +322,8 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
  * -------------------------------------------------------
  */
 
-#nav {width:100%; left:0px;position:fixed; top:0px; z-index: 100; margin: 0 auto;display:block;background:#FF7F24;opacity:0.8;}
-#nav ul.navlist { position: relative; z-index:9999; height:45px; margin:0 auto; background:#FF7F24;opacity:0.8; border-bottom:1px solid #ccc;}
+#nav {width:100%; left:0px;position:fixed; top:0px; z-index: 100; margin: 0 auto;display:block;background:black;}
+#nav ul.navlist { position: relative; z-index:9999; height:45px; margin:0 auto; background:black; border-bottom:1px solid #ccc;}
 #nav .navlist li { float: left; margin: 0px 0px 0 0;width:12%;height:45px;  position:relative;}
 #nav .navlist li#n_3 i{ position:absolute; height:14px; width:14px;background:#C00; color:#fff; left:55%; top:10px; border-radius:50%; font-style:normal; text-align:center; font-size:12px; display:none;}
 #nav .navlist li span{ display:inline-block; width:100%; height:45px; cursor:pointer;}

@@ -25,7 +25,7 @@ p {line-height:20px;}
 
 .PicIEPng img { behavior:url("iepngfix.htc");}
 .PicIEPng input { behavior:url("iepngfix.htc");}
-.PicIEPng{color:white;font-size:18px;padding:13px 0px 0px 18px;font-weight:700;}
+.PicIEPng{color:white;font-size:18px;font-weight:700;}
 /* -------------------- menu --------------------   */
 
 
@@ -33,7 +33,7 @@ p {line-height:20px;}
 .top { width:100%; height:100px;}
 .TopMin320 { min-width:320px;}
 *html .top_bg {position:absolute; top:expression(eval(document.documentElement.scrollTop));}
-.top_bg{ width:100%; left:10; height:45px; background:#FF7F24;opacity:0.8; position:fixed; top:0; z-index:99999;}
+.top_bg{ width:100%; left:10; height:45px; background:black;opacity:0.9; position:fixed; top:0; z-index:99999;}
 /* ---------- king start ---------- */
 .Top_King_top { width:100%; height:45px; overflow:hidden;}
 /* ---------- king end ---------- */
