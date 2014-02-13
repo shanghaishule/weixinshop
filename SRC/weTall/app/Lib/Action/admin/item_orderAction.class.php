@@ -30,7 +30,13 @@ class item_orderAction extends backendAction {
 	     	{
 	     	$item->where('id='.$val['itemId'])->setInc('buy_num',$val['quantity']);
 	        }
-      		$this->success('修改成功!');
+	        $dataTall["tokenTall"]=$this->_get("tokenTall","trim");//echo $dataTall["tokenTall"];die();
+	        $shopcredit=M("wecha_shop");
+	        $shopDetail=$shopcredit->where($dataTall)->find();
+	        $updateCredit["credit"]=$shopDetail["credit"]+1;
+	        if($shopcredit->where($dataTall)->save($updateCredit)){
+      		    $this->success('修改成功!');
+	        }
       	}else
       	{
       		$this->error('修改失败!');

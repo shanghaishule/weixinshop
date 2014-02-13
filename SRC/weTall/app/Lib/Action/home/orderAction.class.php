@@ -46,7 +46,15 @@ class orderAction extends userbaseAction {
 	    	{
 	    		$item->where('id='.$val['itemId'])->setInc('buy_num',$val['quantity']);
 	        }
-	    	$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
+	        
+	        //交易完成商家信誉加上1点
+	        $dataTall["tokenTall"]=$item_orders["tokenTall"];
+	        $shopcredit=M("wecha_shop");
+	        $shopDetail=$shopcredit->where($dataTall)->find();
+	        $updateCredit["credit"]=$shopDetail["credit"]+1;
+	        if($shopcredit->where($dataTall)->save($updateCredit)){	        
+	    		$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
+	        }
 	    }else 
 	    {
 	    	$this->error('确定收货失败');
