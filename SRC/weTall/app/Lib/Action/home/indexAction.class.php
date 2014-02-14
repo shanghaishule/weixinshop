@@ -62,19 +62,20 @@ class indexAction extends frontendAction {
     		$sortByStr="add_time";
     		$sortmethod="desc";
     	}else{
-    		$sortBy = $sortByStr." ".$sortmethod;
-    	}
-    	$this->assign("curSortmethod",$sortmethod);
-    	//if ($_SESSION["sortstr"] == $sortByStr) {    			
-	    	if($sortmethod == "asc"){
-	    		$sortmethod="desc";
+    		
+	    	if ($_SESSION["sortstr"] == $sortByStr) {    			
+		    	if($sortmethod == "asc"){
+		    		$sortmethod="desc";
+		    	}else{
+		    		$sortmethod="asc";
+		    	}
 	    	}else{
-	    		$sortmethod="asc";
+	    		$sortmethod="desc";
 	    	}
-    	//}else{
-    	//	$sortmethod="desc";
-    	//}
-    	$this->assign("sortfield",$sortByStr);//$_SESSION["sortstr"]=$sortByStr;
+	    	$sortBy = $sortByStr." ".$sortmethod;
+	    }
+    	$this->assign("sortfield",$sortByStr);
+    	$_SESSION["sortstr"]=$sortByStr;
     	$this->assign("sortmethod",$sortmethod);
     	if(IS_POST){
     	 //搜索关键字时候	

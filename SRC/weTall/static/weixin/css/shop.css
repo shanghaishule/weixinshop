@@ -876,5 +876,5 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 #sort_bg ul.sortlist { position: relative; z-index:9999; height:45px; margin:0 auto; background:url(/tpl/User/default/common/images/header.png) repeat-x; border-bottom:1px solid #ccc;}
 #sort_bg .sortlist li { float: left; width:79px;height:45px;  position:relative;text-align:center;border-left:1px solid white;}
 #sort_bg .sortlist li a{ display:block; margin-top:10px;height:45px;color:white;font-weight:700;}
-#sort_bg .sortlist li img{ margin-top:0px;}
+#sort_bg .sortlist li img{ margin-top:0px;vertical-align:middle;}
 
