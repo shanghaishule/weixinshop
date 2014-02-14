@@ -94,7 +94,7 @@ class indexAction extends frontendAction {
     			$this->error("请输入关键字！");
     		}
     		else if($method=="local"){//本店
-    			$this->nextPage($method, $keyword, $token,$sortBy);
+    			$this->nextPage($method, $keyword,$sortBy, $token);
                 $_SESSION['keyword']=$keyword;
                 $_SESSION['token']=$token;
                 $_SESSION['method']=$method;
@@ -112,18 +112,20 @@ class indexAction extends frontendAction {
     		$itemid=$this->_get("itemid","trim");
     		$brandid=$this->_get("brandid","trim");
     		$method2=$this->_get("method","trim");
-    		if($method2 != ""){//类别搜索
+    		if($method2 != "local" and $method2 != "weFig" and $method2 != "shop" and $method2 != ""){//类别搜索
     			$this->assign("method",$method2);
     			$this->nextPagetuan($_SESSION['token'],$method2,$sortBy);
     		}else if ($brandid != ""){//品牌
-    			$this->assign("method",$brandid);
+    			//$this->assign("method",$brandid);
+    			$this->assign("brandid",$brandid);
     			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
     		}else if ($itemid != "") {//新品上市  服装鞋帽等
-    			$this->assign("method",$itemid);
+    			//$this->assign("method",$itemid);
+    			$this->assign("itemid",$itemid);
     			$this->nextPageCate($_SESSION['token'],$itemid,$sortBy);
     		}else if($_SESSION['method'] == "local"){//本店搜索
-    			$this->assign("method",$_SESSION['method']);
-    		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'], $_SESSION['token'],$sortBy);
+    			$this->assign("method",$_SESSION['method']); 
+    		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy, $_SESSION['token']);
     		}else{//关键字搜索后的分页
     			$this->assign("method",$_SESSION['method']);
     			$this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy);
@@ -219,7 +221,7 @@ class indexAction extends frontendAction {
     	$this->assign("count",$count);
     	$this->display();
     }
-    public function nextPage($method,$keyword,$token,$sortBy){
+    public function nextPage($method,$keyword,$sortBy,$token){
     	if($method=="shop"){   		
     		$item = M("wecha_shop");   		
     		$condition["name"] = array("like", "%".$keyword."%");
@@ -243,7 +245,7 @@ class indexAction extends frontendAction {
     	}else{
 	    	$tokenTall = $token;
 	    	$this->assign('tokenTall',$tokenTall);
-	    	
+	    	//echo $keyword."hi";die();
 	    	$item = M("item");
 	    	if($token != ""){
 	    	   $condition["tokenTall"]=$token;

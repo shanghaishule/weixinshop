@@ -3,6 +3,7 @@ return array (
   'site_name' => '微指购',
   'site_title' => '微指购',
   'site_url' => 'localhost',
+  'home_token' => 'gmbqsf1389536537',
   'site_my' => '微指购',
   'ischeckuser' => 'true',
   'ipc' => '微指购',

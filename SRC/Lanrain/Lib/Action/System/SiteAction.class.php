@@ -25,7 +25,7 @@ class SiteAction extends BackAction{
 		$file=$this->_post('files');
 		unset($_POST['files']);
 		unset($_POST[C('TOKEN_NAME')]);
-		
+		//echo CONF_PATH.$file;die();
 		if($this->update_config($_POST,CONF_PATH.$file)){
 			$alipay=M('alipay');
 			$alipayData["alipayname"]=$this->_post("alipay_name","trim");

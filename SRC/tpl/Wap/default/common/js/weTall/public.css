@@ -30,10 +30,10 @@ p {line-height:20px;}
 
 
 /* -------------------- top --------------------  */
-.top { width:100%; height:100px;}
-.TopMin320 { min-width:320px;}
-*html .top_bg {position:absolute; top:expression(eval(document.documentElement.scrollTop));}
-.top_bg{ width:100%; left:10; height:45px; background:black;opacity:0.9; position:fixed; top:0; z-index:99999;}
+.top { width:320px; height:100px;max-width:320px;}
+.TopMin320 { max-width:320px;}
+*html .top_bg {position:absolute; top:expression(eval(document.documentElement.scrollTop));max-width:320px;}
+.top_bg{ width:320px; left:10; height:45px; background:black;opacity:0.9; position:fixed; top:0; z-index:99999;}
 /* ---------- king start ---------- */
 .Top_King_top { width:100%; height:45px; overflow:hidden;}
 /* ---------- king end ---------- */

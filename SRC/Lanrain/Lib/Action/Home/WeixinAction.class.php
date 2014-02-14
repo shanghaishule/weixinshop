@@ -858,10 +858,13 @@ class WeixinAction extends Action
             );
         } else {
           
-            if ($home['apiurl'] == false) {
-                $url = '/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
+            if ($home['apiurl'] == false) {            	
+                $url = rtrim(C('site_url'), '/').'/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
             } else {
                 $url = $home['apiurl'];
+            }
+            if (C('home_token') == $this->token) {
+            	$url= rtrim(C('site_url'), '/')."/index.php?g=Wap&m=weTall&a=index";
             }
         }
 		

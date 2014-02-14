@@ -25,6 +25,7 @@
  */
 
 body {font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3"; line-height:1.6; background:#f6f6f6; }
+html,body { max-width:320px; margin:0 auto;}
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0; }
 h1, h2, h3, h4, h5, h6 { font-size: 16px;}
 hr{border:1px solid #D9D9D9;}
@@ -176,8 +177,8 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .membertop .my_address{ display:inline-block;background:-webkit-gradient(linear,left top,left bottom,from(#dbe4c8),to(#dbe4c8));background: -moz-linear-gradient(top,#dbe4c8,#dbe4c8); padding:10px 20px 10px 25px; border-radius:30px; border:1px solid #b0d5f9;box-shadow:2px 1px 1px 2px #dbe4c8 inset;}
 .membertop .my_address a{ color:#fff; display:block; padding-left:20px; background:url(../images/address_ico.png) no-repeat left top;}
 .membertop .my_name a{float:left; width:40%; color:#fff; font-size:24px; display:block; padding:0 0 5px 15px; text-shadow:1px 1px 1px #888;}
-.membertop .logout a {float:right; width:40%; color:#fff; font-size:24px; display:block; padding:0 0 5px 15px; text-shadow:1px 1px 1px #888;}
-.membertop .logout a button{float:right; width:60%; color:#FFC0CB; font-size:20px; display:block; text-shadow:1px 1px 1px #888;}
+.membertop .logout a { font-size:16px; text-shadow:1px 1px 1px #888;}
+.membertop .logout {float:right; width:140px; color:#FFC0CB; font-size:20px; display:block; text-shadow:1px 1px 1px #888;}
 .buyer_stat{ overflow:hidden;}
 .buyer_stat li{background: #f2f2f2; float:left; width:25%; height:44px; line-height:24px;text-align:center; border-bottom:1px solid #ccc;font-size:15px;}
 .buyer_stat li a{ height:44px; display:block; color:#333333;}
@@ -806,7 +807,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 *Search area
 *--------------------------------------------------------------
 */
-.search_all{ width:320px; overflow:hidden; padding:5px 0;}
+.search_all{ width:315px; overflow:hidden; padding:5px 0;}
 .search_content{ width:248px; height:33px; border:2px solid #d3d3d3; -moz-border-radius: 8px;-khtml-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px; background:white; padding-left:-2px;}
 .search_textbox{ width:170px; height:33px; line-height:35px; border:0; font-size:14px; color:#c4c4c4; text-align:left; overflow:hidden; background:none;}
 .search_btn{ width:60px;padding:1px 0px 0 0;}
