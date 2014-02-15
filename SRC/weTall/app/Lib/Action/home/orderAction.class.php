@@ -334,30 +334,45 @@ class orderAction extends userbaseAction {
 			$dingdanhao=$_POST['dingdanhao'];
 			$item_order=M('item_order')->where('userId='.$this->visitor->info['id'].' and orderId='.$dingdanhao)->find();
 			!$item_order && $this->_404();
-			if($payment_id==2)//货到付款
+			if(2 == $payment_id)//货到付款
 			{
 				$data['status']=2;
 				$data['supportmetho']=2;
 				$data['support_time']=time();
 				if(M('item_order')->where('userId='.$this->visitor->info['id'].' and orderId='.$dingdanhao)->data($data)->save())
 				{
-				$this->redirect('user/index');
+					$this->redirect('user/index');
 				}else 
 				{
 					$this->error('操作失败!');
 				}
-			}elseif ($payment_id==1) //支付宝
+			}
+			elseif (3 == $payment_id)
 			{
+				// 银联支付
+				//echo "payment_id:".$payment_id."<br>";
+				//echo "orderid:".$orderid."<br>";
+				//echo "dingdanhao:".$dingdanhao."<br>";
+				//echo "item_order:";
+				//print_r($item_order)."<br>";
 				
+				// 订单号
+				$this->assign('dingdanhao',$dingdanhao);
+				// 价格总额
+				$ordersumPrice=$_GET['ordersumPrice'];
+				$this->assign('ordersumPrice',$ordersumPrice);
+				$this->display();
 				
+			}
+			elseif (1 == $payment_id)
+			{
+				//支付宝				
 				$data['supportmetho']=1;
 				
 				if(M('item_order')->where('userId='.$this->visitor->info['id'].' and orderId='.$dingdanhao)->data($data)->save())
 				{
-					$alipay=M('alipay')->find();
-					
-				echo "<script>location.href='wapapli/alipayapi.php?WIDseller_email=".$alipay['alipayname']."&WIDout_trade_no=".$dingdanhao."&WIDsubject=".$dingdanhao."&WIDtotal_fee=".$item_order['order_sumPrice']."'</script>";
-				
+					$alipay=M('alipay')->find();					
+					echo "<script>location.href='wapapli/alipayapi.php?WIDseller_email=".$alipay['alipayname']."&WIDout_trade_no=".$dingdanhao."&WIDsubject=".$dingdanhao."&WIDtotal_fee=".$item_order['order_sumPrice']."'</script>";
 				}else 
 				{
 					$this->error('操作失败!');
