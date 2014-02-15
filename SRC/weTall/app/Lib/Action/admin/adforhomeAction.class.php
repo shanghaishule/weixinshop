@@ -48,6 +48,8 @@ class adforhomeAction extends backendAction {
         foreach ($res as $val) {
             $board_list[$val['id']] = $val['name'];
         }
+        
+        
         $this->assign('board_list', $board_list);
         $this->assign('ad_type_arr', $this->_ad_type);
     }

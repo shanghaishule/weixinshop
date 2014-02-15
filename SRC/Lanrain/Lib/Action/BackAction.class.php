@@ -40,8 +40,9 @@ class BackAction extends BaseAction{
 		$this->assign('nav',$nav);
 	}
 	
-	protected function _list($model, $map = array(), $sort_by='', $order_by='', $field_list='*', $pagesize=20)
+	protected function _list($model, $map = array(), $sort_by='', $order_by='', $field_list='*', $pagesize=10)
 	{
+		
 		//排序
 		$mod_pk = $model->getPk();
 	
@@ -77,6 +78,7 @@ class BackAction extends BaseAction{
 			$this->assign("page", $page);
 		}
 		$list = $select->select();
+		
 		$this->assign('list', $list);
 		$this->assign('list_table', true);
 	}

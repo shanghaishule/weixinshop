@@ -1,9 +1,10 @@
 <?php
 class indexAction extends frontendAction {
-    
+
     public function index() {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();
+    	$_SESSION["tokenTall"]=$tokenTall;
     	
     	/*****首页广告***/
     	$ad= M('ad');
@@ -32,12 +33,238 @@ class indexAction extends frontendAction {
         $weChaShopDetail = $weChaShop->where($weshopData)->find();//var_dump($weshopData);die();
         $this->assign("weshopData",$weChaShopDetail);
         
+        /*收藏*/
+        if ($_SESSION['user_info']) {
+        	$userid = $_SESSION['user_info']['id'];
+        	$shopfav_mod = M('shop_favi');
+        	$wheredata = array('userid'=>$userid, 'tokenTall'=>$tokenTall);
+        	if ($shopfav_mod->where($wheredata)->find()) {
+        		$favi = "yes";
+        	}else{
+        		$favi = "no";
+        	}
+        }else{
+        	$favi = "no";
+        }
+        $this->assign('favi',$favi);
+        
         $this->assign('news',$news);
         $this->assign('tuijian',$tuijian);
         $this->_config_seo();
         $this->display();
     }
+    public function search() {
+    	//排序字段和方式的获得
+    	$sortByStr=$this->_get("sortid","trim");
+    	$sortmethod=$this->_get("sortmethod","trim");
+    	if($sortByStr == "" or $sortmethod == ""){
+    		$sortBy = "add_time desc";
+    		$sortByStr="add_time";
+    		$sortmethod="desc";
+    	}else{
+    		
+	    	if ($_SESSION["sortstr"] == $sortByStr) {    			
+		    	if($sortmethod == "asc"){
+		    		$sortmethod="desc";
+		    	}else{
+		    		$sortmethod="asc";
+		    	}
+	    	}else{
+	    		$sortmethod="desc";
+	    	}
+	    	$sortBy = $sortByStr." ".$sortmethod;
+	    }
+    	$this->assign("sortfield",$sortByStr);
+    	$_SESSION["sortstr"]=$sortByStr;
+    	$this->assign("sortmethod",$sortmethod);
+    	if(IS_POST){
+    	 //搜索关键字时候	
+    		$keyword=$this->_post("txtkeyword","trim");
+    		//搜索的方式本店，微指购，店铺
+    		$method=$this->_post("method");
+    		
+    		$tokenTall = $this->getTokenTall();
+    		if($tokenTall != ""){
+    			$token= $tokenTall;
+    		}else{
+    			$token=$_SESSION["tokenTall"];
+    		}
+    		$this->assign("method",$method);
+    		if($keyword == ""){
+    			$this->error("请输入关键字！");
+    		}
+    		else if($method=="local"){//本店
+    			$this->nextPage($method, $keyword,$sortBy, $token);
+                $_SESSION['keyword']=$keyword;
+                $_SESSION['token']=$token;
+                $_SESSION['method']=$method;
+    		}else if($method=="weFig"){//微指购
+    			$this->nextPage($method, $keyword,$sortBy);
+                $_SESSION['keyword']=$keyword;
+                $_SESSION['method']=$method;
+    		}else{//店铺内搜索微指购
+    			$this->nextPage($method, $keyword,$sortBy);
+    			$_SESSION['keyword']=$keyword;
+    			$_SESSION['method']=$method;
+    		}
+    		
+    	}else{
+    		$itemid=$this->_get("itemid","trim");
+    		$brandid=$this->_get("brandid","trim");
+    		$method2=$this->_get("method","trim");
+    		if($method2 != "local" and $method2 != "weFig" and $method2 != "shop" and $method2 != ""){//类别搜索
+    			$this->assign("method",$method2);
+    			$this->nextPagetuan($_SESSION['token'],$method2,$sortBy);
+    		}else if ($brandid != ""){//品牌
+    			//$this->assign("method",$brandid);
+    			$this->assign("brandid",$brandid);
+    			$this->nextPageBrand($_SESSION['token'],$brandid,$sortBy);
+    		}else if ($itemid != "") {//新品上市  服装鞋帽等
+    			//$this->assign("method",$itemid);
+    			$this->assign("itemid",$itemid);
+    			$this->nextPageCate($_SESSION['token'],$itemid,$sortBy);
+    		}else if($_SESSION['method'] == "local"){//本店搜索
+    			$this->assign("method",$_SESSION['method']); 
+    		    $this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy, $_SESSION['token']);
+    		}else{//关键字搜索后的分页
+    			$this->assign("method",$_SESSION['method']);
+    			$this->nextPage($_SESSION['method'], $_SESSION['keyword'],$sortBy);
+    		}
+    	}
+    	
+    }
+    public function nextPagetuan($token,$itemid,$sortBy){
+    	$tokenTall = $token;
+    	$this->assign('tokenTall',$tokenTall);
+    	
+    	switch ($itemid) {
+    		case "new": $method="0";break;
+    		case "recom":$method="1";break;
+    		case "free":$method="2";break;
+    		case "fuzhuang":$itemCate="服装鞋帽";break;
+    		case "shuma":$itemCate="数码家电";break;
+    		case "shenghuo":$itemCate="生活用品";break;
+    		case "tushu":$itemCate="图书";break;
+    		case "huazhuang":$itemCate="化妆用品";break;
+    		case "meishi":$itemCate="食品";break;
+    	}
+    	
+    	$item = M("item");
+    	if($itemCate == ""){
+    		$condition["tuijian"] = $method;
+    	}else{
+    		$name["name"]=$itemCate;
+    		$item_cate=M("item_cate")->where($name)->select();
+    		foreach ($item_cate as $val){
+    			$data["pid"]=$val["id"];
+    			$itemID=M("item_cate")->where($data)->select();
+    		}
+    		foreach ($itemID as $varL){
+    			$condition2[]=$varL["id"];
+    		}
+    		$condition["cate_id"]=array('in',$condition2);
+    	}    	
     
+    	if(count($condition2) != 0 or $method != ""){
+    		$count = $item->where($condition)->count();   	
+	    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+	    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+	    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
+	    	$show       = $Page->show();// 分页显示输出
+	    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
+    	}
+	    	//var_dump($carryrecord);die();
+    	$this->assign("item",$carryrecord);
+    	$this->assign("itemcate","Y");
+    	$this->assign('page',$show);// 赋值分页输出pti
+    	$this->assign("count",$count);
+    	$this->display();
+    }
+    public function nextPageBrand($token,$itemid,$sortBy){
+    	$tokenTall = $token;
+    	$this->assign('tokenTall',$tokenTall);
+    	 
+    	$item = M("item");
+    	$condition["brand"] = $itemid;
+    	$count = $item->where($condition)->count();
+    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
+    	$show       = $Page->show();// 分页显示输出
+    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
+    
+    	$this->assign("item",$carryrecord);
+    	$this->assign("itemcate","Y");
+    	$this->assign('page',$show);// 赋值分页输出pti
+    	$this->assign("count",$count);
+    	$this->display();
+    }
+    public function nextPageCate($token,$itemid,$sortBy){
+    	$tokenTall = $token;
+    	$this->assign('tokenTall',$tokenTall);
+    	
+    	$item = M("item");
+    	//if($token != ""){
+    	//	$condition["tokenTall"]=$token;
+    	//}
+    	$condition["cate_id"] = $itemid;
+    	$count = $item->where($condition)->count();
+    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
+    	$show       = $Page->show();// 分页显示输出
+    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
+    	 
+    	$this->assign("item",$carryrecord);
+    	$this->assign("itemcate","Y");
+    	$this->assign('page',$show);// 赋值分页输出pti
+    	$this->assign("count",$count);
+    	$this->display();
+    }
+    public function nextPage($method,$keyword,$sortBy,$token){
+    	if($method=="shop"){   		
+    		$item = M("wecha_shop");   		
+    		$condition["name"] = array("like", "%".$keyword."%");
+    		$count = $item->where($condition)->count();
+    		$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+    		// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+    		$nowPage = isset($_GET['p'])?$_GET['p']:1;
+    		$show       = $Page->show();// 分页显示输出
+    		$carryrecord  = $item->where($condition)->order('credit DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
+    		
+    		foreach ($carryrecord as $val){    			
+    			$val["descr"]=mb_substr($val["descr"], 0,35,"utf-8")."...";
+    			$carryrecord2[]=$val;
+    		}
+ 
+    		$this->assign("item",$carryrecord2);
+    		$this->assign("method",$method);
+    		$this->assign('page',$show);// 赋值分页输出pti
+    		$this->assign("count",$count);
+    		$this->display();
+    	}else{
+	    	$tokenTall = $token;
+	    	$this->assign('tokenTall',$tokenTall);
+	    	//echo $keyword."hi";die();
+	    	$item = M("item");
+	    	if($token != ""){
+	    	   $condition["tokenTall"]=$token;
+	    	}
+	    	$condition["title"] = array("like", "%".$keyword."%");
+	    	$count = $item->where($condition)->count();
+	    	$Page       = new Page($count,10);// 实例化分页类 传入总记录数
+	    	// 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
+	    	$nowPage = isset($_GET['p'])?$_GET['p']:1;
+	    	$show       = $Page->show();// 分页显示输出
+	    	$carryrecord  = $item->where($condition)->order($sortBy)->limit($Page->firstRow.','.$Page->listRows)->select();
+	    	 
+	    	$this->assign("item",$carryrecord);
+	    	$this->assign("method",$method);
+	    	$this->assign('page',$show);// 赋值分页输出pti
+	    	$this->assign("count",$count);
+	    	$this->display();
+    	}
+    }
     public function getItem($where = array())
     {
     	$where_init = array('status'=>'1');
@@ -97,5 +324,63 @@ class indexAction extends frontendAction {
     	}
     	
     }
-    
+    //收藏
+    public function favi()
+    {
+    	//dump($_SESSION);exit;
+    	//0-未登录 1-保存成功 2-保存失败 3-无动作类型
+    	header("content-Type: text/html; charset=Utf-8");
+    	$tokenTall = $this->getTokenTall();
+    	if($_POST['act']){
+    		$act = $_POST['act'];
+    		if ($_SESSION['user_info']) {
+	    		$userid = $_SESSION['user_info']['id'];
+	    		$shopfav_mod = M('shop_favi');
+	    		$insdata = array('userid'=>$userid, 'tokenTall'=>$tokenTall);
+	    		if ($shopfav_mod->where($insdata)->find()) {
+	    			//已经有记录的情况下
+	    			if ($act == "add") {
+	    				//收藏
+	    				$data = array('status'=>2);
+	    			}else{
+	    				//取消收藏
+	    				if($shopfav_mod->where($insdata)->delete()){
+	    					//成功
+	    					$data = array('status'=>1);
+	    				}else{
+	    					//失败
+	    					$data = array('status'=>2);
+	    				}
+	    			}
+	    			
+	    		}else{
+	    			//没有记录的情况下
+	    			if ($act == "add") {
+	    				//收藏
+		    			if ($shopfav_mod->add($insdata)) {
+		    				//成功
+		    				$data = array('status'=>1);
+		    			}else{
+		    				//失败
+		    				$data = array('status'=>2);
+		    			}
+	    			}else{
+	    				//取消收藏
+	    				//成功
+	    				$data = array('status'=>1);
+	    			}
+	    		}
+	    	}else{
+	    		//当前未登录
+	    		$data = array('status'=>0, 'url'=>U('user/index', array('tokenTall'=>$tokenTall)));
+	    	}
+    	}else{
+    		//没有动作类型
+    		$data = array('status'=>3);
+    	}
+    	
+    	echo json_encode($data);
+    }
+    	 
+
 }

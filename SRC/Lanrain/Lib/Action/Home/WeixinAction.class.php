@@ -858,10 +858,13 @@ class WeixinAction extends Action
             );
         } else {
           
-            if ($home['apiurl'] == false) {
-                $url = 'http://bestchoice88.com/weTall' . '/index.php?g=home&m=index&a=index&token='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
+            if ($home['apiurl'] == false) {            	
+                $url = rtrim(C('site_url'), '/').'/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
             } else {
                 $url = $home['apiurl'];
+            }
+            if (C('home_token') == $this->token) {
+            	$url= rtrim(C('site_url'), '/')."/index.php?g=Wap&m=weTall&a=index";
             }
         }
 		
@@ -879,7 +882,11 @@ class WeixinAction extends Action
     }
     function kuaidi($data)
     {
-        $data = array_merge($data);
+        //$data = array_merge($data);
+        $data = array();
+        $content = $this->keywo;
+		$data[0] = substr($content,6,6);
+		$data[1] = substr($content,12);
         $str  = file_get_contents('http://www.weinxinma.com/api/index.php?m=Express&a=index&name=' . $data[0] . '&number=' . $data[1]);
         return $str;
     }

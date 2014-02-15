@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<include file="public:headtop" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/default/message.css" media="all">
+	<script type="text/javascript" src="__STATIC__/js/jquery_min.js"></script>
+	<title>请在此申请</title>
+
+	<script type="text/javascript"> 
+		$(document).ready(function () { 
+			$("#showcard1").click(function () { 
+				var btn = $(this);
+				var applicant = $("#applicant").val();
+				if (applicant == '') {
+					tip('请填写申请人姓名！');
+					return;
+				}
+				var addr = $("#addr").val();
+				if (addr == '') {
+					tip('请填写地址！');
+					return;
+				}
+				var phone = $("#phone").val();
+				if (phone == '') {
+					tip('请填写联系电话！');
+					return;
+				}
+				var trueshop = $('input[name="trueshop"]:checked').val();
+				var licence = $("#licence").val();
+				var shopname = $("#shopname").val();
+				if(trueshop == '1'){
+					if (licence == '') {
+						tip('请填写营业执照相关信息！');
+						return;
+					}
+					if (shopname == '') {
+						tip('请填写店铺名称！');
+						return;
+					}
+				}
+				
+				var info = $("#info").val();
+				
+				var submitData = {
+					uid:'{$uid}',
+					uname: '{$username}',
+					umail: '{$umail}',
+					applicant: applicant,
+					addr: addr,
+					phone: phone,
+					licence: licence,
+					shopname: shopname,
+					trueshop: trueshop,
+					text: info,
+					createtime:'{$createtime}',
+					tokenTall:'{$tokenTall}',
+					wecha_id:'{$wecha_id}'
+				};
+				$.post("{:U('application/add',array('tokenTall'=>$tokenTall))}", submitData,
+					function(data) {
+						alert(data);
+						setTimeout('window.location.href=location.href',500);
+						return;
+					}
+				)
+			}); 
+			
+			$("#alertclose").click(function () { 
+				$("#windowcenter").slideUp(500);
+			});
+		}); 
+		
+		function tip(title){ 
+			//window.scrollTo(0, -1);
+			$("#windowcenter").slideToggle("slow"); 
+			$("#txt").html(title);
+			setTimeout(function(){ 
+				$("#windowcenter").slideUp(500);
+			},3000);
+		}
+		/*
+		$(document).ready(function(){
+			$(".first1").click(function(){
+				$(".ly1").slideToggle();
+			});
+		});
+		*/
+	</script> 
+</head>
+
+<body id="message">
+<include file="public:head" />
+	<div class="container">
+	
+	  	<div class="qiandaobanner">
+			<img src="__STATIC__/css/default/images/application.png" style="width:100%;">
+	    </div>
+
+		<div class="cardexplain">
+			<div class="window" id="windowcenter">
+				<div id="title" class="wtitle">操作提示<span class="close" id="alertclose"></span></div>
+				<div class="content1">
+					<div id="txt"></div>
+				</div>
+			</div>
+ 
+			<div class="history">
+				<div class="history-date">
+					<ul class="history-ul">
+						<h2 class="first" style="position: relative;">请填写您的申请信息</h2>
+						<li class="green ly1" >
+						<dl>
+							<table style = "width:100%;">
+								<tr>
+									<td><label class="pxlabel" for="applicant">姓名：</label></td>
+									<td><input name="applicant" class="px" id="applicant" placeholder="请输入申请人姓名" type="text"></td>
+								</tr>
+								<tr>
+									<td><label class="pxlabel" for="addr">地址：</label></td>
+									<td><input name="addr" class="px" id="addr" placeholder="请输入申请人地址" type="text"></td>
+								</tr>
+								<tr>
+									<td><label class="pxlabel" for="phone">电话：</label></td>
+									<td><input name="phone" class="px" id="phone" placeholder="请输入申请人电话" type="text"></td>
+								</tr>
+								<tr>
+									<td><label class="pxlabel" for="trueshop">是否有实体店：</label></td>
+									<td><input name="trueshop" type="radio" value="1" checked><span class="pxlabel">有</span><input name="trueshop" type="radio" value="0" ><span class="pxlabel">没有</span></td>
+								</tr>
+								<tr>
+									<td><label class="pxlabel" for="licence">营业执照信息：</label></td>
+									<td><input name="licence" class="px" id="licence" placeholder="实体店营业执照" type="text"></td>
+								</tr>
+								<tr>
+									<td><label class="pxlabel" for="shopname">实体店铺名称：</label></td>
+									<td><input name="shopname" class="px" id="shopname" placeholder="实体店名称" type="text"></td>
+								</tr>
+								<tr>
+									<td style="vertical-align:top;"><label class="pxlabeltextarea" for="info">其他补充信息：</label></td>
+									<td><textarea name="info" class="pxtextarea" style="height:150px;" id="info" placeholder="补充信息……"></textarea></td>
+								</tr>
+								<tr><td colspan="2"><a id="showcard1" class="submit" href="javascript:void(0)">提交申请</a></td></tr>
+							</table>
+							</dl>
+						</li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<include file="public:footer" />
+</body>
+</html>

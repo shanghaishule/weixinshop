@@ -30,7 +30,13 @@ class item_orderAction extends backendAction {
 	     	{
 	     	$item->where('id='.$val['itemId'])->setInc('buy_num',$val['quantity']);
 	        }
-      		$this->success('修改成功!');
+	        $dataTall["tokenTall"]=$this->_get("tokenTall","trim");//echo $dataTall["tokenTall"];die();
+	        $shopcredit=M("wecha_shop");
+	        $shopDetail=$shopcredit->where($dataTall)->find();
+	        $updateCredit["credit"]=$shopDetail["credit"]+1;
+	        if($shopcredit->where($dataTall)->save($updateCredit)){
+      		    $this->success('修改成功!');
+	        }
       	}else
       	{
       		$this->error('修改失败!');
@@ -209,6 +215,34 @@ class item_orderAction extends backendAction {
             $this->assign('info', $item); // 订单详细信息
             $this->display();
         }
+    }
+    public function update() {
+    	if (IS_POST) {
+    		$orderid = $_POST["orderId"];
+            //$item["orderId"] = $orderid;
+            $itemprice["order_sumPrice"] = $_POST["oreder_sumPrice"];
+            if(false !== M("item_order")->where("orderId=".$orderid)->save($itemprice)){
+            	IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'edit');
+            	$this->success(L('operation_success'));
+            }else {
+                IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
+                $this->error(L('operation_failure'));
+            }
+    	} else {
+    		$id = $this->_get('id','intval');
+    		$item = $this->_mod->where(array('id'=>$id))->find();    		 
+    		$order_detail=M('order_detail')->where('orderId='.$item['orderId'])->select();
+    		
+    		$this->assign('order_detail',$order_detail);//订单商品信息
+    		$this->assign('info', $item); // 订单详细信息
+    		if (IS_AJAX) {
+    			$response = $this->fetch();
+    			$this->ajaxReturn(1, '', $response);
+    		} else {
+    			$this->display();
+    		}
+    		
+    	}
     }
     public function updateRemark(){
     	$txtSellerRemark= $_POST['txtSellerRemark'];//用客服备注

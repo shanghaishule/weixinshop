@@ -11,11 +11,11 @@
 		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
 			<input type="hidden" name="id" value="{$info.id}" >
             <tr>
-				<th>银行名称:</th>
+				<th>金融机构名称:</th>
 				<td><input type="text" name="bankname" id="J_bankname" class="input-text" size="60" value="{$info.bankname}"></td>
 		    </tr>
 			<tr>
-				<th>银行账号:</th>
+				<th>收款账号:</th>
 				<td><input type="text" name="account" id="J_account" class="input-text" size="60" value="{$info.account}"></td>
 			</tr>
 			<tr>
@@ -42,8 +42,8 @@
 <script type="text/javascript">
 $(function() {
 	$.formValidator.initConfig({formid:"info_form",autotip:true});
-	$("#J_bankname").formValidator({onshow:'请填写银行名称',onfocus:'请填写银行名称'}).inputValidator({min:1,onerror:'请填写银行名称'});
-	$("#J_account").formValidator({onshow:'请填写银行账号',onfocus:'请填写银行账号'}).inputValidator({min:1,onerror:'请填写银行账号'});
+	$("#J_bankname").formValidator({onshow:'请填写银行名称、支付宝等',onfocus:'请填写银行名称、支付宝等'}).inputValidator({min:1,onerror:'请填写银行名称、支付宝等'});
+	$("#J_account").formValidator({onshow:'请填写收款账号',onfocus:'请填写收款账号'}).inputValidator({min:1,onerror:'请填写收款账号'});
 	$("#J_payee").formValidator({onshow:'请填写收款人',onfocus:'请填写收款人'}).inputValidator({min:1,onerror:'请填写收款人'});
 	$("#J_mobile").formValidator({onshow:'请填写收款人手机号',onfocus:'请填写收款人手机号'}).inputValidator({min:1,onerror:'请填写收款人手机号'});
 	$("#J_tokenTall").attr('readOnly',true).formValidator({onshow:'系统自动填写',onfocus:'系统自动填写'});

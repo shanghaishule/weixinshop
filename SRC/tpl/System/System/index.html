@@ -1,6 +1,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>{lanrain::C('site_name')}-微信后台管理系统</title>
+<title>微指购后台管理系统</title>
 <meta name="keywords" content="{lanrain::C('site_name')}-LanRain后台管理系统" />
 <meta name="description" content="{lanrain::C('site_name')}-LanRain后台管理系统" />
 <link href="{lanrain::RES}/images/style.css" type="text/css" rel="stylesheet">
@@ -13,56 +13,60 @@
 <body class="showmenu">
 <table width="100%" height="100%" border=0 cellpadding="0" cellSpacing=0>
   <tr>
-    <td><div id="header">
+    <td>
+    <div id="header">
 	<div class="top">
-    	<a href="/" class="logo" title="首页">首页</a>
-		 <div class="login">
-			<li>您好：<b>{lanrain:$Think.session.username}</b> ，欢迎使用微信CMS！</li>	
+    	<a href="/index.php?g=System&m=System&a=index" class="logo" title="首页">首页</a>
+		<div class="login">
+			<li>您好：<b>{lanrain:$Think.session.username}</b> ，欢迎使用微指购管理系统！</li>	
+			<!-- 
 			<li><a href="/index.php" target="_blank"> 访问首页</a></li>
 			<li><a href="/index.php?g=User&m=Index&a=index" target="_blank">用户中心</a></li>
+			 -->
 			<li><a href="{lanrain::U('Admin/logout')}">[退出]</a></li>
 		</div>
-
-      
     </div>
+    
+    
     <div class="tm">
     	<ul>
 			<volist name="nav" id="nav_val">
         	<li class="nav" id="link{lanrain:$nav_val['id']}">
-			<a href="#" onClick="JumpleftFrame('{lanrain::U('System/menu',array('pid'=>$nav_val['id'],'level'=>2,'title'=>rawurlencode
-($nav_val['title'])))}',{lanrain:$nav_val['id']});">{lanrain:$nav_val['title']}</a></li>
+			<a href="javascript:void(0)" onClick="JumpleftFrame('{lanrain::U('System/menu',array('pid'=>$nav_val['id'],'level'=>2,'title'=>rawurlencode($nav_val['title'])))}',{lanrain:$nav_val['id']});">{lanrain:$nav_val['title']}</a></li>
 			</volist>
         </ul>
     </div>
-<div class="topnav">
-    	<p><a href="#" id="togglemenu">隐藏菜单</a> 加班加点升级中,更多功能，开发中</div>
-        <div class="fr"><a href="#">官方论坛</a> <a href="#">在线帮助</a></div>
+	<div class="topnav">
+    	<p><a href="#" id="togglemenu">隐藏菜单</a>
     </div>
     <i class="tico"></i>
-</div></td>
+    </div>
+    </td>
   </tr>
+  
   <tr>
-    <td height="100%" bgcolor="#ffffff"><table width="100%" height="100%" cellpadding="0" cellSpacing=0 border=0 borderColor="#ff0000">
+    <td height="100%" bgcolor="#ffffff">
+      <table width="100%" height="100%" cellpadding="0" cellSpacing=0 border=0 borderColor="#ff0000">
         <tbody>
           <tr>
             <td noWrap id="frmTitle" bgcolor="#ff0000" width="213"><IFRAME frameBorder="0" id="left" name="left" scrolling="auto" src="{lanrain::U('System/menu')}" style="HEIGHT:100%;VISIBILITY:inherit;width:200px;Z-INDEX:2" allowtransparency="true"></IFRAME></td>
             <td></td>
-            <td width="100%"><table height="100%" cellSpacing=0 cellPadding=0 width="100%" align="right" border=0>
+            <td width="100%">
+              <table height="100%" cellSpacing=0 cellPadding=0 width="100%" align="right" border=0>
                 <tbody>
                   <tr>
                     <td align=right><IFRAME id="main" name="main" style="width: 100%; HEIGHT: 100%" src="{lanrain::U('System/main')}" frameBorder=0></IFRAME></td>
                   </tr>
                 </tbody>
-              </table></td>
+              </table>
+            </td>
           </tr>
         </tbody>
-      </table></td>
+      </table>
+    </td>
   </tr>
   <tr>
-    <td><div id="footer"><i class="tico"></i>
-
-<p class="fr"> Copyright &copy; 2012-2013 版权所有  </p>
-</div></td>
+    <td><div id="footer"><i class="tico"></i><p class="fr"> Copyright &copy; 微指购   版权所有  </p></div></td>
   </tr>
 </table>
 </body>

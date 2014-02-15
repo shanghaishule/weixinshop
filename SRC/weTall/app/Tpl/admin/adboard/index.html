@@ -6,7 +6,7 @@
         <thead>
 			<tr>
 				<th width="25"><input type="checkbox" class="J_checkall"></th>
-				<th><span tdtype="order_by" fieldname="id">ID</span></th>
+				<!-- <th><span tdtype="order_by" fieldname="id">ID</span></th> -->
 				<th><span tdtype="order_by" fieldname="name">{:L('adboard_name')}</span></th>
 				<th><span tdtype="order_by" fieldname="type">{:L('adboard_type')}</span></th>
 				<th>{:L('adboard_size')}</th>
@@ -19,7 +19,7 @@
 			<volist name="list" id="val">
 			<tr>
 				<td align="center"><input type="checkbox" name="checkall" class="J_checkitem" value="{$val.id}"></td>
-				<td align="center">{$val.id}</td>
+				<!-- <td align="center">{$val.id}</td> -->
 				<td><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit">{$val.name}</span></td>
                 <td align="center">{$tpl_list[$val['tpl']]['name']}</td>
 				<td align="center"><span data-tdtype="edit" data-field="width" data-id="{$val.id}" class="tdedit">{$val.width}</span>*<span data-tdtype="edit" data-field="height" data-id="{$val.id}" class="tdedit">{$val.height}</span></td>

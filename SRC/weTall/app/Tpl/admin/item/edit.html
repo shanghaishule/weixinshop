@@ -31,7 +31,45 @@
                 </volist>
                 </select></td>
 			</tr>
-			
+			<tr>
+				<th width="120">型号 :</th>
+                <td>  <!--        
+                <input type="checkbox" name="size[]" <if condition="$sizearr34 eq 34 ">checked</if> value="34">34</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr35 eq 35 ">checked</if> value="35">35</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr36 eq 36 ">checked</if> value="36">36</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr37 eq 37 ">checked</if> value="37">37</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr38 eq 38 ">checked</if> value="38">38</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr39 eq 39 ">checked</if> value="39">39</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr40 eq 40 ">checked</if> value="40">40</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr41 eq 42 ">checked</if> value="41">41</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr42 eq 42 ">checked</if> value="42">42</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr43 eq 43 ">checked</if> value="43">43</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr44 eq 44 ">checked</if> value="44">44</input>&nbsp;
+                     --> <div id="size"><input type="button" value="  添加    " onclick="addSize()">
+                     <volist name="sizearr" id="sizearr">
+                      <if condition="$sizearr neq ''">
+                      <input type="text" name="size[]" value="{$sizearr}" size='12'>
+                      </if>
+                     </volist>
+                     </div>
+                    </td>
+			</tr>
+			<tr>
+				<th width="120">颜色 :</th>
+                <td><input type="checkbox" name="color[]" <if condition="$colorarrwhite eq 'white' ">checked</if> value="white">白色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrblue eq 'blue' ">checked</if> value="blue">蓝色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarryellow eq 'yellow' ">checked</if> value="yellow">黄色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrred eq 'red' ">checked</if> value="red">红色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrblack eq 'black' ">checked</if> value="black">黑色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrorange eq 'orange' ">checked</if> value="orange">橙色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrcoffee eq 'coffee' ">checked</if> value="coffee">咖啡色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrgold eq 'gold' ">checked</if> value="gold">金色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrpiller eq 'piller' ">checked</if> value="piller">紫色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrgreen eq 'green' ">checked</if> value="green">绿色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrindigo eq 'indigo' ">checked</if> value="indigo">靛色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrmix eq 'mix' ">checked</if> value="mix">杂色</input>
+                    </td>
+			</tr>
             <tr>
 				<th>商品名称 :</th>
 				<td><input  type="text" name="title" id="J_title" class="input-text" size="60" value="{$info.title}"></td>
@@ -311,7 +349,11 @@ function del_attr(id,obj)
 <script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
 <script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
 <script>
-
+function addSize()
+{
+    var sizeid=$("#size");
+    sizeid.append("<input name='size[]' type='text' size='12'>&nbsp;");
+}
 $(function() {
 	KindEditor.create('#info', {
 		uploadJson : '{:U("attachment/editer_upload")}',
@@ -340,4 +382,4 @@ $(function() {
 	});
 	
 });
-</script>
+</script><br>

@@ -38,6 +38,23 @@ CREATE TABLE IF NOT EXISTS `tp_wecha_shop` (
   UNIQUE KEY `tokenTall` (`tokenTall`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+/*添加几个字段*/
+ALTER TABLE  `tp_wecha_shop` ADD  `title` VARCHAR( 150 ) NULL DEFAULT NULL AFTER  `HaveReal` ,
+ADD  `keywords` VARCHAR( 200 ) NULL DEFAULT NULL AFTER  `title` ,
+ADD  `descr` TEXT NULL DEFAULT NULL AFTER  `keywords` ,
+ADD  `twodcode` VARCHAR( 200 ) NULL DEFAULT NULL AFTER  `descr` ,
+ADD  `status` TINYINT NOT NULL DEFAULT  '1' AFTER  `twodcode` ;
+
+ALTER TABLE  `tp_wecha_shop` ADD  `closeReason` TEXT NULL AFTER  `status` ;
+
+/*实体店认证*/
+ALTER TABLE`tp_wecha_shop`CHANGE`HaveReal``HaveReal` TINYINT( 4)NOTNULL DEFAULT'0' COMMENT'0-无实体店 1-有实体店 2-认证中 3-审核不通过';
+ALTER TABLE`tp_wecha_shop`ADD`licence` VARCHAR( 255)NULL ;
+ALTER TABLE`tp_wecha_shop`ADD`address` VARCHAR( 255)NULL ;
+
+ALTER TABLE`tp_wecha_shop`ADD`phone` VARCHAR( 11) NULL ;
+ALTER TABLE`tp_wecha_shop`ADD`logo` VARCHAR(255) NULL ;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

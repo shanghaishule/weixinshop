@@ -74,9 +74,22 @@ class itemAction extends backendAction {
     }
 
     public function add() {
+    	
     	$tokenTall = $this->getTokenTall();
     	$this->assign('tokenTall',$tokenTall);
         if (IS_POST) {
+        	//得到商品的尺码和颜色
+        	$colors = $_POST['color'];
+        	$colorstr = "";
+        	foreach($colors as $val){
+        		$colorstr = $colorstr."|".$val;
+        	}
+            $sizes = $_POST['size'];
+        	$sizestr = "";
+        	foreach($sizes as $val2){
+        		$sizestr = $sizestr."|".$val2;
+        	}
+        	
             //获取数据
             if (false === $data = $this->_mod->create()) {
                 $this->error($this->_mod->getError());
@@ -167,6 +180,9 @@ class itemAction extends backendAction {
             }
             $data['imgs'] = $item_imgs;
             $data['tokenTall'] = $tokenTall;
+            //加入颜色和尺码
+            $data["size"]=$sizestr;
+            $data["color"]=$colorstr;
             
             $item_id = $this->_mod->publish($data);
             !$item_id && $this->error(L('operation_failure'));
@@ -240,6 +256,20 @@ class itemAction extends backendAction {
             }else {
             	$data['tuijian']=0;
             }
+            //得到商品的尺码和颜色
+            $colors = $_POST['color'];
+            $colorstr = "";
+            foreach($colors as $val){
+            	$colorstr = $colorstr."|".$val;
+            }
+            $sizes = $_POST['size'];
+            $sizestr = "";
+            foreach($sizes as $val2){
+            	$sizestr = $sizestr."|".$val2;
+            }
+            //加入颜色和尺码
+            $data["size"]=$sizestr;
+            $data["color"]=$colorstr;
             
             //上传相册
             $file_imgs = array();
@@ -327,6 +357,17 @@ class itemAction extends backendAction {
             $this->assign('selected_ids',$spid); //分类选中
             $tag_cache = unserialize($item['tag_cache']);
             $item['tags'] = implode(' ', $tag_cache);
+            
+            $sizestr = $item["size"];
+            $sizearr = explode("|",$sizestr);
+            $this->assign("sizearr",$sizearr);
+            
+            $colorstr = $item["color"];
+            $colorarr = explode("|",$colorstr);
+        	foreach ($colorarr as $color){
+               $this->assign("colorarr".$color,$color);
+            }
+            
             $this->assign('info', $item);
            
             //相册

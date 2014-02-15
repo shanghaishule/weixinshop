@@ -31,8 +31,8 @@ var searchid = 5;
     <div class="memberinfo"  id="destoon_member">	
 		<if condition="$_SESSION[uid]==false">
 			你好&nbsp;&nbsp;<span class="f_red">游客</span>&nbsp;&nbsp;
-			<a href="{lanrain::U('Index/login')}">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="{lanrain::U('Index/login')}">注册</a>
+			<a href="{lanrain::U('Index/index')}">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="{lanrain::U('Index/reg')}">注册</a>
 			<else/>
 			你好,<a href="/#" hidefocus="true"  ><span style="color:red">{lanrain:$Think.session.uname}</span></a>（uid:{lanrain:$Think.session.uid}）
 			<a href="/#" onclick="Javascript:window.open('{lanrain::U('Admin/Admin/logout')}','_blank')" >退出</a>

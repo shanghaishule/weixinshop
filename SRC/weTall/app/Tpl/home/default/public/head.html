@@ -41,7 +41,7 @@
 
 <div id="nav">
 	<ul class="navlist">
-		<li class="r" id="n_4"><a href="/index.php?g=Wap&m=weTall&a=index"><span>&nbsp;&nbsp;微指购商城</span></a></li>
+		<li class="r" id="n_4"><a href="/index.php?g=Wap&m=weTall&a=index"><div class="home_page_logo"></div></a></li>
     	<li id="n_0">
     		<span ></span>
         	<ul class="submenu">
@@ -52,7 +52,13 @@
             </volist>
             </ul>
         </li>
-        <li class="r active" id="n_1"><a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}"><span></span></a></li>
+        <li class="r active" id="n_1">
+           <if condition="$tokenTall eq ''">
+              <a href="/index.php?g=Wap&m=weTall&a=index">
+              <else/>
+              <a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}">
+           </if>
+        <span></span></a></li>
         <li class="r" id="n_2"><a href="{:U('user/index', array('tokenTall'=>$tokenTall))}"><span></span></a></li>
         <li class="r" id="n_3"><a href="{:U('shopcart/index', array('tokenTall'=>$tokenTall))}"><span></span></a><i></i></li>
         

@@ -39,7 +39,7 @@
     <table width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <!-- <th><span data-tdtype="order_by" data-field="id">ID</span></th> -->
                 <th><span data-tdtype="order_by" data-field="billnum">账单单号</span></th>
                 <th><span data-tdtype="order_by" data-field="status">状态</span></th>
                 <th><span data-tdtype="order_by" data-field="gen_time">生成时间</span></th>
@@ -53,7 +53,7 @@
     	<tbody>
             <volist name="list" id="val" >
             <tr>
-                <td align="center">{$val.id}</td>
+                <!-- <td align="center">{$val.id}</td> -->
                 <td align="center"><span data-tdtype="view" data-field="billnum" data-id="{$val.billnum}" class="tdview" >{$val.billnum}</span></td>
                 <td align="center"><b><?php foreach($account_status as $key=>$item){ if($val['status']==$key){echo $item; }}?></b></td>
                 <td align="center"><?php if($val['gen_time']){ echo date('Y-m-d H:i:s',$val['gen_time']); }?></td>
@@ -62,7 +62,7 @@
                 <td align="center">{$val.rate}</td>
                 <td align="center" class="red">{$val.yingjie}</td>
                 <td align="center">
-                <a href="{:U('account/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">查看和操作</a>
+                <a href="{:U('account/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall'], 'status'=>$search['status']))}">查看和操作</a>
                 </td>
             </tr>
             </volist>

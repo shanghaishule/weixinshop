@@ -206,4 +206,5 @@ class frontendAction extends baseAction {
         $count <= $start + $spage_size && $data['isfull'] = 0;
         $this->ajaxReturn(1, '', $data);
     }
+    
 }

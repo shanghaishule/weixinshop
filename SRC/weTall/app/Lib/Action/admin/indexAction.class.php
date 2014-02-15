@@ -9,17 +9,85 @@ class indexAction extends backendAction {
     }
 
     public function index() {
-        $this->login();   
+           
         $top_menus = $this->_mod->admin_menu(0);
         $this->assign('top_menus', $top_menus);
         $my_admin = array('username'=>$_SESSION['admin']['username'], 'rolename'=>$_SESSION['admin']['role_id']);
-        $this->assign('my_admin', $my_admin);
+        $this->assign('my_admin', $my_admin);        
 
         $this->assign('tokenTall', $this->getTokenTall());
         $_SESSION["tokenTall"] = $this->getTokenTall();
+        
+        $token=$_SESSION["tokenTall"];
+        $weshop=M("wecha_shop");
+        $where["tokenTall"]=$token;
+        $where2["token"]=$token;
+        if (false == $weshop->where($where)->find()) {
+        	$data["tokenTall"] = $token;
+        	$data["headurl"] = "/tpl/User/default/common/images/portrait.jpg";
+        	$data["HaveReal"] = "0";
+        	$wxUser=M("wxuser")->where($where2)->find();
+        	
+        	$data["name"]=$wxUser["wxname"];
+        	$data["weName"]=$wxUser["wxname"];
+        	$data["title"]="微指购店铺";
+        	$data["descr"]="微指购店铺";
+        	$data["keywords"]="微指购店铺";
+        	$weshop->add($data);
+        }
+        
         $this->display(); 
     }
 
+    public function edithead(){
+    	if(IS_POST){
+    		//必须上传图片
+    		if (empty($_FILES['headurl']['name'])) {
+    			$this->error('请上传头像图片');
+    		}
+    		//上传图片
+    		$date_dir = date('ym/d/'); //上传目录
+    		$item_headurls = array(); //相册
+    		$result = $this->_upload($_FILES['headurl'], 'item/'.$date_dir, array(
+    				'width'=>C('pin_item_bimg.width').','.C('pin_item_img.width').','.C('pin_item_simg.width'),
+    				'height'=>C('pin_item_bimg.height').','.C('pin_item_img.height').','.C('pin_item_simg.height'),
+    				'suffix' => '_b,_m,_s',
+    				//'remove_origin'=>true
+    		));
+    		if ($result['error']) {
+    			$this->error($result['info']);
+    		} else {
+    			$data['headurl'] = $date_dir . $result['info'][0]['savename'];
+    			//保存一份到相册
+    			$item_imgs[] = array(
+    					'headurl'     => $data['headurl'],
+    			);
+    		}
+    		$datahead['headurl'] = "/weTall/data/upload/item/".$data['headurl'];
+    		$datahead2['tokenTall'] = $_SESSION["tokenTall"];
+    		$wshop=M("wecha_shop");
+    		if($wshop->where($datahead2)->save($datahead)){
+    			$this->success("头像修改成功");
+    		}else{
+    			$this->error("头像修改失败");
+    		}
+    		
+    	}else{
+    		$token=$this->_get("tokenTall","trim");
+    		
+    		$data["tokenTall"]=$token;
+    		if($token != "") $_SESSION["tokenTall"] = $token;
+    		$weChaShop = M("wecha_shop")->where($data)->find();
+    		$this->assign("we_shop", $weChaShop);
+    		
+    	    if (IS_AJAX) {
+    			$response = $this->fetch();
+    			$this->ajaxReturn(1, '', $response);
+    		} else {
+    			$this->display();
+    		}
+    	}
+    }
     public function panel() {
 
     	$map = array();
@@ -41,6 +109,12 @@ class indexAction extends backendAction {
     		}
     		$list[] = $content;
     	}
+    	
+    	//tax for mall
+    	$tax = M("set_tax");
+    	$currentTax = $tax->find();//var_dump($currentTax);die();
+    	
+    	$this->assign("currentTax",$currentTax);
     	$this->assign('list',$list);
     	$this->assign('page',$show);// 赋值分页输出pti
 
@@ -50,6 +124,8 @@ class indexAction extends backendAction {
     	$this->assign("weshopData",$weChaShopDetail);
     	$this->assign('tokenTall', $tokenTall);
 
+    	$result2 = include './../data/conf/info.php';
+    	$this->assign("weQQ",$result2["site_qq"]);
     	
         $message = array();
         if (is_dir('./install')) {
@@ -96,14 +172,34 @@ class indexAction extends backendAction {
         $fahuo= $this->item_order->where(array('status'=>2,'tokenTall'=>$tokenTall))->count();
         $yfahuo= $this->item_order->where(array('status'=>3,'tokenTall'=>$tokenTall))->count();
         $this->assign('count',
-        array('fukuan'=>$fukuan,
-        'fahuo'=>$fahuo,
-        'yfahuo'=>$yfahuo,
-        'buycount'=>$buycount,
-        'nobuycount'=>$nobuycount
-        )
+	        array('fukuan'=>$fukuan,
+	        'fahuo'=>$fahuo,
+	        'yfahuo'=>$yfahuo,
+	        'buycount'=>$buycount,
+	        'nobuycount'=>$nobuycount
+	        )
         );
         
+        $account_mod = M('account_bill_mst');
+        $account_weiduizhang = $account_mod->where("status in (0,1) and tokenTall='".$tokenTall."'")->count();
+        $account_where_weijie = "status != 4 and tokenTall = '".$tokenTall."'";
+        $account_weijie_cnt = $account_mod->where($account_where_weijie)->count();
+        $account_weijie_amt = $account_mod->where($account_where_weijie)->sum('yingjie');
+        $account_weijie_amt = $account_weijie_amt ? $account_weijie_amt : 0;
+        $account_where_yijie = "status = 4 and tokenTall = '".$tokenTall."'";
+        $account_yijie_cnt = $account_mod->where($account_where_yijie)->count();
+        $account_yijie_amt = $account_mod->where($account_where_yijie)->sum('yingjie');
+        $account_yijie_amt = $account_yijie_amt ? $account_yijie_amt : 0;
+
+        $this->assign('account_cnt',
+        	array('weiduizhang'=>$account_weiduizhang,
+				'weijie_cnt'=>$account_weijie_cnt,
+        		'weijie_amt'=>$account_weijie_amt,
+        		'yijie_cnt'=>$account_yijie_cnt,
+        		'yijie_amt'=>$account_yijie_amt,
+        	)
+        );
+
         $this->display();
     }
 
@@ -130,6 +226,8 @@ class indexAction extends backendAction {
                 'username' => $admin['username'],
             ));
             M('admin')->where(array('id'=>$admin['id']))->save(array('last_time'=>time(), 'last_ip'=>get_client_ip()));
+            $tokenTall = $_SESSION["tokenTall"];
+            header("location: /weTall/index.php?g=admin&m=index&a=index&tokenTall=".$tokenTall);
         //    $this->success(L('login_success'), U('index/index'));
        // } else {
        //     $this->display();
@@ -138,6 +236,7 @@ class indexAction extends backendAction {
 
     public function logout() {
         session('admin', null);
+        session('tokenTall', null);
         $this->success(L('logout_success'), U('index/login'));
         exit;
     }
@@ -183,7 +282,7 @@ class indexAction extends backendAction {
                 $left_menu[99]['sub'] = $r;
             }
 
-            array_unshift($left_menu[0]['sub'], array('id'=>0,'name'=>'后台首页','module_name'=>'index','action_name'=>'often_menu'));
+            array_unshift($left_menu[0]['sub'], array('id'=>0,'name'=>'后台首页','module_name'=>'index','action_name'=>'panel'));
         }
         $this->assign('left_menu', $left_menu);
         $this->assign('tokenTall', $this->getTokenTall());

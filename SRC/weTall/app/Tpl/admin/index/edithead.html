@@ -1,0 +1,12 @@
+
+<!--编辑商品-->
+<form id="info_form" action="{:U('index/edithead')}" method="post" enctype="multipart/form-data">
+  <div style="margin-left:20px;">
+             店铺名称：{$we_shop.name}<br>
+              上传头像 ：<input type="file" name="headurl" id="headurl"> 头像规格104 * 104     <br>
+               原头像：<img src="{$we_shop.headurl}" width="104" height="104" /><br><br>
+    <input type="submit" name="submit" value="确定更改">
+  </div>  		
+</form>
+
+

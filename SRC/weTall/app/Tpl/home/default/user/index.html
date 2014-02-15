@@ -14,7 +14,8 @@
 <include file="public:head" />
 <div class="content">
     <h3 class="membertop">
-       <p class="my_name"><a href="#">  {$visitor.username}</a></p>
+       <div class="my_name"><a>{$visitor.username}</a></div>
+       <div class="logout"><a href="/weTall/index.php?m=user&a=logout">注销</a> | <a href="/weTall/index.php?m=user&a=favi">我的收藏</a></div>
        <p class="my_address"><a href="{:U('user/address', array('tokenTall'=>$tokenTall))}">收货地址管理</a></p>
     </h3>
     <ul class="buyer_stat">
@@ -43,6 +44,8 @@
                     <div class="con">
                         <p class="ware_pic"><a href="{:U('Item/index',array('id'=>$item['itemId'],'tokenTall'=>$tokenTall))}" ><img src="{:attach(get_thumb($item['img'], '_b'), 'item')}" height="80" width="80"></a></p>
                         <p class="ware_text"><a href="{:U('Item/index',array('id'=>$item['itemId'],'tokenTall'=>$tokenTall))}">{$item.title}</a><br><span class="attr"></span></p>
+                        <p>大小: <span>{$item.size}</span></p>
+                        <p>颜色: <span>{$item.color}</span></p>
                         <p class="price">价格: <span>¥{$item.price}</span></p>
                         <p class="amount">数量: <span>{$item.quantity}</span></p>
                     </div>

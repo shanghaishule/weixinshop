@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<link href="__ROOT__/weTall/static/css/admin/style.css" rel="stylesheet"/>
+	<title>后台管理</title>
+	<script>
+	var URL = '/weTall/index.php/admin-index';
+	var SELF = '/weTall/index.php?g=admin&m=index&a=index';
+	var ROOT_PATH = '/weTall';
+	var APP	 =	 '/weTall/index.php';
+	//语言项目
+	var lang = new Object();
+	lang.connecting_please_wait = "请稍后...";lang.confirm_title = "提示消息";lang.move = "移动";lang.dialog_title = "消息";lang.dialog_ok = "确定";lang.dialog_cancel = "取消";lang.please_input = "请输入";lang.please_select = "请选择";lang.not_select = "不选择";lang.all = "所有";lang.input_right = "输入正确";lang.plsease_select_rows = "请选择要操作的项目！";lang.upload = "上传";lang.uploading = "上传中";lang.upload_type_error = "不允许上传的文件类型！";lang.upload_size_error = "文件大小不能超过{sizeLimit}！";lang.upload_minsize_error = "文件大小不能小于{minSizeLimit}！";lang.upload_empty_error = "文件为空，请重新选择！";lang.upload_nofile_error = "没有选择要上传的文件！";lang.upload_onLeave = "正在上传文件，离开此页将取消上传！";
+	</script>
+
+	<script src="/weTall/static/js/jquery/jquery.js"></script>
+	<script src="/weTall/static/js/jquery/plugins/jquery.tools.min.js"></script>
+	<script src="/weTall/static/js/jquery/plugins/formvalidator.js"></script>
+	<script src="/weTall/static/js/pinphp.js"></script>
+	<script src="/weTall/static/js/admin.js"></script>
+
+	<script>
+	//初始化弹窗
+	(function (d) {
+	    d['okValue'] = lang.dialog_ok;
+	    d['cancelValue'] = lang.dialog_cancel;
+	    d['title'] = lang.dialog_title;
+	})($.dialog.defaults);
+	</script>
+
+	<script src="/weTall/static/js/jquery/plugins/listTable.js"></script>
+	<script>
+	$(function(){
+		$('.J_tablelist').listTable();
+	});
+	</script>
+	<script src="/weTall/static/js/jquery/plugins/jquery.treetable.js"></script>
+	<script>
+	$(function(){
+	    $("#J_cate_tree").treeTable({indent:20,treeColumn:2});
+	    $(".J_preview").preview();
+	});        
+	</script> 
+
+	<link rel="stylesheet" type="text/css" href="/weTall/static/css/admin/style.css" />
+</head>
+
+<body>
+<div id="J_ajax_loading" class="ajax_loading">提交请求中，请稍候...</div>
+<div class="pad_lr_10" >
+    <div class="J_tablelist table_list">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="10"><input type="checkbox" name="checkall" class="J_checkall"></th>
+                <th width="100">店铺名称</th>
+                <th width="100">实体店认证状态</th>
+				<th width="80" align="center">营业执照</th>
+                <th width="100" align="left">实体店地址</th>
+                <th width="80" align="left">信誉</th>             
+                <th width="50">管理操作</th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val">
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{Lanrain:$val.id}"></td>
+				<td align="center">{Lanrain:$val.name}</td>
+				<td align="center"><if condition="$val['HaveReal'] eq '0'">无实体店<elseif condition="$val['HaveReal'] eq '2'"/>认证中<elseif condition="$val['HaveReal'] eq '3'"/>审核不通过<else/>已认证</if></td>
+				<td align="center">{Lanrain:$val.licence}</td>
+				<td align="left">{Lanrain:$val.address}</td>
+				<td align="left">{Lanrain:$val.credit}</td>
+				
+                <td align="center">
+                    <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/index.php?g=System&m=RealShop&a=delete&id={Lanrain:$val.id}" data-msg="确定删除该条申请吗?">删除</a>
+                     | <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/index.php?g=System&m=RealShop&a=checkPass&id={Lanrain:$val.id}" data-msg="确定认证实体店？">审核</a>
+                      | <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="/index.php?g=System&m=RealShop&a=checkNoPass&id={Lanrain:$val.id}" data-msg="拒绝实体店认证？">拒绝审核</a>                
+                </td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    </div>
+
+    <div class="btn_wrap_fixed">
+    	<label><input type="checkbox" name="checkall" class="J_checkall">全选/取消</label>
+    	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="/index.php?g=System&m=RealShop&a=delete" data-name="id" data-msg="确定删除吗？" value="删除" />
+    	筛选：<a href="/index.php?g=System&m=RealShop&a=index&status=4">全部</a> | <a href="/index.php?g=System&m=RealShop&a=index&status=1">已认证</a>
+    	 | <a href="/index.php?g=System&m=RealShop&a=index&status=2">认证中</a> | <a href="/index.php?g=System&m=RealShop&a=index&status=0">无实体店</a> | <a href="/index.php?g=System&m=RealShop&a=index&status=3">审核不通过</a>
+    <div id="pages">{Lanrain:$page}</div>
+    </div>    
+</div>
+</body>
+</html>

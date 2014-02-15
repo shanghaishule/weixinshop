@@ -25,8 +25,10 @@
  */
 
 body {font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3"; line-height:1.6; background:#f6f6f6; }
+html,body { max-width:320px; margin:0 auto;}
 h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, li, body, form, input, button, img, cite, strong, em, table, td, th { padding:0; margin:0; }
 h1, h2, h3, h4, h5, h6 { font-size: 16px;}
+hr{border:1px solid #D9D9D9;}
 img, table, td, th { border: 0; }
 ul, ol { list-style-type:none; }
 a{ text-decoration:none; color:#666;}
@@ -39,8 +41,20 @@ a:visited{ color:#666;}
  */
 
 
-
-
+.home_page_logo{background:url(/tpl/User/default/common/images/home_page.png) no-repeat 0 0;background-size: 140px 40px; height:40px;width:140px;}
+#shopname{border-bottom:1px solid #d9d9d9;border-left:1px solid #d9d9d9;}
+.dail{
+	margin-left:50px;
+	padding:3px;
+	font-size:12px;
+	border:1px solid gray;
+	-webkit-box-shadow: -2px -2px 4px gray,-1px -1px 4px gray;  
+    -moz-box-shadow: -2px -2px 4px gray,-1px -1px 4px gray;  
+    box-shadow: -2px -2px 4px gray,-1px -1px 4px gray ;
+	-moz-border-radius: 20px;      /* Gecko browsers */
+    -webkit-border-radius: 20px;   /* Webkit browsers */
+    border-radius:20px;            /* W3C syntax */
+}
 
 /*
  * -------------------------------------------------------
@@ -159,10 +173,12 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 
 /*会员中心*/
 .content {margin: 0; min-height:300px; position: relative;}
-.membertop{ padding:30px 10px 10px 20px; background:url(../images/head_bg.png) fixed;  } 
+.membertop{ padding:4px 10px 10px 20px; background:url(../images/head_bg.png) fixed;  } 
 .membertop .my_address{ display:inline-block;background:-webkit-gradient(linear,left top,left bottom,from(#dbe4c8),to(#dbe4c8));background: -moz-linear-gradient(top,#dbe4c8,#dbe4c8); padding:10px 20px 10px 25px; border-radius:30px; border:1px solid #b0d5f9;box-shadow:2px 1px 1px 2px #dbe4c8 inset;}
 .membertop .my_address a{ color:#fff; display:block; padding-left:20px; background:url(../images/address_ico.png) no-repeat left top;}
-.membertop .my_name a{ color:#fff; font-size:24px; display:block; padding:0 0 5px 15px; text-shadow:1px 1px 1px #888;}
+.membertop .my_name a{float:left; width:40%; color:#fff; font-size:24px; display:block; padding:0 0 5px 15px; text-shadow:1px 1px 1px #888;}
+.membertop .logout a { font-size:16px; text-shadow:1px 1px 1px #888;}
+.membertop .logout {float:right; width:140px; color:#FFC0CB; font-size:20px; display:block; text-shadow:1px 1px 1px #888;}
 .buyer_stat{ overflow:hidden;}
 .buyer_stat li{background: #f2f2f2; float:left; width:25%; height:44px; line-height:24px;text-align:center; border-bottom:1px solid #ccc;font-size:15px;}
 .buyer_stat li a{ height:44px; display:block; color:#333333;}
@@ -319,17 +335,17 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
  * -------------------------------------------------------
  */
 
-#nav {width:100%; left:0px;position:fixed; top:0px; z-index: 100; margin: 0 auto;display:block;background:url(http://bestchoice88.com/tpl/Wap/default/common/images/weTall/top_bg.jpg) repeat-x;}
-#nav ul.navlist { position: relative; z-index:9999; height:45px; margin:0 auto; background:url(http://bestchoice88.com/tpl/Wap/default/common/images/weTall/top_bg.jpg) repeat-x; border-bottom:1px solid #ccc;}
+#nav {width:100%; left:0px;position:fixed; top:0px; z-index: 100; margin: 0 auto;display:block;background:black;}
+#nav ul.navlist { position: relative; z-index:9999; height:45px; margin:0 auto; background:black; border-bottom:1px solid #ccc;}
 #nav .navlist li { float: left; margin: 0px 0px 0 0;width:12%;height:45px;  position:relative;}
 #nav .navlist li#n_3 i{ position:absolute; height:14px; width:14px;background:#C00; color:#fff; left:55%; top:10px; border-radius:50%; font-style:normal; text-align:center; font-size:12px; display:none;}
 #nav .navlist li span{ display:inline-block; width:100%; height:45px; cursor:pointer;}
 #nav .navlist li a{ display:block; height:45px;}
-#nav .navlist li#n_0 span{ background:url(http://bestchoice88.com/tpl/Wap/default/common/images/weTall/list_ico.png) no-repeat center center;}
+#nav .navlist li#n_0 span{ background:url(/tpl/Wap/default/common/images/weTall/list_ico.png) no-repeat center center;}
 #nav .navlist li#n_1 span{ background:url(../images/tilttle_btn06.png) no-repeat center center;}
-#nav .navlist li#n_2 span{ background:url(http://bestchoice88.com/tpl/Wap/default/common/images/weTall/login_ico.png) no-repeat center center;}
-#nav .navlist li#n_3 span{ background:url(http://bestchoice88.com/tpl/Wap/default/common/images/weTall/shop_ico.png) no-repeat center center;}
-#nav .navlist li#n_4 span{ text-align:left;padding-top:9px; color:white;}
+#nav .navlist li#n_2 span{ background:url(/tpl/Wap/default/common/images/weTall/login_ico.png) no-repeat center center;}
+#nav .navlist li#n_3 span{ background:url(/tpl/Wap/default/common/images/weTall/shop_ico.png) no-repeat center center;}
+#nav .navlist li#n_4 span{ text-align:left;padding-top:9px; color:white;font-weight:900;}
 #nav .navlist li#n_4{width:50%;}
 
 .banner{position: relative;}
@@ -343,12 +359,13 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .banner .slider #pagenavi a.active{ background:#C00;}
 
  .s_bottom{background: url(../images/gallery_btn.png) repeat-x left top; height:90px; margin-top:-105px;float:none;}
+ .s_bottom_search{background: url(../images/gallery_btn.png) repeat-x left top; height:93px; margin-top:-65px;float:none;}
 
 .shoplogo{width:320px;position: relative;z-index:1;}
 .shoplogourl{width:20%;float:left;}
-.favi{width:80%;float:left;}
+.favi{width:80%;float:left;border-top: 1px solid #EAEAEA;}
 .favi #operdetail li{display:inline-block;font-size:10px;width:30%;text-align:center;}
-.favi #operdetail #m_1,.favi #operdetail #m_2{border-right: 1px solid #EAEAEA;}
+.favi #operdetail #m_1,.favi #operdetail #m_2,.favi #operdetail #m_3{border-left: 1px solid #EAEAEA;}
 
 #nav .normal { display: block; font-size: 12px; font-weight: bold; color: #666; text-decoration: none; background: url(../images/normal.gif) no-repeat right top; }
 #nav .normal:hover { text-decoration: underline; }
@@ -724,7 +741,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 #footer { width:100%;margin: 0 auto; border-top: 1px solid #ddd; text-align: center; color: #aaa; line-height: 20px;}
 #footer p { color: #a6a6a6; word-spacing: 5px; padding: 10px 0; }
 #footer a { color: #a6a6a6; text-decoration: none; }
-#footer p.foot_nav a {font-size:16px; }
+#footer p.foot_nav a {font-size:13px; }
 #footer a:hover { text-decoration: underline; }
 
 /*
@@ -785,6 +802,43 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .no_former { +height: 18px; }
 .former { +height: 18px; }
 .die6 { margin-bottom: 10px; width: 780px; _overflow-x: auto; }
+
+/*-------------------------------------------------------------
+*Search area
+*--------------------------------------------------------------
+*/
+.search_all{ width:315px; overflow:hidden; padding:5px 0;}
+.search_content{ width:248px; height:33px; border:2px solid #d3d3d3; -moz-border-radius: 8px;-khtml-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px; background:white; padding-left:-2px;}
+.search_textbox{ width:170px; height:33px; line-height:35px; border:0; font-size:14px; color:#c4c4c4; text-align:left; overflow:hidden; background:none;}
+.search_btn{ width:60px;padding:1px 0px 0 0;}
+#search_method{ height:35px; border:1px solid #d3d3d3;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;}
+.FloatLeft{float:left; margin:0;}
+.FloatRight { float:right; margin:0;}
+
+/*-------------------------------------------------------
+ **
+ **分页css
+ */
+#pages{
+	width:100%;
+	text-align:center;
+	padding:5px;
+}
+.shopClass{
+	display:block;
+	margin:2px;
+	font-size:14px;
+	text-align:left;
+}
+.descrClass{
+	display:block;
+	margin:2px;
+	padding-left:8px;
+	font-size:8px;
+}
+.shopClass a{
+	color:blue;
+}
 /*
  * -------------------------------------------------------
  * ******************** end hack.css *********************
@@ -812,3 +866,16 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .main_nav .main_li2 .img{ width:160px; height:114px; background:url(../images/cuxiao2.jpg) no-repeat left center; background-size:contain; }
 .main_nav .main_li3 .img{ width:160px; height:114px; background:url(../images/cuxiao3.jpg) no-repeat left center; background-size:contain; }
 .main_nav .main_li4 .img{ width:160px; height:114px; background:url(../images/cuxiao4.jpg) no-repeat left center; background-size:contain; }
+
+/*
+ * -------------------------------------------------------
+ * ******************** search sort **********************
+ * -------------------------------------------------------
+ */
+
+#sort_bg {width:100%;  left:0px;position:fixed; top:45px; z-index: 100; margin: 0 auto;display:block;background:url(/tpl/User/default/common/images/header.png) repeat-x;}
+#sort_bg ul.sortlist { position: relative; z-index:9999; height:45px; margin:0 auto; background:url(/tpl/User/default/common/images/header.png) repeat-x; border-bottom:1px solid #ccc;}
+#sort_bg .sortlist li { float: left; width:79px;height:45px;  position:relative;text-align:center;border-left:1px solid white;}
+#sort_bg .sortlist li a{ display:block; margin-top:10px;height:45px;color:white;font-weight:700;}
+#sort_bg .sortlist li img{ margin-top:0px;vertical-align:middle;}
+

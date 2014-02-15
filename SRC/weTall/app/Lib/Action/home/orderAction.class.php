@@ -46,7 +46,15 @@ class orderAction extends userbaseAction {
 	    	{
 	    		$item->where('id='.$val['itemId'])->setInc('buy_num',$val['quantity']);
 	        }
-	    	$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
+	        
+	        //交易完成商家信誉加上1点
+	        $dataTall["tokenTall"]=$item_orders["tokenTall"];
+	        $shopcredit=M("wecha_shop");
+	        $shopDetail=$shopcredit->where($dataTall)->find();
+	        $updateCredit["credit"]=$shopDetail["credit"]+1;
+	        if($shopcredit->where($dataTall)->save($updateCredit)){	        
+	    		$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
+	        }
 	    }else 
 	    {
 	    	$this->error('确定收货失败');
@@ -113,7 +121,7 @@ class orderAction extends userbaseAction {
 	  	    $item_detail=array();
 	  	    foreach ($order_details as $val)
 	  	    {
-	  		    $items= array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity']);
+	  		    $items= array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity'],'size'=>$val['size'],'color'=>$val['color']);
 	  		    //$order[$key]['items'][]=$items;
 	  		    $item_detail[]=$items;
 	  	    }
@@ -284,6 +292,8 @@ class orderAction extends userbaseAction {
 					$orders['img']=$item['img'];//商品图片
 					$orders['price']=$item['price'];//商品价格 
 					$orders['quantity']=$item['num'];//购买数量
+					$orders['size']=$item['size'];//大小
+					$orders['color']=$item['color'];//颜色
 					$order_detail->data($orders)->add();
 				}
 

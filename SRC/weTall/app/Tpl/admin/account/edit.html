@@ -137,7 +137,7 @@
 	   <if condition = "$account_master['status'] eq '0' or $account_master['status'] eq '1'">
            <a href="{:U('account/status',array('id'=>$account_master['id'],'status'=>'shop_confirm','tokenTall'=>$account_master['tokenTall']))}"><input type="button" value="确认账单正确" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
        </if>
-	   <a href="{:U('account/index',array('tokenTall'=>$account_master['tokenTall']))}"><input type="button"  value=" 返回列表 " class="btn btn_cannel"></a>
+	   <a href="{:U('account/index',array('tokenTall'=>$account_master['tokenTall'], 'status'=>$status))}"><input type="button"  value=" 返回列表 " class="btn btn_cannel"></a>
 	   </div>
 	</div>
 </div>

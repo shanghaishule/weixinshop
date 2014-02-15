@@ -10,7 +10,21 @@
 <script type="text/javascript" src="__STATIC__/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="__STATIC__/js/all.js"></script>
 <script type="text/javascript" src="__STATIC__/weixin/js/colorbox.js"></script>
-
+<link href="__STATIC__/css/admin/style.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>	
+	<title>{:L('website_manage')}</title>
+	<script>
+	var URL = '__URL__';
+	var SELF = '__SELF__';
+	var ROOT_PATH = '__ROOT__';
+	var APP	 =	 '__APP__';
+	//语言项目
+	var lang = new Object();
+	<volist name=":L('js_lang')" id="val">
+		lang.{$key} = "{$val}";
+	</volist>
+	</script>
 <script>
 
 			$(document).ready(function(){
@@ -28,7 +42,7 @@
     <div class="mainbox">
        <div class="mleft">
             <div class="mbar">
-               <h4>公告栏<span class="more"><a target="_blank" href="/index.php?g=System&m=Info_Notice&a=index">更多&gt;&gt;</a></span></h4>
+               <h4>公告栏<!-- <span class="more"><a target="_blank" href="/index.php?g=System&m=Info_Notice&a=index">更多&gt;&gt;</a></span> --></h4>
                <div class="mtishi" id="mtishi2">
                     <table width="100%" id="noticeTable">
 		            <volist name="list" id="val"> 
@@ -45,7 +59,22 @@
                </div>
                <div id="pages">共{$page}</div>
             </div>
-        
+
+            <div class="mbar">
+               <h4>账单信息栏</h4>
+               <div class="mtishi">
+                   <p><strong>您需要立即处理:</strong></p>
+                   <p><span>对账提醒:</span>
+                       <a  href="{:U('account/index',array('status'=>5,'tokenTall'=>$tokenTall))}">未对账账单[<span class="count">{$account_cnt.weiduizhang}</span>]</a>
+                   </p>
+                   <p><strong>您需要关注:</strong></p>
+                   <p><span>结账信息:</span>
+                       <a  href="{:U('account/index',array('status'=>6,'tokenTall'=>$tokenTall))}">未结算账单[<span class="count">{$account_cnt.weijie_cnt}</span>][<span class="count">合计&nbsp;{$account_cnt.weijie_amt}&nbsp;元</span>]</a>
+                       <a  href="{:U('account/index',array('status'=>4,'tokenTall'=>$tokenTall))}">已结算账单[<span class="count">{$account_cnt.yijie_cnt}</span>][<span class="count">合计&nbsp;{$account_cnt.yijie_amt}&nbsp;元</span>]</a>
+                   </p>
+               </div>
+            </div>
+
             <div class="mbar">
                <h4>微商城提醒</h4>
            
@@ -65,18 +94,19 @@
             </div>            
 
        </div>
-       <div class="mright"> 
-        
-            <div style="background:#E5E5E5;">
-               <h4>{$weshopData.name} 基本信息：</h4>
-                       
+       <div class="mright">
+            <div style="background:#E5E5E5;margin-top:11px;">
+               <h4>{$weshopData.name} 基本信息：<span>(<a href="{:U('setting/realShop')}">申请实体店认证</a>)</span></h4>
+               <font size="2px" color="red">基本汇率: {$currentTax.shoptax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优惠券汇率：{$currentTax.coupontax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分汇率：{$currentTax.giftpointtax}</font>       
                <div>
                   <table border="1">
-                     <tr><td rowspan="4">&nbsp;<img src="{$weshopData.headurl}" alt="店铺头像" />&nbsp;<br></br>
-                      
-                     </td><td rowspan="3">
-                        &nbsp;<img height="90" id="imgWxQRCode" src="<?php echo attach(get_thumb(C('pin_weixinshop_img'), ''), 'weixin'); ?>">                    
-                     &nbsp;</td><td>
+                     <tr><td rowspan="4" style="padding:2px;width:108px;">
+                     <a href="{:U('index/edithead',array('tokenTall'=>$tokenTall))}" >
+                     <img width="104px" height="104px" src="{$weshopData.headurl}" alt="更改头像" /></a>
+                    <a href="{:U('index/edithead',array('tokenTall'=>$tokenTall))}" >  点击更改头像</a>
+                     </td><td rowspan="3" style="padding:2px;">
+                     <img height="90" width="90" id="imgWxQRCode" src="{$weshopData.twodcode}">                    
+                    </td><td width="124px">
                     &nbsp;&nbsp;&nbsp;&nbsp;店铺名称：
                      </td><td>{$weshopData.name}</td>
                      
@@ -101,12 +131,14 @@
                         </if></td></tr>
                      <tr><td>
                      &nbsp;&nbsp;&nbsp;&nbsp;有无实体店：
-                     </td><td><if condition="$weshopData['HaveReal'] eq 0">无<else/>有</if></td></tr>
+                     </td><td height="35" width="80">
+                     <if condition="$weshopData['HaveReal'] eq '0'">无实体店<elseif condition="$weshopData['HaveReal'] eq '2'"/>认证中<elseif condition="$weshopData['HaveReal'] eq '3'"/>审核不通过<else/><img src="__STATIC__/images/shiti3.png" width="25" height="25"/></if>
+                     </td></tr>
                      <tr><td >
                      <a href="{:U('setting/index')}">[设置]</a>
-                       <a class="group1" title="微商城二维码" id="aDownLoadShopQRcode" href="<?php echo attach(get_thumb(C('pin_weixin_img'), ''), 'weixin'); ?>">[预览]</a>
+                       <a class="group1" title="微商城二维码" id="aDownLoadShopQRcode" href="{$weshopData.twodcode}">[预览]</a>
                      </td>
-                     <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('setting/index')}">更改店铺名称</a></td>
+                     <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('setting/index')}">修改店铺信息</a></td>
                      </tr>
                   </table>
                    
@@ -117,15 +149,13 @@
             <div class="mbar">
                <h4>服务热线</h4>
                <p style="padding:5px 0 2px 20px;">
-                   <a href="http://wpa.qq.com/msgrd?v=3&uin=1492662116&site=qq&menu=yes" target="_blank"><img border="0" title="点击这里给我发消息" alt="点击这里给我发消息" src="__STATIC__/images/admin/pancl/online2.jpg"></a>
-               </p>
-               <p>
-                   <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1492662116&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2411589211:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+                   <a href="http://wpa.qq.com/msgrd?v=3&uin={$weQQ}&site=qq&menu=yes" target="_blank"><img border="0" title="点击这里给我发消息" alt="点击这里给我发消息" src="__STATIC__/images/admin/pancl/online2.jpg"></a>
+                   <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$weQQ}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:{$weQQ}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
                 
                </p>
              
-               <p><span class="tel">服务热线: 0592-5927951</span></p>
-               <p class="remark">（热线服务时间：周一至周六 9:00 - 20:00，其他时间段请选择QQ留言，谢谢合作！）</p>
+               <p>服务热线: 0312 - 4888382</p>
+               <p class="remark">热线服务时间：周一至周六 9:00 - 20:00</p>
             <!--   <p><a href="#">培训中心</a> <a href="#">帮助中心</a> <a href="#">续签FAQ</a></p>-->
             </div>
         
@@ -135,9 +165,9 @@
                <div class="services">
                    <div id="slider" class="slider" style="height: 150px; width: 345px; overflow: hidden; position: relative;">
                         <ul class="slider">
-                            <li style="float: left;"><a title="" target="_blank" href="http://www.changxiao.cn/weixin.html"><img src="__STATIC__/images/admin/pancl/ad.gif" alt="" style="width: 345px; height: 150px;"></a></li>
-                            <li style="float: left;"><a title="" target="_blank" href="http://www.changxiao.cn/weixin.html"><img src="__STATIC__/images/admin/pancl/ad1.gif" alt="" style="width: 345px; height: 150px;"></a></li>
-                            <li style="float: left;"><a title="" target="_blank" href="http://www.changxiao.cn/weixin.html"><img src="__STATIC__/images/admin/pancl/ad2.gif" alt="" style="width: 345px; height: 150px;"></a></li>
+                            <li style="float: left;"><a title="" target="_blank" href="/index.php"><img src="__STATIC__/images/admin/pancl/ad.gif" alt="" style="width: 345px; height: 150px;"></a></li>
+                            <li style="float: left;"><a title="" target="_blank" href="/index.php"><img src="__STATIC__/images/admin/pancl/ad1.gif" alt="" style="width: 345px; height: 150px;"></a></li>
+                            <li style="float: left;"><a title="" target="_blank" href="/index.php"><img src="__STATIC__/images/admin/pancl/ad2.gif" alt="" style="width: 345px; height: 150px;"></a></li>
                         </ul>
                         <div id="slider_btn"><span class="on">1</span><span class="">2</span><span class="">3</span></div>
                    </div>
@@ -149,7 +179,7 @@
             <div class="mbar">
                <h4>提意见区</h4>
                <p><span class="info">请帮助我们提高，谢谢！</span></p>
-               <p><a  target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1492662116&site=qq&menu=yes">意见反馈</a></p>
+               <p><a  target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$weQQ}&site=qq&menu=yes">意见反馈</a></p>
             </div>
             
        </div>

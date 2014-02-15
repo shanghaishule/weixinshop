@@ -169,6 +169,7 @@ class backendAction extends baseAction
     	$pid = $this->_get('id',"trim");
     	$data['id'] = $pid;
     	$data['checkstatus'] = '1';
+    	$data['status'] = '1';
     	$data['boadid'] = '1';
     	$data1['boadid'] = '1';
     	$data2['boadid'] = '2';

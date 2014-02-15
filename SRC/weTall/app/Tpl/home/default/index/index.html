@@ -3,11 +3,21 @@
 <html>
 <head>
 	<include file="public:headtop" />
+	
+<link rel="stylesheet" href="__STATIC__/weixin/css/content.css" />
+	<style>
+		.showhavereal{
+			margin-left: 5px;
+			font:italic bold 15px arial,sans-serif;
+			color: #c00000 ;
+			text-shadow: 5px 5px 2px #ff6000 ;
+		}
+	</style>
 </head>
 
 <body>
 	<include file="public:head" />
-	<div id="headshop">
+	<!--  <div id="headshop">
 	<div id="leftfloat">
         <div id="search_box"> 
         	<select name="color" id="color">
@@ -20,6 +30,24 @@
 			</form> 
 		</div> 
 	</div>
+</div> -->
+<script>
+function submitForm(){
+	$("#form1").submit(function(e){
+		
+		});
+	
+}
+</script>
+<div class="search_all">
+    <form id="form1" action="/weTall/index.php?m=index&a=search" method="post">       
+        <div class="search_content FloatLeft">
+        <select id="search_method" name="method"><option selected value="local">搜本店</option><option value="weFig">搜商城</option></select>
+            <input type="text" id="txtKeyword" autocomplete="off" placeholder="请输入搜索内容" value=""
+               name="txtkeyword" class="search_textbox" /></div>
+        <div class="search_btn FloatRight">
+            <input type="image" id="submit" onclick="submitForm();" src="/tpl/Wap/default/common/images/weTall/search_btn.jpg" /></div>
+    </form>
 </div>
 	<div class="banner">
 	    <div id="slider" class="slider" style="overflow: hidden; visibility: visible; list-style: none outside none; position: relative;">
@@ -27,7 +55,7 @@
 	        <volist name='ad' id='vo'>
 	            <li style="float: left; display: block; width: 600px;">
 	                <span>
-	                   <a href="{$vo.url}"> <img title="{$vo.desc}" width="100%" src="__ROOT__/data/upload/advert/{$vo.content}"></a>
+	                   <a href="{$vo.url}"> <img title="{$vo.desc}" height="160" width="100%" src="__ROOT__/data/upload/advert/{$vo.content}"></a>
 	                </span>
 	            </li>
 	        </volist>
@@ -40,14 +68,21 @@
 	        </div>
 	    </div>
 	</div>
-
+   <div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+                    <img src="/tpl/User/default/common/images/nav.png" />
+                </div>
 	<div class="shoplogo">
 	   <div class="shoplogourl">
-	    <img width="60" height="60" src="__STATIC__/weixin/images/logo.jpg"/>
+	    <if condition="$weshopData['logo'] eq ''">
+	        <img width="60" height="60" src="{$weshopData.headurl}"/>
+	    <else/>
+	        <img width="60" height="60" src="{$weshopData.logo}" />
+	    </if>
 	   </div>
 	   <div class="favi">
 	      <div id="shopname">
-	         {$weshopData.name}
+	         {$weshopData.name}<span class="showhavereal"><eq name="weshopData.HaveReal" value="1"><img src="__STATIC__/images/shiti3.png" width="20" height="20"/></eq></span>
+	         <botton class="dail"><a href="tel:{$weshopData.phone}" class="order">联系客服</a></botton>
 	      </div>
 	        <ul id="operdetail">
 	          <li id="m_1">
@@ -70,10 +105,24 @@
                         <br>信用
 	          </li>
 	          <li id="m_2">
-	            <img width="20" height="20" src="__STATIC__/weixin/images/share.png"/><br>分享
+	            <div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+                    <img src="/tpl/User/default/common/images/nav.png" />
+                </div>
+	            <div>
+                    <div>                       
+                        <span onclick="document.getElementById('mcover').style.display='block';">
+                        <img src="/tpl/User/default/common/images/friend.jpg" width="20" height="20" />                            
+                         <br>分享
+                        </span>
+                     </div>          
+                </div>
 	          </li>
 	          <li id="m_3">
-	            <img width="20" height="20" src="__STATIC__/weixin/images/favi.png"/><br>收藏店铺
+	            <eq name="favi" value="no">
+	            	<a href="javascript:void(0)" onclick="favi_action('add');"><img width="20" height="20" src="__STATIC__/weixin/images/favi.png"/><br>收藏店铺</a>
+	            <else />
+	            	<a href="javascript:void(0)" onclick="favi_action('cancel');"><img width="20" height="20" src="__STATIC__/weixin/images/favi2.png"/><br>已收藏</a>
+				</eq>
 	          </li>
 	        </ul>
 	   </div>
@@ -83,6 +132,43 @@
 	<div class="s_bottom"></div>
 
 	<script type="text/javascript">
+	function favi_action(act){
+		if(act == "add"){
+			//收藏
+			$.post("{:U('index/favi')}", {act: act}, function(data){
+				//alert("Data Loaded: "+data.status);
+				if(data.status == '0'){
+					alert("您还没有登录，请登录！")
+					window.location.href=data.url;
+				}else if(data.status == '2'){
+					alert("该店铺您已收藏！")
+				}else{
+					alert("收藏成功！")
+					window.location.reload();
+				}
+			},"json");
+		}else{
+			//取消收藏
+			var truthBeTold = window.confirm("您确定要取消收藏吗？"); 
+			if (truthBeTold){
+				$.post("{:U('index/favi')}", {act: act}, function(data){
+					//alert("Data Loaded: "+data.status);
+					if(data.status == '0'){
+						alert("您还没有登录，请登录！")
+						window.location.href=data.url;
+					}else if(data.status == '1'){
+						alert("取消收藏成功！")
+						window.location.reload();
+					}else{
+						window.location.reload();
+					}
+				},"json");
+			}
+		}
+		
+	}
+	
+	
 	$(function(){
 		$("div.module_special .wrap .major ul.list li:last-child").addClass("remove_bottom_line");
 	});
@@ -176,6 +262,10 @@
 	</div>
 
 	<include file="public:footer" />
-
+   
+    <script>
+    
+    
+    </script>  
 </body>
 </html>

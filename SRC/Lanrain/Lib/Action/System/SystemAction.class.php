@@ -32,8 +32,11 @@ class SystemAction extends BackAction{
 			$where['pid']=2;
 			$where['level']=2;
 			$order['sort']='asc';
-			$nav=M('node')->where($where)->order($order)->select();			
+			$nav=M('node')->where($where)->order($order)->select();
 			$this->assign('nav',$nav);
+			
+			$title = M('node')->where('id=2')->find();
+			$this->assign('title',$title[title]);
 		}else{
 			$roleid["pid"] = $_GET['pid'];
 			$roleid["role_id"] = session('roleid');
@@ -54,6 +57,16 @@ class SystemAction extends BackAction{
 	}
 	
 	public function main(){
+		$shop_mod = M('wecha_shop');
+		$shop_cnt = $shop_mod->count();
+		//$shop_info = $shop_mod->select();
+		
+		$order_mod = M('item_order');
+		$order_cnt = $order_mod->where('status=4')->count();
+		$order_amt = $order_mod->where('status=4')->sum('order_sumPrice');
+		
+		$this->assign('shop_cnt',$shop_cnt);
+		$this->assign('order_amt',$order_amt);
 		$this->display();
 	}
 }
