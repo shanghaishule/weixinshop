@@ -882,7 +882,11 @@ class WeixinAction extends Action
     }
     function kuaidi($data)
     {
-        $data = array_merge($data);
+        //$data = array_merge($data);
+        $data = array();
+        $content = $this->keywo;
+		$data[0] = substr($content,6,6);
+		$data[1] = substr($content,12);
         $str  = file_get_contents('http://www.weinxinma.com/api/index.php?m=Express&a=index&name=' . $data[0] . '&number=' . $data[1]);
         return $str;
     }
