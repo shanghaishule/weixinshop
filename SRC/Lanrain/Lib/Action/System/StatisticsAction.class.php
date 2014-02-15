@@ -92,11 +92,16 @@ class StatisticsAction extends BackAction
     	$id = $this->_get('id','intval');
     	//$account_master = $this->_mod_bill_mst->where(array('id'=>$id))->find();
     	
+    	
     	$modelmst = new Model();
+    	/*
     	$account_master = $modelmst->table("tp_account_bill_mst m, tp_account_setting c")
     	->where("m.tokenTall=c.tokenTall and m.id='".$id."'")
     	->field("m.*, c.bankname, c.account, c.payee, c.mobile")
     	->find();
+    	*/
+    	
+    	$account_master = $modelmst->table('tp_account_bill_mst m')->join('tp_account_setting c on m.tokenTall=c.tokenTall')->where("m.id='".$id."'")->field('m.*, c.bankname, c.account, c.payee, c.mobile')->find();
     	
     	$model=new Model();
     	$account_detail=$model->table("tp_account_bill_dtl m, tp_item_order c")

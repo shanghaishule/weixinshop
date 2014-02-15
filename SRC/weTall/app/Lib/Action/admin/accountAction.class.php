@@ -121,7 +121,7 @@ class accountAction extends backendAction
 	    		}
     		}
     	}else{
-    		$info = $this->_mod_setting->find();
+    		$info = $this->_mod_setting->where(array('tokenTall'=>$tokenTall))->find();
     		$this->assign('info',$info);
     	}
     	
