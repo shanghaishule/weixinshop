@@ -15,46 +15,38 @@ class orderAction extends userbaseAction {
 		$this->assign('tokenTall',$tokenTall);
 		
 		$orderId=$_GET['orderId'];
-	    !$orderId && $this->_404();
-	    $this->assign('orderId',$orderId);
-	    $this->_config_seo();
-	    $this->display();
+		!$orderId && $this->_404();
+		$this->assign('orderId',$orderId);
+		$this->_config_seo();
+		$this->display();
 	}
 	
 	public function confirmOrder()//确认收货
 	{
-		//取商家token值，取不到则默认为空
-		$tokenTall = $this->getTokenTall();
-		$this->assign('tokenTall',$tokenTall);
+	    //取商家token值，取不到则默认为空
+	    $tokenTall = $this->getTokenTall();
+	    $this->assign('tokenTall',$tokenTall);
 		
-		$orderId=$_GET['orderId'];
-		$status=$_GET['status'];
+	    $orderId=$_GET['orderId'];
+	    $status=$_GET['status'];
 	    !$orderId && $this->_404();
 	    $item_order=M('item_order');
 	    $item=M('item');
-	    $item_orders= $item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'].' and status=3')->find();
+	    $item_orders= $item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."' and status=3")->find();
 	    if(!is_array($item_orders))
 	    {
 	    	$this->error('该订单不存在!');
 	    }
 	    $data['status']=4;//收到货
-	    if($item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'])->save($data))
+	    if($item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."'")->save($data))
 	    {
 	    	$order_detail=M('order_detail');
-	    	$order_details = $order_detail->where('orderId='.$orderId)->select();
+	    	$order_details = $order_detail->where("orderId='".$orderId."'")->select();
 	    	foreach ($order_details as $val)
 	    	{
-	    		$item->where('id='.$val['itemId'])->setInc('buy_num',$val['quantity']);
+	    		$item->where("id='".$val['itemId']."'")->setInc('buy_num',$val['quantity']);
 	        }
-	        
-	        //交易完成商家信誉加上1点
-	        $dataTall["tokenTall"]=$item_orders["tokenTall"];
-	        $shopcredit=M("wecha_shop");
-	        $shopDetail=$shopcredit->where($dataTall)->find();
-	        $updateCredit["credit"]=$shopDetail["credit"]+1;
-	        if($shopcredit->where($dataTall)->save($updateCredit)){	        
-	    		$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
-	        }
+	    	$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
 	    }else 
 	    {
 	    	$this->error('确定收货失败');
@@ -64,9 +56,9 @@ class orderAction extends userbaseAction {
 	
 	public function closeOrder()//关闭订单
 	{
-		//取商家token值，取不到则默认为空
-		$tokenTall = $this->getTokenTall();
-		$this->assign('tokenTall',$tokenTall);
+	    //取商家token值，取不到则默认为空
+	    $tokenTall = $this->getTokenTall();
+	    $this->assign('tokenTall',$tokenTall);
 		 
 	    $orderId=$_POST['orderId'];
 	    $cancel_reason=$_POST['cancel_reason'];
@@ -74,7 +66,7 @@ class orderAction extends userbaseAction {
 	    $item_order=M('item_order');
 	    $item=M('item');
 	    $order_detail=M('order_detail');
-	    $order=$item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'])->find();
+	    $order=$item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."'")->find();
 
 	    if(!is_array($order))
 	    {
@@ -84,12 +76,12 @@ class orderAction extends userbaseAction {
 	    {
 		  	$data['status']=5;
 		  	$data['closemsg']=$cancel_reason;
-		   	if($item_order->where('orderId='.$orderId)->save($data))//设置为关闭
+		   	if($item_order->where("orderId='".$orderId."'")->save($data))//设置为关闭
 	   		{
-	   			$order_details=$order_detail->where('orderId='.$orderId)->select();
+	   			$order_details=$order_detail->where("orderId='".$orderId."'")->select();
 		   		foreach ($order_details as $val)
 		   		{
-		   			$item->where('id='.$val['itemId'])->setInc('goods_stock',$val['quantity']);
+		   			$item->where("id='".$val['itemId']."'")->setInc('goods_stock',$val['quantity']);
 		   		}
 	   			$this->redirect('user/index',array('tokenTall'=>$tokenTall));
 	   		}else{
@@ -101,15 +93,15 @@ class orderAction extends userbaseAction {
 	
 	public  function checkOrder()//查看订单
 	{
-		//取商家token值，取不到则默认为空
-		$tokenTall = $this->getTokenTall();
-		$this->assign('tokenTall',$tokenTall);
+	    //取商家token值，取不到则默认为空
+	    $tokenTall = $this->getTokenTall();
+	    $this->assign('tokenTall',$tokenTall);
 		
 	    $orderId=$_GET['orderId'];
 	    !$orderId && $this->_404();
 	    $status=$_GET['status'];
 	    $item_order=M('item_order');
-	    $order=$item_order->where('orderId='.$orderId.' and userId='.$this->visitor->info['id'])->find();
+	    $order=$item_order->where("orderId='".$orderId."' and userId='".$this->visitor->info['id']."'")->find();
 	    if(!is_array($order))
 	    {
 	    	$this->error('该订单不存在');
@@ -121,17 +113,17 @@ class orderAction extends userbaseAction {
 	  	    $item_detail=array();
 	  	    foreach ($order_details as $val)
 	  	    {
-	  		    $items= array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity'],'size'=>$val['size'],'color'=>$val['color']);
+	  		    $items= array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity']);
 	  		    //$order[$key]['items'][]=$items;
 	  		    $item_detail[]=$items;
 	  	    }
 	    }
 
 	    $this->assign('item_detail',$item_detail);
-		$this->assign('order',$order);
+	    $this->assign('order',$order);
 		
-		$this->_config_seo();
-		$this->display();
+	    $this->_config_seo();
+	    $this->display();
 	}
 	
 	public function jiesuan(){//结算
@@ -160,31 +152,31 @@ class orderAction extends userbaseAction {
 			}
 			
 			import('Think.ORG.Cart');// 导入购物车类
-	    	$cart=new Cart();
-	    	$sumPrice= $cart->getPrice();
+	    		$cart=new Cart();
+		    	$sumPrice= $cart->getPrice();
 	    	 
-	    	$freearr=array();
-	    	if($pingyou>0)
-	    	{
-	    		$freearr[]=array('value'=>1,'price'=>$pingyou);
-	    	}
-	    	if($kuaidi>0)
-	    	{
-	    		$freearr[]=array('value'=>2,'price'=>$kuaidi);
-	    	}
-	    	if($ems>0)
-	    	{
-	    		$freearr[]=array('value'=>3,'price'=>$ems);
-	    	}
+		    	$freearr=array();
+	    		if($pingyou>0)
+		    	{
+		    		$freearr[]=array('value'=>1,'price'=>$pingyou);
+	    		}
+		    	if($kuaidi>0)
+		    	{
+	    			$freearr[]=array('value'=>2,'price'=>$kuaidi);
+		    	}
+		    	if($ems>0)
+	    		{
+	    			$freearr[]=array('value'=>3,'price'=>$ems);
+		    	}
 	    	 
 	    	
-	    	// var_dump($freearr);
-	    	$this->assign('freearr',$freearr);
-	    	$this->assign('freesum',$freesum);
-	    	$this->assign('sumPrice',$sumPrice);
-		    //$this->assign('pingyou',$pingyou);
+	    		// var_dump($freearr);
+	    		$this->assign('freearr',$freearr);
+	 	   	$this->assign('freesum',$freesum);
+	  	  	$this->assign('sumPrice',$sumPrice);
+		        //$this->assign('pingyou',$pingyou);
 			//$this->assign('kuaidi',$kuaidi);
-		    //$this->assign('ems',$ems);
+		        //$this->assign('ems',$ems);
 		    
 			$this->_config_seo();
 			$this->display();
@@ -203,7 +195,7 @@ class orderAction extends userbaseAction {
 		if(IS_POST && count($_SESSION['cart'])>0)
 		{	
 			import('Think.ORG.Cart');// 导入分页类
-            $cart=new Cart();	
+            		$cart=new Cart();	
 			$user_address=M('user_address');
 			$item_order=M('item_order');
 			$order_detail=M('order_detail');
@@ -272,7 +264,7 @@ class orderAction extends userbaseAction {
                  	$user_address->data($add_address)->add();
 		       }
 			}else{
-				$address= $user_address->where('uid='.$this->visitor->info['id'])->find($address_options);//取到地址
+				$address= $user_address->where("uid='".$this->visitor->info['id']."'")->find($address_options);//取到地址
 				$data['address_name']=$address['consignee'];//收货人姓名
 				$data['mobile']=$address['mobile'];//电话号码
 				$data['address']=$address['sheng'].$address['shi'].$address['qu'].$address['address'];//地址
@@ -292,8 +284,6 @@ class orderAction extends userbaseAction {
 					$orders['img']=$item['img'];//商品图片
 					$orders['price']=$item['price'];//商品价格 
 					$orders['quantity']=$item['num'];//购买数量
-					$orders['size']=$item['size'];//大小
-					$orders['color']=$item['color'];//颜色
 					$order_detail->data($orders)->add();
 				}
 
@@ -312,7 +302,7 @@ class orderAction extends userbaseAction {
 		{
 			$item_order = M('item_order');
 			$orderId=$_GET['orderId'];//订单号
-			$orders=$item_order->where('userId='.$this->visitor->info['id'].' and orderId='.$orderId)->find();
+			$orders=$item_order->where("userId='".$this->visitor->info['id']."' and orderId='".$orderId."'")->find();
 			if(!is_array($orders))
 			$this->_404();
 			
@@ -342,32 +332,47 @@ class orderAction extends userbaseAction {
 			$payment_id=$_POST['payment_id'];
 			$orderid=$_POST['orderid'];
 			$dingdanhao=$_POST['dingdanhao'];
-			$item_order=M('item_order')->where('userId='.$this->visitor->info['id'].' and orderId='.$dingdanhao)->find();
+			$item_order=M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->find();
 			!$item_order && $this->_404();
-			if($payment_id==2)//货到付款
+			if(2 == $payment_id)//货到付款
 			{
 				$data['status']=2;
 				$data['supportmetho']=2;
 				$data['support_time']=time();
-				if(M('item_order')->where('userId='.$this->visitor->info['id'].' and orderId='.$dingdanhao)->data($data)->save())
+				if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->data($data)->save())
 				{
-				$this->redirect('user/index');
+					$this->redirect('user/index');
 				}else 
 				{
 					$this->error('操作失败!');
 				}
-			}elseif ($payment_id==1) //支付宝
+			}
+			elseif (3 == $payment_id)
 			{
+				// 银联支付
+				//echo "payment_id:".$payment_id."<br>";
+				//echo "orderid:".$orderid."<br>";
+				//echo "dingdanhao:".$dingdanhao."<br>";
+				//echo "item_order:";
+				//print_r($item_order)."<br>";
 				
+				// 订单号
+				$this->assign('dingdanhao',$dingdanhao);
+				// 价格总额
+				$ordersumPrice=$_GET['ordersumPrice'];
+				$this->assign('ordersumPrice',$ordersumPrice);
+				$this->display();
 				
+			}
+			elseif (1 == $payment_id)
+			{
+				//支付宝				
 				$data['supportmetho']=1;
 				
-				if(M('item_order')->where('userId='.$this->visitor->info['id'].' and orderId='.$dingdanhao)->data($data)->save())
+				if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->data($data)->save())
 				{
-					$alipay=M('alipay')->find();
-					
-				echo "<script>location.href='wapapli/alipayapi.php?WIDseller_email=".$alipay['alipayname']."&WIDout_trade_no=".$dingdanhao."&WIDsubject=".$dingdanhao."&WIDtotal_fee=".$item_order['order_sumPrice']."'</script>";
-				
+					$alipay=M('alipay')->find();					
+					echo "<script>location.href='wapapli/alipayapi.php?WIDseller_email=".$alipay['alipayname']."&WIDout_trade_no=".$dingdanhao."&WIDsubject=".$dingdanhao."&WIDtotal_fee=".$item_order['order_sumPrice']."'</script>";
 				}else 
 				{
 					$this->error('操作失败!');
@@ -385,7 +390,7 @@ class orderAction extends userbaseAction {
 	public function  getFree($type)
 	{
 		import('Think.ORG.Cart');
-       $cart=new Cart();	
+      		$cart=new Cart();	
 		$money=0;
 		$items=M('item');
 		
