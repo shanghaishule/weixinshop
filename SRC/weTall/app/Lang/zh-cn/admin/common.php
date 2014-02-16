@@ -78,9 +78,9 @@ return array(
     'n4' => '四',
     'n5' => '五',
 
-    'seo_title' => 'Title',
-    'seo_keys' => 'Keywords',
-    'seo_desc' => 'Description',
+    'seo_title' => '标题',
+    'seo_keys' => '关键词',
+    'seo_desc' => '描述',
 
     //后台首页
     'system_info' => '系统信息',
