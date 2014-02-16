@@ -8,6 +8,16 @@
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/zh-CN.js"></script>
 <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js"></script>
 <link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.css">
+<style>
+.button_aaa
+{
+color:white;
+font-size: 12px; 
+padding: 5px;
+border:1px solid #CCC;
+background: #2BD54D;
+}
+</style>
 </head>
 
 <body>
@@ -54,25 +64,25 @@
                     <div class="foot">
                         <p class="time">添加时间:{$vo.add_time|date='Y-m-d H:i:s',###}</p>
                          <div class="handle">
+                            <div style="float:left;">订单总价: <b id="order118_order_amount" style="color:red;">¥{$vo.order_sumPrice}&nbsp;&nbsp;</b></div>
                             <div style="float:left;">
-订单总价: <b id="order118_order_amount">¥{$vo.order_sumPrice}&nbsp;&nbsp;</b>
-                            </div>   
-                         	<switch name="vo.status" >
+                            <switch name="vo.status" >
 	                        <case value="1"><!--待付款 -->
-	                           <a href="{:U('order/pay',array('orderId'=>$vo['orderId'],'tokenTall'=>$tokenTall))}" id="order118_action_pay" class="btn">付款</a>
-	                           <a href="{:U('order/cancelOrder',array('orderId'=>$vo['orderId'],'tokenTall'=>$tokenTall))}" id="order118_action_cancel"> 取消订单</a>
-	                           <a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" >查看订单</a>
+	                           <a class="button_aaa" href="{:U('order/pay',array('orderId'=>$vo['orderId'],'tokenTall'=>$tokenTall))}" id="order118_action_pay" class="btn">付款</a>
+	                           <a class="button_aaa" href="{:U('order/cancelOrder',array('orderId'=>$vo['orderId'],'tokenTall'=>$tokenTall))}" id="order118_action_cancel"> 取消订单</a>
+	                           <a class="button_aaa" href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" >查看订单</a>
 	                        </case>
 	                        <case value="2"><!--待发货 -->
-	                           <a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" >查看订单</a>
+	                           <a class="button_aaa" href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" >查看订单</a>
 	                        </case>
 	                        <case value="3"><!-- 待收货 -->
-	                           <a href="{:U('order/confirmOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" id="order118_action_confirm" >确认收货</a>
-	                           <a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" >查看订单</a>
+	                           <a class="button_aaa" href="{:U('order/confirmOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" id="order118_action_confirm" >确认收货</a>
+	                           <a class="button_aaa" href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" >查看订单</a>
 	                        </case>
 	                        <default />
-	                           <a href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" >查看订单</a>
-	                        </switch>                     
+	                           <a class="button_aaa" href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" >查看订单</a>
+	                    </switch>
+	                   </div>
                         </div>
                     </div>
             	</div>
