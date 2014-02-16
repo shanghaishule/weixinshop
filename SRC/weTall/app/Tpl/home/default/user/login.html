@@ -56,7 +56,9 @@ $(function(){
     			$('#login_text').html("<b>登陆成功！</b>");
     			//function a(){location.href=decodeURIComponent("%2Findex.php%3Fapp%3Dmemberbuy%26store_id%3D9");}
     			function a(){
-    				location.href=data.url;
+    				//location.href=data.url;
+    				window.history.go(-1);
+    			    //window.location.reload();
     			    //alert(data.url);
     			}
     			setTimeout(a,1000);
