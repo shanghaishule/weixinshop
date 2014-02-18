@@ -32,7 +32,8 @@ $(function(){
 <div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
     <img src="/tpl/User/default/common/images/openbrowser2.png" />
 </div>
-<div id="content" onclick="document.getElementById('mcover').style.display='block';">
+<!--<div id="content" onclick="document.getElementById('mcover').style.display='block';">-->
+<div id="content" onclick="document.getElementById('mcover').style.display='';">
     <form action="{:U('order/end',array('tokenTall'=>$tokenTall))}" method="POST" id="goto_pay">
         <input type="hidden" name="orderid" value="{$orderid}" />
         <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
@@ -45,12 +46,21 @@ $(function(){
                 <h3>使用银联支付确认</h3>
 				<div class="order_information">
                 <dl class="defray">
-					<dd>                        
-						<p class="explain"><label for="payment_unionpay"><img src="__STATIC__/weixin/images/unionpay.png" ></label>欢迎使用银联支付,请先点击右上角...按钮,再点击在浏览器中打开</p>
-                    </dd>
-                </dl>
-				</div>
-				<div class="order_information">				
+					<dd>
+						<a href="http://mobile.unionpay.com/getclient?platform=android&type=securepayplugin">Android没有安装银联支付控件在此下载</a>
+					</dd>
+					<dd>
+						<a href="http://mobile.unionpay.com/getclient?platform=ios&type=securepayplugin">iOS没有安装银联支付控件在此下载</a>
+					</dd>
+					<dd>
+						<p class="explain">欢迎使用银联支付,请先点击右上角...按钮,再点击在浏览器中打开</p>
+					</dd>
+					<dd>
+						<p class="explain">点击此处进行银联支付<a href="uppay://uppayservice/?style=token&paydata={$strOrderInfo}"><img src="__STATIC__/weixin/images/unionpay1.jpg" alt="银联手机支付"/></a></p>
+					</dd>
+				</dl>
+			</div>
+			<div class="order_information">
 				<h3>温馨提示：</h3>
                 <dl class="defray">
 					<dd>

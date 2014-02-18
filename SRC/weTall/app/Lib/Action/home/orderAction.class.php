@@ -46,15 +46,7 @@ class orderAction extends userbaseAction {
 	    	{
 	    		$item->where('id='.$val['itemId'])->setInc('buy_num',$val['quantity']);
 	        }
-	        
-	        //交易完成商家信誉加上1点
-	        $dataTall["tokenTall"]=$item_orders["tokenTall"];
-	        $shopcredit=M("wecha_shop");
-	        $shopDetail=$shopcredit->where($dataTall)->find();
-	        $updateCredit["credit"]=$shopDetail["credit"]+1;
-	        if($shopcredit->where($dataTall)->save($updateCredit)){	        
-	    		$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
-	        }
+	    	$this->redirect('user/index',array('status'=>$status,'tokenTall'=>$tokenTall));
 	    }else 
 	    {
 	    	$this->error('确定收货失败');
@@ -121,7 +113,7 @@ class orderAction extends userbaseAction {
 	  	    $item_detail=array();
 	  	    foreach ($order_details as $val)
 	  	    {
-	  		    $items= array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity'],'size'=>$val['size'],'color'=>$val['color']);
+	  		    $items= array('title'=>$val['title'],'img'=>$val['img'],'price'=>$val['price'],'quantity'=>$val['quantity']);
 	  		    //$order[$key]['items'][]=$items;
 	  		    $item_detail[]=$items;
 	  	    }
@@ -292,8 +284,6 @@ class orderAction extends userbaseAction {
 					$orders['img']=$item['img'];//商品图片
 					$orders['price']=$item['price'];//商品价格 
 					$orders['quantity']=$item['num'];//购买数量
-					$orders['size']=$item['size'];//大小
-					$orders['color']=$item['color'];//颜色
 					$order_detail->data($orders)->add();
 				}
 
@@ -343,7 +333,7 @@ class orderAction extends userbaseAction {
 			$orderid=$_POST['orderid'];
 			$dingdanhao=$_POST['dingdanhao'];
 			$item_order=M('item_order')->where('userId='.$this->visitor->info['id'].' and orderId='.$dingdanhao)->find();
-			!$item_order && $this->_404();
+			//!$item_order && $this->_404();
 			if(2 == $payment_id)//货到付款
 			{
 				$data['status']=2;
@@ -366,13 +356,69 @@ class orderAction extends userbaseAction {
 				//echo "item_order:";
 				//print_r($item_order)."<br>";
 				
+				// 根据订单号获取银联流水号
+				// header('Content-Type:text/html;charset=utf-8');
+				require_once("wapupay/lib/upmp_service.php");
+				$req['version']     		= upmp_config::$version; // 版本号
+				$req['charset']     		= upmp_config::$charset; // 字符编码
+				$req['transType']   		= "01"; // 交易类型
+				$req['merId']       		= upmp_config::$mer_id; // 商户代码
+				$req['backEndUrl']      	= upmp_config::$mer_back_end_url; // 通知URL
+				$req['frontEndUrl']     	= upmp_config::$mer_front_end_url; // 前台通知URL(可选)
+				$req['orderDescription']	= "订单描述";// 订单描述(可选)
+				$req['orderTime']   		= date("YmdHis"); // 交易开始日期时间yyyyMMddHHmmss
+				$req['orderTimeout']   		= ""; // 订单超时时间yyyyMMddHHmmss(可选)
+				$req['orderNumber'] 		= date("YmdHiss"); //订单号(商户根据自己需要生成订单号)
+				$req['orderAmount'] 		= "1"; // 订单金额
+				$req['orderCurrency'] 		= "156"; // 交易币种(可选)
+				$req['reqReserved'] 		= "透传信息"; // 请求方保留域(可选，用于透传商户信息)
+				// 保留域填充方法
+				$merReserved['test']   		= "test";
+				$req['merReserved']   		= UpmpService::buildReserved($merReserved); // 商户保留域(可选)
+				$resp = array ();
+				$validResp = UpmpService::trade($req, $resp);
+				// 商户的业务逻辑
+				if ($validResp){
+					// 服务器应答签名验证成功
+					//echo "success"."<br>";
+					//print_r($resp);
+					$strSN = $resp['tn'];
+					//echo "sn:".$strSN."<br>";
+					//echo "dd:".$dingdanhao."<br>";
+					//echo "<pre>";
+					//var_dump($resp);
+					//echo "</pre>";
+				}else {
+					// 服务器应答签名验证失败
+					//echo "failture"."<br>";
+					//print_r($resp);
+				}
+				// 要写入的文件名字
+				$filename = 'bb.txt';
+				$fh = fopen($filename, "w");
 				// 订单号
 				$this->assign('dingdanhao',$dingdanhao);
+				// 未加密的
+				fwrite($fh, $dingdanhao."\r\n");
+				// 订单信息
+				$strOrderInfo = "tn=".$strSN.",ResultURL=http://bestchoice88.com/weTall/wapupay/notify_url.php?rid=,UseTestMode=true";
+				// 未加密的
+				fwrite($fh, $strOrderInfo."\r\n");
+				// 转换字符串
+				$strOrderInfo = urlencode($strOrderInfo);
+				// base64加密
+				$strOrderInfo = base64_encode($strOrderInfo);
+				// 转换字符串
+				$strOrderInfo = urlencode($strOrderInfo);
+				// 加密的
+				fwrite($fh, $strOrderInfo);
+				fclose($fh);
+				// 银联流水号
+				$this->assign('strOrderInfo',$strOrderInfo);
 				// 价格总额
 				$ordersumPrice=$_GET['ordersumPrice'];
 				$this->assign('ordersumPrice',$ordersumPrice);
 				$this->display();
-				
 			}
 			elseif (1 == $payment_id)
 			{
