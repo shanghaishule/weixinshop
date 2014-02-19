@@ -866,6 +866,8 @@ class WeixinAction extends Action
             if (C('home_token') == $this->token) {
             	$url= rtrim(C('site_url'), '/')."/index.php?g=Wap&m=weTall&a=index";
             }
+            
+            $_SESSION['FromUserName'] = $this->data['FromUserName'];
         }
 		
         return array(
