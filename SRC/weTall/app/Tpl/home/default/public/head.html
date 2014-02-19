@@ -43,15 +43,16 @@
 	<ul class="navlist">
 		<li class="r" id="n_4"><a href="/index.php?g=Wap&m=weTall&a=index"><div class="home_page_logo"></div></a></li>
     	<li id="n_0">
-    		<span ></span>
-        	<ul class="submenu">
+    		<a href="{:U('book/allcate',array('tokenTall'=>$tokenTall))}" ><span ></span></a>
+        	<!--ul class="submenu">
         	<volist name='index_cate_list' id='vo' >
         		<li>
                     <a href="{:U('book/cate',array('cid'=>$vo['id'],'tokenTall'=>$tokenTall))}" class="none_ico"> {$vo.name}</a><br>
                 </li>
             </volist>
-            </ul>
+            </ul-->
         </li>
+        
         <li class="r active" id="n_1">
            <if condition="$tokenTall eq ''">
               <a href="/index.php?g=Wap&m=weTall&a=index">

@@ -161,6 +161,49 @@ class bookAction extends frontendAction {
         ));
         $this->display();
     }
+    
+    
+    public function allcate(){
+    	$tokenTall = $this->getTokenTall();
+    	$this->assign('tokenTall',$tokenTall);
+    	
+    	$model=new Model();
+    	$item=$model->table('tp_item m, tp_item_cate c')
+    	->where("m.cate_id=c.id and m.tokenTall='".$tokenTall."'")
+    	->Distinct(true)
+    	->field('c.*')
+    	->order('c.id')
+    	->select();
+    	
+    	$item_l1 = array();
+    	$item_l2 = array();
+    	foreach ($item as $value){
+    	
+    	if ($value['pid'] == 0) {
+    		$item_l1[] = $value;
+    	}else{
+    		$item_l2[] = $value;
+    		$item_l1[] = M('item_cate')->where(array('id'=>$value['pid']))->find();
+    	}
+    	}
+    	
+    	$this->assign("item1",$item_l1);
+    	$this->assign("item2",$item_l2);
+    	
+    	//一级菜单
+    	//$iteml["pid"]="0";
+    	//$item_l1=M("item_cate")->where($iteml)->select();
+    	//二级菜单
+    	//$iteml2["pid"]=array("NEQ","0");
+    	//$item_l2=M("item_cate")->where($iteml2)->select();
+    	
+    	//header("content-Type: text/html; charset=Utf-8");
+    	//dump($item_l1);
+    	//dump($item_l2);
+    	//exit;
+    	$this->display();
+    }
+    
 
     /**
      * 标签分类瀑布
