@@ -82,18 +82,14 @@
                         <default /><font color="red">关闭</font>
                           </switch>
                         </td>
-                         <td width="12%" class="tdtitle"></td>
-                            <td width="22%"></td>
+                         <td width="12%" class="tdtitle">商品总额：</td>
+                            <td width="22%" class="red"><span id="labProductTotal">¥{$info.goods_sumPrice}</span></td>
                         </tr>
                         <tr>
                             <td class="tdtitle">下单时间：</td>
                             <td>{$info.add_time|date='Y/m/d H:i:s',###}</td>
                             <td class="tdtitle">付款时间：</td>
                             <td><if condition="$info.support_time eq ''">-<else />{$info.support_time|date='Y/m/d H:i:s',###}</if></td>
-                            <td class="tdtitle">商品总额：</td>
-                            <td class="red"><span id="labProductTotal">¥{$info.goods_sumPrice}</span></td>
-                        </tr>
-                        <tr>
                             <td class="tdtitle">订单总额：</td>
                             <td class="red"><span id="labOrderTotal">¥{$info.order_sumPrice}</span></td>
                         </tr>
@@ -303,7 +299,7 @@
       
 		
         </div>
-		<div class="mt10" style="text-align:center;">
+		<div class="mt10" style="text-align:center; margin-bottom:20px">
 		  <switch name="info.status" >
                 <case value="1"><!-- 待付款-->
                 <a href="{:U('item_order/status',array('orderId'=>$info['orderId'],'status'=>2,'tokenTall'=>$info['tokenTall']))}">	<input type="button" value="设为已付款" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
@@ -321,7 +317,8 @@
              </switch>
 		
 		
-		<a href="{:U('item_order/index',array('tokenTall'=>$info['tokenTall']))}">  <input type="button"  value=" 返回列表 " class="btn btn_cannel"></a></div>
+		<a href="{:U('item_order/index',array('tokenTall'=>$info['tokenTall']))}">  <input type="button"  value=" 返回列表 " class="btn btn_cannel"></a>
+		</div>
 	</div>
 </div>
 <input type="hidden" name="menuid"  value="{$menuid}"/>

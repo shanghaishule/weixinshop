@@ -132,51 +132,40 @@ class orderAction extends userbaseAction {
 		if(count($_SESSION['cart'])>0)
 		{
 			$user_address_mod = M('user_address');
-			$address_list = $user_address_mod->where(array('uid' => $this->visitor->info['id'], 'tokenTall' => $tokenTall))->select();
+			$address_list = $user_address_mod->where(array('uid' => $this->visitor->info['id']))->select();
 			$this->assign('address_list', $address_list);
-			$items=M('item');
-			$pingyou=0;
-			$kuaidi=0;
-			$ems=0;
-			$freesum=0;
-			foreach ($_SESSION['cart'] as $item)
-			{
-				$free= $items->field('free,pingyou,kuaidi,ems')->where(array('free' => 2, 'tokenTall' => $tokenTall))->find($item['id']);
-				if(is_array($free))
-				{
-					$pingyou+=$free['pingyou'];
-					$kuaidi+=$free['kuaidi'];
-					$ems+=$free['ems'];
-					$freesum+=$free['pingyou']+$free['kuaidi']+$free['ems'];
+			
+			//购物车按店铺分组
+			$result = $this->cart_by_group();
+			
+			//按订单整合物流方式（合并各个商品的物流方式和金额）
+			foreach ($result as $key => $value){
+				$free_style = 1;
+				$pingyou = 0;
+				$kuaidi = 0;
+				$ems = 0;
+				foreach ($value['item'] as $items){
+					if ($items['free'] == '2') {
+						$free_style = 2;
+						$pingyou += floatval($items['pingyou']);
+						$kuaidi += floatval($items['kuaidi']);
+						$ems += floatval($items['ems']);
+					}
 				}
+				$result[$key]['free'] = $free_style;
+				$result[$key]['pingyou'] = $pingyou;
+				$result[$key]['kuaidi'] = $kuaidi;
+				$result[$key]['ems'] = $ems;
 			}
 			
-			import('Think.ORG.Cart');// 导入购物车类
-	    		$cart=new Cart();
-		    	$sumPrice= $cart->getPrice();
-	    	 
-		    	$freearr=array();
-	    		if($pingyou>0)
-		    	{
-		    		$freearr[]=array('value'=>1,'price'=>$pingyou);
-	    		}
-		    	if($kuaidi>0)
-		    	{
-	    			$freearr[]=array('value'=>2,'price'=>$kuaidi);
-		    	}
-		    	if($ems>0)
-	    		{
-	    			$freearr[]=array('value'=>3,'price'=>$ems);
-		    	}
-	    	 
-	    	
-	    		// var_dump($freearr);
-	    		$this->assign('freearr',$freearr);
-	 	   	$this->assign('freesum',$freesum);
+			//header("content-Type: text/html; charset=Utf-8");
+			//dump($result);exit;
+			$this->assign('allinfo',$result);
+	 	   	
+	 	   	import('Think.ORG.Cart');// 导入购物车类
+	 	   	$cart=new Cart();
+	 	   	$sumPrice= $cart->getPrice();
 	  	  	$this->assign('sumPrice',$sumPrice);
-		        //$this->assign('pingyou',$pingyou);
-			//$this->assign('kuaidi',$kuaidi);
-		        //$this->assign('ems',$ems);
 		    
 			$this->_config_seo();
 			$this->display();
@@ -192,10 +181,13 @@ class orderAction extends userbaseAction {
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 
+		//header("content-Type: text/html; charset=Utf-8");
+		//dump($_POST);exit;
+		
 		if(IS_POST && count($_SESSION['cart'])>0)
-		{	
-			import('Think.ORG.Cart');// 导入分页类
-            		$cart=new Cart();	
+		{
+			import('Think.ORG.Cart');// 导入购物车类
+            $cart=new Cart();	
 			$user_address=M('user_address');
 			$item_order=M('item_order');
 			$order_detail=M('order_detail');
@@ -203,100 +195,135 @@ class orderAction extends userbaseAction {
 			$this->visitor->info['id'];//用户ID
 		    $this->visitor->info['username'];//用户账号
 		   
-		    //生成订单号
-		    $dingdanhao = date("Y-m-dH-i-s");
-		    $dingdanhao = str_replace("-","",$dingdanhao);
-		    $dingdanhao .= rand(1000,2000);
-		   
-		    $time = time();//订单添加时间
-			$address_options = $this->_post('address_options','intval');//地址  0：刚填的地址 大于0历史的地址
-			$shipping_id = $this->_post('shipping_id','intval');//配送方式
-			$postscript = $this->_post('postscript','trim');//卖家留言
-		   
-			if(!empty($postscript))//卖家留言
-			{
-				$data['note']=$postscript;
-			}
+		    //收货地址begin
+		    $addr = array();
+		    $address_options = $this->_post('address_options','intval');//0：刚填的地址；大于0：历史地址
+		    if($address_options==0)
+		    {
+		    	$consignee=$this->_post('consignee','trim');//真实姓名
+		    	$sheng=$this->_post('sheng','trim');//省
+		    	$shi=$this->_post('shi','trim');//市
+		    	$qu=$this->_post('qu','trim');//区
+		    	$address=$this->_post('address','trim');//详细地址
+		    	$phone_mob=$this->_post('phone_mob','trim');//电话号码
+		    	$save_address=$this->_post('save_address','trim');//是否保存地址
+		    		
+		    	$addr['address_name']=$consignee;//收货人姓名
+		    	$addr['mobile']=$phone_mob;//电话号码
+		    	$addr['address']=$sheng.$shi.$qu.$address;//地址
+		    		
+		    	if($save_address)//保存地址
+		    	{
+		    		$add_address['uid']=$this->visitor->info['id'];
+		    		$add_address['consignee']=$consignee;
+		    		$add_address['address']=$address;
+		    		$add_address['mobile']=$phone_mob;
+		    		$add_address['sheng']=$sheng;
+		    		$add_address['shi']=$shi;
+		    		$add_address['qu']=$qu;
+		    		 
+		    		$user_address->data($add_address)->add();
+		    	}
+		    }else{
+		    	$address= $user_address->where("uid='".$this->visitor->info['id']."'")->find($address_options);//取到地址
+		    	$addr['address_name']=$address['consignee'];//收货人姓名
+		    	$addr['mobile']=$address['mobile'];//电话号码
+		    	$addr['address']=$address['sheng'].$address['shi'].$address['qu'].$address['address'];//地址
+		    }
+		    //收货地址end
 		    
-		    if(empty($shipping_id))//卖家包邮
-		    {
-		    	$data['freetype']=0;
-		    	$data['order_sumPrice']=$cart->getPrice();
-		    }
-		    else 
-		    {
-		    	$data['freetype']=$shipping_id;
-		    	$data['freeprice']= $this->getFree($shipping_id);//取到运费
-		    	$data['order_sumPrice']=$cart->getPrice()+$this->getFree($shipping_id);
+		    //把购物车的商品按商家分组
+			$result = $this->cart_by_group();
+			
+		    //header("content-Type: text/html; charset=Utf-8");
+		    //dump($result);exit;
+		    
+		    $all_order_arr = array();  //所有生成的订单单号集合
+		    $all_order_price = 0;  //所有生成的订单总额
+		    
+		    //按店铺生成订单
+		    foreach ($result as $key => $value){
+		    	$data = array();
+		    	//生成订单号
+		    	$dingdanhao = date("Y-m-dH-i-s");
+		    	$dingdanhao = str_replace("-","",$dingdanhao);
+		    	$dingdanhao .= rand(1000,2000);
+		    	$time = time();//订单添加时间
 		    	
-		    	//echo $cart->getPrice()+$this->getFree($shipping_id);exit;
-		    }
-		   
-		    $data['orderId']=$dingdanhao;//订单号
-		    $data['add_time']=$time;//添加时间
-		    $data['goods_sumPrice']=$cart->getPrice();//商品总额
-		    $data['userId']=$this->visitor->info['id'];//用户ID
-		    $data['userName']=$this->visitor->info['username'];//用户名
-			if($address_options==0)
-			{
-				$consignee=$this->_post('consignee','trim');//真实姓名
-				$sheng=$this->_post('sheng','trim');//省
-				$shi=$this->_post('shi','trim');//市
-				$qu=$this->_post('qu','trim');//区
-				$address=$this->_post('address','trim');//详细地址
-				$phone_mob=$this->_post('phone_mob','trim');//电话号码
-				$save_address=$this->_post('save_address','trim');//是否保存地址
-			
-				$data['address_name']=$consignee;//收货人姓名
-				$data['mobile']=$phone_mob;//电话号码
-				$data['address']=$sheng.$shi.$qu.$address;//地址
-			
-			   if($save_address)//保存地址
-			   {
-				   	$add_address['uid']=$this->visitor->info['id'];
-				   	$add_address['consignee']=$consignee;
-				   	$add_address['address']=$address;
-				   	$add_address['mobile']=$phone_mob;
-				   	$add_address['sheng']=$sheng;
-				   	$add_address['shi']=$shi;
-				   	$add_address['qu']=$qu;
-			   	
-                 	$user_address->data($add_address)->add();
-		       }
-			}else{
-				$address= $user_address->where("uid='".$this->visitor->info['id']."'")->find($address_options);//取到地址
-				$data['address_name']=$address['consignee'];//收货人姓名
-				$data['mobile']=$address['mobile'];//电话号码
-				$data['address']=$address['sheng'].$address['shi'].$address['qu'].$address['address'];//地址
-			}
-			
-			$data['tokenTall']=$tokenTall;
-			
-			if($orderid=$item_order->data($data)->add())//添加订单成功
-			{
-				$orders['orderId']=$dingdanhao;
-				foreach ($_SESSION['cart'] as $item )
-				{
-					$item_goods->where('id='.$item['id'])->setDec('goods_stock',$item['num']);
-					
-					$orders['itemId']=$item['id'];//商品ID
-					$orders['title']=$item['name'];//商品名称
-					$orders['img']=$item['img'];//商品图片
-					$orders['price']=$item['price'];//商品价格 
-					$orders['quantity']=$item['num'];//购买数量
-					$order_detail->data($orders)->add();
-				}
+		    	$goods_sum = 0;
+		    	foreach ($value['item'] as $items){
+		    		$goods_sum = $goods_sum + (floatval($items['price']) * floatval($items['num']));
+		    	}
 
-				$cart->clear();//清空购物车
-				
-				$this->assign('orderid',$orderid);//订单ID
-				$this->assign('dingdanhao',$dingdanhao);//订单号
-				$this->assign('order_sumPrice',$data['order_sumPrice']);
-			}
-			else 
-			{
-				$this->error('生成订单失败!');
-			}
+		    	$free_sum = 0;
+	    		$freetype = $this->_post('free_'.$key,'intval');//配送方式
+	    		if($freetype == 0){ //卖家包邮
+	    			$free_sum = 0;
+	    		}else{
+	    			$free_sum = $this->_post('freefee_'.$key,'intval');//取到运费
+	    		}
+	    		
+	    		$postscript = '';//卖家留言
+	    		$postscript = $this->_post('mymsg_'.$key,'trim');//卖家留言
+
+		    	$data['orderId']=$dingdanhao;//订单号
+		    	$data['add_time']=$time;//添加时间
+		    	$data['goods_sumPrice']=$goods_sum;//商品总额
+		    	$data['order_sumPrice']=$goods_sum+$free_sum;//订单总额
+		    	$data['note']=$postscript;
+		    	$data['userId']=$this->visitor->info['id'];//用户ID
+		    	$data['userName']=$this->visitor->info['username'];//用户名
+		    	$data['address_name']=$addr['address_name'];//收货人姓名
+		    	$data['mobile']=$addr['mobile'];//电话号码
+		    	$data['address']=$addr['address'];//地址
+		    	$data['freetype'] = $freetype;//配送方式
+		    	$data['freeprice'] = $free_sum;//配送金额
+		    	$data['tokenTall']=$key;
+
+		    	$all_order_arr[] = $dingdanhao;
+		    	$all_order_price = $all_order_price + $goods_sum + $free_sum;
+		    	
+		    	
+		    	if($orderid=$item_order->data($data)->add())//添加订单汇总
+		    	{
+		    		$orders = array();
+		    		$orders['orderId']=$dingdanhao;
+		    		foreach ($value['item'] as $item)
+		    		{
+		    			$item_goods->where('id='.$item['id'])->setDec('goods_stock',$item['num']);
+		    				
+		    			$orders['itemId']=$item['id'];//商品ID
+		    			$orders['title']=$item['name'];//商品名称
+		    			$orders['img']=$item['img'];//商品图片
+		    			$orders['price']=$item['price'];//商品价格
+		    			$orders['quantity']=$item['num'];//购买数量
+		    			$orders['size']=$item['size'];//购买大小
+		    			$orders['color']=$item['color'];//购买颜色
+
+		    			$order_detail->data($orders)->add();  //添加订单明细
+		    		}
+		    		
+		    	}
+		    	else
+		    	{
+		    		$this->error('生成订单失败!');
+		    	}
+
+		    }
+
+		    $cart->clear();//清空购物车
+		     
+		    //$this->assign('orderid',$orderid);//订单ID
+		    //$this->assign('dingdanhao',$dingdanhao);//订单号
+		    //$this->assign('order_sumPrice',$data['order_sumPrice']);
+		    
+		    //header("content-Type: text/html; charset=Utf-8");
+		    //dump(implode('、', $all_order_arr));exit;
+		    
+		    $this->assign('dingdanhao', implode('、', $all_order_arr));//所有订单
+		    $this->assign('order_sumPrice',$all_order_price);//总金额
+		    
+		    
 		}
 		else if(isset($_GET['orderId']))
 		{
@@ -330,21 +357,32 @@ class orderAction extends userbaseAction {
 		if(IS_POST)
 		{
 			$payment_id=$_POST['payment_id'];
-			$orderid=$_POST['orderid'];
-			$dingdanhao=$_POST['dingdanhao'];
-			$item_order=M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->find();
-			!$item_order && $this->_404();
+			//$orderid=$_POST['orderid'];
+			
+			$alldingdanhao=$_POST['dingdanhao']; //取得所有订单号联成的字符串
+			$all_order_arr = explode('、', $alldingdanhao); //切分成数组
+			$all_order_price = 0;
+			foreach ($all_order_arr as $dingdanhao){			
+				$item_order=M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->find();
+				!$item_order && $this->_404();
+				$all_order_price = $all_order_price + floatval($item_order['order_sumPrice']);
+			}
+			
 			if(2 == $payment_id)//货到付款
 			{
-				$data['status']=2;
-				$data['supportmetho']=2;
-				$data['support_time']=time();
-				if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->data($data)->save())
-				{
-					$this->redirect('user/index');
-				}else 
-				{
-					$this->error('操作失败!');
+				foreach ($all_order_arr as $dingdanhao){
+					$data['status']=2;
+					$data['supportmetho']=2;
+					$data['support_time']=time();
+					if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->data($data)->save())
+					{
+						//成功就继续
+						//$this->redirect('user/index');
+					}
+					else 
+					{
+						$this->error('操作失败!');
+					}
 				}
 			}
 			elseif (3 == $payment_id)
@@ -366,22 +404,25 @@ class orderAction extends userbaseAction {
 			}
 			elseif (1 == $payment_id)
 			{
-				//支付宝				
-				$data['supportmetho']=1;
-				
-				if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->data($data)->save())
-				{
-					$alipay=M('alipay')->find();					
-					echo "<script>location.href='wapapli/alipayapi.php?WIDseller_email=".$alipay['alipayname']."&WIDout_trade_no=".$dingdanhao."&WIDsubject=".$dingdanhao."&WIDtotal_fee=".$item_order['order_sumPrice']."'</script>";
-				}else 
-				{
-					$this->error('操作失败!');
+				//支付宝
+				foreach ($all_order_arr as $dingdanhao){			
+					$data['supportmetho']=1;
+					if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->data($data)->save())
+					{
+						//成功就继续
+					}else 
+					{
+						$this->error('操作失败!');
+					}
 				}
+				$alipay=M('alipay')->find();
+				echo "<script>location.href='wapapli/alipayapi.php?WIDseller_email=".$alipay['alipayname']."&WIDout_trade_no=".$alldingdanhao."&WIDsubject=".$alldingdanhao."&WIDtotal_fee=".$all_order_price."'</script>";
 				
 			}else 
 			{
 				$this->error('操作失败!');
 			}
+			
 		}
 	}
 	
@@ -390,7 +431,7 @@ class orderAction extends userbaseAction {
 	public function  getFree($type)
 	{
 		import('Think.ORG.Cart');
-      		$cart=new Cart();	
+      	$cart=new Cart();	
 		$money=0;
 		$items=M('item');
 		
@@ -406,6 +447,26 @@ class orderAction extends userbaseAction {
 			}
 		}
 		return $money;
+	}
+	
+	function cart_by_group(){
+		//把购物车的商品按商家分组
+		$result = array();
+		$cart_items = $_SESSION['cart'];
+		$shops = M('wecha_shop')->select();
+		foreach ($shops as $shopval){
+			foreach ($cart_items as $cartval){
+				if ($cartval['tokenTall'] == $shopval['tokenTall']) {
+					$result[$shopval['tokenTall']]['tokenTall'] = $shopval['tokenTall'];
+					$result[$shopval['tokenTall']]['name'] = $shopval['name'];
+					$result[$shopval['tokenTall']]['credit'] = $shopval['credit'];
+					$result[$shopval['tokenTall']]['headurl'] = $shopval['head'];
+					$result[$shopval['tokenTall']]['HaveReal'] = $shopval['HaveReal'];
+					$result[$shopval['tokenTall']]['item'][] = $cartval;
+				}
+			}
+		}
+		return $result;
 	}
 	
 }

@@ -15,7 +15,7 @@ class Cart{
 		  float $price 商品价格
 		  int $num 购物数量
 	*/
-	public  function addItem($id,$name,$price,$num,$img,$size,$color) {
+	public  function addItem($id,$name,$price,$num,$img,$size,$color,$tokenTall,$free,$pingyou,$kuaidi,$ems) {
 		//如果该商品已存在则直接加其数量
 		if (isset($_SESSION['cart'][$id])) {
 			//$this->incNum($id,$num);
@@ -31,6 +31,12 @@ class Cart{
 		$item['img'] = $img;
 		$item['size'] = $size;
 		$item['color'] = $color;
+		$item['tokenTall'] = $tokenTall;
+		$item['free'] = $free;
+		$item['pingyou'] = $pingyou;
+		$item['kuaidi'] = $kuaidi;
+		$item['ems'] = $ems;
+		
 		$_SESSION['cart'][$id] = $item;
 	}
 
