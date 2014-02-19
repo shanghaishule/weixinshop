@@ -49,10 +49,18 @@ class StatisticsAction extends BackAction
     
     protected function _search() {
     	$map = array();
+
     	($billnum = $this->_request('billnum', 'trim')) && $map['billnum'] = array('like', '%'.$billnum.'%');
-    	($time_start = $this->_request('time_start', 'trim')) && $map['gen_time'][] = array('egt', strtotime($time_start));
-    	($time_end = $this->_request('time_end', 'trim')) && $map['gen_time'][] = array('elt', strtotime($time_end)+(24*60*60-1));
-    	
+    	$time_start = $this->_request('time_start', 'trim');
+    	$time_end = $this->_request('time_end', 'trim');
+    	if($time_start && $time_end){
+    	    $map['gen_time'] = array('between', array(strtotime($time_start), strtotime($time_end)+(24*60*60-1)));
+    	} else if($time_start) {
+    	    $map['gen_time'] = array('egt', strtotime($time_start));
+    	} else if($time_end) {
+    	    $map['gen_time'] = array('elt', strtotime($time_end)+(24*60*60-1));
+    	}
+
     	if( $_GET['status']==null ){
     		$status = -1;
     	}else{
@@ -85,13 +93,13 @@ class StatisticsAction extends BackAction
     			'status' =>$status,
     			'shop' =>$shop,
     	));
+
     	return $map;
     }
     
     public function edit() {
     	$id = $this->_get('id','intval');
     	//$account_master = $this->_mod_bill_mst->where(array('id'=>$id))->find();
-    	
     	
     	$modelmst = new Model();
     	/*

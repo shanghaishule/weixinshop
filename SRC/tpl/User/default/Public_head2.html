@@ -52,7 +52,7 @@
 			<a href="{lanrain::U('Index/login')}">注册</a>
 			<else/>
 			你好,<a href="/#" hidefocus="true"  ><span style="color:red">{lanrain:$Think.session.uname}</span></a>（uid:{lanrain:$Think.session.uid}）
-			<a href="/#" onclick="Javascript:window.open('{lanrain::U('System/Admin/logout')}','_blank')" >退出</a>
+			<a href="/#" onclick="Javascript:window.open('{lanrain::U('Home/Users/logout')}','_blank')" >退出</a>
 	</if>	
 	</div>
 </div>

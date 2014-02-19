@@ -13,13 +13,32 @@ class shopcartAction extends frontendAction {
     	$tokenTall = $this->getTokenTall();
 	    import('Think.ORG.Cart');// 导入购物车类
 	    $cart=new Cart();
-		$this->assign('item',$_SESSION['cart']);
-		$this->assign('sumPrice',$cart->getPrice());
+	    
+	    $result = array();
+	    $cart_items = $_SESSION['cart'];
+	    $shops = M('wecha_shop')->select();
+	    foreach ($shops as $shopval){
+	    	foreach ($cart_items as $cartval){
+		    	if ($cartval['tokenTall'] == $shopval['tokenTall']) {
+		    		$result[$shopval['tokenTall']]['name'] = $shopval['name'];
+		    		$result[$shopval['tokenTall']]['credit'] = $shopval['credit'];
+		    		$result[$shopval['tokenTall']]['headurl'] = $shopval['head'];
+		    		$result[$shopval['tokenTall']]['HaveReal'] = $shopval['HaveReal'];
+		    		$result[$shopval['tokenTall']]['item'][] = $cartval;
+		    		
+		    	}
+	    	}
+	    }
+	    
+	    //header("content-Type: text/html; charset=Utf-8");
+	    //dump($_SESSION['cart']);exit;
+	    //dump($result);exit;
+	    
+	    //$this->assign('item',$_SESSION['cart']);
+	    $this->assign('item',$result);
+	    $this->assign('sumPrice',$cart->getPrice());
+		
 		$this->assign('tokenTall',$tokenTall);
-		
-		//header("content-Type: text/html; charset=Utf-8");
-		//dump($_SESSION['cart']);exit;
-		
 		$this->_config_seo();
 		$this->display();
     }
@@ -36,7 +55,7 @@ class shopcartAction extends frontendAction {
     	$size= $this->_post('size', 'intval');//大小
     	$color=$this->_post('color', 'trim');//颜色
     	   
-    	$item=M('item')->field('id,title,img,price,goods_stock')->find($goodId);
+    	$item=M('item')->field('id,title,img,price,goods_stock,tokenTall,free,pingyou,kuaidi,ems')->find($goodId);
     	$item['size'] = $size;
     	$item['color'] = $color; //mb_convert_encoding($color, "UTF-8", "GBK");
     	
@@ -46,7 +65,7 @@ class shopcartAction extends frontendAction {
     	}elseif($item['goods_stock']<$quantity){
     		$data=array('status'=>0,'msg'=>'没有足够的库存','count'=>$cart->getCnt(),'sumPrice'=>$cart->getPrice());
     	}else {
-    		$result= $cart->addItem($item['id'],$item['title'],$item['price'],$quantity,$item['img'],$item['size'],$item['color']);
+    		$result= $cart->addItem($item['id'],$item['title'],$item['price'],$quantity,$item['img'],$item['size'],$item['color'],$item['tokenTall'],$item['free'],$item['pingyou'],$item['kuaidi'],$item['ems']);
     		if($result==1)//购物车存在该商品
     		{
     			$data=array('result'=>$result,'status'=>1,'count'=>$cart->getCnt(),'sumPrice'=>$cart->getPrice(),'msg'=>'该商品已经存在购物车');

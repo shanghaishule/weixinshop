@@ -138,5 +138,16 @@ class UsersAction extends BaseAction{
 			$this->error('密码修改失败！',U('Index/index'));
 		}
 	}
+	// 用户登出
+	public function logout() {
+		session(null);
+		session_destroy();
+		unset($_SESSION);
+		
+			session(C('USER_AUTH_KEY'),null);
+		
+			$this->error('已经登出！',U('Home/index/index'));
+
+	}
 	
 }

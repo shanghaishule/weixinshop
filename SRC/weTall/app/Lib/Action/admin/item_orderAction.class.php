@@ -21,14 +21,14 @@ class item_orderAction extends backendAction {
       if($status==4)
       {
       	$data['status']=$status;
-      if($this->_mod->where('orderId='.$orderId)->save($data))
+        if($this->_mod->where("orderId='".$orderId."'")->save($data))
       	{
       		$order_detail=M('order_detail');
       		$item=M('item');
-	     	$order_details = $order_detail->where('orderId='.$orderId)->select();
+	     	$order_details = $order_detail->where("orderId='".$orderId."'")->select();
 	    	foreach ($order_details as $val)
 	     	{
-	     	$item->where('id='.$val['itemId'])->setInc('buy_num',$val['quantity']);
+	     	$item->where("id='".$val['itemId']."'")->setInc('buy_num',$val['quantity']);
 	        }
 	        $dataTall["tokenTall"]=$this->_get("tokenTall","trim");//echo $dataTall["tokenTall"];die();
 	        $shopcredit=M("wecha_shop");
@@ -46,7 +46,7 @@ class item_orderAction extends backendAction {
       {
 
       	$data['status']=$status;
-      	if($this->_mod->where('orderId='.$orderId)->save($data))
+      	if($this->_mod->where("orderId='".$orderId."'")->save($data))
       	{
       		$this->success('修改成功!');
       	}else
@@ -89,7 +89,7 @@ class item_orderAction extends backendAction {
             'userName' => $userName,
             'status' =>$status,
             'orderId' => $orderId,
-        	'tokenTall' => $tokenTall,
+            'tokenTall' => $tokenTall,
         ));
         return $map;
     }
@@ -206,7 +206,7 @@ class item_orderAction extends backendAction {
             $id = $this->_get('id','intval');
             $item = $this->_mod->where(array('id'=>$id))->find();
            
-            $order_detail=M('order_detail')->where('orderId='.$item['orderId'])->select();
+            $order_detail=M('order_detail')->where("orderId='".$item['orderId']."'")->select();
          
             $fahuoaddress=M('address')->find($item['fahuoaddress']);
             
@@ -218,10 +218,10 @@ class item_orderAction extends backendAction {
     }
     public function update() {
     	if (IS_POST) {
-    		$orderid = $_POST["orderId"];
+    	    $orderid = $_POST["orderId"];
             //$item["orderId"] = $orderid;
             $itemprice["order_sumPrice"] = $_POST["oreder_sumPrice"];
-            if(false !== M("item_order")->where("orderId=".$orderid)->save($itemprice)){
+            if(false !== M("item_order")->where("orderId='".$orderid."'")->save($itemprice)){
             	IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'edit');
             	$this->success(L('operation_success'));
             }else {
@@ -231,7 +231,7 @@ class item_orderAction extends backendAction {
     	} else {
     		$id = $this->_get('id','intval');
     		$item = $this->_mod->where(array('id'=>$id))->find();    		 
-    		$order_detail=M('order_detail')->where('orderId='.$item['orderId'])->select();
+    		$order_detail=M('order_detail')->where("orderId='".$item['orderId']."'")->select();
     		
     		$this->assign('order_detail',$order_detail);//订单商品信息
     		$this->assign('info', $item); // 订单详细信息
