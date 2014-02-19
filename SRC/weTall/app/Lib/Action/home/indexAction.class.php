@@ -402,6 +402,7 @@ class indexAction extends frontendAction {
 		/*创店时间*/
     	$weUser = M("wxuser");
     	$weUserDetail = $weUser->where($weshopData)->find();//var_dump($weshopData);die();
+    	$weUserDetail["createtime"] = date('Y-m-d h:m:s',$weUserDetail["createtime"]);
     	$this->assign("wxuserData",$weUserDetail);
 //dump($weUserDetail["createtime"]);
     	
