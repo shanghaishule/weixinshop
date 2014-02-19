@@ -439,9 +439,9 @@ class orderAction extends userbaseAction {
 				$filename = 'bb.txt';
 				$fh = fopen($filename, "w");
 				// 订单号
-				$this->assign('dingdanhao',$dingdanhao);
+				$this->assign('dingdanhao',$alldingdanhao);
 				// 未加密的
-				fwrite($fh, $dingdanhao."\r\n");
+				fwrite($fh, $alldingdanhao."\r\n");
 				// 订单信息
 				$strOrderInfo = "tn=".$strSN.",ResultURL=http://bestchoice88.com/weTall/wapupay/notify_url.php?rid=,UseTestMode=true";
 				// 未加密的
