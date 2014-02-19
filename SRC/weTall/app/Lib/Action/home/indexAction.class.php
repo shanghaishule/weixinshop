@@ -381,6 +381,61 @@ class indexAction extends frontendAction {
     	
     	echo json_encode($data);
     }
+    
+    
+    //商家信息
+    public function shopinfo()
+    {
+    	
+    	/*店铺信息*/
+    	$weChaShop = M("wecha_shop");
+    	if($tokenTall == ""){
+    		$weshopData["tokenTall"] = $_SESSION["tokenTall"];
+    	}else{
+    		$weshopData["tokenTall"] = $tokenTall;
+    	}
+    	$weChaShopDetail = $weChaShop->where($weshopData)->find();//var_dump($weshopData);die();
+    	$this->assign("weshopData",$weChaShopDetail);
+
+//dump($weChaShopDetail["name"]);
+
+		/*创店时间*/
+    	$weUser = M("wxuser");
+    	$weUserDetail = $weUser->where($weshopData)->find();//var_dump($weshopData);die();
+    	$this->assign("wxuserData",$weUserDetail);
+//dump($weUserDetail["createtime"]);
+    	
+    	/*宝贝数量*/
+    	$weItem = M("item");
+    	$weItemCount = $weItem->where($weshopData)->count();//var_dump($weshopData);die();
+    	$this->assign("weItemCount",$weItemCount);
+//dump($weItemCount);
+
+    	/*人气指数*/
+    	$weShopFavi = M("shop_favi");
+    	$weShopFaviCount = $weShopFavi->where($weshopData)->count();//var_dump($weshopData);die();
+    	$this->assign("weshopFaviCount",$weShopFaviCount);
+//dump($weShopFaviCount);
+
+    	/*好评率*/
+    	$item_id["item_id"]= $weChaShopDetail["id"];
+    	$allNum = M("comments")->count();
+    	$goodNum = M("comments")->where($item_id)->count();
+    	
+    	$rate = $goodNum/$allNum*100;
+    	$this->assign("rate",$rate);
+//dump($allNum);
+//dump($goodNum);
+//dump($rate);    	
+//dump($weChaShopDetail["phone"]);
+//die();
+
+		
+    	 
+    	
+    	$this->display();
+    	
+    }    
     	 
 
 }

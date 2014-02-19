@@ -40,20 +40,19 @@
 	    	
 	        var goodId = $("#goodId").val();
 	        var quantity = $("#quantity").val();
-	        var size =  $("input[name='size']:checked").val();
-	        var color = $("input[name='color']:checked").val();
-	        //alert(size);
-
-	        if (typeof(size) == "undefined")
+	        var sizeChoose = $("#sizeChoose").val();
+	        var colorChoose = $("#colorChoose").val();
+	        if (sizeChoose == "")
 	        {
 	            alert('请选择大小');
 	            return;
 	        }
-	        if (typeof(color) == "undefined")
+	        if (colorChoose == "")
 	        {
 	            alert('请选择颜色');
 	            return;
-	        }
+        	}
+	        
 	        
 	        if (quantity == '')
 	        {
@@ -70,8 +69,8 @@
 	          alert("请输入数字!");
 	           return;
 	        }
-	        
-	        add_cart(goodId, quantity, size, color);
+	        sizeChoose = sizeChoose + "";
+	        add_cart(goodId, quantity, sizeChoose, colorChoose);
 	    }
 	    
 	    function add_cart(goodId,quantity,size,color)//商品ID，购买数量
@@ -97,7 +96,25 @@
 	     		}
 	     	},"json");	
 	    }
-	    
+	  
+	  
+		//xxl start
+		function showinfo(sheetnum)
+		{
+			if (sheetnum == 2){
+				$("#item_comments").show();
+				$("#item_info").hide();
+				$("#sheet2").addClass("active");
+				$("#sheet1").removeClass("active");
+			}else{
+				$("#item_comments").hide();
+				$("#item_info").show();
+				$("#sheet1").addClass("active");
+				$("#sheet2").removeClass("active");			
+			}
+		 
+		}
+		//xxl end	    
 	    /* add cart */
 	    function add_to_cart(spec_id, quantity)
 	    {
@@ -124,6 +141,8 @@
 
 		$(document).ready(function(){
 			$(".group1").colorbox({rel:'group1',width:"100%",height:"100%"});
+			$("#item_comments").hide();
+			
 		});
 	</script>
     <div class="ware_info">
@@ -158,6 +177,7 @@
                  active=index;
                  as[active].className='active';
              }});
+		         
          </script>
          <input type="hidden" value="{$item.id}" id="goodId" >
          <div class="ware_text">
@@ -168,23 +188,40 @@
                 <span class="letter1">品牌:</span>{$item.brand}<br>销售情况:售出 {$item.buy_num}件<br>所在地区:中国 
 			</div>
             <div class="handle">
-                <ul>
+           <script type="text/javascript">
+	            function sizetitle(size_title){
+	             $(".size_title").css('background','none');
+		     $("#size" + size_title).css('background','url(/weTall/static/images/xiaokuang.png)');
+		     $("#sizeChoose").val(size_title);
+		    }
+		    function colortitle(color_title){
+	             $(".color_title").css('background','none');
+		     $("#color" + color_title).css('background','url(/weTall/static/images/xiaokuang.png)');
+		     $("#colorChoose").val(color_title);
+		    }
+		  </script>
+		  <style>
+		   .size_title{border:1px solid #d9d9d9;color:black;width:75px;height:24px;background:none;font-size:14px;float:left;margin-left:3px;}
+		   .color_title{border:1px solid #d9d9d9;color:black;width:75px;height:24px;background:none;font-size:14px;float:left;margin-left:3px;}
+		  </style>
+               <ul>
                 	<li class="handle_title">大小:</li>
                     <li>
                     <volist name='size' id='vo'>
-                    	<input type="radio" name="size" value="{$vo}" />{$vo}
+                    	 <a href="javascript:void(0);" onclick="sizetitle('{$vo}')" ><div class="size_title" id="size{$vo}">{$vo}</div></a>
                     </volist>
+                    <input name="size" id="sizeChoose" type="hidden" value="">
                     </li>
                 </ul>
                 <ul>
                     <li class="handle_title">颜色:</li>
                     <li>
                     <volist name='color' id='vo'>
-                    	<input type="radio" name="color" value="{$vo}" />{$vo}
+                    	<a href="javascript:void(0);" onclick="colortitle('{$vo}')" ><div class="color_title" id="color{$vo}">{$vo}</div></a>
                     </volist>
+                    <input name="color" id="colorChoose" type="hidden" value="">
                     </li>
                 </ul>
-                <ul>
                     <li class="handle_title">购买数量:</li>
                     <li>
                         <input type="text" value="1" id="quantity" name="" class="text width1" onafterpaste="this.value=this.value.replace(/\D/g,'')" onkeyup="this.value=this.value.replace(/\D/g,'')" />件（库存<span ectype="goods_stock" class="stock">{$item.goods_stock}</span>件）
@@ -217,13 +254,40 @@
     <ul class="user_menu">
         <div class="ornament1"></div>
         <div class="ornament2"></div>
-        <li><a href="#" class="active"><span>商品详情</span></a></li>
+	<!--xxl start-->
+        <li class="btn_1 active" id = "sheet1"><a href="javascript:showinfo(1);"><span>商品详情</span></a></li>
+        <li class="btn_2" id = "sheet2"><a href="javascript:showinfo(2);"><span>商品评论</span></a></li>
+	<!--xxl end-->
     </ul>
-    <div class="option_box">
-        <div class="default">
-        {$item.info}
-        </div>
-    </div>
+	<div class="option_box" id = "item_info">		 
+			<div class="default">
+			{$item.info}
+			</div>
+	</div>
+	<!--xxl start-->
+	<div class="option_box" id = "item_comments">
+	<table style = "width:100%;">	
+	  
+		<volist name='comments_list' id='vo' >
+		<tr>
+			<td><label><font size="1px">{$vo.create_time}</font></label></td>
+			<td><label><font size="1px">{$vo.user_name}</font></label></td>
+			<td><label><font size="1px">评价等级:
+				<switch name="vo.comments_type" >
+					<case value="1">好</case>
+					<case value="2">中</case>
+					<default />差  
+				</switch>
+			</font></label></td>
+		</tr>
+		<tr>
+			<td><label><font size="1px">评价内容：{$vo.user_comments}</font></label></td>
+		</tr>		
+		</volist>			
+	</table>		
+	</div>		
+	<!--xxl end-->
+	    
     <div class="clear"></div>
 </div>
 

@@ -1,0 +1,34 @@
+@charset "utf-8";
+/*商品信息*/
+.commment_form {margin-left:25px;border-radius: 5px;border: 1px solid #aaa;padding: 15px;font-size: 14px;color: #666;background: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#ddd));background: -moz-linear-gradient(top,#fff,#ddd);box-shadow: 0.1em 0.1em 0.1em #ccc inset;}
+.commment_form .con{margin:5px; border:1px solid #ddd; padding:5px; border-radius:5px; overflow:hidden;}
+.commment_form .con p{ float:left; line-height:25px; margin:5px 5px 0 0;}
+.commment_form .con p.ware_text{float: none;}
+.commment_form .con p.price span, div.handle #order39_order_amount{color: #f34;}
+
+.ware_info div.ware_pic:after{content: "";position: absolute;width: 100%;height: 3px;background-image: url(../images/pattern_lace.png);background-size: 8px;left: 0;bottom: -3px;}
+.ware_info div.ware_pic{height: 220px;margin-bottom: -220px;z-index: -1;background: #333;background-image: url(../images/pattern_lace.png);background-size: 4px;position: relative;}
+.ware_text { position: relative; z-index: 10;margin: 10px; }
+.title { height: 30px; line-height: 30px;font-weight: bold; margin: 0 auto;}
+
+.handle {font-size:15px; background: #FFFFFF; border: 1px solid #ddd; overflow: hidden; padding:5px 5px 5px 10px; border-radius:5px;}
+
+.pxtextarea{
+    width: 95%; 
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+}
+
+.pxradio {
+	position: relative;
+	background-color: transparent;
+	color: #999999;
+	display: inline-block;
+	vertical-align: middle;
+	padding:10px;
+	font-size: 16px;
+	font-family:Arial, Helvetica, sans-serif;
+	border:0;
+	-webkit-appearance:none;
+}

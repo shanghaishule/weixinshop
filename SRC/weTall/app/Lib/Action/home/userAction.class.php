@@ -1,6 +1,11 @@
 <?php
 
 class userAction extends userbaseAction {
+	public $commetns_mod;
+	public function _initialize(){
+		parent::_initialize();
+		$this->commetns_mod = M('comments');
+	}
 	
 	public function ajaxlogin()
     {
@@ -227,7 +232,7 @@ class userAction extends userbaseAction {
     public function index() {
     	//取商家token值，取不到则默认为空
     	$tokenTall = $this->getTokenTall();
-    	
+ 	
         $item_order=M('item_order');
         $order_detail=M('order_detail');
         if(!isset($_GET['status']))
@@ -600,4 +605,48 @@ class userAction extends userbaseAction {
     	$this->assign('tokenTall',$tokenTall);
     	$this->display();
     }
+    
+     /**
+     *	追加评论
+     */
+    public function comments() {
+    
+    /*
+        $data['user_comments']= $this->_get('user_comments', 'intval');        
+    	$data['item_id'] = $_SESSION['item_id'] ;
+        $data['user_name'] = $this->visitor->info['username'];
+	$data['create_time'] = date('y-m-d H:i:m');
+
+	$record= M('comments');
+	$record->add($data);
+	
+    	$username = $this->visitor->info['username'];
+    	$createtime = date('y-m-d H:i:m');
+	
+    */
+    	$item = $this->_get('item');    	    	
+    	$this->assign('item',$item);
+    	$this->assign('username',$this->visitor->info['username']);
+    	$this->assign('createtime',date('y-m-d H:i:m'));
+        $this->display();        
+        
+    } 
+    
+    /**
+     *	插入评论
+     */
+    public function addcomm() {
+     if($_POST){
+     	     	
+			if ($this->commetns_mod->create()) {
+				if($this->commetns_mod->add()){
+					echo '您的评论已经成功提交！';
+				}else{
+					echo '很遗憾，您的评论提交失败了！';
+				}
+			}
+     	
+		}
+		
+    }    
 }

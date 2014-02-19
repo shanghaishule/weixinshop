@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<include file="public:headtop" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/default/message.css" media="all">
+    
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/default/commments.css" media="all">
+	<script type="text/javascript" src="__STATIC__/js/jquery_min.js"></script>
+	
+
+	
+	<title>请在此申请</title>
+
+	<script type="text/javascript"> 
+		$(document).ready(function () { 
+			$("#addcomm").click(function () { 
+				var btn = $(this);
+
+				var itemtype = $('input[name="itemtype"]:checked').val();				
+				var info = $("#info").val();
+				
+				var submitData = {
+					item_id:'{$item.itemId}',
+					user_name:'{$username}',
+					comments_type:itemtype,
+					user_comments:info,
+					create_time:'{$createtime}'
+				};
+				$.post("{:U('user/addcomm')}", submitData,
+					function(data) {
+						alert(data);
+						setTimeout("window.location.href='index.php?m=user&a=index&status=4&tokenTall='",500);
+						return;
+					}
+				)
+			}); 			
+		}); 				
+
+		function xian(){
+//alert("OK");
+return "/weTall/index.php?m=user&a=index&status=4&tokenTall=";
+		}		
+  </script>
+
+</head>
+
+<body id="message">
+<include file="public:head" />
+	<div class="container">
+	
+	  	<div class="qiandaobanner">
+			<img src="__STATIC__/css/default/images/mycomments.png" style="width:100%;">
+	    </div>
+
+		<div class="cardexplain">
+			<div class="window" id="windowcenter">
+				<div id="title" class="wtitle">操作提示<span class="close" id="alertclose"></span></div>
+				<div class="content1">
+					<div id="txt"></div>
+				</div>
+			</div>
+ 
+			<div class="history">
+				<div class="history-date">
+					<ul class="history-ul">
+						<h2 class="first" style="position: relative;">请填写您的评论</h2>
+						
+	            	<div class="commment_form">
+	                    <p class="title">商品信息</p>
+	                    <div class="con">
+	                        <p class="ware_pic"><a href="{:U('Item/index',array('id'=>$item['itemId'],'tokenTall'=>$tokenTall))}" ><img src="{:attach(get_thumb($item['img'], '_b'), 'item')}" height="80" width="80"></a></p>
+	                        <p class="ware_text"><a href="{:U('Item/index',array('id'=>$item['itemId'],'tokenTall'=>$tokenTall))}">{$item.title}</a><br><span class="attr"></span></p>
+	                        <p>大小: <span>{$item.size}</span></p>
+	                        <p>颜色: <span>{$item.color}</span></p>
+	                        <p class="price">价格: <span>¥{$item.price}</span></p>
+	                        <p class="amount">数量: <span>{$item.quantity}</span></p>                                                
+	                    </div>
+	                    <div class="clear"></div>
+	                    <div class="foot">
+	                        <p class="title">评论内容</p>
+	                         <div class="handle">
+								<input name="itemtype" type="radio" value="1" onchange = "change();" checked><span class="pxradio">好</span>
+								<input name="itemtype" type="radio" value="2" onchange = "change();"><span class="pxradio">中</span>
+								<input name="itemtype" type="radio" value="3" onchange = "change();"><span class="pxradio">差</span>	
+	                            <div >
+										<textarea name="info" class="pxtextarea" style="height:150px; margin-right:10px" id="info" placeholder="补充内容……"></textarea>
+								</div>
+	
+	                        </div>
+	                        <br>
+	                        <div>
+									<a id="addcomm" class="submit" href="javascript:void(0)">提交评论</a>
+							</div>
+	                    </div>
+	            	</div>
+   											
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<include file="public:footer" />
+</body>
+</html>

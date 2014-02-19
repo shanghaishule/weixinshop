@@ -87,6 +87,30 @@
 			});
 		});
 		*/
+		
+		//xxl		
+		function change()
+		{
+			var radio= document.getElementsByName("trueshop");
+		        for(i=0;i<radio.length;i++){  
+				  if(radio[i].checked){ 
+				          if(radio[i].value ==0 ){
+				          	$("#worknum").text("身份证号");
+				          	$("#licence").attr('placeholder',"身份证号");
+				                $("#workname").hide();
+				          }else{
+				          	$("#worknum").text("营业执照注册号");
+				          	$("#licence").attr('placeholder',"营业执照注册号");
+				          	$("#workname").show();
+				          }
+				  } 
+		        } 	
+		
+		}
+		//xxl
+  </script>
+
+		
 	</script> 
 </head>
 
@@ -127,14 +151,24 @@
 								</tr>
 								<tr>
 									<td><label class="pxlabel" for="trueshop">是否有实体店：</label></td>
-									<td><input name="trueshop" type="radio" value="1" checked><span class="pxlabel">有</span><input name="trueshop" type="radio" value="0" ><span class="pxlabel">没有</span></td>
+									
+									<!--xxl start-->
+									<td>
+									<input name="trueshop" type="radio" value="1" onchange = "change();" checked><span class="pxlabel">有</span>
+									<input name="trueshop" type="radio" value="0" onchange = "change();"><span class="pxlabel">没有</span>
+									</td>
+									<!--xxl end-->
 								</tr>
 								<tr>
-									<td><label class="pxlabel" for="licence">营业执照信息：</label></td>
-									<td><input name="licence" class="px" id="licence" placeholder="实体店营业执照" type="text"></td>
+								        <!--xxl start-->
+									<!--<td><label class="pxlabel" for="licence" name="worknum" id="worknum" >营业执照注册号：</label></td>-->
+									<td><span class="pxlabel" for="licence" name="worknum" id="worknum" >营业执照注册号：</span></td>
+									<td><input name="licence" class="px" id="licence" placeholder="营业执照注册号" type="text"></td>
+									<!--xxl end-->
+									
 								</tr>
-								<tr>
-									<td><label class="pxlabel" for="shopname">实体店铺名称：</label></td>
+								<tr id="workname">
+									<td><label class="pxlabel" for="shopname" name="workname" id="workname" >实体店铺名称：</label></td>
 									<td><input name="shopname" class="px" id="shopname" placeholder="实体店名称" type="text"></td>
 								</tr>
 								<tr>

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<include file="public:headtop" />
+<link rel="stylesheet" href="__STATIC__/weixin/css/content.css" />
+<link rel="stylesheet" href="__STATIC__/weixin/css/shopinfo.css">
+	
+</head>
+
+<body>
+	<include file="public:head" />
+<script>
+
+</script>
+
+	
+<div id="content">    
+	 <div class="module_special">	    
+	     <h2 class="shopinfo_title veins2">
+			<span class="ico2">商家信息</span>
+	     </h2>
+	</div>
+    
+	<table style = "width:100%;">
+		<tr >
+			<td rowspan="2">
+				   <div class="shoplogourl">
+				    <if condition="$weshopData['logo'] eq ''">
+				        <img width="60" height="60" src="{$weshopData.headurl}"/>
+				    <else/>
+				        <img width="60" height="60" src="{$weshopData.logo}" />
+				    </if>
+				   </div>
+			</td>
+			<td><label><font size = "6">{$weshopData.name}</font></label></td>
+		</tr>
+		<tr>
+			<td><label><font size = "2">创店时间  {$wxuserData.createtime}</font></label></td>
+		</tr>	  
+	</table> 
+	    <hr>
+	<table style = "width:100%;">
+		<tr>
+			<td width="30%"><label class="pxlabel" for="applicant">宝贝数量</label></td>
+			<td ><label class="pxlabel" for="applicant">{$weItemCount}</label></td>
+			
+		</tr>
+		<tr>
+			<td><label class="pxlabel" for="addr">人气指数</label></td>
+			<td><label class="pxlabel" for="addr">{$weshopFaviCount}</label></td>
+		</tr>	 
+		<tr>
+			<td><label class="pxlabel" for="addr">好评率</label></td>
+			<td><label class="pxlabel" for="addr">{$rate}</label></td>
+		</tr>			 
+	</table> 		
+	<hr>		        
+	<table style = "width:100%;">
+		<tr>
+		   
+			<td width="30%"><label class="pxlabel" for="addr">电话 </label></td>
+			<td><label class="pxlabel" for="addr">{$weshopData.phone}</label></td>
+			<td>
+			   <botton>
+				<a href="tel:{$weshopData.phone}" class="order">
+					<img width="47" height="31" src="__STATIC__/css/default/images/phone.png"/>
+				</a>
+				</botton>
+		    </td>
+		</tr>	 
+	</table>     
+
+	    <div class="clear"></div>
+	</div>
+
+
+	<include file="public:footer" />
+
+</body>
+</html>

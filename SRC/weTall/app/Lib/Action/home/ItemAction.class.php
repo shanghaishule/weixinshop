@@ -80,8 +80,10 @@ class itemAction extends frontendAction {
         $item['brand'] = $brand['name'];
         
         //商品相册
-        $img_list = M('item_img')->field('url')->where(array('item_id' => $id))->order('ordid')->select();
-
+        $img_list = M('item_img')->field('url')->where(array('item_id' => $id))->order('ordid')->select();        
+        $comments_list = M('comments')->where(array('item_id' => $id))->order('create_time desc')->select();
+        
+        $this->assign('comments_list', $comments_list);        
         $this->assign('item', $item);
         $this->assign('img_list', $img_list);
         $this->assign('tokenTall', $tokenTall);
