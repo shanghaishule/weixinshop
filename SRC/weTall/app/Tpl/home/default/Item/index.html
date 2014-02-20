@@ -168,22 +168,30 @@
                 <span class="letter1">品牌:</span>{$item.brand}<br>销售情况:售出 {$item.buy_num}件<br>所在地区:中国 
 			</div>
             <div class="handle">
-                <ul>
-                	<li class="handle_title">大小:</li>
+                <if condition="$countSize eq 0">
+                    <input name="size" id="sizeChoose" type="hidden" value="无">
+                    <else/><ul>
+                	<li class="handle_title">型号:</li>
                     <li>
+                    
                     <volist name='size' id='vo'>
-                    	<input type="radio" name="size" value="{$vo}" />{$vo}
+                    	 <a href="javascript:void(0);" onclick="sizetitle('{$vo}')" ><div class="size_title" id="size{$vo}">{$vo}</div></a>
                     </volist>
+                    <input name="size" id="sizeChoose" type="hidden" value="">
+                    
                     </li>
-                </ul>
+                </ul></if>
+                <if condition="$countColor eq 0"><input name="color" id="colorChoose" type="hidden" value="无">
+                <else/>
                 <ul>
                     <li class="handle_title">颜色:</li>
                     <li>
                     <volist name='color' id='vo'>
-                    	<input type="radio" name="color" value="{$vo}" />{$vo}
+                    	<a href="javascript:void(0);" onclick="colortitle('{$vo}')" ><div class="color_title" id="color{$vo}">{$vo}</div></a>
                     </volist>
+                    <input name="color" id="colorChoose" type="hidden" value="">
                     </li>
-                </ul>
+                </ul></if>
                 <ul>
                     <li class="handle_title">购买数量:</li>
                     <li>
