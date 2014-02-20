@@ -1,0 +1,82 @@
+<include file="public:header" />
+<div class="subnav">
+    <h1 class="title_2 line_x">订单详情</h1>
+</div>
+<form id="info_form" action="{:u('score_order/edit')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+				<table width="100%" cellspacing="0" class="table_form">
+					<tr>
+						<th width="120">订单号 :</th>
+						<td>
+						{$info.order_sn}
+						</td>
+                        <th>商品名称 :</th>
+						<td>
+		                {$info.item_name}
+		                </td>
+					</tr>
+		            <tr>
+						
+					</tr>
+                    <tr>
+						<th>商品数量 :</th>
+						<td>{$info.item_num}</td>
+                        <th>使用积分 :</th>
+						<td>{$info.order_score}</td>
+					</tr>
+                    <tr>
+						
+					</tr>
+		            <tr>
+						<th>会员名称 :</th>
+						<td>
+                        {$info.uname}
+                        </td>
+                        <th>收货人 :</th>
+						<td>
+                        {$info.consignee}
+                        </td>
+		 			</tr>
+                    <tr>
+						
+		 			</tr>
+                    <tr>
+						<th>收货人电话 :</th>
+						<td>
+                        {$info.mobile}
+                        </td>
+                        <th>邮政编码 :</th>
+						<td>
+                        {$info.zip}
+                        </td>
+		 			</tr>
+                    <tr>
+						
+		 			</tr>
+                    <tr>
+						<th>收货地址 :</th>
+						<td>
+                        {$info.address}
+                        </td>
+                        <th>下单时间 :</th>
+						<td>{$info.add_time|date="Y-m-d H:i:s",###}</td>
+		 			</tr>
+					
+					<tr>
+						
+					</tr> 
+                    <tr>
+                    	<th>备注 :</th>
+                        <td colspan="4">
+                        <textarea id="remark" name="remark" style="width:70%; height:70px;">{$info.remark}</textarea>
+                        </td>
+                    </tr>    
+				</table>
+		<div class="mt10"><input type="submit" value="完 成" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"><br /><br /><br /></div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+<input type="hidden" name="id" id="id" value="{$info.id}" />
+</form>
+<include file="public:footer" />
+</body>
+</html>

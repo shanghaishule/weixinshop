@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<include file="public:headtop" />
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+</head>
+
+<body onload="setup()" >
+<include file="public:head" />
+<div id="content">
+    <h4 class="add_title"><a class="enter" href="javascript:void(0)">确认订单信息</a></h4>
+    <div style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px;">
+        <h3 style="margin-bottom:10px;">确认收货地址</h3>
+        <script type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" charset="utf-8"></script>
+        <!-- <script type="text/javascript" src="__STATIC__/weixin/js/area.js" charset="utf-8"></script>-->
+        <script type="text/javascript" src="__STATIC__/weixin/js/jquery_003.js" charset="utf-8"></script>
+        <script type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js" charset="utf-8"></script>
+        <link href="__STATIC__/weixin/css/dialog.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" id="dialog_js" charset="utf-8"></script>
+        <script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/dizhi2.js'></script>
+		<script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/diqu2.js'></script>
+        <script type="text/javascript">
+
+       <script type="text/javascript">
+       $(function(){
+       	$('#order_form').validate({
+       		errorPlacement: function(error, element){
+       			$(element).next("label").append(error);
+       		},
+       		success       : function(label){
+       			//label.addClass('validate_right').text('OK!');
+       		},
+       		onsubmit:true,// 是否在提交是验证
+       		onkeyup : false,
+       		rules : {
+       			consignee : {
+       				required : true,
+       			},
+       			address : {
+       				required : true
+       			},
+
+       		},
+       		messages : {
+       			consignee : {
+       				required : '您必须提供一个用户名',
+       				remote   : '用户名不存在！'
+       			},
+       			address  : {
+       				required : '请如实填写收货人详细地址'
+       			}
+       		}
+       	});
+       });
+        </script>
+      
+        <script>
+        $(function(){
+
+        	$('input[name=address_options]').change(function(){
+        		if($(this).val()==0)
+        		{
+        			$('#address_form').show();
+        		}else
+        		{
+        			$('#address_form').hide();
+        		}
+        	});
+        	set_address();
+        })
+
+        function set_address()
+        {
+        	var addr_id = $("input[name='address_options']:checked").val();
+
+        	if(addr_id == 0)
+        	{
+
+        		$('#address_form').show();
+        	}
+        	else
+        	{
+        		$('#address_form').hide();
+
+        	}
+        }
+
+        function ordertj()
+        {
+        	var addr_id = $("input[name='address_options']:checked").val();
+        	if(addr_id == 0)
+        	{
+        		var consignee=  $.trim($('#consignee').val());
+        		var address=  $.trim($('#address').val());
+        		var phone_mob=  $.trim($('#phone_mob').val());
+        		var sheng=  $.trim($('#s1').val());
+
+        		if(consignee=='')
+        		{
+        			alert('请输入收货人姓名');
+        			return false;
+        		}
+        		if(sheng=='')
+        		{
+        			alert('请选择所在地区');return false;
+        		}
+
+        		if(address=='')
+        		{
+        			alert('请输入详细地址');
+        			return false;
+        		}
+        		if(phone_mob=='')
+        		{
+        			alert('请输入手机号码');
+        			return false;
+        		}
+        		if(isNaN(phone_mob))
+        		{
+        			alert('请输入正确的手机号码');return false;
+        		}
+        	}
+        	$('#order_form').submit();
+
+        }
+        </script>
+       
+         
+       <form method="post"  action="{:U('order/pay',array('tokenTall'=>$tokenTall))}" id="order_form" name="order_form" >
+       <?php if(count($address_list)!=0){ ?>
+	        <volist name='address_list' id='vo' >
+	        <ul class="receive_add address_item selected_address">
+	            <li class="radio"><input id="address_{$vo.id}" checked="checked"  name="address_options" value="{$vo.id}" type="radio"></li>
+	            <li class="particular">{$vo.sheng}&nbsp;{$vo.shi}&nbsp;{$vo.qu}&nbsp;{$vo.address}</li>
+	            <li class="name">收货人姓名: {$vo.consignee}</li>
+	            <li class="mobile">手机号码:{$vo.mobile}</li>
+	        </ul>
+	        </volist>
+	        <ul class="new_receive_add address_item">
+	            <li class="radio">
+	            <input name="address_options" id="use_new_address" value="0"  type="radio">
+	            </li><li class="particular">使用新的收货地址</li>
+	        </ul>    
+
+
+<!-- 一开始不显示 -- begin -->
+            <ul style="display: none;" class="fill_in_content" id="address_form">
+            <li>
+                <p class="title">收货人姓名</p>
+                <p><input value="" name="consignee" id="consignee" class="text" type="text"></p>
+            </li>
+            <li>
+                <p class="title">所在地区</p>
+                <p></p>
+                <div id="region">
+                <select name="sheng" id="s1"></select>
+                <select name="shi" id="s2"></select>
+                <select name="qu" id="s3"></select>
+                </div>
+                <script language="javascript">
+					new PCAS("sheng","shi","qu","","","");
+			    </script>
+                <p></p>
+            </li>
+            <li>
+                <p class="title">详细地址</p>
+                <p><input value="" name="address" id="address" class="text width1" type="text"></p>
+            </li>
+            <li>
+                <p class="title">手机号码</p>
+                <p><input value="" id="phone_mob" name="phone_mob" class="text" type="text"></p>
+            </li>
+            <li>
+                <p class="title">&nbsp;</p>
+                <p>
+                    <label>
+                        <input value="1" id="save_address" name="save_address" type="checkbox">&nbsp;自动保存收货地址
+                        <span class="explain">&nbsp;(&nbsp;选择后该地址将会保存到您的收货地址列表&nbsp;)&nbsp;</span>
+                    </label>
+                </p>
+            </li>
+            </ul>
+<!-- 一开始不显示 -- end -->
+
+       <?php }else{ ?>
+           <ul class="new_receive_add address_item">
+           <li class="radio">
+           <input checked='checked' name="address_options" id="use_new_address" value="0"  type="radio">
+           </li><li class="particular">使用新的收货地址</li>
+           </ul> 
+           <ul class="fill_in_content" id="address_form">
+           <li>
+               <p class="title">收货人姓名</p>
+               <p><input value="" name="consignee" id="consignee" class="text" type="text"></p>
+           </li>
+           <li>
+               <p class="title">所在地区</p>
+               <p></p>
+               <div id="region">
+               <select name="sheng" id="s1"></select>
+               <select name="shi" id="s2"></select>
+               <select name="qu" id="s3"></select>
+               </div>
+               <script language="javascript">
+					new PCAS("sheng","shi","qu","","","");
+			   </script>
+               <p></p>
+            </li>
+            <li>
+                <p class="title">详细地址</p>
+                <p><input value="" name="address" id="address" class="text width1" type="text"></p>
+            </li>
+            <li>
+                <p class="title">手机号码</p>
+                <p><input value="" id="phone_mob" name="phone_mob" class="text" type="text"></p>
+            </li>
+            <li>
+                <p class="title">&nbsp;</p>
+                <p>
+                    <label>
+                        <input value="1" id="save_address" name="save_address" type="checkbox">&nbsp;自动保存收货地址
+                        <span class="explain">&nbsp;(&nbsp;选择后该地址将会保存到您的收货地址列表&nbsp;)&nbsp;</span>
+                    </label>
+                </p>
+            </li>
+            </ul>
+        <?php } ?>
+    </div>
+    
+    <div style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px;">
+        <h3 style="margin-bottom:10px;">确认订单信息</h3>
+        <ul class="cart_list">
+    	<volist name='allinfo' id='vo_group'>
+        <div style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px;">
+        {$vo_group.name}
+        <volist name='vo_group.item' id='vo'>
+           <li>
+              <p class="goods_info">
+                  <span class="img"><img src="{:attach(get_thumb($vo['img'], '_m'), 'item')}" height="80" width="80"></span>
+                  <span class="tit">
+                      {$vo.name}<br>
+                      <span>大小：</span><span style="color:black;">{$vo.size}</span>
+                      <span style="margin-left:5px">颜色：</span><span style="color:black;">{$vo.color}</span><br>
+                      <span style="margin-right:5px">价格：¥</span><span class="price1" id="gdprice_{$vo.tokenTall}_{$vo.id}">{$vo.price}</span><br>
+                      <span>数量：</span><span class="price1" id="gdnum_{$vo.tokenTall}_{$vo.id}">{$vo.num}</span><br>
+                  </span>
+              </p>
+              <div style="font-size:13px; text-align:right;">
+    			 <span>小计：¥</span>
+    			 <span class="price1" id="xiaoji_{$vo.tokenTall}_{$vo.id}"></span>
+              </div>
+           </li>
+        </volist>
+		<div style="font-size:13px; color:green;">运送方式：
+			<eq name="vo_group.free" value="1">
+				<select id="free_{$vo_group.tokenTall}" name="free_{$vo_group.tokenTall}"><option value ="0" selected="selected">卖家承担运费</option></select>
+			<else />
+				<select id="free_{$vo_group.tokenTall}" name="free_{$vo_group.tokenTall}">
+				<option value="1" val="{$vo_group.pingyou}">平邮：{$vo_group.pingyou}元</option>
+  		  		<option value="2" val="{$vo_group.kuaidi}" selected="selected">快递：{$vo_group.kuaidi}元</option>
+		  		<option value="3" val="{$vo_group.ems}">EMS：{$vo_group.ems}元</option>
+   				</select>
+          	</eq>
+          	<input id="freefee_{$vo_group.tokenTall}" name="freefee_{$vo_group.tokenTall}" type="hidden"/>
+         </div>
+         <div>
+			<span style="font-size:13px; color: green;">给卖家的附言：</span>
+            <textarea id="mymsg_{$vo_group.tokenTall}" name="mymsg_{$vo_group.tokenTall}" style="font-size:10px; color: lightgrey; width:97%;" placeholder="选填，可以告诉卖家您对商品的特殊需求，如个人喜好等"></textarea>
+        </div>
+        <div style="font-size:13px; text-align:right;">
+   			 <span>店铺合计(含运费)：¥</span>
+   			 <span id="heji_{$vo_group.tokenTall}" style="color: red;"></span>
+        </div>
+        </div>
+    </volist>
+    </ul>
+    </div>
+    </form>
+    
+    <div class="make_sure">
+        <p class="order_amount">订单总价：<strong class="fontsize3" id="order_amount">¥<font id='order_amount2'></font></strong></p>
+        <div>
+            <a onclick="ordertj();" class="btn enter">下单完成并支付</a>
+            <a href="{:U('shopcart/index')}" class="back">返回购物车</a>
+        </div>
+    </div>
+</div>
+<include file="public:footer" />
+</body>
+</html>
+
+<script>
+	$(function(){
+		$("select[id^='free_']").change(function(){
+			set_free();
+         });
+         set_free();
+	})
+        
+    function set_free()
+    {
+		var ordersum = 0;
+		$("select[id^='free_'] option:selected").each(function(){
+			//alert($(this).parent().attr("id"));
+			var tokenTall = $(this).parent().attr("id").substr(5);
+			//alert(tokenTall);
+
+			//alert($(this).val());  //alert($(this).text());
+			//获得选中的项目的val，即运费。
+			var free_style = $(this).val();
+			var free_fee = '0';
+			if(free_style != '0'){
+				free_fee = $(this).attr("val");
+			}
+			$("#freefee_"+tokenTall).val(free_fee);
+			
+			
+			var xiaoji_sum = 0;
+			$("span[id^='xiaoji_"+tokenTall+"_']").each(function(){
+				var itemid = $(this).attr("id").substr(7);
+				//alert(itemid);
+				//计算每个商品的小计金额
+				var gd_sum = parseFloat($('#gdprice_'+itemid).text()) * parseFloat($('#gdnum_'+itemid).text());
+				//alert(gd_sum);
+				//小计赋值
+				$(this).text(gd_sum.toFixed(2));
+				
+				xiaoji_sum = parseFloat(xiaoji_sum) + parseFloat(gd_sum);
+			});
+			
+			//店铺合计
+			var shopsum = 0;
+			shopsum = parseFloat(free_fee) + parseFloat(xiaoji_sum);
+			$('#heji_'+tokenTall).html(shopsum.toFixed(2));
+			
+			//订单累计
+			ordersum = parseFloat(ordersum) + parseFloat(shopsum);
+			
+		});
+		//订单总价赋值
+		$('#order_amount2').html(ordersum.toFixed(2));
+    }
+</script>

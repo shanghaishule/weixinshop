@@ -1,0 +1,385 @@
+<include file="public:header" />
+<script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
+<!--编辑商品-->
+<form id="info_form" action="{:u('item/edit')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">基本信息</li>
+            <li>展示图片</li>
+			<!--<li>SEO设置</li>
+            <li>附加属性</li>-->
+		</ul>
+		<div class="J_panes">
+        <div class="content_list pad_10">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+			<tr>
+				<th width="120">所属分类 :</th>
+                <td><select class="J_cate_select mr10" data-pid="0" data-uri="{:U('item_cate/ajax_getchilds', array('type'=>0))}" data-selected="{$selected_ids}"></select>
+                <input type="hidden" name="cate_id" id="J_cate_id" value="{$info.cate_id}" /></td>
+			</tr>
+			
+			<tr>
+				<th width="120">所属品牌 :</th>
+                <td>
+                <select  name="brand" >
+                <option value="">--请选择--</option>
+                <volist name='brandlist' id='vo' >
+                <option <if condition="$vo.id eq $info.brand "> selected="selected"
+</if>
+  value="{$vo.id}" >{$vo.name}</option>
+                </volist>
+                </select></td>
+			</tr>
+			<tr>
+				<th width="120">型号 :</th>
+                <td>  <!--        
+                <input type="checkbox" name="size[]" <if condition="$sizearr34 eq 34 ">checked</if> value="34">34</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr35 eq 35 ">checked</if> value="35">35</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr36 eq 36 ">checked</if> value="36">36</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr37 eq 37 ">checked</if> value="37">37</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr38 eq 38 ">checked</if> value="38">38</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr39 eq 39 ">checked</if> value="39">39</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr40 eq 40 ">checked</if> value="40">40</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr41 eq 42 ">checked</if> value="41">41</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr42 eq 42 ">checked</if> value="42">42</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr43 eq 43 ">checked</if> value="43">43</input>&nbsp;
+                    <input type="checkbox" name="size[]" <if condition="$sizearr44 eq 44 ">checked</if> value="44">44</input>&nbsp;
+                     --> <div id="size"><input type="button" value="  添加    " onclick="addSize()">
+                     <volist name="sizearr" id="sizearr">
+                      <if condition="$sizearr neq ''">
+                      <input type="text" name="size[]" value="{$sizearr}" size='12'>
+                      </if>
+                     </volist>
+                     </div>
+                    </td>
+			</tr>
+			<tr>
+				<th width="120">颜色 :</th>
+                <td><input type="checkbox" name="color[]" <if condition="$colorarrwhite eq 'white' ">checked</if> value="white">白色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrblue eq 'blue' ">checked</if> value="blue">蓝色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarryellow eq 'yellow' ">checked</if> value="yellow">黄色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrred eq 'red' ">checked</if> value="red">红色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrblack eq 'black' ">checked</if> value="black">黑色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrorange eq 'orange' ">checked</if> value="orange">橙色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrcoffee eq 'coffee' ">checked</if> value="coffee">咖啡色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrgold eq 'gold' ">checked</if> value="gold">金色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrpiller eq 'piller' ">checked</if> value="piller">紫色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrgreen eq 'green' ">checked</if> value="green">绿色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrindigo eq 'indigo' ">checked</if> value="indigo">靛色</input>&nbsp;
+                    <input type="checkbox" name="color[]" <if condition="$colorarrmix eq 'mix' ">checked</if> value="mix">杂色</input>
+                    </td>
+			</tr>
+            <tr>
+				<th>商品名称 :</th>
+				<td><input  type="text" name="title" id="J_title" class="input-text" size="60" value="{$info.title}"></td>
+			</tr>
+		<!--	 <tr>
+				<th>颜色 :</th>
+				<td><input type="text" name="color" id="J_color" class="input-text" size="30" value="{$info.color}" ><font color="#FD5873">（不需要可不填, 格式：多个用竖杆“|”隔开，如：蓝色|红色|白色）</font></td>
+			</tr>
+			   <tr>
+				<th>尺寸 :</th>
+				<td><input type="text" name="size" id="J_size" class="input-text" size="30" value="{$info.size}"><font color="#FD5873">（不需要可不填, 格式：多个用竖杆“|”隔开，如：蓝色|红色|白色）</font></td>
+			</tr>-->
+			<tr>
+                <th>商品简介 :</th>
+                <td><textarea name="intro" cols="80" rows="2">{$info.intro}</textarea></td>
+            </tr>
+            <tr>
+				<th>商品图片 :</th>
+				<td>
+					<notempty name="info['img']"><img src="{:attach(get_thumb($info['img'], '_m'), 'item')}" width="100" height="100"/><br /></notempty>
+					<input type="file" name="img" />
+				</td>
+ 			</tr>
+ 			<tr>
+		      <th>是否推荐:</th>
+		      <td><input value="1" <if condition='$info.news eq 1'>checked=''</if> type="checkbox" name="news" >新品&nbsp; <input value="1" <if condition='$info.tuijian eq 1'>checked=''</if> type="checkbox" name="tuijian" >推荐</td>
+		    </tr>
+		   
+		    
+		     <tr>
+		      <th>运费:</th>
+		      <td>
+		      <select id='free' name="free">
+		      <option <if condition='$info.free eq 1'> selected="selected"</if> value="1">卖家承担运费</option>
+		      <option  <if condition='$info.free eq 2'> selected="selected"</if>  value="2">买家承担运费</option>
+		      </select>
+		      </td>
+		    </tr>
+		    
+		      <script>
+		     $(function(){
+        	 $('#free').change(function(){
+        	  if($(this).val()==2)
+        	  {
+        	  	$('#address_form').show();
+        	  }else
+        	  {
+        	  		$('#address_form').hide();
+        	  }
+        	 });
+        	 set_address();
+        })
+        
+          function set_address()
+          {
+          var addr_id =$("#free").find("option:selected").val();
+          	 //var addr_id = $("#free:selected").val();
+          
+           if(addr_id == 2)
+            {
+               
+                $('#address_form').show();
+            }
+            else
+            {
+                $('#address_form').hide();
+     
+            }
+          }
+		    </script>
+		    
+		    <tr id="address_form" style="display:none;">
+		    <th></th>
+		    <td> 
+		      平邮:<input value="{$info.pingyou}" onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="pingyou" />
+		      快递:<input value="{$info.kuaidi}" onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="kuaidi" />
+		      EMS:<input value="{$info.ems}" onkeyup="value=value.replace(/[^\d\.]/g,'')" type="text" name="ems" /></td>
+		    </tr>
+		    
+			<!--<tr>
+				<th>链接地址 :</th>
+				<td><input type="text" name="url" class="input-text" size="50" value="{$info.url}"></td>
+			</tr>
+            <tr>
+				<th>商品标签 :</th>
+				<td>
+                	<input type="text" name="tags" id="J_tags" class="input-text" size="50" value="{$info.tags}">
+                    <input type="button" value="{:L('auto_get')}" id="J_gettags" name="tags_btn" class="btn">
+                </td>
+			</tr>-->
+            <tr>
+				<th>商品价格 :</th>
+				<td><input id='J_price' onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')"  type="text" name="price" size="10" class="input-text" value="{$info.price}"> 元</td>
+			</tr>
+			<tr>
+				<th>商品库存 :</th>
+				<td><input id='J_goods_stock' onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="goods_stock" class="input-text" size="10" value="{$info.goods_stock}"> </td>
+			</tr>
+			<!--<tr>
+				<th width="120">商品来源 :</th>
+                <td>
+				<select name="orig_id" id="orig_id">
+            	<volist name="orig_list" id="val">
+            	<option value="{$val.id}" <if condition="$info['orig_id'] eq $val['id']">selected="selected"</if>>{$val.name}</option>
+            	</volist>
+            	</select></td>
+			</tr>
+			<tr>
+            	<th>发布人 :</th>
+                <td>{$info.uname}</td>
+            </tr>-->
+			 <tr>
+			     <th>商品详情 :</th>
+		         <td><textarea name="info" id="info" style="width:68%;height:400px;visibility:hidden;resize:none;">{$info.info}</textarea></td>
+			</tr>
+		</table>
+		</div>
+        <div class="content_list pad_10 hidden">
+        	<style>
+				.addpic {}
+				.addpic li { float:left; text-align:center; margin:0 0 10px 20px;}
+				.addpic a { display:block;}
+            </style>
+            <ul class="addpic">
+            <volist name="img_list" id="val">      
+            <li class="album_{$val['id']}">
+            <a href="javascript:void(0)" onclick="del_album({$val['id']});"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>
+            <a><img src="{:attach(get_thumb($val['url'], '_b'), 'item')}" style="width:80px;height:60px; border:solid 1px #000; "/></a>
+            </li>
+            </volist>
+            </ul>
+            <div class="cb"></div>
+            <table width="100%" cellpadding="2" cellspacing="1" class="table_form" id="first_upload_file">
+                <tbody class="uplode_file">
+                <tr>
+                    <th width="100" align="left"><a href="javascript:void(0);" class="blue" onclick="add_file();"><img src="__STATIC__/css/admin/bgimg/tv-expandable.gif" /></a>上传文件 :</th>
+                    <td><input type="file" name="imgs[]"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+		<div class="content_list pad_10 hidden">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+			<tr>
+				<th width="120">{:L('seo_title')} :</th>
+ 				<td><input type="text" name="seo_title" class="input-text" size="60" value="{$info.seo_title}"></td>
+			</tr>
+			<tr>
+				<th>{:L('seo_keys')} :</th>
+				<td><input type="text" name="seo_keys" class="input-text" size="60" value="{$info.seo_keys}"></td>
+			</tr>
+			<tr>
+				<th>{:L('seo_desc')} :</th>
+				<td><textarea name="seo_desc" cols="80" rows="8">{$info.seo_desc}</textarea></td>
+			</tr>
+		</table>
+		</div>
+        <div class="content_list pad_10 hidden">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form" id="item_attr">
+			<volist name="attr_list" id="val">
+            <tr>
+                <td width="200">
+                <a href="javascript:void(0);" class="blue" onclick="del_attr({$val.id},this);"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>属性名 :{$val.attr_name}
+                </td>
+                <td width="">属性值 :{$val.attr_value}</td>
+            </tr>
+            </volist>
+            
+            <tbody class="add_item_attr">
+            <tr>
+                <th width="200">
+                <a href="javascript:void(0);" class="blue" onclick="add_attr();"><img src="__STATIC__/css/admin/bgimg/tv-expandable.gif" /></a>属性名 :<input type="text" name="attr[name][]" class="input-text" size="20">
+                </th>
+                <td>属性值 :<input type="text" name="attr[value][]" class="input-text" size="30"></td>
+            </tr>
+            </tbody>
+		</table>
+		</div>
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"></div>
+	</div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+<input type="hidden" name="id" value="{$info.id}" />
+</form>
+<include file="public:footer" />
+<script type="text/javascript">
+$('.J_cate_select').cate_select('请选择');
+$(function() {	
+	$('ul.J_tabs').tabs('div.J_panes > div');
+	//自动获取标签
+	$('#J_gettags').live('click', function() {
+		var title = $.trim($('#J_title').val());
+		if(title == ''){
+			$.pinphp.tip({content:lang.article_title_isempty, icon:'alert'});
+			return false;
+		}
+		$.getJSON('{:U("item/ajax_gettags")}', {title:title}, function(result){
+			if(result.status == 1){
+				$('#J_tags').val(result.data);
+			}else{
+				$.pinphp.tip({content:result.msg});
+			}
+		});
+	});
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+	$("#J_title").formValidator({onshow:'请填写商品名称',onfocus:'请填写商品名称'}).inputValidator({min:1,onerror:'请填写商品名称'}).defaultPassed();
+	$("#J_price").formValidator({onshow:'请填写商品价格',onfocus:'请填写商品价格'}).inputValidator({min:1,onerror:'请填写商品价格'}).defaultPassed();
+	$("#J_goods_stock").formValidator({onshow:'请填写商品库存',onfocus:'请填写商品库存'}).inputValidator({min:1,onerror:'请填写商品库存'}).defaultPassed();
+});
+function get_child_cates(obj,to_id)
+{
+	var parent_id = $(obj).val();
+	if( parent_id ){
+		$.get('?m=item&a=get_child_cates&g=admin&parent_id='+parent_id,function(data){
+				var obj = eval("("+data+")");
+				$('#'+to_id).html( obj.content );
+	    });
+    }
+}
+
+function add_file()
+{
+    $("#next_upload_file .uplode_file").clone().insertAfter($("#first_upload_file .uplode_file:last"));
+}
+function del_file_box(obj)
+{
+	$(obj).parent().parent().remove();
+}
+function del_album(id)
+{
+	var url = "{:U('item/delete_album')}";
+    $.get(url+"&album_id="+id, function(data){
+		if(data==1){
+		    $('.album_'+id).remove();
+		};
+    });
+}
+function add_attr()
+{
+    $("#hidden_attr .add_item_attr").clone().insertAfter($("#item_attr .add_item_attr:last"));
+}
+function del_attrs(obj)
+{
+	$(obj).parent().parent().remove();
+}
+function del_attr(id,obj)
+{
+	var url = "{:U('item/delete_attr')}";
+    $.get(url+"&attr_id="+id, function(data){
+		if(data==1){
+		    $(obj).parent().parent().remove();
+		};
+    });
+}
+</script>
+<table id="next_upload_file" style="display:none;">
+<tbody class="uplode_file">
+   <tr>
+      <th width="100"><a href="javascript:void(0);" onclick="del_file_box(this);" class="blue"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>上传文件 :</th>
+      <td><input type="file" name="imgs[]"></td>
+   </tr>
+</tbody>
+</table>
+<table id="hidden_attr" style="display:none;">
+<tbody class="add_item_attr">
+<tr>
+    <th width="200">
+    <a href="javascript:void(0);" class="blue" onclick="del_attrs(this);"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>属性名 :<input type="text" name="attr[name][]" class="input-text" size="20">
+    </th>
+    <td>属性值 :<input type="text" name="attr[value][]" class="input-text" size="30"></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
+<script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
+<script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
+<script>
+function addSize()
+{
+    var sizeid=$("#size");
+    sizeid.append("<input name='size[]' type='text' size='12'>&nbsp;");
+}
+$(function() {
+	KindEditor.create('#info', {
+		uploadJson : '{:U("attachment/editer_upload")}',
+		fileManagerJson : '{:U("attachment/editer_manager")}',
+		allowFileManager : true
+	});
+	$('ul.J_tabs').tabs('div.J_panes > div');
+
+	//颜色选择器
+	$('.J_color_picker').colorpicker();
+
+	//自动获取标签
+	$('#J_gettags').live('click', function() {
+		var title = $.trim($('#J_title').val());
+		if(title == ''){
+			$.pinphp.tip({content:lang.article_title_isempty, icon:'alert'});
+			return false;
+		}
+		$.getJSON('{:U("article/ajax_gettags")}', {title:title}, function(result){
+			if(result.status == 1){
+				$('#J_tags').val(result.data);
+			}else{
+				$.pinphp.tip({content:result.msg});
+			}
+		});
+	});
+	
+});
+</script><br>

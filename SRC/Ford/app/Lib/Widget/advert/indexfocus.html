@@ -1,0 +1,14 @@
+<ul id="J_focus_img" class="focus_img fr">
+    <volist name="ad_list" id="ad">
+    <li class="big_slide">{$ad.html}</li>
+    </volist>
+</ul>
+<ul id="J_focus" class="focus_desc">
+    <volist name="ad_list" id="ad">
+    <li>
+        <img src="__UPLOAD__/advert/{$ad.extimg}">
+        <h3>{$ad.name}</h3>
+        <p>{$ad.desc}</p>
+    </li>
+    </volist>
+</ul>

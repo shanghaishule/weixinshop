@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0048)http://store.weiapps.cn/index.php -->
+<html>
+<head>
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" name="viewport">
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<title>{$page_seo.title}--购物车</title>
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/css/shop.css">
+<script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
+<script charset="utf-8" src="__STATIC__/weixin/js/ecmall.js" type="text/javascript"></script>
+<script charset="utf-8" src="__STATIC__/weixin/js/touchslider.dev.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+var SITE_URL = "index.php-app=member&act=login&ret_url=-index.php-app=member.htm"/*tpa=http://store.weiapps.cn/*/;
+var REAL_SITE_URL = "index.php-app=member&act=login&ret_url=-index.php-app=member.htm"/*tpa=http://store.weiapps.cn/*/;
+var PRICE_FORMAT = '¥%s';
+
+$(function(){
+    var span = $("#child_nav");
+    span.hover(function(){
+        $("#float_layer:not(:animated)").show();
+    }, function(){
+        $("#float_layer").hide();
+    });
+});
+
+</script>
+</head>
+
+<body>
+<include file="public:head" />
+<script type="text/javascript" src="__STATIC__/weixin/js/cart.js" charset="utf-8"></script>
+
+<div id="content">
+<?php if(count($_SESSION['cart'])==0){ ?>
+    <div class="null_shopping">
+          <div class="cart_pic"></div>
+          <h4>您还没有宝贝，赶快去逛逛吧！</h4>
+          <p>
+              <if condition="$tokenTall eq ''">
+              <a class="enter" href="/index.php?g=Wap&m=weTall&a=index">马上去逛逛</a>
+              <else/>
+              <a class="enter" href="{:U('index/index',array('tokenTall'=>$tokenTall))}">马上去逛逛</a>
+              </if>
+          </p>
+      </div>  
+   <?php }else{  ?>   
+   <h3 id="chose_all"><b class="ico">购物车</b></h3>
+    <ul class="cart_list">
+      <volist name='item' id='vo_group'>
+      <div style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px;">
+        {$vo_group.name}
+        <volist name='vo_group.item' id='vo'>
+           <li id="cart_item_{$vo.id}">
+              <p class="goods_info">
+                  <span class="img"><a href="{:U('Item/index',array('id'=>$vo['id'],'tokenTall'=>$tokenTall))}" ><img src="{:attach(get_thumb($vo['img'], '_m'), 'item')}" height="80" width="80"></a></span>
+                  <span class="tit">
+                      <a href="{:U('Item/index',array('id'=>$vo['id'],'tokenTall'=>$tokenTall))}" >{$vo.name}</a><br>
+                      <span>大小:</span><span class="price1">{$vo.size}</span><br>
+                      <span>颜色:</span><span class="price1">{$vo.color}</span><br>
+                      <span>价格:</span><span class="price1">¥{$vo.price}</span><br>
+                      <span>数量:</span>
+                      <span>
+                          <img src="__STATIC__/weixin/images/subtract.gif" onClick="decrease_quantity({$vo.id});" alt="decrease" style="vertical-align: middle;width=:16px">
+                           <input id="input_item_{$vo.id}" value="{$vo.num}" orig="1" changed="{$vo.num}" onKeyUp="change_quantity({$vo.id}, this);" class="text1 width3" type="text" style="height:20px;">
+                          <img src="__STATIC__/weixin/images/adding.gif" onClick="add_quantity({$vo.id});" alt="increase" style="vertical-align: middle;width=:16px">
+                      </span><br>
+                      <span>
+                          <a class="del" href="javascript:void(0)" onClick="drop_cart_item({$vo.id});"> <img src="__STATIC__/weixin/images/del.png"  style="vertical-align: middle;height:20px;width=:20px"></a>
+                      </span>
+                  </span>
+              </p>
+              <p class="buy_info">
+                  <span class="total">
+                      <span>小计:</span>
+                      <span class="price2" id="item{$vo.id}_subtotal">¥<?php echo sprintf("%01.2f",$vo['num']*$vo['price']); ?></span>
+                  </span>
+              </p>
+           </li>
+        </volist>
+        </div>
+      </volist>
+    </ul>
+   
+    <div class="buy_foot">
+        <p class="goods_amount">
+            <span>商品总价:</span>
+            <strong class="fontsize1" id="cart_amount">¥{$sumPrice}</strong>
+        </p>
+        <p class="jiesuan_btn">
+            <a href="{:U('order/jiesuan',array('tokenTall'=>$tokenTall))}" class="btn"><span>去结算</span><img src="__STATIC__/weixin/images/jiesuan.png" width="50%"></a>
+        </p>
+    </div>
+    <?php } ?>
+</div>
+<script type="text/javascript">
+function drop_cart_item(id){
+	//alert(id);
+	var url = "{:U('shopcart/remove_cart_item')}";
+	$.post(url, {'itemId' : id}, function(data){
+		//刷新当前页面，如果传参数true进去，则为强制刷新(shift+F5)
+		window.location.reload();  
+	},"json");
+}
+function decrease_quantity(id){
+	//alert(id);
+	var url = "{:U('shopcart/change_quantity')}";
+	var qty = parseInt($("#input_item_{$vo.id}").val()) - 1;
+	$.post(url, {'itemId':id, quantity:qty}, function(data){
+		if(data.status == 0){
+			alert(data.msg);
+		}else{
+			window.location.reload();
+		}
+	},"json");
+}
+function add_quantity(id){
+	var url = "{:U('shopcart/change_quantity')}";
+	var qty = parseInt($("#input_item_{$vo.id}").val()) + 1;
+	$.post(url, {'itemId':id, quantity:qty}, function(data){
+		if(data.status == 0){
+			alert(data.msg);
+		}else{
+			window.location.reload();
+		}
+	},"json");
+}
+function change_quantity(id,th){
+	var url = "{:U('shopcart/change_quantity')}";
+	var qty = parseInt($("#input_item_{$vo.id}").val());
+	$.post(url, {'itemId':id, quantity:qty}, function(data){
+		if(data.status == 0){
+			alert(data.msg);
+		}else{
+			window.location.reload();
+		}
+	},"json");
+}
+
+</script>
+
+
+<include file="public:footer" />
+
+</body>
+</html>

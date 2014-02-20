@@ -1,0 +1,149 @@
+<include file="public:header" />
+<script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
+<style>
+.tdtitle {font-family: "宋体";
+    height: 32px;
+    line-height: 32px;
+    padding-right: 5px;
+    text-align: right;
+    vertical-align: top;}
+
+.tblist thead tr th, .tblist tbody tr.tblist_th td {
+    background: url("__STATIC__/weixin/images/tblistthbg.gif") repeat-x scroll 0 0 transparent;
+    border-right: 1px solid #DDDDDD;
+    height: 30px;
+    overflow: hidden;
+    padding: 0 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+.tblist tbody tr, .tbmodify .tblist tbody tr {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+.tblist {
+    border-left: 1px solid #DDDDDD;
+    width: 100%;
+}	
+.tblist tbody tr, .tbmodify .tblist tbody tr {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+.tblist tbody tr td, .tbmodify .tblist tbody tr td {
+    border-bottom: 1px solid #DDDDDD;
+    border-left: 0 solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    line-height: 18px;
+    text-align: center;
+}
+.tblist tbody tr td {
+    padding: 2px 4px;
+}
+.tbdetail {
+    width: 100%;
+}
+.tbdetail td {
+    background-color: #FFFFFF;
+    height: 32px;
+    line-height: 33px;
+    padding: 3px 0 3px 5px;
+   <!-- text-align: left;-->
+}
+.tbdetail .ltd {
+    padding-left: 5px;
+  text-align: left;
+}
+.tbdetail .rtd {
+    padding-right: 5px;
+   text-align: right;	
+}
+</style>
+
+<form id="info_form" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<div class="J_panes">
+        <div class="content_list pad_10">
+        <div align="center" style="background:none repeat scroll 0 0 #E6F1F6;font-size:14px;font-weight:bold;padding:10px 0;">基本信息</div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbdetail">
+        	 <tbody>
+         		<tr>
+                   <td width="10%" class="tdtitle" >账单单号：</td>
+                   <td width="20%">{$account_master.billnum}</td>
+                   <td width="10%" class="tdtitle">账单状态：</td>
+                   <td width="20%" class="red"><?php foreach($account_status as $key=>$item){ if($account_master['status']==$key) echo $item; }?></td>
+                   <td width="10%" class="tdtitle">账单总金额(元)：</td>
+                   <td width="30%" class="red">{$account_master.totalamt}</td>
+               </tr>
+               <tr>
+                   <td width="10%" class="tdtitle">结算扣率：</td>
+                   <td width="20%" class="red">{$account_master.rate}</td>
+                   <td width="10%" class="tdtitle">应结金额(元)：</td>
+                   <td width="20%" class="red">{$account_master.yingjie}</td>
+                   <td width="10%" class="tdtitle" >账单统计时间段：</td>
+                   <td width="30%" class="green"><?php if($account_master['start_time']){ echo date('Y-m-d H:i:s',$account_master['start_time']); }?> -- <?php if($account_master['end_time']){ echo date('Y-m-d H:i:s',$account_master['end_time']); }?></td>
+               </tr>
+               
+            </tbody>
+        </table>
+		<div align="center" style="background:none repeat scroll 0 0 #E6F1F6;font-size:14px;font-weight:bold;padding:10px 0;">操作信息</div>    
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbdetail">
+            <tbody>
+                <tr>
+                   <td width="10%" class="tdtitle" >生成：</td>
+                   <td width="15%">{$account_master.gen}</td>
+                   <td width="10%" class="tdtitle">生成时间：</td>
+                   <td width="15%"><?php if($account_master['gen_time']){ echo date('Y-m-d H:i:s',$account_master['gen_time']); }?></td>
+                   <td width="10%" class="tdtitle" >商城对账：</td>
+                   <td width="15%">{$account_master.duizhang}</td>
+                   <td width="10%" class="tdtitle">商城对账时间：</td>
+                   <td width="15%"><?php if($account_master['duizhang_time']){ echo date('Y-m-d H:i:s',$account_master['duizhang_time']); }?></td>
+               </tr>
+               <tr>
+                   <td width="10%" class="tdtitle" >付款：</td>
+                   <td width="15%">{$account_master.pay}</td>
+                   <td width="10%" class="tdtitle">付款时间：</td>
+                   <td width="15%"><?php if($account_master['pay_time']){ echo date('Y-m-d H:i:s',$account_master['pay_time']); }?></td>
+                   <td width="10%" class="tdtitle" >商家对账：</td>
+                   <td width="15%">{$account_master.duizhang2}</td>
+                   <td width="10%" class="tdtitle">商家对账时间：</td>
+                   <td width="15%"><?php if($account_master['duizhang2_time']){ echo date('Y-m-d H:i:s',$account_master['duizhang2_time']); }?></td>
+               </tr>
+            </tbody>
+        </table>
+        <div align="center" style="background:none repeat scroll 0 0 #E6F1F6;font-size:14px;font-weight:bold;padding:10px 0;">账单明细</div>    
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tblist">
+        	<thead>
+            	<tr>
+	                <th>序号</th>
+	                <th>订单号</th>
+	                <th>商品总额</th>
+	                <th>订单总额</th>
+            	</tr>
+        	</thead>
+            <tbody>
+                <volist name='account_detail' id='vo' >
+                <tr class="">
+                	<td class="ltd">{$vo.itemno}</td>
+                    <td class="ltd">{$vo.orderId}</td>
+                    <td class="red rtd">¥{$vo.goods_sumPrice}</td>
+                    <td class="red rtd">¥{$vo.order_sumPrice}</td>
+                </tr>
+                </volist>   
+            </tbody>
+       </table>      
+       </div>
+       </div>
+       
+	   <div class="mt10" style="text-align:center;">
+	   <if condition = "$account_master['status'] eq '0' or $account_master['status'] eq '1'">
+           <a href="{:U('account/status',array('id'=>$account_master['id'],'status'=>'shop_confirm','tokenTall'=>$account_master['tokenTall']))}"><input type="button" value="确认账单正确" id="dosubmit" name="dosubmit" class="btn btn_submit" ></a>
+       </if>
+	   <a href="{:U('account/index',array('tokenTall'=>$account_master['tokenTall'], 'status'=>$status))}"><input type="button"  value=" 返回列表 " class="btn btn_cannel"></a>
+	   </div>
+	</div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+<input type="hidden" name="id" value="{$account_master.id}" />
+</form>
+<include file="public:footer" />
+</body>
+</html>

@@ -1,0 +1,18 @@
+<volist name="item_list" id="item">
+  <div class="J_item wall_item">
+              <li>
+                 <div class="pic">
+                  <a href="{:U('Item/detail',array('id'=>$item['id']))}"><img  src="{:attach($item['img'], '_m')}"></a>
+                 </div>
+               <div class="good_content">
+                <h3>
+               <a  href="{:U('Item/detail',array('id'=>$item['id']))}">{$item.title}</a>
+                </h3>
+               <p>¥{$item.price}</p>
+                </div>
+              <span class="show_good">
+                <a  href="{:U('Item/detail',array('id'=>$item['id']))}"></a>
+               </span>
+            </li>
+   </div>
+</volist>

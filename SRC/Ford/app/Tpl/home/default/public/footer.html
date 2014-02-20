@@ -1,0 +1,32 @@
+﻿<div id="footer" style="min-width: 320px;">
+    <p class="foot_nav">
+        <if condition="$tokenTall eq ''">
+              <a href="/index.php?g=Wap&m=weTall&a=index">店铺首页</a>
+              <else/>
+              <a href="{:U('index/index',array('tokenTall'=>$tokenTall))}">店铺首页</a>
+        </if>
+         | <a href="{:U('user/index',array('tokenTall'=>$tokenTall))}">会员中心</a> | <a href="{:U('suggestion/index',array('tokenTall'=>$tokenTall))}">宝贵意见</a> | <a href="{:U('application/index',array('tokenTall'=>$tokenTall))}">申请开店</a>
+    </p>
+    <div style="height:40px; background:#000; padding:0; overflow:hidden;">
+        <div style="float:left; margin:5px 10px 0 0; display:inline;"><img height="30" src="/tpl/User/default/common/images/weizhigou_logo.png"></div>
+        <div style="line-height:40px; height:40px; display:inline-block; margin-right:10px; float:right; color:#fff; font-size:14px;">微指购商城</div>
+    </div>
+</div>
+
+<script>
+var PINER = {
+    root: "__ROOT__",
+    uid: "<?php echo $visitor['id'];?>", 
+    async_sendmail: "<?php echo $async_sendmail;?>",
+    config: {
+        wall_distance: "<?php echo C('pin_wall_distance');?>",
+        wall_spage_max: "<?php echo C('pin_wall_spage_max');?>"
+    },
+    //URL
+    url: {}
+};
+//语言项目
+var lang = {};
+<volist name=":L('js_lang')" id="val">lang.{$key} = "{$val}";</volist>
+</script>
+<pin:load type="js" href="__STATIC__/js/jquery/plugins/jquery.tools.min.js,__STATIC__/js/jquery/plugins/jquery.masonry.js,__STATIC__/js/jquery/plugins/formvalidator.js,__STATIC__/js/fileuploader.js,__STATIC__/js/pinphp.js,__STATIC__/js/front.js,__STATIC__/js/dialog.js,__STATIC__/js/wall.js,__STATIC__/js/item.js,__STATIC__/js/user.js,__STATIC__/js/album.js" />

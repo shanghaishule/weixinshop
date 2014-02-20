@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/tpl/Wap/default/common/js/weTall/index.css" />
+<include file="public:headtop" />
+<script charset="utf-8" src="__STATIC__/weixin/js/goodsinfo.js" type="text/javascript"></script>
+<script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
+<script charset="utf-8" src="__STATIC__/weixin/js/colorbox.js" type="text/javascript"></script>
+<link type="text/css" rel="stylesheet" href="__STATIC__/weixin/colorbox.css">
+</head>
+<body>
+<include file="public:head" />
+  <volist name="item1" id="vo1">  
+    <div class="allcate"><a href="{:U('book/cate',array('cid'=>$vo1['id'],'tokenTall'=>$tokenTall))}">{$vo1.name}</a></div>
+	<div class="childcate">
+		<ul>
+		    <volist name="item2" id="vo2">
+		     <if condition="$vo2['pid'] eq $vo1['id']">
+		     	<li><a href="{:U('book/cate',array('cid'=>$vo2['id'],'tokenTall'=>$tokenTall))}">{$vo2.name}</a></li>
+		     </if>
+		    </volist>
+	    </ul>
+   </div>
+ </volist>
+ <include file="public:footer" />
+</body>
+</html>

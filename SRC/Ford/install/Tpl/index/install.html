@@ -1,0 +1,26 @@
+<include file="public:header"/>
+<div class="c_main fr">
+<form id="J_install_form" action="{:U('finish_done')}" method="post">
+    <div class="c_main_title">{:L('step_install_desc')}</div>
+    <div id="J_process" class="c_main_body process"></div>
+    <div id="J_link" class="act" style="display:none;">
+        <div class="btn"><input type="button" value="{:L('next')}" class="btn_next" onclick="window.location.href='{:U('finish')}';" /></div>
+    </div>
+    <iframe src="about:blank" style="width:500px; height:300px;display:none;" name="post_target"></iframe>
+</form>
+</div>
+<script>
+$(function(){
+    $('#J_install_form').attr('target', 'post_target');
+    $('#J_install_form').submit();
+});
+function show_process(html){
+    $('#J_process').html($('#J_process').html() + html);
+    var _t = $('#J_process').get(0);
+    _t.scrollTop = _t.scrollHeight;
+}
+function install_successed(){
+    $('#J_link').show();
+}
+</script>
+<include file="public:footer"/>

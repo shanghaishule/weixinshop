@@ -1,0 +1,6 @@
+<dl class="followus fr">
+    <dt>关注我们</dt>
+    <volist name="ad_list" id="ad">
+    <dd><a href="{:U('advert/tgo', array('id'=>$ad['id']))}" target="_blank"><img src="__UPLOAD__/advert/{$ad.extimg}" class="fl mr5" />{$ad.html}</a></dd>
+    </volist>
+</dl>

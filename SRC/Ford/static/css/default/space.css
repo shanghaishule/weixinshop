@@ -1,0 +1,170 @@
+/*个人空间顶部*/
+.space_top {position: relative;border: 1px solid #DFDFDF;}
+.space_info {padding: 10px 10px 15px;}
+.iwc_ct h1 { background-color: rgba(0, 0, 0, 0.3); border-radius: 7px 7px 7px 7px; color: #FFFFFF; float: left; font-size: 24px; font-weight: bold;height: 50px; line-height: 50px; margin: 15px; padding: 0 10px;}
+.space_info .left a {color: #689200;margin-right: 5px;}
+.space_info .left .user_profile {margin: -6px 0 0 10px;}
+.space_info .left .avatar {width: 100px;height: 100px;}
+.space_info .left .uname {font-size: 30px;color: #333;font-family:"微软雅黑";margin-right: 5px;}
+.space_info .left .home_follow {margin-top: 8px;}
+.space_info .left .home_follow .fo_u_btn{ color: #ffffff;}
+.space_info .right .collect_list {float:left;text-align:center;min-width:60px;_width:60px;border-right:1px dotted #CCC;line-height:16px;margin-top:10px;}
+.space_info .right .bd_none {border: medium none;}
+.space_info .right .bd_none a {color: #FF386C;}
+.space_info .right .bd_none span {background:url(images/user_icon.png)  0 -96px no-repeat;padding: 0 0 0 12px;}
+.space_nav {padding:0 10px;height:36px;border-top:1px solid #DFDFDF;background:white none;}
+.space_nav a, .space_nav .ft_14 {height: 36px;line-height: 36px;color: #666;font-size: 14px;margin-right: 18px;}
+.space_nav a {padding:0 20px;float:left;display:inline;height:38px;line-height:38px;font-size:16px;font-weight:bold;position:relative;}
+.space_nav a.current {background:#8FC63B;color:white;height:37px;}
+.space_nav .cus_cover {float: right;display: inline;font-size: 12px;padding: 0 10px 0 20px;font-weight: normal;background: url(images/cus_cover.png) center left no-repeat;}
+
+/*个人空间封面*/
+.space_cover_main {width: 715px;}
+.cover_album {border: 1px solid #DFDFDF;margin-bottom:20px;}
+.cover_album h2 {height: 50px;line-height: 50px;font-size: 18px;}
+.cover_album h2 i {color: #666;font-size: 20px;line-height: 40px;float:left; margin-left: 22px;}
+.cover_album h2 .album_all {display: inline;background: none;color: #87BD34;font-size: 12px;margin:0 0 0 15px;line-height:40px;font-weight: normal;text-decoration: underline;float:left;}
+.cover_album h2 a {height:26px;line-height:26px;text-align:center;color:#fff;width: 96px;float:right;background:url(images/user_icon.png) 0 -50px no-repeat;display:block;font-size:12px;margin: 8px 22px 0 0;}
+.cover_album .album_list{ width: 100%}
+.cover_album .album_item{margin: 0 0 20px 22px;}
+.cover_album .album_item ul {border: 1px solid #E9E9E9;border-bottom: none; margin-left: 0;}
+.cover_album .album_item .album_link {top: 1px;left: 1px;}
+
+.user_show_title {font-size: 20px;color: #727763;}
+.space_cover_main .wall_container {min-height: 500px;position: relative;width: 732px;}
+.cover_more a{ display:block; width:112px; height:29px; line-height:29px; background:url(images/cover_more.png) no-repeat; text-align:center; color:#ffffff; font-size:14px; margin:-20px 0 0 0; font-weight:bold;}
+
+.space_cover_side{width:225px;}
+.side_piece{border: 1px solid #DFDFDF;}
+
+/*详细信息*/
+.user_info_main{border: 1px solid #DFDFDF;padding: 10px 30px;}
+.setting_tilte { color: #FF70A7; font-family: '微软雅黑'; font-size: 18px; font-weight: bold; height: 25px; line-height: 25px; margin-top: 5px;}
+.info_title .setting { color: #87B32E; margin: 10px 0 0 15px; text-decoration: underline;}
+.info_detail dd { color: #999999; float: left; height: 20px; line-height: 22px; text-align: right; width: 80px;}
+.info_detail dt { color: #333333; float: left;line-height: 24px; margin-bottom: 17px; width: 800px;}
+
+/*用户信息模块*/
+.side_userinfo {padding: 0 0 0 13px;}
+.side_userinfo .avatar a {position: relative;padding: 8px 0;display: block;width: 200px;}
+.side_userinfo .avatar img {display: block;margin: 0 auto;}
+.side_userinfo .nickname {font-size: 18px;font-weight: bold;height: 32px;line-height: 32px;overflow: hidden;}
+.side_userinfo .nickname a {color: #87BD34;}
+.side_userinfo .record_wrap {width:200px;overflow: hidden;}
+.side_userinfo .record {margin: 7px 0;width: 200px;}
+.side_userinfo .record li {width: 52px;float: left;border-right: 1px #CCC dotted;padding: 0 0 0 14px;}
+.side_userinfo .record li.bd_none{ border: medium none;}
+.side_userinfo .record li span{font-family:"微软雅黑";display:block;color:#525252;}
+.side_userinfo .detail {width: 200px;} 
+.side_userinfo .detail a {color: #87B32E;text-decoration: underline;float: right;margin: 5px 15px 5px 0;}
+
+/*个人空间专辑页面*/
+.space_toolbar{height:29px;line-height:29px;overflow:hidden;}
+.space_toolbar_sort{color: #AAAAAA;}
+.space_toolbar_sort a{border-right:1px solid #CCCCCC;padding:0 8px;color: #666666;}
+.space_toolbar_sort .bd_none{border:none;}
+.space_toolbar_sort a.current{color:#87BD34;font-weight:bold;}
+.space_toolbar_sort a:hover{color:#87BD34;}
+.space_toolbar_nav{height:16px;line-height:16px;padding:5px 0 6px;width:360px;}
+.space_toolbar_nav li {border-right:1px solid #CCCCCC;float:right;padding:0 10px;}
+.space_toolbar_nav li.bd_none{border:none;}
+.space_toolbar_nav li a{color:#669900;}
+.space_toolbar_nav li a.current{color:#666666;}
+
+/*我的动态*/
+.space_tab { padding-left: 20px;border-bottom: 1px solid #E1E1E1;}
+.space_tab .current {background-color: white;color: #666;height: 25px;line-height: 25px;bottom: -1px;border-bottom: 1px solid white;}
+.space_tab li {float: left;display: inline;width:76px;height: 24px;line-height:24px;text-align:center;border:1px solid #E1E1E1;border-radius:3px 3px 0 0;background-color: whiteSmoke;color:#8B8B8B;position:relative;bottom:-2px;margin-right:4px;}
+.space_tab li a {color: #666;}
+.talk_l {padding:10px 0 20px;clear:both;}
+.talk_l .talk_f {padding: 15px 0;border-bottom:1px solid #EBEDE3;margin:0 10px;}
+.talk_l .talk_tag .t {color: #BBB;float:left;}
+.talk_l .hd {width: 48px;position: absolute;}
+.talk_l .tk {padding: 0 0 0 60px;}
+.talk_l .inf .n {font-size: 14px;font-weight: bold;padding-right: 3px;color:#87BD34;}
+.talk_l .inf span a{color: #87BD34;}
+.talk_l .inf span a:hover {color: #FF89A7;}
+.talk_l .sms {line-height:22px;font-size:14px;color:#333;}
+.talk_l .sms a:hover {color: white;background: #87BD34;}
+.talk_l .sms a { color:#87BD34;}
+/*商品*/
+.talk_l .pic {padding-top: 7px;font-size: 0;margin-right: -3px;overflow: hidden;zoom: 1;position: relative;}
+.talk_l .pic img { width:160px;}
+.talk_l .pic div { display: inline-block;zoom: 1;padding: 3px;border: 1px solid #D8D8D8;margin: 0 3px 5px 0;position: relative;background-color: white;cursor: url(images/big.cur),auto;top: 0;}
+.talk_l .pic div:hover { border:1px solid #87BD34;}
+.talk_l .src_info {border: 1px solid #DADADA; display: none; float: left; overflow: hidden; padding: 3px; position: relative;}
+.talk_l .src_info .src_buy { font-size: 14px; line-height: 19px; margin: 5px 7px 10px;}
+.talk_l .src_info .src_buy a {color: #11AEFF;display: inline-block; float: left;height: 20px;width: 240px;}
+.talk_l .src_info .src_buy a.buy_it { padding-right: 8px; display: inline-block; float: right;height:23px; line-height: 22px; font-size: 12px; color: #FFFFFF; width: auto; background:url(images/src_buy_btn.png) no-repeat top right;}
+.talk_l .src_info .src_buy a.buy_it b { padding: 0 8px 0 18px; line-height: 23px; color: #FFFFFF; background:url(images/src_buy_btn.png) no-repeat top left; float: left;}
+.talk_l .src_info img { width: 450px;}
+.talk_l .src_info .src_link { height: 25px; padding-right: 10px;}
+.talk_l .src_info .src_link li{ float: right;}
+.talk_l .src_info .src_link li.detail{background:url(images/detail_icon.png) no-repeat 0 3px; padding-left: 15px;}
+/*转发*/
+.talk_l .q {background-color: #F7F7F7; margin-top: 12px; padding: 5px 10px 10px;}
+.talk_l .q .sms {font-size: 12px;}
+.talk_l .q .pic img{ width: 100px;}
+
+/*操作*/
+.talk_l .tl {clear: both;padding-top: 10px;text-align: right;height: 20px;}
+.talk_l .tl a{color:#87b32e;background:url(images/icons_line.png) no-repeat;padding:3px 5px 0 20px;}
+.talk_l .tl .del{background:none;padding:3px 5px 0 0;}
+.talk_l .tl .fw{background-position:0 -298px;*background-position:0 -300px;}
+.talk_l .tl .fw:hover{background-position:0 -281px;*background-position:0 -283px;}
+.talk_l .tl .cmt{background-position:0 -332px;*background-position:0 -334px;}
+.talk_l .tl .cmt:hover{background-position:0 -315px;*background-position:0 -317px;}
+
+/*评论*/
+.talk_l .cmt_b { margin-top: 15px; position: relative;}
+.talk_l .cmt_pub { background-color: #F7F7F7; padding: 15px 10px 10px;}
+.talk_l .pub_txt { background-color: #FFFFFF; border: 1px solid #CFCFCF; height: 20px; margin: 0; overflow: hidden; padding: 2px 5px; width: 480px;}
+.talk_l .cmt_l { background-color: #F7F7F7; border-top: 1px solid #EAEAEA; padding: 10px 0 0 10px;}
+.talk_l .cmt_l li { min-height: 40px; padding: 7px;}
+.talk_l .cmt_l .avt { border-radius: 3px 3px 3px 3px; float: left; height: 36px; width: 36px;}
+.talk_l .cmt_l .sms { font-size: 12px; padding-left: 48px;}
+.talk_l .cmt_l .sms .n:hover{ background-color: #FF89A7; color: #FFFFFF;}
+.talk_l .cmt_l div { line-height: 120%; text-align: right;}
+.talk_l .cmt_l div a { color: #87B32E; margin-left: 10px;}
+.talk_l .cmt_l div a:hover{ background-color: #87B32E; color: #FFFFFF;}
+
+/*提到我的*/
+.followdiv {}
+.followdiv .addfo {margin-top: 6px;text-align: center;background: url(images/fav_icon.png) left -64px no-repeat;width: 50px;height: 18px;line-height:18px;display: block;color:#ffffff;overflow: hidden;}
+.talk_l .q {background-color: #F7F7F7;padding: 5px 10px 10px;margin-top: 12px;}
+.talk_l .q_a {position: absolute;margin: -14px 0 0 20px;}
+.talk_l .q .sms {font-size: 12px;}
+.talk_tab i {margin: 0 10px;color: #CCC; font-style:italic;}
+.talk_tab a { color: #0099EE;}
+.talk_tab .current { color: #333333; font-weight: bold;}
+
+/*评论我的*/
+.cmt_me {margin: 0;padding: 10px 0 20px;}
+.cmt_me .cmt_row {border-bottom: 1px solid #EBEDE3;padding: 15px 3px 5px 3px;margin: 0 10px 0 15px;}
+.cmt_me .avt { float: left;}
+.cmt_me .avt img { width:48px; height:48px; margin-right:5px;}
+.cmt_me .cm_info {float: left;margin: 0 0 10px 10px; width: 860px;}
+.cmt_me .cm_info p {line-height: 200%;min-height: 60px;}
+.cmt_me .cm_info .msg .u_g {font-weight: bold;color: #FF69A2;}
+.cmt_me .cm_info p span {font-size: 14px;}
+.cmt_me .cm_info .msg a {color: #FF69A2;}
+.cmt_me .cm_info .msg a:hover {background:#FF69A2;color:#fff;}
+.cmt_me .cm_info div {line-height: 150%;}
+.cmt_me .cm_info div .fr:hover {color: white;background-color: #87B32E;}
+.cmt_me .cm_info div .fr {color: #87B32E;padding: 0 5px;}
+.cmt_me .cm_info div .fl { color:#888888;}
+.cmt_me .reply { font-size: 12px; margin-bottom: 4px; margin-left: 54px; position: relative;}
+.cmt_me .reply_input { background-color: #F7F7F7; min-height: 30px; padding: 15px 10px 10px;}
+.cmt_me .reply_content { background-color: #FFFFFF; border: 1px solid #CFCFCF; height: 24px; line-height: 24px; overflow: hidden; padding-left: 3px; width: 480px;}
+
+/*关注和粉丝*/
+.followfans_main {border: 1px solid #DFDFDF;}
+.followfans_info {margin:10px 10px 14px 20px;}
+.followfans_info h1 {font-size: 18px;color: #FF70A7;font-family:"微软雅黑";font-weight: bold;}
+.people_search .n {border: 1px solid #BBB;color: #999;width: 143px;height: 22px;line-height:22px;padding-left:5px;}
+.people_search .s {border:none;margin-left:5px;background:url(images/zone_note_comment_btn_v3.png) no-repeat;width:51px;height:24px;
+font-weight:bold;color:white;cursor:pointer;}
+.followfans_main .space_tab { padding-left: 0; margin: 0 10px 0 20px;}
+
+/*我的动态------我的粉丝*/
+.people_list .fans_op a {line-height: 18px;color:#690;width:80px;text-align:right;}

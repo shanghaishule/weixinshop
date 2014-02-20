@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>会员中心 - 我的地址</title>
+<link href="__STATIC__/weixin/css/shop.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="__STATIC__/weixin/js/ecmall.js" charset="utf-8"></script>
+<script type="text/javascript" src="__STATIC__/weixin/js/touchslider.dev.js" charset="utf-8"></script>
+
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/mlselection.js" ></script>
+<script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/dizhi2.js'></script>
+<script type="text/javascript" language="javascript" src='__STATIC__/weixin/js/diqu2.js'></script>
+<link rel="stylesheet" type="text/css" href="__STATIC__/weixin/css/jquery.ui.css" /></head>
+
+<body onLoad="setup()">
+<include file="public:head" />
+<script type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+$(function(){
+    regionInit("region");
+    $('#address_form').validate({
+        /*errorPlacement: function(error, element){
+            var _message_box = $(element).parent().find('.field_message');
+            _message_box.find('.field_notice').hide();
+            _message_box.append(error);
+        },
+        success       : function(label){
+            label.addClass('validate_right').text('OK!');
+        },
+        errorLabelContainer: $('#warning'),
+        invalidHandler: function(form, validator) {
+           var errors = validator.numberOfInvalids();
+           if(errors)
+           {
+               $('#warning').show();
+           }
+           else
+           {
+               $('#warning').hide();
+           }
+        },*/
+        onkeyup : false,
+        rules : {
+            consignee : {
+                required : true
+            },
+            sheng : {
+                required : true
+              
+            },
+            address   : {
+                required : true
+            },
+            phone_mob : {
+                required : true,
+                minlength:6,
+                digits : true
+            }
+        },
+        messages : {
+            consignee : {
+                required : '请填写收货人姓名. '
+            },
+            sheng : {
+                required : '请选择所在地区. '
+             
+            },
+            address   : {
+                required : '请填写详细地址. '
+            },
+            phone_mob : {
+                required : '固定电话和手机请至少填写一项. ',
+                minlength: '错误的手机号码,只能是数字,并且不能少于6位. ',
+                digits : '错误的手机号码,只能是数字,并且不能少于6位. '
+            }
+        }
+    });
+});
+function check_phone(){
+    return ($('[name="phone_tel"]').val() == '' && $('[name="phone_mob"]').val() == '');
+}
+function hide_error(){
+    $('#region').find('.error').hide();
+}
+
+</script>
+<div class="eject_con" id="content">
+    <div class="add">
+        <div id="warning"></div>
+        <form method="post" action="{:U('user/address',array('tokenTall'=>$tokenTall))}" id="address_form">
+        <input type="hidden" name="id" value="{$info.id}" />
+            <ul class="form_address">
+                <li>
+                    <input class="text width_normal" value="{$info.consignee}" name="consignee" placeholder="请填写您的真实姓名" type="text">
+                    <label class="field_message"><span class="field_notice"></span></label>
+                </li>
+                <li>
+            		<select name="sheng" id="s1"></select>
+					<select name="shi" id="s2"></select>
+					<select name="qu" id="s3"></select>
+                </li>
+                <script language="javascript">
+					new PCAS("sheng","shi","qu","{$info.sheng}","{$info.shi}","{$info.qu}");
+				</script>
+                
+                <li>
+                    <input value="{$info.address}" class="text width_normal" name="address" placeholder="不必重复填写地区" type="text"><label class="field_message"><span class="field_notice"></span></label>
+                </li>
+                <li>
+                    <input value="{$info.mobile}" class="text width_normal" name="phone_mob" placeholder="电话号码" type="text"><label class="field_message"><span class="field_notice"></span></label>
+                </li>
+            </ul>
+            <div class="submit">
+                <input class="btn enter" value="保存地址" type="submit">
+            </div>
+        </form>
+    </div>
+     
+</div>
+<include file="public:footer" />
+</body>
+</html>

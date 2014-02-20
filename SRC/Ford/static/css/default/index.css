@@ -1,0 +1,82 @@
+/*首页*/
+.focusbox {border:1px solid #dfdfdf;margin:10px auto 25px auto;box-shadow: 1px 1px 2px #e4e4e4; padding:15px;}
+.focusbox_l{width:620px;position:relative;}
+.focus_img{height:283px;width:439px;position:relative;}
+.focus_img li.big_slide{position:absolute;z-index:1;top:0;left:0;display:none;}
+.focus_img img{height:283px;width:439px;}
+.focus_desc{position:relative;z-index:10;position:absolute;}
+.focus_desc li{border-bottom:1px solid #eee; background:url(images/public.png) 0 0 no-repeat; cursor: pointer;}
+.focus_desc li{width:181px;height:70px;display:block;overflow:hidden;}
+.focus_desc .current { border-right: 3px solid #8FC63B;}
+.focus_desc .current h3 { color: #8FC63B;}
+.focus_desc li img{height:48px;width:48px;margin:11px 0 11px 9px;}
+.focus_desc li h3{height:24px;line-height:24px;font-size:14px;color:#666;margin:-62px 0 0 62px;}
+.focus_desc li p{color:#999;margin:0 0 0 62px;height:30px;line-height:14px;overflow:hidden;}
+.focus_desc .on{border-right:3px solid #8fc63b;}
+.focus_desc .on h3{color:#8fc63b;}
+.user_act { width:290px;}
+
+.user_info { height: 71px; margin: 3px 6px 0 0;}
+.user_info .avatar, .user_info .avatar img { display: block; height: 48px; width: 48px;}
+.user_info .user_name { color: #FF85B4; font-size: 18px; font-weight: bold; height: 30px; line-height: 30px; margin: -54px 0 0 55px;}
+.user_info .user_name a { font-family: '微软雅黑';}
+.user_info .feed_link { color: #666666; line-height: 22px; margin: 0 0 0 55px;}
+.user_info .feed_link a { color: #8FC63B; text-decoration: underline;}
+
+.user_login{height:73px;margin:1px 6px 0 0;background:url(images/public.png) 0 -100px no-repeat;position:relative;}
+.user_login a{display:block;overflow:hidden;}
+.user_login .register_btn{height:56px;width:152px;text-indent:-999em;float: left; margin-right: 15px;}
+.user_login .oauth_btn{width:16px;height:16px; float: left; margin: 30px 5px 0 0;}
+.id_login{height:165px;}
+.id_login li{height:24px;padding:7px 0;line-height:24px;border-top:1px solid #efefef;}
+.id_login img{width:32px;height:22px;margin:1px 0 0;vertical-align:top;}
+.id_login li a{line-height:24px;float:left;margin:0 5px;}
+.id_login li a:hover{color:#8FC63B;}
+.id_login li .top_active_btn{float:right;width:59px;height:24px;background:url(images/public.png) 0 -197px no-repeat;text-align:center;color:#ffffff; overflow:hidden;}
+
+.index_piece{padding: 10px 18px 20px 25px;border:1px solid #dfdfdf;box-shadow: 1px 1px 2px #e4e4e4; margin-bottom:25px;_padding:10px 15px 20px 10px;}
+
+.piece_head { line-height:32px;height:32px;}
+.piece_head h3 { float:left; margin:0 15px 0 0; overflow:hidden;height:32px;}
+.piece_head h3 a {font-size:21px;color:#79ac00;}
+.piece_head ul li { display:inline;color:#777777; margin-right:8px;}
+.piece_head ul li a { font-size:14px;color:#777777;}
+.piece_head ul li a:hover { text-decoration:underline;}
+.view_all a { display:inline-block;height:24px;line-height:24px; color: #666666; overflow:hidden; font-weight:bold; margin-right:5px;}
+.piece_body {overflow: hidden; margin-top:10px;_margin-rignt:-8px;}
+
+.index_album_list{ width: 936px;}
+.index_album{margin:0 10px 0 0; padding:0 0 10px 0;}
+.index_album{width:296px;background:#f7f7f7;margin:0 10px 0 0;display:inline;float:left;position:relative;}
+.index_album ul{overflow:hidden;zoom:1;height:146px;width:296px;background:#fff;}
+.index_album li{height:72px;width:72px;margin:0 0 1px 1px;float:left;display:inline;background:#e9e9e9;overflow:hidden;}
+.index_album .big{height:145px;width:150px;margin:0 0 1px; overflow:hidden;}
+.index_album li img{vertical-align:top;}
+.index_album .small img{height:72px;width:72px;}
+.index_album .big img{width:150px; height:145px;}
+.index_album h4{padding:10px 10px 0;margin:0 0 4px;color:#666;font-size:14px;line-height:20px;height:20px;overflow:hidden;}
+.index_album .num{padding:0;color:#999;line-height:20px;height:20px;float:right;font-size:12px;font-weight:normal;}
+.index_album .pic_num,.index_album .fav_num{padding:0 0 0 16px;background:url(images/public.png) -286px -168px no-repeat;margin:0 0 0 15px;}
+.index_album .fav_num{background-position: 0 -168px;}
+.index_album h4 a{color:#666;}
+.index_album h4 a:hover,.index_album .num a:hover{color:#8fc63b;text-decoration:underline;}
+.index_album .album_link{position:absolute;height:146px;width:296px;display:block;top:0;left:0;}
+.index_album .album_desc{height:20px;line-height:20px;width:266px;padding:0 0 0 10px;color:#aaa;white-space:nowrap;word-wrap:normal;word-break:normal;text-overflow:ellipsis;-o-text-overflow:ellipsis;overflow:hidden;}
+.index_album .mask{display:block;height:145px;width:145px;top:0;right:0;position:absolute;background-color:rgba(255,255,255,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#99ffffff,endcolorstr=#99ffffff); z-index:2;}
+.index_album .album_author {padding: 10px;height: 20px;}
+.index_album .album_author a.author_name {height: 20px;line-height: 20px;color: #87BD34;font-weight: bold; margin-left:5px;}
+.index_album .album_author img {height: 20px;width: 20px;vertical-align: top;border-radius: 3px;margin: 0 5px 0 0;}
+
+.index_cate{overflow:hidden;zoom:1;}
+.index_cate ul{float:left;}
+.index_cate li{float:left;display:inline;overflow:hidden;position:relative;}
+.index_cate li,.index_cate li img,.index_cate li a{height:170px;width:150px;}
+.index_cate li{margin:0 2px 3px 0;}
+.index_cate li a{display:block;}
+.index_cate img{vertical-align:top;margin:0 1px 1px 0;}
+.index_cate li span {cursor:pointer;position:absolute;bottom:0;left:0;position:absolute;text-align:center;height:27px;line-height:27px;font-size:16px;font-weight:bold;color:#333;filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#66ffffff',endColorstr='#66ffffff');background:rgba(255,255,255,0.6);zoom:1; display:block;width:150px; overflow:hidden;}
+
+.wel_find_more {height: 29px; line-height: 28px; margin: 34px 0 15px;}
+.wel_find_more h2{float:left; overflow:hidden;height:32px;background:url(images/public.png) 5px -243px no-repeat; padding-left: 30px;}
+.wel_find_more a { color: #666666; font-size: 14px; line-height: 22px; font-weight: normal; margin-right: 20px;}
+.wel_find_more h2 a {font-size:21px;color:#79ac00; font-weight: 700;}

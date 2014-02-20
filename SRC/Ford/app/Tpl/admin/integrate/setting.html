@@ -1,0 +1,46 @@
+<include file="public:header" />
+<!--安装商品接口-->
+<div class="subnav">
+    <div class="content_menu ib_a blue line_x">
+        <a href="{:U('integrate/index',array('menuid'=>$menuid))}"><em><< {:L('integrate_list')}</em></a>
+        <span>|</span>
+        <a href="{:U('integrate/setting',array('code'=>$info['code'],'menuid'=>$menuid))}" class="on"><em>{$info.name}</em></a>
+    </div>
+</div>
+<div class="pad_lr_10">
+	<form id="info_form" action="{:U('integrate/setting')}" method="post">
+    <table width="100%" class="table_form">
+        <volist name="info.config" id="config">
+        <tr>
+            <th width="160">{$config.text} :</th>
+            <td>
+                <switch name="config.type">
+                    <case value="text">
+                        <input type="text" name="{$key}" class="input-text" size="{$config.size}" value="{$icv[$key]}">&nbsp;&nbsp;<span class="gray">{$config.desc}</span>
+                    </case>
+                    <case value="select">
+                        <select name="{$config_key}">
+                            <volist name="config.items" id="item" key="item_key">
+                            <option value="{$item_key}" <if condition="$item_key eq $icv[$key]">selected</if>>{$item}</option>
+                            </volist>
+                        </select>
+                    </case>
+                    <case value="textarea">
+                        <textarea name="{$key}" style="width:{$config.width}px; height:{$config.height}px;">{$icv[$key]}</textarea>
+                        <span class="gray">{$config.desc}</span>
+                    </case>
+                </switch>
+            </td>
+        </tr>
+        </volist>
+        <tr>
+            <th></th>
+            <td><input type="submit" value="{:L('submit')}" name="dosubmit" class="btn btn_submit"></td>
+        </tr>
+    </table>
+    <input type="hidden" name="code" value="{$info.code}" />
+    </form>
+</div>
+<include file="public:footer" />
+</body>
+</html>

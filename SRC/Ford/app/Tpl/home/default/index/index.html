@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+	<title>福特中国</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/main.css" />
+    <script type="text/javascript" src="__STATIC__/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/main.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/swipe.js"></script>    
+    
+	<script type="text/javascript">
+    (function() {
+        var c = document.createElement("script");
+        c.type = "text/javascript";
+        c.async = true;
+        c.src = ("https:" == document.location.protocol ? "https://" : "http://") + "sitemonitor.cn.miaozhen.com/boot/45630";
+        var h = document.getElementsByTagName("script")[0];
+        h.parentNode.insertBefore(c, h);
+    })(); 
+    </script>
+    <script type="text/javascript">
+    window._CiQ45630 = window._CiQ45630 || [];
+    window._CiQ45630.push(['_trackEvent', {
+        type: 3,
+        labels: [
+            {'页面名称':'首页'}    /*填入*/
+        ],
+        values: [
+            { '浏览量' : 1}
+        ]
+    }]);
+    </script>
+    
+</head>
+
+<body>
+
+<!--header-->
+<div class="header">
+    <a href="index.html"><img src="__STATIC__/images/logo.jpg" class="logo" /></a>
+    <span class="headerRigth">
+        <a href="index.html" class="home"><img src="__STATIC__/images/home.png" width="65px" height="35px" alt="首页" /></a>
+    </span>
+</div>
+
+<!--main-->
+<div class="homeBox">
+    <div class="home" id="slider">
+        <ul>
+        	<li><a href="ATS-showLove.html"><img src="__STATIC__/images/classic_01.jpg" /></a></li>
+        	<li><img src="images/banner_home_07.jpg" /></li>
+            <li><img src="images/banner_home_08.jpg" /></li>
+            <!--<li><img src="images/banner_home_09.jpg" /></li>-->
+            <li><img src="images/banner_home_10.jpg" /></li>
+        	<!--<li><img src="images/banner_home_05.jpg" /></li>
+        	<li><img src="images/banner_home_04.jpg" /></li>-->
+            <li><img src="images/banner_home_01.jpg" /></li>
+            <!--<li><img src="images/subBanner.jpg" /></li>-->
+            <li><img src="images/banner_home_02.jpg" /></li>
+            <li><img src="images/banner_home_03.jpg" /></li>
+        </ul>
+        <div class="btn" id="position">
+            <span class="on"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+
+<div class="navMenu">
+    <ul class="menu">
+        <li><a href="all_models.html">全部车型</a></li>
+        <li><a href="subscribe.html">预约试驾</a></li>
+        <li><a href="query.html">经销商查询</a></li>
+        <li><a href="demeanour.html">凯迪拉克风范</a></li>
+        <li><a href="http://www.cadillac.com.cn/innovation/app_experience.html">XTS创新科技</a></li>
+    </ul>
+</div>
+
+<div class="footer">
+    <ul>
+        <li class="telephone"><a href="tel:400-820-1902">凯迪拉克贵宾热线</a></li>
+        <li class="shareBox mp25">
+            <span class="weibo">新浪微博</span>
+            <span class="share"><a href="javascript:;" onClick="Share('http://www.cadillac.com.cn/wap/index.html')"><img src="images/share.png" width="60px" height="16px" /></a></span>
+            <span style="padding:0 18px 0 10px;"> | </span>
+            <span class="weixin">微信：凯迪拉克</span></li>
+        <li class="copyright">Copyright&copy;2013上海通用汽车有限公司</li>
+    </ul>
+</div>
+
+<!--
+DoubleClick Floodlight 代码的开头：请勿删除
+此代码的活动名称：67-WAP
+需要放置代码的网页的网址：http://www.cadillac.com.cn/wap/
+此代码必须放置在 <body> 和 </body> 代码之间，且尽可能靠近起始代码。
+创建日期：11/26/2013
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<iframe src="http://3736684.fls.doubleclick.net/activityi;src=3736684;type=-bran479;cat=67-wa701;ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+</script>
+<noscript>
+<iframe src="http://3736684.fls.doubleclick.net/activityi;src=3736684;type=-bran479;cat=67-wa701;ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+</noscript>
+
+<!-- DoubleClick Floodlight 代码的末尾：请勿删除 -->
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17663917-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? ' https://ssl' : ' http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
+<script>
+/*KV*/
+var slider = new Swipe(document.getElementById('slider'), {
+	auto: 3000,
+    continuous: true,
+    callback: function(e, pos) {
+        var i = bullets.length;
+        while (i--) {bullets[i].className = '';}
+        bullets[pos].className = 'on';
+    }
+}),
+bullets = document.getElementById('position').getElementsByTagName('span')
+</script>

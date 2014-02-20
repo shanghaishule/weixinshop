@@ -1,0 +1,124 @@
+<!--<include file="public:header" />-->
+
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<link href="__STATIC__/css/admin/style.css" rel="stylesheet"/>
+	<title>{:L('website_manage')}</title>
+	<script>
+	var URL = '__URL__';
+	var SELF = '__SELF__';
+	var ROOT_PATH = '__ROOT__';
+	var APP	 =	 '__APP__';
+	//语言项目
+	var lang = new Object();
+	<volist name=":L('js_lang')" id="val">
+		lang.{$key} = "{$val}";
+	</volist>
+	</script>
+</head>
+<body>
+
+ <table width="100%"  class="table_form" cellspacing="0">
+    <form id="info_form" action="{:u('setting/edit')}" method="post" enctype="multipart/form-data">
+     <tr>
+            <th width="150">1.</th>
+            <td>先填写微信AppId和微信AppSecret（这个2个值需要到微信公众平台获取）</td>
+        </tr>
+         <tr>
+            <th width="150">2.</th>
+            <td>按钮数最多只能创建3个，子按钮数最多创建5个，否则创建失败!</td>
+        </tr>
+         <tr>
+            <th width="150">3.</th>
+            <td>关键词需于《关键词自动回复》里的关键词对应,KEY值用字母或数字组成</td>
+        </tr>
+         <tr>
+            <th width="150">微信AppId：</th>
+            <td><input type="text" name="setting[appid]" class="input-text" size="50" value="{:C('pin_appid')}"></td>
+        </tr>
+        <tr>
+            <th>微信AppSecret：</th>
+            <td><input type="text" name="setting[appsecret]" class="input-text" size="50" value="{:C('pin_appsecret')}"></td>
+        </tr>
+     <tr>
+        	<th></th>
+        	<td><input type="submit" class="btn btn_submit" value="{:L('submit')}"/></td>
+    	</tr>
+    	</form>
+    </table>
+
+<div id="J_ajax_loading" class="ajax_loading">{:L('ajax_loading')}</div>
+<if condition="($sub_menu neq '') OR ($big_menu neq '')">
+<div class="subnav">
+    <div class="content_menu ib_a blue line_x">
+    	<notempty name="big_menu">
+    	<a class="add fb J_showdialog" href="javascript:void(0);" data-uri="{$big_menu.iframe}" data-title="{$big_menu.title}" data-id="{$big_menu.id}" data-width="{$big_menu.width}" data-height="{$big_menu.height}"><em>{$big_menu.title}</em></a>　
+        </notempty>
+        <notempty name="sub_menu">
+        <volist name="sub_menu" id="val" key="key">
+        <if condition="$key neq 1"><span>|</span></if>
+        <a href="{:U($val['module_name'].'/'.$val['action_name'],array('menuid'=>$menuid))}{$val.data}" class="{$val.class}"><em>{:L($val['name'])}</em></a>
+        </volist>
+        </notempty>
+    </div>
+</div>
+</if>
+
+
+
+<!--栏目列表-->
+<div class="pad_lr_10">
+    <div class="J_tablelist table_list" data-acturi="{:U('custom_menu/ajax_edit')}">
+    <table width="100%" cellspacing="0" id="J_cate_tree">
+        <thead>
+            <tr>
+                <th width="30"><input type="checkbox" name="checkall" class="J_checkall"></th>
+                <th width="30"><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <th>菜单名称</th>
+               <th >key值</th>
+                <th>关键词</th>
+             <!--   <th width="80">{:L('item_cate_type')}</th>-->
+              	<th width="60"><span data-tdtype="order_by" data-field="ordid">{:L('sort_order')}</span></th>
+               
+				<th width="60"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
+                <th width="180">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+    	<tbody>
+        {$list}
+    	</tbody>
+    	<tr>
+    	<td colspan="8"><a  onclick="creat()" ><input type="button" class="btn btn_submit" value="生成菜单"/></a></td>
+    	</tr>
+    </table>
+    <script>
+    function creat()
+    {
+    	if(confirm('是否创建自定义菜单'))
+    	{
+    		location.href="/index.php?g=admin&m=custom_menu&a=creat_custom_menu";
+    	}
+    }
+    </script>
+    </div>
+    <div class="btn_wrap_fixed">
+        <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn btn_submit" data-tdtype="batch_action" data-acttype="ajax_form" data-id="move" data-uri="{:U('custom_menu/move')}" data-name="id" data-title="{:L('item_cate_move')}" value="{:L('move')}" /> 
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('custom_menu/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+    </div>
+</div>
+<include file="public:footer" />
+<script src="__STATIC__/js/jquery/plugins/jquery.treetable.js"></script>
+<script>
+$(function(){
+    //initialState:'expanded'
+    $("#J_cate_tree").treeTable({indent:20,treeColumn:2});
+    $(".J_preview").preview();
+});        
+</script> 
+</body>
+</html>

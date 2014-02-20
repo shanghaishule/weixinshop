@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<include file="public:headtop" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/default/message.css" media="all">
+	<script type="text/javascript" src="__STATIC__/js/jquery_min.js"></script>
+	<title>请在此留言</title>
+
+	<script type="text/javascript"> 
+		$(document).ready(function () { 
+			$("#showcard1").click(function () { 
+				var btn = $(this);
+				var info = $("#info1").val();
+				if (info == '') {
+					tip('请留下您的宝贵意见和建议');
+					return;
+				}
+				var submitData = {
+					uid:'{$uid}',
+					title: '{$username}',
+					text: info,
+					createtime:'{$createtime}',
+					token:'{$tokenTall}',
+					wecha_id:'{$wecha_id}'
+				};
+				$.post("{:U('suggestion/add',array('tokenTall'=>$tokenTall))}", submitData,
+					function(data) {
+						alert(data);
+						setTimeout('window.location.href=location.href',500);
+						return;
+				})
+			}); 
+			
+			$("#alertclose").click(function () { 
+				$("#windowcenter").slideUp(500);
+			});
+		}); 
+		
+		function tip(title){ 
+			window.scrollTo(0, -1);
+			$("#windowcenter").slideToggle("slow"); 
+			$("#txt").html(title);
+			setTimeout(function(){ 
+				$("#windowcenter").slideUp(500);
+			},3000);
+		}
+		/*
+		$(document).ready(function(){
+			$(".first1").click(function(){
+				$(".ly1").slideToggle();
+			});
+		});
+		*/
+	</script> 
+</head>
+
+<body id="message">
+<include file="public:head" />
+	<div class="container">
+	
+	  	<div class="qiandaobanner">
+			<img src="__STATIC__/css/default/images/mpic.jpg" style="width:100%;">
+	    </div>
+
+		<div class="cardexplain">
+			<div class="window" id="windowcenter">
+				<div id="title" class="wtitle">操作提示<span class="close" id="alertclose"></span></div>
+				<div class="content1">
+					<div id="txt"></div>
+				</div>
+			</div>
+ 
+			<div class="history">
+				<div class="history-date">
+					<ul class="history-ul">
+						<h2 class="first" style="position: relative;">请您留下宝贵意见和建议</h2>
+						<li class="green ly1" >
+							<dl>
+								<dt>
+									<textarea name="info" class="pxtextarea" style="height:150px;" id="info1" placeholder="请您留言……"></textarea>
+								</dt>
+								<dt><a id="showcard1" class="submit" href="javascript:void(0)">提交留言</a></dt>
+							</dl>
+						</li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<include file="public:footer" />
+</body>
+</html>

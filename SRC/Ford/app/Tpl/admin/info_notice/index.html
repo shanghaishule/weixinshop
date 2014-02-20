@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<link href="__STATIC__/css/admin/info.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+
+<div class="dialog_content" >
+	<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+		<tr>
+			<td align="center"><h2>{$volist.title}</h2></td>
+		</tr>
+		
+		<tr>
+			<td align="right">			
+			时间：{$volist.ptime|date='Y-m-d',###}
+			</td>
+		</tr>
+		
+        <tr>
+			<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;{$volist.content}</td>
+		</tr>
+	</table>
+
+</div>
+</body>
+</html>

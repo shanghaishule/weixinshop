@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商城后台</title>
+<link href="__STATIC__/css/admin/pancl01.css" type="text/css" rel="stylesheet" />
+<link href="__STATIC__/css/admin/pancl02.css" type="text/css" rel="stylesheet" />
+<link href="__STATIC__/css/admin/notice.css" type="text/css" rel="stylesheet" />
+<link href="__STATIC__/weixin/colorbox.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__STATIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__STATIC__/js/all.js"></script>
+<script type="text/javascript" src="__STATIC__/weixin/js/colorbox.js"></script>
+<link href="__STATIC__/css/admin/style.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>	
+	<title>{:L('website_manage')}</title>
+	<script>
+	var URL = '__URL__';
+	var SELF = '__SELF__';
+	var ROOT_PATH = '__ROOT__';
+	var APP	 =	 '__APP__';
+	//语言项目
+	var lang = new Object();
+	<volist name=":L('js_lang')" id="val">
+		lang.{$key} = "{$val}";
+	</volist>
+	</script>
+<script>
+
+			$(document).ready(function(){
+				//Examples of how to assign the Colorbox event to elements
+				$(".group1").colorbox({rel:'group1'});
+				
+				
+			});
+	
+</script>
+</head>
+
+<body>
+<div id="mainer">
+    <div class="mainbox">
+       <div class="mleft">
+            <div class="mbar">
+               <h4>公告栏<!-- <span class="more"><a target="_blank" href="/index.php?g=System&m=Info_Notice&a=index">更多&gt;&gt;</a></span> --></h4>
+               <div class="mtishi" id="mtishi2">
+                    <table width="100%" id="noticeTable">
+		            <volist name="list" id="val"> 
+		               <tr>
+		                <td width="20" align="center"><img src="__STATIC__/images/score.png" alt="公告" /></td>
+		                <td width="50"  align="left">{$val.ptime||date='Y-m-d',###}</td>
+		                <td width="80"  align="left">{$val.title}</td>
+		                <td width="300"  align="left">{$val.content}</td>
+		                <td width="20"  align="left"><a href="/weTall/index.php?g=admin&m=info_notice&a=index&id={$val.id}" target="new">详情</a></td>   
+		               </tr> 
+		            </volist>
+		            </table>
+		            		    
+               </div>
+               <div id="pages">共{$page}</div>
+            </div>
+
+            <div class="mbar">
+               <h4>账单信息栏</h4>
+               <div class="mtishi">
+                   <p><strong>您需要立即处理:</strong></p>
+                   <p><span>对账提醒:</span>
+                       <a  href="{:U('account/index',array('status'=>5,'tokenTall'=>$tokenTall))}">未对账账单[<span class="count">{$account_cnt.weiduizhang}</span>]</a>
+                   </p>
+                   <p><strong>您需要关注:</strong></p>
+                   <p><span>结账信息:</span>
+                       <a  href="{:U('account/index',array('status'=>6,'tokenTall'=>$tokenTall))}">未结算账单[<span class="count">{$account_cnt.weijie_cnt}</span>][<span class="count">合计&nbsp;{$account_cnt.weijie_amt}&nbsp;元</span>]</a>
+                       <a  href="{:U('account/index',array('status'=>4,'tokenTall'=>$tokenTall))}">已结算账单[<span class="count">{$account_cnt.yijie_cnt}</span>][<span class="count">合计&nbsp;{$account_cnt.yijie_amt}&nbsp;元</span>]</a>
+                   </p>
+               </div>
+            </div>
+
+            <div class="mbar">
+               <h4>微商城提醒</h4>
+           
+               <div class="mtishi">
+                   <p><strong>您需要立即处理:</strong></p>
+               
+                   <p><span>订单提醒:</span>
+                       <a  href="{:U('item_order/index',array('status'=>1,'menuid'=>296,'tokenTall'=>$tokenTall))}">待付款订单 [<span class="count">{$count.fukuan}</span>]</a>
+                       <a href="{:U('item_order/index',array('status'=>2,'menuid'=>296,'tokenTall'=>$tokenTall))}">待发货订单 [<span class="count">{$count.fahuo}</span>]</a>
+                       <a href="{:U('item_order/index',array('status'=>3,'menuid'=>296,'tokenTall'=>$tokenTall))}">已发货订单 [<span class="count">{$count.yfahuo}</span>]</a>
+                      <!-- <a href="{:U('item_order/index',array('status'=>1,'menuid'=>296,'tokenTall'=>$tokenTall))}">退款中订单 [<span class="count">0</span>]</a>-->
+                   </p>
+                   <p><span>商品提醒:</span> <a href="{:U('item/index',array('status'=>0,'tokenTall'=>$tokenTall))}">待上架商品 [<span class="count">{$count.nobuycount}</span>]</a></p>
+                   <p><span>商品管理:</span> <a href="{:U('item/index',array('status'=>1,'tokenTall'=>$tokenTall))}">出售中商品 [<span class="count">{$count.buycount}</span>]</a></p>
+               </div>
+                          
+            </div>            
+
+       </div>
+       <div class="mright">
+            <div style="background:#E5E5E5;margin-top:11px;">
+               <h4>{$weshopData.name} 基本信息：<span>(<a href="{:U('setting/realShop')}">申请实体店认证</a>)</span></h4>
+               <font size="2px" color="red">基本汇率: {$currentTax.shoptax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优惠券汇率：{$currentTax.coupontax}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积分汇率：{$currentTax.giftpointtax}</font>       
+               <div>
+                  <table border="1">
+                     <tr><td rowspan="4" style="padding:2px;width:108px;">
+                     <a href="{:U('index/edithead',array('tokenTall'=>$tokenTall))}" >
+                     <img width="104px" height="104px" src="{$weshopData.headurl}" alt="更改头像" /></a>
+                    <a href="{:U('index/edithead',array('tokenTall'=>$tokenTall))}" >  点击更改头像</a>
+                     </td><td rowspan="3" style="padding:2px;">
+                     <img height="90" width="90" id="imgWxQRCode" src="{$weshopData.twodcode}">                    
+                    </td><td width="124px">
+                    &nbsp;&nbsp;&nbsp;&nbsp;店铺名称：
+                     </td><td>{$weshopData.name}</td>
+                     
+                     </tr><tr><td>
+                     &nbsp;&nbsp;&nbsp;&nbsp;信誉：
+                     </td><td>
+                        <if condition="$weshopData['credit'] lt 4"><img width="40" height="40" src="__STATIC__/images/Level/1_0.png"/>
+                        <elseif condition="$weshopData['credit'] lt 11" /><img width="40" height="40" src="__STATIC__/images/Level/1_1.png"/>
+                        <elseif condition="$weshopData['credit'] lt 50" /><img width="40" height="40" src="__STATIC__/images/Level/1_2.png"/>
+                        <elseif condition="$weshopData['credit'] lt 110" /><img width="40" height="40" src="__STATIC__/images/Level/1_3.png"/>
+                        <elseif condition="$weshopData['credit'] lt 250" /><img width="40" height="40" src="__STATIC__/images/Level/1_4.png"/>
+                        <elseif condition="$weshopData['credit'] lt 500" /><img width="40" height="40" src="__STATIC__/images/Level/2_0.png"/>
+                        <elseif condition="$weshopData['credit'] lt 1000" /><img width="40" height="40" src="__STATIC__/images/Level/2_1.png"/>
+                        <elseif condition="$weshopData['credit'] lt 2000" /><img width="40" height="40" src="__STATIC__/images/Level/2_2.png"/>
+                        <elseif condition="$weshopData['credit'] lt 5000" /><img width="40" height="40" src="__STATIC__/images/Level/2_3.png"/>
+                        <elseif condition="$weshopData['credit'] lt 10000" /><img width="40" height="40" src="__STATIC__/images/Level/2_4.png"/>
+                        <elseif condition="$weshopData['credit'] lt 20000" /><img width="40" height="40" src="__STATIC__/images/Level/3_0.png"/>
+                        <elseif condition="$weshopData['credit'] lt 50000" /><img width="40" height="40" src="__STATIC__/images/Level/3_1.png"/>
+                        <elseif condition="$weshopData['credit'] lt 100000" /><img width="40" height="40" src="__STATIC__/images/Level/3_2.png"/>
+                        <elseif condition="$weshopData['credit'] lt 200000" /><img width="40" height="40" src="__STATIC__/images/Level/3_3.png"/>
+                        <else/><img width="40" height="40" src="__STATIC__/images/Level/3_4.png"/>
+                        </if></td></tr>
+                     <tr><td>
+                     &nbsp;&nbsp;&nbsp;&nbsp;有无实体店：
+                     </td><td height="35" width="80">
+                     <if condition="$weshopData['HaveReal'] eq '0'">无实体店<elseif condition="$weshopData['HaveReal'] eq '2'"/>认证中<elseif condition="$weshopData['HaveReal'] eq '3'"/>审核不通过<else/><img src="__STATIC__/images/shiti3.png" width="25" height="25"/></if>
+                     </td></tr>
+                     <tr><td >
+                     <a href="{:U('setting/index')}">[设置]</a>
+                       <a class="group1" title="微商城二维码" id="aDownLoadShopQRcode" href="{$weshopData.twodcode}">[预览]</a>
+                     </td>
+                     <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('setting/index')}">修改店铺信息</a></td>
+                     </tr>
+                  </table>
+                   
+               </div>
+              
+            </div>
+
+            <div class="mbar">
+               <h4>服务热线</h4>
+               <p style="padding:5px 0 2px 20px;">
+                   <a href="http://wpa.qq.com/msgrd?v=3&uin={$weQQ}&site=qq&menu=yes" target="_blank"><img border="0" title="点击这里给我发消息" alt="点击这里给我发消息" src="__STATIC__/images/admin/pancl/online2.jpg"></a>
+                   <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$weQQ}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:{$weQQ}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+                
+               </p>
+             
+               <p>服务热线: 0312 - 4888382</p>
+               <p class="remark">热线服务时间：周一至周六 9:00 - 20:00</p>
+            <!--   <p><a href="#">培训中心</a> <a href="#">帮助中心</a> <a href="#">续签FAQ</a></p>-->
+            </div>
+        
+        
+            <div class="mbar">
+               <h4>产品服务</h4>
+               <div class="services">
+                   <div id="slider" class="slider" style="height: 150px; width: 345px; overflow: hidden; position: relative;">
+                        <ul class="slider">
+                            <li style="float: left;"><a title="" target="_blank" href="/index.php"><img src="__STATIC__/images/admin/pancl/ad.gif" alt="" style="width: 345px; height: 150px;"></a></li>
+                            <li style="float: left;"><a title="" target="_blank" href="/index.php"><img src="__STATIC__/images/admin/pancl/ad1.gif" alt="" style="width: 345px; height: 150px;"></a></li>
+                            <li style="float: left;"><a title="" target="_blank" href="/index.php"><img src="__STATIC__/images/admin/pancl/ad2.gif" alt="" style="width: 345px; height: 150px;"></a></li>
+                        </ul>
+                        <div id="slider_btn"><span class="on">1</span><span class="">2</span><span class="">3</span></div>
+                   </div>
+               </div>
+               <div class="clear"></div>
+            </div>
+        
+       
+            <div class="mbar">
+               <h4>提意见区</h4>
+               <p><span class="info">请帮助我们提高，谢谢！</span></p>
+               <p><a  target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$weQQ}&site=qq&menu=yes">意见反馈</a></p>
+            </div>
+            
+       </div>
+    </div>
+</div>
+
+<div id="footer">
+    <div class="f-box">
+        <div class="copy">版权所有 &copy; 蜀乐网络科技有限公司 </a></div>
+    </div>
+</div>
+</body>
+</html>
+
+  <script type="text/javascript">
+        (function(){
+            var $=function(id){return "string" == typeof id ? document.getElementById(id) : id;};
+            var start, end, obj, data;
+            obj = $("txtShopLink");
+            data = obj.value;
+            end = data.length;
+            $("btn-copy").onclick = function(){
+                if(-[1,]){             //处理费IE浏览器
+                    alert("您使用的浏览器不支持此复制功能，请使用Ctrl+C或鼠标右键。");
+                    obj.setSelectionRange(0,end);
+                    obj.focus();
+                }else{
+                    var flag = window.clipboardData.setData("text",data);
+                    if(flag == true){
+                        alert("复制成功。现在您可以粘贴（Ctrl+v）到。");
+                    }else{
+                        alert("复制失败。");
+                    }
+                    var range = obj.createTextRange();
+                    range.moveEnd("character",end);
+                    range.moveStart("character",0);
+                    range.select();
+                }
+
+            }
+        })()
+    </script>

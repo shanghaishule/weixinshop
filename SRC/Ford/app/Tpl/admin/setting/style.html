@@ -1,0 +1,76 @@
+<include file="public:header" />
+<!--显示设置-->
+<div class="subnav">
+    <h1 class="title_2 line_x">显示设置</h1>
+</div>
+<div class="pad_lr_10">
+	<form id="info_form" action="{:u('setting/edit')}" method="post">
+	<table width="100%" class="table_form">
+        <tr>
+            <th width="150">{:L('default_keyword')} :</th>
+            <td><input type="text" name="setting[default_keyword]" class="input-text" value="{:C('pin_default_keyword')}" /></td>
+        </tr>
+        <tr>
+            <th>{:L('album_default_title')} :</th>
+            <td><input type="text" name="setting[album_default_title]" class="input-text" size="40" value="{:C('pin_album_default_title')}"></td>
+        </tr>
+    	<tr>
+        	<th>{:L('hot_tags')} :</th>
+        	<td><textarea rows="2" cols="80" name="setting[hot_tags]">{:C('pin_hot_tags')}</textarea></td>
+    	</tr>
+        <tr>
+            <th>首页瀑布流 :</th>
+            <td>
+                <label><input type="radio" <if condition="C('pin_index_wall') eq '1'">checked="checked"</if> value="1" name="setting[index_wall]"> {:L('open')}</label> &nbsp;&nbsp;
+                <label><input type="radio" <if condition="C('pin_index_wall') eq '0'">checked="checked"</if> value="0" name="setting[index_wall]"> {:L('close')}</label>
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('wall_distance')}</th>
+            <td>
+                <input type="text" name="setting[wall_distance]" class="input-text" value="{:C('pin_wall_distance')}" />
+                <span class="gray ml10">{:L('wall_distance_tip')}</span>
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('wall_spage_max')} :</th>
+            <td>
+                <input type="text" name="setting[wall_spage_max]" class="input-text" value="{:C('pin_wall_spage_max')}" />
+                <span class="gray ml10">每页动态加载次数</span>
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('wall_spage_size')} :</th>
+            <td>
+                <input type="text" name="setting[wall_spage_size]" class="input-text" value="{:C('pin_wall_spage_size')}" />
+                <span class="gray ml10">每次加载的商品个数</span>
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('book_page_max')} :</th>
+            <td>
+                <input type="text" name="setting[book_page_max]" class="input-text" value="{:C('pin_book_page_max')}" />
+                <span class="gray ml10">发现页面最多显示页数</span>
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('item_cover_comments')} :</th>
+            <td><input type="text" name="setting[item_cover_comments]" class="input-text" value="{:C('pin_item_cover_comments')}" /></td>
+        </tr>
+        <tr>
+            <th>{:L('album_cover_items')} :</th>
+            <td><input type="text" name="setting[album_cover_items]" class="input-text" value="{:C('pin_album_cover_items')}" /></td>
+        </tr>
+        <tr>
+        	<th></th>
+        	<td>
+                <input type="hidden" name="menuid"  value="{$menuid}"/>
+                <input type="submit" class="btn btn_submit" value="{:L('submit')}"/>
+            </td>
+    	</tr>
+	</table>
+	</form>
+</div>
+<include file="public:footer" />
+</body>
+</html>

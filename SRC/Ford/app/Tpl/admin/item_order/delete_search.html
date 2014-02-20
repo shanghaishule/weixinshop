@@ -1,0 +1,92 @@
+<include file="public:header" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>
+
+<div class="subnav">
+    <h1 class="title_2 line_x">一键删除</h1>
+</div>
+<div class="pad_lr_10" >
+<form action="{:u('item/delete_search')}" method="post" name="searchform" id="info_form">
+
+                <table width="100%" cellspacing="0" class="table_form">
+				<tbody>
+				
+	                <tr>
+						<th width="120">发布时间：</th>
+						<td>
+	                    <input type="text" name="time_start" id="time_start" class="date" size="12" value="{$time_start}">
+	                    -
+	                    <input type="text" name="time_end" id="time_end" class="date" size="12" value="{$time_end}">
+						</td>
+					</tr>
+		            <tr>
+						<th>商品分类：：</th>
+						<td>
+						<select class="J_cate_select mr10" data-pid="0" data-uri="{:U('item_cate/ajax_getchilds')}" data-selected=""></select><input type="hidden" name="cate_id" id="J_cate_id" value="" />
+						</td>
+					</tr>
+	                <tr>
+						<th>审核状态：</th>
+						<td>
+	                    <select name="status">
+	                    <option value="" selected>-所有状态-</option>
+	                    <option value="1">已审核</option>
+	                    <option value="0">未审核</option>
+	                    </select>
+						</td>
+					</tr>
+	                <tr>
+						<th>关 键 字：</th>
+						<td>
+	                    <input name="keyword" type="text" class="input-text" size="25" value="{$keyword}" />
+						</td>
+					</tr>
+	                <tr>
+						<th>价格范围：</th>
+						<td>
+					   <input type="text" name="min_price" size="5" class="input-text" value="{$min_price}" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')" />&nbsp;-&nbsp;<input type="text" name="max_price" size="5" class="input-text" value="{$max_price}" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')" />&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<th>佣金范围：</th>
+						<td>
+					   <input type="text" name="min_rates" size="5" class="input-text" value="{$min_rates}" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')" />&nbsp;-&nbsp;<input type="text" name="max_rates" size="5" class="input-text" value="{$max_rates}" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9.]/g,'')" />&nbsp;%
+						</td>
+					</tr>
+	                <tr>
+						<th>确认删除：</th>
+						<td>
+					   <input name="isok" type="checkbox" class="input-text" value="1" />&nbsp;&nbsp;<font color=red>(注：确认是否要删除，删除的数据不可恢复！)</font> 
+					   </td>
+					</tr>
+					</tbody>
+                </table>
+				
+				
+                <div class="mt10">
+				<input type="submit" name="dosubmit" class="btn btn_submit" value="删除" id="dosubmit"　　　　 style="margin:0 0 10px 100px;"　　　　　　　　/>
+				</div>
+</form>
+</div>
+<include file="public:footer" />
+<script language="javascript" type="text/javascript">
+	                        Calendar.setup({
+	                            inputField     :    "time_start",
+	                            ifFormat       :    "%Y-%m-%d",
+	                            showsTime      :    'true',
+	                            timeFormat     :    "24"
+	                        });
+</script>
+<script language="javascript" type="text/javascript">
+	                        Calendar.setup({
+	                            inputField     :    "time_end",
+	                            ifFormat       :    "%Y-%m-%d",
+	                            showsTime      :    'true',
+	                            timeFormat     :    "24"
+	                        });
+</script>  
+<script>
+$('.J_cate_select').cate_select('请选择');
+//$('.J_cate_select').cate_select({top_option:lang.all}); //分类联动
+</script>
+</body></html>

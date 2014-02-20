@@ -1,0 +1,30 @@
+<!--自定义广告模板  专辑焦点图-->
+<div class="fl" id="album_slide">
+    <ul class="album_slide_items">
+        <volist name="ad_list" id="ad">
+        <li class="album_slide_item">
+            {$ad.html}
+            <div class="author">
+                <a href="{:U('space/index', array('uid'=>$ad['extval']))}" target="_blank">
+                    <img class="J_card fl avatar r5" src="{:avatar($ad['extval'], 64)}" data-uid="{$ad.extval}">
+                </a>
+                <div class="info">
+                    <p class="title">{$ad.name}</p>
+                    <p class="desc">{$ad.desc}</p>
+                </div>
+            </div>
+        </li>
+        </volist>
+    </ul>
+</div>
+
+<div id="album_slide_btn">
+    <ul>
+        <li class="c">●</li>
+    </ul>
+</div>
+<script>
+$(function(){
+    $.pinphp.photo_slide('album_slide', 'album_slide_btn', 'album_slide_item', 470);
+});
+</script>

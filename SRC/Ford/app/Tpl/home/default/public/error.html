@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{:L('message_title')}</title>
+<!-- css file="__STATIC__/css/default/base.css" / -->
+<!-- css file="__STATIC__/css/default/style.css" / -->
+<script src="__STATIC__/js/jquery/jquery.js"></script>
+<include file="public:headtop" />
+</head>
+<body>
+<include file="public:head" />
+<div class="main_wrap">
+    <div class="msg_wrap">
+        <div class="message_box">
+            <div class="msg_error">
+                <p>{$error}</p>
+                <p class="msg_btnleft"><a href="{$jumpUrl}">{:L('msg_jump_desc')}</a></p>
+            </div>
+            <script language="javascript">
+                setTimeout("location.href='{$jumpUrl}';",{$waitSecond}*1000);
+            </script>
+        </div>
+    </div>
+</div>
+<include file="public:footer" />
+</body>
+</html>
