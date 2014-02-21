@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>用户登入-{$page_seo.title}</title>
+<link href="__STATIC__/weixin/css/shop.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/weixin/js/index.js"></script>
+<script type="text/javascript" src="__STATIC__/weixin/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="__STATIC__/weixin/js/ecmall.js" charset="utf-8"></script>
+<script type="text/javascript" src="__STATIC__/weixin/js/touchslider.js" charset="utf-8"></script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/jquery_002.js"></script></head>
+
+<body>
+<include file="public:head" />
+
+<script type="text/javascript">
+$(function(){	
+    $('#login_form').validate({
+        errorPlacement: function(error, element){
+            $(element).next("label").append(error); 
+        },
+        success       : function(label){
+            //label.addClass('validate_right').text('OK!');
+        },
+		onsubmit:true,// 是否在提交时验证 
+        onkeyup : false,
+        rules : {
+            user_name : {
+                required : true,
+				remote   : "{:U('index/ajaxCheckuser')}"
+            },
+            password : {
+                required : true
+            },
+          		
+        },
+        messages : {
+            user_name : {
+                required : '您必须提供一个用户名',
+				remote   : '用户名不存在！'
+            },
+            password  : {
+                required : '您必须提供一个密码'
+            }
+        },
+		submitHandler: function(form) {  //通过之后回调
+			
+    	var user_name= $('#user_name').val();
+    	var password= $('#password').val();
+    	
+    	var url  = "{:U('index/ajaxlogin',array('tokenTall'=>$tokenTall))}";
+    	$.post(url,{user_name:user_name,password:password},function(data){
+    	
+    		if(data.status==1) {
+    			$('#login_text').html("<b>登陆成功！</b>");
+    			//function a(){location.href=decodeURIComponent("%2Findex.php%3Fapp%3Dmemberbuy%26store_id%3D9");}
+    			function a(){
+    				//location.href=data.url;
+    				window.history.go(-1);
+    			    //window.location.reload();
+    			    //alert(data.url);
+    			}
+    			setTimeout(a,1000);
+    		} else {
+    			//var jsonObj = eval('('+result+')');
+    			$('#login_text').html("<i>密码错误！</i>");
+    		}
+
+    	},"json");
+        }
+}); 
+});
+</script>
+
+<div id="content">
+    <form method="post" id="login_form">
+            <input name="user_name" id="user_name" class="text width5" placeholder="用户名" type="text">
+            <label></label>
+            <input name="password" id="password" class="text width5" placeholder="密 码" type="password">
+            <label></label>
+            <label id="login_text"></label>
+            <input name="Submit" value="登陆" class="enter" type="submit">
+            <a href="#" class="clew" style="display:none;">忘记密码？</a>
+    </form>
+    <div class="login_right">
+        <h4>如果您还不是会员，请<a href="{:U('user/register', array('tokenTall'=>$tokenTall))}" title="立即注册">立即注册</a></h4>
+    </div>
+</div>
+
+<include file="public:footer" />
+
+</body>
+</html>

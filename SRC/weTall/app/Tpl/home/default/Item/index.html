@@ -188,6 +188,7 @@
                 <span class="letter1">品牌:</span>{$item.brand}<br>销售情况:售出 {$item.buy_num}件<br>所在地区:中国 
 			</div>
             <div class="handle">
+
            <script type="text/javascript">
 	            function sizetitle(size_title){
 	             $(".size_title").css('background','none');
@@ -206,13 +207,23 @@
 		  </style>
                <ul>
                 	<li class="handle_title">大小:</li>
+
+                <if condition="$countSize eq 0">
+                    <input name="size" id="sizeChoose" type="hidden" value="无">
+                    <else/><ul>
+                	<li class="handle_title">型号:</li>
+
                     <li>
+                    
                     <volist name='size' id='vo'>
                     	 <a href="javascript:void(0);" onclick="sizetitle('{$vo}')" ><div class="size_title" id="size{$vo}">{$vo}</div></a>
                     </volist>
                     <input name="size" id="sizeChoose" type="hidden" value="">
+
                     </li>
-                </ul>
+                </ul></if>
+                <if condition="$countColor eq 0"><input name="color" id="colorChoose" type="hidden" value="无">
+                <else/>
                 <ul>
                     <li class="handle_title">颜色:</li>
                     <li>
@@ -222,6 +233,9 @@
                     <input name="color" id="colorChoose" type="hidden" value="">
                     </li>
                 </ul>
+
+                </ul></if>
+                <ul>
                     <li class="handle_title">购买数量:</li>
                     <li>
                         <input type="text" value="1" id="quantity" name="" class="text width1" onafterpaste="this.value=this.value.replace(/\D/g,'')" onkeyup="this.value=this.value.replace(/\D/g,'')" />件（库存<span ectype="goods_stock" class="stock">{$item.goods_stock}</span>件）

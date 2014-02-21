@@ -1,0 +1,63 @@
+<include file="public:header" />
+<!--专辑列表-->
+<div class="pad_10" >
+    
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+            <td>
+            <div class="explain_col">
+            	<input type="hidden" name="g" value="admin" />
+                <input type="hidden" name="m" value="album" />
+                <input type="hidden" name="a" value="check" />
+                <input type="hidden" name="menuid" value="{$menuid}" />
+				{:L('cate')}：
+                <select name="cate_id">
+                    <option value="">--请选择分类--</option>
+                    <volist name="cate_list" id="val"> <option value="{$val.id}" 
+                        <if condition="$search.cate_id eq $val['id']"> selected="selected" </if>
+                        >{$val.name}
+                     </option>
+                     </volist>
+                </select>&nbsp;
+                {:L('keyword')} :
+                <input name="keyword" type="text" class="input-text" size="25" value="{$search.keyword}" />
+                <input type="submit" name="search" class="btn" value="{:L('search')}" />
+        	</div>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+    
+    <div class="J_tablelist album_imglist clearfix">
+        <volist name="list" id="val">
+        <div class="album fl">
+            <div class="clearfix"><h4 class="fl">{$val.title}</h4><em class="fr gray">{$val.id}</em></div>
+            <ul class="mt5 clearfix">
+                <for start="0" end=":C('pin_album_cover_items')">
+                    <li class="fl <if condition="$i%3 eq 0">left</if>">
+                        <present name="val['cover'][$i]">
+                        <img src="{:attach(get_thumb($val['cover'][$i]['img'], '_s'), 'item')}" width="55" height="55" />
+                        </present>
+                    </li>
+                </for>
+            </ul>
+            <div class="mt10"></div>
+            <a class="btn_blue">{$album_cate[$val['cate_id']]}</a>
+            <input type="checkbox" class="J_checkitem check fr" value="{$val.id}" />
+        </div>
+        </volist>
+    </div>
+	<div class="btn_wrap_fixed">
+    	<label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn btn_submit" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('album/do_check')}" data-name="id" data-msg="{:L('confirm_check')}" value="{:L('check')}" />
+    	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('album/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+    	<div id="pages">{$page}</div>
+    </div>
+
+</div>
+<include file="public:footer" />
+</body>
+</html>

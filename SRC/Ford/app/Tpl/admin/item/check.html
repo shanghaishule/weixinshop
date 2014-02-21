@@ -1,0 +1,77 @@
+<include file="public:header" />
+<!--商品列表-->
+<div class="pad_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="item" />
+                    <input type="hidden" name="a" value="check" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    发布时间：
+                    <input type="text" name="time_start" id="time_start" class="date" size="12" value="{$search.time_start}">
+                    -
+                    <input type="text" name="time_end" id="time_end" class="date" size="12" value="{$search.time_end}">
+                    &nbsp;&nbsp;商品分类：
+                    <select class="J_cate_select mr10" data-pid="0" data-uri="{:U('item_cate/ajax_getchilds')}" data-selected="{$search.selected_ids}"></select>
+                    <input type="hidden" name="cate_id" id="J_cate_id" value="{$search.cate_id}" />
+                    &nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text" size="25" value="{$search.keyword}" />
+                    <input type="submit" name="search" class="btn" value="搜索" />
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <div class="J_tablelist item_imglist clearfix">
+        <volist name="list" id="val">
+        <div class="item fl">
+            <label>
+            <input type="checkbox" class="J_checkitem check" value="{$val.id}" />
+            <div class="img clearfix"><img src="{:attach(get_thumb($val['img'], '_m'), 'item')}"></div>
+            </label>
+            <span class="line_x">{$val.title}</span>
+            <ul>
+                <li><a class="J_tooltip btn_blue" title="{$cate_list[$val['cate_id']]}">{:L('cate')}</a></li>
+                <li><a class="J_tooltip btn_blue" title="{$val.uname|default=L('item_no_author')}">{:L('author')}</a></li>
+            </ul>
+        </div>
+        </volist>
+    </div>
+
+    <div class="btn_wrap_fixed">
+        <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn btn_submit" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item/do_check')}" data-name="id" data-msg="{:L('confirm_check')}" value="{:L('check')}" />
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+        <div id="pages">{$page}</div>
+    </div>
+
+</div>
+<include file="public:footer" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+Calendar.setup({
+	inputField : "time_start",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+Calendar.setup({
+	inputField : "time_end",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+$(function(){
+    $('.J_cate_select').cate_select({top_option:lang.all}); //分类联动
+    $('.J_tooltip[title]').tooltip({offset:[10, 2], effect:'slide'}).dynamic({bottom:{direction:'down', bounce:true}});
+});
+</script>
+</body>
+</html>

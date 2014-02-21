@@ -1,0 +1,87 @@
+<include file="public:header" />
+<!--全局设置-->
+<div class="pad_lr_10">
+	<form id="info_form" action="{:u('setting/edit')}" method="post" enctype="multipart/form-data">
+	<table width="100%" class="table_form">
+        <tr>
+            <th width="150">{:L('ipban_switch')} :</th>
+            <td>
+                <label><input type="radio" <if condition="C('pin_ipban_switch') eq '1'">checked="checked"</if> value="1" name="setting[ipban_switch]"> {:L('open')}</label> &nbsp;&nbsp;
+                <label><input type="radio" <if condition="C('pin_ipban_switch') eq '0'">checked="checked"</if> value="0" name="setting[ipban_switch]"> {:L('close')}</label>
+                <span class="gray ml10">如果本站没有添加黑名单数据，建议关闭改功能提升性能</span>
+            </td>
+        </tr>
+        <tr>
+            <th>商品审核 :</th>
+            <td>
+                <label><input type="radio" <if condition="C('pin_item_check') eq '1'">checked="checked"</if> value="1" name="setting[item_check]"> {:L('open')}</label> &nbsp;&nbsp;
+                <label><input type="radio" <if condition="C('pin_item_check') eq '0'">checked="checked"</if> value="0" name="setting[item_check]"> {:L('close')}</label>
+                <span class="gray ml10">开启之后用户发布的商品默认是未审核状态</span>
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('avatar_size')} :</th>
+            <td>
+                <input type="text" name="setting[avatar_size]" class="input-text" size="40" value="{:C('pin_avatar_size')}">
+                <span class="gray ml10">用户头像规格，用","隔开</span>
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('item_bimg')} :</th>
+            <td>
+                <input type="text" name="setting[item_bimg][width]" class="input-text" size="5" value="{:C('pin_item_bimg.width')}"> × 
+                <input type="text" name="setting[item_bimg][height]" class="input-text" size="5" value="{:C('pin_item_bimg.height')}">
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('item_img')} :</th>
+            <td>
+                <input type="text" name="setting[item_img][width]" class="input-text" size="5" value="{:C('pin_item_img.width')}"> × 
+                <input type="text" name="setting[item_img][height]" class="input-text" size="5" value="{:C('pin_item_img.height')}">
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('item_simg')} :</th>
+            <td>
+                <input type="text" name="setting[item_simg][width]" class="input-text" size="5" value="{:C('pin_item_simg.width')}"> × 
+                <input type="text" name="setting[item_simg][height]" class="input-text" size="5" value="{:C('pin_item_simg.height')}">
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('itemcate_img')} :</th>
+            <td>
+                <input type="text" name="setting[itemcate_img][width]" class="input-text" size="5" value="{:C('pin_itemcate_img.width')}"> × 
+                <input type="text" name="setting[itemcate_img][height]" class="input-text" size="5" value="{:C('pin_itemcate_img.height')}">
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('score_item_simg')} :</th>
+            <td>
+                <input type="text" name="setting[score_item_img][swidth]" class="input-text" size="5" value="{:C('pin_score_item_img.swidth')}"> × 
+                <input type="text" name="setting[score_item_img][sheight]" class="input-text" size="5" value="{:C('pin_score_item_img.sheight')}">
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('score_item_bimg')} :</th>
+            <td>
+                <input type="text" name="setting[score_item_img][bwidth]" class="input-text" size="5" value="{:C('pin_score_item_img.bwidth')}"> × 
+                <input type="text" name="setting[score_item_img][bheight]" class="input-text" size="5" value="{:C('pin_score_item_img.bheight')}">
+            </td>
+        </tr>
+        <tr>
+            <th>{:L('statics_url')} :</th>
+            <td>
+                <input type="text" name="setting[statics_url]" class="input-text" size="40" value="{:C('pin_statics_url')}">
+                <span class="gray ml10">默认为空，外部服务器请填写如：http://s.pinphp.com</span>
+            </td>
+        </tr>
+        <tr>
+        	<th></th>
+        	<td><input type="hidden" name="menuid"  value="{$menuid}"/><input type="submit" class="btn btn_submit" name="do" value="{:L('submit')}"/></td>
+    	</tr>
+	</table>
+	</form>
+</div>
+<include file="public:footer" />
+</body>
+</html>

@@ -1,0 +1,55 @@
+<include file="public:header" />
+<div class="subnav">
+    <div class="content_menu ib_a blue line_x">
+        <a href="{:U('collect_alimama/index',array('menuid'=>$menuid))}"><em><< 重新搜索</em></a>
+        <span>|</span>
+        <em class="red">淘宝只提供搜索数据前10页，访问大于10页内容系统会自动跳转到第1页</em>
+    </div>
+</div>
+<!--阿里妈妈筛选采集-->
+<div class="pad_lr_10" >
+    <div class="J_tablelist table_list">
+        <table width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
+                <th align="left">{:L('tbk_item_info')}</th>
+                <th align="right">{:L('tbk_item_price')}</th>
+                <th align="right">{:L('tbk_item_commission')}</th>
+                <th align="right">{:L('tbk_item_commission_rate')}</th>
+                <th align="right">{:L('tbk_item_commission_num')}</th>
+                <th align="right">{:L('tbk_item_commission_volume')}</th>
+                <th align="right">{:L('tbk_item_volume')}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="val">
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.num_iid}"></td>
+                <td>
+                    <div class="fl img_border mr10"><img src="{$val.pic_url}_100x100.jpg" width="60" height="60" /></div>
+                    <div>
+                        <a href="{$val.click_url}" target="_blank">{$val.title}</a><br/>
+                        {:L('taobao_shop')}：<a href="{$val.shop_click_url}" target="_blank">{$val.nick}</a>
+                    </div>
+                </td>
+                <td align="right">{$val.price}{:L('price_unit')}</td>
+                <td align="right">{$val.commission}{:L('price_unit')}</td>
+                <td align="right">{$val['commission_rate']/100}%</td>
+                <td align="right">{$val.commission_num}{:L('item_unit')}</td>
+                <td align="right">{$val.commission_volume}{:L('price_unit')}</td>
+                <td align="right">{$val.volume}{:L('item_unit')}</td>
+            </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn_wrap_fixed">
+        <label class="select_all pad_lr_10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn btn_submit" data-tdtype="batch_action" data-acttype="ajax_form" data-uri="{:U('collect_alimama/publish')}" data-name="id" data-id="publish" data-title="{:L('publish')}" data-width="450" value="{:L('publish')}" />
+        <div id="pages">{$page}</div>
+    </div>
+</div>
+<include file="public:footer" />
+</body>
+</html>

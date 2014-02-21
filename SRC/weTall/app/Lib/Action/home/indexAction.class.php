@@ -287,6 +287,7 @@ class indexAction extends frontendAction {
         	$tokenTall = $this->getTokenTall();
     		$data = array('status'=>1, 'url'=>U('user/index', array('tokenTall'=>$tokenTall)));
     		$_SESSION['user_info']=$users;
+    		$user->where("username='".$user_name."' and password='".md5($password)."'")->save(array('last_login_time'=>time()));
         }else {
        		$data = array('status'=>0);
         }

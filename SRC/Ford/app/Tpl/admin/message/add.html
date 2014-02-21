@@ -1,0 +1,67 @@
+<div class="dialog_content">
+<form action="{:u('message/add')}" method="post" name="myform" id="info_form"  enctype="multipart/form-data" style="margin-top:10px;">
+<div class="common-form">
+      <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+        <tr>
+          <th width="80">管理员 :</th>
+          <td>{$_SESSION['admin']['username']}</td>
+        </tr>	
+        <tr>
+          <th>接收人 :</th>
+          <td>
+          	<textarea name="to_name" style="width:150px;height:70px;"></textarea>
+          	<p class="gray">每行填写一个会员名，不填则为全部会员</p>
+          </td>
+        </tr>
+        <tr>
+          <th>模版 :</th>
+          <td>
+          	<label><input class="J_type mr3" type="radio" name="type" value="tpl" checked="checked" />通知模板</label>
+          	<label class="ml5"><input class="J_type mr3" type="radio" name="type" value="custom" />自定义内容</label>
+          </td>
+        </tr>
+        <tr id="tpl">
+          <th>通知模板 :</th>
+          <td>
+	          <select name="tpl_alias">
+		          <volist name="tpl_list" id="val">
+		          <option value="{$val.alias}">{$val.name}</option>
+		          </volist>
+	          </select>
+          </td>
+        </tr>
+        <tr id="custom" style="display:none;">
+          <th>信息内容 :</th>
+          <td><textarea name="info" style="width:350px;height:80px;"></textarea></td>
+        </tr>                     
+      </table>
+</div>
+</form>
+</div>
+<script>
+$(function(){
+	$('.J_type').live('click',function(){
+		var type = $('.J_type:checked').val();
+		if(type == 'custom'){
+			$('#tpl').hide();
+			$('#custom').show();
+		}else {
+			$('#custom').hide();
+			$('#tpl').show();
+		}
+	});
+     
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+	
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+	function complate(result){
+		if(result.status == 1){
+			$.dialog.get(result.dialog).close();
+			$.pinphp.tip({content:result.msg});
+			window.location.reload();
+		} else {
+			$.pinphp.tip({content:result.msg, icon:'alert'});
+		}
+	}
+});
+</script>

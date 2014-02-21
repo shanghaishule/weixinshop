@@ -1,0 +1,28 @@
+<include file="public:header" />
+<!--栏目列表-->
+<div class="pad_10">
+    <div class="J_tablelist table_list">
+    <table width="100%" cellspacing="0" id="J_cate_tree">
+        <thead>
+            <tr>
+                <th width="40">ID</th>
+                <th align="left">{:L('page_name')}</th>
+                <th>{:L('page_last_time')}</td>
+                <th width="100">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {$list}
+        </tbody>
+    </table>
+    </div>
+</div>
+<include file="public:footer" />
+<script src="__STATIC__/js/jquery/plugins/jquery.treetable.js"></script>
+<script>
+$(function(){
+    $("#J_cate_tree").treeTable({indent:20, treeColumn:1, clickableNodeNames:true, initialState:'expanded'});
+});
+</script>
+</body>
+</html>

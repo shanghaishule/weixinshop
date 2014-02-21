@@ -1,0 +1,82 @@
+<include file="public:header" />
+<!--网站设置-->
+<div class="pad_lr_10">
+	<form id="info_form" action="{:u('setting/edit')}" method="post" enctype="multipart/form-data">
+	<table width="100%" class="table_form">
+        <tr>
+            <th width="150">{:L('site_name')} :</th>
+            <td><input type="text" name="name" class="input-text" size="50" value="{$wecha_shop.name}"></td>
+        </tr>
+        <tr>
+            <th>{:L('seo_title')} :</th>
+            <td><input type="text" name="title" class="input-text" size="50" value="{$wecha_shop.title}"></td>
+        </tr>
+        <tr>
+            <th>{:L('seo_keys')} :</th>
+            <td><input type="text" name="keywords" class="input-text" size="50" value="{$wecha_shop.keywords}"></td>
+        </tr>
+        <tr>
+            <th>{:L('seo_desc')} :</th>
+            <td><textarea rows="3" cols="50" name="descr">{$wecha_shop.descr}</textarea></td>
+        </tr>
+        <tr>
+            <th>店铺logo :</th>
+            <td>
+  	               <input type="file" name="logo" />宽高比例建议:60 * 60     
+  	               <img width="60" height="60" alt="店铺logo" src="{$wecha_shop.logo}"/>
+  	        </td>
+        </tr>
+         <tr>
+            <th>微信公众号二维码 :</th>
+            <td>
+            <input type="file" name="twodcode" /> 宽高比例建议:90 * 90       
+            <img width="90" height="90" alt="店铺二维码" src="{$wecha_shop.twodcode}"/>
+  			</td>
+        </tr>
+        <tr>
+            <th>客服联系电话:</th>
+            <td>
+            <input type="text" name="phone" maxlength="11" value="{$wecha_shop.phone}"/> 
+  			</td>
+        </tr>
+        	
+       <!-- <tr>
+            <th>{:L('site_icp')} :</th>
+            <td><input type="text" name="setting[site_icp]" class="input-text" size="50" value="{:C('pin_site_icp')}"></td>
+        </tr>
+        <tr>
+            <th>{:L('statistics_code')} :</th>
+            <td><textarea rows="3" cols="50" name="setting[statistics_code]">{:C('pin_statistics_code')}</textarea></td>
+        </tr>-->
+    	<tr>
+        	<th>{:L('site_status')} :</th>
+        	<td>
+            	<label><input type="radio" class="J_change_status" <if condition="$wecha_shop['status'] eq '1'">checked="checked"</if> value="1" name="setting[site_status]"> {:L('open')}</label> &nbsp;&nbsp;
+                <label><input type="radio" class="J_change_status" <if condition="$wecha_shop['status'] eq '0'">checked="checked"</if> value="0" name="setting[site_status]"> {:L('close')}</label>
+            </td>
+    	</tr>
+        <tr id="J_closed_reason" <if condition="C('pin_site_status') eq 1">class="hidden"</if>>
+        	<th>{:L('closed_reason')} :</th>
+        	<td><textarea rows="4" cols="50" name="closeReason" id="closed_reason">{$wecha_shop.closeReason}</textarea></td>
+    	</tr>
+        <tr>
+        	<th></th>
+        	<td><input type="hidden" name="menuid"  value="{$menuid}"/><input type="submit" class="btn btn_submit" value="{:L('submit')}"/></td>
+    	</tr>
+	</table>
+	</form>
+</div>
+<include file="public:footer" />
+<script>
+$(function(){
+    $('.J_change_status').live('click', function(){
+        if($(this).val() == '0'){
+            $('#J_closed_reason').fadeIn();
+        }else{
+            $('#J_closed_reason').fadeOut();
+        }
+    });
+});
+</script>
+</body>
+</html>

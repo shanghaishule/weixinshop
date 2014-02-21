@@ -1,0 +1,17 @@
+<include file="public:header"/>
+<div class="c_main fr">
+<form action="{:U('index')}" method="post">
+    <div class="c_main_title">{:L('step_eula_desc')}</div>
+    <div class="c_main_body eula">
+        <present name="error_msg">
+        <div class="error_msg">{$error_msg}</div>
+        </present>
+        {$eula_html}
+    </div>
+    <div class="act">
+        <div class="accept"><label><input type="checkbox" name="accept" class="input_checkbox" value="1" />&nbsp;&nbsp;{$Think.lang.i_accept}</label></div>
+        <div class="btn"><input type="submit" value="{:L('next')}" class="btn_next" /></div>
+    </div>
+</form>
+</div>
+<include file="public:footer"/>

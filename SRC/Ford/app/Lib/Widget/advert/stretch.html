@@ -1,0 +1,16 @@
+<!--伸缩广告-->
+<div id="J_stretch_big">
+	{$ad_list[0]['html']}
+</div>
+<div id="J_stretch_small" style="display:none;">
+	{$ad_list[1]['html']}
+</div>
+<script>
+$(function(){
+	setTimeout(function(){
+		$("#J_stretch_big").slideUp(1000,function(){
+			$("#J_stretch_small").slideDown(1000);
+		});
+	}, 2E3);
+});
+</script>

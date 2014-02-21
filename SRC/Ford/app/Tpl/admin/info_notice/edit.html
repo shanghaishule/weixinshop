@@ -1,0 +1,43 @@
+<include file="public:header" />
+<!--添加禁止IP-->
+<div class="dialog_content">
+	<form id="info_form" name="info_form" action="{:u('info_notice/edit')}" method="post">
+	<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+		<tr>
+			<th width="80">公告标题:</th>
+			<td><input type="text" name="title" value="{$info.title}" id="title" class="input-text"></td>
+		</tr>
+		<tr>
+			<th width="80">公告内容:</th>
+			<td><textarea style="width:200px; height:100px;" name="content" id="content">{$info.content}</textarea></td>
+		</tr>
+		<tr>
+			<th width="80">公告时间:</th>
+			<td>			
+			<input type="text" class="date" id="ptime" value="{$info.ptime|date='Y-m-d',###}"  name="ptime" />
+			<script type="text/javascript">
+			Calendar.setup({
+				inputField : "ptime",
+				ifFormat   : "%Y-%m-%d",
+				showsTime  : false,
+				timeFormat : "24"
+			});
+			</script>
+			</td>
+		</tr>
+        <tr>
+			<th width="100">排序值 :</th>
+			<td><input type="text" name="ordid" value="{$info.order}" id="ordid" class="input-text" size="10"></td>
+		</tr>
+		<tr>
+			<th>{:L('enabled')} :</th>
+			<td>
+				<label><input type="radio" name="status" class="radio_style" value="1" checked="checked"> {:L('yes')}</label>
+				<label class="ml10"><input type="radio" name="status" class="radio_style" value="0"> {:L('no')}</label>
+			</td>
+		</tr>
+	</table>
+	<input type="hidden" name="id" value="{$info.id}" />
+	</form>
+</div>
+

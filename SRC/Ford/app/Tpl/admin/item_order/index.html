@@ -1,0 +1,151 @@
+<include file="public:header" />
+<!--商品列表-->
+<div class="pad_lr_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="item_order" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="tokenTall" value="{$search.tokenTall}" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                     订单编号 :
+                    <input name="orderId" type="text" class="input-text" size="25" value="{$search.orderId}" />
+                   &nbsp;&nbsp; 会员名 :
+                    <input name="userName" type="text" class="input-text" size="25" value="{$search.userName}" />
+                    &nbsp;&nbsp; 订单状态 :
+                    <select name="status">
+                    <option value="">--所有--</option>
+                   <?php foreach($order_status as $key=>$item){ ?>
+                   <option <?php if($search['status']==$key) echo "selected=''"; ?> value="<?php echo $key; ?>"><?php echo $item; ?></option>
+                    <?php } ?>
+                    
+                    </select>
+                    <br>
+					<if condition="$sm neq ''"><input type="hidden" name="sm" value="{$sm}" /></if>
+                    下单时间 :
+                    <input type="text" name="time_start" id="J_time_start" class="date" size="12" value="{$search.time_start}">
+                    -
+                    <input type="text" name="time_end" id="J_time_end" class="date" size="12" value="{$search.time_end}">
+                    付款时间 :
+                    <input type="text" name="start_support_time" id="J_time_start_support" class="date" size="12" value="{$search.start_support_time}">
+                    -
+                    <input type="text" name="end_support_time" id="J_time_end_support" class="date" size="12" value="{$search.end_support_time}">
+                    订单价格区间 :
+                    <input type="text" name="price_min" class="input-text" size="5" value="{$search.price_min}" />
+                    -
+                    <input type="text" name="price_max" class="input-text" size="5" value="{$search.price_max}" />
+					
+                    <input type="submit" name="search" class="btn" value="搜索" />
+					<script>
+					Calendar.setup({
+						inputField : "J_time_start",
+						ifFormat   : "%Y-%m-%d",
+						showsTime  : false,
+						timeFormat : "24"
+					});
+					Calendar.setup({
+						inputField : "J_time_end",
+						ifFormat   : "%Y-%m-%d",
+						showsTime  : false,
+						timeFormat : "24"
+					});
+					Calendar.setup({
+						inputField : "J_time_start_support",
+						ifFormat   : "%Y-%m-%d",
+						showsTime  : false,
+						timeFormat : "24"
+					});
+					Calendar.setup({
+						inputField : "J_time_end_support",
+						ifFormat   : "%Y-%m-%d",
+						showsTime  : false,
+						timeFormat : "24"
+					});
+					</script>
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+   
+    <div class="J_tablelist table_list" data-acturi="{:U('item/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width=25><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <!-- <th width="100"><span data-tdtype="order_by" data-field="id">ID</span></th> -->
+                <th width="100"><span data-tdtype="order_by" data-field="orderId">订单编号&状态</span></th>
+                <th width="70"><span data-tdtype="order_by" data-field="order_sumPrice">订单金额</span></th>
+                <th width="60">收货人&电话</span></th>
+                <th width="70">支付&配送</span></th>
+                <th width="40"><span data-tdtype="order_by" data-field="add_time">下单&付款时间 </span></th>
+                <th width="80">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <!-- <td align="center">{$val.id}</td> -->
+       
+                <td align="center"><a href="{:U('item_order/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">{$val.orderId}</a><br> 
+               <if condition="$val.sellerRemark neq ''"> 
+                <a title="【客服备注】{$val.sellerRemark}">
+                <img src="__STATIC__/weixin/images/remark.gif" >
+               </a>
+               </if>
+                     <switch name="val.status" >
+                         <case value="1">待付款</case>
+                         <case value="2">待发货</case>
+                         <case value="3">待收货</case>
+                         <case value="4">完成</case>
+                        <default />关闭
+                 </switch>
+                 </td>
+               <td align="center"><b style="color:red">¥{$val.order_sumPrice}</b></td>
+                <td align="center">{$val.address_name}({$val.userName})<br>{$val.mobile}</td>
+               
+                <td align="center" >
+                   <switch name="val.supportmetho" >
+                         <case value="1">支付宝支付</case>
+                         <case value="2">货到付款</case>  
+                 </switch>
+                 <br>
+                  <switch name="val.freetype" >
+                         <case value="1">平邮</case>
+                         <case value="2">快递</case>  
+                         <case value="3">ems</case>  
+                          <case value="0">卖家包邮</case>  
+                 </switch>
+                </td> 
+                <td align="center">{$val.add_time|date='Y-m-d H:i:s',###}--<br><if condition="$val.support_time neq '' ">{$val.support_time|date='Y-m-d H:i:s',###}</if></td>
+                <td align="center"><a href="{:U('item_order/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">查看</a>| <a href="javascript:void(0);" class="J_confirmurl" data-uri="{:U('item_order/delete', array('id'=>$val['id'], 'tokenTall'=>$val['tokenTall']))}" data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),$val['orderId'])}">{:L('delete')}</a>
+                | <a href="javascript:;" class="J_showdialog" data-uri="{:U('item_order/update', array('id'=>$val['id'], 'tokenTall'=>$val['tokenTall']))}" data-title="编辑 - {$val.orderId}"  data-id="update" data-acttype="ajax" data-width="800" data-height="130">修改价格</a> </td>
+            </tr> 
+            </volist>
+    	</tbody>
+    </table>
+    </div>
+   
+    <div class="btn_wrap_fixed">
+      <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item_order/delete', array('tokenTall'=>$search.tokenTall))}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+        <div id="pages">{$page}</div>
+    </div>
+</div>
+
+<include file="public:footer" />
+
+<script>
+$('.J_preview').preview(); //查看大图
+$('.J_cate_select').cate_select({top_option:lang.all}); //分类联动
+$('.J_tooltip[title]').tooltip({offset:[10, 2], effect:'slide'}).dynamic({bottom:{direction:'down', bounce:true}});
+</script>
+
+</body>
+</html>

@@ -133,6 +133,7 @@
 			<div class="history">
 				<div class="history-date">
 					<ul class="history-ul">
+						<if condition="($apply_again eq '0')">
 						<h2 class="first" style="position: relative;">请填写您的申请信息</h2>
 						<li class="green ly1" >
 						<dl>
@@ -177,9 +178,13 @@
 								</tr>
 								<tr><td colspan="2"><a id="showcard1" class="submit" href="javascript:void(0)">提交申请</a></td></tr>
 							</table>
-							</dl>
+						</dl>
 						</li>
 						<li></li>
+						<else /> 
+							<h2 class="first" >您的申请已在处理中</h2>
+							<br />
+						</if>
 					</ul>
 				</div>
 			</div>

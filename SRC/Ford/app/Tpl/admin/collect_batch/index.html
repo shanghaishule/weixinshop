@@ -1,0 +1,58 @@
+<include file="public:header" />
+<!--商品地址批量添加-->
+<div class="subnav">
+    <h1 class="title_2 line_x">批量采集</h1>
+</div>
+
+<div class="pad_lr_10">
+    <form action="{:U('collect_batch/import')}" method="post" enctype="multipart/form-data">
+    <table width="100%" cellspacing="0" class="table_form">
+        <tr>
+            <th width="100">导入方式 :</th>
+            <td>
+                <label><input type="radio" class="J_import_type" name="type" value="input" checked> 输入地址</label> &nbsp;&nbsp;
+                <label><input type="radio" class="J_import_type" name="type" value="file"> 导入文件</label>
+            </td>
+        </tr>
+        <tr>
+            <th>采集马甲 :</th>
+            <td>
+                <select name="auid">
+                    <volist name="auto_user" id="val">
+                    <option value="{$val.id}">{$val.name}</option>
+                    </volist>
+                </select>
+            </td>
+        </tr>
+        <tr id="J_input">
+            <th>{:L('item_collect_url')} :</th>
+            <td><textarea rows="10" cols="80" name="url_list"></textarea></td>
+        </tr>
+        <tr id="J_file" class="hidden">
+            <th>导入文件 :</th>
+            <td><input type="file" name="url_file" /></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><input type="submit" value="{:L('submit')}" name="dosubmit" class="btn btn_submit"></td>
+        </tr>
+    </table>
+    </form>
+</div>
+
+<include file="public:footer" />
+<script>
+$(function(){
+    $('.J_import_type').live('click', function(){
+        if($(this).val() == 'input'){
+            $('#J_file').hide();
+            $('#J_input').show();
+        }else{
+            $('#J_input').hide();
+            $('#J_file').show();
+        }
+    });
+});
+</script>
+</body>
+</html>

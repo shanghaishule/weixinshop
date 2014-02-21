@@ -139,3 +139,14 @@ CREATE TABLE `tp_shop_favi` (
   `tokenTall` varchar(30) DEFAULT NULL COMMENT '店铺token',
   PRIMARY KEY (`id`), UNIQUE (`userid`,`tokenTall`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+/*总商城增加会员管理*/
+/*插入节点表*/
+delete from tp_node where `name` = 'Member';
+insert into tp_node(`name`,title,`status`,remark,pid,`level`,sort,display)
+values('Member','会员管理',1,0,84,2,0,2);
+/*给admin组加权限*/
+delete a from tp_access a , tp_node b where a.node_id = b.id and b.title = '会员管理';
+INSERT into tp_access(role_id, node_id, pid, `level`)
+select 5,id,pid,`level` from tp_node where title = '会员管理';

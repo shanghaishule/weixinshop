@@ -1,0 +1,44 @@
+
+<!--编辑商品-->
+<form id="info_form" action="{:U('item_order/update',array('orderId'=>$info.orderId))}" method="post" enctype="multipart/form-data">
+  <div style="margin-left:20px;">
+                 <input type="hidden" value="{$info.orderId}" name="orderId">
+                 <div align="center" style="background:none repeat scroll 0 0 #E6F1F6;font-size:14px;font-weight:bold;padding:10px 0;">商品明细</div>    
+                   <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tblist">
+                    <thead>
+                        <tr>
+                            <th width="70">商品图片</th>
+                            <th>商品名称</th>
+                            <th width="60">单价</th>
+                            <th width="60">数量</th>
+                            <th width="60">小计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <volist name='order_detail' id='vo' >
+                        <tr class="">
+                            <td><img width="68" alt="nopic" src="{:attach(get_thumb($vo['img'], '_b'), 'item')}"></td>
+                            <td class="ltd">
+                                {$vo.title}
+                                
+                            </td>
+                            <td width="150" class="red rtd">¥{$vo.price}</td>
+                            <td>{$vo.quantity}</td>
+                            <td class="red rtd">¥<?php echo $vo['price']*$vo['quantity']; ?></td>
+                        </tr>
+                     </volist>   
+                    </tbody>
+                </table>      
+                
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbdetail">
+                    <tbody>
+                        <tr>
+                            <td class="rtd">订单总额：<span class="red" id="labProdAllTotal">¥<input id="sumPrice" size="12" type="text" value="{$info.order_sumPrice}" name="oreder_sumPrice"></span>  </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>          
+		</div>  		
+</form>
+
+

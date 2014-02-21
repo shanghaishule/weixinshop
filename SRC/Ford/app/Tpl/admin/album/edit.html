@@ -1,0 +1,85 @@
+<div class="dialog_content">
+<form id="info_form" action="{:u('album/edit')}" method="post">
+<div class="common-form">
+	<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+        <tr>
+			<th width="80">专辑分类 :</th>
+			<td>
+            <select name="cate_id" id="cate_id">
+            <option value="">--请选择分类--</option>
+            <volist name="cate_list" id="val">
+            <option value="{$val.id}" <if condition="$info['cate_id'] eq $val['id']">selected="selected"</if>>{$val.name}</option>
+            </volist>
+            </select></td>
+		</tr>
+        <tr>
+			<th width="80">专辑名称 :</th>
+			<td><input type="text" name="title" id="title" class="input-text" size="30" style="width:65%;" value="{$info.title}"></td>
+		</tr>
+		<tr>
+			<th>专辑图片 :</th>
+			<td>
+			<input type="text" name="banner" id="J_img" class="input-text fl mr10" size="30" value="{$info.banner}">
+        	<div id="J_upload_img" class="upload_btn"><span>{:L('upload')}</span></div>
+			<notempty name="info['banner']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{:attach($info['banner'], 'album')}"><img src="__STATIC__/images/filetype/image_s.gif" /></span></notempty>
+			</td>
+ 		</tr>
+        <tr>
+			<th width="80">专辑描述 :</th>
+			<td><textarea name="intro" id="intro" style="width:65%;height:50px;">{$info.intro}</textarea></td>
+		</tr>
+	</table>
+    <input type="hidden" name="id" value="{$info.id}" />
+</div>
+</form>
+</div>
+<script src="__STATIC__/js/fileuploader.js"></script>
+<script type="text/javascript">
+$(function(){
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+	$("#title").formValidator({onshow:"请填写专辑名称",onfocus:"请填写专辑名称"}).inputValidator({min:1,onerror:"请填写专辑名称"}).defaultPassed();
+	$("#cate_id").formValidator({onshow:"请选择分类",onfocus:"请选择分类"}).inputValidator({min:1,onerror:"请选择分类"}).defaultPassed();
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+	function complate(result){
+		if(result.status == 1){
+			$.dialog.get(result.dialog).close();
+			$.pinphp.tip({content:result.msg});
+			window.location.reload();
+		} else {
+			$.pinphp.tip({content:result.msg, icon:'alert'});
+		}
+	}
+	
+	//上传图片
+    var uploader = new qq.FileUploaderBasic({
+    	allowedExtensions: ['jpg','gif','jpeg','png','bmp','pdg'],
+        button: document.getElementById('J_upload_img'),
+        multiple: false,
+        action: "{:U('album/ajax_upload_img')}",
+        inputName: 'img',
+        forceMultipart: true, //用$_FILES
+        messages: {
+        	typeError: lang.upload_type_error,
+        	sizeError: lang.upload_size_error,
+        	minSizeError: lang.upload_minsize_error,
+        	emptyError: lang.upload_empty_error,
+        	noFilesError: lang.upload_nofile_error,
+        	onLeave: lang.upload_onLeave
+        },
+        showMessage: function(message){
+        	$.pinphp.tip({content:message, icon:'error'});
+        },
+        onSubmit: function(id, fileName){
+        	$('#J_upload_img').addClass('btn_disabled').find('span').text(lang.uploading);
+        },
+        onComplete: function(id, fileName, result){
+        	$('#J_upload_img').removeClass('btn_disabled').find('span').text(lang.upload);
+            if(result.status == '1'){
+        		$('#J_img').val(result.data);
+        	} else {
+        		$.pinphp.tip({content:result.msg, icon:'error'});
+        	}
+        }
+    });
+});
+</script>

@@ -1,0 +1,65 @@
+<include file="public:header" />
+<script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
+<!--标签-->
+<div class="pad_lr_10" >
+
+    <div class="J_tablelist table_list" data-acturi="{:U('address/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="40">默认</th>
+				<th width="50"><span tdtype="order_by" data-field="name">联系人</span></th>
+                <th align="100">所在地区</th>
+                <th align="center">详细地址</th>
+                <th align="50">邮政编码</th>
+                <th align="50">手机号码</th>
+                <th align="50">电话号码	</th>
+                <th align="80">公司名称</th>
+                <th width="50" align="left"><span data-tdtype="order_by" data-field="ordid">排序</span></th>
+                <th width="40"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
+                <th width="120">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val">
+            <tr>
+                <td align="center"><input onchange="chang(this);" name="isno" <if condition='$val.isno eq 1'>checked=""</if> type="radio" title="点击设为默认发货地址" class="J_checkitem" value="{$val.id}"></td>
+				<td align="center">{$val.contacts}</td>
+				<td align="center">{$val.Province}{$val.City}{$val.Area}</td>
+				<td align="center"><span data-tdtype="edit" data-field="address" data-id="{$val.id}" class="tdedit">{$val.address}</span></td>
+				<td align="center"><span data-tdtype="edit" data-field="postcode" data-id="{$val.id}" class="tdedit">{$val.postcode}</span></td>
+				<td align="center"><span data-tdtype="edit" data-field="mobile" data-id="{$val.id}" class="tdedit">{$val.mobile}</span></td>
+				<td align="center"><span data-tdtype="edit" data-field="phone" data-id="{$val.id}" class="tdedit">{$val.phone}</span></td>
+                <td align="center"><span data-tdtype="edit" data-field="name" data-id="{$val.id}" class="tdedit">{$val.name}</span></td>
+                <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit" style="color:{$val.colors};">{$val.ordid}</span></td>
+                <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
+                <td align="center">
+                	<a href="javascript:;" class="J_showdialog" data-uri="{:U('address/edit', array('id'=>$val['id'],'tokenTall'=>$val['tokenTall']))}" data-title="{:L('edit')} - {$val.name}"  data-id="edit" data-acttype="ajax" data-width="550" data-height="130">{:L('edit')}</a> | 
+                    <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('address/deletebrand', array('id'=>$val['id'],'tokenTall'=>$val['tokenTall']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['contacts'])}">{:L('delete')}</a>
+                </td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    </div>
+
+    <div class="btn_wrap_fixed">
+    	<div id="pages">{$page}</div>
+    </div>
+
+</div>
+<include file="public:footer" />
+</body>
+</html>
+
+<script>
+function chang(obj)
+{
+	if(obj.value!='')
+	{
+		$.post("{:U('address/check')}",{id:obj.value},function(date){
+		
+		});
+	}
+}
+</script>

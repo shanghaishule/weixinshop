@@ -80,10 +80,34 @@ class itemAction extends frontendAction {
         $item['brand'] = $brand['name'];
         
         //商品相册
+
         $img_list = M('item_img')->field('url')->where(array('item_id' => $id))->order('ordid')->select();        
         $comments_list = M('comments')->where(array('item_id' => $id))->order('create_time desc')->select();
         
         $this->assign('comments_list', $comments_list);        
+
+        $img_list = M('item_img')->field('url')->where(array('item_id' => $id))->order('ordid')->select();
+        
+        //size的数量
+        $countSize=0;//var_dump($size);die();
+        foreach($size as $val){
+        	if($val != ""){
+        		$countSize=$countSize+1;
+        	}
+        }
+        
+        //color的数量
+        $countColor=0;
+        foreach($color as $val){
+        	if($val != ""){
+        		$countColor=$countColor+1;
+        	}
+        }
+        
+        $this->assign('countSize', $countSize);
+        $this->assign('countColor', $countColor);
+
+//>>>>>>> branch 'master' of https://github.com/shanghaishule/weixinshop.git
         $this->assign('item', $item);
         $this->assign('img_list', $img_list);
         $this->assign('tokenTall', $tokenTall);

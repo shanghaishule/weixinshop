@@ -1,0 +1,53 @@
+<include file="public:header" />
+<script charset="utf-8" src="__STATIC__/weixin/js/jquery.js" type="text/javascript"></script>
+<div class="subnav">
+    <h1 class="title_2 line_x">结账方式信息</h1>
+</div>
+<form id="info_form" action="{:U('account/setting')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<div class="J_panes">
+        <div class="content_list pad_10">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+			<input type="hidden" name="id" value="{$info.id}" >
+            <tr>
+				<th>金融机构名称:</th>
+				<td><input type="text" name="bankname" id="J_bankname" class="input-text" size="60" value="{$info.bankname}"></td>
+		    </tr>
+			<tr>
+				<th>收款账号:</th>
+				<td><input type="text" name="account" id="J_account" class="input-text" size="60" value="{$info.account}"></td>
+			</tr>
+			<tr>
+				<th>收款人:</th>
+				<td><input type="text" name="payee" id="J_payee" class="input-text" size="60" value="{$info.payee}"></td>
+			</tr>
+			<tr>
+				<th>收款人手机号:</th>
+				<td><input type="text" name="mobile" id="J_mobile" class="input-text" size="60" value="{$info.mobile}"></td>
+			</tr>
+			<tr>
+				<th>商家token值:</th>
+				<td><input type="text" name="tokenTall" id="J_tokenTall" class="input-text" size="60" <if condition="$info.tokenTall eq ''"> value="{$tokenTall}" <else /> value="{$info.tokenTall}" </if> ></td>
+			</tr>
+		</table>
+		</div>
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" class="btn btn_submit"></div>
+	</div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+</form>
+<include file="public:footer" />
+<script type="text/javascript">
+$(function() {
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+	$("#J_bankname").formValidator({onshow:'请填写银行名称、支付宝等',onfocus:'请填写银行名称、支付宝等'}).inputValidator({min:1,onerror:'请填写银行名称、支付宝等'});
+	$("#J_account").formValidator({onshow:'请填写收款账号',onfocus:'请填写收款账号'}).inputValidator({min:1,onerror:'请填写收款账号'});
+	$("#J_payee").formValidator({onshow:'请填写收款人',onfocus:'请填写收款人'}).inputValidator({min:1,onerror:'请填写收款人'});
+	$("#J_mobile").formValidator({onshow:'请填写收款人手机号',onfocus:'请填写收款人手机号'}).inputValidator({min:1,onerror:'请填写收款人手机号'});
+	$("#J_tokenTall").attr('readOnly',true).formValidator({onshow:'系统自动填写',onfocus:'系统自动填写'});
+});
+</script>
+</body>
+</html>

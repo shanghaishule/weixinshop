@@ -1,0 +1,74 @@
+<include file="public:header" />
+<!--积分设置-->
+<div class="pad_lr_10">
+<form id="info_form" action="{:U('score/setting')}" method="post">
+    <table width="100%" cellspacing="0" class="table_form">
+        <thead>
+        <tr>
+            <th width="150" align="left">用户行为</th>
+            <th width="150" align="left">积分</th>
+            <th align="left">每日奖惩上限次数</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>注册 :</td>
+            <td><input type="text" name="score_rule[register]" class="input-text" size="10" value="{:C('pin_score_rule.register')}"></td>
+            <td>
+                {:C('pin_score_rule.register_nums')}
+                <input type="text" name="score_rule[register_nums]" class="input-text" size="10" value="{:C('pin_score_rule.register_nums')}" style="display:none;">
+            </td>
+        </tr>
+        <tr>
+            <td>登录 :</td>
+            <td><input type="text" name="score_rule[login]" class="input-text" size="10" value="{:C('pin_score_rule.login')}"></td>
+            <td><input type="text" name="score_rule[login_nums]" class="input-text" size="10" value="{:C('pin_score_rule.login_nums')}"></td>
+        </tr>
+        <tr>
+            <td>发布分享 :</td>
+            <td><input type="text" name="score_rule[pubitem]" class="input-text" size="10" value="{:C('pin_score_rule.pubitem')}"></td>
+            <td><input type="text" name="score_rule[pubitem_nums]" class="input-text" size="10" value="{:C('pin_score_rule.pubitem_nums')}"></td>
+        </tr>
+        <tr>
+            <td>添加喜欢 :</td>
+            <td><input type="text" name="score_rule[likeitem]" class="input-text" size="10" value="{:C('pin_score_rule.likeitem')}"></td>
+            <td><input type="text" name="score_rule[likeitem_nums]" class="input-text" size="10" value="{:C('pin_score_rule.likeitem_nums')}"></td>
+        </tr>
+        <tr>
+            <td>添加到专辑 :</td>
+            <td><input type="text" name="score_rule[joinalbum]" class="input-text" size="10" value="{:C('pin_score_rule.joinalbum')}"></td>
+            <td><input type="text" name="score_rule[joinalbum_nums]" class="input-text" size="10" value="{:C('pin_score_rule.joinalbum_nums')}"></td>
+        </tr>
+        <tr>
+            <td>转发分享 :</td>
+            <td><input type="text" name="score_rule[fwitem]" class="input-text" size="10" value="{:C('pin_score_rule.fwitem')}"></td>
+            <td><input type="text" name="score_rule[fwitem_nums]" class="input-text" size="10" value="{:C('pin_score_rule.fwitem_nums')}"></td>
+        </tr>
+        <tr>
+            <td>发布评论 :</td>
+            <td><input type="text" name="score_rule[pubcmt]" class="input-text" size="10" value="{:C('pin_score_rule.pubcmt')}"></td>
+            <td><input type="text" name="score_rule[pubcmt_nums]" class="input-text" size="10" value="{:C('pin_score_rule.pubcmt_nums')}"></td>
+        </tr>
+        <tr>
+            <td>删除分享 :</td>
+            <td><input type="text" name="score_rule[delitem]" class="input-text" size="10" value="{:C('pin_score_rule.delitem')}"></td>
+            <td><input type="text" name="score_rule[delitem_nums]" class="input-text" size="10" value="{:C('pin_score_rule.delitem_nums')}"></td>
+        </tr>
+        <tr>
+            <td colspan="3"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" /></td>
+        </tr>
+    </tbody>
+    </table>
+</form>
+</div>
+<include file="public:footer" />
+<script>
+$('#score_setting').find('input').live('keyup keydown blur',function(){
+    var self = $(this);
+    var val = self.val();
+    val = val.replace(/[^0-9]/g,'');
+    self.val(val);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<include file="public:header"/>
+<div class="c_main fr">
+<form action="{:U('check')}" method="post">
+    <div class="c_main_title">{:L('step_check_desc')}</div>
+    <div class="c_main_body">
+        <volist name="error" id="val">
+        <div class="error_msg">{$val}</div>
+        </volist>
+    </div>
+    <div class="act">
+        <div class="btn">
+            <present name="error">
+            <input type="submit" class="btn_next" value="{:L('recheck')}"/>
+            <else/>
+            <input type="submit" value="{:L('next')}" class="btn_next" />
+            </present>
+        </div>
+    </div>
+</form>
+</div>
+<include file="public:footer"/>
