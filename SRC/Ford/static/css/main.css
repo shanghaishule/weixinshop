@@ -1,4 +1,4 @@
-body,html {font: normal 100% Helvetica, Arial, sans-serif; color:#FFF; background:url(../images/main_bg.jpg) repeat; -webkit-text-size-adjust:none;}
+body,html {font: normal 100% Helvetica, Arial, sans-serif; color:#FFF; background:url(../images/Innovate/main_bg_2.jpg) repeat; -webkit-text-size-adjust:none;}
 a, a:link, a:visited, a:hover, a:active {cursor: pointer;text-decoration:none; color:#FFF;}
 *{ padding:0; margin:0; list-style: none; border:0 none;outline:none;}
 .mp25 {margin-top:25px;}
@@ -6,8 +6,8 @@ a, a:link, a:visited, a:hover, a:active {cursor: pointer;text-decoration:none; c
 
 /*header
 ==================================================================================*/
-.header {width:100%;height: 56px; background:url(../images/header_bg.jpg) repeat-x; overflow:hidden; position:relative}
-.header .logo {width:132px; height:56px; overflow:hidden; position:absolute; top:0; left:0;}
+.header {width:100%;height: 56px; background:url(../images/Innovate/main_bg_2.jpg) repeat-x; overflow:hidden; position:relative}
+.header .logo {width:75px; height:50px; overflow:hidden; position:absolute; top:0; left:20;margin-left:30px;}
 .headerRigth { position:absolute; top:12px; right:0;}
 .header .back,.header .home {width:65px; height:35px; display:block; float:left; margin-right:20px;}
 .headerRigth { height:35px; overflow:hidden}

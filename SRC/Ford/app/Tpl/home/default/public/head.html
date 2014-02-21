@@ -1,79 +1,9 @@
-<div id="head"></div>
+<body>
 
-<style>
-	#logo{
-		height:50px;
-		width:116px;
-	}
-	#headshop select{
-		-webkit-border-radius:5px ; -moz-border-radius:5px;
-		float:left;
-		height:30px;
-		top:30px;
-		border-color:rgb(102,204,51);
-		margin:2px 0px 0px 2px;
-	}
-	#leftfloat{
-		height:35px;
-		margin:2px 2px 0px 10px;
-	}
-	#search_box {
-		width: 301px; 
-		height: 34px; 
-		background: url(__ROOT__/static/weixin/css/images/bg_search_box.gif); 
-	} 
-	#s { 
-		float:left;
-		padding: 0; 
-		margin: 2px 0 0 6px; 
-		border: 0; 
-		height:30px;
-		width: 175px; 
-		background: none; 
-		font-size: .8em; 
-	} 
-	#search_box #go { 
-		float: right; 
-		margin: 4px 4px 0 0;
-	}
-</style>
-
-
-<div id="nav">
-	<ul class="navlist">
-		<li class="r" id="n_4"><a href="/index.php?g=Wap&m=weTall&a=index"><div class="home_page_logo"></div></a></li>
-    	<li id="n_0">
-    		<a href="{:U('book/allcate',array('tokenTall'=>$tokenTall))}" ><span ></span></a>
-        	<!--ul class="submenu">
-        	<volist name='index_cate_list' id='vo' >
-        		<li>
-                    <a href="{:U('book/cate',array('cid'=>$vo['id'],'tokenTall'=>$tokenTall))}" class="none_ico"> {$vo.name}</a><br>
-                </li>
-            </volist>
-            </ul-->
-        </li>
-        
-        <li class="r active" id="n_1">
-           <if condition="$tokenTall eq ''">
-              <a href="/index.php?g=Wap&m=weTall&a=index">
-              <else/>
-              <a href="{:U('home/index/index', array('tokenTall'=>$tokenTall))}">
-           </if>
-        <span></span></a></li>
-        <li class="r" id="n_2"><a href="{:U('user/index', array('tokenTall'=>$tokenTall))}"><span></span></a></li>
-        <li class="r" id="n_3"><a href="{:U('shopcart/index', array('tokenTall'=>$tokenTall))}"><span></span></a><i></i></li>
-        
-    </ul>
-    <script type="text/javascript">
-    	$(".navlist > li#n_0").click(function(){
-			$(this).toggleClass("active");
-		});
-		$(".navlist > li.r a").each(function() {
-            href="index.php-app=member&act=login&ret_url=-index.php-app=member.htm"+$(this).attr("href");
-			whref=window.location.href;
-			if(whref.indexOf(href)!='-1'){
-				$(this).parent("li").addClass("active");
-			}
-        });
-    </script>
+<!--header-->
+<div class="header">
+    <a href="{:U(home/index/index)}"><img src="__STATIC__/images/logo.jpg" class="logo" /></a>
+    <span class="headerRigth">
+        <a href="{:U(home/index/index)}" class="home"><img src="__STATIC__/images/home.png" width="65px" height="35px" alt="首页〉" /></a>
+    </span>
 </div>
