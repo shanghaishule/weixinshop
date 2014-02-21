@@ -335,17 +335,21 @@ class orderAction extends userbaseAction {
 			$orders=$item_order->where("userId='".$this->visitor->info['id']."' and orderId='".$orderId."'")->find();
 			if(!is_array($orders))
 				$this->_404();
-				
+
+			$this->assign('orderid',$orders['id']);//订单ID
+			$this->assign('dingdanhao',$orders['orderId']);//订单号
+			$this->assign('order_sumPrice',$orders['order_sumPrice']);
+			$this->assign('order_exist','1');
+			
 			if(empty($orders['supportmetho']))//是否已有支付方式
 			{
-				$this->assign('orderid',$orders['id']);//订单ID
-				$this->assign('dingdanhao',$orders['orderId']);//订单号
-				$this->assign('order_sumPrice',$orders['order_sumPrice']);
+				$this->assign('order_zhifu','0');
 			}else
 			{
-				$alipay=M('alipay')->find();
-				echo "<script>location.href='wapapli/alipayapi.php?WIDseller_email=".$alipay['alipayname']."&WIDout_trade_no=".$orderId."&WIDsubject=".$orderId."&WIDtotal_fee=".$orders['order_sumPrice']."'</script>";
-				exit;
+				//$alipay=M('alipay')->find();
+				//echo "<script>location.href='wapapli/alipayapi.php?WIDseller_email=".$alipay['alipayname']."&WIDout_trade_no=".$orderId."&WIDsubject=".$orderId."&WIDtotal_fee=".$orders['order_sumPrice']."'</script>";
+				//exit;
+				$this->assign('order_zhifu',$orders['supportmetho']);
 			}
 		}
 		else
@@ -388,6 +392,7 @@ class orderAction extends userbaseAction {
 						$this->error('操作失败!');
 					}
 				}
+				$this->success('货到付款，保存成功！',U('user/index',array('status'=>2)));
 			}
 			elseif (3 == $payment_id)
 			{

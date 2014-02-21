@@ -33,12 +33,17 @@ $(function(){
         <input type="hidden" name="orderid" value="{$orderid}" />
         <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
         <div class="step_main">
-            <div class="clue_on"><h4>订单提交成功！</h4><p>您的订单已成功生成，选择您想用的支付方式进行支付</p></div>
+        	<eq name="order_exist" value="1">
+        		<div class="clue_on"><h4>订单信息：</h4></div>
+            <else />
+            	<div class="clue_on"><h4>订单提交成功！</h4><p>您的订单已成功生成，选择您想用的支付方式进行支付</p></div>
+            </eq>
             <div class="order_information">
                 <p>订单号：<span>{$dingdanhao}</span></p>
                 <p>订单总价：<span>¥{$order_sumPrice}</span></p>
             </div>
 
+			<eq name="order_zhifu" value="0">
             <div class="buy">
                 <h3>选择支付方式并付款</h3>
                     <dl class="defray">
@@ -68,6 +73,22 @@ $(function(){
                     <a href="javascript:$('#goto_pay').submit();" class="btn enter">确认支付</a>
                 </p>
             </div>
+            <else />
+            	<div class="buy">
+                <h3>您已选择支付方式：</h3>
+                <switch name="order_zhifu">
+				<case value="3">
+				<p class="logo"><label for="payment_unionpay"><img src="__STATIC__/weixin/images/unionpay.png" ></label></p>
+				<p class="explain">银联支付</p>
+				</case>
+				<case value="2">
+				<p class="logo"><label for="payment_cod"><img  src="__STATIC__/weixin/images/huodao.png"></label></p>
+                <p class="explain">货到付款</p>
+				</case>
+				<default />其他方式
+				</switch>
+                </div>
+            </eq>
             <div class="clear"></div>
         </div>
     </form>
