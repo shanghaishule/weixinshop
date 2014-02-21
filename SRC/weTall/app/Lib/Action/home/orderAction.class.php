@@ -325,7 +325,7 @@ class orderAction extends userbaseAction {
 	
 			$this->assign('dingdanhao', implode('、', $all_order_arr));//所有订单
 			$this->assign('order_sumPrice',$all_order_price);//总金额
-	
+			$this->assign('order_zhifu','0');
 	
 		}
 		else if(isset($_GET['orderId']))
