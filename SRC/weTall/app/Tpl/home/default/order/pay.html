@@ -43,7 +43,7 @@ $(function(){
                 <p>订单总价：<span>¥{$order_sumPrice}</span></p>
             </div>
 
-			<eq name="order_zhifu" value="0">
+
             <div class="buy">
                 <h3>选择支付方式并付款</h3>
                     <dl class="defray">
@@ -73,22 +73,8 @@ $(function(){
                     <a href="javascript:$('#goto_pay').submit();" class="btn enter">确认支付</a>
                 </p>
             </div>
-            <else />
-            	<div class="buy">
-                <h3>您已选择支付方式：</h3>
-                <switch name="order_zhifu">
-				<case value="3">
-				<p class="logo"><label for="payment_unionpay"><img src="__STATIC__/weixin/images/unionpay.png" ></label></p>
-				<p class="explain">银联支付</p>
-				</case>
-				<case value="2">
-				<p class="logo"><label for="payment_cod"><img  src="__STATIC__/weixin/images/huodao.png"></label></p>
-                <p class="explain">货到付款</p>
-				</case>
-				<default />其他方式
-				</switch>
-                </div>
-            </eq>
+            
+            
             <div class="clear"></div>
         </div>
     </form>
