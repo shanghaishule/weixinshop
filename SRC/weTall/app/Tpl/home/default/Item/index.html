@@ -40,14 +40,18 @@
 	    	
 	        var goodId = $("#goodId").val();
 	        var quantity = $("#quantity").val();
-	        var sizeChoose = $("#sizeChoose").val();
-	        var colorChoose = $("#colorChoose").val();
-	        if (sizeChoose == "")
+
+	        var size =  $("#sizeChoose").val();
+	        var color = $("#colorChoose").val();
+	        //alert(size);
+
+	        if (size == "")
 	        {
 	            alert('请选择大小');
 	            return;
 	        }
-	        if (colorChoose == "")
+
+	        if (color == "")
 	        {
 	            alert('请选择颜色');
 	            return;
@@ -69,8 +73,8 @@
 	          alert("请输入数字!");
 	           return;
 	        }
-	        sizeChoose = sizeChoose + "";
-	        add_cart(goodId, quantity, sizeChoose, colorChoose);
+	        
+	        add_cart(goodId, quantity, size, color);
 	    }
 	    
 	    function add_cart(goodId,quantity,size,color)//商品ID，购买数量
@@ -205,12 +209,11 @@
 		   .size_title{border:1px solid #d9d9d9;color:black;width:75px;height:24px;background:none;font-size:14px;float:left;margin-left:3px;}
 		   .color_title{border:1px solid #d9d9d9;color:black;width:75px;height:24px;background:none;font-size:14px;float:left;margin-left:3px;}
 		  </style>
-               <ul>
-                	<li class="handle_title">大小:</li>
-
+               
                 <if condition="$countSize eq 0">
                     <input name="size" id="sizeChoose" type="hidden" value="无">
-                    <else/><ul>
+                <else/>
+                <ul>
                 	<li class="handle_title">型号:</li>
 
                     <li>
@@ -222,7 +225,8 @@
 
                     </li>
                 </ul></if>
-                <if condition="$countColor eq 0"><input name="color" id="colorChoose" type="hidden" value="无">
+                <if condition="$countColor eq 0">
+                	<input name="color" id="colorChoose" type="hidden" value="无">
                 <else/>
                 <ul>
                     <li class="handle_title">颜色:</li>
