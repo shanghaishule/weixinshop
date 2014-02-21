@@ -40,16 +40,16 @@
 	    	
 	        var goodId = $("#goodId").val();
 	        var quantity = $("#quantity").val();
-	        var size =  $("input[name='size']:checked").val();
-	        var color = $("input[name='color']:checked").val();
+	        var size =  $("#sizeChoose").val();
+	        var color = $("#colorChoose").val();
 	        //alert(size);
 
-	        if ($("#sizeChoose").val() == "")
+	        if (size == "")
 	        {
 	            alert('请选择大小');
 	            return;
 	        }
-	        if ($("#colorChoose").val() == "")
+	        if (color == "")
 	        {
 	            alert('请选择颜色');
 	            return;
@@ -186,7 +186,8 @@
 		  </style>
                 <if condition="$countSize eq 0">
                     <input name="size" id="sizeChoose" type="hidden" value="无">
-                    <else/><ul>
+                <else/>
+                <ul>
                 	<li class="handle_title">型号:</li>
                     <li>
                     
@@ -197,7 +198,8 @@
                     
                     </li>
                 </ul></if>
-                <if condition="$countColor eq 0"><input name="color" id="colorChoose" type="hidden" value="无">
+                <if condition="$countColor eq 0">
+                	<input name="color" id="colorChoose" type="hidden" value="无">
                 <else/>
                 <ul>
                     <li class="handle_title">颜色:</li>
