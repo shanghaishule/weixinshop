@@ -168,6 +168,22 @@
                 <span class="letter1">品牌:</span>{$item.brand}<br>销售情况:售出 {$item.buy_num}件<br>所在地区:中国 
 			</div>
             <div class="handle">
+                <script type="text/javascript">
+	            function sizetitle(size_title){
+	             $(".size_title").css('background','none');
+		     $("#size" + size_title).css('background','url(/weTall/static/images/xiaokuang.png)');
+		     $("#sizeChoose").val(size_title);
+		    }
+		    function colortitle(color_title){
+	             $(".color_title").css('background','none');
+		     $("#color" + color_title).css('background','url(/weTall/static/images/xiaokuang.png)');
+		     $("#colorChoose").val(color_title);
+		    }
+		  </script>
+		  <style>
+		   .size_title{border:1px solid #d9d9d9;color:black;width:75px;height:24px;background:none;font-size:14px;float:left;margin-left:3px;}
+		   .color_title{border:1px solid #d9d9d9;color:black;width:75px;height:24px;background:none;font-size:14px;float:left;margin-left:3px;}
+		  </style>
                 <if condition="$countSize eq 0">
                     <input name="size" id="sizeChoose" type="hidden" value="无">
                     <else/><ul>
