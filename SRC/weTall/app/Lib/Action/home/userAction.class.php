@@ -628,6 +628,7 @@ class userAction extends userbaseAction {
     	$this->assign('item',$item);
     	$this->assign('username',$this->visitor->info['username']);
     	$this->assign('createtime',date('y-m-d H:i:m'));
+    	$this->assign('tokenTall',$this->getTokenTall());
         $this->display();        
         
     } 

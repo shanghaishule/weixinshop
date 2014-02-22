@@ -284,13 +284,16 @@
 	</div>
 	<!--xxl start-->
 	<div class="option_box" id = "item_comments">
-	<table style = "width:100%;">	
-	  
-		<volist name='comments_list' id='vo' >
-		<tr>
-			<td><label><font size="1px">{$vo.create_time}</font></label></td>
-			<td><label><font size="1px">{$vo.user_name}</font></label></td>
-			<td><label><font size="1px">评价等级:
+	<table style = "width:100%;border-collapse:collapse;" border="1">	
+		<volist name='comments_list' id='vo' mod='2'>
+		<eq name="mod" value="1">
+		<tr style="background: lightgrey;">
+		<else />
+		<tr style="background: lightgrey">
+		</eq>
+			<td style="padding:10px; border:0px;"><label><font size="1px">{$vo.create_time}</font></label></td>
+			<td style="text-align:center; border:0px;"><label><font size="1px">{$vo.user_name}</font></label></td>
+			<td style="text-align:center; border:0px;"><label><font size="1px">评价等级:
 				<switch name="vo.comments_type" >
 					<case value="1">好</case>
 					<case value="2">中</case>
@@ -298,9 +301,10 @@
 				</switch>
 			</font></label></td>
 		</tr>
-		<tr>
-			<td><label><font size="1px">评价内容：{$vo.user_comments}</font></label></td>
-		</tr>		
+		<tr style="background: pink;" >
+			<td colspan="3" style="padding:10px"><label><font size="1px">评价内容：{$vo.user_comments}</font></label></td>
+		</tr>
+		</div>
 		</volist>			
 	</table>		
 	</div>		

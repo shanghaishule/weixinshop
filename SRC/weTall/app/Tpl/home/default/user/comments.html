@@ -31,7 +31,7 @@
 				$.post("{:U('user/addcomm')}", submitData,
 					function(data) {
 						alert(data);
-						setTimeout("window.location.href='index.php?m=user&a=index&status=4&tokenTall='",500);
+						setTimeout("window.location.href='index.php?m=user&a=index&status=4&tokenTall={$tokenTall}'",500);
 						return;
 					}
 				)
@@ -40,7 +40,7 @@
 
 		function xian(){
 //alert("OK");
-return "/weTall/index.php?m=user&a=index&status=4&tokenTall=";
+return "/weTall/index.php?m=user&a=index&status=4&tokenTall={$tokenTall}";
 		}		
   </script>
 

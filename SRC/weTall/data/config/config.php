@@ -11,5 +11,5 @@ return array(
     'DATA_PATH_LEVEL'=>3, //缓存文件夹层级
     'LOAD_EXT_CONFIG' => 'url,db', //扩展配置
     
-    'SHOW_PAGE_TRACE' => TRUE,
+    'SHOW_PAGE_TRACE' => false,
 );
