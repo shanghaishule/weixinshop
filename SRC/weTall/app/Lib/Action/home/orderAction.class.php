@@ -412,11 +412,12 @@ class orderAction extends userbaseAction {
 				$req['merId']       		= upmp_config::$mer_id; // 商户代码
 				$req['backEndUrl']      	= upmp_config::$mer_back_end_url; // 通知URL
 				$req['frontEndUrl']     	= upmp_config::$mer_front_end_url; // 前台通知URL(可选)
-				$req['orderDescription']	= "订单描述";// 订单描述(可选)
+				$req['orderDescription']	= "订单号：".$alldingdanhao;// 订单描述(可选)
 				$req['orderTime']   		= date("YmdHis"); // 交易开始日期时间yyyyMMddHHmmss
 				$req['orderTimeout']   		= ""; // 订单超时时间yyyyMMddHHmmss(可选)
-				$req['orderNumber'] 		= date("YmdHiss"); //订单号(商户根据自己需要生成订单号)
-				$req['orderAmount'] 		= "1"; // 订单金额
+				//$req['orderNumber'] 		= date("YmdHiss"); //订单号(商户根据自己需要生成订单号)
+				$req['orderNumber'] 		= $alldingdanhao;
+				$req['orderAmount'] 		= $all_order_price; // 订单金额
 				$req['orderCurrency'] 		= "156"; // 交易币种(可选)
 				$req['reqReserved'] 		= "透传信息"; // 请求方保留域(可选，用于透传商户信息)
 				// 保留域填充方法
@@ -448,11 +449,13 @@ class orderAction extends userbaseAction {
 				// 未加密的
 				fwrite($fh, $alldingdanhao."\r\n");
 				// 订单信息
-				$strOrderInfo = "tn=".$strSN.",ResultURL=http://bestchoice88.com/weTall/wapupay/notify_url.php?rid=,UseTestMode=true";
+				// urlEncode(base64(tn=流水号,resultURL=urlEcode(交易结果展示url),usetestmode=true|false))
+				//$strOrderInfo = "tn=".$strSN.",ResultURL=http://115.28.228.91/weTall/wapupay/notify_url.php?rid=,UseTestMode=true";
+				$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode("http://115.28.228.91/weTall/wapupay/notify_url.php?rid=").",UseTestMode=true";
 				// 未加密的
 				fwrite($fh, $strOrderInfo."\r\n");
 				// 转换字符串
-				$strOrderInfo = urlencode($strOrderInfo);
+				//$strOrderInfo = urlencode($strOrderInfo);
 				// base64加密
 				$strOrderInfo = base64_encode($strOrderInfo);
 				// 转换字符串
@@ -507,7 +510,6 @@ class orderAction extends userbaseAction {
 			if(is_array($free))
 			{
 				$money+=$free[$method[$type]];
-	
 			}
 		}
 		return $money;
