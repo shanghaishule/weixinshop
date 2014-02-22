@@ -1,13 +1,13 @@
-body,html {font: normal 100% Helvetica, Arial, sans-serif; color:#FFF; background:url(../images/Innovate/main_bg_2.jpg) repeat; -webkit-text-size-adjust:none;}
+body,html {font: normal 100% Helvetica, Arial, sans-serif; color:#FFF; background:url(../images/main_bg.jpg) repeat; -webkit-text-size-adjust:none;max-width:320px;}
 a, a:link, a:visited, a:hover, a:active {cursor: pointer;text-decoration:none; color:#FFF;}
 *{ padding:0; margin:0; list-style: none; border:0 none;outline:none;}
-.mp25 {margin-top:25px;}
+.mp25 {margin-top:0px;}
 .hidden { display:none}
 
 /*header
 ==================================================================================*/
-.header {width:100%;height: 56px; background:url(../images/Innovate/main_bg_2.jpg) repeat-x; overflow:hidden; position:relative}
-.header .logo {width:75px; height:50px; overflow:hidden; position:absolute; top:0; left:20;margin-left:30px;}
+.header {width:100%;height: 95px; background:url(../images/upbg.jpg) no-repeat; overflow:hidden; position:relative;background-size:100% 100%;}
+.header .logo {width:75px; height:50px; overflow:hidden; position:absolute; top:0; left:20;margin-left:30px;margin-top:27px;}
 .headerRigth { position:absolute; top:12px; right:0;}
 .header .back,.header .home {width:65px; height:35px; display:block; float:left; margin-right:20px;}
 .headerRigth { height:35px; overflow:hidden}
@@ -15,8 +15,16 @@ a, a:link, a:visited, a:hover, a:active {cursor: pointer;text-decoration:none; c
 .nav { height:35px; padding:0 15px; background:url(../images/nav_bg.jpg) repeat-x; overflow:hidden; position:relative}
 .backList { width:85px; height:35px; display:block; float:right}
 
-.menu { background:url(../images/menu_ul_bg.jpg) repeat-x;}
-.menu li { color:#FFF; height:40px; font-size:16px; font-family:"Microsoft YaHei"; line-height:40px;background:url(../images/menu_bg.jpg) no-repeat right 0;}
+.menu { background:url(../images/menu_ul_bg.jpg) repeat-x;opacity:0.95;
+        -moz-border-radius:20px;
+        border-radius:20px;
+	    -webkit-border-radius:20px;
+}
+.menu li { 
+	-moz-border-radius:20px;
+        border-radius:20px;
+	    -webkit-border-radius:20px;
+	color:#FFF; height:40px; font-size:16px; font-family:"Microsoft YaHei"; line-height:40px;background:url(../images/menu_bg.jpg) no-repeat right 0;}
 .menu li a { color:#FFF; padding:0 0 0 30px;height:40px; display:block}
 
 /*body_index
@@ -170,22 +178,22 @@ a, a:link, a:visited, a:hover, a:active {cursor: pointer;text-decoration:none; c
 #download .down_tvc{ top:147px;}
 
 /*footer*/
-.footer {width:100%;padding-top:25px;position:relative;}
+.footer {width:100%;height: 95px;padding-top:7px;position:relative;background:url(../images/down_bg.jpg) no-repeat;background-size:100% 100%;}
 .footer ul {width:320px; margin:0 auto;}
 .footer .cxkj a {width:150px; height:34px; line-height:34px; font-size:14px; font-family:"Microsoft YaHei"; display:block; text-align:center; background:url(../images/cxkj_bg.png) no-repeat; margin:0 auto;}
-.telephone {width:190px; height:30px; line-height:30px; padding:0 0 0 50px; font-size:14px; font-family:"Microsoft YaHei"; background:url(../images/telephone.png) no-repeat; margin-left:64px;}
+.telephone {width:190px; height:30px; line-height:30px; padding:0 0 0 50px; font-size:14px; font-family:"Microsoft YaHei"; background:url(../images/telephone.png) no-repeat; margin-left:114px;}
 .telephone a { color:#FFF;}
-.shareBox { height:20px; padding-left:18px}
-.shareBox span { font-size:12px; padding-right:10px;float:left}
+.shareBox { height:20px; padding-left:8px}
+.shareBox span { font-size:12px; padding-right:0px;float:left}
 .shareBox .weibo { background:url(../images/ico_weibo.png) no-repeat;padding-left:20px;}
-.shareBox .share { position:relative; top:-1px;}
+.shareBox .share { position:relative; top:-1px;margin-left:5px;}
 .shareBox .weixin { background:url(../images/ico_weixin.png) no-repeat;padding-left:20px;}
 .yy { height:32px; overflow:hidden; position:relative;}
 .button_yy,.button_search {width:126px; height:32px; line-height:32px; color:#8b8b8c; margin-left:20px; font-size:14px; display:block}
 .button_yy a,.button_search a { padding:2px 0 0 50px; color:#8b8b8c; display:block;}
 .button_search { background:url(../images/button_search.png) no-repeat; position:absolute; right:20px; top:0}
 .button_yy { background:url(../images/button_yy.png) no-repeat; padding-right:15px; border-right:solid 1px #2a2b2c;}
-.copyright {color:#4f4f4f; text-align:center; font-size:12px; padding:20px 0;}
+.copyright {color:white; text-align:left; font-size:12px; padding:20px 0 0 0px;}
 
 
 /*
