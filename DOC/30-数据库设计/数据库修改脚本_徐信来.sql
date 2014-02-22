@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- 数据库: `bestchoi_shule`
 --
-delete from tp_comments;
+drop TABLE tp_comments;
 
 -- --------------------------------------------------------
 

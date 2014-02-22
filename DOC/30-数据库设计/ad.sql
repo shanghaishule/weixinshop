@@ -1,1 +1,0 @@
-ALTERTABLE`tp_ad`ADD`tokenTall` VARCHAR( 20)NULLAFTER`checkstatus` ;
