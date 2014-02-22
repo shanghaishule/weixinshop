@@ -127,9 +127,13 @@ class settingAction extends backendAction {
         $weChaShop = M("wecha_shop");
         
         $wechaData1["tokenTall"] = $_SESSION["tokenTall"];
-        $weChaShop->where($wechaData1)->save($data);
+        if ($weChaShop->where($wechaData1)->save($data)) {
+        	$this->success(L('operation_success'));
+        }else {
+        	$this->error(L('您没有做任何修改！'));
+        }
 
-        $this->success(L('operation_success'));
+        
     }
 
     public function ajax_mail_test() {

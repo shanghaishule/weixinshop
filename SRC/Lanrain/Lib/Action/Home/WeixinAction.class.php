@@ -141,6 +141,10 @@ class WeixinAction extends Action
                 
                     return $this->home();
                     break;
+                case '官网':
+                    
+                    	return $this->guanwang();
+                    	break;
                 case '主页':
                     return $this->home();
                     break;
@@ -858,14 +862,16 @@ class WeixinAction extends Action
             );
         } else {
           
-            if ($home['apiurl'] == false) {            	
-                $url = rtrim(C('site_url'), '/').'/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
+            if ($home['apiurl'] == false) { 
+            	$url = rtrim(C('site_url'), '/') . '/index.php?g=Wap&m=Index&a=index&token='. $this->token .'&wecha_id='.$this->data['FromUserName'];
+            	 
+                //$url = rtrim(C('site_url'), '/').'/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
             } else {
                 $url = $home['apiurl'];
             }
-            if (C('home_token') == $this->token) {
-            	$url= rtrim(C('site_url'), '/')."/index.php?g=Wap&m=weTall&a=index";
-            }
+            //if (C('home_token') == $this->token) {
+            //	$url= rtrim(C('site_url'), '/')."/index.php?g=Wap&m=weTall&a=index";
+            //}
             
             $_SESSION['FromUserName'] = $this->data['FromUserName'];
         }
@@ -881,6 +887,42 @@ class WeixinAction extends Action
             ),
             'news'
         );
+    }
+    function guanwang($name)
+    {
+    	$home = M('home')->where(array(
+    			'token' => $this->token
+    	))->find();
+    	if ($home == false) {
+    		return array(
+    				'商家未做官网配置，请稍后再试',
+    				'text'
+    		);
+    	} else {
+    
+    		if ($home['apiurl'] == false) {
+    			$url = rtrim(C('site_url'), '/').'/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
+    		} else {
+    			$url = $home['apiurl'];
+    		}
+    		if (C('home_token') == $this->token) {
+    			$url= rtrim(C('site_url'), '/')."/index.php?g=Wap&m=weTall&a=index";
+    		}
+    
+    		$_SESSION['FromUserName'] = $this->data['FromUserName'];
+    	}
+    
+    	return array(
+    			array(
+    					array(
+    							$home['title'],
+    							$home['info'],
+    							$home['picurl'],
+    							$url
+    					)
+    			),
+    			'news'
+    	);
     }
     function kuaidi($data)
     {
