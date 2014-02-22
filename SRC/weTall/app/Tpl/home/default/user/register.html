@@ -55,7 +55,7 @@ $(function(){
             },
             email : {
                 required : true,
-                email    : true
+                //email    : true
             }
            
         },
@@ -74,8 +74,8 @@ $(function(){
                 equalTo  : '两次输入的密码不一致'
             },
             email : {
-                required : '您必须提供您的电子邮箱',
-                email    : '这不是一个有效的电子邮箱'
+                required : '您必须提供您的微信号',
+                //email    : '这不是一个有效的电子邮箱'
             }
         }
     });
@@ -87,7 +87,7 @@ $(function(){
         <input id="user_name" name="user_name" placeholder="用户名" class="text width10" type="text">
         <input id="password" name="password" placeholder="密&nbsp;&nbsp;&nbsp;码" class="text width10" type="password">
         <input name="password_confirm" placeholder="确认密码" class="text width10" type="password">
-        <input name="email" placeholder="电子邮箱" class="text width10" type="text">
+        <input name="email" placeholder="微信号" class="text width10" type="text">
         <input name="Submit" value="立即注册" class="login_btn" title="立即注册" type="submit">
         <input name="ret_url" value=" " type="hidden">
     </form>

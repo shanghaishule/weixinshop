@@ -5,7 +5,7 @@ class userModel extends Model
     protected $_validate = array(
         array('username', 'require', '{%username_require}'), //不能为空
         array('repassword', 'password', '{%inconsistent_password}', 0, 'confirm'), //确认密码
-        array('email', 'email', '{%email_error}'), //邮箱格式
+        //array('email', 'email', '{%email_error}'), //邮箱格式
         array('username', '1,20', '{%username_length_error}', 0, 'length', 1), //用户名长度
         array('password', '6,20', '{%password_length_error}', 0, 'length', 1), //密码长度
         array('username', '', '{%username_exists}', 0, 'unique', 1), //新增的时候检测重复
