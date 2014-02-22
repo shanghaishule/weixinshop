@@ -42,7 +42,7 @@ class HomeAction extends UserAction{
 					$row=array('token'=>$this->token);
 					$row['name']=$m;
 					//$row['url']=$this->$_POST['url_'.$m];
-					$row['url']=intval($_POST['url_'.$m]);
+					$row['url']=$_POST['url_'.$m];
 					$row['taxis']=intval($_POST['sort_'.$m]);
 					$row['display']=intval($_POST['display_'.$m]);
 					//if (strlen(trim($row['url']))){
