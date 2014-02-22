@@ -417,7 +417,7 @@ class orderAction extends userbaseAction {
 				$req['orderTimeout']   		= ""; // 订单超时时间yyyyMMddHHmmss(可选)
 				//$req['orderNumber'] 		= date("YmdHiss"); //订单号(商户根据自己需要生成订单号)
 				$req['orderNumber'] 		= $alldingdanhao;
-				$req['orderAmount'] 		= $all_order_price; // 订单金额
+				$req['orderAmount'] 		= $all_order_price*100; // 订单金额，精确到分 1块请输入100
 				$req['orderCurrency'] 		= "156"; // 交易币种(可选)
 				$req['reqReserved'] 		= "透传信息"; // 请求方保留域(可选，用于透传商户信息)
 				// 保留域填充方法
