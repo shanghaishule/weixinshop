@@ -29,7 +29,7 @@ class applicationAction extends frontendAction{
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		
-		$wecha_id = $_SESSION['FromUserName'] ? $_SESSION['FromUserName'] : "";
+		$wecha_id = $this->getWechaId();
 		$this->assign('wecha_id',$wecha_id);
 		
 		if($this->application_mod->where(array('wecha_id'=>$wecha_id))->find()){
@@ -38,7 +38,7 @@ class applicationAction extends frontendAction{
 			$this->assign('apply_again','0');
 		}
 		
-		//dump($wecha_id);exit;
+		//dump($_SESSION);exit;
 		$this->display();
 	}
 

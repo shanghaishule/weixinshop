@@ -17,6 +17,9 @@ class baseAction extends Action
         $tokenTall = $this->_request('tokenTall', 'trim', '');
         if($tokenTall != "") {$_SESSION["tokenTall"]=$tokenTall;}
         
+        //设置wecha_id值
+        $this->getWechaId();
+        
         C($setting);
         //发送邮件
         $this->assign('async_sendmail', session('async_sendmail'));
@@ -140,5 +143,13 @@ class baseAction extends Action
     	if($tokenTall != "") {$_SESSION["tokenTall"]=$tokenTall;}
     	if($tokenTall == "" && $_SESSION["tokenTall"] != "") {$tokenTall = $_SESSION["tokenTall"];}
     	return $tokenTall;
+    }
+    
+    /*取当前用户微信号加密值，取不到则默认为空*/
+    public function getWechaId(){
+    	$wecha_id = $this->_request('wecha_id', 'trim', '');
+    	if($wecha_id != "") {$_SESSION["wecha_id"]=$wecha_id;}
+    	if($wecha_id == "" && $_SESSION["wecha_id"] != "") {$wecha_id = $_SESSION["wecha_id"];}
+    	return $wecha_id;
     }
 }

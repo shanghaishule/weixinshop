@@ -13,7 +13,7 @@ class WeixinAction extends Action
         $this->data  = $weixin->request();
         $this->my    = C('site_my');
         list($content, $type) = $this->reply($data);
-		
+		//$_SESSION['FromUserName'] = $data['FromUserName'];
 		$weixin->response($content, $type);
     }
     private function reply($data)
@@ -867,13 +867,13 @@ class WeixinAction extends Action
             	 
                 //$url = rtrim(C('site_url'), '/').'/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
             } else {
-                $url = $home['apiurl'];
+                $url = $home['apiurl'].'&wecha_id='.$this->data['FromUserName'];
             }
             //if (C('home_token') == $this->token) {
             //	$url= rtrim(C('site_url'), '/')."/index.php?g=Wap&m=weTall&a=index";
             //}
             
-            $_SESSION['FromUserName'] = $this->data['FromUserName'];
+            
         }
 		
         return array(
@@ -903,15 +903,14 @@ class WeixinAction extends Action
     		if ($home['apiurl'] == false) {
     			$url = rtrim(C('site_url'), '/').'/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
     		} else {
-    			$url = $home['apiurl'];
+    			$url = $home['apiurl'].'&wecha_id='.$this->data['FromUserName'];
     		}
     		if (C('home_token') == $this->token) {
-    			$url= rtrim(C('site_url'), '/')."/index.php?g=Wap&m=weTall&a=index";
+    			$url= rtrim(C('site_url'), '/')."/index.php?g=Wap&m=weTall&a=index&wecha_id=".$this->data['FromUserName'];
     		}
     
-    		$_SESSION['FromUserName'] = $this->data['FromUserName'];
     	}
-    
+
     	return array(
     			array(
     					array(
@@ -923,6 +922,7 @@ class WeixinAction extends Action
     			),
     			'news'
     	);
+		
     }
     function kuaidi($data)
     {

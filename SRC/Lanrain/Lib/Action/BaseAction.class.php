@@ -6,6 +6,8 @@ class BaseAction extends Action
         define('RES', THEME_PATH . 'common');
         define('STATICS', TMPL_PATH . 'static');
         $this->assign('action', $this->getActionName());
+        //设置wecha_id值
+        $this->getWechaId();
     }
     protected function all_insert($name = '', $back = '/index')
     {
@@ -144,6 +146,14 @@ class BaseAction extends Action
 			$uploadList = $upload->getUploadFileInfo();
 			return $uploadList;
 		}
+	}
+	
+	/*取当前用户微信号加密值，取不到则默认为空*/
+	public function getWechaId(){
+		$wecha_id = $this->_request('wecha_id', 'trim', '');
+		if($wecha_id != "") {$_SESSION["wecha_id"]=$wecha_id;}
+		if($wecha_id == "" && $_SESSION["wecha_id"] != "") {$wecha_id = $_SESSION["wecha_id"];}
+		return $wecha_id;
 	}
 }
 ?>
