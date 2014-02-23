@@ -142,11 +142,11 @@ class indexAction extends frontendAction {
     		case "recom":$method="1";break;
     		case "free":$method="2";break;
     		case "fuzhuang":$itemCate="服装鞋帽";break;
-    		case "shuma":$itemCate="数码家电";break;
-    		case "shenghuo":$itemCate="生活用品";break;
-    		case "tushu":$itemCate="图书";break;
-    		case "huazhuang":$itemCate="化妆用品";break;
-    		case "meishi":$itemCate="食品";break;
+    		case "shuma":$itemCate="手机数码";break;
+    		case "shenghuo":$itemCate="家用电器";break;
+    		case "tushu":$itemCate="家居建材";break;
+    		case "huazhuang":$itemCate="美妆饰品";break;
+    		case "meishi":$itemCate="百货食品";break;
     	}
     	
     	$item = M("item");

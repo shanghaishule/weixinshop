@@ -809,7 +809,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 */
 .search_all{ width:99%; overflow:hidden; padding:4px 0;}
 .search_content{ width:248px; height:33px; border:2px solid #d3d3d3; -moz-border-radius: 8px;-khtml-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px; background:white; padding-left:0px;}
-.search_textbox{ width:170px; height:33px; line-height:35px; border:0; font-size:14px; color:#c4c4c4; text-align:left; overflow:hidden; background:none;}
+.search_textbox{ width:160px; height:33px; line-height:35px; border:0; font-size:14px; color:#c4c4c4; text-align:left; overflow:hidden; background:none;}
 .search_btn{ float:right;display:block;margin-top:-38px;width:65px}
 .search_btn input{ width:65px}
 #search_method{ display:block;float:left;margin-top:-1px;width:68px;height:34px; border:1px solid #d3d3d3;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;}
