@@ -73,15 +73,17 @@ function submitForm(){
                 </div>
 	<div class="shoplogo">
 	   <div class="shoplogourl">
+	    <a  href="{:U('index/shopinfo',array('id'=>$weshopData['id'], 'tokenTall'=>$weshopData['tokenTall']))}">
 	    <if condition="$weshopData['logo'] eq ''">
 	        <img width="60" height="60" src="{$weshopData.headurl}"/>
 	    <else/>
 	        <img width="60" height="60" src="{$weshopData.logo}" />
 	    </if>
+	    </a>
 	   </div>
 	   <div class="favi">
 	      <div id="shopname">
-	         <a  href="{:U('index/shopinfo',array('id'=>$item['id'], 'tokenTall'=>$item['tokenTall']))}">{$weshopData.name}</a>
+	         <a  href="{:U('index/shopinfo',array('id'=>$weshopData['id'], 'tokenTall'=>$weshopData['tokenTall']))}">{$weshopData.name}</a>
 	         <span class="showhavereal">
 		         <eq name="weshopData.HaveReal" value="1">
 		         	<img src="__STATIC__/images/shiti3.png" width="20" height="20"/>
