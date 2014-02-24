@@ -38,37 +38,37 @@ $(function(){
         <input type="hidden" name="orderid" value="{$orderid}" />
         <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
         <div class="step_main">					
-            <div class="clue_on"><h4>订单提交成功！</h4><p>您的订单已成功生成，您选择银联支付方式进行支付</p></div>
+            <!--div class="clue_on"><h4>订单提交成功！</h4><p>您的订单已成功生成，您选择银联支付方式进行支付</p></div>
             <div class="order_information">
                 <p>订单号：<span>{$dingdanhao}</span></p>
                 <p>订单总价：<span>¥{$ordersumPrice}</span></p>
-            </div>
-            <div class="buy">
-                <h3>使用银联支付确认</h3>
-				<div class="order_information">
-                <dl class="defray">
-					<dd>
-						<a href="http://mobile.unionpay.com/getclient?platform=android&type=securepayplugin">Android没有安装银联支付控件在此下载</a>
+            </div-->
+            <div class="buy" style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px;">
+                
+                <h3>欢迎使用银联支付</h3>
+                <p style="color:grey; font-size:15px; background-color: #DCDCDC; padding-left:10px;">支付金额：<span style="color:red;">¥{$ordersumPrice}</span></p>
+                
+                <div style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px; margin-top:10px;">
+
+                <p style="color:green; font-size:15px; background-color: #fff; padding-left:10px;">请您点击银联图标进行支付</p>
+                <a href="uppay://uppayservice/?style=token&paydata={$strOrderInfo}"><img src="__STATIC__/weixin/images/unionpay1.png" alt="银联手机支付"/></a>
+                </div>
+                
+				<div class="order_information" style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px; margin-top:10px;">
+                
+                <p style="font-size:10px; color:purple;">如果您未安装过银联控件，请您下载安装</p>
+                <h3>银联支付控件下载</h3>
+                <dl class="defray" style="text-align:center;">
+					<dd style="margin-top:10px">
+						<a href="http://mobile.unionpay.com/getclient?platform=android&type=securepayplugin">
+						<img src="__STATIC__/weixin/images/android.png" alt="Android银联支付控件在此下载"/></a>
 					</dd>
 					<dd>
-						<a href="http://mobile.unionpay.com/getclient?platform=ios&type=securepayplugin">iOS没有安装银联支付控件在此下载</a>
-					</dd>
-					<dd>
-						<p class="explain">欢迎使用银联支付,请先点击右上角...按钮,再点击在浏览器中打开</p>
-					</dd>
-					<dd>
-						<p class="explain">点击此处进行银联支付<a href="uppay://uppayservice/?style=token&paydata={$strOrderInfo}"><img src="__STATIC__/weixin/images/unionpay1.png" alt="银联手机支付"/></a></p>
+						<a href="http://mobile.unionpay.com/getclient?platform=ios&type=securepayplugin">
+						<img src="__STATIC__/weixin/images/apple.png" alt="IOS银联支付控件在此下载"/></a>
 					</dd>
 				</dl>
-			</div>
-			<div class="order_information">
-				<h3>温馨提示：</h3>
-                <dl class="defray">
-					<dd>
-                        <p class="explain">希望你在微指购购物快乐！</p>
-                    </dd>
-                </dl>
-				</div>				
+				</div>
             </div>            
         </div>
     </form>
