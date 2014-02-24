@@ -3,11 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <title>登陆与注册－{lanrain::C('site_title')}</title>
-<meta name="keywords" content="LANRAIN 微信帮手 微信公众账号 微信公众平台 微信公众账号开发 微信二次开发 微信接口开发 微信托管服务 微信营销 微信公众平台接口开发"/>
-<meta name="description" content="微信公众平台接口开发、托管、营销活动、二次开发"/>
 <include file="Public:header2"/>
 
-<div class="main">
+<div class="main2">
 <style>
 
 .contaier{ zoom: 1; }
@@ -46,111 +44,43 @@ a:hover{ text-decoration: underline; }
 .think-form .login .verify { height: 24px; width: 150px; line-height: 24px; padding: 3px; border: 1px solid #ccc; }
 .login-other{ float: left; padding-left: 60px; margin-left: -1px; display: inline; border-left: 1px solid #ddd; }
 .login-other .head strong{ font-weight: normal; color: #999; }
-</style><br></br>
-<div class="aboday">
-        <div class="contaier wp cf">
+</style>
+<div class="abody">
+        
 
-    <div class="think-login">
-        <div class="head">
-            <strong>用户登录</strong>
-        </div>
-        <div class="body think-form ">
-            <form action="{lanrain::U('Users/checklogin')}" method="post" class="login">
-                <table>
-                    <tbody><tr>
-                        <th>用户名</th>
-                        <td>
-                            <input class="text" type="text" name="username">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>密　码</th>
-                        <td>
-                            <input class="text" type="password" name="password">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            <input class="submit" type="submit" value="登录">
-                        </td>
-                    </tr>
-					<tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr><tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr><!--
-					   <tr>
-                        <th>帐号审核：</th>
-                        <td>
-                            QQ:{lanrain::C('site_qq')}
-                        </td>
-                    </tr>-->
-                </tbody></table>
-            </form>
-        </div>
-    </div>
-    <div class="login-other">
+    <div id="think-login2">
+        
           <div class="head">
-            <strong style="font-weight: normal;font-size: 30px;vertical-align: bottom;color: #323232;">用户注册</strong>
+            <strong style="font-weight: normal;font-size: 30px;vertical-align: bottom;color: white;">用户登录</strong>
 		　</div>
-        <div class="body think-form ">
-            <form action="{lanrain::U('Users/checkreg')}" method="post" class="login">
-                <table>
-                    <tbody><tr>
-                        <th>用户名</th>
-                        <td>
-                            <input class="text" required="" value="请输入用户名" onclick="if(this.value=='请输入用户名'){this.value=''}" onblur="if(this.value==''){this.value='请输入用户名'}" type="text" name="username">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>密　码</th>
-                        <td>
-                            <input class="text" type="password" name="password">
-                        </td>
-                    </tr>
-					 <tr>
-                        <th>重复密码</th>
-                        <td>
-                            <input class="text" type="password" name="repassword">
-                        </td>
-                    </tr>
-					<tr>
-                        <th>邮　箱</th>
-                        <td>
-                            <input class="text" type="text" name="email" value="请输入电子邮箱" onclick="if(this.value=='请输入电子邮箱'){this.value=''}" onblur="if(this.value==''){this.value='请输入电子邮箱'}">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            <input class="submit" type="submit" value="注册">
-                        </td>
-                    </tr>
-					<tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr><!--
-					   <tr>
-                        <th>帐号审核：</th>
-                        <td>
-                            QQ:{lanrain::C('site_qq')}
-                        </td>
-                    </tr>-->
-                </tbody></table>
-            </form>
-        </div>
+      
+     <div class="class="body think-form "">       
+<form action="{lanrain::U('Users/checklogin')}" method="post" class="login" id="tform">
+	<table width="600" border="0" align="center" style="margin-top:20px">
+	<tr>
+		<td>
+			<span class="usedata">用户名：<input id="username" type="text" name="username"></input></span>
+		</td>
+		<td align="right">
+			<span class="usedata"> 密码：<input id="password" type="password" name="password"></input></span>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			
+		</td>
+		<td height="100px" align="right">
+			<input id="login" type="image" src="{lanrain::RES}/images/login.png" width="100" height="35" onclick="return dosubmit();" />
+			<!-- a href="{lanrain::U('Index/reg')}"><img class="img2" width="100" height="35" src="{lanrain::RES}/images/register.png" /></a -->
+		</td>
+	</tr>
+	</table>
+</form>
+
+            
     </div>
-</div>
 </div>
     </div>
 <script type="text/javascript">try{Dd('webpage_6').className='left_menu_on';}catch(e){}</script>
-<include file="Public:footer"/>
+</html>

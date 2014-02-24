@@ -71,7 +71,7 @@
 .navr {WIDTH:750px; background:none;  overflow:hidden; margin:18px 0 30px 250px;}
 .top .navr ul{ width:100px;}
 .navr LI {TEXT-ALIGN:center;FLOAT: left;HEIGHT:32px;FONT-SIZE:1em;width:103px; margin-right:5px;}
-.navr LI A {width:103px;TEXT-ALIGN:center; LINE-HEIGHT:30px; FLOAT: left;HEIGHT:32px;font-size:18px;color:red;font-weight:700;TEXT-DECORATION: none
+.navr LI A {width:103px;TEXT-ALIGN:center; LINE-HEIGHT:30px; FLOAT: left;HEIGHT:32px;font-size:18px;color:white;font-weight:700;TEXT-DECORATION: none
 }
 .navr LI A:hover {BACKGROUND: url(img/navhover.gif) center no-repeat;color:#009900;}
 .navr LI.menuon {BACKGROUND: none center no-repeat; display:block;width:103px;HEIGHT:32px;font-size:18px;color:white;font-weight:900;}

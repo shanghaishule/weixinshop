@@ -51,7 +51,7 @@ class UsersAction extends BaseAction{
 			$this->success('登录成功',U('User/Index/index'));
 			//$this->redirect(U('User/Index/index'));
 		}else{
-			$this->error('帐号密码错误',U('Index/index'));
+			$this->error('帐号密码错误',U('Index/login'));
 		}
 	}
 	

@@ -3,9 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <title>登陆与注册－{lanrain::C('site_title')}</title>
-<meta name="keywords" content="LANRAIN 微信帮手 微信公众账号 微信公众平台 微信公众账号开发 微信二次开发 微信接口开发 微信托管服务 微信营销 微信公众平台接口开发"/>
-<meta name="description" content="微信公众平台接口开发、托管、营销活动、二次开发"/>
-<include file="Public:header"/>
+<include file="Public:header2"/>
 
 <div class="main2">
 <style>
@@ -57,7 +55,7 @@ a:hover{ text-decoration: underline; }
 		　</div>
         <div class="body think-form ">
             <form action="{lanrain::U('Users/checkreg')}" method="post" class="login">
-                <table width="100%" class="tablefield" border="0">
+                <table class="tablefield" border="0" align="center">
                     <tbody><tr>
                         <th>用户名</th>
                         <td>
@@ -82,21 +80,12 @@ a:hover{ text-decoration: underline; }
                     </tr>
                     <tr>
                         
-                        <td colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;   <input id="submit" class="submit" type="submit" value="注册" />
+                        <td colspan="4" align="right">
+                        <input id="submit" class="submit" type="submit" value="注册" />
                         </td>
                    
                         
-                    </tr><!--
-					   <tr>
-                        <th>帐号审核：</th>
-                        <td>
-                            QQ:{lanrain::C('site_qq')}
-                        </td>
-                    </tr>-->
+                    </tr>
                 </tbody></table>
             </form>
         </div>
@@ -104,4 +93,4 @@ a:hover{ text-decoration: underline; }
 </div>
     </div>
 <script type="text/javascript">try{Dd('webpage_6').className='left_menu_on';}catch(e){}</script>
-<include file="Public:footer"/>
+</html>

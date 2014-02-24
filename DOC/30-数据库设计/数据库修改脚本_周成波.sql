@@ -150,3 +150,6 @@ values('Member','会员管理',1,0,84,2,0,2);
 delete a from tp_access a , tp_node b where a.node_id = b.id and b.title = '会员管理';
 INSERT into tp_access(role_id, node_id, pid, `level`)
 select 5,id,pid,`level` from tp_node where title = '会员管理';
+
+/*改变*/
+ALTER TABLE `tp_diymen_class` CHANGE `url` `url` varchar(180) NOT NULL DEFAULT '' COMMENT 'url地址';
