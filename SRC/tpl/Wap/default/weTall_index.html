@@ -22,7 +22,29 @@
 
 <title>
 
-</title></head>
+</title>
+	<style>
+		#first {
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    background: rgba(0, 0, 0, 0.7);
+		    display: none;
+		    z-index: 20000;
+		 }
+		 #first img {
+		    position: fixed;
+		    right: 18px;
+		    top: 5px;
+		    width: 260px!important;
+		    height: 180px!important;
+		    z-index: 20001;
+		 }		
+	</style>
+
+</head>
 <body>
     <div class="Top_King_top">
         <a name="top">&nbsp;</a>&nbsp;</div>
@@ -60,9 +82,20 @@ function submitForm(){
 	$("#form1").submit(function(e){
 		
 		});
-	
 }
+//xxl start
+$(document).ready(function() { 
+		document.getElementById('first').style.display='block';
+	 }); 
+//xxl end		
+
 </script>
+<!-- xxl start -->
+<div id="first" onclick="document.getElementById('first').style.display='';" style="display:none;">
+                    <img src="/tpl/Wap/default/common/images/first.png" />
+</div>
+<!-- xxl end -->
+
 <div class="search_all">
     <form id="form1" action="/weTall/index.php?m=index&a=search" method="post">       
         <div class="search_content FloatLeft">
