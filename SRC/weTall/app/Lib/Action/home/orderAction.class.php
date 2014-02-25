@@ -451,7 +451,8 @@ class orderAction extends userbaseAction {
 				// 订单信息
 				// urlEncode(base64(tn=流水号,resultURL=urlEcode(交易结果展示url),usetestmode=true|false))
 				//$strOrderInfo = "tn=".$strSN.",ResultURL=http://115.28.228.91/weTall/wapupay/notify_url.php?rid=,UseTestMode=true";
-				$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode("http://115.28.228.91/weTall/wapupay/notify_url.php?rid=").",UseTestMode=true";
+				//$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode("http://115.28.228.91/weTall/wapupay/notify_url.php?rid=").",UseTestMode=true";
+				$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode(U('order/notify',array('dingdanhao'=>$alldingdanhao))).",UseTestMode=true";
 				// 未加密的
 				fwrite($fh, $strOrderInfo."\r\n");
 				// 转换字符串
@@ -533,6 +534,39 @@ class orderAction extends userbaseAction {
 			}
 		}
 		return $result;
+	}
+	
+	function notify(){
+		header('Content-Type:text/html;charset=utf-8');
+		//请在这里加上商户的业务逻辑程序代码
+		//获取通知返回参数，可参考接口文档中通知参数列表(以下仅供参考)
+		$transStatus = $_POST['transStatus'];// 交易状态
+		$rid = $_GET['rid'];
+		
+		if (""!=$transStatus && "00"==$transStatus){
+			// 交易处理成功
+			$alldingdanhao=$_REQUEST['dingdanhao']; //取得所有订单号联成的字符串
+			$all_order_arr = explode('、', $alldingdanhao); //切分成数组
+
+			foreach ($all_order_arr as $dingdanhao){
+				$data['status']=2;
+				$data['supportmetho']=3;
+				$data['support_time']=time();
+				if(M('item_order')->where("orderId='".$dingdanhao."'")->data($data)->save())
+				{
+					//成功就继续
+					//$this->redirect('user/index');
+				}
+				else
+				{
+					$this->error('更新订单状态失败!');
+				}
+			}
+
+			$this->success('支付成功！',U('user/index',array('status'=>2)));
+		}else {
+			$this->error('支付失败！',U('user/index',array('status'=>1)));
+		}
 	}
 
 }
