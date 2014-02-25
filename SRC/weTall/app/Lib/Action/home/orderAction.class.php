@@ -452,7 +452,7 @@ class orderAction extends userbaseAction {
 				// urlEncode(base64(tn=流水号,resultURL=urlEcode(交易结果展示url),usetestmode=true|false))
 				//$strOrderInfo = "tn=".$strSN.",ResultURL=http://115.28.228.91/weTall/wapupay/notify_url.php?rid=,UseTestMode=true";
 				//$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode("http://115.28.228.91/weTall/wapupay/notify_url.php?rid=").",UseTestMode=true";
-				$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode(U('order/notify',array('dingdanhao'=>$alldingdanhao))).",UseTestMode=true";
+				$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode("http://www.vzhigo.com/weTall/index.php?m=order&a=notify&dingdanhao=".$alldingdanhao).",UseTestMode=true";
 				// 未加密的
 				fwrite($fh, $strOrderInfo."\r\n");
 				// 转换字符串
