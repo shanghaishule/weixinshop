@@ -321,9 +321,22 @@ class orderAction extends userbaseAction {
 			//$this->assign('order_sumPrice',$data['order_sumPrice']);
 	
 			//header("content-Type: text/html; charset=Utf-8");
-			//dump(implode('、', $all_order_arr));exit;
+			//dump(implode(',', $all_order_arr));exit;
 	
-			$this->assign('dingdanhao', implode('、', $all_order_arr));//所有订单
+			//重新生成一个合并订单号，用于支付，并将原订单号和合并订单号的关联关系写入表中。
+			$merge = date("Y-m-dH-i-s");
+			$merge = str_replace("-","",$merge);
+			$merge .= rand(1000,2000);
+			foreach ($all_order_arr as $order){
+				$data1['orderid'] = $order;
+				$data1['mergeid'] = $merge;
+				M('order_merge')->data($data1)->add();
+			}
+			
+			//$this->assign('dingdanhao', implode(',', $all_order_arr));//所有订单
+			$this->assign('dingdanhao', $merge);
+			
+			
 			$this->assign('order_sumPrice',$all_order_price);//总金额
 			$this->assign('order_zhifu','0');
 	
@@ -367,11 +380,13 @@ class orderAction extends userbaseAction {
 			$payment_id=$_POST['payment_id'];
 			//$orderid=$_POST['orderid'];
 			
-			$alldingdanhao=$_POST['dingdanhao']; //取得所有订单号联成的字符串
-			$all_order_arr = explode('、', $alldingdanhao); //切分成数组
+			$alldingdanhao=$_POST['dingdanhao']; //取得合并支付订单号
+			//$all_order_arr = explode(',', $alldingdanhao); //切分成数组
+			$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
+			
 			$all_order_price = 0;
 			foreach ($all_order_arr as $dingdanhao){			
-				$item_order=M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->find();
+				$item_order=M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->find();
 				!$item_order && $this->_404();
 				$all_order_price = $all_order_price + floatval($item_order['order_sumPrice']);
 			}
@@ -382,7 +397,7 @@ class orderAction extends userbaseAction {
 					$data['status']=2;
 					$data['supportmetho']=2;
 					$data['support_time']=time();
-					if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->data($data)->save())
+					if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->data($data)->save())
 					{
 						//成功就继续
 						//$this->redirect('user/index');
@@ -452,7 +467,7 @@ class orderAction extends userbaseAction {
 				// urlEncode(base64(tn=流水号,resultURL=urlEcode(交易结果展示url),usetestmode=true|false))
 				//$strOrderInfo = "tn=".$strSN.",ResultURL=http://115.28.228.91/weTall/wapupay/notify_url.php?rid=,UseTestMode=true";
 				//$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode("http://115.28.228.91/weTall/wapupay/notify_url.php?rid=").",UseTestMode=true";
-				$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode("http://www.vzhigo.com/weTall/index.php?m=order&a=notify&dingdanhao=".$alldingdanhao).",UseTestMode=true";
+				$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode("http://www.vzhigo.com/weTall/index.php?m=order&a=notify&dingdanhao=".$alldingdanhao."&rid=").",UseTestMode=true";
 				// 未加密的
 				fwrite($fh, $strOrderInfo."\r\n");
 				// 转换字符串
@@ -476,7 +491,7 @@ class orderAction extends userbaseAction {
 				//支付宝
 				foreach ($all_order_arr as $dingdanhao){
 					$data['supportmetho']=1;
-					if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao."'")->data($data)->save())
+					if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->data($data)->save())
 					{
 						//成功就继续
 					}else
@@ -540,19 +555,23 @@ class orderAction extends userbaseAction {
 		header('Content-Type:text/html;charset=utf-8');
 		//请在这里加上商户的业务逻辑程序代码
 		//获取通知返回参数，可参考接口文档中通知参数列表(以下仅供参考)
-		$transStatus = $_POST['transStatus'];// 交易状态
-		$rid = $_GET['rid'];
+		//$transStatus = $_POST['transStatus'];// 交易状态
+		$rid = $_REQUEST['rid'];
 		
-		if (""!=$transStatus && "00"==$transStatus){
+		//dump($_REQUEST);exit;
+		
+		//if (""!=$transStatus && "00"==$transStatus){
+		if ("0"==$rid){
 			// 交易处理成功
 			$alldingdanhao=$_REQUEST['dingdanhao']; //取得所有订单号联成的字符串
-			$all_order_arr = explode('、', $alldingdanhao); //切分成数组
+			//$all_order_arr = explode(',', $alldingdanhao); //切分成数组
+			$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
 
 			foreach ($all_order_arr as $dingdanhao){
 				$data['status']=2;
 				$data['supportmetho']=3;
 				$data['support_time']=time();
-				if(M('item_order')->where("orderId='".$dingdanhao."'")->data($data)->save())
+				if(M('item_order')->where("orderId='".$dingdanhao['orderid']."'")->data($data)->save())
 				{
 					//成功就继续
 					//$this->redirect('user/index');

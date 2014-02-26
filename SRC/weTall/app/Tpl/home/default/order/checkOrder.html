@@ -90,7 +90,9 @@ $(function(){
                      <ul class="order_detail_list">
                        <li>支付方式:<switch name="order.supportmetho" >
                          <case value="1">支付宝</case>
-                         <default />货到付款
+                         <case value="2">货到付款</case>
+                         <case value="3">银联支付</case>
+                         <default />无
                          </switch>
                        </li>
                        <li>支付时间:{$order.support_time|date='Y-m-d H:i:s',###}</li>

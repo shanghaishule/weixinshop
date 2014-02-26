@@ -153,3 +153,13 @@ select 5,id,pid,`level` from tp_node where title = '会员管理';
 
 /*改变*/
 ALTER TABLE `tp_diymen_class` CHANGE `url` `url` varchar(180) NOT NULL DEFAULT '' COMMENT 'url地址';
+
+/*增加合并支付订单信息表*/
+DROP TABLE IF EXISTS `tp_order_merge`;
+CREATE TABLE `tp_order_merge` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orderid` varchar(50) DEFAULT NULL COMMENT '订单号',
+  `mergeid` varchar(50) DEFAULT NULL COMMENT '合并订单号',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
