@@ -3,13 +3,14 @@ class PanoramaAction extends UserAction{
 	public $panorama_model;
 	public function _initialize() {
 		parent::_initialize();
-		$token_open=M('token_open')->field('queryname')->where(array('token'=>session('token')))->find();
-		if(!strpos($token_open['queryname'],'panorama')){
-            	//$this->error('您还开启该模块的使用权,请到功能模块中添加',U('Function/index',array('token'=>session('token'),'id'=>session('wxid'))));
-		}
+		
 		$this->panorama_model=M('Panorama');
 	}
 	public function index(){
+		$token_open=M('token_open')->field('queryname')->where(array('token'=>session('token')))->find();
+		if(!strpos($token_open['queryname'],'panorama')){
+			$this->error('您还开启该模块的使用权,请到功能模块中添加',U('Function/index',array('token'=>session('token'),'id'=>session('wxid'))));
+		}
 		if (IS_POST){
 			
 		}else{
