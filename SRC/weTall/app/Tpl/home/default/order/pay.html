@@ -36,15 +36,18 @@ $(function(){
         	<eq name="order_exist" value="1">
         		<div class="clue_on"><h4>订单信息：</h4></div>
             <else />
-            	<div class="clue_on"><h4>订单提交成功！</h4><p>您的订单已成功生成，选择您想用的支付方式进行支付</p></div>
+            	<div class="clue_on"><h4>订单提交成功！</h4><p>您的订单已成功生成，共生成<span style="font-weight:bold; color:red;">{$allorderid|count}</span>单。</p></div>
             </eq>
             <div class="order_information">
-                <p>支付订单号：<span>{$dingdanhao}</span></p>
+            	<volist name="allorderid" id="vo">
+            	<p>订单单号：<span>{$vo}</span></p>
+            	</volist>
                 <p>订单总价：<span>¥{$order_sumPrice}</span></p>
             </div>
 
 
             <div class="buy">
+            	<p>支付编号：<span style="color:blue;">{$dingdanhao}</span></p>
                 <h3>选择支付方式并付款</h3>
                     <dl class="defray">
                         <dt>在线支付</dt>                        
