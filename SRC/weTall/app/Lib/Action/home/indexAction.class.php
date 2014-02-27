@@ -157,7 +157,7 @@ class indexAction extends frontendAction {
     	switch ($itemid) {
     		case "new": $method="0";break;
     		case "recom":$method="1";break;
-    		case "free":$method="2";break;
+    		case "free":$itemCate="餐饮娱乐";break;
     		case "fuzhuang":$itemCate="服装鞋帽";break;
     		case "shuma":$itemCate="手机数码";break;
     		case "shenghuo":$itemCate="家用电器";break;
@@ -168,7 +168,11 @@ class indexAction extends frontendAction {
     	
     	$item = M("item");
     	if($itemCate == ""){
-    		$condition["tuijian"] = $method;
+    		if ($method=="0") {
+    			$condition["news"] = "1";
+    		}else{
+    		    $condition["tuijian"] = $method;
+    		}
     	}else{
     		$name["name"]=$itemCate;
     		$item_cate=M("item_cate")->where($name)->select();

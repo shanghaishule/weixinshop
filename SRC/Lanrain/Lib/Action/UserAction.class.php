@@ -21,7 +21,7 @@ class UserAction extends BaseAction{
 		//
 		$this->assign('userinfo',$userinfo);
 		if(session('uid')==false){
-			$this->redirect('Home/Index/index');
+			$this->redirect('Home/Index/login');
 		}
 	}
 }
