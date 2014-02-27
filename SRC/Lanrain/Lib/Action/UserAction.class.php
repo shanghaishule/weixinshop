@@ -24,4 +24,19 @@ class UserAction extends BaseAction{
 			$this->redirect('Home/Index/index');
 		}
 	}
+	
+	public function checkauth($funname, $modname){
+		//检查权限
+		$func = M('Function')->where(array('funname'=>$funname))->find();
+		if ($func['gid'] > session('gid')) {
+			$this->error('您没有该模块的使用权限,请升级您的账号！');
+		}
+		
+		//检查模块是否勾选
+		$token_open=M('token_open')->field('queryname')->where(array('token'=>session('token')))->find();
+		if(!strpos($token_open['queryname'],$modname)){
+			//$this->error('您还未开启该模块的使用,请到功能模块中添加！',U('Function/index',array('token'=>session('token'),'id'=>session('wxid'))));
+			$this->error('您还未开启该模块的使用,请到功能模块中添加！');
+		}
+	}
 }

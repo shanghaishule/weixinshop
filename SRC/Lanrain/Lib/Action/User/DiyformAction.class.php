@@ -1,10 +1,9 @@
 <?php
 class DiyformAction extends UserAction{		
-	public function index(){				
-		$token_open=M('token_open')->field('queryname')->where(array('token'=>session('token')))->find();
-		if(!strpos($token_open['queryname'],'diyform')){
-            $this->error('您还未开启该模块的使用权,请到功能模块中添加',U('Function/index',array('token'=>session('token'),'id'=>session('wxid'))));
-		}		 
+	public function index(){
+		//检查权限和功能
+		$this->checkauth('diyform','diyform');
+		
 		$data=M('Diyform');
 		$count      = $data->where(array('token'=>$_SESSION['token']))->count();
 		$Page       = new Page($count,12);

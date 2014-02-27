@@ -22,10 +22,9 @@ class Member_cardAction extends UserAction{
 	}
 	//会员卡配置
 	public function index(){
-		$token_open=M('token_open')->field('queryname')->where(array('token'=>session('token')))->find();
-		if(!strpos($token_open['queryname'],'huiyuanka')){
-            $this->error('您还未开启该模块的使用权,请到功能模块中添加',U('Function/index',array('token'=>session('token'),'id'=>session('wxid'))));
-		}
+		//检查权限和功能
+		$this->checkauth('huiyuanka','huiyuanka'); 
+		
 		$data=M('Member_card_set')->where(array('token'=>$_SESSION['token']))->find();
 		if(IS_POST){
 			$_POST['token']=$_SESSION['token'];			

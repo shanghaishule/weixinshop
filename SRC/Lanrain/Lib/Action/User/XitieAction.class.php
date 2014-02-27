@@ -6,10 +6,6 @@ class XitieAction extends UserAction{
 	//public $selfform_value_model;
 	public function _initialize() {
 		parent::_initialize();
-		$token_open=M('token_open')->field('queryname')->where(array('token'=>session('token')))->find();
-		if(!strpos($token_open['queryname'],'Xitie')){
-            	$this->error('您还开启该模块的使用权,请到功能模块中添加',U('Function/index',array('token'=>session('token'),'id'=>session('wxid'))));
-		}
 		$this->xitie_model=M('Xitie');
 		//$this->selfform_input_model=M('Selfform_input');
 		//$this->selfform_value_model=M('Selfform_value');
@@ -18,6 +14,9 @@ class XitieAction extends UserAction{
 		$this->assign('module','Xitie');
 	}
 	public function index(){
+		//检查权限和功能
+		$this->checkauth('WeiXitie','WeiXitie');
+		
 		$where=array('token'=>$this->token);
 		if(IS_POST){
 			$key = $this->_post('searchkey');
