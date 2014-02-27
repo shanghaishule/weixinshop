@@ -35,8 +35,7 @@ class UserAction extends BaseAction{
 		//检查模块是否勾选
 		$token_open=M('token_open')->field('queryname')->where(array('token'=>session('token')))->find();
 		if(!strpos($token_open['queryname'],$modname)){
-			//$this->error('您还未开启该模块的使用,请到功能模块中添加！',U('Function/index',array('token'=>session('token'),'id'=>session('wxid'))));
-			$this->error('您还未开启该模块的使用,请到功能模块中添加！');
+			$this->error('您还未开启该模块的使用,请到功能模块中添加！',U('Function/index',array('token'=>session('token'),'id'=>session('wxid'))));
 		}
 	}
 }
