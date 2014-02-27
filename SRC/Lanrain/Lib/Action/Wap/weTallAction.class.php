@@ -1,10 +1,17 @@
 <?php
   class weTallAction extends BaseAction{
     public function index(){
+    	//判断是微信的环境
+    	$systemBrowse="X";
+    	$agent = $_SERVER['HTTP_USER_AGENT'];
+    	if(!strpos($agent,"icroMessenger")) {
+    		$systemBrowse="Y";
+    	}
     	//广告位
     	$weTallad = M("adforhome");
     	//所有品牌
-    	$broadlist=M("brandlist")->select();
+    	$where["display"] = '1';
+    	$broadlist=M("brandlist")->where($where)->select(); 
     	//一级菜单
     	$iteml["pid"]="0";
     	$item_l1=M("item_cate")->where($iteml)->limit(3)->select();
@@ -28,6 +35,7 @@
     	
     	$this->assign("cartNum",count($_SESSION['cart']));	
     	$this->assign("weTallboard",$weTallboard);
+    	$this->assign("systemBrowse",$systemBrowse);
     	$this->assign("brandlist",$broadlist);
     	$this->assign("item1",$item_l1);
     	$this->assign("goods",$goods);
@@ -50,6 +58,11 @@
     	$this->assign("item",$item_l1);
     	$this->assign("itemtwo",$item_l2);
     	$this->display();
+    }
+    public function allBrand(){
+    	$broadlist=M("brandlist")->select();
+    	$this->assign("brandlist",$broadlist);
+    	$this->display();    	
     }
   }
 ?>

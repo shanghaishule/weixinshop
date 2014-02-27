@@ -6,6 +6,13 @@ class indexAction extends frontendAction {
     	$tokenTall = $this->getTokenTall();
     	$_SESSION["tokenTall"]=$tokenTall;
     	
+    	//判断是微信的环境
+    	$systemBrowse="X";
+    	$agent = $_SERVER['HTTP_USER_AGENT'];
+    	if(!strpos($agent,"icroMessenger")) {
+    		$systemBrowse="Y";
+    	}
+    	
     	/*****首页广告***/
     	$ad= M('ad');
     	$where = array('board_id'=>1, 'status'=>1, 'tokenTall'=>$tokenTall);
@@ -46,8 +53,9 @@ class indexAction extends frontendAction {
         }else{
         	$favi = "no";
         }
-        $this->assign('favi',$favi);
         
+        $this->assign('favi',$favi);
+        $this->assign("systemBrowse",$systemBrowse);
         $this->assign('news',$news);
         $this->assign('tuijian',$tuijian);
         $this->_config_seo();

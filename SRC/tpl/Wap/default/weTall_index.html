@@ -90,10 +90,12 @@ $(document).ready(function() {
 //xxl end		
 
 </script>
-<!-- xxl start -->
-<div id="first" onclick="document.getElementById('first').style.display='';" style="display:none;">
-                    <img src="/tpl/Wap/default/common/images/first.png" />
+<!-- xxl start -->{Lanrain:$systemBrowse}
+<if condition="$systemBrowse eq 'X'">
+<div id="first" onclick="document.getElementById('first').style.display='';"  style="display:none;" >
+                    <img src="/tpl/Wap/default/common/images/secode.png" />
 </div>
+</if>
 <!-- xxl end -->
 
 <div class="search_all">
@@ -230,7 +232,10 @@ $(document).ready(function() {
         <!--所有分类-->
         <div class="widthMAX all_list">
 <div class="widthMAX2">
-<div class="title FloatLeft">所有品牌</div>
+<div class="title FloatLeft">商城品牌</div>
+<div class="pr_list_frist FloatRight">
+<a href="{Lanrain::U('weTall/allBrand')}" style="color:red;margin-right:9px;">所有品牌</a>
+</div>
 </div>
 <ul>
 <volist name="brandlist" id="brandlist">

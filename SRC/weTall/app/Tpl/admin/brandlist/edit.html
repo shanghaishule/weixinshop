@@ -11,6 +11,12 @@
 			<td><input type="text" name="ordid" id="ordid" class="input-text" size="10" value="{$info.ordid}"></td>
 		</tr>
 		<tr>
+			<th width="100">首页显示:</th>
+			<td><label><input type="radio" name="display" value="1" class="input-text" <if condition="$info.display eq 1">checked="checked"</if>>显示</label>
+			<label><input type="radio" name="display" value="0" class="input-text" <if condition="$info.display eq 0">checked="checked"</if>>不显示</label>
+			</td>
+		</tr>
+		<tr>
 			<th>{:L('enabled')} :</th>
 			<td>
 				<label><input type="radio" name="status" class="radio_style" value="1" <if condition="$info.status eq 1"> checked="checked"</if>> {:L('yes')}</label>
