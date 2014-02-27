@@ -5,6 +5,9 @@ class indexAction extends frontendAction {
         $this->display();
     }    	 
 
+    public function home() {
+    	$this->display();
+    }
     public function all_models(){
     	$this->display();
     }
@@ -30,6 +33,9 @@ class indexAction extends frontendAction {
     	$this->display();
     }
     public function brand(){
+    	$this->display();
+    }
+    public function innovation(){
     	$this->display();
     }
 }
