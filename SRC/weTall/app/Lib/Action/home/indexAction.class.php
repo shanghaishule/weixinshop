@@ -54,8 +54,17 @@ class indexAction extends frontendAction {
         	$favi = "no";
         }
         
+        //首次进入首页
+        $index_num2 = $_SESSION["index_num2"];
+        if ($index_num2 == "") {
+        	$index_num2 = 0;
+        }
+        $index_num2 = $index_num2 + 1;
+        $_SESSION["index_num2"] = $index_num2;
+        
         $this->assign('favi',$favi);
         $this->assign("systemBrowse",$systemBrowse);
+        $this->assign("index_num2",$_SESSION["index_num2"]);
         $this->assign('news',$news);
         $this->assign('tuijian',$tuijian);
         $this->_config_seo();

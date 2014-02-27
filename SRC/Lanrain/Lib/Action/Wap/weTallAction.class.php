@@ -7,6 +7,12 @@
     	if(!strpos($agent,"icroMessenger")) {
     		$systemBrowse="Y";
     	}
+    	$index_num = $_SESSION["index_num"];
+    	if ($index_num == "") {
+    		$index_num = 0;
+    	}
+    	$index_num = $index_num + 1;
+    	$_SESSION["index_num"] = $index_num;
     	//广告位
     	$weTallad = M("adforhome");
     	//所有品牌
@@ -37,6 +43,7 @@
     	$this->assign("weTallboard",$weTallboard);
     	$this->assign("systemBrowse",$systemBrowse);
     	$this->assign("brandlist",$broadlist);
+    	$this->assign("index_num",$_SESSION["index_num"]);
     	$this->assign("item1",$item_l1);
     	$this->assign("goods",$goods);
     	$this->assign("item",$item_l1);
