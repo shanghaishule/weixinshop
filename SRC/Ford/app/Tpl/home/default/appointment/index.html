@@ -1,0 +1,268 @@
+<include file="public:headtop" />
+<include file="public:head" />
+<!--main-->
+<div class="homeBox">
+    <div class="home" id="slider">
+        <ul>
+        	<li><a href="ATS-showLove.html"><img src="__STATIC__/images/Ford/classic_01.png" /></a></li>
+        	<li><img src="__STATIC__/images/Ford/classic_02.png" /></li>
+            <li><img src="__STATIC__/images/Ford/classic_03.png" /></li>
+            <!--<li><img src="images/banner_home_09.jpg" /></li>-->
+            <li><img src="__STATIC__/images/Ford/Carnival_3.png" /></li>
+        	<!--<li><img src="images/banner_home_05.jpg" /></li>
+        	<li><img src="images/banner_home_04.jpg" /></li>-->
+            <li><img src="__STATIC__/images/Ford/Carnival_1.png" /></li>
+            <!--<li><img src="images/subBanner.jpg" /></li>-->
+            <li><img src="__STATIC__/images/Ford/Carnival_2.png" /></li>
+            <!-- <li><img src="images/banner_home_03.jpg" /></li> -->
+        </ul>
+        <div class="btn" id="position">
+            <span class="on"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<div class="mainBox">
+    <form id="testdriveform" name="testdriveform">
+    <div class="subscribe">
+        <ul class="form">
+            <li>
+                <label>选择经销商：</label>
+                <p class="samllSelect">
+                    <select id="model" name="model" class="smallselect">
+                        <option selected value=-1>请选择省份</option>
+                    </select>
+                    <span style="display:none;"><a href="query.html"><img src="images/inquiry.png" class="inquiry" /></a></span>
+                </p></li>
+            <li>
+                <p class="mp25">
+                <select id="city" name="city" class="bigselect">
+                        <option value="-1">请选择城市</option>
+                    </select>
+                    </p>
+            </li>
+            <li>
+                <p class="mp25">
+                    <select id="dealer" name="dealer" class="bigselect">
+                        <option selected value="-1">请选择经销商</option>
+                    </select>
+                </p></li>
+            <li>
+                <dl class="adress">
+                    <!--<dt>上海浦东新区东新东新东新东新御桥路1470号</dt>
+                    <dd>021-68933888</dd>-->
+                </dl>
+            </li>
+            <li>
+                <label class="mp25">选择车型：</label>
+                <p>
+                    <select id="selmodel" name="selmodel"  class="bigselect">
+                    	<option value="140">ATS</option>
+                    	<option value="60">XTS</option>
+                        <option value="10">CTS</option>
+                        <option value="110">CTS COUPE</option>
+                        <option value="70">CTS-V</option>
+                        <option value="120">CTS-V COUPE</option>
+                        <option value="20">SRX</option>
+                        <option value="40">ESCALADE</option>
+                        <option value="130">ESCALADE ESV</option>
+                    </select>
+                    <span class="car" id="140">
+                        <img src="__STATIC__/images/Ford/car_ATS.png" />
+                    </span>
+                    <span class="car" id="10" style="display:none">
+                        <img src="__STATIC__/images/Ford/car_CTS.png" />
+                    </span>
+                    <span class="car" id="110" style="display:none">
+                        <img src="__STATIC__/images/Ford/car_CTS-Coupe.png" />
+                    </span>
+                    <span class="car" id="70" style="display:none">
+                        <img src="__STATIC__/images/Ford/car_CTS-V.png" />
+                    </span>
+                    <span class="car" id="120" style="display:none">
+                        <img src="__STATIC__/images/Ford/car_CTS-V-Coupe.png" />
+                    </span>
+                    <span class="car" id="60" style="display:none">
+                        <img src="__STATIC__/images/Ford/car_XTS.png" />
+                    </span>
+                    <span class="car" id="20" style="display:none">
+                        <img src="__STATIC__/images/Ford/car_SRX.png" />
+                    </span>
+                    <span class="car" id="40" style="display:none">
+                        <img src="__STATIC__/images/Ford/car_Escalade.png" />
+                    </span>
+                    <span class="car" id="130" style="display:none">
+                        <img src="__STATIC__/images/Ford/car_Escalade-esv.png" />
+                    </span>
+                    
+                </p></li>
+            <li>
+                <p class="checkbox mp25">
+                    <input type="checkbox" name="RequestTypeID" value="1" /><span>预约看车</span>
+                    <input type="checkbox" name="RequestTypeID" value="2"/><span>索取资料</span></p></li>
+            <li>
+                <p class="name mp25">
+                    <label class="mp25">姓 名：</label>
+                    <input type="text" id="driverName" name="driverName" value="" class="inputBtn" />
+                </p></li>
+            <li>
+                <p class="name mp25">
+                    <label class="mp25">称 谓：</label>
+                    <input type="radio" name="sex" value="1" checked="checked" /><span>先生</span>
+                    <input type="radio" name="sex" value="2"/><span>小姐</span>
+                </p></li>
+            <li>
+                <p class="name mp25">
+                    <label class="mp25">手 机：</label>
+                    <input type="text" id="driverPhone" name="driverPhone" value="" class="inputBtn" maxlength="11" />
+                </p></li>
+            <!--<li>
+                <p class="name mp25">
+                    <label class="mp25">电 邮：</label>
+                    <input type="text" id="driverEmail" name="driverEmail" value="" class="inputBtn" />
+                </p></li>-->
+            <li>
+                <label class="mp25">计划购车时间：</label>
+                <p>
+                    <select id="driverPlan" name="driverPlan" class="bigselect">
+                        <option selected value="-1">购车计划</option>
+                        <option value="1">7天内</option>
+                        <option value="2">15天内</option>
+                        <option value="4">30天内</option>
+                        <option value="10">90天内</option>
+                        <option value="35">短期内暂无购车计划</option>
+                    </select>
+                </p></li>
+            <li style="display:none;">
+                <label class="mp25">购车预算：</label>
+                <p>
+                    <select id="program" name="program" class="bigselect">
+                        <option selected="selected" value="-1">请选择购车预算</option>
+                        <option value="2">30万以下</option>
+                        <option value="5">30-40万</option>
+                        <option value="10">40-60万</option>
+                        <option value="20">60-80万</option>
+                        <option value="30">80-100万</option>
+                        <option value="40">100万以上</option>
+                    </select>
+                </p>
+                <span class="tip">请填写完整的联系地址确保您能收到资料</span></li>
+        </ul>
+        <p class="checkbox mp25"><input type="checkbox" name="driverRead" value="1" /><span>我愿意收到凯迪拉克电子版时事通讯</span></p>
+        <p class="submit mp25"></span><img src="__STATIC__/images/submit.png" width="144px" height="40px" onclick="FormLogin();" /></p>
+        <span class="verify">
+    </div>
+    <input type="hidden" id="referSourceID" name="referSourceID" value="1" />
+    <div style="display:none">
+    <input type="reset" id="formreset" />
+    </div>
+    </form>
+</div>
+
+
+<!--弹窗-->
+<div id="popupWin" class="popup">
+    <div class="popupwin">
+        <img src="images/close.png" onclick="closePopup()" class="close" />
+        <img src="images/popup.png" />
+    </div>
+</div>
+
+<img id="dctracking" src="images/trans.gif" width="1" height="1" style="display:none;" />
+    
+<include file="public:footer" />
+<script type="text/javascript">
+	jQuery(function(){
+		$('#selmodel').change(function(){
+			var textconcent = $('#selmodel option::selected').val();
+			$('.car').hide();
+			$('#'+textconcent).show();
+		})
+	})
+</script>
+
+<script type="text/javascript">
+
+function Request(strName, defaultValue) {
+	var strHref = location.href;
+	var intPos = strHref.indexOf("?");
+	var strRight = strHref.substr(intPos + 1);
+	var arrTmp = strRight.split("&");
+	for (var i = 0; i < arrTmp.length; i++) {
+		var arrTemp = arrTmp[i].split("=");
+		if (arrTemp[0].toUpperCase() == strName.toUpperCase()) return arrTemp[1];
+	}
+	return defaultValue;
+}
+function initialize_province(){
+	$('#model').empty().append('<OPTION selected value=-1>请选择省份</OPTION>');
+	for(var i=0;i<provinceinfo.length;i++){
+		$('#model').append('<option value="'+provinceinfo[i]+'">'+provinceinfo[i]+'</option>');
+	}
+}
+
+function initialize_city(city){
+	$('.adress').html('');
+	$("#dealer").empty().append('<option value="-1" selected="selected">请选择经销商</option>');
+	for(var i=0;i<dealerinfo.length;i++){
+		if(dealerinfo[i][6] == city){
+			$("#dealer").append('<option value="'+dealerinfo[i][0]+'">'+dealerinfo[i][1]+'</option>');
+			//$('#dealer').val(dealerinfo[i][0]);
+		}
+	}
+}
+
+function initialize_dealer(dealer){
+	$('.adress').html('');
+	for(var i=0;i<dealerinfo.length;i++){
+		if(dealerinfo[i][0] == dealer){
+			$('.adress').html('<dt>'+dealerinfo[i][2]+'</dt><dd>'+dealerinfo[i][7]+'</dd>');
+			break;
+		}
+	}
+}
+
+jQuery(function(){
+	initialize_province();
+	$('#model').change(function(){
+		$('.adress').html('');
+		$("#dealer").empty().append('<option value="-1" selected="selected">请选择经销商</option>');
+		city();
+		$('#model,#city').sSelect();
+		$('#model,#dealer').sSelect();
+	});
+	$('#city').change(function(){
+		initialize_city($(this).val());
+		$('#city,#dealer').sSelect();
+	});
+	$('#dealer').change(function(){
+		initialize_dealer($(this).val());
+	})
+})
+
+
+function submitData(){
+	$.ajax({
+			type:"get",
+			url:"/api/testdrive.ashx?ts="+new Date().getTime()+"&"+$('#testdriveform').serialize(),
+			data:{cid:Request("cid","")},
+			dataType:"xml",
+			success:function(xml){
+				var leadsid = $(xml).find("leadsid").text();
+				
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+var trackhtml = "http://3736684.fls.doubleclick.net/activityi;src=3736684;type=-bran479;cat=05--t579;u3="+leadsid+";u2="+$('#driverName').val()+";u1="+$('#driverPhone').val()+";ord=' + a + '?";
+$("#dctracking").attr("src", trackhtml);
+
+				$('#formreset').click();
+				lottery();
+			}
+		});
+}
+</script>
