@@ -7,10 +7,8 @@ class ProductAction extends UserAction{
 	public function _initialize() {
 		parent::_initialize();
 		//
-		$token_open=M('token_open')->field('queryname')->where(array('token'=>session('token')))->find();
-		if((!isset($_GET['dining'])&&!strpos($token_open['queryname'],'shop'))||(isset($_GET['dining'])&&!strpos($token_open['queryname'],'dx'))){
-           // $this->error('您还未开启该模块的使用权,请到功能模块中添加',U('Function/index',array('token'=>session('token'),'id'=>session('wxid'))));
-		}
+		//检查权限和功能
+		$this->checkauth('shop','shop');
 		//是否是餐饮
 		if (isset($_GET['dining'])&&intval($_GET['dining'])){
 			$this->isDining=1;

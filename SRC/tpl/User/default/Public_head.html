@@ -67,7 +67,7 @@ window.onload =getHost;
 	<div id="nav">
 		<img src="{lanrain:$wecha.headerpic}" width="50" height="50" />
 		<ul class="ul">
-			<li><strong>{lanrain:$wecha.wxname}</strong><img src="{lanrain::RES}/images/vip.png" /></li>
+			<li><strong>{lanrain:$wecha.wxname}</strong><span class="vipimgbig vip-iconbig<php>echo $_SESSION['gid']-1;</php>"></span></li>
 			<li>微信号：{lanrain:$wecha.weixin}</li>
 		</ul>
 		<ul class="ul2">
@@ -174,10 +174,10 @@ window.onload =getHost;
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
 			<a href="{lanrain::U('Home/set',array('token'=>$token))}" >
             	<img src="{lanrain::RES}/images/TwoMenu-ico-01.png" />
-                <span>3G站</span>
+                <span>3G</span>
             </a>
 			<div id="TwoMenu-02" <?php if(in_array(MODULE_NAME,array('Home','Tmpls','Classify','Img','Diymen','Flash','Photo'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
-            	<img src="{lanrain::RES}/images/TwoMenu-ico-001.png" /><a class="a">3G站</a>
+            	<img src="{lanrain::RES}/images/TwoMenu-ico-001.png" /><a class="a">3G</a>
             </div>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
 			<a href="{lanrain::U('Lottery/index',array('token'=>$token))}" >
@@ -187,7 +187,7 @@ window.onload =getHost;
             	<img src="{lanrain::RES}/images/TwoMenu-ico-003.png" /><a class="a">营销</a>
             </div>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
-			<a href="{lanrain::U('Groupon/index',array('token'=>$token))}" >
+			<a href="{lanrain::U('Adma/index',array('token'=>$token))}" >
             	<img src="{lanrain::RES}/images/TwoMenu-ico-02.png" /><span>商务</span>
             </a>
 			<div id="TwoMenu-04" <?php if(in_array(MODULE_NAME,array('Product','Groupon','orders','Host','Selfform','Adma','Panorama','Reply_info'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
@@ -231,9 +231,9 @@ window.onload =getHost;
                 <a href="{lanrain::U('Company/index',array('token'=>$token))}" class="Brown" >
                     <img src="{lanrain::RES}/images/1-5.png" /><span>LBS回复</span>
                 </a>
-                <a href="{lanrain::U('Alipay_config/index',array('token'=>$token))}" class="LightPurple" >
+                <!--a href="{lanrain::U('Alipay_config/index',array('token'=>$token))}" class="LightPurple" >
                     <img src="{lanrain::RES}/images/2-6.png" /><span>支付宝</span>
-                </a>
+                </a-->
                 <a href="{lanrain::U('Requerydata/index',array('token'=>$token))}" class="LightRed" >
                     <img src="{lanrain::RES}/images/TwoMenu-ico-05.png" /><span>统计分析</span>
                 </a>
@@ -337,9 +337,9 @@ window.onload =getHost;
             </div>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <div class="contab" <?php if(in_array(MODULE_NAME,array('Taobao','Api','Liuyan'))){ ?>style="display:block;" <?php }else{ ?>style="display:none;"<?php } ?> >
-                <a href="{lanrain::U('Taobao/index',array('token'=>$token))}"  class="Red"  >
+                <!--a href="{lanrain::U('Taobao/index',array('token'=>$token))}"  class="Red"  >
                     <img src="{lanrain::RES}/images/ThreeMenu-ico-04.png" /><span>淘宝天猫</span>
-                </a>
+                </a-->
                 <a href="{lanrain::U('Api/index',array('token'=>$token))}" class="Highland" >
                     <img src="{lanrain::RES}/images/ThreeMenu-ico-04.png" /><span>第三方</span>
                 </a>

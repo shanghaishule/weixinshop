@@ -396,5 +396,5 @@ ALTER TABLE `tp_wecha_shop` ADD `logo` VARCHAR(255) NULL ;
 
 
 /*  品牌首页显示问题          */
-ALTER TABLE`tp_brandlist`ADD`display` TINYINT NOTNULL DEFAULT'0' COMMENT'1-首页显示 0-首页不显示' AFTER `ordid` ;
+ALTER TABLE `tp_brandlist` ADD `display` TINYINT NOT NULL DEFAULT '0' COMMENT '1-首页显示 0-首页不显示' AFTER `ordid`;
 

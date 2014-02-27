@@ -5,15 +5,18 @@ class WechaWallAction extends BaseAction{
     
      $this->token=$_GET['token'];
      if($_SESSION['token'] == "") $_SESSION['token']=$this->token;
-     $wall=M('weixin_vote');     
+     
+     $wall=M('vote');     
      $where['tokenTall']=$this->token;
+     
      $this->assign('token',$this->token);
      $this->assign('count',$wall->where($where)->count());
      $this->assign("list",$wall->limit(20)->where($where)->order('res DESC')->select());
+     
      $this->display();
   }
   public function Tozero(){
-     $wall=M('weixin_vote');
+     $wall=M('vote');
      $data['res']=0;
      $where['tokenTall']=$_GET['token'];
      if($wall->where($where)->save($data)){
@@ -23,7 +26,7 @@ class WechaWallAction extends BaseAction{
      }
   }
   public function gameAgain(){
-     $wall=M('weixin_vote');
+     $wall=M('vote');
      $data['gameOverFlag']="Y";
      $where['tokenTall']=$_GET['token'];
      if($wall->where($where)->save($data)){
@@ -33,7 +36,7 @@ class WechaWallAction extends BaseAction{
      }
   }
   public function deleteAll(){
-     $wall=M('weixin_vote');
+     $wall=M('vote');
      $where['tokenTall']=$_GET['token'];
      if($wall->where($where)->delete()){
          $this->success('所有人员删除成功',U('WechaWall/index',array('token'=>$_SESSION['token'])));

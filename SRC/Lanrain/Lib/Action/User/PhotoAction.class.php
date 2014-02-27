@@ -2,9 +2,9 @@
 class PhotoAction extends UserAction{
 	public function index(){		
 		
-		$token_open=M('token_open')->field('queryname')->where(array('token'=>session('token')))->find();
-		//dump($token_open);
-		if(!strpos($token_open['queryname'],'adma')){$this->error('您还开启该模块的使用权,请到功能模块中添加',U('Function/index',array('token'=>session('token'),'id'=>session('wxid'))));}
+		$//检查权限和功能
+		$this->checkauth('adma','adma');
+		
 		//相册列表
 		$data=M('Photo');
 		$count      = $data->where(array('token'=>$_SESSION['token']))->count();
