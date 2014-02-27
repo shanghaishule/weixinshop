@@ -110,6 +110,16 @@
 							return false;
 
 						} );
+						
+						var scrollTimer; 
+						$("#sb-slider").hover(
+							function() {
+								clearInterval(scrollTimer); 
+							},
+							function() { 
+								scrollTimer = setInterval(function() { slicebox.next(); }, 2000); 
+							}
+						).trigger("mouseleave"); 
 
 					};
 
@@ -118,6 +128,8 @@
 			})();
 
 			Page.init();
+
+			
 
 		});
 		</script>
