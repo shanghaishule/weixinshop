@@ -22,6 +22,7 @@ class IndexAction extends UserAction{
 	public function add(){
 		$randLength=6;
 		$chars='abcdefghijklmnopqrstuvwxyz';
+		
 		$len=strlen($chars);
 		$randStr='';
 		for ($i=0;$i<$randLength;$i++){
@@ -77,6 +78,7 @@ class IndexAction extends UserAction{
 		if($db->create()===false){
 			$this->error($db->getError());
 		}else{
+			
 			$id=$db->add();
 			if($id){
 				M('Users')->field('wechat_card_num')->where(array('id'=>session('uid')))->setInc('wechat_card_num');
@@ -88,10 +90,28 @@ class IndexAction extends UserAction{
 				$data1["weName"] = $_POST["wxname"];
 				$data1["HaveReal"] = 0;
 				$data1["credit"] = 0;
-				$data1["tokenTall"] = $_POST['token'];
-				$weChaShop->add($data1);
-				//
-				$this->success('操作成功',U('Index/index'));
+				
+				//判断微信号是否已经开店
+				$flag = false;
+				$wecha_shop=M('wecha_shop');
+				$where_shop['weName']=$_POST["wxname"];
+				$Have_token = $wecha_shop->where($where_shop)->find();
+				if ($Have_token['tokenTall'] != "") {
+					$data1["tokenTall"] = $Have_token['tokenTall'];
+					$tokenData["token"] = $Have_token['tokenTall'];
+					$flag = true;
+					$db->where($where_shop)->save($tokenData);
+				}else{
+					$data1["tokenTall"] = $_POST['token'];
+					$weChaShop->add($data1);
+				}
+				
+				if($flag){
+					$this->success('欢迎回来',U('Index/index'));
+				}else{
+					$this->success('操作成功',U('Index/index'));
+				}
+				
 			}else{
 				$this->error('操作失败',U('Index/index'));
 			}
@@ -107,7 +127,16 @@ class IndexAction extends UserAction{
 	public function addfc(){
 		$token_open=M('Token_open');
 		$open['uid']=session('uid');
-		$open['token']=$_POST['token'];
+		//判断微信号是否已经开店
+		$wecha_shop=M('wecha_shop');
+		$where_shop['weName']=$_POST["wxname"];
+		$Have_token = $wecha_shop->where($where_shop)->find();
+		if ($Have_token['tokenTall'] != "") {
+			$open['token'] = $Have_token['tokenTall'];
+		}else{
+			$open['token']=$_POST['token'];
+		}
+		
 		$gid=session('gid');
 		$fun=M('Function')->field('funname,gid,isserve')->where('`gid` <= '.$gid)->select();
 		foreach($fun as $key=>$vo){
