@@ -141,7 +141,7 @@ class WeixinAction extends Action
                 
                     return $this->home();
                     break;
-                case '官网':
+                case '商城':
                     
                     	return $this->guanwang();
                     	break;
@@ -203,7 +203,7 @@ class WeixinAction extends Action
 				// case '留言':
 					// return $this->liuyan();
 					// break;
-                case '商城':
+               // case '商城':
                     /*$pro = M('product')->where(array(
                         'groupon' => '0',
                         'dining' => '0',
@@ -220,22 +220,22 @@ class WeixinAction extends Action
                         ),
                         'news'
                     );*/
-					$pro = M('reply_info')->where(array(
-                        'infotype' => 'Shop',
-                        'token' => $this->token
-                    ))->find();
-                    return array(
-                        array(
-                            array(
-                                $pro['title'],
-                                strip_tags(htmlspecialchars_decode($pro['info'])),
-                                $pro['picurl'],
-                                C('site_url') . '/index.php?g=Wap&m=Product&a=index&token=' . $this->token . '&wecha_id=' . $this->data['FromUserName']
-                            )
-                        ),
-                        'news'
-                    );
-                    break;
+				//	$pro = M('reply_info')->where(array(
+               //         'infotype' => 'Shop',
+             //           'token' => $this->token
+              //      ))->find();
+             //       return array(
+             //           array(
+             //               array(
+              //                  $pro['title'],
+              //                  strip_tags(htmlspecialchars_decode($pro['info'])),
+              //                  $pro['picurl'],
+              //                  C('site_url') . '/index.php?g=Wap&m=Product&a=index&token=' . $this->token . '&wecha_id=' . $this->data['FromUserName']
+             //               )
+             //           ),
+              //          'news'
+            //        );
+            //        break;
 				case '全景':
 					$pro = M('reply_info')->where(array(
                         'infotype' => 'Panorama',
