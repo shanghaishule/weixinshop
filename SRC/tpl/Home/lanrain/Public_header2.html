@@ -21,7 +21,7 @@ var searchid = 5;
 <div class="top">
 <div class="toplink">
 <div class="welcome">
-	<a href="/" title="微指购"><img src="/tpl/User/default/common/images/home_page.png" width="160px" height="40px"/></a>
+	<a href="{lanrain::U('Index/index')}" title="微指购"><img src="./tpl/User/default/common/images/home_page.png" width="160px" height="40px"/></a>
 </div>
     <div class="memberinfo"  id="destoon_member">	
 		<if condition="$_SESSION[uid]==false">
@@ -37,7 +37,7 @@ var searchid = 5;
 	<div class="logo">
     	<div class="navr">
         <ul id="topMenu">           
-			 <li <if condition="(ACTION_NAME eq 'index') and (GROUP_NAME eq 'Home')">class="menuon"</if> ><a href="/" >首页</a></li>
+			 <li <if condition="(ACTION_NAME eq 'index') and (GROUP_NAME eq 'Home')">class="menuon"</if> ><a href="{lanrain::U('Index/index')}" >首页</a></li>
              <li <eq name="ACTION_NAME" value="fc">class="menuon"</eq>><a href="{lanrain::U('Home/Index/fc')}">功能介绍</a></li>
              <li <eq name="ACTION_NAME" value="about">class="menuon"</eq>><a href="{lanrain::U('Home/Index/about')}">关于我们</a></li>
              <li <eq name="ACTION_NAME" value="price">class="menuon"</eq>><a href="{lanrain::U('Home/Index/price')}">资费说明</a></li>
