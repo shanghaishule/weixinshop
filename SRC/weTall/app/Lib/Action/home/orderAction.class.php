@@ -129,6 +129,7 @@ class orderAction extends userbaseAction {
 	
 	
 	public function jiesuan(){//结算
+die();			
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		if(count($_SESSION['cart'])>0)
@@ -183,7 +184,7 @@ class orderAction extends userbaseAction {
 		//取商家token值，取不到则默认为空
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
-	
+
 		//header("content-Type: text/html; charset=Utf-8");
 		//dump($_POST);exit;
 	
@@ -373,14 +374,19 @@ class orderAction extends userbaseAction {
 		{
 			$this->redirect('user/index',array('tokenTall'=>$tokenTall));
 		}
+		
 		$this->display();
 	}
 	
 	
 	public function end()
 	{
+die();		
 		if(IS_POST)
-		{
+		{	
+			//xxl start 短信提醒
+		    $orderInfo = array();
+		    //xxl end 
 			$payment_id=$_POST['payment_id'];
 			//$orderid=$_POST['orderid'];
 			
@@ -389,11 +395,29 @@ class orderAction extends userbaseAction {
 			$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
 			
 			$all_order_price = 0;
+			
+			//xxl start
+			$orderinfos = array();
+			//xxl end
 			foreach ($all_order_arr as $dingdanhao){			
 				$item_order=M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->find();
 				!$item_order && $this->_404();
 				$all_order_price = $all_order_price + floatval($item_order['order_sumPrice']);
+				
+				//xxl start 短信提醒
+				$order_detail=M('order_detail');
+				$order_title_arr = $order_detail->field('title')->where("orderId='".$dingdanhao['orderid']."'")->select();	
+				$order_titles = implode(",",$order_title_arr);
+				
+				$orderInfo('address_name')=$item_order('address_name');
+				$orderInfo('mobile')=$item_order('mobile');
+				$orderInfo('title')=$order_titles;
+				$orderinfos[] = $orderInfo;
+				//xxl end
 			}
+			//xxl start
+			//$_SESSION['orderinfos'] = $orderinfos;
+			//xxl end
 			
 			if(2 == $payment_id)//货到付款
 			{
@@ -411,7 +435,12 @@ class orderAction extends userbaseAction {
 						$this->error('操作失败!');
 					}
 				}
+				//短信提醒 xxl start
+				$this->send_tel_mail();
+				//xxl end
 				$this->success('货到付款，保存成功！',U('user/index',array('status'=>2)));
+				
+				
 			}
 			elseif (3 == $payment_id)
 			{
@@ -585,11 +614,43 @@ class orderAction extends userbaseAction {
 					$this->error('更新订单状态失败!');
 				}
 			}
-
+			//短信提醒 xxl start
+			$this->send_tel_mail();
+			//xxl end
 			$this->success('支付成功！',U('user/index',array('status'=>2)));
 		}else {
 			$this->error('支付失败！',U('user/index',array('status'=>1)));
 		}
 	}
+	
+	/**
+	 * 短信提醒
+	 */
+	function send_tel_mail() {
+		 
+		$Token = $this->getTokenTall();		
+		$info=M('call')->where(array('token'=>$Token))->find();
+		
+		$user=$info['phone_account'];//短信平台帐号
+		$pass=md5($info['phone_password']);//短信平台密码
+		$smsstatus=$info['status'];//短信平台状态
+		
+		//短信提醒设置时
+		if ($smsstatus == 1) {
+dump($_SESSION['orderinfos']);
+die();			
+			//商家电话
+			$shop_tel=M('wecha_shop')->field("phone")->where(array('token'=>$Token))->find();
+			foreach ($_SESSION['orderinfos'] as $orderinfo){
+				//商家短信提醒
+				$content = "顾客".$orderinfo('address_name')."在您微店已下单购买".$orderinfo('title')."商品,您尽快为顾客安排发货";				
+				$smsrs = file_get_contents('http://api.smsbao.com/sms?u='.$user.'&p='.$pass.'&m='.$shop_tel.'&c='.urlencode($content));
+				//用户信息
+				$content = "您在微指购商城购买的".$orderinfo('title')."商品，请 微信搜索\"微指购\"+关注 查询物流信息！";
+				$smsrs = file_get_contents('http://api.smsbao.com/sms?u='.$user.'&p='.$pass.'&m='.$orderinfo('mobile').'&c='.urlencode($content));
+			}			
+		}				
+		
+	}	
 
 }
