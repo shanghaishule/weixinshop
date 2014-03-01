@@ -78,43 +78,49 @@ class IndexAction extends UserAction{
 		if($db->create()===false){
 			$this->error($db->getError());
 		}else{
+			//判断微信号是否已经开店
+			$flag = false;
+			$wecha_shop=M('wecha_shop');
+			$where_shop['weName']=$_POST["wxname"];
+			$haveuse["wxuser"]=$_POST["wxname"];
+			$Have_token = $wecha_shop->where($where_shop)->find();
+			if ($db->where($haveuse)->find()) {
+				$this->error('该微信号已经存在其他用户中，请选择其他公众号！',U('Index/index'));
+			}else{				
 			
-			$id=$db->add();
-			if($id){
-				M('Users')->field('wechat_card_num')->where(array('id'=>session('uid')))->setInc('wechat_card_num');
-				$this->addfc();
-				$weChaShop = M("wecha_shop");
-				$data1["name"] = $_POST["wxname"];
-				$headurl = $_POST["headerpic"];
-				$data1["headurl"] = substr($headurl, 0,strlen($headurl));
-				$data1["weName"] = $_POST["wxname"];
-				$data1["HaveReal"] = 0;
-				$data1["credit"] = 0;
-				
-				//判断微信号是否已经开店
-				$flag = false;
-				$wecha_shop=M('wecha_shop');
-				$where_shop['weName']=$_POST["wxname"];
-				$Have_token = $wecha_shop->where($where_shop)->find();
-				if ($Have_token['tokenTall'] != "") {
-					$data1["tokenTall"] = $Have_token['tokenTall'];
-					$tokenData["token"] = $Have_token['tokenTall'];
-					$flag = true;
-					$where_shopw['wxname']=$_POST["wxname"];
-					$db->where($where_shopw)->save($tokenData);
+				$id=$db->add();
+				if($id){
+					M('Users')->field('wechat_card_num')->where(array('id'=>session('uid')))->setInc('wechat_card_num');
+					$this->addfc();
+					$weChaShop = M("wecha_shop");
+					$data1["name"] = $_POST["wxname"];
+					$headurl = $_POST["headerpic"];
+					$data1["headurl"] = substr($headurl, 0,strlen($headurl));
+					$data1["weName"] = $_POST["wxname"];
+					$data1["HaveReal"] = 0;
+					$data1["credit"] = 0;
+					
+					
+					if ($Have_token['tokenTall'] != "") {
+						$data1["tokenTall"] = $Have_token['tokenTall'];
+						$tokenData["token"] = $Have_token['tokenTall'];
+						$flag = true;
+						$where_shopw['wxname']=$_POST["wxname"];
+						$db->where($where_shopw)->save($tokenData);
+					}else{
+						$data1["tokenTall"] = $_POST['token'];
+						$weChaShop->add($data1);
+					}
+					
+					if($flag){
+						$this->success('欢迎回来',U('Index/index'));
+					}else{
+						$this->success('操作成功',U('Index/index'));
+					}
+					
 				}else{
-					$data1["tokenTall"] = $_POST['token'];
-					$weChaShop->add($data1);
+					$this->error('操作失败',U('Index/index'));
 				}
-				
-				if($flag){
-					$this->success('欢迎回来',U('Index/index'));
-				}else{
-					$this->success('操作成功',U('Index/index'));
-				}
-				
-			}else{
-				$this->error('操作失败',U('Index/index'));
 			}
 		}
 		
