@@ -15,8 +15,7 @@ class Token_openAction extends UserAction{
 		if($back){
 			echo 1;
 		}else{
-			$deleteWhere['queryname']=$fun['funname'];
-			$ins = M('Token_open')->add($deleteWhere);
+			$ins = M('Token_open')->add(array('uid'=>session('uid'), 'token'=>session('token'), 'queryname'=>$fun['funname']));
 			if ($ins)
 				echo 1;
 			else
