@@ -43,7 +43,7 @@
   </tr>
   <tr>
    <td class="sureVaule" valign="top" colspan=3>
-   <a href='http://bestchoice88.com/Wall/vote/shake.php?token=<?=$tokenTall?>&tokenTall=<?=$token?>'><b>我已经登记过了</b></a>
+   <a href='/Wall/vote/shake.php?token=<?=$tokenTall?>&tokenTall=<?=$token?>'><b>我已经登记过了</b></a>
    </td>
   </tr>
 </tbody>

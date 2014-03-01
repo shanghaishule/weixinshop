@@ -16,7 +16,7 @@
         if($query2=mysql_query($sql,$link)){
          echo "登录中....";
          echo "<script language='javascript'>";
-         echo "location.href='http://bestchoice88.com/Wall/vote/shake.php?token=".$token."&tokenTall=".$tokenTall."'";
+         echo "location.href='/Wall/vote/shake.php?token=".$token."&tokenTall=".$tokenTall."'";
          echo "</script>";
         }else{
            echo "系统故障！<a href='javascript:history.go(-1);' class='right btnGrayS vm' style='margin-top:-27px'>返回</a>";

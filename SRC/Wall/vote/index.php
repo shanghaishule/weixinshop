@@ -49,7 +49,7 @@
 $(document).ready(function(){
   $("p").click(function(){
     $(this).hide();
-     Load("http://bestchoice88.com/Wall/vote/resetData.php?tokenTall=<?=$tokenTall?>");
+     Load("/Wall/vote/resetData.php?tokenTall=<?=$tokenTall?>");
   });
 });
 </script>
