@@ -129,7 +129,6 @@ class orderAction extends userbaseAction {
 	
 	
 	public function jiesuan(){//结算
-die();			
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
 		if(count($_SESSION['cart'])>0)
