@@ -100,7 +100,8 @@ class IndexAction extends UserAction{
 					$data1["tokenTall"] = $Have_token['tokenTall'];
 					$tokenData["token"] = $Have_token['tokenTall'];
 					$flag = true;
-					$db->where($where_shop)->save($tokenData);
+					$where_shopw['wxname']=$_POST["wxname"];
+					$db->where($where_shopw)->save($tokenData);
 				}else{
 					$data1["tokenTall"] = $_POST['token'];
 					$weChaShop->add($data1);
