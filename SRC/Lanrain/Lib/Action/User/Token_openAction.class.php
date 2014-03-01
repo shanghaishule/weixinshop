@@ -16,13 +16,7 @@ class Token_openAction extends UserAction{
 		if($back){
 			echo 1;
 		}else{
-			$allfun=M('Function')->select();
-			$queryname = '';
-			foreach ($allfun as $value){
-				$queryname .= $value['funname'].',';
-			}
-			$queryname=rtrim($queryname,',');
-			$ins = M('Token_open')->add(array('uid'=>session('uid'), 'token'=>session('token'), 'queryname'=>$queryname));
+			$ins = M('Token_open')->add(array('uid'=>session('uid'), 'token'=>session('token'), 'queryname'=>$fun['funname']));
 			if ($ins)
 				echo 1;
 			else

@@ -12,6 +12,17 @@ class FunctionAction extends UserAction{
 		//第一次登陆　创建　功能所有权
 		$token_open=M('Token_open');
 		$toback=$token_open->field('id,queryname')->where(array('token'=>session('token'),'uid'=>session('uid')))->find();
+		if (! $toback) {
+			$allfun=M('Function')->select();
+			$queryname = '';
+			foreach ($allfun as $value){
+				$queryname .= $value['funname'].',';
+			}
+			$queryname=rtrim($queryname,',');
+			M('Token_open')->add(array('uid'=>session('uid'), 'token'=>session('token'), 'queryname'=>$queryname));
+			$toback=$token_open->field('id,queryname')->where(array('token'=>session('token'),'uid'=>session('uid')))->find();
+		}
+		
 		$open['uid']=session('uid');
 		$open['token']=session('token');
 		//遍历功能列表
