@@ -297,8 +297,8 @@ class item_orderAction extends backendAction {
     }
     public function fahuo()
     {
-    	 $mod = D($this->_name);
-        if (IS_POST&&$this->_post('orderId','trim')) {
+    	$mod = D($this->_name);
+        if (IS_POST && $this->_post('orderId','trim')) {
         	
             if (false === $data = $mod->create()) {
                 IS_AJAX && $this->ajaxReturn(0, $mod->getError());
@@ -318,23 +318,13 @@ class item_orderAction extends backendAction {
             }
             $date['fahuo_time']=time();
             $date['status']=3;
-            if($mod->where('orderId='.$data['orderId'])->data($date)->save()){
+            if($mod->where("orderId='".$data['orderId']."'")->data($date)->save()){
                IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
                 $this->success(L('operation_success'));
             } else {
                 IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
               $this->error(L('operation_failure'));
           }
-            
-            
-           /* if( $addid=$mod->add($data) ){
-            
-                IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'fahuo');
-                $this->success(L('operation_success'));
-            } else {
-                IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
-                $this->error(L('operation_failure'));
-            }*/
         } else {
             $this->assign('open_validator', true);
             if (IS_AJAX) {
