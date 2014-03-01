@@ -1,5 +1,5 @@
 <?php
-class WechaWallAction extends BaseAction{
+class WechaWallAction extends UserAction{
      private $token;
   public function index(){
     

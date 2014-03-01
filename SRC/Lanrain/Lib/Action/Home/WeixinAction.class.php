@@ -134,7 +134,7 @@ class WeixinAction extends Action
                 );
             }
             switch ($key) {
-            CASE '1':
+            CASE '摇一摇':
             RETURN $this->shake();
             break;
                 case '首页':
