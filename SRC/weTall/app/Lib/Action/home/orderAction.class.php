@@ -330,6 +330,7 @@ class orderAction extends userbaseAction {
 			foreach ($all_order_arr as $order){
 				$data1['orderid'] = $order;
 				$data1['mergeid'] = $merge;
+				M('order_merge')->where("orderid='".$order."'")->delete();
 				M('order_merge')->data($data1)->add();
 			}
 			
@@ -354,7 +355,19 @@ class orderAction extends userbaseAction {
 				$this->_404();
 
 			$this->assign('orderid',$orders['id']);//订单ID
-			$this->assign('dingdanhao',$orders['orderId']);//订单号
+			
+			//重新生成一个合并订单号，用于支付，并将原订单号和合并订单号的关联关系写入表中。
+			$merge = date("Y-m-dH-i-s");
+			$merge = str_replace("-","",$merge);
+			$merge .= rand(1000,2000);
+			M('order_merge')->where("orderid='".$orderId."'")->delete();
+			M('order_merge')->data(array('orderid'=>$orderId, 'mergeid'=>$merge))->add();
+			
+			//支付号
+			$this->assign('dingdanhao', $merge);
+			//订单号
+			$this->assign('allorderid',array($orderId));
+			
 			$this->assign('order_sumPrice',$orders['order_sumPrice']);
 			$this->assign('order_exist','1');
 			
@@ -386,7 +399,7 @@ class orderAction extends userbaseAction {
 			$payment_id=$_POST['payment_id'];
 			//$orderid=$_POST['orderid'];
 			
-			$alldingdanhao=$_POST['dingdanhao']; //取得合并支付订单号
+			$alldingdanhao=$_POST['dingdanhao']; //取得支付号
 			//$all_order_arr = explode(',', $alldingdanhao); //切分成数组
 			$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
 			
