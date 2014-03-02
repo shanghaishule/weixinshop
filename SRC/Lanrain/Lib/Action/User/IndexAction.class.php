@@ -81,10 +81,9 @@ class IndexAction extends UserAction{
 			//判断微信号是否已经开店
 			$flag = false;
 			$wecha_shop=M('wecha_shop');
-			$where_shop['weName']=$_POST["wxname"];
-			$haveuse["wxuser"]=$_POST["wxname"];
-			$Have_token = $wecha_shop->where($where_shop)->find();
-			if ($db->where($haveuse)->find()) {
+			$haveuse["wxname"]=$_POST["wxname"];
+			$olduser=$db->where($haveuse)->find();
+			if ($olduser["wxuser"] != "") {
 				$this->error('该微信号已经存在其他用户中，请选择其他公众号！',U('Index/index'));
 			}else{				
 			
@@ -99,7 +98,8 @@ class IndexAction extends UserAction{
 					$data1["weName"] = $_POST["wxname"];
 					$data1["HaveReal"] = 0;
 					$data1["credit"] = 0;
-					
+					$where_shop['weName']=$_POST["wxname"];					
+					$Have_token = $wecha_shop->where($where_shop)->find();
 					
 					if ($Have_token['tokenTall'] != "") {
 						$data1["tokenTall"] = $Have_token['tokenTall'];
