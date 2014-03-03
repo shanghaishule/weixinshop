@@ -27,7 +27,35 @@ class DiymenAction extends UserAction{
 
 	public function  class_add(){
 		if(IS_POST){
-			$this->all_insert('Diymen_class','/class_add');
+			//$this->all_insert('Diymen_class','/class_add');
+			$data0 = $_POST;
+			$data0['token']=$_SESSION['token'];
+			if($data0['menutype'] == 'keyword')
+				$data0['keyword'] = $data0['menutypeval'];
+			else
+				$data0['url'] = $data0['menutypeval'];
+			
+			//dump($data0);exit;
+			$db = M('Diymen_class');
+			if ($db->create($data0) === false) {
+				$this->error('创建数据对象失败！');
+			} else {
+				$id = $db->add();
+				if ($id) {
+					if ($data0['menutype'] == 'keyword') {
+						$data['pid']     = $id;
+						$data['module']  = 'diymen';
+						$data['token']   = $data0['token'];
+						$data['keyword'] = $data0['menutypeval'];
+						M('Keyword')->add($data);
+					}
+					$this->success('操作成功');
+				} else {
+					$this->error('操作失败');
+				}
+			}
+			
+			
 		}else{
 			$class=M('Diymen_class')->where(array('token'=>session('token'),'pid'=>0))->order('sort desc')->select();
 			//dump($class);
@@ -55,7 +83,36 @@ class DiymenAction extends UserAction{
 		if(IS_POST){
 			$_POST['id']=$this->_get('id');
 			
-			$this->all_save('Diymen_class','/class_edit?id='.$this->_get('id'));
+			//$this->all_save('Diymen_class','/class_edit?id='.$this->_get('id'));
+			
+			$data0 = $_POST;
+			$data0['token']=$_SESSION['token'];
+			if($data0['menutype'] == 'keyword')
+				$data0['keyword'] = $data0['menutypeval'];
+			else
+				$data0['url'] = $data0['menutypeval'];
+				
+			//dump($data0);exit;
+			$db = M('Diymen_class');
+			if ($db->create($data0) === false) {
+				$this->error('创建数据对象失败！');
+			} else {
+				$id = $db->save();
+				if ($id) {
+					if ($data0['menutype'] == 'keyword') {
+						$data['pid']     = $id;
+						$data['module']  = 'diymen';
+						$data['token']   = $data0['token'];
+						$da['keyword'] = $data0['menutypeval'];
+						M('Keyword')->where($data)->save($da);
+					}
+					$this->success('操作成功');
+				} else {
+					$this->error('操作失败');
+				}
+			}
+			
+			
 		}else{
 			$data=M('Diymen_class')->where(array('token'=>session('token'),'id'=>$this->_get('id')))->find();
 			if($data==false){

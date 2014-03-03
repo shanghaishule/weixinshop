@@ -2,7 +2,7 @@
 class PhotoAction extends UserAction{
 	public function index(){		
 		
-		$//检查权限和功能
+		//检查权限和功能
 		$this->checkauth('adma','adma');
 		
 		//相册列表

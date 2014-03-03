@@ -102,20 +102,20 @@ $(function(){
     </form>
     
     <div class="J_tablelist table_list" data-acturi="{Lanrain:U('adforhome/ajax_edit')}">
-		<table width="100%" cellspacing="0">
+		<table width="100%" cellspacing="0"  style="table-layout:fixed;border-collapse:collapse;font-size:12px;">
         <thead>
           <tr>
             <th width="25"><input type="checkbox" name="checkall" class="J_checkall"></th>
             <!-- <th>ID</th> -->
             <th width="80" align="left"><span data-tdtype="order_by" data-field="name">广告名称</span></th>           
             <th width="70"><span data-tdtype="order_by" data-field="type">广告类型</span></th>
-            <th align="left"><span data-tdtype="order_by" data-field="url">广告链接地址</span></th>
+            <th align="left" width="300"><span data-tdtype="order_by" data-field="url">广告链接地址</span></th>
             <th width="60"><span data-tdtype="order_by" data-field="board_id">广告位</span></th>
-            <th width="150">有效时间</th>
+            <th width="140">有效时间</th>
             <th width="60"><span data-tdtype="order_by" data-field="ordid">广告排序</span></th>
             <th width="60"><span data-tdtype="order_by" data-field="status">状态</span></th>
             <th width="60"><span data-tdtype="order_by" data-field="checkstatus">审核状态</span></th>
-            <th width="80">管理操作</th>
+            <th width="90">管理操作</th>
           </tr>
         </thead>
         <tbody>
@@ -125,7 +125,7 @@ $(function(){
             <!-- <td align="center">{Lanrain:$val.id}</td> -->
             <td><span data-tdtype="edit" data-field="name" data-id="{Lanrain:$val.id}" class="tdedit">{Lanrain:$val.name}</span></td>           
             <td align="center">{Lanrain:$ad_type_arr[$val['type']]}<if condition="$val.type eq 'image'"><notempty name="val['content']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="/weTall/data/upload/advert/{Lanrain:$img_dir}{Lanrain:$val.content}"><img src="__ROOT__/weTall/static/images/filetype/image_s.gif" /></span></notempty></if></td>
-            <td><span data-tdtype="edit" data-field="url" data-id="{Lanrain:$val.id}" class="tdedit">{Lanrain:$val.url}</span></td>
+            <td nowrap style="overflow:hidden;text-overflow:ellipsis;">{Lanrain:$val.url}</td>
             <td align="center"><if condition="$val.boadid eq 0">未投入</if><if condition="$val.boadid eq 1">首页头部</if><if condition="$val.boadid eq 2">首页中部</if><if condition="$val.boadid eq 3">首页下部</if></td>
             <td align="center">{Lanrain:$val.start_time|date='Y-m-d',###} / {Lanrain:$val.end_time|date='Y-m-d',###}</td>
             <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{Lanrain:$val.id}" class="tdedit">{Lanrain:$val.ordid}</span></td>

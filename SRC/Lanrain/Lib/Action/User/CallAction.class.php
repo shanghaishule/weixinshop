@@ -16,6 +16,7 @@ class CallAction extends UserAction{
 		$txt = $sms->sendsms("13257089190","开始咯");
 	}
 	public function insert(){
+				
 		C('TOKEN_ON',false);
 		$db=D('Call');
 		$where['uid']=$_SESSION['uid'];
@@ -33,13 +34,16 @@ class CallAction extends UserAction{
 			}else{
 				$this->error('添加失败',U('Call/index'));
 			}
-		}else{
+		}else{		
 			$where['id']=$res['id'];
 			$where['phone_account']=$this->_post('phone_account','trim');
+			
+			$where['status']=$this->_post('status','trim');
 
 			if(isset($_POST['phone_password'])){
 				$where['phone_password']=$this->_post('phone_password','trim');
-			}		
+			}
+			
 			if($db->save($where)){
 				$this->success('更新成功',U('Call/index'));
 			}else{

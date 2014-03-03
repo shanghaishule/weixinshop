@@ -89,9 +89,10 @@ background: #2BD54D;
 	                           <a class="button_aaa" href="{:U('order/confirmOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" id="order118_action_confirm" >确认收货</a>
 	                           <a class="button_aaa" href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" >查看订单</a>	                           
 	                        </case>
-	                        <default />
+	                        <case value="4"><!-- 已完成 -->
 	                           <a class="button_aaa" href="{:U('order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status,'tokenTall'=>$tokenTall))}" >查看订单</a>
 	                           <a class="button_aaa" href="{:U('user/comments',array('item'=>$item))}" >添加评论</a>
+	                        </case>
 	                    </switch>
 	                   </div>
                         </div>

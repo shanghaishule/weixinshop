@@ -183,7 +183,7 @@ class orderAction extends userbaseAction {
 		//取商家token值，取不到则默认为空
 		$tokenTall = $this->getTokenTall();
 		$this->assign('tokenTall',$tokenTall);
-	
+
 		//header("content-Type: text/html; charset=Utf-8");
 		//dump($_POST);exit;
 	
@@ -330,6 +330,7 @@ class orderAction extends userbaseAction {
 			foreach ($all_order_arr as $order){
 				$data1['orderid'] = $order;
 				$data1['mergeid'] = $merge;
+				M('order_merge')->where("orderid='".$order."'")->delete();
 				M('order_merge')->data($data1)->add();
 			}
 			
@@ -354,7 +355,19 @@ class orderAction extends userbaseAction {
 				$this->_404();
 
 			$this->assign('orderid',$orders['id']);//订单ID
-			$this->assign('dingdanhao',$orders['orderId']);//订单号
+			
+			//重新生成一个合并订单号，用于支付，并将原订单号和合并订单号的关联关系写入表中。
+			$merge = date("Y-m-dH-i-s");
+			$merge = str_replace("-","",$merge);
+			$merge .= rand(1000,2000);
+			M('order_merge')->where("orderid='".$orderId."'")->delete();
+			M('order_merge')->data(array('orderid'=>$orderId, 'mergeid'=>$merge))->add();
+			
+			//支付号
+			$this->assign('dingdanhao', $merge);
+			//订单号
+			$this->assign('allorderid',array($orderId));
+			
 			$this->assign('order_sumPrice',$orders['order_sumPrice']);
 			$this->assign('order_exist','1');
 			
@@ -373,28 +386,53 @@ class orderAction extends userbaseAction {
 		{
 			$this->redirect('user/index',array('tokenTall'=>$tokenTall));
 		}
+		
 		$this->display();
 	}
 	
 	
 	public function end()
 	{
+		
 		if(IS_POST)
-		{
+		{	
 			$payment_id=$_POST['payment_id'];
 			//$orderid=$_POST['orderid'];
 			
-			$alldingdanhao=$_POST['dingdanhao']; //取得合并支付订单号
+			$alldingdanhao=$_POST['dingdanhao']; //取得支付号
 			//$all_order_arr = explode(',', $alldingdanhao); //切分成数组
 			$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
 			
 			$all_order_price = 0;
+			
+			//xxl start
+			$orderinfos = array();
+			$orderInfo = array();
+			//xxl end
 			foreach ($all_order_arr as $dingdanhao){			
 				$item_order=M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->find();
 				!$item_order && $this->_404();
 				$all_order_price = $all_order_price + floatval($item_order['order_sumPrice']);
+				
+				//xxl start 短信提醒
+				$order_detail=M('order_detail');
+				$order_title_arr = $order_detail->field('title')->where("orderId='".$dingdanhao['orderid']."'")->select();				
+				$order_titles = "";
+				foreach ($order_title_arr as $order_title){					
+					$order_titles = $order_titles.$order_title['title']." ";
+				}
+
+				$orderInfo['orderid']=$dingdanhao['orderid'];
+				$orderInfo['address_name']=$item_order['address_name'];
+				$orderInfo['mobile']=$item_order['mobile'];
+				$orderInfo['title']=$order_titles;
+				$orderinfos[] = $orderInfo;
+				
+				//xxl end
 			}
-			
+			//xxl start
+			$_SESSION['orderinfos'] = $orderinfos;
+			//xxl end
 			if(2 == $payment_id)//货到付款
 			{
 				foreach ($all_order_arr as $dingdanhao){
@@ -411,7 +449,12 @@ class orderAction extends userbaseAction {
 						$this->error('操作失败!');
 					}
 				}
+				//短信提醒 xxl start
+				$this->send_tel_mail();
+				//xxl end
 				$this->success('货到付款，保存成功！',U('user/index',array('status'=>2)));
+				
+				
 			}
 			elseif (3 == $payment_id)
 			{
@@ -585,11 +628,41 @@ class orderAction extends userbaseAction {
 					$this->error('更新订单状态失败!');
 				}
 			}
-
+			//短信提醒 xxl start
+			//$this->send_tel_mail();
+			//xxl end
 			$this->success('支付成功！',U('user/index',array('status'=>2)));
 		}else {
 			$this->error('支付失败！',U('user/index',array('status'=>1)));
 		}
 	}
+	
+	/**
+	 * 短信提醒
+	 */
+	function send_tel_mail() {
+		 
+		$Token = $this->getTokenTall();		
+		$info=M('call')->where(array('token'=>$Token))->find();
+		
+		$user=$info['phone_account'];//短信平台帐号
+		$pass=md5($info['phone_password']);//短信平台密码
+		$smsstatus=$info['status'];//短信平台状态
+	
+		//短信提醒设置时
+		if ($smsstatus == 1) {		
+			//商家电话
+			$shop_tel=M('wecha_shop')->field("phone")->where(array('tokenTall'=>$Token))->find();
+			foreach ($_SESSION['orderinfos'] as $orderinfo){		
+				//商家短信提醒
+				$content = "顾客".$orderinfo['address_name']."在您微店已下单购买\"".$orderinfo['title']."\"商品,订单号为：".$orderinfo['orderid']." 您尽快为顾客安排发货";				
+				$smsrs = file_get_contents('http://api.smsbao.com/sms?u='.$user.'&p='.$pass.'&m='.$shop_tel['phone'].'&c='.urlencode($content));
+				//用户信息
+				$content = "您在微指购商城购买的\"".$orderinfo['title']."\"商品,订单号为：".$orderinfo['orderid']." 请 微信搜索\"微指购\"+关注 查询物流信息！";
+				$smsrs = file_get_contents('http://api.smsbao.com/sms?u='.$user.'&p='.$pass.'&m='.$orderinfo['mobile'].'&c='.urlencode($content));
+			}			
+		}				
+		
+	}	
 
 }

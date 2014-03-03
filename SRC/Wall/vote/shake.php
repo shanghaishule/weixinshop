@@ -99,7 +99,7 @@ function start(steps){
 	createXMLHttp();
 	var sendStr = "c_name=" + steps;
         var sendStr2 = encodeURI(sendStr);
-       xmlHttp.open('GET','http://www.bestchoice88.com/Wall/vote/saveData.php?tokenTall=<?=$tokenTall?>&token=<?=$token?>&' + sendStr2,true);
+       xmlHttp.open('GET','/Wall/vote/saveData.php?tokenTall=<?=$tokenTall?>&token=<?=$token?>&' + sendStr2,true);
        xmlHttp.onreadystatechange = doSomething;   
        xmlHttp.send(null); 
   }

@@ -57,6 +57,10 @@ class UsersAction extends BaseAction{
 	
 	public function checkreg(){
 		$db=D('Users');
+		$username["username"] = $_POST["username"];
+		if($db->where($username)->find()){
+			$this->error("用户名已存在！",U('Home/Index/reg'));
+		}
 		$info=M('User_group')->find(1);
 		if($db->create()){
 			$id=$db->add();
