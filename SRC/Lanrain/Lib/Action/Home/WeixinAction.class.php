@@ -6,7 +6,7 @@ class WeixinAction extends Action
     private $data = array();
     private $my = '蜀乐';
     public function index()
-    {
+    { 
         $this->token = $this->_get('token');
         $weixin      = new Wechat($this->token);
         $data        = $weixin->request();
