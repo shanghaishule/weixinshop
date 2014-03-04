@@ -43,12 +43,14 @@ $(function(){
                 <p style="color:grey; font-size:15px; background-color: #DCDCDC; padding-left:10px;">支付金额：<span style="color:red;">¥{$ordersumPrice}</span></p>
                 
                 <div style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px; margin-top:10px;">
-				<eq name="connectInfo" value="1">
-                <p style="color:green; font-size:15px; background-color: #fff; padding-left:10px;">请您点击银联图标进行支付</p>
+				<if condition="$connectInfo eq '1'">
+				<p style="color:green; font-size:15px; background-color: #fff; padding-left:10px;">请您点击银联图标进行支付</p>
                 <a href="uppay://uppayservice/?style=token&paydata={$strOrderInfo}"><img src="__STATIC__/weixin/images/unionpay1.png" alt="银联手机支付"/></a>
-                <else />
-                <p style="color:red; font-size:15px; background-color: #fff; padding-left:10px;">订单推送失败</p>
-                </eq>
+				<elseif condition="$connectInfo eq 2"/>
+				<p style="color:blue; font-size:15px; background-color: #fff; padding-left:10px;">您的订单已经支付</p>
+				<else />
+				<p style="color:red; font-size:15px; background-color: #fff; padding-left:10px;">订单信息提交银联失败</p>
+				</if>
                 </div>
                 
 				<div class="order_information" style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px; margin-top:10px;">

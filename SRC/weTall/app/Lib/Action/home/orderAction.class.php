@@ -356,15 +356,18 @@ class orderAction extends userbaseAction {
 
 			$this->assign('orderid',$orders['id']);//订单ID
 			
+			/* 
+			 * 不能这么干，应该发起查询，如果没有支付，则再进行支付。by zcb
 			//重新生成一个合并订单号，用于支付，并将原订单号和合并订单号的关联关系写入表中。
 			$merge = date("Y-m-dH-i-s");
 			$merge = str_replace("-","",$merge);
 			$merge .= rand(1000,2000);
 			M('order_merge')->where("orderid='".$orderId."'")->delete();
 			M('order_merge')->data(array('orderid'=>$orderId, 'mergeid'=>$merge))->add();
-			
+			*/
+			$merge = M('order_merge')->where(array('orderid'=>$orderId))->find();
 			//支付号
-			$this->assign('dingdanhao', $merge);
+			$this->assign('dingdanhao', $merge['mergeid']);
 			//订单号
 			$this->assign('allorderid',array($orderId));
 			
@@ -396,13 +399,13 @@ class orderAction extends userbaseAction {
 		
 		if(IS_POST)
 		{	
+			//支付方式
 			$payment_id=$_POST['payment_id'];
 			//$orderid=$_POST['orderid'];
 			
 			$alldingdanhao=$_POST['dingdanhao']; //取得支付号
-			//$all_order_arr = explode(',', $alldingdanhao); //切分成数组
 			$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
-			
+
 			$all_order_price = 0;
 			
 			//xxl start
@@ -467,58 +470,69 @@ class orderAction extends userbaseAction {
 				$ordersumPrice=$_GET['ordersumPrice'];
 				$this->assign('ordersumPrice',$ordersumPrice);
 				
-				// 根据订单号获取银联流水号
-				header('Content-Type:text/html;charset=utf-8');
-				require_once("wapupay/lib/upmp_service.php");
-				$req['version']     		= upmp_config::$version; // 版本号
-				$req['charset']     		= upmp_config::$charset; // 字符编码
-				$req['transType']   		= "01"; // 交易类型
-				$req['merId']       		= upmp_config::$mer_id; // 商户代码
-				$req['backEndUrl']      	= $this->_server('HTTP_ORIGIN')."/weTall/wapupay/yinlian_notify_back.php"; // 后台通知URL
-				$req['frontEndUrl']     	= ""; // 前台通知URL(可选)  //经过沟通,银联还未实现这个功能.
-				$req['orderDescription']	= "微指购订单支付";// 订单描述(可选)
-				$req['orderTime']   		= substr($alldingdanhao, 0, 14);    //date("YmdHis"); // 交易开始日期时间yyyyMMddHHmmss
-				$req['orderTimeout']   		= ""; // 订单超时时间yyyyMMddHHmmss(可选)
-				$req['orderNumber'] 		= $alldingdanhao;  //支付号
-				$req['orderAmount'] 		= $all_order_price*100; // 订单金额，精确到分 ，1块请输入100
-				$req['orderCurrency'] 		= "156"; // 交易币种(可选)
-				$req['reqReserved'] 		= ""; // 请求方保留域(可选，用于透传商户信息)
-				// 保留域填充方法
-				$merReserved['test']   		= "test";
-				$req['merReserved']   		= UpmpService::buildReserved($merReserved); // 商户保留域(可选)
-				
-				$resp = array ();
-				$validResp = UpmpService::trade($req, $resp);
-				
-				// 商户的业务逻辑
-				if ($validResp){
-					// 服务器应答签名验证成功
-					// 写入文件
-					$filename = 'order_push.txt';
-					$fh = fopen($filename, "w");
-					//请求报文
-					fwrite($fh, "订单推送请求报文：". $this->transUpmpInfo($req)."\r\n");
-					//应答报文
-					fwrite($fh, "订单推送应答报文：". $this->transUpmpInfo($resp)."\r\n");
-
-					// 准备支付控件所需信息
-					// urlEncode(base64(tn=流水号,resultURL=urlEcode(交易结果展示url),usetestmode=true|false))
-					$strOrderInfo = "tn=".$resp['tn'].",ResultURL=".urlencode($this->_server('HTTP_ORIGIN')."/weTall/index.php?m=order&a=notify_kongjian&dingdanhao=".$alldingdanhao."&rid=").",UseTestMode=true";
-					// base64加密
-					$strOrderInfo = base64_encode($strOrderInfo);
-					// 转换字符串
-					$strOrderInfo = urlencode($strOrderInfo);					
-					// 输出支付控件所需信息到页面
-					$this->assign('strOrderInfo',$strOrderInfo);
+				//先查一下，看看是否已经支付过
+				if ($this->orderUpmpQuery($alldingdanhao) == "not_paid"){
+					// 根据订单号获取银联流水号
+					header('Content-Type:text/html;charset=utf-8');
+					require_once("wapupay/lib/upmp_service.php");
+					$req['version']     		= upmp_config::$version; // 版本号
+					$req['charset']     		= upmp_config::$charset; // 字符编码
+					$req['transType']   		= "01"; // 交易类型
+					$req['merId']       		= upmp_config::$mer_id; // 商户代码
+					$req['backEndUrl']      	= $this->_server('HTTP_ORIGIN')."/weTall/wapupay/yinlian_notify_back.php"; // 后台通知URL
+					$req['frontEndUrl']     	= ""; // 前台通知URL(可选)  //经过沟通,银联还未实现这个功能.
+					$req['orderDescription']	= "微指购订单支付";// 订单描述(可选)
+					$req['orderTime']   		= substr($alldingdanhao, 0, 14);    //date("YmdHis"); // 交易开始日期时间yyyyMMddHHmmss
+					$req['orderTimeout']   		= ""; // 订单超时时间yyyyMMddHHmmss(可选)
+					$req['orderNumber'] 		= $alldingdanhao;  //支付号
+					$req['orderAmount'] 		= $all_order_price*100; // 订单金额，精确到分 ，1块请输入100
+					$req['orderCurrency'] 		= "156"; // 交易币种(可选)
+					$req['reqReserved'] 		= ""; // 请求方保留域(可选，用于透传商户信息)
+					// 保留域填充方法
+					$merReserved['test']   		= "test";
+					$req['merReserved']   		= UpmpService::buildReserved($merReserved); // 商户保留域(可选)
 					
-					//关闭文件
-					fclose($fh);
-					//成功信息
-					$connectInfo = '1';
-				}else {
-					// 服务器应答签名验证失败
-					//echo "failture"."<br>";
-					$connectInfo = '0';
+					$resp = array ();
+					$validResp = UpmpService::trade($req, $resp);
+					
+					// 商户的业务逻辑
+					if ($validResp){
+						// 服务器应答签名验证成功
+						// 写入文件
+						$filename = 'order_push.txt';
+						$fh = fopen($filename, "w");
+						//请求报文
+						fwrite($fh, "订单推送请求报文：". $this->transUpmpInfo($req)."\r\n");
+						//应答报文
+						fwrite($fh, "订单推送应答报文：". $this->transUpmpInfo($resp)."\r\n");
+	
+						// 准备支付控件所需信息
+						// urlEncode(base64(tn=流水号,resultURL=urlEcode(交易结果展示url),usetestmode=true|false))
+						$strOrderInfo = "tn=".$resp['tn'].",ResultURL=".urlencode($this->_server('HTTP_ORIGIN')."/weTall/index.php?m=order&a=notify_kongjian&dingdanhao=".$alldingdanhao."&rid=").",UseTestMode=true";
+						// base64加密
+						$strOrderInfo = base64_encode($strOrderInfo);
+						// 转换字符串
+						$strOrderInfo = urlencode($strOrderInfo);					
+						// 输出支付控件所需信息到页面
+						$this->assign('strOrderInfo',$strOrderInfo);
+						
+						//关闭文件
+						fclose($fh);
+						//成功信息
+						$connectInfo = '1';
+					}else {
+						// 服务器应答签名验证失败
+						//echo "failture"."<br>";
+						$connectInfo = '0';
+					}
+				}else if ($this->orderUpmpQuery($alldingdanhao) == "paid"){
+					foreach ($all_order_arr as $dingdan){
+						$data['status']=2;
+						$data['supportmetho']=3;
+						$data['support_time']=time();
+						M('item_order')->where("orderId='".$dingdan['orderid']."' and status=1")->data($data)->save();
+					}
+					$connectInfo = '2';
 				}
 				
 				$this->assign('connectInfo', $connectInfo);
