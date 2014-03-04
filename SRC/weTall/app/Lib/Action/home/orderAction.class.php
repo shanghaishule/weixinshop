@@ -598,7 +598,7 @@ class orderAction extends userbaseAction {
 			// 支付成功
 			$alldingdanhao=$_REQUEST['dingdanhao']; //取得支付号
 			
-			if ($this->orderUpmpQuery($alldingdanhao) === false){
+			if ($this->orderUpmpQuery($alldingdanhao) == "not_paid"){
 				$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
 				foreach ($all_order_arr as $dingdanhao){
 					$data['status']=2;
@@ -661,11 +661,8 @@ class orderAction extends userbaseAction {
 	/*订单银联查询接口*/
 	public function orderUpmpQuery($num="")
 	{
-		
 		$zhifuhao=$num;
-		
 		if ($zhifuhao != "") {
-			
 			header('Content-Type:text/html;charset=utf-8');
 			require_once("wapupay/lib/upmp_service.php");
 			
@@ -693,20 +690,22 @@ class orderAction extends userbaseAction {
 				fwrite($fh, "订单查询请求报文：". $this->transUpmpInfo($req)."\r\n");
 				//应答报文
 				fwrite($fh, "订单查询应答报文：". $this->transUpmpInfo($resp)."\r\n");
-
 				//关闭文件
 				fclose($fh);
 				
-				return true;
-
+				if (""!=$resp['transStatus'] && "00"==$resp['transStatus']) {
+					return "paid";
+				}else{
+					return "not_paid";
+				}
 			}else {
 				// 服务器应答签名验证失败
 				//echo "failture"."<br>";
-				return false;
+				return "服务器应答签名验证失败";
 			}
 
 		}else {
-			return false;
+			return "参数为空";
 		}
 	}
 
