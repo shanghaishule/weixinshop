@@ -433,6 +433,8 @@ class orderAction extends userbaseAction {
 			//xxl start
 			$_SESSION['orderinfos'] = $orderinfos;
 			//xxl end
+			
+			
 			if(2 == $payment_id)//货到付款
 			{
 				foreach ($all_order_arr as $dingdanhao){
@@ -459,78 +461,67 @@ class orderAction extends userbaseAction {
 			elseif (3 == $payment_id)
 			{
 				// 银联支付
-				//echo "payment_id:".$payment_id."<br>";
-				//echo "orderid:".$orderid."<br>";
-				//echo "dingdanhao:".$dingdanhao."<br>";
-				//echo "item_order:";
-				//print_r($item_order)."<br>";
+				// 订单支付号
+				$this->assign('dingdanhao',$alldingdanhao);
+				// 价格总额
+				$ordersumPrice=$_GET['ordersumPrice'];
+				$this->assign('ordersumPrice',$ordersumPrice);
 				
 				// 根据订单号获取银联流水号
-				// header('Content-Type:text/html;charset=utf-8');
+				header('Content-Type:text/html;charset=utf-8');
 				require_once("wapupay/lib/upmp_service.php");
 				$req['version']     		= upmp_config::$version; // 版本号
 				$req['charset']     		= upmp_config::$charset; // 字符编码
 				$req['transType']   		= "01"; // 交易类型
 				$req['merId']       		= upmp_config::$mer_id; // 商户代码
-				$req['backEndUrl']      	= upmp_config::$mer_back_end_url; // 通知URL
-				$req['frontEndUrl']     	= upmp_config::$mer_front_end_url; // 前台通知URL(可选)
-				$req['orderDescription']	= "微指购订单支付";// 订单描述(可选)
-				$req['orderTime']   		= date("YmdHis"); // 交易开始日期时间yyyyMMddHHmmss
+				$req['backEndUrl']      	= urlencode(U('order/notify_back')); // 后台通知URL
+				$req['frontEndUrl']     	= urlencode(U('order/notify_front')); // 前台通知URL(可选)
+				$req['orderDescription']	= urlencode("微指购订单支付");// 订单描述(可选)
+				$req['orderTime']   		= substr($alldingdanhao, 0, 14);    //date("YmdHis"); // 交易开始日期时间yyyyMMddHHmmss
 				$req['orderTimeout']   		= ""; // 订单超时时间yyyyMMddHHmmss(可选)
-				//$req['orderNumber'] 		= date("YmdHiss"); //订单号(商户根据自己需要生成订单号)
-				$req['orderNumber'] 		= $alldingdanhao;
-				$req['orderAmount'] 		= $all_order_price*100; // 订单金额，精确到分 1块请输入100
+				$req['orderNumber'] 		= $alldingdanhao;  //支付号
+				$req['orderAmount'] 		= $all_order_price*100; // 订单金额，精确到分 ，1块请输入100
 				$req['orderCurrency'] 		= "156"; // 交易币种(可选)
-				$req['reqReserved'] 		= "透传信息"; // 请求方保留域(可选，用于透传商户信息)
+				$req['reqReserved'] 		= ""; // 请求方保留域(可选，用于透传商户信息)
 				// 保留域填充方法
 				$merReserved['test']   		= "test";
 				$req['merReserved']   		= UpmpService::buildReserved($merReserved); // 商户保留域(可选)
+				
 				$resp = array ();
 				$validResp = UpmpService::trade($req, $resp);
+				
 				// 商户的业务逻辑
 				if ($validResp){
 					// 服务器应答签名验证成功
-					//echo "success"."<br>";
-					//print_r($resp);
-					$strSN = $resp['tn'];
-					//echo "sn:".$strSN."<br>";
-					//echo "dd:".$dingdanhao."<br>";
-					//echo "<pre>";
-					//var_dump($resp);
-					//echo "</pre>";
+					// 写入文件
+					$filename = 'bb.txt';
+					$fh = fopen($filename, "w");
+					//请求报文
+					fwrite($fh, "订单推送请求报文：". $this->transUpmpInfo($req)."\r\n");
+					//应答报文
+					fwrite($fh, "订单推送应答报文：". $this->transUpmpInfo($resp)."\r\n");
+
+					// 准备支付控件所需信息
+					// urlEncode(base64(tn=流水号,resultURL=urlEcode(交易结果展示url),usetestmode=true|false))
+					$strOrderInfo = "tn=".$resp['tn'].",ResultURL=".urlencode("/weTall/index.php?m=order&a=notify_kongjian&dingdanhao=".$alldingdanhao."&rid=").",UseTestMode=true";
+					// base64加密
+					$strOrderInfo = base64_encode($strOrderInfo);
+					// 转换字符串
+					$strOrderInfo = urlencode($strOrderInfo);					
+					// 输出支付控件所需信息到页面
+					$this->assign('strOrderInfo',$strOrderInfo);
+					
+					//关闭文件
+					fclose($fh);
+					//成功信息
+					$connectInfo = '1';
 				}else {
 					// 服务器应答签名验证失败
 					//echo "failture"."<br>";
-					//print_r($resp);
+					$connectInfo = '0';
 				}
-				// 要写入的文件名字
-				$filename = 'bb.txt';
-				$fh = fopen($filename, "w");
-				// 订单号
-				$this->assign('dingdanhao',$alldingdanhao);
-				// 未加密的
-				fwrite($fh, $alldingdanhao."\r\n");
-				// 订单信息
-				// urlEncode(base64(tn=流水号,resultURL=urlEcode(交易结果展示url),usetestmode=true|false))
-				//$strOrderInfo = "tn=".$strSN.",ResultURL=http://115.28.228.91/weTall/wapupay/notify_url.php?rid=,UseTestMode=true";
-				//$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode("http://115.28.228.91/weTall/wapupay/notify_url.php?rid=").",UseTestMode=true";
-				$strOrderInfo = "tn=".$strSN.",ResultURL=".urlencode("http://www.vzhigo.com/weTall/index.php?m=order&a=notify&dingdanhao=".$alldingdanhao."&rid=").",UseTestMode=true";
-				// 未加密的
-				fwrite($fh, $strOrderInfo."\r\n");
-				// 转换字符串
-				//$strOrderInfo = urlencode($strOrderInfo);
-				// base64加密
-				$strOrderInfo = base64_encode($strOrderInfo);
-				// 转换字符串
-				$strOrderInfo = urlencode($strOrderInfo);
-				// 加密的
-				fwrite($fh, $strOrderInfo);
-				fclose($fh);
-				// 银联流水号
-				$this->assign('strOrderInfo',$strOrderInfo);
-				// 价格总额
-				$ordersumPrice=$_GET['ordersumPrice'];
-				$this->assign('ordersumPrice',$ordersumPrice);
+				
+				$this->assign('connectInfo', $connectInfo);
 				$this->display();
 			}
 			elseif (1 == $payment_id)
@@ -598,44 +589,94 @@ class orderAction extends userbaseAction {
 		return $result;
 	}
 	
-	function notify(){
+	/*银联前台通知*/
+	function notify_front(){
 		header('Content-Type:text/html;charset=utf-8');
-		//请在这里加上商户的业务逻辑程序代码
-		//获取通知返回参数，可参考接口文档中通知参数列表(以下仅供参考)
-		//$transStatus = $_POST['transStatus'];// 交易状态
+		require_once("wapupay/lib/upmp_service.php");
+		
+		if (UpmpService::verifySignature($_POST)){// 服务器签名验证成功
+			//请在这里加上商户的业务逻辑程序代码
+			//获取通知返回参数，可参考接口文档中通知参数列表(以下仅供参考)
+			$transStatus = $_POST['transStatus'];// 交易状态
+			if (""!=$transStatus && "00"==$transStatus){
+				// 交易处理成功
+				$alldingdanhao=$_POST['orderNumber']; //取得支付号
+				
+				$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
+				foreach ($all_order_arr as $dingdanhao){
+					$data['status']=2;
+					$data['supportmetho']=3;
+					$data['support_time']=time();
+					M('item_order')->where("orderId='".$dingdanhao['orderid']."' and status=1")->data($data)->save();
+				}
+				
+				$this->success('恭喜，支付成功！',U('user/index',array('status'=>2)));
+			}else {
+				$this->error('很遗憾，支付失败了！',U('user/index',array('status'=>1)));
+			}
+		}else {// 服务器签名验证失败
+			//echo "fail";
+		}
+			
+	}
+	
+	/*银联后台通知*/
+	function notify_back(){
+		header('Content-Type:text/html;charset=utf-8');
+		require_once("wapupay/lib/upmp_service.php");
+		
+		// 写入文件
+		$filename = 'bb.txt';
+		$fh = fopen($filename, "w");
+		//异步通知报文
+		fwrite($fh, "异步通知报文：". $this->transUpmpInfo($_POST)."\r\n");
+		//关闭文件
+		fclose($fh);
+		
+		if (UpmpService::verifySignature($_POST)){// 服务器签名验证成功
+			//请在这里加上商户的业务逻辑程序代码
+			//获取通知返回参数，可参考接口文档中通知参数列表(以下仅供参考)
+			$transStatus = $_POST['transStatus'];// 交易状态
+			if (""!=$transStatus && "00"==$transStatus){
+				// 交易处理成功
+				$alldingdanhao=$_POST['orderNumber']; //取得支付号
+	
+				$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
+				foreach ($all_order_arr as $dingdanhao){
+					$data['status']=2;
+					$data['supportmetho']=3;
+					$data['support_time']=time();
+					M('item_order')->where("orderId='".$dingdanhao['orderid']."' and status=1")->data($data)->save();
+				}
+			}
+		}else {// 服务器签名验证失败
+			//echo "fail";
+		}
+	}
+	
+	/*银联支付控件通知*/
+	function notify_kongjian(){
+		header('Content-Type:text/html;charset=utf-8');
 		$rid = $_REQUEST['rid'];
-		
-		//dump($_REQUEST);exit;
-		
-		//if (""!=$transStatus && "00"==$transStatus){
 		if ("0"==$rid){
 			// 交易处理成功
-			$alldingdanhao=$_REQUEST['dingdanhao']; //取得所有订单号联成的字符串
-			//$all_order_arr = explode(',', $alldingdanhao); //切分成数组
+			$alldingdanhao=$_REQUEST['dingdanhao']; //取得支付号
 			$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
-
 			foreach ($all_order_arr as $dingdanhao){
 				$data['status']=2;
 				$data['supportmetho']=3;
 				$data['support_time']=time();
-				if(M('item_order')->where("orderId='".$dingdanhao['orderid']."'")->data($data)->save())
-				{
-					//成功就继续
-					//$this->redirect('user/index');
-				}
-				else
-				{
-					$this->error('更新订单状态失败!');
-				}
+				M('item_order')->where("orderId='".$dingdanhao['orderid']."' and status=1")->data($data)->save();
 			}
-			//短信提醒 xxl start
-			//$this->send_tel_mail();
-			//xxl end
+			
 			$this->success('支付成功！',U('user/index',array('status'=>2)));
+		}else if ("-1"==$rid){
+			$this->error('支付取消！',U('user/index',array('status'=>1)));
 		}else {
 			$this->error('支付失败！',U('user/index',array('status'=>1)));
 		}
 	}
+
 	
 	/**
 	 * 短信提醒
@@ -663,6 +704,70 @@ class orderAction extends userbaseAction {
 			}			
 		}				
 		
-	}	
+	}
+	
+	/**
+	 * 银联请求和应答转换为字符串
+	 *
+	 */
+	function transUpmpInfo($arr){
+		$return = "";
+		foreach ($arr as $key => $value){
+			$return .= $key ."=". $value ."&";
+		}
+		$return = rtrim($return,'&');
+		return $return;
+	}
+	
+	/*订单银联查询接口*/
+	public function orderUpmpQuery($num="")
+	{
+		if(IS_POST)
+		{
+			$zhifuhao=$_POST['zhifu_number']; //取得订单号
+		}else{
+			$zhifuhao=$num;
+		}
+		
+		if ($zhifuhao != "") {
+			
+			header('Content-Type:text/html;charset=utf-8');
+			require_once("wapupay/lib/upmp_service.php");
+			
+			//需要填入的部分
+			$req['version']     	= upmp_config::$version; // 版本号
+			$req['charset']     	= upmp_config::$charset; // 字符编码
+			$req['transType']   	= "01"; // 交易类型
+			$req['merId']       	= upmp_config::$mer_id; // 商户代码
+			$req['orderTime']   	= substr($zhifuhao, 0, 14); // 交易开始日期时间yyyyMMddHHmmss或yyyyMMdd
+			$req['orderNumber'] 	= $zhifuhao;
+			// 保留域填充方法
+			$merReserved['test']   	= "test";
+			$req['merReserved']   	= UpmpService::buildReserved($merReserved); // 商户保留域(可选)
+			
+			$resp = array ();
+			$validResp = UpmpService::query($req, $resp);
+			
+			// 商户的业务逻辑
+			if ($validResp){
+				// 服务器应答签名验证成功
+				// 写入文件
+				$filename = 'bb.txt';
+				$fh = fopen($filename, "w");
+				//请求报文
+				fwrite($fh, "订单查询请求报文：". $this->transUpmpInfo($req)."\r\n");
+				//应答报文
+				fwrite($fh, "订单查询应答报文：". $this->transUpmpInfo($resp)."\r\n");
+
+				//关闭文件
+				fclose($fh);
+
+			}else {
+				// 服务器应答签名验证失败
+				//echo "failture"."<br>";
+			}
+
+		}
+	}
 
 }

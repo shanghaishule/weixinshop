@@ -22,9 +22,11 @@ class upmp_config
     
     static $mer_id     				= "880000000000919"; // 商户号
     static $security_key    		= "WzWxLMl2kguG7CxFuzPrR71l9tfv2hsA"; // 商户密钥
-    static $mer_back_end_url     	= "http://www.vzhigo.com/weTall/wapupay/notify_url.php"; // 后台通知地址
-    static $mer_front_end_url     	= "http://www.vzhigo.com/weTall/wapupay/notify_url.php"; // 前台通知地址
-
+    /*
+     * 在orderAction中设置
+    static $mer_back_end_url     	= "http://www.yourdomain.com/your_path/yourBackEndUrl"; // 后台通知地址
+    static $mer_front_end_url     	= "http://www.yourdomain.com/your_path/yourFrontEndUrl"; // 前台通知地址
+    */
     static $upmp_trade_url   	 	= "http://222.66.233.198:8080/gateway/merchant/trade";
     static $upmp_query_url    	 	= "http://222.66.233.198:8080/gateway/merchant/query";  
     
