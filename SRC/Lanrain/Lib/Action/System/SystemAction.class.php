@@ -27,6 +27,7 @@ class SystemAction extends BackAction{
 	
 	public function menu(){
 		if(empty($_GET['pid'])){
+			/*
 			$where['display']=2;
 			$where['status']=1;
 			$where['pid']=2;
@@ -37,6 +38,8 @@ class SystemAction extends BackAction{
 			
 			$title = M('node')->where('id=2')->find();
 			$this->assign('title',$title[title]);
+			*/
+			$this->assign('title',"欢迎");
 		}else{
 			$roleid["pid"] = $_GET['pid'];
 			$roleid["role_id"] = session('roleid');
