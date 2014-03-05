@@ -1,5 +1,5 @@
 <?php
-class indexAction extends frontendAction {
+class rightsAction extends frontendAction {
     public function index() {
     	
         //$this->display();

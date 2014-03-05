@@ -1,5 +1,5 @@
 <?php
-class indexAction extends frontendAction {
+class alarmAction extends frontendAction {
     public function index() {
     	
         //$this->display();
