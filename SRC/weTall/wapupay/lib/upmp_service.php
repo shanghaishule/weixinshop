@@ -28,8 +28,8 @@ class UpmpService {
     	$respString = post(upmp_config::$upmp_trade_url, $nvp);
     	
     	//写文件
-    	$this->whitemsg("trade_req", $nvp);
-    	$this->whitemsg("trade_resp", $respString);
+    	self::whitemsg("trade_req", $nvp);
+    	self::whitemsg("trade_resp", $respString);
     	
     	return self::verifyResponse($respString, $resp);
     }
@@ -45,8 +45,8 @@ class UpmpService {
     	$respString = post(upmp_config::$upmp_query_url, $nvp);
     	
     	//写文件
-    	$this->whitemsg("query_req", $nvp);
-    	$this->whitemsg("query_resp", $respString);
+    	self::whitemsg("query_req", $nvp);
+    	self::whitemsg("query_resp", $respString);
     	
     	return self::verifyResponse($respString, $resp);
     }
@@ -119,7 +119,7 @@ class UpmpService {
     	}
     }
     
-    public function whitemsg($type, $msg){
+    static function whitemsg($type, $msg){	
     	// 写入文件
     	$filename = $type.'.txt';
     	$fh = fopen($filename, "w");
@@ -127,6 +127,7 @@ class UpmpService {
     	fwrite($fh, $msg."\r\n");
     	//关闭文件
     	fclose($fh);
+
     }
 	
 }
