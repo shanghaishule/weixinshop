@@ -17,7 +17,7 @@
 	foreach ($_POST as $key => $value){
 		fwrite($fh, $key."=".$value."&");
 	}
-	fwrite($fh, "\r\n");
+	fwrite($fh, "\r\n\r\n");
 
 	if (UpmpService::verifySignature($_POST)){// 服务器签名验证成功
 		//请在这里加上商户的业务逻辑程序代码
