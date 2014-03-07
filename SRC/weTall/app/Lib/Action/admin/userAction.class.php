@@ -12,6 +12,7 @@ class userAction extends backendAction
 
     protected function _search() {
         $map = array();
+        $map['role'] = array('eq','0');
         if( $keyword = $this->_request('keyword', 'trim') ){
             $map['_string'] = "username like '%".$keyword."%' OR email like '%".$keyword."%'";
         }
