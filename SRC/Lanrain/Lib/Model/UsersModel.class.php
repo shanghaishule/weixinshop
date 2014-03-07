@@ -20,7 +20,7 @@ class UsersModel extends Model{
 		array('lasttime','time',self::MODEL_BOTH,'function'),
 		array('lastip','getip',self::MODEL_BOTH,'callback'),
 		array('status','getstatus',self::MODEL_BOTH,'callback'),
-		array('gid','getgid',self::MODEL_INSERT,'callback'),
+		//array('gid','getgid',self::MODEL_INSERT,'callback'),
 	);
 	
 	public function getip(){

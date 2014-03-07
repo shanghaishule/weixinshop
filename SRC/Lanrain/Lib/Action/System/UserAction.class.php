@@ -6,6 +6,7 @@ class UserAction extends BackAction{
 	public function index(){
         $role = M('Role')->getField('id,name');
         $map = array();
+        $map['role'] = array('neq','0');
         $UserDB = D('User');
         $count = $UserDB->where($map)->count();
         $Page       = new Page($count);// 实例化分页类 传入总记录数
