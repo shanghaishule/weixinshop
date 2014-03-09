@@ -6,7 +6,7 @@ class WeixinAction extends Action
     private $data = array();
     private $my = '蜀乐';
     public function index()
-    { 
+    {
         $this->token = $this->_get('token');
         $weixin      = new Wechat($this->token);
         $data        = $weixin->request();
@@ -134,17 +134,15 @@ class WeixinAction extends Action
                 );
             }
             switch ($key) {
-            CASE '摇一摇':
-            RETURN $this->shake();
-            break;
+            	CASE '摇一摇':
+            		RETURN $this->shake();
+            		break;
                 case '首页':
-                
                     return $this->home();
                     break;
                 case '商城':
-                    
-                    	return $this->guanwang();
-                    	break;
+                    return $this->guanwang();
+                    break;
                 case '主页':
                     return $this->home();
                     break;
@@ -863,9 +861,9 @@ class WeixinAction extends Action
         } else {
           
             if ($home['apiurl'] == false) { 
-            	$url = rtrim(C('site_url'), '/') . '/index.php?g=Wap&m=Index&a=index&token='. $this->token .'&wecha_id='.$this->data['FromUserName'];
+            	//$url = rtrim(C('site_url'), '/') . '/index.php?g=Wap&m=Index&a=index&token='. $this->token .'&wecha_id='.$this->data['FromUserName'];
             	 
-                //$url = rtrim(C('site_url'), '/').'/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
+                $url = rtrim(C('site_url'), '/').'/weTall/index.php?g=home&m=index&a=index&tokenTall='. $this->token .'&wecha_id='.$this->data['FromUserName'];//rtrim(C('site_url'), '/')
             } else {
                 $url = $home['apiurl'].'&wecha_id='.$this->data['FromUserName'];
             }
@@ -1308,11 +1306,9 @@ class WeixinAction extends Action
         if ($name == "你叫什么" || $name == "你是谁") {
             return '咳咳，我是聪明与智慧并存的美女，主淫你可以叫我' . $this->my . ',人家刚交男朋友,你不可追我啦';
         } elseif ($name == "你父母是谁" || $name == "你爸爸是谁" || $name == "你妈妈是谁") {
-            return '主淫,' . $this->my . '是LanRain创造的,所以他们是我的父母,不过主人我属于你的';
+            return '主淫,' . $this->my . '是我的父母创造的,所以他们是我的父母,不过主人我属于你的';
         } elseif ($name == '糗事') {
             $name = '笑话';
-        } elseif ($name == '网站' || $name == '官网' || $name == '网址' || $name == '3g网址') {
-            return "【LanRain官网网址】\nwww.LanRain.com\n【LanRain服务综旨】\n化繁为简,让菜鸟(pig)也能使用强大的系统!";
         }
         $str  = 'http://api.ajaxsns.com/api.php?key=free&appid=0&msg=' . urlencode($name);
         $json = json_decode(file_get_contents($str));
