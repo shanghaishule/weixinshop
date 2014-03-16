@@ -498,21 +498,10 @@ class orderAction extends userbaseAction {
 					// 商户的业务逻辑
 					if ($validResp){
 						// 服务器应答签名验证成功
-						
-						/* // 写入文件
-						$filename = 'order_push.txt';
-						$fh = fopen($filename, "w");
-						//请求报文
-						fwrite($fh, "订单推送请求报文：". $this->transUpmpInfo($req)."\r\n");
-						//应答报文
-						fwrite($fh, "订单推送应答报文：". $this->transUpmpInfo($resp)."\r\n");
-						//关闭文件
-						fclose($fh);
-						*/
 	
 						// 准备支付控件所需信息
 						// urlEncode(base64(tn=流水号,resultURL=urlEcode(交易结果展示url),usetestmode=true|false))
-						$strOrderInfo = "tn=".$resp['tn'].",ResultURL=".urlencode($this->_server('HTTP_ORIGIN')."/weTall/index.php?m=order&a=notify_kongjian&dingdanhao=".$alldingdanhao."&rid=").",UseTestMode=true";
+						$strOrderInfo = "tn=".$resp['tn'].",ResultURL=".urlencode($this->_server('HTTP_ORIGIN')."/weTall/index.php?m=order&a=notify_kongjian&dingdanhao=".$alldingdanhao."&rid=").",UseTestMode=false";
 						// base64加密
 						$strOrderInfo = base64_encode($strOrderInfo);
 						// 转换字符串
@@ -699,19 +688,7 @@ class orderAction extends userbaseAction {
 			
 			// 商户的业务逻辑
 			if ($validResp){
-				// 服务器应答签名验证成功
-				
-				/* // 写入文件
-				$filename = 'order_query.txt';
-				$fh = fopen($filename, "w");
-				//请求报文
-				fwrite($fh, "订单查询请求报文：". $this->transUpmpInfo($req)."\r\n");
-				//应答报文
-				fwrite($fh, "订单查询应答报文：". $this->transUpmpInfo($resp)."\r\n");
-				//关闭文件
-				fclose($fh);
-				*/
-				
+				// 服务器应答签名验证成功				
 				if (""!=$resp['transStatus'] && "00"==$resp['transStatus']) {
 					return "paid";
 				}else{

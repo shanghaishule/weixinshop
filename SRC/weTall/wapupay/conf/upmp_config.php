@@ -20,16 +20,23 @@ class upmp_config
     static $charset    		 		= "UTF-8"; // 字符编码
     static $sign_method 			= "MD5"; // 签名方法，目前仅支持MD5
     
+    /* 测试环境
     static $mer_id     				= "880000000000919"; // 商户号
     static $security_key    		= "WzWxLMl2kguG7CxFuzPrR71l9tfv2hsA"; // 商户密钥
-    /*
-     * 在orderAction中设置
+    
+    //在orderAction中设置
     static $mer_back_end_url     	= "http://www.yourdomain.com/your_path/yourBackEndUrl"; // 后台通知地址
     static $mer_front_end_url     	= "http://www.yourdomain.com/your_path/yourFrontEndUrl"; // 前台通知地址
-    */
+    
     static $upmp_trade_url   	 	= "http://222.66.233.198:8080/gateway/merchant/trade";
     static $upmp_query_url    	 	= "http://222.66.233.198:8080/gateway/merchant/query";  
+	*/
     
+    static $mer_id     				= "898111148990497"; // 商户号
+    static $security_key    		= "o0WmG0XAfTEXfGT1iCaJzRFDv88H3bMB"; // 商户密钥
+    static $upmp_trade_url   	 	= "https://mgate.unionpay.com/gateway/merchant/trade";
+    static $upmp_query_url    	 	= "https://mgate.unionpay.com/gateway/merchant/query";
+
     const VERIFY_HTTPS_CERT 		= false;
     
     const RESPONSE_CODE_SUCCESS 	= "00"; // 成功应答码
