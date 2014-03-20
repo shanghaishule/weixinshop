@@ -437,6 +437,7 @@ div.order_cancel_box p span {color: #f34; font-weight: bold;}
 .default ol li { list-style: outside decimal; }
 .default ol li ul li { list-style: outside disc; }
 .default p { margin: 16px 0; }
+.default p span { white-space: normal !important; }
 .default h1, .default h2, .default h3, .default h4, .default h5, .default h6 { margin-bottom: 16px; }
 .default h1 { font-size: 32px; }
 .default h2 { font-size: 24px; }
