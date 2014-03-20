@@ -101,16 +101,16 @@ class DiymenAction extends UserAction{
 				$this->error('创建数据对象失败！');
 			} else {
 				$id = $db->save();
-				if ($id) {
+				if ($id !== false) {
 					if ($data0['menutype'] == 'keyword') {
-						$data['pid']     = $id;
+						$data['pid']     = $data0['id'];
 						$data['module']  = 'diymen';
 						$data['token']   = $data0['token'];
 						$da['keyword'] = $data0['menutypeval'];
 						M('Keyword')->where($data)->save($da);
 					}
 					if ($data0['menutype'] == 'url') {
-						$data['pid']     = $id;
+						$data['pid']     = $data0['id'];
 						$data['module']  = 'diymen';
 						$data['token']   = $data0['token'];
 						
