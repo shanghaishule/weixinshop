@@ -87,10 +87,13 @@ class DiymenAction extends UserAction{
 			
 			$data0 = $_POST;
 			$data0['token']=$_SESSION['token'];
-			if($data0['menutype'] == 'keyword')
+			if($data0['menutype'] == 'keyword'){
 				$data0['keyword'] = $data0['menutypeval'];
-			else
+				$data0['url'] = '';
+			}else{
+				$data0['keyword'] = '';
 				$data0['url'] = $data0['menutypeval'];
+			}
 				
 			//dump($data0);exit;
 			$db = M('Diymen_class');
