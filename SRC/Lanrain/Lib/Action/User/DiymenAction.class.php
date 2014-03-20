@@ -109,6 +109,13 @@ class DiymenAction extends UserAction{
 						$da['keyword'] = $data0['menutypeval'];
 						M('Keyword')->where($data)->save($da);
 					}
+					if ($data0['menutype'] == 'url') {
+						$data['pid']     = $id;
+						$data['module']  = 'diymen';
+						$data['token']   = $data0['token'];
+						
+						M('Keyword')->where($data)->delete();
+					}
 					$this->success('操作成功');
 				} else {
 					$this->error('操作失败');
