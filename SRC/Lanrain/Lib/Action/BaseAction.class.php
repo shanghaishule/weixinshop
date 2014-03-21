@@ -100,7 +100,7 @@ class BaseAction extends Action
                 }
                 $this->success('操作成功', U(MODULE_NAME . $back));
             } else {
-                $this->error('操作失败', U(MODULE_NAME . $back));
+                $this->error('您未做任何修改！', U(MODULE_NAME . $back));
             }
         }
     }

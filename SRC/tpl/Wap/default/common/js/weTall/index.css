@@ -49,15 +49,17 @@
 /* ---------------new product --------*/
 .newPro{ background-image:url('/tpl/Wap/default/common/images/weTall/new.png');
 		 background-position:0px 0px;
+		 background-size:64px 64px;
 		 width:64px;
 		 height:64px;
 		 margin-top:8px;}
-.tuanPro{ background-image:url('/tpl/Wap/default/common/images/weTall/recom.png');
+.tuanPro{ background-image:url('/tpl/Wap/default/common/images/weTall/lunch.png');
 		 background-position:0px 0px;
+		 background-size:64px 64px;
 		 width:64px;
 		 height:64px;
 		 margin-top:8px;}
-.mailPro{ background-image:url('../../images/weTall/canyin.gif');
+.mailPro{ background-image:url('../../images/weTall/canyin.png');
 		 background-position:0px 0px;
 		 background-size:64px 64px;
 		 width:64px;
