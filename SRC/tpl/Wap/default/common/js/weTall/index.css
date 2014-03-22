@@ -66,7 +66,7 @@
 		 height:64px;
 		 margin-top:8px;}
 /* ---------- king ---------- */
-.Pr_list_Cont { width:100%; position:relative; height:145px; overflow:hidden; background:white;border-bottom:1px solid #D9D9D9;}
+.Pr_list_Cont { width:100%; position:relative; height:50px; overflow:hidden; background:white;border-bottom:1px solid #D9D9D9;}
 .pr_list_second { position:absolute; left:0; top:0; width:100%; overflow:hidden;}
 
 .banner_Cont { width:100%; position:relative; height:230px; overflow:hidden;}
