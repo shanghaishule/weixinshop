@@ -20,6 +20,7 @@
     	$broadlist=M("brandlist")->where($where)->select(); 
     	//一级菜单
     	$iteml["pid"]="0";
+    	$iteml["is_index"]="1";
     	$item_l1=M("item_cate")->where($iteml)->limit(3)->select();
     	
     	//二级菜单	
