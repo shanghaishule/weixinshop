@@ -39,11 +39,21 @@ class CouponAction extends UserAction{
 		}
 		if(IS_POST){
 			$data=D('lottery');
-			$_POST['statdate']=strtotime($this->_post('statdate'));
+			$_POST['startdate']=strtotime($this->_post('startdate'));
 			$_POST['enddate']=strtotime($this->_post('enddate'));
+			
+			//xxl start
+			$_POST['firststartdate']=strtotime($_POST['firststartdate']);
+			$_POST['firstenddate']=strtotime($_POST['firstenddate']);
+			$_POST['secondstartdate']=strtotime($_POST['secondstartdate']);
+			$_POST['secondenddate']=strtotime($_POST['secondenddate']);
+			$_POST['thirdstartdate']=strtotime($_POST['thirdstartdate']);
+			$_POST['thirdenddate']=strtotime($_POST['thirdenddate']);
+			//xxl end			
+					
 			$_POST['token']=session('token');
 			$_POST['type']=3;
-			if($_POST['enddate'] < $_POST['statdate']){
+			if($_POST['enddate'] < $_POST['startdate']){
 				$this->error('结束时间不能小于开始时间');
 			}else{
 				if($data->create()!=false){
@@ -54,6 +64,7 @@ class CouponAction extends UserAction{
 						$data1['keyword']=$this->_post('keyword');
 						M('Keyword')->add($data1);
 						$user=M('Users')->where(array('id'=>session('uid')))->setInc('activitynum');
+
 						$this->success('活动创建成功',U('Coupon/index'));
 					}else{
 						$this->error('服务器繁忙,请稍候再试');
@@ -107,13 +118,25 @@ class CouponAction extends UserAction{
 			$data=D('Lottery');
 			$_POST['id']=$this->_get('id');
 			$_POST['token']=session('token');
-			$_POST['statdate']=strtotime($_POST['statdate']);
+			$_POST['startdate']=strtotime($_POST['startdate']);
 			$_POST['enddate']=strtotime($_POST['enddate']);
-			if($_POST['enddate'] < $_POST['statdate']){
+			
+			//xxl start
+			$_POST['firststartdate']=strtotime($_POST['firststartdate']);
+			$_POST['firstenddate']=strtotime($_POST['firstenddate']);
+			$_POST['secondstartdate']=strtotime($_POST['secondstartdate']);
+			$_POST['secondenddate']=strtotime($_POST['secondenddate']);
+			$_POST['thirdstartdate']=strtotime($_POST['thirdstartdate']);
+			$_POST['thirdenddate']=strtotime($_POST['thirdenddate']);
+			//xxl end
+			
+			if($_POST['enddate'] < $_POST['startdate']){
 				$this->error('结束时间不能小于开始时间');
 			}else{
 				$where=array('id'=>$_POST['id'],'token'=>$_POST['token'],'type'=>3);
 				$check=$data->where($where)->find();
+				
+
 				if($check==false)$this->error('非法操作');
 					if($data->where($where)->save($_POST)){
 						$data1['pid']=$_POST['id'];
@@ -121,6 +144,8 @@ class CouponAction extends UserAction{
 						$data1['token']=session('token');
 						$da['keyword']=$_POST['keyword'];
 						M('Keyword')->where($data1)->save($da);
+						
+						//dump($data);
 						$this->success('修改成功',U('Coupon/index',array('token'=>session('token'))));
 					}else{
 						$this->error('操作失败');

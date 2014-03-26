@@ -49,9 +49,9 @@
     						<td>{lanrain:$record.time|date='Y-m-d H:i:s',###}</td>
     						<td>
                <if condition="$record['sendstutas'] eq 0"> 
-                 <a href="index.php?g=User&m=Coupon&a=sendprize&id={lanrain:$record.id}">发奖</a>
+                 <a href="index.php?g=User&m=Coupon&a=sendprize&id={lanrain:$record.id}">发放</a>
               <else/>
-               <a href="index.php?g=User&m=Coupon&a=sendnull&id={lanrain:$record.id}">取消发奖</a>
+                 <a href="index.php?g=User&m=Coupon&a=sendnull&id={lanrain:$record.id}">取消发放</a>
               </if>
              
             </td>

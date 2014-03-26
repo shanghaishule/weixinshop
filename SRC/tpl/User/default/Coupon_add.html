@@ -40,15 +40,18 @@
   		 </td>
 </tr>
 </TR>
+
 <tr>
 	<th><span class="red">*</span>活动时间：</th>
-	<td><input type="input" class="px" id="statdate" value="<if condition="$vo['statdate'] neq ''">{lanrain:$vo.statdate|date="Y-m-d H:i:s",###}<else/><?php 
-	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker()" name="statdate" />                
+	<td><input type="input" class="px" id="startdate" value="<if condition="$vo['startdate'] neq ''">{lanrain:$vo.startdate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker()" name="startdate" />                
 		到
 		<input type="input" class="px" id="enddate" value="<if condition="$vo['enddate'] neq ''">{lanrain:$vo.enddate|date="Y-m-d H:i:s",###}<else/><?php 
 	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));?></if>" name="enddate" onClick="WdatePicker()"  /> 
 	</td>
 </tr>
+
+
 <tr>
 <th valign="top"><span class="red">*</span>优惠券活动说明：</th>
 <td><textarea class="px" id="info" name="info" style="width: 400px; height: 125px;">{lanrain:$vo.info}</textarea>
@@ -101,6 +104,16 @@
 请不要多于50字! </td>
   <td rowspan="9" valign="top">&nbsp;</td>
 </tr>
+
+
+<!--xxl start-->
+<tr>
+<th valign="top"><span class="red">*</span>优惠券金额：</th>
+<td><input type="input" class="px" id="firstmoney" name="firstmoney" value="{lanrain:$vo.firstmoney}" style="width:60px">
+</td>
+</tr>
+<!--xxl end-->
+
 <tr>
 <th valign="top"><span class="red">*</span>优惠券数量：</th>
 <td><input type="input" class="px" id="fistnums" name="fistnums" value="{lanrain:$vo.fistnums}" style="width:60px">
@@ -111,11 +124,11 @@
 <!--xxl start-->
 <tr>
 	<th><span class="red">*</span>活动时间：</th>
-	<td><input type="input" class="px" id="statdate" value="<if condition="$vo['statdate'] neq ''">{lanrain:$vo.statdate|date="Y-m-d H:i:s",###}<else/><?php 
-	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker()" name="statdate" />                
+	<td><input type="input" class="px" id="firststartdate" value="<if condition="$vo['firststartdate'] neq ''">{lanrain:$vo.firststartdate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker()" name="firststartdate" />                
 		到
-		<input type="input" class="px" id="enddate" value="<if condition="$vo['enddate'] neq ''">{lanrain:$vo.enddate|date="Y-m-d H:i:s",###}<else/><?php 
-	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));?></if>" name="enddate" onClick="WdatePicker()"  /> 
+	    <input type="input" class="px" id="firstenddate" value="<if condition="$vo['firstenddate'] neq ''">{lanrain:$vo.firstenddate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));?></if>" name="firstenddate" onClick="WdatePicker()"  /> 
 	</td>
 </tr>
 <!--xxl end-->
@@ -125,20 +138,28 @@
 <th valign="top">优惠券名称2：</th>
 <td><input type="input" class="px" id="second" name="second" value="{lanrain:$vo.second}" style="width:250px">
 请不要多于50字! </td>
-                                        </tr>
+</tr>
+<!--xxl start-->
+<tr>
+<th valign="top"></span>优惠券金额：</th>
+<td><input type="input" class="px" id="secondmoney" name="secondmoney" value="{lanrain:$vo.secondmoney}" style="width:60px">
+</td>
+</tr>
+<!--xxl end-->
+
 <tr>
 <th valign="top">优惠券数量：</th>
 <td><input type="input" class="px" id="secondnums" name="secondnums" value="{lanrain:$vo.secondnums}" style="width:60px">
 </td>
-                                        </tr>
+</tr>
 <!--xxl start-->
 <tr>
-	<th><span class="red">*</span>活动时间：</th>
-	<td><input type="input" class="px" id="statdate" value="<if condition="$vo['statdate'] neq ''">{lanrain:$vo.statdate|date="Y-m-d H:i:s",###}<else/><?php 
-	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker()" name="statdate" />                
+	<th>活动时间：</th>
+	<td><input type="input" class="px" id="secondstartdate" value="<if condition="$vo['secondstartdate'] neq ''">{lanrain:$vo.secondstartdate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker()" name="secondstartdate" />                
 		到
-		<input type="input" class="px" id="enddate" value="<if condition="$vo['enddate'] neq ''">{lanrain:$vo.enddate|date="Y-m-d H:i:s",###}<else/><?php 
-	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));?></if>" name="enddate" onClick="WdatePicker()"  /> 
+		<input type="input" class="px" id="secondenddate" value="<if condition="$vo['secondenddate'] neq ''">{lanrain:$vo.secondenddate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));?></if>" name="secondenddate" onClick="WdatePicker()"  /> 
 	</td>
 </tr>
 <!--xxl end-->
@@ -147,11 +168,31 @@
 <th valign="top">优惠券名称3：</th>
 <td><input type="input" class="px" id="third" name="third" value="{lanrain:$vo.third}" style="width:250px">
 请不要多于50字! </td>
-                                        </tr>
+</tr>
+
+<!--xxl start-->
+<tr>
+<th valign="top"></span>优惠券金额：</th>
+<td><input type="input" class="px" id="thirdmoney" name="thirdmoney" value="{lanrain:$vo.thirdmoney}" style="width:60px">
+</td>
+</tr>
+<!--xxl end-->
 <tr>
 <th valign="top">优惠券数量：</th>
 <td><input type="input" class="px" id="thirdnums" name="thirdnums" value="{lanrain:$vo.thirdnums}" style="width:60px">
  </td>
+
+<!--xxl start-->
+<tr>
+	<th>活动时间：</th>
+	<td><input type="input" class="px" id="thirdstartdate" value="<if condition="$vo['thirdstartdate'] neq ''">{lanrain:$vo.thirdstartdate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker()" name="thirdstartdate" />                
+		到
+		<input type="input" class="px" id="thirdenddate" value="<if condition="$vo['thirdenddate'] neq ''">{lanrain:$vo.thirdenddate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(0, 0, 0, date("m")  , date("d")+3, date("Y")));?></if>" name="thirdenddate" onClick="WdatePicker()"  /> 
+	</td>
+</tr>
+<!--xxl end-->
 
   </tbody>
 
