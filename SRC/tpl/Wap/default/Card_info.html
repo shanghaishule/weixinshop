@@ -71,8 +71,12 @@ $(document).ready(function(){
 
 <div id="mappContainer">
   <div class="inner root" style="height: 468px;">
+  <eq name="card.diybg" value="">
+    <div id="card" class="card" style="background:url('{lanrain:$card.bg}') no-repeat 0 0;-webkit-background-size:267px 159px;background-size:267px 159px;">
+  <else/>
     <div id="card" class="card" style="background:url('{lanrain:$card.diybg}') no-repeat 0 0;-webkit-background-size:267px 159px;background-size:267px 159px;">
-		  <img src="{lanrain:$card.logo}" class="logo"/>
+  </eq>
+  		  <img src="{lanrain:$card.logo}" class="logo"/>
 		  <h1 style="color:{lanrain:$card.vipnamecolor};text-shadow:0 1px #e2ded2;">{lanrain:$card.cardname}</h1>
 		  <!--<h2></h2>-->
 		  <figure class="pdo twodim" hidden=""><img data-src="006 4655"></figure>
