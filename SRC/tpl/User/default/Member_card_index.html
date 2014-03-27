@@ -98,7 +98,11 @@ display:block; width:213px; border:0;
 <tr>
 <th width="303" rowspan="5" valign="top">
 	<div class="vipcard">
+	    <eq name="card.diybg" value="">
+		<img id="cardbg" src="{lanrain:$card.bg}">
+		<else />
 		<img id="cardbg" src="{lanrain:$card.diybg}">
+		</eq>
 		<img id="cardlogo" class="logo" src="{lanrain:$card.logo}">
 		<h1 id="vipname" style="color:{lanrain:$card.vipnamecolor}">{lanrain:$card.cardname}会员卡</h1>
 		<strong class="pdo verify" id="number" style="color:{lanrain:$card.vipnamecolor}"><span><em>会员卡号</em>2188 5539</span></strong>
