@@ -33,6 +33,7 @@
 				<TH>QQ号码</TH> 
 				<TH>备注</TH>
         <TH>领卡时间</TH>
+        <TH>总积分</TH>
         <TH>消费金额(元)</TH> 
         <TH>消费日期</TH>  
         <TH class="norightborder">添加</TH>              
@@ -58,6 +59,7 @@
                     无时间记录
                     </if>                      
                   </TD>
+                  <TD>{lanrain:$list.total_score}</TD> 
  <form method="post"  action="/index.php?g=User&m=Member&a=edit" >
                   <TD>
                   <input type="text" name="add_expend" value="{lanrain:$list.add_expend}" class="px" style="width:40px;">
