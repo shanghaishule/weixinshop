@@ -179,16 +179,18 @@ function() {
         if(data==1){			 
 			alert('更新成功');
 		}else if(data==2){
-			 
 			alert('成功领取了会员卡');
-			location.href = "{lanrain::U('Card/vip',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}";
+			//强制跳转到资料维护界面 by zcb 20140327
+			//location.href = "{lanrain::U('Card/vip',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}";
+			location.href = "{lanrain::U('Userinfo/index',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}";
 		}else if(data==3){
 			 
 			alert('该商家会员卡缺货了或者请您关注我一下先，亲！');
-		}else{  
-			 
+		}else{
 			alert('成功领取了会员卡');
-			location.href = "{lanrain::U('Card/vip',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}";
+			//强制跳转到资料维护界面 by zcb 20140327
+			//location.href = "{lanrain::U('Card/vip',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}";
+			location.href = "{lanrain::U('Userinfo/index',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}";
 		}
     },
     "json")
