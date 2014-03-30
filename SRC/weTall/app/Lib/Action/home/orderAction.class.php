@@ -390,6 +390,8 @@ class orderAction extends userbaseAction {
 			$this->redirect('user/index',array('tokenTall'=>$tokenTall));
 		}
 		
+		$this->assign('current_user',$_SESSION['user_info']['username']);
+		//dump($_SESSION['user_info']['username']);exit;
 		$this->display();
 	}
 	
