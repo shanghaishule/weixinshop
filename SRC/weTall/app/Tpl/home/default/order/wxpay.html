@@ -20,35 +20,29 @@ $(function(){
     });
 });
 
+function weixinpay(){
+	alert('xxx');
+}
 </script>
 </head>
 
 <body>
 <include file="public:head" />
 
-<script>
-	function weixinpay(){
-		alert('xxx');
-	}
-</script>
-
 <div id="content">
-        <input type="hidden" name="orderid" value="{$orderid}" />
-        <input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
         <div class="step_main">
             <div class="buy" style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px;">
                 <h3>欢迎使用微信支付</h3>
                 <p style="color:grey; font-size:15px; background-color: #DCDCDC; padding-left:10px;">支付金额：<span style="color:red;">¥{$ordersumPrice}</span></p>
                 
                 <div style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px; margin-top:10px;">
-				<if condition="$connectInfo eq '1'">
-				<p style="color:green; font-size:15px; background-color: #fff; padding-left:10px;">微信支付</p>
-                <a href="javascript: weixinpay();"><img src="__STATIC__/weixin/images/wxpay.png" alt="微信支付"/></a>
-				<elseif condition="$connectInfo eq 2"/>
-				<p style="color:blue; font-size:15px; background-color: #fff; padding-left:10px;">您的订单已经支付</p>
-				<else />
-				<p style="color:red; font-size:15px; background-color: #fff; padding-left:10px;">订单信息提交微信支付失败</p>
-				</if>
+					<if condition="$connectInfo eq '1'">
+	                	<a href="javascript: weixinpay();"><img src="__STATIC__/weixin/images/wxpay.png" alt="微信支付"/></a>
+					<elseif condition="$connectInfo eq 2"/>
+						<p style="color:blue; font-size:15px; background-color: #fff; padding-left:10px;">您的订单已经支付</p>
+					<else />
+						<p style="color:red; font-size:15px; background-color: #fff; padding-left:10px;">订单信息提交微信支付失败</p>
+					</if>
                 </div>
                 
             </div>            

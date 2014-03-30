@@ -535,6 +535,7 @@ class orderAction extends userbaseAction {
 			elseif (1 == $payment_id)
 			{
 				//支付宝
+				/*
 				foreach ($all_order_arr as $dingdanhao){
 					$data['supportmetho']=1;
 					if(M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->data($data)->save())
@@ -545,33 +546,10 @@ class orderAction extends userbaseAction {
 						$this->error('操作失败!');
 					}
 				}
+				*/
 				$alipay=M('alipay')->find();
 				echo "<script>location.href='wapapli/alipayapi.php?WIDseller_email=".$alipay['alipayname']."&WIDout_trade_no=".$alldingdanhao."&WIDsubject=".$alldingdanhao."&WIDtotal_fee=".$all_order_price."'</script>";
 			
-			}
-			elseif (4 == $payment_id)
-			{
-				//微信支付
-				if ($this->orderWxQuery($alldingdanhao) == "paid"){
-					foreach ($all_order_arr as $dingdan){
-						$data['status']=2;
-						$data['supportmetho']=4;
-						$data['support_time']=time();
-						M('item_order')->where("orderId='".$dingdan['orderid']."' and status=1")->data($data)->save();
-					}
-					$connectInfo = '2';
-				}else{
-					$wxpay=M('wxpay')->where(array('wxname'=>'微指购'))->find();
-					$this->assign('appId', $wxpay['appId']);
-					$this->assign('paySignKey', $wxpay['paySignKey']);
-					$this->assign('appSecret', $wxpay['appSecret']);
-					$this->assign('partnerId', $wxpay['partnerId']);
-					$this->assign('partnerKey', $wxpay['partnerKey']);
-					$connectInfo = '1';
-				}
-				
-				$this->assign('connectInfo', $connectInfo);
-				$this->display('wxpay');
 			}
 			else 
 			{
@@ -731,6 +709,78 @@ class orderAction extends userbaseAction {
 		}
 	}
 	
+	
+	public function wxpay()
+	{
+		if(IS_POST)
+		{
+			//支付方式
+			$payment_id=$_POST['payment_id'];
+			$alldingdanhao=$_POST['dingdanhao']; //取得支付号
+			$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
+	
+			$all_order_price = 0;
+				
+			//xxl start
+			$orderinfos = array();
+			$orderInfo = array();
+			//xxl end
+			foreach ($all_order_arr as $dingdanhao){
+				$item_order=M('item_order')->where("userId='".$this->visitor->info['id']."' and orderId='".$dingdanhao['orderid']."'")->find();
+				!$item_order && $this->_404();
+				$all_order_price = $all_order_price + floatval($item_order['order_sumPrice']);
+	
+				//xxl start 短信提醒
+				$order_detail=M('order_detail');
+				$order_title_arr = $order_detail->field('title')->where("orderId='".$dingdanhao['orderid']."'")->select();
+				$order_titles = "";
+				foreach ($order_title_arr as $order_title){
+					$order_titles = $order_titles.$order_title['title']." ";
+				}
+	
+				$orderInfo['orderid']=$dingdanhao['orderid'];
+				$orderInfo['address_name']=$item_order['address_name'];
+				$orderInfo['mobile']=$item_order['mobile'];
+				$orderInfo['title']=$order_titles;
+				$orderinfos[] = $orderInfo;
+	
+				//xxl end
+			}
+			//xxl start
+			$_SESSION['orderinfos'] = $orderinfos;
+			//xxl end
+				
+			if (4 == $payment_id)
+			{
+				//微信支付
+				if ($this->orderWxQuery($alldingdanhao) == "paid"){
+					foreach ($all_order_arr as $dingdan){
+						$data['status']=2;
+						$data['supportmetho']=4;
+						$data['support_time']=time();
+						M('item_order')->where("orderId='".$dingdan['orderid']."' and status=1")->data($data)->save();
+					}
+					$connectInfo = '2';
+				}else{
+					$wxpay=M('wxpay')->where(array('wxname'=>'微指购'))->find();
+					$this->assign('appId', $wxpay['appId']);
+					$this->assign('paySignKey', $wxpay['paySignKey']);
+					$this->assign('appSecret', $wxpay['appSecret']);
+					$this->assign('partnerId', $wxpay['partnerId']);
+					$this->assign('partnerKey', $wxpay['partnerKey']);
+					$connectInfo = '1';
+				}
+
+				$this->assign('ordersumPrice', $all_order_price);
+				$this->assign('connectInfo', $connectInfo);
+				$this->display();
+			}
+			else
+			{
+				$this->error('操作失败!');
+			}
+		}
+	}
 	/*订单微信查询接口*/
 	public function orderWxQuery($num="")
 	{
