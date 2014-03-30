@@ -547,6 +547,30 @@ class orderAction extends userbaseAction {
 				echo "<script>location.href='wapapli/alipayapi.php?WIDseller_email=".$alipay['alipayname']."&WIDout_trade_no=".$alldingdanhao."&WIDsubject=".$alldingdanhao."&WIDtotal_fee=".$all_order_price."'</script>";
 			
 			}
+			elseif (4 == $payment_id)
+			{
+				//微信支付
+				if ($this->orderWxQuery($alldingdanhao) == "paid"){
+					foreach ($all_order_arr as $dingdan){
+						$data['status']=2;
+						$data['supportmetho']=4;
+						$data['support_time']=time();
+						M('item_order')->where("orderId='".$dingdan['orderid']."' and status=1")->data($data)->save();
+					}
+					$connectInfo = '2';
+				}else{
+					$wxpay=M('wxpay')->where(array('wxname'=>'微指购'))->find();
+					$this->assign('appId', $wxpay['appId']);
+					$this->assign('paySignKey', $wxpay['paySignKey']);
+					$this->assign('appSecret', $wxpay['appSecret']);
+					$this->assign('partnerId', $wxpay['partnerId']);
+					$this->assign('partnerKey', $wxpay['partnerKey']);
+					$connectInfo = '1';
+				}
+				
+				$this->assign('connectInfo', $connectInfo);
+				$this->display('wxpay');
+			}
 			else 
 			{
 				$this->error('操作失败!');
@@ -700,6 +724,20 @@ class orderAction extends userbaseAction {
 				return "服务器应答签名验证失败";
 			}
 
+		}else {
+			return "参数为空";
+		}
+	}
+	
+	/*订单微信查询接口*/
+	public function orderWxQuery($num="")
+	{
+		return "not_paid";
+		
+		$zhifuhao=$num;
+		if ($zhifuhao != "") {
+			
+	
 		}else {
 			return "参数为空";
 		}
