@@ -718,9 +718,7 @@ class orderAction extends userbaseAction {
 			$payment_id=$_POST['payment_id'];
 			$alldingdanhao=$_POST['dingdanhao']; //取得支付号
 			$all_order_arr = M('order_merge')->where("mergeid='".$alldingdanhao."'")->select();
-	
 			$all_order_price = 0;
-				
 			//xxl start
 			$orderinfos = array();
 			$orderInfo = array();
@@ -762,16 +760,25 @@ class orderAction extends userbaseAction {
 					}
 					$connectInfo = '2';
 				}else{
-					$wxpay=M('wxpay')->where(array('wxname'=>'微指购'))->find();
+					$wxpay=M('wxpay')->find();
+					$this->assign('wxname', $wxpay['wxname']);
+					$this->assign('tokenTall', $wxpay['tokenTall']);
 					$this->assign('appId', $wxpay['appId']);
 					$this->assign('paySignKey', $wxpay['paySignKey']);
 					$this->assign('appSecret', $wxpay['appSecret']);
 					$this->assign('partnerId', $wxpay['partnerId']);
 					$this->assign('partnerKey', $wxpay['partnerKey']);
+					$this->assign('notify_url', $wxpay['notify_url']);
+					$this->assign('success_url', $wxpay['success_url']);
+					$this->assign('fail_url', $wxpay['fail_url']);
+					$this->assign('cancel_url', $wxpay['cancel_url']);
+					
 					$connectInfo = '1';
 				}
 
-				$this->assign('ordersumPrice', $all_order_price);
+				$this->assign('alldingdanhao', $alldingdanhao);
+				$this->assign('ordersumPrice', $all_order_price*100);  //支付用，精确到分
+				$this->assign('ordersumPrice_act', $all_order_price);  //显示用
 				$this->assign('connectInfo', $connectInfo);
 				$this->display();
 			}

@@ -10,11 +10,43 @@ CREATE TABLE `tp_wxpay` (
   `appSecret` varchar(255) NOT NULL COMMENT '',
   `partnerId` varchar(255) NOT NULL COMMENT '财付通商户身份的标识',
   `partnerKey` varchar(255) NOT NULL COMMENT '财付通商户权限密钥Key',
+  `notify_url` varchar(255) NOT NULL COMMENT '后台通知url',
+  `success_url` varchar(255) NOT NULL COMMENT '前台通知url_成功支付',
+  `fail_url` varchar(255) NOT NULL COMMENT '前台通知url_失败支付',
+  `cancel_url` varchar(255) NOT NULL COMMENT '前台通知url_取消支付',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 /*李帅的支付信息*/
-insert into `tp_wxpay`(`tokenTall`, `wxname`, `appId`, `paySignKey`, `appSecret`, `partnerId`, `partnerKey`)
-values('sgvctz1393762965','微指购','wx7b93af2548c04072','','0e7eef0922a587c8f0867e91a691bbcb','1218363601','1c280be45878451ba5cecf9d7f874d7d')
+insert into `tp_wxpay`(`tokenTall`, `wxname`, `appId`, `paySignKey`, `appSecret`, `partnerId`, `partnerKey`, `notify_url`, `success_url`, `fail_url`, `cancel_url`)
+values('sgvctz1393762965','微指购','wx7b93af2548c04072','6uSTZuiOV4r5qKfZFXxvDVldIwIjnsUvyqkrbJ2S09jFCeZ3nk05tpMBDXixe0XJu4KxACblXELDoIYj6i4Y1Eg8b3RdLeZGAhWOUnHdEAgf8tbTbviCgZv2Y49R6bca','0e7eef0922a587c8f0867e91a691bbcb','1218363601','1c280be45878451ba5cecf9d7f874d7d','http://www.vzhigo.com/weTall/wxpay/notify_url.php','','','');
 
+/*微信支付历史记录*/
+DROP TABLE IF EXISTS `tp_wxpay_history`;
+CREATE TABLE `tp_wxpay_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sign_type` varchar(255) NULL COMMENT '签名类型',
+  `service_version` varchar(255) NULL COMMENT '版本号',
+  `input_charset` varchar(255) NULL COMMENT '字符编码',
+  `sign` varchar(255) NULL COMMENT '签名',
+  `sign_key_index` int(11) NULL COMMENT '多密钥支持的密钥序号',
+  `trade_mode` int(11) NULL COMMENT '交易模式：1-即时到账',
+  `trade_state` int(11) NULL COMMENT '支付结果：0—成功',
+  `pay_info` varchar(255) NULL COMMENT '支付结果信息，支付成功时为空',
+  `partner` varchar(255) NULL COMMENT '商户号',
+  `bank_type` varchar(255) NULL COMMENT '银行类型，在微信中使用WX',
+  `bank_billno` varchar(255) NULL COMMENT '银行订单号',
+  `total_fee` int(11) NULL COMMENT '支付金额，单位为分',
+  `fee_type` int(11) NULL COMMENT '币种,1-人民币',
+  `notify_id` varchar(255) NULL COMMENT '支付结果通知id',
+  `transaction_id` varchar(255) NULL COMMENT '交易号',
+  `out_trade_no` varchar(255) NULL COMMENT '商户系统的订单号',
+  `attach` varchar(255) NULL COMMENT '商户数据包',
+  `time_end` varchar(255) NULL COMMENT '支付完成时间',
+  `transport_fee` int(11) NULL COMMENT '物流费用，单位分',
+  `product_fee` int(11) NULL COMMENT '物品费用，单位分',
+  `discount` int(11) NULL COMMENT '折扣价格，单位分',
+  `buyer_alias` varchar(255) NULL COMMENT '买家别名',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

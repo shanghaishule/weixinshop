@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>公众号支付测试网页</title>
+        <title>会员中心 - 微信支付</title>
         <script language="javascript" src="http://res.mail.qq.com/mmr/static/lib/js/jquery.js"></script>
         <script language="javascript" src="http://res.mail.qq.com/mmr/static/lib/js/lazyloadv3.js"></script>
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+        <script language="javascript" type="text/javascript" src="http://fw.qq.com/ipaddress">  
         <script Language="javascript">
             //辅助函数
             function Trim(str,is_global)
@@ -42,25 +43,25 @@
             
             function getPartnerId()
             {
-                return document.form1.partnerId.value;
+                return "{$partnerId}";
             }
             
             function getPartnerKey()
             {
-                return "8934e7d15453e97507ef794cf7b0519d";
+                return "{$partnerKey}";
             }
 
             function getPackage()
             {
                 var banktype = "WX";
-                var body = document.form1.body.value;//商品名称信息，这里由测试网页填入。
+                var body = "{$wxname}订单支付";//商品名称信息
                 var fee_type = "1";//费用类型，这里1为默认的人民币
                 var input_charset = "GBK";//字符集，这里将统一使用GBK
-                var notify_url = "http://www.qq.com";//支付成功后将通知该地址
-                var out_trade_no = ""+getANumber();//订单号，商户需要保证该字段对于本商户的唯一性
-                var partner = getPartnerId();//测试商户号
-                var spbill_create_ip = "127.0.0.1";//用户浏览器的ip，这个需要在前端获取。这里使用127.0.0.1测试值
-                var total_fee = document.form1.totalFee.value;//总金额。
+                var notify_url = "{$notify_url}";//支付成功后将通知该地址
+                var out_trade_no = "{$alldingdanhao}";//订单支付号
+                var partner = getPartnerId();//商户号
+                var spbill_create_ip = IPData[0];//用户浏览器的ip，这个需要在前端获取。这里使用127.0.0.1测试值
+                var total_fee = "{$ordersumPrice}";//总金额。
                 var partnerKey = getPartnerKey();//这个值和以上其他值不一样是：签名需要它，而最后组成的传输字符串不能含有它。这个key是需要商户好好保存的。
                 
                 //首先第一步：对原串进行签名，注意这里不要对任何字段进行编码。这里是将参数按照key=value进行字典排序后组成下面的字符串,在这个字符串最后拼接上key=XXXX。由于这里的字段固定，因此只需要按照这个顺序进行排序即可。
@@ -94,12 +95,12 @@
             
             function getAppId()
             {
-                return document.form1.appId.value;
+                return "{$appId}";
             }
             
             function getAppKey()
             {
-                return "2Wozy2aksie1puXUBpWD8oZxiD1DfQuEaiC7KcRATv1Ino3mdopKaPGQQ7TtkNySuAmCaDCrw4xhPY5qKTBl7Fzm0RgR3c0WaVYIXZARsxzHV2x7iwPPzOz94dnwPWSn";
+            	return "{$paySignKey}";
             }
 
             function getTimeStamp()
@@ -212,7 +213,7 @@
 							WeixinJSBridge.invoke(
 								'getBrandWCPayRequest',
 								{
-                      				"appId" : getAppId(), //公众号名称，由商户传入
+									"appId" : getAppId(), //公众号名称，由商户传入
 									"timeStamp" : getTimeStamp(), //时间戳
 									"nonceStr" : getNonceStr(), //随机串
 									"package" : getPackage(),//扩展包
@@ -220,15 +221,42 @@
 									"paySign" : getSign() //微信签名
 								},
 								function(res){
-									if(res.err_msg == "get_brand_wcpay_request:ok" ) {}
-									// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-									//因此微信团队建议，当收到ok返回时，向商户后台询问是否收到交易成功的通知，若收到通知，前端展示交易成功的界面；
-									//若此时未收到通知，商户后台主动调用查询订单接口，查询订单的当前状态，并反馈给前端展示相应的界面。
+									//alert(res.err_code+res.err_desc); 
+									if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+										//成功
+										alert('支付成功！');
+										<eq name="success_url" value="">
+											window.location.href="{:U('user/index',array('status'=>2))}";
+										<else />
+											window.location.href="{$success_url}";
+										</eq>
+/*使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+因此微信团队建议，当收到ok返回时，向商户后台询问是否收到交易成功的通知，若收到通知，前端展示交易成功的界面；
+若此时未收到通知，商户后台主动调用查询订单接口，查询订单的当前状态，并反馈给前端展示相应的界面。*/
+									}else if(res.err_msg == "get_brand_wcpay_request:fail" ) {
+										//失败
+										alert('支付失败！');
+										<eq name="success_url" value="">
+											window.location.href="{:U('user/index',array('status'=>1))}";
+										<else />
+											window.location.href="{$success_url}";
+										</eq>
+									}else if(res.err_msg == "get_brand_wcpay_request:cancel" ) {
+										//用户取消
+										alert('取消支付！');
+										<eq name="success_url" value="">
+											window.location.href="{:U('user/index',array('status'=>1))}";
+										<else />
+											window.location.href="{$success_url}";
+										</eq>
+									}else{
+										//其他
+										window.location.href="{:U('user/index',array('status'=>1))}";
+									}
 								}
 							);
 						}
 					);
-					WeixinJSBridge.log('yo~ ready.');
 				}, 
 				false
 			)
@@ -260,15 +288,23 @@
     </head>
     <body>
         <form name="form1" target="_blank">
-            <table border="1">
-                <TR><th>公众号ID</th> <th><INPUT value="wxf8b4f85f3a794e77" name="appId" id="1"></th>
-                    <tr><th>商户ID</th><th><INPUT value="1900000109" name="partnerId" id="2"></th>
-                        <TR><th>总金额</th><th><INPUT value=1 name="totalFee" id="3"></th>
-                            <TR><th>商品名</th><th><INPUT value="江诗丹顿" name="body" id="4"></th>
-            </table>
+			<div id="content">
+		        <div class="step_main">
+		            <div class="buy" style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px;">
+		                <h3>欢迎使用微信支付</h3>
+		                <p style="color:grey; font-size:15px; background-color: #DCDCDC; padding-left:10px;">支付金额：<span style="color:red;">¥{$ordersumPrice_act}</span></p>
+		                <div style="border:2px solid #ddd; background:#fff; border-radius:10px; padding:10px; overflow:hidden; margin-bottom:10px; margin-top:10px;">
+							<if condition="$connectInfo eq '1'">
+			                	<a id="getBrandWCPayRequest" href="javascript:void(0);"><img src="__STATIC__/weixin/images/wxpay.png" alt="微信支付"/></a>
+							<elseif condition="$connectInfo eq 2"/>
+								<p style="color:blue; font-size:15px; background-color: #fff; padding-left:10px;">您的订单已经支付</p>
+							<else />
+								<p style="color:red; font-size:15px; background-color: #fff; padding-left:10px;">订单信息提交微信支付失败</p>
+							</if>
+		                </div>
+		            </div>
+		        </div>
+			</div>
         </form>
-        <div class="WCPay">
-            <a id="getBrandWCPayRequest" href="javascript:void(0);"><h1 class="title">提交</h1></a>
-        </div>
     </body>
 </html>
