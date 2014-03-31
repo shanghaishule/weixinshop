@@ -43,25 +43,32 @@
             
             function getPartnerId()
             {
-                return "{$partnerId}";
+                //return "{$partnerId}";
+                return "1900000109";
             }
             
             function getPartnerKey()
             {
-                return "{$partnerKey}";
+                //return "{$partnerKey}";
+            	return "8934e7d15453e97507ef794cf7b0519d";
             }
 
             function getPackage()
             {
                 var banktype = "WX";
-                var body = "{$wxname}订单支付";//商品名称信息
+                //var body = "{$wxname}订单支付";//商品名称信息
+                var body = "江诗丹顿";//商品名称信息，这里由测试网页填入。
                 var fee_type = "1";//费用类型，这里1为默认的人民币
                 var input_charset = "GBK";//字符集，这里将统一使用GBK
-                var notify_url = "{$notify_url}";//支付成功后将通知该地址
-                var out_trade_no = "{$alldingdanhao}";//订单支付号
+                //var notify_url = "{$notify_url}";//支付成功后将通知该地址
+                var notify_url = "http://www.qq.com";//支付成功后将通知该地址
+                //var out_trade_no = "{$alldingdanhao}";//订单支付号
+                var out_trade_no = ""+getANumber();//订单号，商户需要保证该字段对于本商户的唯一性
                 var partner = getPartnerId();//商户号
-                var spbill_create_ip = IPData[0];//用户浏览器的ip，这个需要在前端获取。这里使用127.0.0.1测试值
-                var total_fee = "{$ordersumPrice}";//总金额。
+                //var spbill_create_ip = IPData[0];//用户浏览器的ip，这个需要在前端获取。这里使用127.0.0.1测试值
+                var spbill_create_ip = "127.0.0.1";//用户浏览器的ip，这个需要在前端获取。这里使用127.0.0.1测试值
+                //var total_fee = "{$ordersumPrice}";//总金额。
+                var total_fee = "100";//总金额。
                 var partnerKey = getPartnerKey();//这个值和以上其他值不一样是：签名需要它，而最后组成的传输字符串不能含有它。这个key是需要商户好好保存的。
                 
                 //首先第一步：对原串进行签名，注意这里不要对任何字段进行编码。这里是将参数按照key=value进行字典排序后组成下面的字符串,在这个字符串最后拼接上key=XXXX。由于这里的字段固定，因此只需要按照这个顺序进行排序即可。
@@ -95,12 +102,15 @@
             
             function getAppId()
             {
-                return "{$appId}";
+                //return "{$appId}";
+                return "wxf8b4f85f3a794e77";
+            	
             }
             
             function getAppKey()
             {
-            	return "{$paySignKey}";
+            	//return "{$paySignKey}";
+            	return "2Wozy2aksie1puXUBpWD8oZxiD1DfQuEaiC7KcRATv1Ino3mdopKaPGQQ7TtkNySuAmCaDCrw4xhPY5qKTBl7Fzm0RgR3c0WaVYIXZARsxzHV2x7iwPPzOz94dnwPWSn";
             }
 
             function getTimeStamp()
