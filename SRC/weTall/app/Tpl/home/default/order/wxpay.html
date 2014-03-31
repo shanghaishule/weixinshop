@@ -6,7 +6,7 @@
         <script language="javascript" src="http://res.mail.qq.com/mmr/static/lib/js/lazyloadv3.js"></script>
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
-        <script language="javascript" type="text/javascript" src="http://fw.qq.com/ipaddress">  
+        <script language="javascript" type="text/javascript" src="http://pv.sohu.com/cityjson"></script>
         <script Language="javascript">
             //辅助函数
             function Trim(str,is_global)
@@ -43,32 +43,28 @@
             
             function getPartnerId()
             {
-                //return "{$partnerId}";
-                return "1900000109";
+                return "{$partnerId}";
+                //return "1900000109";
             }
             
             function getPartnerKey()
             {
-                //return "{$partnerKey}";
-            	return "8934e7d15453e97507ef794cf7b0519d";
+                return "{$partnerKey}";
+            	//return "8934e7d15453e97507ef794cf7b0519d";
             }
 
             function getPackage()
             {
                 var banktype = "WX";
-                //var body = "{$wxname}订单支付";//商品名称信息
-                var body = "江诗丹顿";//商品名称信息，这里由测试网页填入。
+                var body = "{$wxname}订单支付";//商品名称信息
                 var fee_type = "1";//费用类型，这里1为默认的人民币
                 var input_charset = "GBK";//字符集，这里将统一使用GBK
-                //var notify_url = "{$notify_url}";//支付成功后将通知该地址
-                var notify_url = "http://www.qq.com";//支付成功后将通知该地址
-                //var out_trade_no = "{$alldingdanhao}";//订单支付号
-                var out_trade_no = ""+getANumber();//订单号，商户需要保证该字段对于本商户的唯一性
+                var notify_url = "{$notify_url}";//支付成功后将通知该地址
+                var out_trade_no = "{$alldingdanhao}";//订单支付号
                 var partner = getPartnerId();//商户号
-                //var spbill_create_ip = IPData[0];//用户浏览器的ip，这个需要在前端获取。这里使用127.0.0.1测试值
-                var spbill_create_ip = "127.0.0.1";//用户浏览器的ip，这个需要在前端获取。这里使用127.0.0.1测试值
-                //var total_fee = "{$ordersumPrice}";//总金额。
-                var total_fee = "100";//总金额。
+                var spbill_create_ip = returnCitySN[0];//用户浏览器的ip，这个需要在前端获取。这里使用127.0.0.1测试值
+                //var spbill_create_ip = "127.0.0.1";//用户浏览器的ip，这个需要在前端获取。这里使用127.0.0.1测试值
+                var total_fee = "{$ordersumPrice}";//总金额。
                 var partnerKey = getPartnerKey();//这个值和以上其他值不一样是：签名需要它，而最后组成的传输字符串不能含有它。这个key是需要商户好好保存的。
                 
                 //首先第一步：对原串进行签名，注意这里不要对任何字段进行编码。这里是将参数按照key=value进行字典排序后组成下面的字符串,在这个字符串最后拼接上key=XXXX。由于这里的字段固定，因此只需要按照这个顺序进行排序即可。
@@ -102,15 +98,15 @@
             
             function getAppId()
             {
-                //return "{$appId}";
-                return "wxf8b4f85f3a794e77";
+                return "{$appId}";
+                //return "wxf8b4f85f3a794e77";
             	
             }
             
             function getAppKey()
             {
-            	//return "{$paySignKey}";
-            	return "2Wozy2aksie1puXUBpWD8oZxiD1DfQuEaiC7KcRATv1Ino3mdopKaPGQQ7TtkNySuAmCaDCrw4xhPY5qKTBl7Fzm0RgR3c0WaVYIXZARsxzHV2x7iwPPzOz94dnwPWSn";
+            	return "{$paySignKey}";
+            	//return "2Wozy2aksie1puXUBpWD8oZxiD1DfQuEaiC7KcRATv1Ino3mdopKaPGQQ7TtkNySuAmCaDCrw4xhPY5qKTBl7Fzm0RgR3c0WaVYIXZARsxzHV2x7iwPPzOz94dnwPWSn";
             }
 
             function getTimeStamp()
@@ -233,31 +229,30 @@
 								function(res){
 									//alert(res.err_code+res.err_desc); 
 									if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-										//成功
+										//微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+										//因此微信团队建议，当收到ok返回时，向商户后台询问是否收到交易成功的通知，若收到通知，前端展示交易成功的界面；
+										//若此时未收到通知，商户后台主动调用查询订单接口，查询订单的当前状态，并反馈给前端展示相应的界面。
 										alert('支付成功！');
 										<eq name="success_url" value="">
 											window.location.href="{:U('user/index',array('status'=>2))}";
 										<else />
 											window.location.href="{$success_url}";
 										</eq>
-/*使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-因此微信团队建议，当收到ok返回时，向商户后台询问是否收到交易成功的通知，若收到通知，前端展示交易成功的界面；
-若此时未收到通知，商户后台主动调用查询订单接口，查询订单的当前状态，并反馈给前端展示相应的界面。*/
 									}else if(res.err_msg == "get_brand_wcpay_request:fail" ) {
 										//失败
 										alert('支付失败！');
 										<eq name="success_url" value="">
 											window.location.href="{:U('user/index',array('status'=>1))}";
 										<else />
-											window.location.href="{$success_url}";
+											window.location.href="{$fail_url}";
 										</eq>
 									}else if(res.err_msg == "get_brand_wcpay_request:cancel" ) {
 										//用户取消
-										alert('取消支付！');
+										alert('您取消了支付！');
 										<eq name="success_url" value="">
 											window.location.href="{:U('user/index',array('status'=>1))}";
 										<else />
-											window.location.href="{$success_url}";
+											window.location.href="{$cancel_url}";
 										</eq>
 									}else{
 										//其他
@@ -293,6 +288,10 @@
 						self.parents('div.pic').css({'width' : new_w + 'px', 'height' : new_h + 'px'});
 					});
 				});
+			}
+            
+			window.onload=function(){
+				window.document.getElementById('getBrandWCPayRequest').click();
 			}
 		</script>
     </head>
