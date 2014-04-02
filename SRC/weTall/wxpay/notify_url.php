@@ -83,6 +83,7 @@ if ($array['trade_state'] == 0) {  //成功支付
     }
     $mysqli->close();
 
+    //向微信回复成功。如果不回复，微信将在30分钟内重复通知8次
     echo "success";
 }
 
