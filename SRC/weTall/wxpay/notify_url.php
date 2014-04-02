@@ -1,7 +1,7 @@
 <?php 
 	set_include_path('D:\websoft\web\phpwind\weTall'.PATH_SEPARATOR.get_include_path()); 
 
-	/*银联后台通知*/
+	/*后台通知*/
 	header('Content-Type:text/html;charset=utf-8');
 	require_once("data/config/db.php");
 	//var_dump($arr);exit;
