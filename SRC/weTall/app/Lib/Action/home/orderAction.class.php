@@ -795,7 +795,12 @@ class orderAction extends userbaseAction {
 		
 		$zhifuhao=$num;
 		if ($zhifuhao != "") {
-			
+			header('Content-Type:text/html;charset=utf-8');
+			require_once("wxpay/lib.php");
+			$wechat = new Wechat;
+			$config=M('wxpay')->find();
+			$result = $wechat->orderquery($config, $zhifuhao);  // 这里仅需要本站订单号
+			dump($result);
 	
 		}else {
 			return "参数为空";
