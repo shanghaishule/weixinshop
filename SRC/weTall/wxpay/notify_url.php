@@ -79,9 +79,11 @@ if ($array['trade_state'] == 0) {  //成功支付
 	    	$mysqli->query($query_item);
 	    }
     	$result->close();
+
     }
     $mysqli->close();
 
+    echo "success";
 }
 
 
