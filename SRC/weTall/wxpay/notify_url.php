@@ -36,8 +36,9 @@ fwrite($fh, "\r\n\r\n");
 fclose($fh);
 
 
-$verifyNotify = $wechat->verifyNotify($array, $config); // 验证通知
-if ($verifyNotify) {
+//$verifyNotify = $wechat->verifyNotify($array, $config); // 验证通知
+//if ($verifyNotify) {
+if ($array['trade_state'] == 0) {  //成功支付
     $array += $wechat->getXmlArray(); // 再获取xml数据
     // 结果已经获取到了 下面可以更新数据库支付状态等操作了 也可以使用订单查询接口来查询是否支付成功
 
@@ -57,14 +58,16 @@ if ($verifyNotify) {
     $query = "insert into ".$arr["DB_PREFIX"]."wxpay_history(`sign_type`,`service_version`,`input_charset`,"
      		."`sign`,`sign_key_index`,`trade_mode`,`trade_state`,`pay_info`,`partner`,`bank_type`,`bank_billno`,"
      		."`total_fee`,`fee_type`,`notify_id`,`transaction_id`,`out_trade_no`,`attach`,`time_end`,`transport_fee`,"
-     		."`product_fee`,`discount`,`buyer_alias`)"
+     		."`product_fee`,`discount`,`buyer_alias`,`openid`,`appid`,`issubscribe`,`timestamp`,`noncestr`,`appsignature`,`signmethod`)"
     		." values ( '".$array['sign_type']."', '".$array['service_version']."', '".$array['input_charset']."', '"
     		.$array['sign']."', '".$array['sign_key_index']."', '".$array['trade_mode']."', '"
     		.$array['trade_state']."', '".$array['pay_info']."', '".$array['partner']."', '".$array['bank_type']."', '"
     		.$array['bank_billno']."', '".$array['total_fee']."', '".$array['fee_type']."', '"
     		.$array['notify_id']."', '".$array['transaction_id']."', '".$array['out_trade_no']."', '"
     		.$array['attach']."', '".$array['time_end']."', '".$array['transport_fee']."', '"
-    		.$array['product_fee']."', '".$array['discount']."', '".$array['buyer_alias']."')";
+    		.$array['product_fee']."', '".$array['discount']."', '".$array['buyer_alias']."', '"
+    		.$array['openid']."', '".$array['appid']."', '".$array['issubscribe']."', '"
+    		.$array['timestamp']."', '".$array['noncestr']."', '".$array['appsignature']."', '".$array['signmethod']."')";
     $mysqli->query($query);
 
     // 交易处理成功

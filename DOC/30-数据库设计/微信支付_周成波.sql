@@ -48,5 +48,12 @@ CREATE TABLE `tp_wxpay_history` (
   `product_fee` int(11) NULL COMMENT '物品费用，单位分',
   `discount` int(11) NULL COMMENT '折扣价格，单位分',
   `buyer_alias` varchar(255) NULL COMMENT '买家别名',
+  `openid` varchar(255) NULL COMMENT '购买用户',
+  `appid` varchar(255) NULL COMMENT '',
+  `issubscribe` varchar(255) NULL COMMENT '是否关注',
+  `timestamp` varchar(255) NULL COMMENT '时间戳',
+  `noncestr` varchar(255) NULL COMMENT '随机串',
+  `appsignature` varchar(255) NULL COMMENT '',
+  `signmethod` varchar(255) NULL COMMENT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
