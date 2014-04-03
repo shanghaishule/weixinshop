@@ -159,7 +159,12 @@ class DiymenAction extends UserAction{
 				if($c!=false){
 					$data.='"sub_button":[';
 				}else{
-					$data.='"type":"click","key":"'.$vo['title'].'"';
+					if($vo['url']){
+						$data.='"type":"view","url":"'.$vo['url'].'"';
+					}else{
+						$data.='"type":"click","key":"'.$vo['title'].'"';
+					}
+					
 				}
 				$i=1;
 				foreach($c as $voo){

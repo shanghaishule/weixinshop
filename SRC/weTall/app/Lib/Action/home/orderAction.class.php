@@ -791,7 +791,7 @@ class orderAction extends userbaseAction {
 	/*订单微信查询接口*/
 	public function orderWxQuery($num="")
 	{
-		return "notpaid";
+		return "not_paid";
 		$zhifuhao=$num;
 		if ($zhifuhao != "") {
 			header('Content-Type:text/html;charset=utf-8');
