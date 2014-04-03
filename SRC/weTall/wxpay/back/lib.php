@@ -132,9 +132,8 @@ class Wechat{
      * @return string
      */
     public function getAccessToken($config) {
-	
-        $request = $this->curlGet('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' . $config['appId'] . '&secret=' . $config['appSecret']);
-		$requestArray = json_decode($request, true);
+        $request = httpRequest('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' . $config['appId'] . '&secret=' . $config['appSecret']);
+        $requestArray = json_decode($request, true);
         if (isset($requestArray['errcode'])) {
             return false;
         }
@@ -171,19 +170,16 @@ class Wechat{
             return false;
         }
         $url = 'https://api.weixin.qq.com/pay/orderquery?access_token=' . $this->getAccessToken($config);
-		//var_dump(json_encode($array);exit;
-		$myinfo = $this->myquery($out_trade_no);
-		$array = array(
+        $array = array(
             'appid' => $config['appId'],
-            'package' => 'out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&sign=' . $myinfo['sign'],
-            'timestamp' => mktime(),
+            'package' => 'out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&sign=' . strtoupper(md5('out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&key=' . $config['partnerkey'])),
+            'timestamp' => mktime()
         );
-		$array['app_signature'] = $myinfo['appsignature']; //$this->buildSign($array, $config);
-        $array['sign_method'] = 'sha1';
-        
-		//var_dump($array);exit;
-        $result = $this->api_notice_increment($url, json_encode($array));
-		var_dump($result);exit;
+        $array .= array(
+            'app_signature' => $this->buildSign($array, $config),
+            'sign_method' => 'sha1'
+        );
+        $result = $this->doPost($url, json_encode($array));
         return json_decode($result, true);
     }
     
@@ -200,58 +196,4 @@ class Wechat{
         $request = @file_get_contents($url, FALSE, $stream_context);
         return $request;
     }
-	
-	function curlGet($url){
-		$ch = curl_init();
-		$header = "Accept-Charset: utf-8";
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$temp = curl_exec($ch);
-		curl_close($ch);
-		return $temp;
-	
-	}
-	
-	function api_notice_increment($url, $data){
-		$ch = curl_init();
-		//$header = "Accept-Charset: utf-8";
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-		//curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
-		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 5.01; Windows NT 5.0)');
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-		curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$tmpInfo = curl_exec($ch);
-		if (curl_errno($ch)) {
-			return false;
-		}else{
-			return $tmpInfo;
-		}
-	}
-	
-	function myquery($out_trade_no){
-		header('Content-Type:text/html;charset=utf-8');
-		$wetallroute = dirname(dirname(__FILE__));
-		include $wetallroute."/data/config/db.php";
-		//var_dump($arr);exit;
-		$mysqli = new mysqli($arr["DB_HOST"], $arr["DB_USER"], $arr["DB_PWD"], $arr["DB_NAME"], $arr["DB_PORT"]);
-		$query = "SELECT sign,appsignature FROM ".$arr["DB_PREFIX"]."wxpay_history where out_trade_no = '$out_trade_no' LIMIT 1";	
-		if ($result = $mysqli->query($query)) {
-			if ($row = $result->fetch_row()) {
-				$return['sign'] = $row[0]; 
-				$return['appsignature'] = $row[1]; 
-				//var_dump($return);exit;
-			}
-			$result->close();
-		}
-		$mysqli->close();
-		
-		return $return;
-	}
 }
