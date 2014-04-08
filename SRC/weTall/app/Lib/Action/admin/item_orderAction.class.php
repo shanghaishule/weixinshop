@@ -474,7 +474,7 @@ class item_orderAction extends backendAction {
 			
     		$result = $wechat->delivernotify($config, $parameter);
     		//dump($result);exit;
-			if ($result['errcode'] == 0) { //成功
+			if (($result['errcode'] == 0) && ($result['errmsg'] == 'ok')) { //成功
 				return true;
 			}else{
 				return false;

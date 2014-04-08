@@ -751,35 +751,22 @@ class orderAction extends userbaseAction {
 			if (4 == $payment_id)
 			{
 				//微信支付
-				if ($this->orderWxQuery($alldingdanhao) == "paid"){
-					foreach ($all_order_arr as $dingdan){
-						$data['status']=2;
-						$data['supportmetho']=4;
-						$data['support_time']=time();
-						M('item_order')->where("orderId='".$dingdan['orderid']."' and status=1")->data($data)->save();
-					}
-					$connectInfo = '2';
-				}else{
-					$wxpay=M('wxpay')->find();
-					$this->assign('wxname', $wxpay['wxname']);
-					$this->assign('tokenTall', $wxpay['tokenTall']);
-					$this->assign('appId', $wxpay['appId']);
-					$this->assign('paySignKey', $wxpay['paySignKey']);
-					$this->assign('appSecret', $wxpay['appSecret']);
-					$this->assign('partnerId', $wxpay['partnerId']);
-					$this->assign('partnerKey', $wxpay['partnerKey']);
-					$this->assign('notify_url', $wxpay['notify_url']);
-					$this->assign('success_url', $wxpay['success_url']);
-					$this->assign('fail_url', $wxpay['fail_url']);
-					$this->assign('cancel_url', $wxpay['cancel_url']);
-					
-					$connectInfo = '1';
-				}
-
+				$wxpay=M('wxpay')->find();
+				$this->assign('wxname', $wxpay['wxname']);
+				$this->assign('tokenTall', $wxpay['tokenTall']);
+				$this->assign('appId', $wxpay['appId']);
+				$this->assign('paySignKey', $wxpay['paySignKey']);
+				$this->assign('appSecret', $wxpay['appSecret']);
+				$this->assign('partnerId', $wxpay['partnerId']);
+				$this->assign('partnerKey', $wxpay['partnerKey']);
+				$this->assign('notify_url', $wxpay['notify_url']);
+				$this->assign('success_url', $wxpay['success_url']);
+				$this->assign('fail_url', $wxpay['fail_url']);
+				$this->assign('cancel_url', $wxpay['cancel_url']);
+				
 				$this->assign('alldingdanhao', $alldingdanhao);
 				$this->assign('ordersumPrice', $all_order_price*100);  //支付用，精确到分
 				$this->assign('ordersumPrice_act', $all_order_price);  //显示用
-				$this->assign('connectInfo', $connectInfo);
 				$this->display();
 			}
 			else
@@ -791,7 +778,6 @@ class orderAction extends userbaseAction {
 	/*订单微信查询接口*/
 	public function orderWxQuery($num="")
 	{
-		//return "not_paid";
 		$zhifuhao=$num;
 		if ($zhifuhao != "") {
 			header('Content-Type:text/html;charset=utf-8');
@@ -801,10 +787,14 @@ class orderAction extends userbaseAction {
 			include $wetallroute."/wxpay/lib.php";
 			$wechat = new Wechat;
 			$result = $wechat->orderquery($config, $zhifuhao);  // 这里仅需要本站订单号
-			dump($result);exit;
-		}else {
-			return "参数为空";
-		}
+			if (($result['errcode'] == 0) && ($result['errmsg'] == 'ok') && ($result['order_info']['ret_code'] == 0)) { //成功
+				return true;
+			}else{
+				return false;
+			}
+    	}else {
+    		return false;
+    	}
 	}
 	
 

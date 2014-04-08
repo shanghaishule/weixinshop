@@ -206,7 +206,7 @@ class Wechat{
     			'app_signature' => $this->buildSign($array, $config),
     			'sign_method' => 'sha1'
     	);
-		dump($array);exit;
+		//dump($array);exit;
     	$result = $this->api_notice_increment($url, json_encode($array));
     	return json_decode($result, true);
     }
