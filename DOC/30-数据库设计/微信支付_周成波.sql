@@ -18,7 +18,7 @@ CREATE TABLE `tp_wxpay` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
-/*李帅的支付信息*/
+/*支付信息*/
 insert into `tp_wxpay`(`tokenTall`, `wxname`, `appId`, `paySignKey`, `appSecret`, `partnerId`, `partnerKey`, `notify_url`, `success_url`, `fail_url`, `cancel_url`)
 values('sgvctz1393762965','微指购','wx7b93af2548c04072','6uSTZuiOV4r5qKfZFXxvDVldIwIjnsUvyqkrbJ2S09jFCeZ3nk05tpMBDXixe0XJu4KxACblXELDoIYj6i4Y1Eg8b3RdLeZGAhWOUnHdEAgf8tbTbviCgZv2Y49R6bca','0e7eef0922a587c8f0867e91a691bbcb','1218363601','1c280be45878451ba5cecf9d7f874d7d','http://www.vzhigo.com/weTall/wxpay/notify_url.php','','','');
 
@@ -57,3 +57,21 @@ CREATE TABLE `tp_wxpay_history` (
   `signmethod` varchar(255) NULL COMMENT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+/*告警信息*/
+DROP TABLE IF EXISTS `tp_wxpay_alarm`;
+CREATE TABLE `tp_wxpay_alarm` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tokenTall` varchar(30) NOT NULL,
+  `wxname` varchar(60) NOT NULL COMMENT '公众号名称',
+  `appid` varchar(255) NOT NULL COMMENT '公众号身份的唯一标识',
+  `errortype` varchar(255) NOT NULL COMMENT '错误类型',
+  `description` varchar(255) NOT NULL COMMENT '错误描述',
+  `alarmcontent` varchar(255) NOT NULL COMMENT '错误详情',
+  `timestamp` varchar(255) NULL COMMENT '时间戳',
+  `appsignature` varchar(255) NULL COMMENT '',
+  `signmethod` varchar(255) NULL COMMENT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
