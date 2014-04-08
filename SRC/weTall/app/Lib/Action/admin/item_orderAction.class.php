@@ -315,28 +315,17 @@ class item_orderAction extends backendAction {
             $date['status']=3;
             if($mod->where("orderId='".$data['orderId']."'")->data($date)->save()){
             	
-            	
-
-            	
-            	
-            	
-            	
-            	
-            	
-            	
-            	
-            	
-            	
-            	
-            	
-            	
-            	
-                IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
-                $this->success(L('operation_success'));
+            	if($this->orderWxDeliver($data['orderId'])){
+					IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
+					$this->success(L('operation_success'));
+				}else{
+					IS_AJAX && $this->ajaxReturn(0, '微信发货通知失败');
+					$this->error('微信发货通知失败');
+				}
             } else {
                 IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
-              $this->error(L('operation_failure'));
-          }
+                $this->error(L('operation_failure'));
+            }
         } else {
             $this->assign('open_validator', true);
             if (IS_AJAX) {
@@ -456,13 +445,14 @@ class item_orderAction extends backendAction {
     /*订单微信发货接口*/
     public function orderWxDeliver($num="")
     {
-    	$num = $_GET('orderId');
+    	//$num = $_GET['orderId'];
     	
     	if ($num != "") {
     		header('Content-Type:text/html;charset=utf-8');
     		$wetallroute = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+			//dump($wetallroute);exit;
     		include $wetallroute."/wxpay/config.php";
-    		dump($config);exit;
+    		//dump($config);exit;
     		include $wetallroute."/wxpay/lib.php";
     		
     		//取支付信息
@@ -478,12 +468,14 @@ class item_orderAction extends backendAction {
     				'deliver_status' => '1', // 发货状态，1 表明成功，0 表明失败，失败时需要在 deliver_msg 填上失败原因
     				'deliver_msg' => 'ok' // 是发货状态信息，失败时可以填上 UTF8 编码的错误提示信息，比如“该商品已退款”
     		);
-
+			//dump($parameter);exit;
     		$wechat = new Wechat;
+			//dump($wechat);exit;
+			
     		$result = $wechat->delivernotify($config, $parameter);
-    		
-    		
-    		dump($result);exit;
+
+    		//dump($result);exit;
+			return true;
     	}else {
     		return false;
     	}

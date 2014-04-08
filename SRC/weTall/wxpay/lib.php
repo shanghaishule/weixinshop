@@ -113,8 +113,9 @@ class Wechat{
 	 */
 	public function buildSign($array, $config) {
 		$signPars = "";
-        $array['appKey'] = $config['paySignKey'];
+        $array['appkey'] = $config['paySignKey'];
 		ksort($array);
+		//dump($array);exit;
 		foreach($array as $k => $v) {
 			if("" != $v && "sign" != $k) {
 				$signPars .= strtolower($k) . "=" . $v . "&";
@@ -155,7 +156,11 @@ class Wechat{
             'app_signature' => $this->buildSign($parameter, $config),
             'sign_method' => 'sha1'
         );
-        $result = $this->doPost($url, json_encode($parameter));
+		//dump($parameter);exit;
+        //$result = $this->doPost($url, json_encode($parameter));
+		//dump(json_encode($parameter));exit;
+		$result = $this->api_notice_increment($url, json_encode($parameter));
+		
         return json_decode($result, true);
     }
     
@@ -165,7 +170,7 @@ class Wechat{
      * @param array $config
      * @param string $out_trade_no
      * @return array
-     */
+     
     public function orderquery($config, $out_trade_no) {
         if (! $config || ! $out_trade_no) {
             return false;
@@ -186,6 +191,25 @@ class Wechat{
 		var_dump($result);exit;
         return json_decode($result, true);
     }
+    */
+    public function orderquery($config, $out_trade_no) {
+    	if (! $config || ! $out_trade_no) {
+    		return false;
+    	}
+    	$url = 'https://api.weixin.qq.com/pay/orderquery?access_token=' . $this->getAccessToken($config);
+    	$array = array(
+    			'appid' => $config['appId'],
+    			'package' => 'out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&sign=' . strtoupper(md5('out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&key=' . $config['partnerkey'])),
+    			'timestamp' => mktime()
+    	);
+    	$array .= array(
+    			'app_signature' => $this->buildSign($array, $config),
+    			'sign_method' => 'sha1'
+    	);
+    	$result = $this->api_notice_increment($url, json_encode($array));
+    	return json_decode($result, true);
+    }
+    
     
     /**
      * Wechat::doPost()
