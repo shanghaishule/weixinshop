@@ -797,7 +797,7 @@ class orderAction extends userbaseAction {
 			header('Content-Type:text/html;charset=utf-8');
 			$wetallroute = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
 			include $wetallroute."/wxpay/config.php";
-			dump($config);exit;
+			//dump($config);exit;
 			include $wetallroute."/wxpay/lib.php";
 			$wechat = new Wechat;
 			$result = $wechat->orderquery($config, $zhifuhao);  // 这里仅需要本站订单号

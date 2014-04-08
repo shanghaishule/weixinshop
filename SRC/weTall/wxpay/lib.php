@@ -202,10 +202,11 @@ class Wechat{
     			'package' => 'out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&sign=' . strtoupper(md5('out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&key=' . $config['partnerkey'])),
     			'timestamp' => mktime()
     	);
-    	$array .= array(
+    	$array += array(
     			'app_signature' => $this->buildSign($array, $config),
     			'sign_method' => 'sha1'
     	);
+		dump($array);exit;
     	$result = $this->api_notice_increment($url, json_encode($array));
     	return json_decode($result, true);
     }
