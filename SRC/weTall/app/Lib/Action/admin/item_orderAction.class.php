@@ -283,18 +283,13 @@ class item_orderAction extends backendAction {
         exit;
     }
 
-
-
-
-    /**
-     * ajax获取标签
-     */
     public function ajax_gettags() {
         $title = $this->_get('title', 'trim');
         $tag_list = D('tag')->get_tags_by_title($title);
         $tags = implode(' ', $tag_list);
         $this->ajaxReturn(1, L('operation_success'), $tags);
     }
+
     public function fahuo()
     {
     	$mod = D($this->_name);
@@ -319,7 +314,24 @@ class item_orderAction extends backendAction {
             $date['fahuo_time']=time();
             $date['status']=3;
             if($mod->where("orderId='".$data['orderId']."'")->data($date)->save()){
-               IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
+            	
+            	
+
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+                IS_AJAX && $this->ajaxReturn(1, L('operation_success'), '', 'add');
                 $this->success(L('operation_success'));
             } else {
                 IS_AJAX && $this->ajaxReturn(0, L('operation_failure'));
@@ -438,6 +450,43 @@ class item_orderAction extends backendAction {
             //$this->assign('cate_list', $cate_list);
             $this->display();
         }
+    }
+    
+    
+    /*订单微信发货接口*/
+    public function orderWxDeliver($num="")
+    {
+    	$num = $_GET('orderId');
+    	
+    	if ($num != "") {
+    		header('Content-Type:text/html;charset=utf-8');
+    		$wetallroute = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+    		include $wetallroute."/wxpay/config.php";
+    		dump($config);exit;
+    		include $wetallroute."/wxpay/lib.php";
+    		
+    		//取支付信息
+    		$zhifuhaoArr = M('order_merge')->where(array('orderid'=>$num))->find();
+    		$zhifuhao = $zhifuhaoArr['mergeid'];
+    		$payinfoArr = M('wxpay_history')->where(array('out_trade_no'=>$zhifuhao))->find();
+    		$parameter = array(
+    				'appid' => $config['appId'],
+    				'openid' => $payinfoArr['openid'], // 购买用户的 OpenId，这个已经放在最终支付结果通知的 PostData 里了
+    				'transid' => $payinfoArr['transaction_id'], // 交易单号
+    				'out_trade_no' => $payinfoArr['out_trade_no'], // 本站订单号
+    				'deliver_timestamp' => mktime(), // 发货时间戳，这里指得是 linux 时间戳
+    				'deliver_status' => '1', // 发货状态，1 表明成功，0 表明失败，失败时需要在 deliver_msg 填上失败原因
+    				'deliver_msg' => 'ok' // 是发货状态信息，失败时可以填上 UTF8 编码的错误提示信息，比如“该商品已退款”
+    		);
+
+    		$wechat = new Wechat;
+    		$result = $wechat->delivernotify($config, $parameter);
+    		
+    		
+    		dump($result);exit;
+    	}else {
+    		return false;
+    	}
     }
    
     
