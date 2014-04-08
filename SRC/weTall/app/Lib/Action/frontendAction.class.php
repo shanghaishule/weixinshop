@@ -207,4 +207,23 @@ class frontendAction extends baseAction {
         $this->ajaxReturn(1, '', $data);
     }
     
+    
+    /**
+     * Wechat::getXmlArray()
+     * 从xml中获取数组
+     * @return array
+     */
+    public function getXmlArray() {
+    	$postStr = isset($GLOBALS["HTTP_RAW_POST_DATA"]) ? $GLOBALS["HTTP_RAW_POST_DATA"] : '';
+    	if ($postStr) {
+    		$postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+    		if (! is_object($postObj)) {
+    			return false;
+    		}
+    		$array = json_decode(json_encode($postObj), true); // xml对象转数组
+    		return array_change_key_case($array, CASE_LOWER); // 所有键小写
+    	} else {
+    		return false;
+    	}
+    }
 }
