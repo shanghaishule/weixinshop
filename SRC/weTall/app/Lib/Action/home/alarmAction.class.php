@@ -3,7 +3,6 @@ class alarmAction extends frontendAction {
     public function index() {
     	
     	$data = $this->getXmlArray();
-    	$data['tokenTall'] = $this->getTokenTall();
     	
     	// 写入文件
     	$filename = 'alarm.txt';

@@ -78,7 +78,6 @@ CREATE TABLE `tp_wxpay_history` (
 DROP TABLE IF EXISTS `tp_wxpay_alarm`;
 CREATE TABLE `tp_wxpay_alarm` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tokenTall` varchar(30) NULL,
   `appid` varchar(255) NULL COMMENT '公众号身份的唯一标识',
   `errortype` varchar(255) NULL COMMENT '错误类型',
   `description` varchar(255) NULL COMMENT '错误描述',
@@ -93,7 +92,6 @@ CREATE TABLE `tp_wxpay_alarm` (
 DROP TABLE IF EXISTS `tp_wxpay_rights`;
 CREATE TABLE `tp_wxpay_rights` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tokenTall` varchar(30) NULL,
   `openid` varchar(255) NULL COMMENT '购买用户',
   `appid` varchar(255) NULL COMMENT '公众号身份的唯一标识',
   `timestamp` varchar(255) NULL COMMENT '时间戳',
@@ -105,11 +103,7 @@ CREATE TABLE `tp_wxpay_rights` (
   `extinfo` varchar(255) NULL COMMENT '备注',
   `appsignature` varchar(255) NULL COMMENT '',
   `signmethod` varchar(255) NULL COMMENT '',
-  `picinfo1` text NULL COMMENT '',
-  `picinfo2` text NULL COMMENT '',
-  `picinfo3` text NULL COMMENT '',
-  `picinfo4` text NULL COMMENT '',
-  `picinfo5` text NULL COMMENT '',
+  `picurl` text NULL COMMENT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
