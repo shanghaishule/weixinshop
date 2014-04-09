@@ -445,8 +445,7 @@ class item_orderAction extends backendAction {
     /*订单微信发货接口*/
     public function orderWxDeliver($num="")
     {
-    	//$num = $_GET['orderId'];
-    	
+
     	if ($num != "") {
     		header('Content-Type:text/html;charset=utf-8');
     		$wetallroute = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
@@ -481,6 +480,31 @@ class item_orderAction extends backendAction {
 			}
     	}else {
     		return false;
+    	}
+    }
+    
+    /*订单微信查询接口*/
+    public function orderWxQuery($num="")
+    {
+    	$num = $num == "" ? $_GET['orderId'] : $num;
+    	
+    	$zhifuhao=M('order_merge')->where(array('orderid'=>$num))->getField('mergeid');
+    	
+    	if ($zhifuhao != "") {
+    		header('Content-Type:text/html;charset=utf-8');
+    		$wetallroute = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+    		include $wetallroute."/wxpay/config.php";
+    		dump($config);exit;
+    		include $wetallroute."/wxpay/lib.php";
+    		$wechat = new Wechat;
+    		$result = $wechat->orderquery($config, $zhifuhao);
+    		if (($result['errcode'] == 0) && ($result['errmsg'] == 'ok') && ($result['order_info']['ret_code'] == 0)) { //成功
+    			$this->success("没有取到支付号！");
+    		}else{
+    			$this->error("没有取到支付号！");
+    		}
+    	}else {
+    		$this->error("没有取到支付号！");
     	}
     }
    

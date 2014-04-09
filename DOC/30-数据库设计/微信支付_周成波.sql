@@ -1,8 +1,8 @@
 /*本脚本可以反复执行，重复执行.
  * 
  * 1、支付：weTall-home-order-wxpay
- * 2、发货：weTall-admin-item_orderAction
- * 3、查询：weTall-home-order-orderWxQuery
+ * 2、发货：weTall-admin-item_orderAction-orderWxDeliver
+ * 3、查询：weTall-admin-item_orderAction-orderWxQuery
  * 4、告警：weTall-home-alarm（腾讯调起）
  * 5、维权：weTall-home-rights（腾讯调起）
  * 6、维权查看和处理：weTall-admin-wxpay_rights
