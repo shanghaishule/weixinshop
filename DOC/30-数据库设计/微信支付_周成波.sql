@@ -1,4 +1,20 @@
-/*本脚本可以反复执行，重复执行*/
+/*本脚本可以反复执行，重复执行.
+ * 
+ * 1、支付：weTall-home-order-wxpay
+ * 2、发货：weTall-admin-item_orderAction
+ * 3、查询：weTall-home-order-orderWxQuery
+ * 4、告警：weTall-home-alarm（腾讯调起）
+ * 5、维权：weTall-home-rights（腾讯调起）
+ * 6、维权处理：
+ * 
+ * 网页授权
+ * 收货地址共享
+ * 告警：查看和处理
+ * 维权：查看和处理
+ * 客服系统：沟通
+ * */
+
+
 
 DROP TABLE IF EXISTS `tp_wxpay`;
 CREATE TABLE `tp_wxpay` (
@@ -62,16 +78,38 @@ CREATE TABLE `tp_wxpay_history` (
 DROP TABLE IF EXISTS `tp_wxpay_alarm`;
 CREATE TABLE `tp_wxpay_alarm` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tokenTall` varchar(30) NOT NULL,
-  `wxname` varchar(60) NOT NULL COMMENT '公众号名称',
-  `appid` varchar(255) NOT NULL COMMENT '公众号身份的唯一标识',
-  `errortype` varchar(255) NOT NULL COMMENT '错误类型',
-  `description` varchar(255) NOT NULL COMMENT '错误描述',
-  `alarmcontent` varchar(255) NOT NULL COMMENT '错误详情',
+  `tokenTall` varchar(30) NULL,
+  `appid` varchar(255) NULL COMMENT '公众号身份的唯一标识',
+  `errortype` varchar(255) NULL COMMENT '错误类型',
+  `description` varchar(255) NULL COMMENT '错误描述',
+  `alarmcontent` varchar(255) NULL COMMENT '错误详情',
   `timestamp` varchar(255) NULL COMMENT '时间戳',
   `appsignature` varchar(255) NULL COMMENT '',
   `signmethod` varchar(255) NULL COMMENT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+/*维权信息*/
+DROP TABLE IF EXISTS `tp_wxpay_rights`;
+CREATE TABLE `tp_wxpay_rights` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tokenTall` varchar(30) NULL,
+  `openid` varchar(255) NULL COMMENT '购买用户',
+  `appid` varchar(255) NULL COMMENT '公众号身份的唯一标识',
+  `timestamp` varchar(255) NULL COMMENT '时间戳',
+  `msgtype` varchar(255) NULL COMMENT '',
+  `feedbackid` varchar(255) NULL COMMENT '',
+  `transid` varchar(255) NULL COMMENT '交易号',
+  `reason` varchar(255) NULL COMMENT '详情',
+  `solution` varchar(255) NULL COMMENT '解决方法',
+  `extinfo` varchar(255) NULL COMMENT '备注',
+  `appsignature` varchar(255) NULL COMMENT '',
+  `signmethod` varchar(255) NULL COMMENT '',
+  `picinfo1` text NULL COMMENT '',
+  `picinfo2` text NULL COMMENT '',
+  `picinfo3` text NULL COMMENT '',
+  `picinfo4` text NULL COMMENT '',
+  `picinfo5` text NULL COMMENT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

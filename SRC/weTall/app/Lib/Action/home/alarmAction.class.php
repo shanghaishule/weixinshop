@@ -3,7 +3,8 @@ class alarmAction extends frontendAction {
     public function index() {
     	
     	$data = $this->getXmlArray();
-    	  
+    	$data['tokenTall'] = $this->getTokenTall();
+    	
     	// 写入文件
     	$filename = 'alarm.txt';
     	$fh = fopen($filename, "w");
@@ -14,9 +15,11 @@ class alarmAction extends frontendAction {
     	//关闭文件
     	fclose($fh);
     	
+    	//写入表
+    	M('wxpay_alarm')->add($data);
     	
         //$this->display();
-    	$this->show('微信支付告警页面!');
+    	//$this->show('微信支付告警页面!由腾讯方主动调起本页面。');
     }
 }
 ?>
