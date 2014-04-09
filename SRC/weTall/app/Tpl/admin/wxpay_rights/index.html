@@ -30,7 +30,7 @@
             <td>
             <div class="explain_col">
             	<input type="hidden" name="g" value="admin" />
-                <input type="hidden" name="m" value="wxpay_right" />
+                <input type="hidden" name="m" value="wxpay_rights" />
                 <input type="hidden" name="a" value="index" />
                 <input type="hidden" name="menuid" value="{$menuid}" />
                 购买用户 :
@@ -83,7 +83,7 @@
                 <td width="50" align="center">{$val.status}</td>
                 <td width="100" align="center">
                 <eq name="val.status" value="0">
-                	<a href="{:U('wxpay_rights/updatefeedback', array('id'=>$val['id']))}">通知微信已经处理</a>
+                	<a href="{:U('wxpay_rights/updatefeedback', array('id'=>$val['id']))}">通知微信该投诉已处理</a>
                 </eq> 
                 </td>
             </tr>
