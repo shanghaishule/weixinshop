@@ -30,20 +30,11 @@
             <td>
             <div class="explain_col">
             	<input type="hidden" name="g" value="admin" />
-                <input type="hidden" name="m" value="wxpay_rights" />
+                <input type="hidden" name="m" value="wxpay_alarm" />
                 <input type="hidden" name="a" value="index" />
                 <input type="hidden" name="menuid" value="{$menuid}" />
-                购买用户 :
-                <input name="openid" type="text" class="input-text" size="25" value="{$search.openid}" />
-                &nbsp;&nbsp; 通知类型 :
-                <select name="msgtype">
-                <option value="">--所有--</option>
-                <option value="request" <eq name="search.msgtype" value="request">selected</eq> >request</option>
-                <option value="reject" <eq name="search.msgtype" value="reject">selected</eq> >reject</option>
-                <option value="confirm" <eq name="search.msgtype" value="confirm">selected</eq> >confirm</option>
-                </select>
-                &nbsp;&nbsp; 投诉单号:
-                <input name="feedbackid" type="text" class="input-text" size="25" value="{$search.feedbackid}" />
+                错误类型 :
+                <input name="errortype" type="text" class="input-text" size="25" value="{$search.errortype}" />
                 <input type="submit" name="search" class="btn" value="搜索" />
         	</div>
             </td>
@@ -52,25 +43,20 @@
     </table>
     </form>
 
-    <!--div class="J_tablelist table_list" -->
+    <div class="J_tablelist table_list">
     <table border="1"  style="word-break:break-all;word-wrap:break-word">
         <thead>
             <tr>
                 <!-- <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th> -->
 				<!-- th width="50"><span tdtype="order_by" fieldname="id">ID</span></th -->
-                <th>购买用户</th>
                 <th>公众号</th>
+                <th>错误类型</th>
+                <th>错误描述</th>
+                <th>错误详情</th>
                 <th>时间</th>
-                <th>通知类型</th>
-                <th>投诉单号</th>
-                <th>交易号</th>
-                <th>投诉原因</th>
-                <th>用户希望解决方案</th>
-                <th>其他信息</th>
                 <th>签名</th>
                 <th>签名方式</th>
                 <th>状态</th>
-                <th>{:L('operations_manage')}</th>
             </tr>
         </thead>
     	<tbody>
@@ -78,28 +64,19 @@
             <tr>
                 <!-- <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td> -->
 				<!-- td align="center">{$val.id}</td -->
-                <td width="100" align="center">{$val.openid}</td>
                 <td width="100" align="center">{$val.appid}</td>
+                <td width="100" align="center">{$val.errortype}</td>
+                <td width="100" align="center">{$val.description}</td>
+                <td width="100" align="center">{$val.alarmcontent}</td>
                 <td width="130" align="center">{$val.timestamp|date='Y-m-d H:i:s',###}</td>
-                <td width="70" align="center" <eq name="val.msgtype" value="confirm">style="color:green"<else/>style="color:red"</eq> >{$val.msgtype}</td>
-                <td width="100" align="center">{$val.feedbackid}</td>
-                <td width="100" align="center">{$val.transid}</td>
-                <td width="100" align="center">{$val.reason}</td>
-                <td width="150" align="center">{$val.solution}</td>
-                <td width="100" align="center">{$val.extinfo}</td>
                 <td width="100" align="center">{$val.appsignature}</td>
                 <td width="70" align="center">{$val.signmethod}</td>
                 <td width="50" align="center">{$val.status}</td>
-                <td width="100" align="center">
-                <if condition="($val.status eq 0) AND (($val.msgtype eq 'request') OR ($val.msgtype eq 'reject')) ">
-                	<a href="{:U('wxpay_rights/updatefeedback', array('id'=>$val['id']))}">通知微信该投诉已处理</a>
-                </if> 
-                </td>
             </tr>
             </volist>
     	</tbody>
     </table>
-    <!--/div-->
+    </div>
 
     <div class="btn_wrap_fixed">
     	<!-- <label><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
