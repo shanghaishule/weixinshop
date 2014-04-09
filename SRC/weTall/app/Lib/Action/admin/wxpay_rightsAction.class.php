@@ -8,11 +8,12 @@ class wxpay_rightsAction extends backendAction {
 	
 	protected function _search() {
 		$map = array();
+		/*
 		//只能看到自己的
 		$tokenTall = $this->getTokenTall();
 		$me = M('wxpay')->where(array('tokenTall'=>$tokenTall))->find();
 		$map['appid'] = array('eq', $me['appId']);
-		
+		*/
 		($openid = $this->_request('openid', 'trim')) && $map['openid'] = array('like', '%'.$openid.'%');
 		($msgtype = $this->_request('msgtype', 'trim')) && $map['msgtype'] = array('eq', $msgtype);
 		($feedbackid = $this->_request('feedbackid', 'trim')) && $map['feedbackid'] = array('like', '%'.$feedbackid.'%');

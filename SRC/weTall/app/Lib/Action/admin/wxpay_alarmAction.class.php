@@ -8,10 +8,12 @@ class wxpay_alarmAction extends backendAction {
 	
 	protected function _search() {
 		$map = array();
+		/*
 		//只能看到自己的
 		$tokenTall = $this->getTokenTall();
 		$me = M('wxpay')->where(array('tokenTall'=>$tokenTall))->find();
 		$map['appid'] = array('eq', $me['appId']);
+		*/
 		
 		($errortype = $this->_request('errortype', 'trim')) && $map['errortype'] = array('like', '%'.$errortype.'%');
 		$this->assign('search', array(
