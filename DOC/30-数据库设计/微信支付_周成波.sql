@@ -5,13 +5,13 @@
  * 3、查询：weTall-home-order-orderWxQuery
  * 4、告警：weTall-home-alarm（腾讯调起）
  * 5、维权：weTall-home-rights（腾讯调起）
- * 6、维权处理：
+ * 6、维权查看和处理：weTall-admin-wxpay_rights
+ * 7、告警查看和处理：weTall-admin-wxpay_alarm
  * 
  * 网页授权
  * 收货地址共享
- * 告警：查看和处理
- * 维权：查看和处理
  * 客服系统：沟通
+ * 
  * */
 
 
@@ -107,3 +107,11 @@ CREATE TABLE `tp_wxpay_rights` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+/*增加投诉管理菜单*/
+delete from tp_menu where `name` = '投诉管理';
+insert into tp_menu(`name`,pid,module_name,action_name,`data`,remark,often,ordid,display)
+values('投诉管理','148','wxpay_rights','index','','',99,255,1);
+/*增加告警管理菜单*/
+delete from tp_menu where `name` = '告警管理';
+insert into tp_menu(`name`,pid,module_name,action_name,`data`,remark,often,ordid,display)
+values('告警管理','148','wxpay_alarm','index','','',99,255,1);
