@@ -82,9 +82,9 @@
                 <td width="70" align="center">{$val.signmethod}</td>
                 <td width="50" align="center">{$val.status}</td>
                 <td width="100" align="center">
-                <eq name="val.status" value="0">
+                <if condition="($val.status eq 0) AND (($val.msgtype eq 'request') OR ($val.msgtype eq 'reject')) ">
                 	<a href="{:U('wxpay_rights/updatefeedback', array('id'=>$val['id']))}">通知微信该投诉已处理</a>
-                </eq> 
+                </if> 
                 </td>
             </tr>
             </volist>
