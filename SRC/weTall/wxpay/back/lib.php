@@ -165,22 +165,30 @@ class Wechat{
      * @param string $out_trade_no
      * @return array
      */
-    public function orderquery($config, $out_trade_no) {
-        if (! $config || ! $out_trade_no) {
-            return false;
-        }
-        $url = 'https://api.weixin.qq.com/pay/orderquery?access_token=' . $this->getAccessToken($config);
-        $array = array(
-            'appid' => $config['appId'],
-            'package' => 'out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&sign=' . strtoupper(md5('out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&key=' . $config['partnerkey'])),
-            'timestamp' => mktime()
-        );
-        $array .= array(
-            'app_signature' => $this->buildSign($array, $config),
-            'sign_method' => 'sha1'
-        );
-        $result = $this->doPost($url, json_encode($array));
-        return json_decode($result, true);
+	 public function orderquery($config, $out_trade_no) {
+    	if (! $config || ! $out_trade_no) {
+    		return false;
+    	}
+    	$url = 'https://api.weixin.qq.com/pay/orderquery?access_token=' . $this->getAccessToken($config);
+		//dump($url);
+		$oldtime = mktime();
+		$signstr = 'out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&key=' . $config['partnerKey'];
+		//dump($signstr);
+		$sign = strtoupper(md5($signstr));
+    	//dump($sign);
+		$array = array(
+    			'appid' => $config['appId'],
+    			'package' => 'out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&sign=' . $sign,
+    			'timestamp' => $oldtime
+    	);
+    	$array += array(
+    			'app_signature' => $this->buildSign($array, $config),
+    			'sign_method' => 'sha1'
+    	);
+		//dump($array);exit;
+    	$result = $this->api_notice_increment($url, json_encode($array));
+		//dump($result);exit;
+    	return json_decode($result, true);
     }
     
     /**

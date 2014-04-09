@@ -483,6 +483,7 @@ class item_orderAction extends backendAction {
     	}
     }
     
+   
     /*订单微信查询接口*/
     public function orderWxQuery($num="")
     {
@@ -494,17 +495,22 @@ class item_orderAction extends backendAction {
     		header('Content-Type:text/html;charset=utf-8');
     		$wetallroute = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
     		include $wetallroute."/wxpay/config.php";
-    		dump($config);exit;
+    		//dump($config);exit;
     		include $wetallroute."/wxpay/lib.php";
     		$wechat = new Wechat;
     		$result = $wechat->orderquery($config, $zhifuhao);
-    		if (($result['errcode'] == 0) && ($result['errmsg'] == 'ok') && ($result['order_info']['ret_code'] == 0)) { //成功
-    			$this->success("没有取到支付号！");
+    		if (($result['errcode'] == 0) && ($result['errmsg'] == 'ok')) { //成功返回
+				if ($result['order_info']['ret_code'] == 0 && $result['order_info']['trade_state'] == "0") {
+					$this->success('该订单支付成功！');
+				}else{
+					$this->error('该订单支付失败！'.'['.$result['order_info']['ret_code'].']'.$result['order_info']['ret_msg']);
+				}
+				
     		}else{
-    			$this->error("没有取到支付号！");
+    			$this->error('该订单未支付！'.'['.$result['errcode'].']'.$result['errmsg']);
     		}
     	}else {
-    		$this->error("没有取到支付号！");
+    		$this->error("没有取到订单号！");
     	}
     }
    
