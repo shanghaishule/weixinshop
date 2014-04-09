@@ -72,7 +72,7 @@
                 <td width="100" align="center">{$val.openid}</td>
                 <td width="100" align="center">{$val.appid}</td>
                 <td width="130" align="center">{$val.timestamp|date='Y-m-d H:i:s',###}</td>
-                <td width="70" align="center">{$val.msgtype}</td>
+                <td width="70" align="center" <eq name="val.msgtype" value="confirm">color="green"<else/>color="red"</eq> >{$val.msgtype}</td>
                 <td width="100" align="center">{$val.feedbackid}</td>
                 <td width="100" align="center">{$val.transid}</td>
                 <td width="100" align="center">{$val.reason}</td>
