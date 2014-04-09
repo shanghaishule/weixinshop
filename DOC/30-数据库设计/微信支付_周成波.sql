@@ -85,6 +85,7 @@ CREATE TABLE `tp_wxpay_alarm` (
   `timestamp` varchar(255) NULL COMMENT '时间戳',
   `appsignature` varchar(255) NULL COMMENT '',
   `signmethod` varchar(255) NULL COMMENT '',
+  `status` int NOT NULL DEFAULT 0 COMMENT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

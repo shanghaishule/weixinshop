@@ -50,6 +50,9 @@ class wxpay_rightsAction extends backendAction {
 			$this->_mod->where(array('id'=>$id))->save(array('status'=>1));
 			$this->success('通知微信成功!');
 
+		} elseif ($result['errcode'] == -1 && $result['errmsg'] == 'system error'){
+			$this->_mod->where(array('id'=>$id))->save(array('status'=>1));
+			$this->success('已经通知过微信,更改状态成功!');
 		} else {
 			//IS_AJAX && $this->ajaxReturn(0, $result['errmsg']);
 			$this->error($result['errmsg']);
