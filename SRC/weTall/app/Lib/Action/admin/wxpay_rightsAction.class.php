@@ -1,5 +1,5 @@
 <?php
-class rightsAction extends backendAction {
+class wxpay_rightsAction extends backendAction {
 	public function _initialize() {
 		parent::_initialize();
 		$this->_mod = M('wxpay_rights');
