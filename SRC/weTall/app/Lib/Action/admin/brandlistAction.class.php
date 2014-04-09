@@ -10,7 +10,7 @@ class brandlistAction extends backendAction
 
     public function _before_index() {
         $big_menu = array(
-            'title' => L('添加分类'),
+            'title' => L('添加品牌'),
             'iframe' => U('brandlist/add'),
             'id' => 'add',
             'width' => '400',
@@ -36,7 +36,7 @@ class brandlistAction extends backendAction
         $name = $this->_get('name', 'trim');
         $id = $this->_get('id', 'intval');
         if (D('score_item_cate')->name_exists($name, $id)) {
-            $this->ajaxReturn(0, L('该分类名称已存在'));
+            $this->ajaxReturn(0, L('该品牌名称已存在'));
         } else {
             $this->ajaxReturn(1);
         }
