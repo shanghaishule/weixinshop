@@ -104,6 +104,7 @@ CREATE TABLE `tp_wxpay_rights` (
   `appsignature` varchar(255) NULL COMMENT '',
   `signmethod` varchar(255) NULL COMMENT '',
   `picurl` text NULL COMMENT '',
+  `status` int NOT NULL DEFAULT 0 COMMENT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

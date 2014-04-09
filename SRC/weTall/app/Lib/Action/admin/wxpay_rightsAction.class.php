@@ -26,22 +26,32 @@ class wxpay_rightsAction extends backendAction {
 		//dump($config);exit;
 		include $wetallroute."/wxpay/lib.php";
 		
+		
 		$wechat = new Wechat;
-		$data = $wechat->getXmlArray();
 
+	
 		// openid 与 feedback参数都可以从数据库中得到
 		$feedback = $this->_mod->where(array('id'=>$id))->find();
+		//dump($feedback);exit;
+		//$content = 'http://api.weixin.qq.com/cgi-bin/pay/delivernotify?access_token=' . $wechat->getAccessToken($config) . '&openid=' . $feedback['openid'] . '&feedbackid=' . $feedback['feedbackid'];
 		
-		$result = file_get_contents('http://api.weixin.qq.com/cgi-bin/pay/delivernotify?access_token=' . $wechat->getAccessToken() . '&openid=' . $feedback['openid'] . '&feedbackid=' . $feedback['feedbackid']);
+		$content = 'https://api.weixin.qq.com/payfeedback/update?access_token='.$wechat->getAccessToken($config).'&openid='.$feedback['openid'].'&feedbackid='.$feedback['feedbackid']; 
+		//dump($content);
+		$result = $wechat->curlGet($content);
+		
+		//dump($result);exit;
+		
+		
 		$result = json_decode($result, true);
 		if ($result['errcode'] == 0) {
 			//echo 'success';
+			//IS_AJAX && $this->ajaxReturn(1, $result['errmsg'], '', 'edit');
 			
-			IS_AJAX && $this->ajaxReturn(1, $result['errmsg'], '', 'edit');
-			$this->success($result['errmsg']);
+			$this->_mod->where(array('id'=>$id))->save(array('status'=>1));
+			$this->success('通知微信成功!');
 			
 		} else {
-			IS_AJAX && $this->ajaxReturn(0, $result['errmsg']);
+			//IS_AJAX && $this->ajaxReturn(0, $result['errmsg']);
 			$this->error($result['errmsg']);
 		}
 	}

@@ -30,7 +30,7 @@
             <td>
             <div class="explain_col">
             	<input type="hidden" name="g" value="admin" />
-                <input type="hidden" name="m" value="brandlist" />
+                <input type="hidden" name="m" value="wxpay_right" />
                 <input type="hidden" name="a" value="index" />
                 <input type="hidden" name="menuid" value="{$menuid}" />
                 购买用户 :
@@ -43,24 +43,25 @@
     </table>
     </form>
 
-    <div class="J_tablelist table_list">
-    <table width="100%" cellspacing="0">
+    <!--div class="J_tablelist table_list" -->
+    <table border="1"  style="word-break:break-all;word-wrap:break-word">
         <thead>
             <tr>
                 <!-- <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th> -->
 				<!-- th width="50"><span tdtype="order_by" fieldname="id">ID</span></th -->
-                <th align="left"><span data-tdtype="order_by" data-field="openid">购买用户</span></th>
-                <th width="50" align="left"><span data-tdtype="order_by" data-field="appid">公众号</span></th>
-                <th width="40"><span data-tdtype="order_by" data-field="timestamp">时间</span></th>
-                <th align="left"><span data-tdtype="order_by" data-field="msgtype">通知类型</span></th>
-                <th align="left"><span data-tdtype="order_by" data-field="feedbackid">投诉单号</span></th>
-                <th align="left"><span data-tdtype="order_by" data-field="transid">交易号</span></th>
-                <th align="left"><span data-tdtype="order_by" data-field="reason">投诉原因</span></th>
-                <th align="left"><span data-tdtype="order_by" data-field="solution">用户希望解决方案</span></th>
-                <th align="left"><span data-tdtype="order_by" data-field="extinfo">其他信息</span></th>
-                <th align="left"><span data-tdtype="order_by" data-field="appsignature">签名</span></th>
-                <th align="left"><span data-tdtype="order_by" data-field="signmethod">签名方式</span></th>
-                <th width="120">{:L('operations_manage')}</th>
+                <th>购买用户</th>
+                <th>公众号</th>
+                <th>时间</th>
+                <th>通知类型</th>
+                <th>投诉单号</th>
+                <th>交易号</th>
+                <th>投诉原因</th>
+                <th>用户希望解决方案</th>
+                <th>其他信息</th>
+                <th>签名</th>
+                <th>签名方式</th>
+                <th>状态</th>
+                <th>{:L('operations_manage')}</th>
             </tr>
         </thead>
     	<tbody>
@@ -68,25 +69,28 @@
             <tr>
                 <!-- <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td> -->
 				<!-- td align="center">{$val.id}</td -->
-                <td align="left">{$val.openid}</td>
-                <td align="left">{$val.appid}</td>
-                <td align="center">{$val.timestamp|date='Y-m-d H:i:s',###}</td>
-                <td align="left">{$val.msgtype}</td>
-                <td align="left">{$val.feedbackid}</td>
-                <td align="left">{$val.transid}</td>
-                <td align="left">{$val.reason}</td>
-                <td align="left">{$val.solution}</td>
-                <td align="left">{$val.extinfo}</td>
-                <td align="left">{$val.appsignature}</td>
-                <td align="left">{$val.signmethod}</td>
-                <td align="center">
-                	<a href="javascript:;" class="J_showdialog" data-uri="{:U('wxpay_rights/updatefeedback', array('id'=>$val['id']))}" data-title="处理"  data-id="edit" data-acttype="ajax" data-width="400" data-height="130">处理</a> 
+                <td width="100" align="center">{$val.openid}</td>
+                <td width="100" align="center">{$val.appid}</td>
+                <td width="130" align="center">{$val.timestamp|date='Y-m-d H:i:s',###}</td>
+                <td width="70" align="center">{$val.msgtype}</td>
+                <td width="100" align="center">{$val.feedbackid}</td>
+                <td width="100" align="center">{$val.transid}</td>
+                <td width="100" align="center">{$val.reason}</td>
+                <td width="150" align="center">{$val.solution}</td>
+                <td width="100" align="center">{$val.extinfo}</td>
+                <td width="100" align="center">{$val.appsignature}</td>
+                <td width="70" align="center">{$val.signmethod}</td>
+                <td width="50" align="center">{$val.status}</td>
+                <td width="100" align="center">
+                <eq name="val.status" value="0">
+                	<a href="{:U('wxpay_rights/updatefeedback', array('id'=>$val['id']))}">通知微信已经处理</a>
+                </eq> 
                 </td>
             </tr>
             </volist>
     	</tbody>
     </table>
-    </div>
+    <!--/div-->
 
     <div class="btn_wrap_fixed">
     	<!-- <label><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
