@@ -8,9 +8,13 @@ class wxpay_rightsAction extends backendAction {
 	
 	protected function _search() {
 		$map = array();
-		($keyword = $this->_request('keyword', 'trim')) && $map['openid'] = array('like', '%'.$keyword.'%');
+		($openid = $this->_request('openid', 'trim')) && $map['openid'] = array('like', '%'.$openid.'%');
+		($msgtype = $this->_request('msgtype', 'trim')) && $map['msgtype'] = array('eq', $msgtype);
+		($feedbackid = $this->_request('feedbackid', 'trim')) && $map['feedbackid'] = array('eq', $feedbackid);
 		$this->assign('search', array(
-				'keyword' => $keyword,
+				'openid' => $openid,
+				'msgtype' => $msgtype,
+				'feedbackid' => $feedbackid,
 		));
 		return $map;
 	}

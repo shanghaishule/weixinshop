@@ -34,7 +34,16 @@
                 <input type="hidden" name="a" value="index" />
                 <input type="hidden" name="menuid" value="{$menuid}" />
                 购买用户 :
-                <input name="keyword" type="text" class="input-text" size="25" value="{$search.keyword}" />
+                <input name="openid" type="text" class="input-text" size="25" value="{$search.openid}" />
+                &nbsp;&nbsp; 通知类型 :
+                <select name="msgtype">
+                <option value="">--所有--</option>
+                <option value="request">request</option>
+                <option value="reject">reject</option>
+                <option value="confirm">confirm</option>
+                </select>
+                &nbsp;&nbsp; 投诉单号:
+                <input name="feedbackid" type="text" class="input-text" size="25" value="{$search.feedbackid}" />
                 <input type="submit" name="search" class="btn" value="搜索" />
         	</div>
             </td>
@@ -72,7 +81,7 @@
                 <td width="100" align="center">{$val.openid}</td>
                 <td width="100" align="center">{$val.appid}</td>
                 <td width="130" align="center">{$val.timestamp|date='Y-m-d H:i:s',###}</td>
-                <td width="70" align="center" <eq name="val.msgtype" value="confirm">color="green"<else/>color="red"</eq> >{$val.msgtype}</td>
+                <td width="70" align="center" <eq name="val.msgtype" value="confirm">style="color:green"<else/>style="color:red"</eq> >{$val.msgtype}</td>
                 <td width="100" align="center">{$val.feedbackid}</td>
                 <td width="100" align="center">{$val.transid}</td>
                 <td width="100" align="center">{$val.reason}</td>
