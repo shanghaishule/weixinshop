@@ -170,37 +170,22 @@ class Wechat{
      * @param array $config
      * @param string $out_trade_no
      * @return array
-     
-    public function orderquery($config, $out_trade_no) {
-        if (! $config || ! $out_trade_no) {
-            return false;
-        }
-        $url = 'https://api.weixin.qq.com/pay/orderquery?access_token=' . $this->getAccessToken($config);
-		//var_dump(json_encode($array);exit;
-		$myinfo = $this->myquery($out_trade_no);
-		$array = array(
-            'appid' => $config['appId'],
-            'package' => 'out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&sign=' . $myinfo['sign'],
-            'timestamp' => mktime(),
-        );
-		$array['app_signature'] = $myinfo['appsignature']; //$this->buildSign($array, $config);
-        $array['sign_method'] = 'sha1';
-        
-		//var_dump($array);exit;
-        $result = $this->api_notice_increment($url, json_encode($array));
-		var_dump($result);exit;
-        return json_decode($result, true);
-    }
     */
-    public function orderquery($config, $out_trade_no) {
+	 public function orderquery($config, $out_trade_no) {
     	if (! $config || ! $out_trade_no) {
     		return false;
     	}
     	$url = 'https://api.weixin.qq.com/pay/orderquery?access_token=' . $this->getAccessToken($config);
-    	$array = array(
+		//dump($url);
+		$oldtime = mktime();
+		$signstr = 'out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&key=' . $config['partnerKey'];
+		//dump($signstr);
+		$sign = strtoupper(md5($signstr));
+    	//dump($sign);
+		$array = array(
     			'appid' => $config['appId'],
-    			'package' => 'out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&sign=' . strtoupper(md5('out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&key=' . $config['partnerkey'])),
-    			'timestamp' => mktime()
+    			'package' => 'out_trade_no=' . $out_trade_no . '&partner=' . $config['partnerId'] . '&sign=' . $sign,
+    			'timestamp' => $oldtime
     	);
     	$array += array(
     			'app_signature' => $this->buildSign($array, $config),
@@ -208,6 +193,7 @@ class Wechat{
     	);
 		//dump($array);exit;
     	$result = $this->api_notice_increment($url, json_encode($array));
+		//dump($result);exit;
     	return json_decode($result, true);
     }
     
