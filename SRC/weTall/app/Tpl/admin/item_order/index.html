@@ -113,7 +113,9 @@
                 <td align="center" >
                    <switch name="val.supportmetho" >
                          <case value="1">支付宝支付</case>
-                         <case value="2">货到付款</case>  
+                         <case value="2">货到付款</case>
+                         <case value="3">银联支付</case>
+                         <case value="4">微信支付</case>      
                  </switch>
                  <br>
                   <switch name="val.freetype" >
@@ -127,7 +129,9 @@
                 <td align="center">
                 <a href="{:U('item_order/edit', array('id'=>$val['id'], 'menuid'=>$menuid, 'tokenTall'=>$val['tokenTall']))}">查看</a>| <a href="javascript:void(0);" class="J_confirmurl" data-uri="{:U('item_order/delete', array('id'=>$val['id'], 'tokenTall'=>$val['tokenTall']))}" data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),$val['orderId'])}">{:L('delete')}</a>
                 | <a href="javascript:;" class="J_showdialog" data-uri="{:U('item_order/update', array('id'=>$val['id'], 'tokenTall'=>$val['tokenTall']))}" data-title="编辑 - {$val.orderId}"  data-id="update" data-acttype="ajax" data-width="800" data-height="130">修改价格</a> 
+                <eq name="val.supportmetho" value="4">
                 | <a href="{:U('item_order/orderWxQuery',array('orderId'=>$val['orderId']))}">微信订单查询 </a>
+                </eq>
                 </td>
             </tr> 
             </volist>
