@@ -1,12 +1,12 @@
 /*本脚本可以反复执行，重复执行.
  * 
- * 1、支付：weTall-home-order-wxpay
- * 2、发货：weTall-admin-item_orderAction-orderWxDeliver
- * 3、查询：weTall-admin-item_orderAction-orderWxQuery
- * 4、告警：weTall-home-alarm（腾讯调起）
- * 5、维权：weTall-home-rights（腾讯调起）
- * 6、维权查看和处理：weTall-admin-wxpay_rights
- * 7、告警查看和处理：weTall-admin-wxpay_alarm
+ * 1、微信支付：weTall-home-order-wxpay
+ * 2、微信发货：weTall-admin-item_orderAction-orderWxDeliver
+ * 3、订单查询：weTall-admin-item_orderAction-orderWxQuery
+ * 4、告警通知：weTall-home-alarm（腾讯调起，我方接收）
+ * 5、维权通知：weTall-home-rights（腾讯调起，我方接收）
+ * 6、维权处理：weTall-admin-wxpay_rights
+ * 7、告警查看：weTall-admin-wxpay_alarm
  * 
  * 网页授权
  * 收货地址共享

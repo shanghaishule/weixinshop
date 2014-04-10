@@ -501,13 +501,13 @@ class item_orderAction extends backendAction {
     		$result = $wechat->orderquery($config, $zhifuhao);
     		if (($result['errcode'] == 0) && ($result['errmsg'] == 'ok')) { //成功返回
 				if ($result['order_info']['ret_code'] == 0 && $result['order_info']['trade_state'] == "0") {
-					$this->success('该订单支付成功！');
+					$this->success('该订单已支付成功！');
 				}else{
 					$this->error('该订单支付失败！'.'['.$result['order_info']['ret_code'].']'.$result['order_info']['ret_msg']);
 				}
 				
     		}else{
-    			$this->error('该订单未支付！'.'['.$result['errcode'].']'.$result['errmsg']);
+    			$this->error('该订单查询失败！'.'['.$result['errcode'].']'.$result['errmsg']);
     		}
     	}else {
     		$this->error("没有取到订单号！");
