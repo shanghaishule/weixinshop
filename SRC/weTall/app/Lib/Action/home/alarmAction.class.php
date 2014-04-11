@@ -17,6 +17,7 @@ class alarmAction extends frontendAction {
     	//写入表
     	M('wxpay_alarm')->add($data);
     	
+    	echo "success";
         //$this->display();
     	//$this->show('微信支付告警页面!由腾讯方主动调起本页面。');
     }

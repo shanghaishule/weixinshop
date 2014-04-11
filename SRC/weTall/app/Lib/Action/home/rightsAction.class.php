@@ -16,6 +16,7 @@ class rightsAction extends frontendAction {
     	//写入表
     	M('wxpay_rights')->add($data);
     	
+    	echo "success";
     	/*
     	switch ($data['msgtype']) {
     		case 'request' : // 新增投诉单，这里可以记录到数据库，以作相应处理
